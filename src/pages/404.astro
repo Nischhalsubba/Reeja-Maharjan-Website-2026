@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import Container from '../components/Container.astro';
+---
+
+<BaseLayout
+  title="Page Not Found"
+  description="The page you requested could not be found."
+  page="not-found"
+>
+  <section class="py-24 md:py-32">
+    <Container className="text-center">
+      <p class="accent-chip subtle-ring mb-4 inline-flex px-3 py-1 text-sm font-semibold">404</p>
+      <h1 class="text-4xl font-semibold md:text-6xl">Page not found</h1>
+      <p class="text-muted mx-auto mt-4 max-w-xl">
+        The page may have been moved or removed. Use the main navigation or return home.
+      </p>
+      <ButtonLink href="/" className="mt-6">Go to Home</ButtonLink>
+    </Container>
+  </section>
+</BaseLayout>

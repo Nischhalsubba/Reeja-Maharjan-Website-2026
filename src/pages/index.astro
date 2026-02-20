@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import Container from '../components/Container.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Hero from '../components/sections/Hero.astro';
+import Highlights from '../components/sections/Highlights.astro';
+import ExperienceTimeline from '../components/sections/ExperienceTimeline.astro';
+---
+
+<BaseLayout
+  title="Home"
+  description="Portfolio website for Reeja, a nurse focused on patient-centered care, safety, and outcomes."
+  page="home"
+>
+  <Hero />
+  <Highlights />
+  <ExperienceTimeline limit={2} />
+
+  <section class="pb-16 md:pb-24">
+    <Container>
+      <div class="card-surface flex flex-col gap-4 p-6 md:flex-row md:items-center md:justify-between md:p-8" data-motion="reveal">
+        <div>
+          <SectionHeading
+            title="Looking for a dependable nursing professional?"
+            description="Review full experience or reach out directly for opportunities and collaborations."
+          />
+        </div>
+        <div class="flex flex-wrap gap-3">
+          <ButtonLink href="/experience">View Experience</ButtonLink>
+          <ButtonLink href="/contact" variant="secondary">Contact</ButtonLink>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

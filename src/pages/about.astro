@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Card from '../components/Card.astro';
+import Container from '../components/Container.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { profile } from '../content/profile';
+---
+
+<BaseLayout
+  title="About"
+  description="Learn about Reeja's nursing values, patient-care philosophy, and communication strengths."
+  page="about"
+>
+  <section class="py-14 md:py-20">
+    <Container>
+      <SectionHeading eyebrow="About Reeja" title="Compassionate, precise, and patient-first" />
+
+      <div class="grid gap-6 md:grid-cols-[1.3fr_1fr]">
+        <Card className="h-full">
+          <p class="text-muted text-lg leading-relaxed">{profile.summary.paragraph}</p>
+          <ul class="mt-5 space-y-2">
+            {profile.summary.bullets.map((bullet) => <li class="text-muted">• {bullet}</li>)}
+          </ul>
+        </Card>
+
+        <Card className="h-full">
+          <h3 class="text-2xl font-semibold">Care philosophy</h3>
+          <ul class="text-muted mt-4 space-y-2">
+            <li>• Evidence-based treatment with clear patient communication.</li>
+            <li>• Respect for privacy, dignity, and informed consent.</li>
+            <li>• Partnership with families to strengthen recovery outcomes.</li>
+            <li>• Continuous learning and quality improvement in clinical practice.</li>
+          </ul>
+        </Card>
+      </div>
+
+      <div class="mt-8 card-surface p-5 md:p-7" data-motion="reveal">
+        <h3 class="text-2xl font-semibold">Languages</h3>
+        <ul class="mt-4 flex flex-wrap gap-2">
+          {profile.languages.map((language) => <li class="subtle-ring px-3 py-2 text-sm">{language}</li>)}
+        </ul>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

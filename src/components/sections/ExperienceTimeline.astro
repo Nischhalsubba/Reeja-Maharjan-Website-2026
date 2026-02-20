@@ -1,0 +1,62 @@
+---
+import Card from '../Card.astro';
+import Container from '../Container.astro';
+import SectionHeading from '../SectionHeading.astro';
+import { profile } from '../../content/profile';
+
+interface Props {
+  limit?: number;
+  heading?: boolean;
+}
+
+const { limit, heading = true } = Astro.props as Props;
+const items = typeof limit === 'number' ? profile.experience.slice(0, limit) : profile.experience;
+---
+
+<section class="py-14 md:py-20">
+  <Container>
+    {
+      heading && (
+        <SectionHeading
+          eyebrow="Experience"
+          title="Clinical journey and leadership growth"
+          description="Roles across hospital and community settings with strong documentation and patient education focus."
+        />
+      )
+    }
+
+    <div class="relative" data-timeline-root>
+      <div class="absolute top-0 bottom-0 left-3 w-px bg-[var(--border)]" aria-hidden="true"></div>
+      <div
+        class="absolute top-0 left-3 w-px bg-[var(--accent)]"
+        aria-hidden="true"
+        data-timeline-progress
+      ></div>
+
+      <ol class="space-y-6 md:space-y-8">
+        {
+          items.map((item) => (
+            <li class="relative pl-10 md:pl-14" data-timeline-item>
+              <span
+                class="absolute top-7 left-1 h-4 w-4 rounded-full border-2 border-[var(--accent)] bg-[var(--surface)]"
+                aria-hidden="true"
+              ></span>
+              <Card>
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <h3 class="text-2xl font-semibold">{item.role}</h3>
+                  <p class="text-muted text-sm font-semibold">{item.dates}</p>
+                </div>
+                <p class="text-muted mt-1 text-sm font-semibold">
+                  {item.org} · {item.location}
+                </p>
+                <ul class="mt-4 space-y-2">
+                  {item.bullets.map((bullet) => <li class="text-muted">• {bullet}</li>)}
+                </ul>
+              </Card>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </Container>
+</section>

@@ -1,0 +1,7 @@
+---
+const { className = '' } = Astro.props;
+---
+
+<article class:list={['card-surface p-5 md:p-7', className]} data-motion="reveal">
+  <slot />
+</article>

@@ -1,0 +1,81 @@
+---
+interface Props {
+  id: string;
+  labelOn: string;
+  labelOff: string;
+  defaultOn?: boolean;
+  storageKey?: string;
+  className?: string;
+}
+
+const {
+  id,
+  labelOn,
+  labelOff,
+  defaultOn = false,
+  storageKey = '',
+  className = '',
+} = Astro.props as Props;
+---
+
+<section
+  class:list={['rounded-2xl border border-[var(--border)] p-4 md:p-5', className]}
+  data-ui-toggle
+  data-default-on={defaultOn ? 'true' : 'false'}
+  data-label-on={labelOn}
+  data-label-off={labelOff}
+  data-storage-key={storageKey}
+>
+  <button
+    type="button"
+    class="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-4 py-2 text-sm font-semibold"
+    aria-controls={id}
+    aria-expanded={defaultOn ? 'true' : 'false'}
+    data-toggle-button
+  >
+    <span data-toggle-label>{defaultOn ? labelOn : labelOff}</span>
+  </button>
+  <div id={id} class="mt-4" hidden={!defaultOn} data-toggle-panel data-auto-animate>
+    <slot />
+  </div>
+</section>
+
+<script>
+  const wrappers = document.querySelectorAll('[data-ui-toggle]');
+
+  wrappers.forEach((wrapper) => {
+    const button = wrapper.querySelector('[data-toggle-button]');
+    const label = wrapper.querySelector('[data-toggle-label]');
+    const panel = wrapper.querySelector('[data-toggle-panel]');
+    if (!(button instanceof HTMLButtonElement) || !(panel instanceof HTMLElement) || !label) {
+      return;
+    }
+
+    const labelOn = wrapper.getAttribute('data-label-on') ?? 'Hide';
+    const labelOff = wrapper.getAttribute('data-label-off') ?? 'Show';
+    const storageKey = wrapper.getAttribute('data-storage-key');
+    const defaultOn = wrapper.getAttribute('data-default-on') === 'true';
+
+    let open = defaultOn;
+    if (storageKey) {
+      const saved = window.localStorage.getItem(storageKey);
+      if (saved === 'on') open = true;
+      if (saved === 'off') open = false;
+    }
+
+    const applyState = () => {
+      panel.hidden = !open;
+      button.setAttribute('aria-expanded', open ? 'true' : 'false');
+      label.textContent = open ? labelOn : labelOff;
+    };
+
+    applyState();
+    button.addEventListener('click', () => {
+      open = !open;
+      applyState();
+      if (storageKey) {
+        window.localStorage.setItem(storageKey, open ? 'on' : 'off');
+      }
+    });
+  });
+</script>

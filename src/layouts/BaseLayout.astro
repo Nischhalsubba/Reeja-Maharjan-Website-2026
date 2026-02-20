@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  page: string;
+  ogImage?: string;
+}
+
+const { title, description, page, ogImage = '/og-image.png' } = Astro.props as Props;
+const siteUrl = Astro.site?.toString() ?? import.meta.env.SITE_URL ?? 'https://example.com';
+const canonical = new URL(Astro.url.pathname, siteUrl).toString();
+const fullTitle = `${title} | Reeja Nurse Portfolio`;
+const imageUrl = new URL(ogImage, siteUrl).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body class="page-noise antialiased">
+    <a href="#main-content" class="skip-link rounded-md bg-[var(--accent)] px-4 py-2 text-white">
+      Skip to content
+    </a>
+    <Navbar />
+    <main id="main-content" data-page={page}>
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      import { initMotion } from '../lib/motion/core/init';
+
+      initMotion(document);
+    </script>
+  </body>
+</html>

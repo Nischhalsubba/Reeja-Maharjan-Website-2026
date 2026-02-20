@@ -1,0 +1,151 @@
+---
+import Container from '../Container.astro';
+import SectionHeading from '../SectionHeading.astro';
+import Toggle from '../Toggle.astro';
+import { profile } from '../../content/profile';
+
+const formAction = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? '';
+---
+
+<section class="py-14 md:py-20">
+  <Container>
+    <SectionHeading
+      eyebrow="Contact"
+      title="Start a professional conversation"
+      description="Available for nursing opportunities, collaborations, and clinical consultations."
+    />
+
+    <div class="grid gap-6 md:grid-cols-[1fr_1.2fr]">
+      <aside class="card-surface p-5 md:p-7" data-motion="reveal">
+        <h3 class="text-2xl font-semibold">Contact details</h3>
+        <ul class="text-muted mt-4 space-y-2">
+          <li>
+            <span class="font-semibold text-[var(--text)]">Email: </span>
+            <a href={`mailto:${profile.email}`} class="text-[var(--accent)] hover:underline">
+              {profile.email}
+            </a>
+          </li>
+          <li>
+            <span class="font-semibold text-[var(--text)]">LinkedIn: </span>
+            <a href={profile.linkedin} class="text-[var(--accent)] hover:underline" target="_blank" rel="noreferrer noopener">
+              View profile
+            </a>
+          </li>
+          <li>
+            <span class="font-semibold text-[var(--text)]">Location: </span>
+            {profile.location}
+          </li>
+        </ul>
+
+        <div class="mt-6 space-y-4">
+          <Toggle
+            id="phone-panel"
+            labelOn="Hide phone number"
+            labelOff="Show phone number"
+            defaultOn={profile.privacy.showPhoneByDefault}
+          >
+            <p class="text-muted text-sm">
+              {profile.phone ?? 'Phone not listed.'}
+            </p>
+          </Toggle>
+
+          <Toggle
+            id="references-panel"
+            labelOn="Hide references"
+            labelOff="Show references"
+            defaultOn={profile.privacy.showReferencesByDefault}
+          >
+            <ul class="space-y-2 text-sm">
+              {
+                profile.references.map((ref) => (
+                  <li class="text-muted">
+                    <span class="font-semibold text-[var(--text)]">{ref.name}</span> - {ref.role}
+                    <br />
+                    {ref.contact}
+                  </li>
+                ))
+              }
+            </ul>
+          </Toggle>
+        </div>
+      </aside>
+
+      <div class="card-surface p-5 md:p-7" data-motion="reveal">
+        {
+          !formAction && (
+            <p class="mb-4 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+              Set <code>PUBLIC_FORMSPREE_ENDPOINT</code> to enable live submissions.
+            </p>
+          )
+        }
+        <form
+          method="POST"
+          action={formAction || 'https://formspree.io/f/your-form-id'}
+          class="grid gap-4"
+          data-contact-form
+        >
+          <input
+            type="text"
+            name="_gotcha"
+            tabindex="-1"
+            autocomplete="off"
+            class="hidden"
+            aria-hidden="true"
+          />
+
+          <label class="grid gap-2 text-sm font-semibold">
+            Full name
+            <input
+              type="text"
+              name="name"
+              required
+              class="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-base font-normal"
+            />
+          </label>
+
+          <label class="grid gap-2 text-sm font-semibold">
+            Email
+            <input
+              type="email"
+              name="email"
+              required
+              class="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-base font-normal"
+            />
+          </label>
+
+          <label class="grid gap-2 text-sm font-semibold">
+            Subject
+            <input
+              type="text"
+              name="subject"
+              required
+              class="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-base font-normal"
+            />
+          </label>
+
+          <label class="grid gap-2 text-sm font-semibold">
+            Message
+            <textarea
+              name="message"
+              rows={5}
+              required
+              class="rounded-xl border border-[var(--border)] bg-[var(--surface)] px-3 py-2 text-base font-normal"
+            ></textarea>
+          </label>
+
+          <label class="flex items-start gap-2 text-sm">
+            <input type="checkbox" name="consent" required class="mt-1" />
+            <span class="text-muted">I confirm this inquiry is professional and relevant.</span>
+          </label>
+
+          <button
+            type="submit"
+            class="mt-2 inline-flex w-fit items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:brightness-110"
+          >
+            Send message
+          </button>
+        </form>
+      </div>
+    </div>
+  </Container>
+</section>
