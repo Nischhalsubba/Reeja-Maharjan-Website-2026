@@ -3,11 +3,11 @@ import Container from './Container.astro';
 import { profile } from '../content/profile';
 ---
 
-<footer class="mt-20 border-t border-[var(--border)] py-10">
+<footer class="mt-16 border-t border-[var(--line)] py-10">
   <Container className="grid gap-6 md:grid-cols-2 md:items-center">
     <div>
       <p class="font-semibold">{profile.name}</p>
-      <p class="text-muted mt-1 text-sm">{profile.title}</p>
+      <p class="text-muted mt-1 text-sm">{profile.role}</p>
       <p class="text-muted mt-1 text-sm">{profile.location}</p>
     </div>
     <div class="md:text-right">

@@ -1,27 +1,33 @@
 @import 'tailwindcss';
-@import '@fontsource/manrope/400.css';
-@import '@fontsource/manrope/500.css';
-@import '@fontsource/manrope/600.css';
-@import '@fontsource/newsreader/400.css';
-@import '@fontsource/newsreader/600.css';
+@import '@fontsource/public-sans/400.css';
+@import '@fontsource/public-sans/500.css';
+@import '@fontsource/public-sans/600.css';
+@import '@fontsource/public-sans/700.css';
+@import '@fontsource/source-serif-4/400.css';
+@import '@fontsource/source-serif-4/600.css';
 
 :root {
-  --bg: #f6f7f5;
+  --bg: #f1f9f8;
+  --bg-deep: #e6f3f2;
   --surface: #ffffff;
-  --surface-muted: #eef2f1;
-  --text: #162027;
-  --text-muted: #4a5a61;
-  --border: #d4ddda;
-  --accent: #2f6e69;
-  --accent-soft: #d8ebe9;
-  --focus: #155e75;
+  --surface-mute: #edf6f5;
+  --ink: #123540;
+  --ink-soft: #496068;
+  --line: #c4ddda;
+  --accent: #0f766e;
+  --accent-strong: #0b5b55;
+  --accent-soft: #d4f1ed;
+  --focus: #0e7490;
 }
 
 html,
 body {
-  background: radial-gradient(circle at 10% 10%, #fbfcfb 0%, var(--bg) 65%);
-  color: var(--text);
-  font-family: 'Manrope', system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 92% 8%, rgb(15 118 110 / 12%), transparent 22%),
+    radial-gradient(circle at 8% 92%, rgb(14 116 144 / 10%), transparent 24%),
+    linear-gradient(180deg, var(--bg), #f7fbfa 32%, #f7fbfa 100%);
+  color: var(--ink);
+  font-family: 'Public Sans', system-ui, sans-serif;
   margin: 0;
   min-height: 100%;
 }
@@ -32,8 +38,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Newsreader', Georgia, serif;
-  letter-spacing: -0.015em;
+  font-family: 'Source Serif 4', Georgia, serif;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 a {
@@ -56,36 +63,55 @@ a {
   top: 1rem;
 }
 
-.page-noise::before {
-  background:
-    radial-gradient(circle at 80% 10%, rgb(47 110 105 / 10%), transparent 35%),
-    radial-gradient(circle at 10% 90%, rgb(21 94 117 / 9%), transparent 30%);
-  content: '';
-  inset: 0;
-  pointer-events: none;
-  position: fixed;
-  z-index: -1;
-}
-
 .card-surface {
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 1rem;
-  box-shadow: 0 10px 40px rgb(15 23 42 / 5%);
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  box-shadow: 0 10px 30px rgb(18 53 64 / 5%);
 }
 
 .subtle-ring {
-  border: 1px solid var(--border);
+  border: 1px solid var(--line);
   border-radius: 999px;
 }
 
 .text-muted {
-  color: var(--text-muted);
+  color: var(--ink-soft);
 }
 
 .accent-chip {
   background: var(--accent-soft);
   color: var(--accent);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--accent-strong), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.section-title {
+  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+}
+
+.section-body {
+  color: var(--ink-soft);
+  font-size: clamp(0.98rem, 2vw, 1.05rem);
+  line-height: 1.75;
+}
+
+.detail-list {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0;
+  padding-left: 1rem;
+}
+
+.detail-list li {
+  color: var(--ink-soft);
+  line-height: 1.7;
 }
 
 .js [data-motion='reveal'] {

@@ -1,26 +1,34 @@
 export type ExperienceItem = {
   role: string;
-  org: string;
+  organization: string;
   location: string;
-  dates: string;
-  bullets: string[];
+  period: string;
+  highlights: string[];
+};
+
+export type CredentialItem = {
+  title: string;
+  issuer: string;
+  date: string;
+  details: string;
 };
 
 export type EducationItem = {
-  program: string;
+  level: string;
   institution: string;
-  location: string;
-  dates: string;
+  period: string;
+  result: string;
 };
 
-export type CertificationItem = {
-  name: string;
-  issuer: string;
-  year: string;
+export type EvidenceItem = {
+  document: string;
+  issuedBy: string;
+  date: string;
+  insight: string;
 };
 
-export type SkillsGroup = {
-  category: string;
+export type SkillGroup = {
+  area: string;
   items: string[];
 };
 
@@ -32,160 +40,221 @@ export type ReferenceItem = {
 
 export type Profile = {
   name: string;
-  title: string;
+  role: string;
   location: string;
   email: string;
+  phone: string;
   linkedin: string;
-  phone?: string;
-  summary: {
-    paragraph: string;
-    bullets: string[];
-  };
-  highlights: string[];
-  experience: ExperienceItem[];
-  education: EducationItem[];
-  certifications: CertificationItem[];
-  skills: SkillsGroup[];
-  languages: string[];
   resumePdfPath: string;
+  headline: string;
+  summary: string;
+  goals: string[];
+  quickFacts: string[];
+  practiceAreas: string[];
+  experience: ExperienceItem[];
+  credentials: CredentialItem[];
+  education: EducationItem[];
+  evidence: EvidenceItem[];
+  skillGroups: SkillGroup[];
+  languages: string[];
   references: ReferenceItem[];
-  privacy: {
-    showPhoneByDefault: boolean;
-    showReferencesByDefault: boolean;
-  };
 };
 
 export const profile: Profile = {
   name: 'Reeja Maharjan',
-  title: 'Registered Nurse | Patient-Centered Care',
-  location: 'Kathmandu, Nepal',
-  email: 'reeja@example.com',
-  linkedin: 'https://linkedin.com/in/reeja-maharjan',
-  phone: '+977 9800-000-000',
-  summary: {
-    paragraph:
-      'Compassionate registered nurse with experience in acute care, patient education, and multidisciplinary coordination. Focused on safe outcomes, clear communication, and dignity-first care across every stage of treatment.',
-    bullets: [
-      'Skilled in triage, medication administration, documentation, and discharge planning.',
-      'Known for calm decision-making in high-pressure clinical settings.',
-      'Committed to patient advocacy, family collaboration, and continuous quality improvement.',
-    ],
-  },
-  highlights: [
-    '5+ years in medical-surgical and outpatient nursing workflows.',
-    'Led patient education initiatives that improved discharge adherence.',
-    'Consistent high ratings in empathy, communication, and care quality.',
+  role: 'Registered Nurse (Nepal)',
+  location: 'Lalitpur Metropolitan-21, Khokana, Nepal',
+  email: 'maharjanreeja88@gmail.com',
+  phone: '9843704288',
+  linkedin: 'https://www.linkedin.com',
+  resumePdfPath: '/resume.pdf',
+  headline:
+    'Maternal and newborn care, pregnancy and postpartum counselling, and patient education in hospital frontline settings.',
+  summary:
+    'Registered nurse with frontline maternity, birthing, OT-readiness, and inpatient ward experience across Sindhuli, Swoyambhu, and Maharajgunj clinical settings. Strong in counselling, health teaching, structured charting, interdepartmental referral support, and safe handover continuity.',
+  goals: [
+    'Transition into advocacy-focused nursing and IEC-led public health support roles.',
+    'Strengthen community referral coordination and evidence-based patient follow-up.',
+    'Contribute to safeguarding-aligned practice with confidentiality and respectful care.',
+  ],
+  quickFacts: [
+    'Nepal Nursing Council Registered Nurse (Reg. No. 65100, valid through 5 Sep 2027).',
+    '3+ years continuous hospital experience in maternity, OT, and general ward workflows.',
+    'BSc Nursing (Tribhuvan University, First Division, 2021).',
+    'CPR, Comprehensive Newborn Care Level II, and OTTM certified.',
+  ],
+  practiceAreas: [
+    'Maternal and newborn care',
+    'Pregnancy and postpartum counselling',
+    'Breastfeeding counselling and family education',
+    'OT readiness and aseptic support routines',
+    'Ward documentation and shift handovers',
+    'Interdepartmental referral coordination',
   ],
   experience: [
     {
-      role: 'Senior Staff Nurse',
-      org: 'CityCare Hospital',
-      location: 'Kathmandu, Nepal',
-      dates: '2023 - Present',
-      bullets: [
-        'Coordinate care plans with physicians, pharmacists, and allied health teams.',
-        'Monitor high-acuity patients and perform timely escalation during clinical changes.',
-        'Mentor junior nurses on protocol adherence, charting quality, and bedside communication.',
+      role: 'Staff Nurse',
+      organization: 'Tribhuvan University Teaching Hospital (TUTH)',
+      location: 'Maharajgunj, Kathmandu',
+      period: 'Sep 10, 2024 - Nov 27, 2025',
+      highlights: [
+        'Delivered counselling and health education for pregnancy, postpartum recovery, and breastfeeding.',
+        'Supported normal deliveries and provided newborn plus postnatal mother care with a safety-first approach.',
+        'Maintained structured documentation and reliable shift handovers for continuity of care.',
       ],
     },
     {
-      role: 'Registered Nurse',
-      org: 'Metro Health Center',
-      location: 'Lalitpur, Nepal',
-      dates: '2020 - 2023',
-      bullets: [
-        'Delivered medication, wound care, and post-operative support for inpatient units.',
-        'Educated patients and caregivers on home recovery and preventive care plans.',
-        'Maintained accurate EMR documentation and infection control compliance.',
+      role: 'Staff Nurse - General Ward',
+      organization: 'Manmohan Memorial Medical College and Teaching Hospital',
+      location: 'Swoyambhu, Kathmandu',
+      period: 'Feb 20, 2024 - Aug 20, 2024',
+      highlights: [
+        'Provided inpatient nursing care and monitored condition changes for timely escalation.',
+        'Coordinated tests and referrals while maintaining accurate ward records.',
+        'Delivered patient and family health education with clear handover communication.',
       ],
     },
     {
-      role: 'Junior Nurse',
-      org: 'Sunrise Community Clinic',
-      location: 'Bhaktapur, Nepal',
-      dates: '2018 - 2020',
-      bullets: [
-        'Supported outpatient triage, vital monitoring, and routine procedure preparation.',
-        'Assisted immunization and maternal health campaigns in community outreach programs.',
-        'Improved patient intake flow by standardizing pre-visit checklist routines.',
+      role: 'Nursing Officer',
+      organization: 'Sindhuli Hospital',
+      location: 'Sindhuli, Nepal',
+      period: 'Dec 1, 2021 - Dec 3, 2023',
+      highlights: [
+        'Supported antenatal assessment, delivery care, newborn support, and postnatal counselling.',
+        'Handled maternity and OT department responsibilities, including aseptic and safety routines.',
+        'Maintained ward-level documentation, waste segregation routines, and interdisciplinary coordination.',
       ],
+    },
+  ],
+  credentials: [
+    {
+      title: 'Registered Nurse Certificate (Reg. No. 65100)',
+      issuer: 'Nepal Nursing Council',
+      date: 'Sep 5, 2021 - Sep 5, 2027',
+      details: 'National licensure registration for nursing practice in Nepal.',
+    },
+    {
+      title: 'Comprehensive Newborn Care Level II',
+      issuer: "Health Training Center / Paropakar Maternity and Women's Hospital",
+      date: '2079/01/20 - 2079/02/03 (BS)',
+      details: 'Focused training on newborn and maternal care standards in hospital setting.',
+    },
+    {
+      title: 'Operation Theatre Techniques and Management (OTTM)',
+      issuer: 'Health Training Center / Bharatpur Hospital',
+      date: '2080/02/08 - 2080/03/17 (BS)',
+      details: 'Practical OT technique and management workflow training.',
+    },
+    {
+      title: 'Cardiopulmonary Resuscitation (CPR)',
+      issuer: 'Nursing Inservice Education Unit, TUTH',
+      date: 'May 30, 2025',
+      details: 'Hands-on half-day CPR training participation.',
     },
   ],
   education: [
     {
-      program: 'Bachelor of Science in Nursing (BSc Nursing)',
-      institution: 'Institute of Medicine',
-      location: 'Kathmandu, Nepal',
-      dates: '2014 - 2018',
+      level: 'Bachelor of Science in Nursing',
+      institution: 'Manmohan Memorial Institute of Health Sciences / Tribhuvan University',
+      period: 'Sep 2016 - Sep 2021',
+      result: 'First Division, 77.92%',
+    },
+    {
+      level: '+2 Science',
+      institution: 'Pinnacle Academy, Lalitpur',
+      period: 'Sep 2014 - Sep 2016',
+      result: 'First Division, 74.70%',
+    },
+    {
+      level: 'SLC',
+      institution: 'Aadarsha Saula Yubak Higher Secondary School, Lalitpur',
+      period: 'May 2010 - Jun 2014',
+      result: 'First Division with Distinction, 83.25%',
     },
   ],
-  certifications: [
+  evidence: [
     {
-      name: 'Basic Life Support (BLS)',
-      issuer: 'American Heart Association',
-      year: '2025',
+      document: 'Service Letter - Sindhuli Hospital',
+      issuedBy: 'Acting Medical Superintendent, Sindhuli Hospital',
+      date: 'Dec 3, 2023',
+      insight:
+        'Confirms strong professionalism, punctuality, discipline, and maternity plus OT handling during 2021-2023 tenure.',
     },
     {
-      name: 'Advanced Cardiac Life Support (ACLS)',
-      issuer: 'American Heart Association',
-      year: '2024',
+      document: 'Service Letter - Manmohan Memorial Medical College & Teaching Hospital',
+      issuedBy: 'Nursing Chief, Department of Nursing',
+      date: 'Aug 20, 2024',
+      insight:
+        'Confirms general ward service in surgery and gynecology/obstetrics with conscientious team conduct.',
     },
     {
-      name: 'Infection Prevention and Control',
-      issuer: 'Nursing Council',
-      year: '2023',
+      document: 'CNC Level II Certificate',
+      issuedBy: 'Health Training Center, Bagmati Province',
+      date: '2079/02/03 (BS)',
+      insight: 'Validates advanced newborn and maternal care training completion.',
+    },
+    {
+      document: 'OTTM Certificate',
+      issuedBy: 'Health Training Center, Bagmati Province',
+      date: '2080/03/17 (BS)',
+      insight: 'Validates operation theatre techniques and management training completion.',
+    },
+    {
+      document: 'CPR Training Certificate',
+      issuedBy: 'Institute of Medicine, Tribhuvan University Teaching Hospital',
+      date: '2082/02/16 (BS)',
+      insight: 'Validates practical CPR upskilling through nursing inservice education.',
     },
   ],
-  skills: [
+  skillGroups: [
     {
-      category: 'Clinical Care',
+      area: 'Counselling and Patient Education',
       items: [
-        'Patient Assessment',
-        'Medication Administration',
-        'IV Therapy',
-        'Wound Dressing',
-        'Post-Operative Monitoring',
+        'Pregnancy and postpartum counselling',
+        'Breastfeeding guidance',
+        'IEC and public-facing communication',
+        'Family-level health teaching',
       ],
     },
     {
-      category: 'Safety and Compliance',
+      area: 'Maternal and Newborn Clinical Support',
       items: [
-        'Infection Control',
-        'Clinical Documentation',
-        'Patient Safety Protocols',
-        'Incident Reporting',
+        'Birthing ward support',
+        'Normal delivery assistance',
+        'Postnatal mother care',
+        'Newborn routine care',
       ],
     },
     {
-      category: 'Communication and Leadership',
+      area: 'Documentation and Reporting',
       items: [
-        'Patient Education',
-        'Family Counseling',
-        'Interdisciplinary Coordination',
-        'Mentoring Junior Staff',
+        'Structured shift handover',
+        'Ward register and charting',
+        'Basic report writing',
+        'MS Word / Excel / PowerPoint',
       ],
     },
     {
-      category: 'Tools and Systems',
-      items: ['EMR/EHR Systems', 'Digital Charting', 'Telehealth Coordination'],
+      area: 'Coordination and Professional Standards',
+      items: [
+        'Referral coordination',
+        'Interdisciplinary teamwork',
+        'Confidentiality and safeguarding awareness',
+        'Professional conduct and respectful service',
+      ],
     },
   ],
-  languages: ['English', 'Nepali', 'Hindi'],
-  resumePdfPath: '/resume.pdf',
+  languages: ['Nepali', 'Newari', 'English', 'Hindi'],
   references: [
     {
-      name: 'Dr. A. Shrestha',
-      role: 'Consultant Physician, CityCare Hospital',
-      contact: 'Available upon request',
+      name: 'Dr. Nawaraj Subba',
+      role: 'Public Health Specialist (Freelance)',
+      contact: '9842321955 | nrsubba@gmail.com',
     },
     {
-      name: 'S. Thapa, RN',
-      role: 'Nursing Supervisor, Metro Health Center',
-      contact: 'Available upon request',
+      name: 'Elisha Thapa Magar',
+      role: 'Ward Incharge, Sindhuli Hospital',
+      contact: '9867497369 | alyesha.thp@gmail.com',
     },
   ],
-  privacy: {
-    showPhoneByDefault: false,
-    showReferencesByDefault: false,
-  },
 };

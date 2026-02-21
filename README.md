@@ -1,24 +1,24 @@
 # reeja-nurse-portfolio
 
-High-end static portfolio website for nurse Reeja, built with Astro + TypeScript + Tailwind and designed for Cloudflare Pages deployment.
+Single-page, static healthcare portfolio for Reeja Maharjan (Registered Nurse), built with Astro + TypeScript + Tailwind and deployable on Cloudflare Pages.
+
+## What Changed
+- Full redesign to a mobile-first single-page website (`/`) with section anchors.
+- Desktop reading width constrained to `820px` for better readability.
+- Content updated from provided resume + supporting certificates/letters.
+- Resume file replaced with uploaded file in `public/resume.pdf`.
+- Healthcare-focused visual system (new colors, spacing, typography).
 
 ## Tech Stack
 - Astro (static output)
 - TypeScript (strict mode)
 - Tailwind CSS v4
-- React islands only for optional motion demos
-- Motion toolbox architecture in `src/lib/motion`
-
-### Motion Engines
-- Production: `gsap` (`ScrollTrigger`, `ScrollToPlugin`), WAAPI, `lenis`, `split-type`, `@formkit/auto-animate`
-- Optional lazy engines: `motion`, `animejs`, `lottie-web`, `three`, `@rive-app/canvas`
-- Dev-only demos: `popmotion`, `velocity-animate`, `@mojs/core`
+- GSAP + ScrollTrigger + ScrollToPlugin
+- WAAPI + Lenis + SplitType + AutoAnimate
 
 ## Node Version
-- `.nvmrc` -> `22`
-- `.node-version` -> `22`
-
-Use Node 22 LTS locally and in Cloudflare Pages.
+- `.nvmrc`: `22`
+- `.node-version`: `22`
 
 ## Commands
 ```bash
@@ -35,83 +35,65 @@ Use GitHub repo connection and configure:
 
 - Build command: `npm run build`
 - Output directory: `dist`
-- Node version: from `.nvmrc` (`22`)
+- Node version: `22` (from `.nvmrc`)
 
-Recommended env vars in Cloudflare:
+Recommended env vars:
 - `NODE_VERSION=22`
 - `SITE_URL=https://your-domain.example`
 - `PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-id`
 
-## Content Editing
-All portfolio copy and lists are centralized in:
+Important:
+- Do not use `npx wrangler deploy` for this Pages setup.
+- For direct CLI Pages deploy, use:
+  - `npx wrangler pages deploy dist --project-name=reeja-nurse-portfolio`
+
+## Content Source
+All portfolio content is centralized in:
 
 - `src/content/profile.ts`
 
-Edit this file to update:
-- Identity (name, title, location, email, linkedin, optional phone)
-- Summary paragraph and bullets
-- Highlights
-- Experience timeline
-- Education and certifications
-- Skills groups and languages
-- Resume path
-- References
-- Privacy defaults (phone/references hidden by default)
+This includes:
+- identity/contact details
+- summary and goals
+- practice areas
+- work experience timeline
+- credentials/training
+- education
+- document-evidence summaries
+- skills/languages/references
 
-## Asset Replacement
-Replace these placeholder files in `public/`:
-- `reeja-headshot.jpg`
+## Single-Page Sections
+The homepage includes:
+- `#overview`
+- `#experience`
+- `#credentials`
+- `#skills`
+- `#contact`
+
+Navigation uses these anchor links for fast scanning and simple UX.
+
+## Assets
+Primary assets in `public/`:
+- `resume.pdf` (current uploaded resume)
 - `og-image.png`
-- `resume.pdf`
+- `reeja-headshot.jpg` (optional)
 
-If you change the resume filename/path, update `resumePdfPath` in `src/content/profile.ts`.
+## Contact Form (Static-safe)
+The contact form is embedded in the homepage and posts to Formspree.
 
-## Contact Form (Static-safe with Formspree)
-`/contact` uses a plain HTML POST form to Formspree.
+1. Create Formspree form.
+2. Set `PUBLIC_FORMSPREE_ENDPOINT`.
+3. `_gotcha` honeypot field is already included.
 
-1. Create a Formspree form.
-2. Set `PUBLIC_FORMSPREE_ENDPOINT` locally and in Cloudflare Pages.
-3. Honeypot field `_gotcha` is included for spam resistance.
-4. Optional: add Cloudflare Turnstile and update CSP accordingly.
+If env var is missing, a setup warning appears and a placeholder endpoint is used.
 
-If env var is missing, the UI shows a setup warning and fallback endpoint placeholder.
+## Motion and Accessibility
+- Progressive enhancement: content remains readable with JS off.
+- Reduced motion respected via system preference + user toggle.
+- Lenis and heavy effects are disabled in reduced-motion mode.
 
-## Motion System
-- Motion bootstrap: `src/lib/motion/core/init.ts`
-- Feature mapping: `src/lib/motion/core/registry.ts`
-- Preference helpers: `src/lib/motion/core/env.ts`
-
-Behavior:
-- Progressive enhancement: content is usable with JavaScript off.
-- Reduced motion authoritative: disables Lenis, SplitType, parallax, and heavy timelines.
-- User toggle: persisted via localStorage.
-- Page-level lazy initialization: only needed features load per route.
-
-Dev-only Motion Lab:
-- Appears only on `/skills` when `import.meta.env.DEV` is true.
-- Loads optional engines on-demand to avoid production bundle impact.
-
-## SEO and Static Quality
-- Meta tags, OG, and Twitter cards in `src/layouts/BaseLayout.astro`
-- `robots.txt` at `public/robots.txt`
-- Sitemap generated by `@astrojs/sitemap`
-- Custom 404 route at `src/pages/404.astro`
-
-Important:
-- Set `SITE_URL` so canonical URLs and sitemap output are correct.
-- Update `public/robots.txt` sitemap URL to your final production domain.
-
-## Security Headers
-Starter security headers are provided in:
-- `public/_headers`
-
-Includes:
-- `X-Content-Type-Options`
-- `Referrer-Policy`
-- `X-Frame-Options`
-- `Permissions-Policy`
-- Starter `Content-Security-Policy`
-
-CSP notes:
-- Keep `form-action` allowlist for Formspree.
-- If you add external assets/APIs, update `img-src`, `connect-src`, etc.
+## SEO and Security
+- SEO meta/OG/Twitter handled in `src/layouts/BaseLayout.astro`
+- `robots.txt` in `public/robots.txt`
+- sitemap generated by `@astrojs/sitemap`
+- security headers in `public/_headers`
