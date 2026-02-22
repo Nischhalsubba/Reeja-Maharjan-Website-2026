@@ -3,15 +3,17 @@ import Container from './Container.astro';
 import { profile } from '../content/profile';
 
 const links = [
-  { href: '/#overview', label: 'Overview' },
+  { href: '/#hero', label: 'Home' },
+  { href: '/#about', label: 'About' },
   { href: '/#experience', label: 'Experience' },
   { href: '/#credentials', label: 'Credentials' },
+  { href: '/#documents', label: 'Documents' },
   { href: '/#skills', label: 'Skills' },
   { href: '/#contact', label: 'Contact' },
 ];
 ---
 
-<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[rgb(241_249_248_/_92%)] backdrop-blur-md">
+<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[rgb(248_252_252_/_92%)] backdrop-blur-md">
   <Container className="flex min-h-16 items-center justify-between gap-4">
     <a href="/" class="text-base font-semibold tracking-tight sm:text-lg">{profile.name}</a>
 

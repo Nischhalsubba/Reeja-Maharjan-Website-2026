@@ -6,16 +6,16 @@ export default function TransitionDemo() {
   const nodeRef = useRef<HTMLDivElement | null>(null);
 
   return (
-    <div className="rounded-xl border border-[var(--border)] p-3">
+    <div className="rounded-xl border border-[var(--line)] p-3">
       <button
         type="button"
-        className="mb-3 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold"
+        className="mb-3 rounded-full border border-[var(--line)] px-3 py-1 text-xs font-semibold"
         onClick={() => setOpen((prev) => !prev)}
       >
         Toggle transition
       </button>
       <CSSTransition in={open} timeout={220} classNames="rtg" unmountOnExit nodeRef={nodeRef}>
-        <div ref={nodeRef} className="rounded-lg border border-[var(--border)] p-4 text-sm">
+        <div ref={nodeRef} className="rounded-lg border border-[var(--line)] p-4 text-sm">
           React Transition Group island demo
         </div>
       </CSSTransition>

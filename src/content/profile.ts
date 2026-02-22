@@ -20,13 +20,6 @@ export type EducationItem = {
   result: string;
 };
 
-export type EvidenceItem = {
-  document: string;
-  issuedBy: string;
-  date: string;
-  insight: string;
-};
-
 export type SkillGroup = {
   area: string;
   items: string[];
@@ -36,6 +29,18 @@ export type ReferenceItem = {
   name: string;
   role: string;
   contact: string;
+};
+
+export type DocumentGalleryItem = {
+  id: string;
+  title: string;
+  category: string;
+  file: string;
+  issuer: string;
+  date: string;
+  summary: string;
+  public: boolean;
+  featured?: boolean;
 };
 
 export type Profile = {
@@ -48,16 +53,18 @@ export type Profile = {
   resumePdfPath: string;
   headline: string;
   summary: string;
+  carePhilosophy: string[];
   goals: string[];
   quickFacts: string[];
   practiceAreas: string[];
   experience: ExperienceItem[];
   credentials: CredentialItem[];
   education: EducationItem[];
-  evidence: EvidenceItem[];
   skillGroups: SkillGroup[];
   languages: string[];
   references: ReferenceItem[];
+  documentGallery: DocumentGalleryItem[];
+  privacyNotes: string[];
 };
 
 export const profile: Profile = {
@@ -69,27 +76,32 @@ export const profile: Profile = {
   linkedin: 'https://www.linkedin.com',
   resumePdfPath: '/resume.pdf',
   headline:
-    'Maternal and newborn care, pregnancy and postpartum counselling, and patient education in hospital frontline settings.',
+    'Maternal and newborn care, pregnancy and postpartum counselling, and patient education in frontline hospital settings.',
   summary:
-    'Registered nurse with frontline maternity, birthing, OT-readiness, and inpatient ward experience across Sindhuli, Swoyambhu, and Maharajgunj clinical settings. Strong in counselling, health teaching, structured charting, interdepartmental referral support, and safe handover continuity.',
+    'Registered nurse with practical experience across maternity, birthing ward, operation theatre support, and general ward service. Strong in counselling, health teaching, documentation, referral coordination, and continuity-focused handovers.',
+  carePhilosophy: [
+    'Safe, respectful, and confidentiality-focused care in every patient interaction.',
+    'Clear counselling for mothers and families to improve home-care confidence.',
+    'Structured documentation and responsible escalation for reliable clinical continuity.',
+  ],
   goals: [
-    'Transition into advocacy-focused nursing and IEC-led public health support roles.',
-    'Strengthen community referral coordination and evidence-based patient follow-up.',
-    'Contribute to safeguarding-aligned practice with confidentiality and respectful care.',
+    'Continue delivering high-quality maternal and newborn nursing care.',
+    'Contribute to counselling and IEC-focused nursing/public health roles.',
+    'Strengthen referral and stakeholder coordination for patient follow-up support.',
   ],
   quickFacts: [
-    'Nepal Nursing Council Registered Nurse (Reg. No. 65100, valid through 5 Sep 2027).',
-    '3+ years continuous hospital experience in maternity, OT, and general ward workflows.',
-    'BSc Nursing (Tribhuvan University, First Division, 2021).',
-    'CPR, Comprehensive Newborn Care Level II, and OTTM certified.',
+    'Nepal Nursing Council registered nurse (Reg. No. 65100).',
+    '3+ years of continuous hospital nursing experience (2021-2025).',
+    'BSc Nursing, Tribhuvan University, First Division.',
+    'CNC Level II, OTTM, and CPR certified.',
   ],
   practiceAreas: [
     'Maternal and newborn care',
     'Pregnancy and postpartum counselling',
-    'Breastfeeding counselling and family education',
-    'OT readiness and aseptic support routines',
-    'Ward documentation and shift handovers',
-    'Interdepartmental referral coordination',
+    'Breastfeeding counselling',
+    'General ward nursing support',
+    'OT readiness and aseptic routines',
+    'Documentation and shift handover',
   ],
   experience: [
     {
@@ -98,9 +110,9 @@ export const profile: Profile = {
       location: 'Maharajgunj, Kathmandu',
       period: 'Sep 10, 2024 - Nov 27, 2025',
       highlights: [
-        'Delivered counselling and health education for pregnancy, postpartum recovery, and breastfeeding.',
-        'Supported normal deliveries and provided newborn plus postnatal mother care with a safety-first approach.',
-        'Maintained structured documentation and reliable shift handovers for continuity of care.',
+        'Delivered counselling and health education for pregnancy, postpartum care, and breastfeeding.',
+        'Supported normal deliveries and provided newborn and postnatal mother care.',
+        'Maintained structured charting and handovers for safe continuity of care.',
       ],
     },
     {
@@ -109,9 +121,9 @@ export const profile: Profile = {
       location: 'Swoyambhu, Kathmandu',
       period: 'Feb 20, 2024 - Aug 20, 2024',
       highlights: [
-        'Provided inpatient nursing care and monitored condition changes for timely escalation.',
-        'Coordinated tests and referrals while maintaining accurate ward records.',
-        'Delivered patient and family health education with clear handover communication.',
+        'Provided inpatient nursing care and monitored patient status for timely escalation.',
+        'Coordinated investigations and referrals with departments and duty teams.',
+        'Delivered patient and family education with clear handover communication.',
       ],
     },
     {
@@ -120,24 +132,18 @@ export const profile: Profile = {
       location: 'Sindhuli, Nepal',
       period: 'Dec 1, 2021 - Dec 3, 2023',
       highlights: [
-        'Supported antenatal assessment, delivery care, newborn support, and postnatal counselling.',
-        'Handled maternity and OT department responsibilities, including aseptic and safety routines.',
-        'Maintained ward-level documentation, waste segregation routines, and interdisciplinary coordination.',
+        'Supported antenatal assessment, delivery care, newborn care, and postnatal counselling.',
+        'Handled maternity and OT-related duties with safety and aseptic focus.',
+        'Followed documentation and waste-segregation routines with team coordination.',
       ],
     },
   ],
   credentials: [
     {
-      title: 'Registered Nurse Certificate (Reg. No. 65100)',
-      issuer: 'Nepal Nursing Council',
-      date: 'Sep 5, 2021 - Sep 5, 2027',
-      details: 'National licensure registration for nursing practice in Nepal.',
-    },
-    {
       title: 'Comprehensive Newborn Care Level II',
       issuer: "Health Training Center / Paropakar Maternity and Women's Hospital",
       date: '2079/01/20 - 2079/02/03 (BS)',
-      details: 'Focused training on newborn and maternal care standards in hospital setting.',
+      details: 'Advanced newborn and maternal care training completion.',
     },
     {
       title: 'Operation Theatre Techniques and Management (OTTM)',
@@ -149,7 +155,13 @@ export const profile: Profile = {
       title: 'Cardiopulmonary Resuscitation (CPR)',
       issuer: 'Nursing Inservice Education Unit, TUTH',
       date: 'May 30, 2025',
-      details: 'Hands-on half-day CPR training participation.',
+      details: 'Hands-on CPR training participation.',
+    },
+    {
+      title: 'Registered Nurse (Licensure)',
+      issuer: 'Nepal Nursing Council',
+      date: 'Registered Sep 5, 2021',
+      details: 'Professional nursing registration in Nepal (Reg. No. 65100).',
     },
   ],
   education: [
@@ -172,75 +184,41 @@ export const profile: Profile = {
       result: 'First Division with Distinction, 83.25%',
     },
   ],
-  evidence: [
-    {
-      document: 'Service Letter - Sindhuli Hospital',
-      issuedBy: 'Acting Medical Superintendent, Sindhuli Hospital',
-      date: 'Dec 3, 2023',
-      insight:
-        'Confirms strong professionalism, punctuality, discipline, and maternity plus OT handling during 2021-2023 tenure.',
-    },
-    {
-      document: 'Service Letter - Manmohan Memorial Medical College & Teaching Hospital',
-      issuedBy: 'Nursing Chief, Department of Nursing',
-      date: 'Aug 20, 2024',
-      insight:
-        'Confirms general ward service in surgery and gynecology/obstetrics with conscientious team conduct.',
-    },
-    {
-      document: 'CNC Level II Certificate',
-      issuedBy: 'Health Training Center, Bagmati Province',
-      date: '2079/02/03 (BS)',
-      insight: 'Validates advanced newborn and maternal care training completion.',
-    },
-    {
-      document: 'OTTM Certificate',
-      issuedBy: 'Health Training Center, Bagmati Province',
-      date: '2080/03/17 (BS)',
-      insight: 'Validates operation theatre techniques and management training completion.',
-    },
-    {
-      document: 'CPR Training Certificate',
-      issuedBy: 'Institute of Medicine, Tribhuvan University Teaching Hospital',
-      date: '2082/02/16 (BS)',
-      insight: 'Validates practical CPR upskilling through nursing inservice education.',
-    },
-  ],
   skillGroups: [
     {
-      area: 'Counselling and Patient Education',
+      area: 'Counselling and Health Education',
       items: [
         'Pregnancy and postpartum counselling',
         'Breastfeeding guidance',
-        'IEC and public-facing communication',
         'Family-level health teaching',
+        'IEC and public-facing communication',
       ],
     },
     {
-      area: 'Maternal and Newborn Clinical Support',
+      area: 'Maternal and Newborn Practice',
       items: [
-        'Birthing ward support',
         'Normal delivery assistance',
         'Postnatal mother care',
         'Newborn routine care',
+        'Birthing ward support',
       ],
     },
     {
-      area: 'Documentation and Reporting',
+      area: 'Ward Documentation and Coordination',
       items: [
         'Structured shift handover',
-        'Ward register and charting',
+        'Ward registers and charting',
         'Basic report writing',
-        'MS Word / Excel / PowerPoint',
+        'Referral coordination',
       ],
     },
     {
-      area: 'Coordination and Professional Standards',
+      area: 'Professional Conduct',
       items: [
-        'Referral coordination',
-        'Interdisciplinary teamwork',
-        'Confidentiality and safeguarding awareness',
-        'Professional conduct and respectful service',
+        'Confidentiality and patient dignity',
+        'Teamwork and communication',
+        'Safety-focused escalation',
+        'Respectful service behavior',
       ],
     },
   ],
@@ -256,5 +234,115 @@ export const profile: Profile = {
       role: 'Ward Incharge, Sindhuli Hospital',
       contact: '9867497369 | alyesha.thp@gmail.com',
     },
+  ],
+  documentGallery: [
+    {
+      id: 'exp-letter',
+      title: 'Experience Letter',
+      category: 'Experience',
+      file: '/documents/experience-letter.jpg',
+      issuer: 'Sindhuli Hospital',
+      date: 'Dec 3, 2023',
+      summary: 'Service verification with professionalism and maternity/OT responsibility remarks.',
+      public: true,
+      featured: true,
+    },
+    {
+      id: 'cnc-level-ii',
+      title: 'Comprehensive Newborn Care Level II Certificate',
+      category: 'Training',
+      file: '/documents/cnc-level-ii-certificate.jpg',
+      issuer: 'Health Training Center, Bagmati Province',
+      date: '2079/02/03 (BS)',
+      summary: 'Completion of structured maternal and newborn care training.',
+      public: true,
+      featured: true,
+    },
+    {
+      id: 'ottm',
+      title: 'Operation Theatre Techniques and Management Certificate',
+      category: 'Training',
+      file: '/documents/ottm-certificate.jpg',
+      issuer: 'Health Training Center, Bagmati Province',
+      date: '2080/03/17 (BS)',
+      summary: 'Completion of operation theatre techniques and management training.',
+      public: true,
+      featured: true,
+    },
+    {
+      id: 'cpr',
+      title: 'Cardiopulmonary Resuscitation Certificate',
+      category: 'Training',
+      file: '/documents/cpr-certificate.jpg',
+      issuer: 'Institute of Medicine, TUTH',
+      date: '2082/02/16 (BS)',
+      summary: 'Hands-on CPR training participation for emergency response readiness.',
+      public: true,
+    },
+    {
+      id: 'bsc-degree',
+      title: 'BSc Nursing Degree Certificate',
+      category: 'Education',
+      file: '/documents/bsc-degree-certificate.jpg',
+      issuer: 'Tribhuvan University',
+      date: 'Dec 9, 2022',
+      summary: 'Bachelor of Science in Nursing degree certificate (Tribhuvan University).',
+      public: true,
+      featured: true,
+    },
+    {
+      id: 'bsc-character',
+      title: 'Bachelor Character Certificate',
+      category: 'Education',
+      file: '/documents/bsc-character-certificate.jpg',
+      issuer: 'Tribhuvan University',
+      date: 'Issued after BSc Nursing completion',
+      summary: 'Academic character and completion evidence at bachelor level.',
+      public: true,
+    },
+    {
+      id: 'plus2-provisional',
+      title: '+2 Provisional Certificate',
+      category: 'Education',
+      file: '/documents/plus2-provisional-certificate.jpg',
+      issuer: 'Higher Secondary Education Board',
+      date: 'After +2 completion',
+      summary: 'Provisional certificate for higher secondary education.',
+      public: true,
+    },
+    {
+      id: 'plus2-transcript',
+      title: '+2 Transcript',
+      category: 'Education',
+      file: '/documents/plus2-transcript.jpg',
+      issuer: 'Higher Secondary Education Board',
+      date: 'After +2 completion',
+      summary: 'Subject-wise academic transcript for higher secondary studies.',
+      public: true,
+    },
+    {
+      id: 'slc-certificate',
+      title: 'SLC Certificate',
+      category: 'Education',
+      file: '/documents/slc-certificate.jpg',
+      issuer: 'Office of the Controller of Examinations',
+      date: '2014 AD',
+      summary: 'School leaving certificate completion record.',
+      public: true,
+    },
+    {
+      id: 'slc-marksheet',
+      title: 'SLC Marksheet',
+      category: 'Education',
+      file: '/documents/slc-marksheet.jpg',
+      issuer: 'Office of the Controller of Examinations',
+      date: '2014 AD',
+      summary: 'Subject-wise marksheet from SLC examinations.',
+      public: true,
+    },
+  ],
+  privacyNotes: [
+    'Sensitive identity documents such as citizenship and national ID card are excluded from this public portfolio.',
+    'Only professional certificates, training records, experience letters, and education proofs are included in the document gallery.',
   ],
 };

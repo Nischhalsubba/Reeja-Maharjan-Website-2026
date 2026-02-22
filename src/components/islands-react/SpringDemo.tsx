@@ -10,15 +10,15 @@ export default function SpringDemo() {
   });
 
   return (
-    <div className="rounded-xl border border-[var(--border)] p-3">
+    <div className="rounded-xl border border-[var(--line)] p-3">
       <button
         type="button"
-        className="mb-3 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold"
+        className="mb-3 rounded-full border border-[var(--line)] px-3 py-1 text-xs font-semibold"
         onClick={() => setActive((prev) => !prev)}
       >
         Toggle spring
       </button>
-      <animated.div style={spring} className="rounded-lg border border-[var(--border)] p-4 text-sm">
+      <animated.div style={spring} className="rounded-lg border border-[var(--line)] p-4 text-sm">
         react-spring island demo
       </animated.div>
     </div>

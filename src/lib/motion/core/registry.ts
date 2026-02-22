@@ -3,17 +3,10 @@ export type MotionFeature =
   | 'reveals'
   | 'timeline-progress'
   | 'skills-stagger'
-  | 'scroll-to'
-  | 'parallax'
-  | 'motion-lab';
+  | 'scroll-to';
 
 const pageMap: Record<string, MotionFeature[]> = {
-  home: ['hero-intro', 'reveals', 'timeline-progress', 'scroll-to', 'parallax'],
-  about: ['reveals'],
-  experience: ['reveals', 'timeline-progress'],
-  credentials: ['reveals'],
-  skills: ['reveals', 'skills-stagger', 'motion-lab'],
-  contact: ['reveals'],
+  home: ['hero-intro', 'reveals', 'timeline-progress', 'skills-stagger', 'scroll-to'],
   'not-found': ['reveals'],
 };
 

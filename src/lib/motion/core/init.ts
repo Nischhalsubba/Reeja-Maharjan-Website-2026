@@ -53,17 +53,6 @@ const runFeature = async (feature: MotionFeature, main: HTMLElement, reduced: bo
       await bindScrollToTargets(main, reduced);
       return;
     }
-    case 'parallax': {
-      const { bindParallaxAccents } = await import('../features/parallax');
-      await bindParallaxAccents(main, reduced);
-      return;
-    }
-    case 'motion-lab': {
-      if (!import.meta.env.DEV) return;
-      const { runMotionLab } = await import('../features/motion-lab');
-      await runMotionLab(main, reduced);
-      return;
-    }
   }
 };
 

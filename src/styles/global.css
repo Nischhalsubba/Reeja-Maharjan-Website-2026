@@ -7,25 +7,24 @@
 @import '@fontsource/source-serif-4/600.css';
 
 :root {
-  --bg: #f1f9f8;
-  --bg-deep: #e6f3f2;
+  --bg: #eef7f6;
+  --bg-alt: #f7fcfb;
   --surface: #ffffff;
-  --surface-mute: #edf6f5;
-  --ink: #123540;
-  --ink-soft: #496068;
-  --line: #c4ddda;
-  --accent: #0f766e;
-  --accent-strong: #0b5b55;
-  --accent-soft: #d4f1ed;
+  --surface-soft: #f1f8f7;
+  --line: #c9dddb;
+  --ink: #163640;
+  --ink-soft: #4c6770;
+  --accent: #14756e;
+  --accent-strong: #0f5f59;
+  --accent-soft: #d7efec;
   --focus: #0e7490;
 }
 
 html,
 body {
   background:
-    radial-gradient(circle at 92% 8%, rgb(15 118 110 / 12%), transparent 22%),
-    radial-gradient(circle at 8% 92%, rgb(14 116 144 / 10%), transparent 24%),
-    linear-gradient(180deg, var(--bg), #f7fbfa 32%, #f7fbfa 100%);
+    radial-gradient(circle at 90% 10%, rgb(20 117 110 / 10%), transparent 24%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 46%, var(--bg-alt) 100%);
   color: var(--ink);
   font-family: 'Public Sans', system-ui, sans-serif;
   margin: 0;
@@ -40,7 +39,7 @@ h5,
 h6 {
   font-family: 'Source Serif 4', Georgia, serif;
   letter-spacing: -0.01em;
-  line-height: 1.2;
+  line-height: 1.16;
 }
 
 a {
@@ -66,8 +65,8 @@ a {
 .card-surface {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 1.2rem;
-  box-shadow: 0 10px 30px rgb(18 53 64 / 5%);
+  border-radius: 1.1rem;
+  box-shadow: 0 8px 24px rgb(22 54 64 / 5%);
 }
 
 .subtle-ring {
@@ -84,29 +83,27 @@ a {
   color: var(--accent);
 }
 
-.gradient-text {
-  background: linear-gradient(90deg, var(--accent-strong), var(--accent));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+.hero-title {
+  font-size: clamp(2.1rem, 6vw, 3.7rem);
+  font-weight: 600;
 }
 
 .section-title {
-  font-size: clamp(1.7rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.55rem, 3.8vw, 2.25rem);
   font-weight: 600;
 }
 
 .section-body {
   color: var(--ink-soft);
-  font-size: clamp(0.98rem, 2vw, 1.05rem);
+  font-size: clamp(0.98rem, 2.2vw, 1.04rem);
   line-height: 1.75;
 }
 
 .detail-list {
   display: grid;
-  gap: 0.65rem;
+  gap: 0.62rem;
   margin: 0;
-  padding-left: 1rem;
+  padding-left: 1.1rem;
 }
 
 .detail-list li {
@@ -114,9 +111,16 @@ a {
   line-height: 1.7;
 }
 
+.doc-thumb {
+  aspect-ratio: 4 / 3;
+  border-radius: 0.8rem;
+  object-fit: cover;
+  width: 100%;
+}
+
 .js [data-motion='reveal'] {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(14px);
 }
 
 @media (prefers-reduced-motion: reduce) {
