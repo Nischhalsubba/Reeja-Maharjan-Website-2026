@@ -15,11 +15,11 @@ export const bindFloatingPills = async (root: ParentNode, reduced: boolean): Pro
 
   const { gsap } = await loadGSAP();
   pills.forEach((pill, index) => {
-    const amp = isHome ? 4 : 6;
+    const amp = isHome ? 2.5 : 6;
     const y = index % 2 === 0 ? -amp : amp;
     gsap.to(pill, {
       y,
-      duration: (isHome ? 3.1 : 2.4) + (index % 3) * (isHome ? 0.42 : 0.35),
+      duration: (isHome ? 4.2 : 2.4) + (index % 3) * (isHome ? 0.55 : 0.35),
       repeat: -1,
       yoyo: true,
       ease: 'sine.inOut',

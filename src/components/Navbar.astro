@@ -2,6 +2,10 @@
 import Container from './Container.astro';
 import { profile } from '../content/profile';
 
+interface Props {
+  variant?: 'default' | 'source-home';
+}
+
 const links = [
   { href: '/#hero', label: 'Home', id: 'hero' },
   { href: '/#services', label: 'Care Areas', id: 'services' },
@@ -13,36 +17,69 @@ const links = [
   { href: '/#skills', label: 'Skills', id: 'skills' },
   { href: '/#contact', label: 'Contact', id: 'contact' },
 ];
+
+const { variant = 'default' } = Astro.props as Props;
+const contactLink = links.find((link) => link.id === 'contact');
+const navLinks = variant === 'source-home' ? links.filter((link) => link.id !== 'contact') : links;
 ---
 
-<header class="site-nav sticky top-0 z-50">
-  <Container size="wide" className="py-3">
-    <div class="nav-shell">
-      <a href="/#hero" class="brand-mark" aria-label={`${profile.name} home`}>
-        <span class="brand-mark__mono">{profile.brand.monogram}</span>
-        <span class="brand-mark__label">
-          <span>{profile.brand.displayName}</span>
-          <small>{profile.role}</small>
-        </span>
-      </a>
+<header class:list={['site-nav sticky top-0 z-50', variant === 'source-home' && 'site-nav--source-home']}>
+  <Container size={variant === 'source-home' ? 'source-stage' : 'wide'} className="py-3">
+    <div class:list={['nav-shell', variant === 'source-home' && 'nav-shell--source-home']}>
+      {
+        variant === 'source-home' ? (
+          <nav aria-label="Primary" class="nav-scroll nav-scroll--source-home">
+            <ul class="nav-pills nav-pills--source-home">
+              {navLinks.map((link) => (
+                <li>
+                  <a href={link.href} data-nav-spy-link={link.id} class="nav-pill nav-pill--source-home">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ) : (
+          <a href="/#hero" class="brand-mark" aria-label={`${profile.name} home`}>
+            <span class="brand-mark__mono">{profile.brand.monogram}</span>
+            <span class="brand-mark__label">
+              <span>{profile.brand.displayName}</span>
+              <small>{profile.role}</small>
+            </span>
+          </a>
+        )
+      }
 
-      <nav aria-label="Primary" class="nav-scroll">
-        <ul class="nav-pills">
-          {
-            links.map((link) => (
-              <li>
-                <a href={link.href} data-nav-spy-link={link.id} class="nav-pill">
-                  {link.label}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </nav>
+      {
+        variant === 'source-home' ? (
+          <a href="/#hero" class="brand-capsule" aria-label={`${profile.name} home`}>
+            <span>{profile.brand.displayName}</span>
+          </a>
+        ) : (
+          <nav aria-label="Primary" class="nav-scroll">
+            <ul class="nav-pills">
+              {navLinks.map((link) => (
+                <li>
+                  <a href={link.href} data-nav-spy-link={link.id} class="nav-pill">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        )
+      }
 
-      <button type="button" class="motion-toggle" data-motion-pref-toggle aria-pressed="false">
-        Reduce motion
-      </button>
+      <div class:list={['nav-actions', variant === 'source-home' && 'nav-actions--source-home']}>
+        {variant === 'source-home' && contactLink && (
+          <a href={contactLink.href} data-nav-spy-link={contactLink.id} class="nav-contact-pill">
+            {contactLink.label}
+          </a>
+        )}
+        <button type="button" class="motion-toggle" data-motion-pref-toggle aria-pressed="false">
+          Reduce motion
+        </button>
+      </div>
     </div>
   </Container>
 </header>

@@ -1,17 +1,18 @@
 ---
 interface Props {
   className?: string;
-  size?: 'stage' | 'stage-tight' | 'narrow' | 'wide' | 'full';
+  size?: 'stage' | 'stage-tight' | 'narrow' | 'wide' | 'full' | 'source-stage';
 }
 
 const { className = '', size = 'narrow' } = Astro.props as Props;
 
 const sizeClassMap: Record<NonNullable<Props['size']>, string> = {
-  stage: 'max-w-[420px]',
-  'stage-tight': 'max-w-[360px]',
+  stage: 'max-w-[360px]',
+  'stage-tight': 'max-w-[320px]',
   narrow: 'max-w-[860px]',
   wide: 'max-w-[1120px]',
   full: 'max-w-[1280px]',
+  'source-stage': 'max-w-[392px]',
 };
 ---
 

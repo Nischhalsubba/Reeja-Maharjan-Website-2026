@@ -63,6 +63,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   keywords={getHomepageKeywords(profile)}
   schema={homeSchema}
 >
+  <div class="home-source-canvas" data-home-source-match>
   <section id="hero" class="section-pad pt-5 sm:pt-6">
     <Container size="stage">
       <div class="section-shell section-shell--hero hero-stage" data-motion="reveal" data-medical-particles-root>
@@ -584,4 +585,5 @@ const rolePageLinks = profile.seoPages.map((page) => ({
       </div>
     </Container>
   </section>
+  </div>
 </BaseLayout>

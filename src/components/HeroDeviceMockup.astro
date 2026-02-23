@@ -11,7 +11,7 @@ const topCredentials = profile.credentials.slice(0, 3);
 const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured) ?? profile.images?.find((img) => img.usage === 'hero' && img.public);
 ---
 
-<div class="device-wrap" data-hero-device data-tilt-card>
+<div class="device-wrap device-wrap--hero" data-hero-device data-tilt-card>
   <div class="device-glow" aria-hidden="true"></div>
   <div class="device-ambient-rings" aria-hidden="true">
     <span></span>
@@ -27,9 +27,12 @@ const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.p
     </svg>
   </div>
   <div class="device-frame">
+    <div class="device-frame__rim" aria-hidden="true"></div>
     <div class="device-frame__sheen" aria-hidden="true"></div>
     <div class="device-notch" aria-hidden="true"></div>
     <div class="device-screen">
+      <div class="device-screen__vignette" aria-hidden="true"></div>
+      <div class="device-screen__mesh" aria-hidden="true"></div>
       <div class="device-header">
         <div class="device-header__identity">
           {

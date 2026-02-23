@@ -73,11 +73,11 @@ const schemaList = Array.isArray(schema) ? schema : schema ? [schema] : [];
     <a href="#main-content" class="skip-link rounded-md bg-[var(--accent)] px-4 py-2 text-white">
       Skip to content
     </a>
-    <Navbar />
+    <Navbar variant={page === 'home' ? 'source-home' : 'default'} />
     <main id="main-content" data-page={page}>
       <slot />
     </main>
-    <Footer />
+    <Footer variant={page === 'home' ? 'source-home' : 'default'} />
 
     <script>
       import { initMotion } from '../lib/motion/core/init';

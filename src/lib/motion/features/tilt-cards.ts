@@ -20,9 +20,9 @@ export const bindTiltCards = async (root: ParentNode, reduced: boolean): Promise
       const rect = card.getBoundingClientRect();
       const x = (event.clientX - rect.left) / rect.width;
       const y = (event.clientY - rect.top) / rect.height;
-      const maxRx = isHome ? 4 : 6;
-      const maxRy = isHome ? 5.5 : 8;
-      const lift = isHome ? 1.25 : 2;
+      const maxRx = isHome ? 2.4 : 6;
+      const maxRy = isHome ? 3.2 : 8;
+      const lift = isHome ? 0.7 : 2;
       const rx = (0.5 - y) * maxRx;
       const ry = (x - 0.5) * maxRy;
 
