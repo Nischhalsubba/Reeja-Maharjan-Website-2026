@@ -64,8 +64,12 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   schema={homeSchema}
 >
   <section id="hero" class="section-pad pt-5 sm:pt-6">
-    <Container size="wide">
-      <div class="section-shell section-shell--hero hero-stage" data-motion="reveal">
+    <Container size="stage">
+      <div class="section-shell section-shell--hero hero-stage" data-motion="reveal" data-medical-particles-root>
+        <div class="hero-medical-particles" data-medical-particles-layer aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
         <div class="watermark" data-hero-watermark aria-hidden="true">
           {profile.brand.watermarkWord}
         </div>
@@ -127,7 +131,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="services" class="section-pad">
-    <Container size="wide">
+    <Container size="stage">
       <div class="section-shell section-shell--plain">
         <div data-motion="reveal">
           <p class="section-label">Clinical Areas of Practice</p>
@@ -184,7 +188,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="highlights" class="section-pad">
-    <Container size="wide">
+    <Container size="stage">
       <div class="section-shell section-shell--glow">
         <div data-motion="reveal">
           <p class="section-label">Clinical Experience Highlights</p>
@@ -240,7 +244,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="about" class="section-pad">
-    <Container size="narrow">
+    <Container size="stage">
       <div class="section-shell section-shell--plain">
         <div data-motion="reveal">
           <p class="section-label">Professional Profile</p>
@@ -291,7 +295,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="proof" class="section-pad">
-    <Container size="wide">
+    <Container size="stage">
       <div class="section-shell section-shell--glow">
         <div data-motion="reveal">
           <p class="section-label">Recommendations, Recognition & Evidence</p>
@@ -370,7 +374,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="credentials" class="section-pad">
-    <Container size="narrow">
+    <Container size="stage">
       <div class="section-shell section-shell--plain">
         <div data-motion="reveal">
           <p class="section-label">Credentials</p>
@@ -399,7 +403,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="documents" class="section-pad">
-    <Container size="wide">
+    <Container size="stage">
       <div class="section-shell section-shell--plain">
         <div data-motion="reveal">
           <p class="section-label">Full Verification Gallery</p>
@@ -434,7 +438,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="skills" class="section-pad">
-    <Container size="narrow">
+    <Container size="stage">
       <div class="section-shell section-shell--plain">
         <div data-motion="reveal">
           <p class="section-label">Clinical Skills & Professional Readiness</p>
@@ -486,13 +490,13 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="faq" class="section-pad">
-    <Container size="narrow">
+    <Container size="stage">
       <FaqList items={homepageFaqs} title="Recruiter FAQ" />
     </Container>
   </section>
 
   <section class="section-pad">
-    <Container size="narrow">
+    <Container size="stage">
       <InternalLinksBlock
         links={rolePageLinks}
         title="Explore Nursing Profiles by Role, Setting and Opportunity Type"
@@ -501,7 +505,7 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   </section>
 
   <section id="contact" class="section-pad pb-16 sm:pb-20">
-    <Container size="narrow">
+    <Container size="stage">
       <div class="section-shell section-shell--glow">
         <div class="contact-grid mt-0">
           <div data-motion="reveal">

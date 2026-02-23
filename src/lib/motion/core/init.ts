@@ -33,6 +33,21 @@ const runFeature = async (feature: MotionFeature, main: HTMLElement, reduced: bo
       await runHeroIntro(main, reduced);
       return;
     }
+    case 'medical-particles': {
+      const { bindMedicalParticles } = await import('../features/medical-particles');
+      await bindMedicalParticles(main, reduced);
+      return;
+    }
+    case 'ecg-pulse': {
+      const { bindEcgPulse } = await import('../features/ecg-pulse');
+      await bindEcgPulse(main, reduced);
+      return;
+    }
+    case 'heartbeat-accent': {
+      const { bindHeartbeatAccent } = await import('../features/heartbeat-accent');
+      await bindHeartbeatAccent(main, reduced);
+      return;
+    }
     case 'reveals': {
       const { bindScrollReveals } = await import('../features/reveals');
       await bindScrollReveals(main, reduced);

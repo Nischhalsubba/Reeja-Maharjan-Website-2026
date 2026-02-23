@@ -13,7 +13,21 @@ const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.p
 
 <div class="device-wrap" data-hero-device data-tilt-card>
   <div class="device-glow" aria-hidden="true"></div>
+  <div class="device-ambient-rings" aria-hidden="true">
+    <span></span>
+    <span></span>
+  </div>
+  <div class="device-ecg-shell" data-ecg-root aria-hidden="true">
+    <svg viewBox="0 0 300 60" class="device-ecg-svg">
+      <path
+        d="M0 35 L35 35 L48 35 L58 20 L70 46 L84 10 L98 35 L128 35 L145 35 L156 28 L167 40 L182 18 L196 35 L226 35 L242 35 L252 25 L264 39 L280 35 L300 35"
+        class="device-ecg-path"
+        data-ecg-line
+      ></path>
+    </svg>
+  </div>
   <div class="device-frame">
+    <div class="device-frame__sheen" aria-hidden="true"></div>
     <div class="device-notch" aria-hidden="true"></div>
     <div class="device-screen">
       <div class="device-header">
@@ -35,12 +49,17 @@ const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.p
             <p class="device-subname">{profile.role}</p>
           </div>
         </div>
-        <span class="device-chip">NNC RN</span>
+        <span class="device-chip" data-device-pulse-chip>
+          <span class="heartbeat-accent" data-heartbeat-accent aria-hidden="true"></span>
+          NNC RN
+        </span>
       </div>
 
       <section class="device-panel device-panel--hero">
         <div class="device-status-row">
-          <span class="device-status-dot" aria-hidden="true"></span>
+          <span class="device-status-dot" aria-hidden="true">
+            <span class="heartbeat-accent heartbeat-accent--status" data-heartbeat-accent aria-hidden="true"></span>
+          </span>
           <span class="device-status-text">Immediate availability</span>
         </div>
         <div class="device-mini-grid">

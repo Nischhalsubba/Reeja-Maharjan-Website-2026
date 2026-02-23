@@ -34,28 +34,28 @@ export const runHeroIntro = async (root: ParentNode, reduced: boolean): Promise<
   }
 
   const titleWords = split?.words ?? [];
-  gsap.set([...titleWords, ...elements], { opacity: 0, y: 18, willChange: 'transform, opacity' });
+  gsap.set([...titleWords, ...elements], { opacity: 0, y: 14, willChange: 'transform, opacity' });
 
   const timeline = gsap.timeline({ defaults: { ease: 'power2.out' } });
   if (titleWords.length) {
-    timeline.to(titleWords, { opacity: 1, y: 0, duration: 0.65, stagger: 0.04 });
+    timeline.to(titleWords, { opacity: 1, y: 0, duration: 0.74, stagger: 0.045 });
   } else if (title instanceof HTMLElement) {
-    timeline.fromTo(title, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.65 });
+    timeline.fromTo(title, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.74 });
   }
 
   timeline
     .to(
       watermark instanceof HTMLElement ? [watermark] : [],
-      { opacity: 1, y: 0, duration: 0.8, ease: 'power1.out' },
+      { opacity: 1, y: 0, duration: 0.92, ease: 'power1.out' },
       '-=0.45'
     )
     .to(
       [subtitle, copy, actions].filter((el): el is HTMLElement => el instanceof HTMLElement),
-      { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.09 },
       '-=0.25'
     )
-    .to(pills, { opacity: 1, y: 0, duration: 0.55, stagger: 0.04 }, '-=0.4')
-    .to(image instanceof HTMLElement ? [image] : [], { opacity: 1, y: 0, duration: 0.7 }, '-=0.42')
+    .to(pills, { opacity: 1, y: 0, duration: 0.62, stagger: 0.04 }, '-=0.42')
+    .to(image instanceof HTMLElement ? [image] : [], { opacity: 1, y: 0, duration: 0.82 }, '-=0.46')
     .eventCallback('onComplete', () => {
       [...titleWords, ...elements].forEach((el) => {
         if (el instanceof HTMLElement) el.style.willChange = 'auto';

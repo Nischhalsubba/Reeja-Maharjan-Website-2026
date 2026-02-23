@@ -4,49 +4,50 @@ import { profile } from '../content/profile';
 ---
 
 <footer class="site-footer">
-  <Container size="wide">
+  <Container size="full">
     <div class="footer-shell" data-motion="reveal">
       <div class="footer-watermark" aria-hidden="true">{profile.brand.watermarkWord}</div>
+      <div class="footer-inner-stage">
+        <div class="footer-grid">
+          <section>
+            <p class="footer-kicker">Portfolio</p>
+            <p class="footer-title">{profile.name}</p>
+            <p class="footer-copy">{profile.role}</p>
+            <p class="footer-copy">{profile.location}</p>
+          </section>
 
-      <div class="footer-grid">
-        <section>
-          <p class="footer-kicker">Portfolio</p>
-          <p class="footer-title">{profile.name}</p>
-          <p class="footer-copy">{profile.role}</p>
-          <p class="footer-copy">{profile.location}</p>
-        </section>
+          <section>
+            <p class="footer-kicker">Navigate</p>
+            <ul class="footer-links">
+              <li><a href="/#services">Care Areas</a></li>
+              <li><a href="/#highlights">Highlights</a></li>
+              <li><a href="/#credentials">Credentials</a></li>
+              <li><a href="/#documents">Documents</a></li>
+            </ul>
+          </section>
 
-        <section>
-          <p class="footer-kicker">Navigate</p>
-          <ul class="footer-links">
-            <li><a href="/#services">Care Areas</a></li>
-            <li><a href="/#highlights">Highlights</a></li>
-            <li><a href="/#credentials">Credentials</a></li>
-            <li><a href="/#documents">Documents</a></li>
-          </ul>
-        </section>
+          <section>
+            <p class="footer-kicker">Contact</p>
+            <ul class="footer-links">
+              <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+              <li><a href={`tel:${profile.phone}`}>{profile.phone}</a></li>
+              <li><a href={profile.resumePdfPath}>Resume PDF</a></li>
+            </ul>
+          </section>
 
-        <section>
-          <p class="footer-kicker">Contact</p>
-          <ul class="footer-links">
-            <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
-            <li><a href={`tel:${profile.phone}`}>{profile.phone}</a></li>
-            <li><a href={profile.resumePdfPath}>Resume PDF</a></li>
-          </ul>
-        </section>
+          <section>
+            <p class="footer-kicker">Role Pages</p>
+            <ul class="footer-links">
+              {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
+            </ul>
+          </section>
+        </div>
 
-        <section>
-          <p class="footer-kicker">Role Pages</p>
-          <ul class="footer-links">
-            {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
-          </ul>
-        </section>
-      </div>
-
-      <div class="footer-meta">
-        <span>(c) {new Date().getFullYear()} {profile.name}</span>
-        <span>Registered Nurse Portfolio</span>
-        <span>Static Astro + Cloudflare Pages</span>
+        <div class="footer-meta">
+          <span>(c) {new Date().getFullYear()} {profile.name}</span>
+          <span>Registered Nurse Portfolio</span>
+          <span>Static Astro + Cloudflare Pages</span>
+        </div>
       </div>
     </div>
   </Container>
