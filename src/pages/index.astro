@@ -8,7 +8,16 @@ import MetricCard from '../components/MetricCard.astro';
 import ProofSnippetCard from '../components/ProofSnippetCard.astro';
 import DocumentGalleryCard from '../components/DocumentGalleryCard.astro';
 import DocumentLightbox from '../components/DocumentLightbox.astro';
+import FaqList from '../components/seo/FaqList.astro';
+import InternalLinksBlock from '../components/seo/InternalLinksBlock.astro';
 import { profile } from '../content/profile';
+import { getHomepageKeywords } from '../lib/seo/keywords';
+import {
+  buildFaqSchema,
+  buildPersonSchema,
+  buildProfilePageSchema,
+  buildWebSiteSchema,
+} from '../lib/seo/schema';
 
 const formAction = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? '';
 const publicDocs = profile.documentGallery
@@ -23,9 +32,37 @@ const workPreferenceChips = [
   `Availability: ${profile.workPreferences.availability}`,
   profile.workPreferences.relocation ? 'Relocation: Accepted' : 'Relocation: Not listed',
 ];
+const homepageFaqs = profile.faqItems.filter((faq) => faq.appliesTo.includes('home')).slice(0, 5);
+const siteUrl = Astro.site?.toString() ?? import.meta.env.SITE_URL ?? 'https://example.com';
+const homepageUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const personSchema = buildPersonSchema(profile, siteUrl);
+const personId = String(personSchema['@id']);
+const homeSchema = [
+  personSchema,
+  buildProfilePageSchema({
+    url: homepageUrl,
+    title: profile.seo.homeTitle,
+    description: profile.seo.homeDescription,
+    personId,
+  }),
+  buildWebSiteSchema({ siteUrl, name: `${profile.name} Nurse Portfolio` }),
+  buildFaqSchema(homepageFaqs),
+];
+const rolePageLinks = profile.seoPages.map((page) => ({
+  href: `/${page.slug}/`,
+  label: page.h1,
+  description: page.description,
+}));
 ---
 
-<BaseLayout title={profile.seo.homeTitle} description={profile.seo.homeDescription} page="home">
+<BaseLayout
+  title={profile.seo.homeTitle}
+  description={profile.seo.homeDescription}
+  page="home"
+  pageType="profile"
+  keywords={getHomepageKeywords(profile)}
+  schema={homeSchema}
+>
   <section id="hero" class="section-pad pt-5 sm:pt-6">
     <Container size="wide">
       <div class="section-shell section-shell--hero hero-stage" data-motion="reveal">
@@ -445,6 +482,21 @@ const workPreferenceChips = [
           </article>
         </div>
       </div>
+    </Container>
+  </section>
+
+  <section id="faq" class="section-pad">
+    <Container size="narrow">
+      <FaqList items={homepageFaqs} title="Recruiter FAQ" />
+    </Container>
+  </section>
+
+  <section class="section-pad">
+    <Container size="narrow">
+      <InternalLinksBlock
+        links={rolePageLinks}
+        title="Explore Nursing Profiles by Role, Setting and Opportunity Type"
+      />
     </Container>
   </section>
 

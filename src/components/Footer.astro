@@ -34,6 +34,13 @@ import { profile } from '../content/profile';
             <li><a href={profile.resumePdfPath}>Resume PDF</a></li>
           </ul>
         </section>
+
+        <section>
+          <p class="footer-kicker">Role Pages</p>
+          <ul class="footer-links">
+            {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
+          </ul>
+        </section>
       </div>
 
       <div class="footer-meta">

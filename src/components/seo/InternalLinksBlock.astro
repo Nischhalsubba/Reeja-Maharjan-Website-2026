@@ -1,0 +1,31 @@
+---
+type LinkItem = {
+  href: string;
+  label: string;
+  description?: string;
+};
+
+interface Props {
+  title?: string;
+  links: LinkItem[];
+  className?: string;
+}
+
+const { title = 'Explore Nursing Profiles by Role', links, className = '' } = Astro.props as Props;
+---
+
+<section class:list={['section-shell section-shell--plain', className]}>
+  <p class="section-label">Role Pages</p>
+  <h2 class="section-title mt-3">{title}</h2>
+  <div class="mt-4 grid gap-3">
+    {
+      links.map((link) => (
+        <a href={link.href} class="card-surface block p-4 transition hover:-translate-y-0.5 hover:border-[rgb(111_91_255_/_38%)]">
+          <p class="font-semibold text-[var(--ink)]">{link.label}</p>
+          {link.description && <p class="section-body mt-2 text-sm">{link.description}</p>}
+        </a>
+      ))
+    }
+  </div>
+</section>
+

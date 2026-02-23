@@ -8,13 +8,27 @@ interface Props {
   description: string;
   page: string;
   ogImage?: string;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  robots?: string;
+  keywords?: string[];
+  pageType?: 'profile' | 'seo-landing';
 }
 
-const { title, description, page, ogImage = '/og-image.png' } = Astro.props as Props;
+const {
+  title,
+  description,
+  page,
+  ogImage = '/og-image.png',
+  schema,
+  robots,
+  keywords = [],
+  pageType = 'profile',
+} = Astro.props as Props;
 const siteUrl = Astro.site?.toString() ?? import.meta.env.SITE_URL ?? 'https://example.com';
 const canonical = new URL(Astro.url.pathname, siteUrl).toString();
 const fullTitle = `${title} | Reeja Nurse Portfolio`;
 const imageUrl = new URL(ogImage, siteUrl).toString();
+const schemaList = Array.isArray(schema) ? schema : schema ? [schema] : [];
 ---
 
 <!doctype html>
@@ -25,6 +39,8 @@ const imageUrl = new URL(ogImage, siteUrl).toString();
     <meta name="generator" content={Astro.generator} />
     <title>{fullTitle}</title>
     <meta name="description" content={description} />
+    {robots && <meta name="robots" content={robots} />}
+    {keywords.length > 0 && <meta name="keywords" content={keywords.join(', ')} />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
@@ -43,8 +59,17 @@ const imageUrl = new URL(ogImage, siteUrl).toString();
     <script is:inline>
       document.documentElement.classList.add('js');
     </script>
+    {
+      schemaList.map((item) => (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(item)}
+        />
+      ))
+    }
   </head>
-  <body class="antialiased">
+  <body class="antialiased" data-page-type={pageType}>
     <a href="#main-content" class="skip-link rounded-md bg-[var(--accent)] px-4 py-2 text-white">
       Skip to content
     </a>

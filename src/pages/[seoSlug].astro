@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import Container from '../components/Container.astro';
+import MetricCard from '../components/MetricCard.astro';
+import ProofSnippetCard from '../components/ProofSnippetCard.astro';
+import DocumentGalleryCard from '../components/DocumentGalleryCard.astro';
+import FaqList from '../components/seo/FaqList.astro';
+import InternalLinksBlock from '../components/seo/InternalLinksBlock.astro';
+import SeoLandingSection from '../components/seo/SeoLandingSection.astro';
+import {
+  profile,
+  type CredentialItem,
+  type DocumentGalleryItem,
+  type ExperienceItem,
+  type ProofSnippet,
+  type SeoPageContent,
+  type SkillGroup,
+  type StatItem,
+} from '../content/profile';
+import { seoPageMeta } from '../lib/seo/meta';
+import { buildSeoLandingProfileSchema } from '../lib/seo/schema';
+
+export function getStaticPaths() {
+  const seen = new Set<string>();
+
+  for (const page of profile.seoPages) {
+    if (seen.has(page.slug)) {
+      throw new Error(`Duplicate SEO page slug in profile.seoPages: ${page.slug}`);
+    }
+    seen.add(page.slug);
+  }
+
+  return profile.seoPages.map((page) => ({
+    params: { seoSlug: page.slug },
+    props: { seoPage: page },
+  }));
+}
+
+interface Props {
+  seoPage: SeoPageContent;
+}
+
+const { seoPage } = Astro.props as Props;
+const meta = seoPageMeta(seoPage);
+const siteUrl = Astro.site?.toString() ?? import.meta.env.SITE_URL ?? 'https://example.com';
+const pageUrl = new URL(Astro.url.pathname, siteUrl).toString();
+
+const isExperienceItem = (value: ExperienceItem | undefined): value is ExperienceItem => Boolean(value);
+const isCredentialItem = (value: CredentialItem | undefined): value is CredentialItem => Boolean(value);
+const isSkillGroup = (value: SkillGroup | undefined): value is SkillGroup => Boolean(value);
+const isDocItem = (value: DocumentGalleryItem | undefined): value is DocumentGalleryItem => Boolean(value);
+const isProofSnippet = (value: ProofSnippet | undefined): value is ProofSnippet => Boolean(value);
+const isStatItem = (value: StatItem | undefined): value is StatItem => Boolean(value);
+
+const relatedExperience = seoPage.relatedExperienceIndexes.map((i) => profile.experience[i]).filter(isExperienceItem);
+const relatedCredentials = seoPage.relatedCredentialIndexes.map((i) => profile.credentials[i]).filter(isCredentialItem);
+const relatedSkillGroups = seoPage.relatedSkillGroupIndexes.map((i) => profile.skillGroups[i]).filter(isSkillGroup);
+const relatedDocs = seoPage.relatedDocumentIds
+  .map((id) => profile.documentGallery.find((doc) => doc.id === id && doc.public))
+  .filter(isDocItem);
+const relatedProof = seoPage.relatedProofSnippetIds
+  .map((id) => profile.proofSnippets.find((item) => item.id === id))
+  .filter(isProofSnippet);
+const faqs = profile.faqItems.filter((faq) => faq.appliesTo.includes(seoPage.slug));
+
+const schema = buildSeoLandingProfileSchema({
+  page: seoPage,
+  profile,
+  url: pageUrl,
+  siteUrl,
+  faqs,
+});
+
+const roleLinks = profile.seoPages
+  .filter((page) => page.slug !== seoPage.slug)
+  .slice(0, 4)
+  .map((page) => ({
+    href: `/${page.slug}/`,
+    label: page.h1,
+    description: page.intent.replace(/-/g, ' '),
+  }));
+
+const snapshotStats = [
+  profile.stats.find((s) => s.label.includes('NNC')) ?? profile.stats[3],
+  { label: 'Availability', value: profile.workPreferences.availability, note: 'Interview-ready' },
+  { label: 'Relocation', value: profile.workPreferences.relocation ? 'Accepted' : 'Not listed', note: 'Nepal / abroad opportunities' },
+  { label: 'Work Modes', value: profile.workPreferences.arrangements.join(' / '), note: profile.workPreferences.sectors.join(' / ') },
+].filter(isStatItem as (value: StatItem | undefined) => value is StatItem);
+---
+
+<BaseLayout
+  title={meta.title}
+  description={meta.description}
+  page="seo-landing"
+  pageType="seo-landing"
+  keywords={meta.keywords}
+  schema={schema}
+>
+  <section class="section-pad pt-5 sm:pt-6">
+    <Container size="narrow">
+      <div class="section-shell section-shell--hero" data-motion="reveal">
+        <p class="section-label">SEO Landing Profile</p>
+        <h1 class="hero-title mt-3">{seoPage.h1}</h1>
+        <p class="hero-subtitle mt-4">{seoPage.intro}</p>
+        {seoPage.relocationDisclosure && (
+          <p class="notice mt-4">{seoPage.relocationDisclosure}</p>
+        )}
+        <div class="chip-row mt-4">
+          {seoPage.keywords.map((keyword) => <span class="chip chip--soft">{keyword}</span>)}
+        </div>
+        <div class="hero-actions mt-5">
+          <ButtonLink href={seoPage.ctaTarget}>{seoPage.ctaLabel}</ButtonLink>
+          <ButtonLink href="/" variant="secondary">View Full Portfolio</ButtonLink>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <section class="section-pad">
+    <Container size="narrow">
+      <SeoLandingSection
+        label="Recruiter Snapshot"
+        title="Availability, Licensure & Role Preferences"
+        description="Quick summary for hospital, NGO, INGO, and recruitment teams reviewing this role-specific profile."
+      >
+        <div class="stats-grid mt-0">
+          {snapshotStats.map((item) => <MetricCard item={item} />)}
+        </div>
+        <div class="chip-row mt-4">
+          {profile.workPreferences.geography.map((item) => <span class="chip">{item}</span>)}
+          {profile.workPreferences.sectors.map((item) => <span class="chip">{item}</span>)}
+          {profile.workPreferences.arrangements.map((item) => <span class="chip">{item}</span>)}
+        </div>
+      </SeoLandingSection>
+    </Container>
+  </section>
+
+  <section class="section-pad">
+    <Container size="wide">
+      <SeoLandingSection
+        label="Relevant Experience"
+        title="Hospital Experience Most Relevant to This Search Intent"
+        description={seoPage.description}
+      >
+        <div class="grid gap-4">
+          {relatedExperience.map((job) => (
+            <article class="card-surface p-4 sm:p-5" data-motion="reveal" data-tilt-card>
+              <div class="highlight-header">
+                <h3 class="highlight-role">{job.role}</h3>
+                <p class="highlight-period">{job.period}</p>
+              </div>
+              <p class="highlight-org">{job.organization} · {job.location}</p>
+              {job.outcomeLine && <p class="highlight-outcome">{job.outcomeLine}</p>}
+              <ul class="bullet-list">
+                {job.highlights.map((item) => <li>{item}</li>)}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </SeoLandingSection>
+    </Container>
+  </section>
+
+  <section class="section-pad">
+    <Container size="wide">
+      <SeoLandingSection
+        label="Verification Evidence"
+        title="Documents and Proof Relevant to This Profile"
+        description="Selected public records are included below. Full document gallery remains available on the main portfolio page."
+      >
+        {relatedProof.length > 0 && (
+          <div class="proof-grid">
+            {relatedProof.map((item) => <ProofSnippetCard item={item} />)}
+          </div>
+        )}
+        {relatedDocs.length > 0 && (
+          <div class="doc-grid mt-5">
+            {relatedDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
+          </div>
+        )}
+      </SeoLandingSection>
+    </Container>
+  </section>
+
+  <section class="section-pad">
+    <Container size="narrow">
+      <SeoLandingSection
+        label="Credentials & Skills"
+        title="Training, Licensure and Role-Fit Competencies"
+        description="Role-specific subset selected from Reeja’s verified credential and skill profile."
+      >
+        <div class="grid gap-4">
+          {relatedCredentials.map((item) => (
+            <article class="card-surface p-4 sm:p-5" data-motion="reveal">
+              <p class="eyebrow">{item.kind ?? 'credential'}</p>
+              <h3 class="mt-2 text-lg font-semibold text-[var(--ink)]">{item.title}</h3>
+              <p class="section-body mt-1 text-sm">{item.issuer}</p>
+              <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.date}</p>
+              <p class="section-body mt-3">{item.details}</p>
+            </article>
+          ))}
+        </div>
+
+        <div class="mt-5 grid gap-4">
+          {relatedSkillGroups.map((group) => (
+            <article class="card-surface p-4 sm:p-5" data-motion="reveal">
+              <h3 class="stack-title">{group.area}</h3>
+              <div class="stack-chip-grid">
+                {group.items.map((item) => <span class="stack-chip">{item}</span>)}
+              </div>
+            </article>
+          ))}
+        </div>
+      </SeoLandingSection>
+    </Container>
+  </section>
+
+  <section class="section-pad">
+    <Container size="narrow">
+      <FaqList items={faqs} title="Role-Specific Nursing FAQ" />
+    </Container>
+  </section>
+
+  <section class="section-pad">
+    <Container size="narrow">
+      <SeoLandingSection
+        label="Contact"
+        title="Discuss This Nursing Profile"
+        description="For interviews or role discussions, use the main portfolio contact section. The primary portfolio page includes the full contact form and complete verification gallery."
+      >
+        <div class="hero-actions mt-0">
+          <ButtonLink href="/#contact">Go to Contact Section</ButtonLink>
+          <ButtonLink href="/" variant="secondary">Back to Main Portfolio</ButtonLink>
+        </div>
+      </SeoLandingSection>
+    </Container>
+  </section>
+
+  <section class="section-pad pb-16 sm:pb-20">
+    <Container size="narrow">
+      <InternalLinksBlock links={roleLinks} title="Explore Related Nursing Profiles" />
+    </Container>
+  </section>
+</BaseLayout>

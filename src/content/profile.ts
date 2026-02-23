@@ -126,6 +126,75 @@ export type ImageAsset = {
   featured?: boolean;
 };
 
+export type SeoIntentTag =
+  | 'registered-rn-nepal'
+  | 'maternal-newborn'
+  | 'general-ward'
+  | 'nursing-officer'
+  | 'relocation-biratnagar'
+  | 'ngo-ingo';
+
+export type SeoCtaVariant = 'contact' | 'documents' | 'credentials';
+
+export type SeoBreadcrumb = {
+  name: string;
+  path: string;
+};
+
+export type SeoPageContent = {
+  slug: string;
+  title: string;
+  description: string;
+  h1: string;
+  intent: SeoIntentTag;
+  keywords: string[];
+  intro: string;
+  relatedExperienceIndexes: number[];
+  relatedCredentialIndexes: number[];
+  relatedDocumentIds: string[];
+  relatedProofSnippetIds: string[];
+  relatedSkillGroupIndexes: number[];
+  faqKeys: string[];
+  ctaLabel: string;
+  ctaTarget: string;
+  ctaVariant?: SeoCtaVariant;
+  breadcrumbs: SeoBreadcrumb[];
+  relocationDisclosure?: string;
+};
+
+export type FaqItem = {
+  key: string;
+  question: string;
+  answer: string;
+  appliesTo: Array<'home' | string>;
+};
+
+export type KeywordTarget = {
+  query: string;
+  intent: string;
+  priority: 'high' | 'medium' | 'low';
+  truthfulLocationMode: 'local' | 'relocation' | 'national';
+};
+
+export type StructuredEntityFacts = {
+  fullName: string;
+  jobTitle: string;
+  licenseName: string;
+  licenseAuthority: string;
+  licenseNumber: string;
+  baseLocation: string;
+  country: string;
+  languages: string[];
+  sameAs: string[];
+  availability: string;
+  relocationAccepted: boolean;
+  sectors: string[];
+  arrangements: string[];
+  alumni: string[];
+  knowsAbout: string[];
+  awards: string[];
+};
+
 export type Profile = {
   name: string;
   role: string;
@@ -157,6 +226,16 @@ export type Profile = {
   recognition: RecognitionItem[];
   research: ResearchItem[];
   images?: ImageAsset[];
+  seoPages: SeoPageContent[];
+  faqItems: FaqItem[];
+  keywordTargets: KeywordTarget[];
+  entityFacts: StructuredEntityFacts;
+  locationTargeting: {
+    currentBase: string;
+    relocationTargets: string[];
+    wordingRule: string;
+  };
+  recruiterQuickAnswers: Array<{ question: string; answer: string }>;
 };
 
 const evidence = {
@@ -744,6 +823,348 @@ export const profile: Profile = {
       public: true,
       tags: ['slc', 'marksheet'],
       previewAspect: 'portrait',
+    },
+  ],
+  entityFacts: {
+    fullName: 'Reeja Maharjan',
+    jobTitle: 'Licensed Registered Nurse (Nepal)',
+    licenseName: 'Registered Nurse',
+    licenseAuthority: 'Nepal Nursing Council',
+    licenseNumber: '65100',
+    baseLocation: 'Lalitpur, Nepal',
+    country: 'NP',
+    languages: ['Nepali', 'Newari', 'English', 'Hindi'],
+    sameAs: ['https://www.linkedin.com/in/reejamaharjan/'],
+    availability: 'Immediate',
+    relocationAccepted: true,
+    sectors: ['Hospital', 'NGO', 'INGO'],
+    arrangements: ['Full-time', 'Contract'],
+    alumni: [
+      'Tribhuvan University',
+      'Manmohan Memorial Institute of Health Sciences',
+      'Pinnacle Academy, Lalitpur',
+    ],
+    knowsAbout: [
+      'Maternal and newborn care support',
+      'General ward nursing',
+      'Patient counselling',
+      'Gynaecology and obstetrics exposure',
+      'OTTM training',
+      'CPR/BLS training participation',
+      'Nursing documentation and handover',
+      'Hospital nursing in Nepal',
+    ],
+    awards: [
+      'SAN Token of Appreciation (World Anesthesia Day 2024)',
+      'Government of Nepal scholarship nomination pathway support for B.Sc. Nursing',
+    ],
+  },
+  locationTargeting: {
+    currentBase: 'Lalitpur, Nepal',
+    relocationTargets: ['Biratnagar', 'Kathmandu Valley', 'Across Nepal', 'International roles'],
+    wordingRule:
+      'Location-targeted pages describe relocation readiness only and do not claim current residence outside Lalitpur unless verified.',
+  },
+  recruiterQuickAnswers: [
+    {
+      question: 'Is Reeja licensed to practice nursing in Nepal?',
+      answer:
+        'Yes. Reeja Maharjan is a Licensed Registered Nurse (RN) with Nepal Nursing Council (Reg. No. 65100) after passing the National Licensure Examination for Nurses.',
+    },
+    {
+      question: 'What kinds of roles is she open to?',
+      answer:
+        'She is open to hospital, NGO, and INGO nursing opportunities in Nepal and abroad, including full-time and contract roles.',
+    },
+    {
+      question: 'Is relocation possible?',
+      answer: 'Yes. Reeja is available immediately and accepts relocation for suitable nursing opportunities.',
+    },
+    {
+      question: 'What evidence is available for verification?',
+      answer:
+        'The site includes public experience letters, training certificates, recognition records, and education documents, with sensitive identity documents excluded for privacy.',
+    },
+  ],
+  keywordTargets: [
+    { query: 'Reeja Maharjan', intent: 'brand', priority: 'high', truthfulLocationMode: 'national' },
+    {
+      query: 'registered nurse nepal portfolio',
+      intent: 'role portfolio',
+      priority: 'high',
+      truthfulLocationMode: 'national',
+    },
+    {
+      query: 'maternal newborn nurse nepal',
+      intent: 'maternal-newborn',
+      priority: 'high',
+      truthfulLocationMode: 'national',
+    },
+    {
+      query: 'general ward nurse nepal',
+      intent: 'general-ward',
+      priority: 'high',
+      truthfulLocationMode: 'national',
+    },
+    {
+      query: 'nursing officer nepal',
+      intent: 'nursing-officer',
+      priority: 'high',
+      truthfulLocationMode: 'national',
+    },
+    {
+      query: 'nurse in biratnagar',
+      intent: 'relocation targeting',
+      priority: 'medium',
+      truthfulLocationMode: 'relocation',
+    },
+    {
+      query: 'nurse for ngo nepal',
+      intent: 'ngo/ingo',
+      priority: 'medium',
+      truthfulLocationMode: 'national',
+    },
+  ],
+  faqItems: [
+    {
+      key: 'nnc-license',
+      question: 'Is Reeja Maharjan a licensed registered nurse in Nepal?',
+      answer:
+        'Yes. Reeja Maharjan is a Licensed Registered Nurse (RN) in Nepal with Nepal Nursing Council registration number 65100 after passing the National Licensure Examination for Nurses.',
+      appliesTo: ['home', 'registered-nurse-nepal', 'nursing-officer-nepal', 'maternal-newborn-nurse-nepal'],
+    },
+    {
+      key: 'maternal-newborn-exposure',
+      question: 'Does Reeja have maternal and newborn care experience?',
+      answer:
+        'Yes. Her experience and training records show maternal and newborn care support exposure, including counselling, postnatal routines, and newborn care learning with supporting certificates in the portfolio.',
+      appliesTo: ['home', 'maternal-newborn-nurse-nepal', 'nursing-officer-nepal'],
+    },
+    {
+      key: 'general-ward-exposure',
+      question: 'Does Reeja have general ward nursing experience in Surgery and Gynaecology & Obstetrics?',
+      answer:
+        'Yes. The MMTH experience letter verifies Staff Nurse service in the General Ward, including Surgery and Gynaecology & Obstetrics service areas.',
+      appliesTo: ['home', 'general-ward-nurse-nepal', 'registered-nurse-nepal'],
+    },
+    {
+      key: 'nursing-officer-role',
+      question: 'Has Reeja worked in a Nursing Officer role?',
+      answer:
+        'Yes. Reeja served as a Nursing Officer at Sindhuli Hospital, with documented responsibilities across maternity and OT-related duties in a regional hospital setting.',
+      appliesTo: ['home', 'nursing-officer-nepal', 'registered-nurse-nepal'],
+    },
+    {
+      key: 'ngo-ingo-fit',
+      question: 'Is Reeja available for NGO and INGO nursing roles in Nepal?',
+      answer:
+        'Yes. She is open to hospital, NGO, and INGO opportunities and brings strengths in patient counselling, health education, documentation, communication, and research participation.',
+      appliesTo: ['home', 'nurse-for-ngo-ingo-nepal'],
+    },
+    {
+      key: 'availability',
+      question: 'Is Reeja Maharjan available immediately for nursing opportunities?',
+      answer:
+        'Yes. Reeja is available immediately for interviews and nursing role discussions, including full-time and contract opportunities.',
+      appliesTo: ['home', 'registered-nurse-nepal', 'nurse-for-ngo-ingo-nepal', 'nurse-biratnagar-nepal-relocation'],
+    },
+    {
+      key: 'relocation',
+      question: 'Is Reeja available for relocation within Nepal, including Biratnagar?',
+      answer:
+        'Yes. Reeja is currently based in Lalitpur, Nepal and accepts relocation for suitable opportunities, including positions in Biratnagar and other locations.',
+      appliesTo: ['home', 'nurse-biratnagar-nepal-relocation'],
+    },
+    {
+      key: 'document-verification',
+      question: 'Can employers review supporting documents and credentials?',
+      answer:
+        'Yes. The portfolio includes a public verification gallery with experience letters, training certificates, recognition records, and education documents. Sensitive identity documents are intentionally excluded.',
+      appliesTo: ['home', 'registered-nurse-nepal', 'maternal-newborn-nurse-nepal', 'general-ward-nurse-nepal', 'nursing-officer-nepal'],
+    },
+  ],
+  seoPages: [
+    {
+      slug: 'registered-nurse-nepal',
+      title: 'Registered Nurse Nepal Portfolio - Reeja Maharjan',
+      description:
+        'Registered Nurse Nepal portfolio of Reeja Maharjan (NNC licensed RN) with hospital experience across TUTH, MMTH and Sindhuli Hospital, verified documents, and immediate availability.',
+      h1: 'Registered Nurse in Nepal - Reeja Maharjan',
+      intent: 'registered-rn-nepal',
+      keywords: [
+        'registered nurse nepal',
+        'registered nurse nepal portfolio',
+        'licensed rn nepal',
+        'reeja maharjan nurse',
+        'nepal nursing council rn',
+      ],
+      intro:
+        'This page summarizes Reeja Maharjan’s NNC-licensed Registered Nurse profile for hospitals, NGOs, INGOs, and recruiters seeking a verified nurse portfolio in Nepal.',
+      relatedExperienceIndexes: [0, 1, 2],
+      relatedCredentialIndexes: [0, 1, 2, 3],
+      relatedDocumentIds: ['mmth-exp-letter', 'exp-letter', 'cnc-level-ii', 'ottm', 'cpr', 'san-token'],
+      relatedProofSnippetIds: ['mmth-letter-general-ward', 'sindhuli-letter-professionalism', 'training-readiness'],
+      relatedSkillGroupIndexes: [0, 1, 2, 3],
+      faqKeys: ['nnc-license', 'general-ward-exposure', 'nursing-officer-role', 'availability', 'document-verification'],
+      ctaLabel: 'Contact for RN Opportunities',
+      ctaTarget: '/#contact',
+      ctaVariant: 'contact',
+      breadcrumbs: [
+        { name: 'Home', path: '/' },
+        { name: 'Registered Nurse Nepal', path: '/registered-nurse-nepal/' },
+      ],
+    },
+    {
+      slug: 'maternal-newborn-nurse-nepal',
+      title: 'Maternal and Newborn Nurse Nepal - Reeja Maharjan',
+      description:
+        'Maternal and newborn nursing profile in Nepal: Reeja Maharjan, NNC-licensed RN with TUTH experience, newborn care training exposure, counselling support, and verified documents.',
+      h1: 'Maternal and Newborn Nurse Profile (Nepal) - Reeja Maharjan',
+      intent: 'maternal-newborn',
+      keywords: [
+        'maternal newborn nurse nepal',
+        'newborn care nurse nepal',
+        'postpartum counselling nurse nepal',
+        'tuth nurse maternal newborn',
+        'reeja maharjan maternal newborn nurse',
+      ],
+      intro:
+        'This page focuses on Reeja Maharjan’s maternal and newborn care support experience, counselling strengths, and related training evidence relevant to maternity-focused roles in Nepal.',
+      relatedExperienceIndexes: [0, 2],
+      relatedCredentialIndexes: [1, 3],
+      relatedDocumentIds: ['cnc-level-ii', 'cpr', 'san-token', 'exp-letter'],
+      relatedProofSnippetIds: ['san-recognition', 'training-readiness'],
+      relatedSkillGroupIndexes: [0, 3],
+      faqKeys: ['nnc-license', 'maternal-newborn-exposure', 'availability', 'document-verification'],
+      ctaLabel: 'Discuss Maternal/Newborn Roles',
+      ctaTarget: '/#contact',
+      ctaVariant: 'contact',
+      breadcrumbs: [
+        { name: 'Home', path: '/' },
+        { name: 'Maternal / Newborn Nurse Nepal', path: '/maternal-newborn-nurse-nepal/' },
+      ],
+    },
+    {
+      slug: 'general-ward-nurse-nepal',
+      title: 'General Ward Nurse Nepal (Surgery, Gyn & Obs Exposure) - Reeja Maharjan',
+      description:
+        'General ward nurse profile in Nepal with MMTH experience in Surgery and Gynaecology & Obstetrics service areas. Verified experience letter and nursing credentials for recruiter review.',
+      h1: 'General Ward Nurse in Nepal - Reeja Maharjan',
+      intent: 'general-ward',
+      keywords: [
+        'general ward nurse nepal',
+        'staff nurse general ward nepal',
+        'surgery ward nurse nepal',
+        'gynaecology obstetrics ward nurse nepal',
+        'mmth staff nurse portfolio',
+      ],
+      intro:
+        'This page highlights Reeja Maharjan’s verified general ward nursing service at MMTH, including Surgery and Gynaecology & Obstetrics exposure, with supporting documentation for recruiters.',
+      relatedExperienceIndexes: [1],
+      relatedCredentialIndexes: [0, 3],
+      relatedDocumentIds: ['mmth-exp-letter', 'cpr', 'san-token'],
+      relatedProofSnippetIds: ['mmth-letter-general-ward'],
+      relatedSkillGroupIndexes: [1, 3],
+      faqKeys: ['general-ward-exposure', 'nnc-license', 'availability', 'document-verification'],
+      ctaLabel: 'Contact for General Ward Roles',
+      ctaTarget: '/#contact',
+      ctaVariant: 'contact',
+      breadcrumbs: [
+        { name: 'Home', path: '/' },
+        { name: 'General Ward Nurse Nepal', path: '/general-ward-nurse-nepal/' },
+      ],
+    },
+    {
+      slug: 'nursing-officer-nepal',
+      title: 'Nursing Officer Nepal Profile - Reeja Maharjan',
+      description:
+        'Nursing Officer profile in Nepal: Reeja Maharjan with Sindhuli Hospital experience, maternity and OT-related duties, OTTM training, and verified experience evidence.',
+      h1: 'Nursing Officer in Nepal - Reeja Maharjan',
+      intent: 'nursing-officer',
+      keywords: [
+        'nursing officer nepal',
+        'nursing officer portfolio nepal',
+        'sindhuli hospital nursing officer',
+        'ot readiness nurse nepal',
+        'reeja maharjan nursing officer',
+      ],
+      intro:
+        'This page focuses on Reeja Maharjan’s Nursing Officer experience at Sindhuli Hospital, including maternity and OT-related duties supported by experience and training documents.',
+      relatedExperienceIndexes: [2],
+      relatedCredentialIndexes: [0, 1, 2],
+      relatedDocumentIds: ['exp-letter', 'ottm', 'cnc-level-ii'],
+      relatedProofSnippetIds: ['sindhuli-letter-professionalism', 'training-readiness'],
+      relatedSkillGroupIndexes: [0, 2, 3],
+      faqKeys: ['nursing-officer-role', 'nnc-license', 'maternal-newborn-exposure', 'document-verification'],
+      ctaLabel: 'Contact for Nursing Officer Opportunities',
+      ctaTarget: '/#contact',
+      ctaVariant: 'contact',
+      breadcrumbs: [
+        { name: 'Home', path: '/' },
+        { name: 'Nursing Officer Nepal', path: '/nursing-officer-nepal/' },
+      ],
+    },
+    {
+      slug: 'nurse-biratnagar-nepal-relocation',
+      title: 'Nurse for Biratnagar, Nepal (Relocation Ready) - Reeja Maharjan',
+      description:
+        'Reeja Maharjan is an NNC-licensed Registered Nurse currently based in Lalitpur and open to relocation to Biratnagar, Nepal for hospital, NGO, and INGO roles.',
+      h1: 'Relocation-Ready Nurse for Biratnagar, Nepal - Reeja Maharjan',
+      intent: 'relocation-biratnagar',
+      keywords: [
+        'nurse in biratnagar',
+        'nurse biratnagar nepal',
+        'relocation ready nurse nepal',
+        'registered nurse biratnagar opportunity',
+        'reeja maharjan nurse biratnagar',
+      ],
+      intro:
+        'This page is for employers in Biratnagar and nearby areas who are looking for a relocation-ready nurse with verified hospital experience in Nepal.',
+      relatedExperienceIndexes: [0, 1, 2],
+      relatedCredentialIndexes: [0, 1, 2, 3],
+      relatedDocumentIds: ['mmth-exp-letter', 'exp-letter', 'cnc-level-ii', 'ottm', 'cpr'],
+      relatedProofSnippetIds: ['mmth-letter-general-ward', 'sindhuli-letter-professionalism', 'training-readiness'],
+      relatedSkillGroupIndexes: [0, 1, 2, 3],
+      faqKeys: ['relocation', 'availability', 'nnc-license', 'document-verification'],
+      ctaLabel: 'Contact for Biratnagar Opportunities',
+      ctaTarget: '/#contact',
+      ctaVariant: 'contact',
+      breadcrumbs: [
+        { name: 'Home', path: '/' },
+        { name: 'Nurse in Biratnagar (Relocation)', path: '/nurse-biratnagar-nepal-relocation/' },
+      ],
+      relocationDisclosure:
+        'Reeja is currently based in Lalitpur, Nepal. This page targets Biratnagar hiring searches only to indicate relocation readiness, not current residence.',
+    },
+    {
+      slug: 'nurse-for-ngo-ingo-nepal',
+      title: 'Nurse for NGO and INGO Roles in Nepal - Reeja Maharjan',
+      description:
+        'Nurse portfolio for NGO/INGO opportunities in Nepal: Reeja Maharjan, NNC-licensed RN with counselling, patient education, documentation, research participation, and hospital-based experience.',
+      h1: 'Nurse for NGO / INGO Roles in Nepal - Reeja Maharjan',
+      intent: 'ngo-ingo',
+      keywords: [
+        'nurse for ngo nepal',
+        'nurse for ingo nepal',
+        'community health nurse nepal portfolio',
+        'patient counselling nurse nepal',
+        'reeja maharjan ngo ingo nurse',
+      ],
+      intro:
+        'This page presents Reeja Maharjan’s nursing strengths relevant to NGO and INGO roles in Nepal, including counselling, patient education, documentation, communication, and research participation.',
+      relatedExperienceIndexes: [0, 1, 2],
+      relatedCredentialIndexes: [0, 1, 3, 4],
+      relatedDocumentIds: ['mmihs-irc-approval', 'san-token', 'vascular-conference', 'cpr'],
+      relatedProofSnippetIds: ['research-involvement', 'san-recognition', 'training-readiness'],
+      relatedSkillGroupIndexes: [0, 3],
+      faqKeys: ['ngo-ingo-fit', 'availability', 'relocation', 'document-verification'],
+      ctaLabel: 'Contact for NGO / INGO Opportunities',
+      ctaTarget: '/#contact',
+      ctaVariant: 'contact',
+      breadcrumbs: [
+        { name: 'Home', path: '/' },
+        { name: 'Nurse for NGO / INGO Nepal', path: '/nurse-for-ngo-ingo-nepal/' },
+      ],
     },
   ],
   privacyNotes: [

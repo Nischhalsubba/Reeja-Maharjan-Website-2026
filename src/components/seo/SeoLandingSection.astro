@@ -1,0 +1,20 @@
+---
+interface Props {
+  label: string;
+  title: string;
+  description?: string;
+  className?: string;
+}
+
+const { label, title, description, className = '' } = Astro.props as Props;
+---
+
+<section class:list={['section-shell section-shell--plain', className]}>
+  <p class="section-label">{label}</p>
+  <h2 class="section-title mt-3">{title}</h2>
+  {description && <p class="section-body mt-3 reading-wrap">{description}</p>}
+  <div class="mt-4">
+    <slot />
+  </div>
+</section>
+
