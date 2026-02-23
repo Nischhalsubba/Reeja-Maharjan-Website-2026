@@ -1,4 +1,8 @@
 ---
+import { existsSync, statSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ButtonLink from '../components/ButtonLink.astro';
 import Container from '../components/Container.astro';
@@ -24,7 +28,23 @@ const publicDocs = profile.documentGallery
   .filter((doc) => doc.public)
   .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 const docCategories = ['All', ...new Set(publicDocs.map((doc) => doc.category))];
-const heroImage = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured);
+
+const publicDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public');
+const hasUsablePublicImage = (file?: string) => {
+  if (!file || !file.startsWith('/')) return false;
+  const absolute = resolve(publicDir, file.slice(1));
+  if (!existsSync(absolute)) return false;
+  try {
+    return statSync(absolute).size > 10_000;
+  } catch {
+    return false;
+  }
+};
+
+const heroImageCandidate = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured)
+  ?? profile.images?.find((img) => img.usage === 'hero' && img.public);
+const heroImage = heroImageCandidate && hasUsablePublicImage(heroImageCandidate.file) ? heroImageCandidate : undefined;
+
 const workPreferenceChips = [
   ...profile.workPreferences.geography,
   ...profile.workPreferences.sectors,
@@ -53,6 +73,128 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   label: page.h1,
   description: page.description,
 }));
+
+type EvidenceLink = NonNullable<(typeof profile.experience)[number]['evidence']>[number];
+type TimelineKind = 'experience' | 'credential' | 'recognition' | 'research';
+type TimelineEntry = {
+  id: string;
+  kind: TimelineKind;
+  displayDate: string;
+  sortKey: number;
+  title: string;
+  org: string;
+  summary?: string;
+  bullets?: string[];
+  evidence?: EvidenceLink[];
+};
+
+const docById = Object.fromEntries(publicDocs.map((doc) => [doc.id, doc]));
+const stripOrdinals = (value: string) => value.replace(/\b(\d+)(st|nd|rd|th)\b/gi, '$1');
+const safeDateUtc = (year: number, month = 1, day = 1) => Date.UTC(Math.max(1900, year), Math.max(0, month - 1), Math.max(1, Math.min(28, day)));
+
+const parseDateToSortKey = (value?: string): number | null => {
+  if (!value) return null;
+  const source = stripOrdinals(value);
+
+  const periodParts = source.split(/\s+-\s+/);
+  if (periodParts.length > 1) {
+    const lastPart = periodParts.at(-1);
+    if (lastPart) return parseDateToSortKey(lastPart.trim());
+  }
+
+  const bsMatch = source.match(/(20\d{2})\/(\d{1,2})\/(\d{1,2})\s*\(BS\)/i);
+  if (bsMatch) {
+    const year = Number(bsMatch[1]) - 57;
+    const month = Number(bsMatch[2]);
+    const day = Number(bsMatch[3]);
+    return safeDateUtc(year, month, day);
+  }
+
+  const adDateMatch = source.match(/[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}/);
+  if (adDateMatch) {
+    const parsed = Date.parse(adDateMatch[0]);
+    if (!Number.isNaN(parsed)) return parsed;
+  }
+
+  const yearOnly = source.match(/\b(19|20)\d{2}\b/);
+  if (yearOnly) {
+    return safeDateUtc(Number(yearOnly[0]), 12, 31);
+  }
+
+  return null;
+};
+
+const asEvidenceLink = (doc: (typeof publicDocs)[number]): EvidenceLink => ({
+  title: doc.title,
+  file: doc.file,
+  type: 'document',
+  alt: doc.alt,
+  note: doc.summary,
+});
+
+const presentDocs = (items: Array<(typeof publicDocs)[number] | undefined>): EvidenceLink[] =>
+  items.filter((item): item is (typeof publicDocs)[number] => Boolean(item)).map(asEvidenceLink);
+
+const keywordDocEvidenceForCredential = (title: string): EvidenceLink[] => {
+  const lower = title.toLowerCase();
+  if (lower.includes('newborn')) return presentDocs([docById['cnc-level-ii']]);
+  if (lower.includes('operation theatre') || lower.includes('ottm')) return presentDocs([docById.ottm]);
+  if (lower.includes('cpr') || lower.includes('bls')) return presentDocs([docById.cpr]);
+  if (lower.includes('conference')) return presentDocs([docById['vascular-conference']]);
+  if (lower.includes('nepal nursing council') || lower.includes('registered nurse')) return [];
+  return [];
+};
+
+const timelineEntries: TimelineEntry[] = [
+  ...profile.experience.map((job, index) => ({
+    id: `exp-${index}`,
+    kind: 'experience' as const,
+    displayDate: job.period,
+    sortKey: parseDateToSortKey(job.period) ?? Date.UTC(2020, 0, 1) - index,
+    title: job.role,
+    org: `${job.organization} · ${job.location}`,
+    summary: job.outcomeLine,
+    bullets: job.highlights,
+    evidence: job.evidence,
+  })),
+  ...profile.credentials.map((item, index) => ({
+    id: `cred-${index}`,
+    kind: 'credential' as const,
+    displayDate: item.date,
+    sortKey: parseDateToSortKey(item.date) ?? Date.UTC(2018, 0, 1) - index,
+    title: item.title,
+    org: item.issuer,
+    summary: item.details,
+    evidence: keywordDocEvidenceForCredential(item.title),
+  })),
+  ...profile.recognition.map((item, index) => ({
+    id: `rec-${index}`,
+    kind: 'recognition' as const,
+    displayDate: item.date ?? item.issuer,
+    sortKey: parseDateToSortKey(item.date) ?? Date.UTC(2017, 0, 1) - index,
+    title: item.title,
+    org: item.issuer,
+    summary: item.summary,
+    evidence: item.evidence,
+  })),
+  ...profile.research.map((item, index) => ({
+    id: `res-${index}`,
+    kind: 'research' as const,
+    displayDate: item.evidence?.[0]?.title ? (item.evidence?.[0] ? (docById['mmihs-irc-approval']?.date ?? item.status ?? item.organization) : (item.status ?? item.organization)) : (item.status ?? item.organization),
+    sortKey:
+      parseDateToSortKey(docById['mmihs-irc-approval']?.date)
+      ?? parseDateToSortKey(item.status)
+      ?? Date.UTC(2016, 0, 1) - index,
+    title: item.title,
+    org: item.organization,
+    summary: item.summary,
+    evidence: item.evidence,
+  })),
+].sort((a, b) => b.sortKey - a.sortKey);
+
+const topCredentialCards = profile.credentials;
+const proofCards = profile.proofSnippets;
+const mergedSkillsCards = profile.skillGroups;
 ---
 
 <BaseLayout
@@ -63,167 +205,227 @@ const rolePageLinks = profile.seoPages.map((page) => ({
   keywords={getHomepageKeywords(profile)}
   schema={homeSchema}
 >
-  <div class="home-source-canvas" data-home-source-match>
-  <section id="hero" class="section-pad pt-5 sm:pt-6">
-    <Container size="wide">
-      <div class="section-shell section-shell--hero hero-stage" data-motion="reveal" data-medical-particles-root>
-        <div class="hero-medical-particles" data-medical-particles-layer aria-hidden="true">
-          <span></span><span></span><span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <div class="watermark" data-hero-watermark aria-hidden="true">
-          {profile.brand.watermarkWord}
-        </div>
-
-        <div class="hero-grid">
-          <div class="hero-copy-block" data-hero-root>
-            <p class="section-label">Registered Nurse Portfolio · Nepal / International Opportunities</p>
-            <h1 class="hero-title mt-3" data-hero-title>{profile.hero.headline}</h1>
-            <p class="hero-subtitle mt-4" data-hero-subtitle>{profile.hero.subheadline}</p>
-
-            <p class="hero-proof-line" data-hero-copy>
-              {profile.hero.microProofLine}
-            </p>
-
-            <div class="chip-row mt-4">
-              {workPreferenceChips.map((chip) => <span class="chip chip--hero">{chip}</span>)}
-            </div>
-
-            <div class="hero-actions" data-hero-actions>
-              <ButtonLink href={profile.resumePdfPath} variant="primary">Download Resume</ButtonLink>
-              <button type="button" class="btn-inline-secondary" data-scroll-target="#contact">
-                Contact for Interview
-              </button>
-              <button type="button" class="btn-inline-secondary" data-scroll-target="#documents">
-                Verify Credentials
-              </button>
-            </div>
+  <div class="home-source-canvas home-v46" data-home-source-match>
+    <section id="hero" class="section-pad home-core-section home-core-section--hero pt-5 sm:pt-6">
+      <Container size="wide">
+        <div class="hero-stage hero-stage--open" data-motion="reveal" data-medical-particles-root>
+          <div class="hero-medical-particles" data-medical-particles-layer aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
           </div>
+          <div class="watermark" data-hero-watermark aria-hidden="true">{profile.brand.watermarkWord}</div>
 
-          <div>
-            <div class="hero-pill-cloud" aria-hidden="true">
-              {profile.hero.floatingTags.map((tag) => <FloatingTagPill label={tag} />)}
-            </div>
-            <HeroDeviceMockup profile={profile} />
-          </div>
-        </div>
+          <div class="hero-grid">
+            <div class="hero-copy-block" data-hero-root>
+              <p class="section-label">Registered Nurse Portfolio · Nepal / International Opportunities</p>
+              <h1 class="hero-title mt-3" data-hero-title>{profile.hero.headline}</h1>
+              <p class="hero-subtitle mt-4" data-hero-subtitle>{profile.hero.subheadline}</p>
+              <p class="hero-proof-line" data-hero-copy>{profile.hero.microProofLine}</p>
 
-        <div class="hero-support-grid mt-5">
-          <div class="hero-support-copy">
-            <p class="eyebrow">Professional Snapshot</p>
-            <p class="section-body mt-2 reading-wrap">
-              Licensed Registered Nurse (NNC) with hospital-based experience across teaching and regional settings, including TUTH, MMTH, and Sindhuli Hospital. Open to hospital, NGO, and INGO opportunities in Nepal and abroad.
-            </p>
-          </div>
-          {
-            heroImage && (
-              <figure class="hero-photo-card card-surface" data-motion="reveal" data-tilt-card>
-                <img src={heroImage.file} alt={heroImage.alt} loading="lazy" decoding="async" />
-                <figcaption>
-                  <p>{profile.name}</p>
-                  <small>{profile.role}</small>
-                </figcaption>
-              </figure>
-            )
-          }
-        </div>
-      </div>
-    </Container>
-  </section>
+              <div class="chip-row mt-4">
+                {workPreferenceChips.map((chip) => <span class="chip chip--hero">{chip}</span>)}
+              </div>
 
-  <section id="services" class="section-pad">
-    <Container size="wide">
-      <div class="section-shell section-shell--plain">
-        <div data-motion="reveal">
-          <p class="section-label">Clinical Areas of Practice</p>
-          <h2 class="section-title mt-3">Care Areas & Nursing Strengths</h2>
-          <p class="section-body mt-3 reading-wrap">
-            Recruiter-focused summary of where Reeja can contribute: maternal and newborn care support, general ward nursing, patient counselling, OT-related readiness, and continuity-focused documentation and coordination.
-          </p>
-        </div>
+              <div class="hero-actions" data-hero-actions>
+                <ButtonLink href={profile.resumePdfPath} variant="primary">Download Resume</ButtonLink>
+                <button type="button" class="btn-inline-secondary" data-scroll-target="#contact">
+                  Contact for Interview
+                </button>
+                <button type="button" class="btn-inline-secondary" data-scroll-target="#documents">
+                  Verify Credentials
+                </button>
+              </div>
 
-        <div class="service-grid mt-5">
-          <article class="card-surface service-feature" data-motion="reveal" data-tilt-card>
-            <div class="service-feature__art">
-              <div class="service-feature__overlay">
-                <p class="eyebrow">Work Preferences</p>
-                <div class="chip-row mt-3">
-                  {profile.workPreferences.geography.map((item) => <span class="chip chip--soft">{item}</span>)}
-                  {profile.workPreferences.sectors.map((item) => <span class="chip chip--soft">{item}</span>)}
-                  {profile.workPreferences.arrangements.map((item) => <span class="chip chip--soft">{item}</span>)}
+              <div class="hero-support-grid mt-5">
+                <div class="hero-support-copy">
+                  <p class="eyebrow">Professional Snapshot</p>
+                  <p class="section-body mt-2 reading-wrap">
+                    Licensed Registered Nurse (NNC) with hospital-based experience across teaching and regional settings, including TUTH, MMTH, and Sindhuli Hospital. Open to hospital, NGO, and INGO opportunities in Nepal and abroad.
+                  </p>
                 </div>
-                <p class="service-feature__foot mt-3">
-                  Immediate availability · Relocation accepted
-                </p>
+                {
+                  heroImage && (
+                    <figure class="hero-photo-card card-surface" data-motion="reveal" data-tilt-card>
+                      <img
+                        src={heroImage.file}
+                        alt={heroImage.alt}
+                        loading="lazy"
+                        decoding="async"
+                        onerror="var f=this.closest('figure'); if(f){f.remove();}"
+                      />
+                      <figcaption>
+                        <p>{profile.name}</p>
+                        <small>{profile.role}</small>
+                      </figcaption>
+                    </figure>
+                  )
+                }
               </div>
             </div>
-            <div class="mt-4 grid gap-2 sm:grid-cols-2">
-              {profile.quickFacts.map((fact) => <p class="section-body text-sm">{fact}</p>)}
-            </div>
-          </article>
 
-          <div class="service-cards">
+            <div class="hero-visual-col">
+              <div class="hero-pill-cloud" aria-hidden="true">
+                {profile.hero.floatingTags.map((tag) => <FloatingTagPill label={tag} />)}
+              </div>
+              <HeroDeviceMockup profile={profile} />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section id="highlights" class="section-pad home-core-section">
+      <Container size="wide">
+        <div class="home-open-section">
+          <div class="home-section-head" data-motion="reveal">
+            <p class="section-label">Clinical Experience Highlights</p>
+            <h2 class="section-title mt-3">Hospital Experience with Inline Evidence</h2>
+            <p class="section-body mt-3 reading-wrap">
+              Experience cards combine verified hospital roles with supporting evidence links, helping recruiters review responsibilities and credibility in one place.
+            </p>
+          </div>
+
+          <div class="career-timeline mt-6" data-timeline-root>
+            <div class="timeline-line timeline-line--bg" aria-hidden="true"></div>
+            <div class="timeline-line timeline-line--progress" aria-hidden="true" data-timeline-progress></div>
+            <ol class="career-timeline__list">
+              {
+                timelineEntries.map((entry) => (
+                  <li class="career-timeline__item" data-timeline-item>
+                    <article class="card-surface career-event" data-motion="reveal" data-tilt-card>
+                      <div class="career-event__top">
+                        <p class:list={['career-event__kind', `career-event__kind--${entry.kind}`]}>
+                          {entry.kind}
+                        </p>
+                        <p class="career-event__date">{entry.displayDate}</p>
+                      </div>
+
+                      <h3 class="career-event__title">{entry.title}</h3>
+                      <p class="career-event__org">{entry.org}</p>
+                      {entry.summary && <p class="career-event__summary">{entry.summary}</p>}
+
+                      {
+                        entry.bullets?.length ? (
+                          <ul class="bullet-list career-event__bullets">
+                            {entry.bullets.map((item) => <li>{item}</li>)}
+                          </ul>
+                        ) : null
+                      }
+
+                      {
+                        entry.evidence?.length ? (
+                          <div class="evidence-inline mt-4">
+                            {entry.evidence.slice(0, 2).map((ev) => (
+                              <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card">
+                                <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
+                                <span>
+                                  <strong>{ev.title}</strong>
+                                  {ev.note && <small>{ev.note}</small>}
+                                </span>
+                              </a>
+                            ))}
+                          </div>
+                        ) : null
+                      }
+                    </article>
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section id="credentials" class="section-pad home-core-section">
+      <Container size="wide">
+        <div class="home-open-section">
+          <div class="home-section-head" data-motion="reveal">
+            <p class="section-label">Credentials</p>
+            <h2 class="section-title mt-3">Licensure, Training & Professional Development</h2>
+            <p class="section-body mt-3 reading-wrap">
+              Prioritized for recruiter verification: NNC licensure first, followed by maternal-newborn, OT, CPR/BLS, and conference participation evidence.
+            </p>
+          </div>
+
+          <div class="credential-list mt-6 home-v46-credential-grid">
             {
-              profile.practiceAreas.slice(0, 4).map((area, index) => (
-                <article class="card-surface service-card" data-motion="reveal" data-tilt-card>
-                  <p class="eyebrow">Focus 0{index + 1}</p>
-                  <h3 class="mt-2">{area}</h3>
-                  <p>
-                    {index === 0 &&
-                      'Supports maternal and newborn care pathways with safe routines, observation, and respectful communication with mothers and families.'}
-                    {index === 1 &&
-                      'Provides pregnancy and postpartum counselling that improves understanding of care plans, home-care readiness, and follow-up confidence.'}
-                    {index === 2 &&
-                      'Works within general ward settings with exposure to Surgery and Gynaecology & Obstetrics service areas and patient coordination needs.'}
-                    {index === 3 &&
-                      'Delivers practical health education, ward communication, and continuity-focused handover documentation for safer nursing workflow.'}
-                  </p>
-                  <a href="/#highlights">View related experience evidence</a>
+              topCredentialCards.map((item) => (
+                <article class:list={['card-surface', 'credential-card', item.kind === 'licensure' ? 'credential-card--licensure' : '']} data-motion="reveal" data-tilt-card>
+                  <div class="credential-head">
+                    <h3 class="credential-title">{item.title}</h3>
+                    <p class="credential-date">{item.date}</p>
+                  </div>
+                  <p class="credential-issuer">{item.issuer}</p>
+                  <p class="credential-copy">{item.details}</p>
                 </article>
               ))
             }
           </div>
+
+          <div id="documents" class="home-anchor"></div>
+          <div class="home-section-head mt-10" data-motion="reveal">
+            <p class="section-label">Full Verification Gallery</p>
+            <h2 class="section-title mt-3">Credentials, Experience, Recognition & Research Documents</h2>
+            <p class="section-body mt-3 reading-wrap">
+              These public documents support the claims used throughout the portfolio. Selected evidence is also linked inline in the experience and proof sections above for faster recruiter review.
+            </p>
+          </div>
+
+          <div class="mt-5" data-doc-gallery>
+            <div class="doc-filter-row" data-motion="reveal">
+              {docCategories.map((category) => (
+                <button
+                  type="button"
+                  class="doc-filter"
+                  data-doc-filter={category}
+                  data-active={category === 'All' ? 'true' : 'false'}
+                  aria-pressed={category === 'All' ? 'true' : 'false'}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+
+            <div class="doc-grid mt-4" data-auto-animate>
+              {publicDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
+            </div>
+          </div>
+          <DocumentLightbox />
         </div>
-      </div>
-    </Container>
-  </section>
+      </Container>
+    </section>
 
-  <section id="highlights" class="section-pad">
-    <Container size="wide">
-      <div class="section-shell section-shell--glow">
-        <div data-motion="reveal">
-          <p class="section-label">Clinical Experience Highlights</p>
-          <h2 class="section-title mt-3">Hospital Experience with Inline Evidence</h2>
-          <p class="section-body mt-3 reading-wrap">
-            Experience cards combine verified hospital roles with supporting evidence links, helping recruiters review responsibilities and credibility in one place.
-          </p>
-        </div>
+    <section id="proof" class="section-pad home-core-section">
+      <Container size="wide">
+        <div class="home-open-section">
+          <div class="home-section-head" data-motion="reveal">
+            <p class="section-label">Recommendations, Recognition & Evidence</p>
+            <h2 class="section-title mt-3">Proof Beyond the Resume</h2>
+            <p class="section-body mt-3 reading-wrap">
+              This section combines official experience letters, recognition records, training evidence, and academic/research documentation to support recruiter review with verifiable context.
+            </p>
+          </div>
 
-        <div class="highlights-stage mt-5" data-timeline-root>
-          <div class="timeline-line timeline-line--bg" aria-hidden="true"></div>
-          <div class="timeline-line timeline-line--progress" aria-hidden="true" data-timeline-progress></div>
-          <ol class="highlight-list">
-            {
-              profile.experience.map((job) => (
-                <li class="highlight-item" data-timeline-item>
-                  <article class="card-surface highlight-card" data-motion="reveal" data-tilt-card>
-                    <div class="highlight-header">
-                      <h3 class="highlight-role">{job.role}</h3>
-                      <p class="highlight-period">{job.period}</p>
-                    </div>
-                    <p class="highlight-org">
-                      {job.organization} · {job.location}
-                    </p>
-                    {job.outcomeLine && <p class="highlight-outcome">{job.outcomeLine}</p>}
-                    <ul class="bullet-list">
-                      {job.highlights.map((item) => <li>{item}</li>)}
-                    </ul>
+          <div class="proof-grid mt-6">
+            {proofCards.map((item) => <ProofSnippetCard item={item} />)}
+          </div>
 
+          <div class="proof-subgrid mt-6">
+            <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
+              <p class="proof-type">Recognition & Academic Merit</p>
+              <h3 class="proof-title">Awards, Scholarship Merit & Professional Participation</h3>
+              <div class="mt-4 grid gap-4">
+                {profile.recognition.map((item) => (
+                  <article class="proof-list-item">
+                    <p class="font-semibold">{item.title}</p>
+                    <p class="section-body mt-1 text-sm">{item.summary}</p>
+                    <p class="proof-source mt-2">{item.issuer}{item.date ? ` · ${item.date}` : ''}</p>
                     {
-                      job.evidence?.length ? (
-                        <div class="evidence-inline mt-4">
-                          {job.evidence.slice(0, 3).map((ev) => (
-                            <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card">
+                      item.evidence?.length ? (
+                        <div class="evidence-inline mt-3">
+                          {item.evidence.slice(0, 1).map((ev) => (
+                            <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card evidence-inline__card--compact">
                               <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
                               <span>
                                 <strong>{ev.title}</strong>
@@ -235,355 +437,246 @@ const rolePageLinks = profile.seoPages.map((page) => ({
                       ) : null
                     }
                   </article>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
-      </div>
-    </Container>
-  </section>
+                ))}
+              </div>
+            </section>
 
-  <section id="about" class="section-pad">
-    <Container size="narrow">
-      <div class="section-shell section-shell--plain">
-        <div data-motion="reveal">
-          <p class="section-label">Professional Profile</p>
-          <h2 class="section-title mt-3">Nurse Portfolio Summary</h2>
-          <p class="section-body mt-3 reading-wrap">{profile.summary}</p>
-        </div>
-
-        <div class="editorial-grid mt-5">
-          <div data-motion="reveal">
-            <h3 class="subsection-title">Care Philosophy</h3>
-            <ul class="bullet-list mt-3">
-              {profile.carePhilosophy.map((point) => <li>{point}</li>)}
-            </ul>
-
-            <h3 class="subsection-title mt-7">Professional Direction</h3>
-            <ul class="bullet-list mt-3">
-              {profile.goals.map((goal) => <li>{goal}</li>)}
-            </ul>
-          </div>
-
-          <div data-motion="reveal">
-            <h3 class="subsection-title">Work Preferences</h3>
-            <div class="chip-row mt-3">
-              {workPreferenceChips.map((chip) => <span class="chip">{chip}</span>)}
-            </div>
-
-            <h3 class="subsection-title mt-7">Professional References</h3>
-            <div class="stack-list mt-3">
-              {profile.references.map((ref) => (
-                <div class="panel-outline p-3">
-                  <p class="font-semibold">{ref.name}</p>
-                  <p class="section-body mt-1 text-sm">{ref.role}</p>
-                  <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{ref.publicSummary ?? 'Reference available on request'}</p>
-                </div>
-              ))}
-            </div>
-            <p class="section-body mt-3 text-sm">
-              Detailed reference contact information can be shared during employer screening or interview coordination.
-            </p>
+            <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
+              <p class="proof-type">Research & Academic Involvement</p>
+              <h3 class="proof-title">MMIHS IRC-Approved Research Participation</h3>
+              <div class="mt-4 grid gap-4">
+                {profile.research.map((item) => (
+                  <article class="proof-list-item">
+                    <p class="font-semibold">{item.title}</p>
+                    <p class="section-body mt-1 text-sm">{item.summary}</p>
+                    {item.status && <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.status}</p>}
+                    <p class="proof-source mt-2">{item.organization}</p>
+                    {
+                      item.evidence?.length ? (
+                        <div class="evidence-inline mt-3">
+                          {item.evidence.slice(0, 1).map((ev) => (
+                            <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card evidence-inline__card--compact">
+                              <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
+                              <span>
+                                <strong>{ev.title}</strong>
+                                {ev.note && <small>{ev.note}</small>}
+                              </span>
+                            </a>
+                          ))}
+                        </div>
+                      ) : null
+                    }
+                  </article>
+                ))}
+              </div>
+            </section>
           </div>
         </div>
+      </Container>
+    </section>
 
-        <div class="stats-grid mt-6">
-          {profile.stats.map((item) => <MetricCard item={item} />)}
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <section id="proof" class="section-pad">
-    <Container size="wide">
-      <div class="section-shell section-shell--glow">
-        <div data-motion="reveal">
-          <p class="section-label">Recommendations, Recognition & Evidence</p>
-          <h2 class="section-title mt-3">Proof Beyond the Resume</h2>
-          <p class="section-body mt-3 reading-wrap">
-            This section combines official experience letters, recognition records, training evidence, and academic/research documentation to support recruiter review with verifiable context.
-          </p>
-        </div>
-
-        <div class="proof-grid mt-5">
-          {profile.proofSnippets.map((item) => <ProofSnippetCard item={item} />)}
-        </div>
-
-        <div class="proof-subgrid mt-6">
-          <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
-            <p class="proof-type">Recognition & Academic Merit</p>
-            <h3 class="proof-title">Awards, Scholarship Merit & Professional Participation</h3>
-            <div class="mt-4 grid gap-4">
-              {profile.recognition.map((item) => (
-                <article class="proof-list-item">
-                  <p class="font-semibold">{item.title}</p>
-                  <p class="section-body mt-1 text-sm">{item.summary}</p>
-                  <p class="proof-source mt-2">{item.issuer}{item.date ? ` · ${item.date}` : ''}</p>
-                  {
-                    item.evidence?.length ? (
-                      <div class="evidence-inline mt-3">
-                        {item.evidence.slice(0, 1).map((ev) => (
-                          <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card evidence-inline__card--compact">
-                            <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
-                            <span>
-                              <strong>{ev.title}</strong>
-                              {ev.note && <small>{ev.note}</small>}
-                            </span>
-                          </a>
-                        ))}
-                      </div>
-                    ) : null
-                  }
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
-            <p class="proof-type">Research & Academic Involvement</p>
-            <h3 class="proof-title">MMIHS IRC-Approved Research Participation</h3>
-            <div class="mt-4 grid gap-4">
-              {profile.research.map((item) => (
-                <article class="proof-list-item">
-                  <p class="font-semibold">{item.title}</p>
-                  <p class="section-body mt-1 text-sm">{item.summary}</p>
-                  {item.status && <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.status}</p>}
-                  <p class="proof-source mt-2">{item.organization}</p>
-                  {
-                    item.evidence?.length ? (
-                      <div class="evidence-inline mt-3">
-                        {item.evidence.slice(0, 1).map((ev) => (
-                          <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card evidence-inline__card--compact">
-                            <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
-                            <span>
-                              <strong>{ev.title}</strong>
-                              {ev.note && <small>{ev.note}</small>}
-                            </span>
-                          </a>
-                        ))}
-                      </div>
-                    ) : null
-                  }
-                </article>
-              ))}
-            </div>
-          </section>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <section id="credentials" class="section-pad">
-    <Container size="narrow">
-      <div class="section-shell section-shell--plain">
-        <div data-motion="reveal">
-          <p class="section-label">Credentials</p>
-          <h2 class="section-title mt-3">Licensure, Training & Professional Development</h2>
-          <p class="section-body mt-3 reading-wrap">
-            Prioritized for recruiter verification: NNC licensure first, followed by maternal-newborn, OT, CPR/BLS, and conference participation evidence.
-          </p>
-        </div>
-
-        <div class="credential-list mt-5">
-          {
-            profile.credentials.map((item) => (
-              <article class:list={['card-surface', 'credential-card', item.kind === 'licensure' ? 'credential-card--licensure' : '']} data-motion="reveal" data-tilt-card>
-                <div class="credential-head">
-                  <h3 class="credential-title">{item.title}</h3>
-                  <p class="credential-date">{item.date}</p>
-                </div>
-                <p class="credential-issuer">{item.issuer}</p>
-                <p class="credential-copy">{item.details}</p>
-              </article>
-            ))
-          }
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <section id="documents" class="section-pad">
-    <Container size="wide">
-      <div class="section-shell section-shell--plain">
-        <div data-motion="reveal">
-          <p class="section-label">Full Verification Gallery</p>
-          <h2 class="section-title mt-3">Credentials, Experience, Recognition & Research Documents</h2>
-          <p class="section-body mt-3 reading-wrap">
-            These public documents support the claims used throughout the portfolio. Selected evidence is also linked inline in the experience and proof sections above for faster recruiter review.
-          </p>
-        </div>
-
-        <div class="mt-5" data-doc-gallery>
-          <div class="doc-filter-row" data-motion="reveal">
-            {docCategories.map((category) => (
-              <button
-                type="button"
-                class="doc-filter"
-                data-doc-filter={category}
-                data-active={category === 'All' ? 'true' : 'false'}
-                aria-pressed={category === 'All' ? 'true' : 'false'}
-              >
-                {category}
-              </button>
-            ))}
-          </div>
-
-          <div class="doc-grid mt-4" data-auto-animate>
-            {publicDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
-          </div>
-        </div>
-      </div>
-    </Container>
-    <DocumentLightbox />
-  </section>
-
-  <section id="skills" class="section-pad">
-    <Container size="narrow">
-      <div class="section-shell section-shell--plain">
-        <div data-motion="reveal">
-          <p class="section-label">Clinical Skills & Professional Readiness</p>
-          <h2 class="section-title mt-3">Skills, Languages, Education & Role Fit</h2>
-          <p class="section-body mt-3 reading-wrap">
-            Structured for recruiter scanning across clinical capability, communication, documentation, and readiness for hospital, NGO, and INGO roles.
-          </p>
-        </div>
-
-        <div class="stack-list mt-5" data-skills-grid>
-          {
-            profile.skillGroups.map((group) => (
-              <article class="card-surface stack-card" data-motion="reveal">
-                <h3 class="stack-title">{group.area}</h3>
-                <div class="stack-chip-grid">
-                  {group.items.map((item) => <span class="stack-chip" data-skill-chip>{item}</span>)}
-                </div>
-              </article>
-            ))
-          }
-
-          <article class="card-surface stack-card" data-motion="reveal" data-tilt-card>
-            <h3 class="stack-title">Education & Academic Performance</h3>
-            <div class="mt-3 grid gap-3">
-              {profile.education.map((edu) => (
-                <div class="panel-outline p-3">
-                  <p class="font-semibold">{edu.level}</p>
-                  <p class="section-body mt-1 text-sm">{edu.institution}</p>
-                  <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">
-                    {edu.period} · {edu.result}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </article>
-
-          <article class="card-surface stack-card" data-motion="reveal" data-tilt-card>
-            <h3 class="stack-title">Languages & Work Preferences</h3>
-            <div class="chip-row mt-3">
-              {profile.languages.map((lang) => <span class="chip">{lang}</span>)}
-            </div>
-            <div class="chip-row mt-4">
-              {workPreferenceChips.map((item) => <span class="chip chip--soft">{item}</span>)}
-            </div>
-          </article>
-        </div>
-      </div>
-    </Container>
-  </section>
-
-  <section id="faq" class="section-pad">
-    <Container size="narrow">
-      <FaqList items={homepageFaqs} title="Recruiter FAQ" />
-    </Container>
-  </section>
-
-  <section class="section-pad">
-    <Container size="narrow">
-      <InternalLinksBlock
-        links={rolePageLinks}
-        title="Explore Nursing Profiles by Role, Setting and Opportunity Type"
-      />
-    </Container>
-  </section>
-
-  <section id="contact" class="section-pad pb-16 sm:pb-20">
-    <Container size="wide">
-      <div class="section-shell section-shell--glow">
-        <div class="contact-grid mt-0">
-          <div data-motion="reveal">
-            <p class="section-label">Contact</p>
-            <h2 class="section-title mt-3">Available for Hospital, NGO & INGO Nursing Opportunities</h2>
+    <section id="skills" class="section-pad home-core-section">
+      <Container size="wide">
+        <div class="home-open-section">
+          <div class="home-section-head" data-motion="reveal">
+            <p class="section-label">Clinical Skills & Professional Readiness</p>
+            <h2 class="section-title mt-3">Skills, Languages, Education & Role Fit</h2>
             <p class="section-body mt-3 reading-wrap">
-              Reeja is available immediately for interview inquiries and role discussions related to maternal and newborn care, general ward nursing, patient counselling, and clinical support roles in Nepal or abroad.
+              Structured for recruiter scanning across clinical capability, communication, documentation, and readiness for hospital, NGO, and INGO roles.
             </p>
-
-            <div class="contact-links mt-5">
-              <p>
-                Phone: <a href={`tel:${profile.phone}`}>{profile.phone}</a>
-              </p>
-              <p>
-                Email: <a href={`mailto:${profile.email}`}>{profile.email}</a>
-              </p>
-              <p>
-                LinkedIn:
-                <a href={profile.linkedin} target="_blank" rel="noreferrer noopener"> {profile.linkedin.replace('https://', '')}</a>
-              </p>
-              <p>
-                Resume: <a href={profile.resumePdfPath}>Download PDF</a>
-              </p>
-            </div>
-
-            <div class="mt-6">
-              <p class="eyebrow">References</p>
-              <p class="section-body mt-2">
-                Professional and clinical references are listed and available for employer screening. Detailed contact sharing can be provided during interview coordination.
-              </p>
-              <ul class="bullet-list mt-3">
-                {profile.references.map((ref) => <li>{ref.name} — {ref.role}</li>)}
-              </ul>
-            </div>
-
-            <div class="mt-6">
-              <p class="eyebrow">Privacy Note</p>
-              <ul class="bullet-list mt-2">
-                {profile.privacyNotes.map((note) => <li>{note}</li>)}
-              </ul>
-            </div>
           </div>
 
-          <div class="card-surface contact-shell" data-motion="reveal" data-tilt-card>
-            {!formAction && <p class="notice">Set <code>PUBLIC_FORMSPREE_ENDPOINT</code> to enable live form submission.</p>}
+          <div id="services" class="home-anchor"></div>
+          <div id="about" class="home-anchor"></div>
 
-            <form method="POST" action={formAction || 'https://formspree.io/f/your-form-id'}>
-              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" />
-              <label>
-                Name
-                <input required name="name" placeholder="Your full name" />
-              </label>
-              <label>
-                Email
-                <input type="email" required name="email" placeholder="you@example.com" />
-              </label>
-              <label>
-                Organization / Role
-                <input required name="subject" placeholder="Hospital, NGO, INGO, recruiter, or hiring manager" />
-              </label>
-              <label>
-                Message
-                <textarea
-                  rows={5}
-                  required
-                  name="message"
-                  placeholder="Please share role type, location, contract/full-time details, and interview availability."
-                ></textarea>
-              </label>
-              <button type="submit" class="btn-inline-primary mt-1 w-fit">
-                Send Opportunity Inquiry
-              </button>
-            </form>
+          <div class="home-merge-grid mt-6">
+            <section class="card-surface stack-card" data-motion="reveal">
+              <p class="section-label section-label--inline">Clinical Areas of Practice</p>
+              <h3 class="stack-title mt-2">Care Areas & Nursing Strengths</h3>
+              <p class="section-body mt-3">
+                Recruiter-focused summary of where Reeja can contribute: maternal and newborn care support, general ward nursing, patient counselling, OT-related readiness, and continuity-focused documentation and coordination.
+              </p>
+              <div class="chip-row mt-4">
+                {profile.practiceAreas.map((area) => <span class="chip chip--soft">{area}</span>)}
+              </div>
+              <div class="mt-4 grid gap-2 sm:grid-cols-2">
+                {profile.quickFacts.map((fact) => <p class="section-body text-sm">{fact}</p>)}
+              </div>
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal">
+              <p class="section-label section-label--inline">Professional Profile</p>
+              <h3 class="stack-title mt-2">Nurse Portfolio Summary</h3>
+              <p class="section-body mt-3">{profile.summary}</p>
+
+              <details class="home-details mt-4" open>
+                <summary>Care Philosophy</summary>
+                <ul class="bullet-list mt-3">
+                  {profile.carePhilosophy.map((point) => <li>{point}</li>)}
+                </ul>
+              </details>
+
+              <details class="home-details mt-3">
+                <summary>Professional Direction</summary>
+                <ul class="bullet-list mt-3">
+                  {profile.goals.map((goal) => <li>{goal}</li>)}
+                </ul>
+              </details>
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal">
+              <h3 class="stack-title">Work Preferences</h3>
+              <div class="chip-row mt-3">
+                {workPreferenceChips.map((chip) => <span class="chip">{chip}</span>)}
+              </div>
+
+              <h3 class="stack-title mt-6">Professional References</h3>
+              <div class="stack-list stack-list--nested mt-3">
+                {profile.references.map((ref) => (
+                  <div class="panel-outline p-3">
+                    <p class="font-semibold">{ref.name}</p>
+                    <p class="section-body mt-1 text-sm">{ref.role}</p>
+                    <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{ref.publicSummary ?? 'Reference available on request'}</p>
+                  </div>
+                ))}
+              </div>
+              <p class="section-body mt-3 text-sm">
+                Detailed reference contact information can be shared during employer screening or interview coordination.
+              </p>
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal">
+              <h3 class="stack-title">Skills & Capability Groups</h3>
+              <div class="stack-list stack-list--nested mt-4" data-skills-grid>
+                {mergedSkillsCards.map((group) => (
+                  <article class="panel-outline p-3">
+                    <h4 class="stack-title stack-title--nested">{group.area}</h4>
+                    <div class="stack-chip-grid">
+                      {group.items.map((item) => <span class="stack-chip" data-skill-chip>{item}</span>)}
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal" data-tilt-card>
+              <h3 class="stack-title">Education & Academic Performance</h3>
+              <div class="mt-3 grid gap-3">
+                {profile.education.map((edu) => (
+                  <div class="panel-outline p-3">
+                    <p class="font-semibold">{edu.level}</p>
+                    <p class="section-body mt-1 text-sm">{edu.institution}</p>
+                    <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">
+                      {edu.period} · {edu.result}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <h3 class="stack-title mt-6">Languages</h3>
+              <div class="chip-row mt-3">
+                {profile.languages.map((lang) => <span class="chip">{lang}</span>)}
+              </div>
+            </section>
+
+            <section class="home-stats-block" data-motion="reveal">
+              <div class="stats-grid">
+                {profile.stats.map((item) => <MetricCard item={item} />)}
+              </div>
+            </section>
           </div>
         </div>
-      </div>
-    </Container>
-  </section>
+      </Container>
+    </section>
+
+    <section id="contact" class="section-pad pb-16 sm:pb-20 home-core-section">
+      <Container size="wide">
+        <div class="home-open-section">
+          <div class="contact-grid mt-0">
+            <div data-motion="reveal">
+              <p class="section-label">Contact</p>
+              <h2 class="section-title mt-3">Available for Hospital, NGO & INGO Nursing Opportunities</h2>
+              <p class="section-body mt-3 reading-wrap">
+                Reeja is available immediately for interview inquiries and role discussions related to maternal and newborn care, general ward nursing, patient counselling, and clinical support roles in Nepal or abroad.
+              </p>
+
+              <div class="contact-links mt-5">
+                <p>
+                  Phone: <a href={`tel:${profile.phone}`}>{profile.phone}</a>
+                </p>
+                <p>
+                  Email: <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                </p>
+                <p>
+                  LinkedIn:
+                  <a href={profile.linkedin} target="_blank" rel="noreferrer noopener"> {profile.linkedin.replace('https://', '')}</a>
+                </p>
+                <p>
+                  Resume: <a href={profile.resumePdfPath}>Download PDF</a>
+                </p>
+              </div>
+
+              <details class="home-details mt-6" open>
+                <summary>References</summary>
+                <p class="section-body mt-3">
+                  Professional and clinical references are listed and available for employer screening. Detailed contact sharing can be provided during interview coordination.
+                </p>
+                <ul class="bullet-list mt-3">
+                  {profile.references.map((ref) => <li>{ref.name} — {ref.role}</li>)}
+                </ul>
+              </details>
+
+              <details class="home-details mt-3">
+                <summary>Privacy Note</summary>
+                <ul class="bullet-list mt-3">
+                  {profile.privacyNotes.map((note) => <li>{note}</li>)}
+                </ul>
+              </details>
+            </div>
+
+            <div class="card-surface contact-shell" data-motion="reveal" data-tilt-card>
+              {!formAction && <p class="notice">Set <code>PUBLIC_FORMSPREE_ENDPOINT</code> to enable live form submission.</p>}
+
+              <form method="POST" action={formAction || 'https://formspree.io/f/your-form-id'}>
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" />
+                <label>
+                  Name
+                  <input required name="name" placeholder="Your full name" />
+                </label>
+                <label>
+                  Email
+                  <input type="email" required name="email" placeholder="you@example.com" />
+                </label>
+                <label>
+                  Organization / Role
+                  <input required name="subject" placeholder="Hospital, NGO, INGO, recruiter, or hiring manager" />
+                </label>
+                <label>
+                  Message
+                  <textarea
+                    rows={5}
+                    required
+                    name="message"
+                    placeholder="Please share role type, location, contract/full-time details, and interview availability."
+                  ></textarea>
+                </label>
+                <button type="submit" class="btn-inline-primary mt-1 w-fit">
+                  Send Opportunity Inquiry
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div id="faq" class="home-anchor"></div>
+          <div class="home-contact-extras mt-8">
+            <FaqList items={homepageFaqs} title="Recruiter FAQ" className="home-embedded-faq" />
+            <InternalLinksBlock
+              links={rolePageLinks}
+              title="Explore Nursing Profiles by Role, Setting and Opportunity Type"
+              className="home-embedded-role-links"
+            />
+          </div>
+        </div>
+      </Container>
+    </section>
   </div>
 </BaseLayout>

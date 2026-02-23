@@ -43,6 +43,7 @@ const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.p
                 class="device-avatar"
                 loading="lazy"
                 decoding="async"
+                onerror="this.style.display='none'"
               />
             )
           }
