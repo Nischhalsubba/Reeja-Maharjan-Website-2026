@@ -3,49 +3,46 @@ import Container from './Container.astro';
 import { profile } from '../content/profile';
 
 const links = [
-  { href: '/#hero', label: 'Home' },
-  { href: '/#about', label: 'About' },
-  { href: '/#experience', label: 'Experience' },
-  { href: '/#credentials', label: 'Credentials' },
-  { href: '/#documents', label: 'Documents' },
-  { href: '/#skills', label: 'Skills' },
-  { href: '/#contact', label: 'Contact' },
+  { href: '/#hero', label: 'Home', id: 'hero' },
+  { href: '/#services', label: 'Care Areas', id: 'services' },
+  { href: '/#highlights', label: 'Highlights', id: 'highlights' },
+  { href: '/#about', label: 'About', id: 'about' },
+  { href: '/#proof', label: 'Proof', id: 'proof' },
+  { href: '/#credentials', label: 'Credentials', id: 'credentials' },
+  { href: '/#documents', label: 'Documents', id: 'documents' },
+  { href: '/#skills', label: 'Skills', id: 'skills' },
+  { href: '/#contact', label: 'Contact', id: 'contact' },
 ];
 ---
 
-<header class="sticky top-0 z-40 border-b border-[var(--line)] bg-[rgb(248_252_252_/_92%)] backdrop-blur-md">
-  <Container className="flex min-h-16 items-center justify-between gap-4">
-    <a href="/" class="text-base font-semibold tracking-tight sm:text-lg">{profile.name}</a>
+<header class="site-nav sticky top-0 z-50">
+  <Container size="wide" className="py-3">
+    <div class="nav-shell">
+      <a href="/#hero" class="brand-mark" aria-label={`${profile.name} home`}>
+        <span class="brand-mark__mono">{profile.brand.monogram}</span>
+        <span class="brand-mark__label">
+          <span>{profile.brand.displayName}</span>
+          <small>{profile.role}</small>
+        </span>
+      </a>
 
-    <nav aria-label="Primary" class="max-w-[56vw] overflow-x-auto">
-      <ul class="flex items-center gap-1 py-1">
-        {
-          links.map((link) => {
-            return (
+      <nav aria-label="Primary" class="nav-scroll">
+        <ul class="nav-pills">
+          {
+            links.map((link) => (
               <li>
-                <a
-                  href={link.href}
-                  class:list={[
-                    'whitespace-nowrap rounded-full px-3 py-2 text-xs font-semibold text-[var(--ink-soft)] transition md:text-sm',
-                    'hover:bg-white hover:text-[var(--ink)]',
-                  ]}
-                >
+                <a href={link.href} data-nav-spy-link={link.id} class="nav-pill">
                   {link.label}
                 </a>
               </li>
-            );
-          })
-        }
-      </ul>
-    </nav>
+            ))
+          }
+        </ul>
+      </nav>
 
-    <button
-      type="button"
-      class="rounded-full border border-[var(--line)] bg-white px-3 py-2 text-xs font-semibold"
-      data-motion-pref-toggle
-      aria-pressed="false"
-    >
-      Reduce motion
-    </button>
+      <button type="button" class="motion-toggle" data-motion-pref-toggle aria-pressed="false">
+        Reduce motion
+      </button>
+    </div>
   </Container>
 </header>

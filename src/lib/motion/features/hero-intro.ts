@@ -9,10 +9,12 @@ export const runHeroIntro = async (root: ParentNode, reduced: boolean): Promise<
   const subtitle = heroRoot.querySelector('[data-hero-subtitle]');
   const copy = heroRoot.querySelector('[data-hero-copy]');
   const actions = heroRoot.querySelector('[data-hero-actions]');
-  const image = root.querySelector('[data-hero-image-wrap]');
+  const image = root.querySelector('[data-hero-device]');
+  const pills = Array.from(root.querySelectorAll<HTMLElement>('[data-motion-float]'));
+  const watermark = root.querySelector('[data-hero-watermark]');
 
   if (reduced) {
-    [title, subtitle, copy, actions, image].forEach((el) => {
+    [title, subtitle, copy, actions, image, watermark, ...pills].forEach((el) => {
       if (el instanceof HTMLElement) {
         el.style.opacity = '1';
         el.style.transform = 'none';
@@ -22,7 +24,9 @@ export const runHeroIntro = async (root: ParentNode, reduced: boolean): Promise<
   }
 
   const { gsap } = await loadGSAP();
-  const elements = [subtitle, copy, actions, image].filter((el): el is HTMLElement => el instanceof HTMLElement);
+  const elements = [subtitle, copy, actions, image, watermark, ...pills].filter(
+    (el): el is HTMLElement => el instanceof HTMLElement
+  );
 
   let split: SplitType | undefined;
   if (title instanceof HTMLElement) {
@@ -39,9 +43,22 @@ export const runHeroIntro = async (root: ParentNode, reduced: boolean): Promise<
     timeline.fromTo(title, { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.65 });
   }
 
-  timeline.to(elements, { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 }, '-=0.35').eventCallback('onComplete', () => {
-    [...titleWords, ...elements].forEach((el) => {
-      if (el instanceof HTMLElement) el.style.willChange = 'auto';
+  timeline
+    .to(
+      watermark instanceof HTMLElement ? [watermark] : [],
+      { opacity: 1, y: 0, duration: 0.8, ease: 'power1.out' },
+      '-=0.45'
+    )
+    .to(
+      [subtitle, copy, actions].filter((el): el is HTMLElement => el instanceof HTMLElement),
+      { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
+      '-=0.25'
+    )
+    .to(pills, { opacity: 1, y: 0, duration: 0.55, stagger: 0.04 }, '-=0.4')
+    .to(image instanceof HTMLElement ? [image] : [], { opacity: 1, y: 0, duration: 0.7 }, '-=0.42')
+    .eventCallback('onComplete', () => {
+      [...titleWords, ...elements].forEach((el) => {
+        if (el instanceof HTMLElement) el.style.willChange = 'auto';
+      });
     });
-  });
 };

@@ -1,0 +1,12 @@
+---
+interface Props {
+  label: string;
+  className?: string;
+}
+
+const { label, className = '' } = Astro.props as Props;
+---
+
+<span class:list={['floating-pill', className]} data-motion-float>
+  {label}
+</span>

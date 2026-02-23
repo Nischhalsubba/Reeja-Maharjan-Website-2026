@@ -1,0 +1,19 @@
+---
+import type { ProofSnippet } from '../content/profile';
+
+interface Props {
+  item: ProofSnippet;
+  className?: string;
+}
+
+const { item, className = '' } = Astro.props as Props;
+const typeLabel =
+  item.type === 'experience-letter' ? 'Experience Letter' : item.type === 'reference' ? 'Reference' : 'Training Proof';
+---
+
+<article class:list={['proof-card', 'card-surface', className]} data-proof-card data-motion="reveal" data-tilt-card>
+  <p class="proof-type">{typeLabel}</p>
+  <h3 class="proof-title">{item.title}</h3>
+  <p class="proof-text">{item.text}</p>
+  <p class="proof-source">{item.source}</p>
+</article>

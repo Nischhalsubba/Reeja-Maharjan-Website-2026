@@ -38,6 +38,11 @@ const runFeature = async (feature: MotionFeature, main: HTMLElement, reduced: bo
       await bindScrollReveals(main, reduced);
       return;
     }
+    case 'floating-pills': {
+      const { bindFloatingPills } = await import('../features/floating-pills');
+      await bindFloatingPills(main, reduced);
+      return;
+    }
     case 'timeline-progress': {
       const { bindTimelineProgress } = await import('../features/timeline-progress');
       await bindTimelineProgress(main, reduced);
@@ -51,6 +56,26 @@ const runFeature = async (feature: MotionFeature, main: HTMLElement, reduced: bo
     case 'scroll-to': {
       const { bindScrollToTargets } = await import('../features/scroll-to');
       await bindScrollToTargets(main, reduced);
+      return;
+    }
+    case 'tilt-cards': {
+      const { bindTiltCards } = await import('../features/tilt-cards');
+      await bindTiltCards(main, reduced);
+      return;
+    }
+    case 'counters': {
+      const { bindCounters } = await import('../features/counters');
+      await bindCounters(main, reduced);
+      return;
+    }
+    case 'doc-gallery': {
+      const { bindDocGallery } = await import('../features/doc-gallery');
+      await bindDocGallery(main, reduced);
+      return;
+    }
+    case 'nav-spy': {
+      const { bindNavSpy } = await import('../features/nav-spy');
+      await bindNavSpy(main, reduced);
       return;
     }
   }

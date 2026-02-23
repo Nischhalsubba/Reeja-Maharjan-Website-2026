@@ -9,12 +9,13 @@ interface Props {
 const { href, variant = 'primary', external = false, className = '' } = Astro.props as Props;
 
 const baseClass =
-  'inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold transition';
+  'inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm font-semibold tracking-wide transition duration-200';
 const styleMap: Record<typeof variant, string> = {
-  primary: 'bg-[var(--accent)] text-white hover:brightness-110',
+  primary:
+    'border border-[rgb(255_255_255_/_12%)] bg-[linear-gradient(135deg,var(--accent-violet),var(--accent-indigo))] text-white shadow-[0_0_0_1px_rgb(255_255_255_/_6%)_inset,0_14px_28px_rgb(61_41_170_/_38%)] hover:brightness-110',
   secondary:
-    'bg-[var(--surface)] border border-[var(--line)] text-[var(--ink)] hover:border-[var(--accent)]',
-  ghost: 'text-[var(--accent)] underline-offset-4 hover:underline',
+    'border border-[var(--line)] bg-[rgb(255_255_255_/_3%)] text-[var(--ink)] shadow-[0_6px_18px_rgb(0_0_0_/_18%)] hover:border-[rgb(111_91_255_/_42%)] hover:bg-[rgb(255_255_255_/_6%)]',
+  ghost: 'text-[var(--accent-cyan)] underline-offset-4 hover:underline',
 };
 ---
 

@@ -1,0 +1,52 @@
+---
+import type { Profile } from '../content/profile';
+
+interface Props {
+  profile: Profile;
+}
+
+const { profile } = Astro.props as Props;
+const topSkills = profile.practiceAreas.slice(0, 4);
+const topCredentials = profile.credentials.slice(0, 3);
+---
+
+<div class="device-wrap" data-hero-device data-tilt-card>
+  <div class="device-glow" aria-hidden="true"></div>
+  <div class="device-frame">
+    <div class="device-notch" aria-hidden="true"></div>
+    <div class="device-screen">
+      <div class="device-header">
+        <div>
+          <p class="device-label">Clinical Profile</p>
+          <p class="device-name">{profile.name}</p>
+        </div>
+        <span class="device-chip">RN</span>
+      </div>
+
+      <section class="device-panel">
+        <p class="device-panel__title">Primary Focus</p>
+        <ul class="device-list">
+          {topSkills.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+
+      <section class="device-panel">
+        <p class="device-panel__title">Credentials</p>
+        <div class="device-badges">
+          {topCredentials.map((item) => <span>{item.title.replace('Certificate', '').trim()}</span>)}
+        </div>
+      </section>
+
+      <section class="device-panel device-panel--compact">
+        <div>
+          <p class="device-panel__title">Location</p>
+          <p class="device-value">{profile.location.split(',')[0]}</p>
+        </div>
+        <div>
+          <p class="device-panel__title">Availability</p>
+          <p class="device-value">Open to opportunities</p>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

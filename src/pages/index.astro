@@ -2,127 +2,136 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ButtonLink from '../components/ButtonLink.astro';
 import Container from '../components/Container.astro';
+import FloatingTagPill from '../components/FloatingTagPill.astro';
+import HeroDeviceMockup from '../components/HeroDeviceMockup.astro';
+import MetricCard from '../components/MetricCard.astro';
+import ProofSnippetCard from '../components/ProofSnippetCard.astro';
+import DocumentGalleryCard from '../components/DocumentGalleryCard.astro';
+import DocumentLightbox from '../components/DocumentLightbox.astro';
 import { profile } from '../content/profile';
 
 const formAction = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? '';
-const publicDocs = profile.documentGallery.filter((doc) => doc.public);
+const publicDocs = profile.documentGallery
+  .filter((doc) => doc.public)
+  .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+
+const docCategories = ['All', ...new Set(publicDocs.map((doc) => doc.category))];
 ---
 
 <BaseLayout
   title="Home"
-  description="Clinical portfolio of Reeja Maharjan, Registered Nurse, with verified experience, credentials, and curated certificate gallery."
+  description="Premium nursing portfolio of Reeja Maharjan, Registered Nurse (Nepal), featuring clinical experience, credentials, and curated document verification."
   page="home"
 >
-  <section id="hero" class="pb-10 pt-10 sm:pb-12 sm:pt-14">
-    <Container>
-      <article class="card-surface p-6 sm:p-8 md:p-10" data-motion="reveal">
-        <p class="accent-chip subtle-ring inline-flex px-3 py-1 text-xs font-semibold tracking-wide sm:text-sm">
-          {profile.role}
-        </p>
-        <div class="mt-5 grid gap-7 md:grid-cols-[1.2fr_0.8fr] md:items-center">
-          <div data-hero-root>
-            <h1 class="hero-title" data-hero-title>{profile.name}</h1>
-            <p class="mt-3 text-lg font-semibold text-[var(--accent)] sm:text-xl" data-hero-subtitle>
-              Maternal and Newborn Care Nursing Portfolio
-            </p>
-            <p class="section-body mt-4 max-w-2xl" data-hero-copy>{profile.headline}</p>
+  <section id="hero" class="section-pad pt-5 sm:pt-6">
+    <Container size="wide">
+      <article class="card-surface hero-stage" data-motion="reveal">
+        <div class="watermark" data-hero-watermark aria-hidden="true">
+          {profile.brand.watermarkWord}
+        </div>
 
-            <div class="mt-6 flex flex-wrap gap-3" data-hero-actions>
-              <ButtonLink href={profile.resumePdfPath}>Download Resume</ButtonLink>
-              <button
-                type="button"
-                class="rounded-full border border-[var(--line)] bg-[var(--surface-soft)] px-5 py-2.5 text-sm font-semibold text-[var(--ink)]"
-                data-scroll-target="#contact"
-              >
-                Contact Now
+        <div class="hero-grid">
+          <div class="hero-copy-block" data-hero-root>
+            <p class="section-label">Registered Nurse Portfolio</p>
+            <h1 class="hero-title mt-3" data-hero-title>{profile.hero.headline}</h1>
+            <p class="hero-subtitle mt-4" data-hero-subtitle>{profile.hero.subheadline}</p>
+            <p class="section-body hero-side-copy reading-wrap" data-hero-copy>
+              <strong>{profile.role}</strong> based in <strong>{profile.location}</strong>. Focused on maternal and newborn care,
+              patient counselling, ward coordination, and clear clinical communication.
+            </p>
+
+            <div class="hero-actions" data-hero-actions>
+              <ButtonLink href={profile.resumePdfPath} variant="primary">Download Resume</ButtonLink>
+              <button type="button" class="btn-inline-secondary" data-scroll-target="#contact">
+                Contact
               </button>
-              <button
-                type="button"
-                class="rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-sm font-semibold text-[var(--ink)]"
-                data-scroll-target="#documents"
-              >
+              <button type="button" class="btn-inline-secondary" data-scroll-target="#documents">
                 View Documents
               </button>
             </div>
           </div>
 
-          <aside class="card-surface bg-[var(--surface-soft)] p-5 sm:p-6" data-hero-image-wrap>
-            <p class="text-xs font-semibold tracking-wide text-[var(--accent)] uppercase">Primary Practice</p>
-            <ul class="detail-list mt-3 text-sm sm:text-base">
-              {profile.practiceAreas.slice(0, 5).map((area) => <li>{area}</li>)}
-            </ul>
-            <p class="text-muted mt-5 text-sm">
-              Location: <strong class="text-[var(--ink)]">{profile.location}</strong>
-            </p>
-            <p class="text-muted text-sm">
-              Email:
-              <a class="font-semibold text-[var(--accent)] hover:underline" href={`mailto:${profile.email}`}>
-                {profile.email}
-              </a>
-            </p>
-          </aside>
+          <div>
+            <div class="hero-pill-cloud" aria-hidden="true">
+              {profile.hero.floatingTags.map((tag) => <FloatingTagPill label={tag} />)}
+            </div>
+            <HeroDeviceMockup profile={profile} />
+          </div>
         </div>
       </article>
+    </Container>
+  </section>
 
-      <div class="mt-4 grid gap-4 sm:grid-cols-2" data-motion="reveal">
-        {
-          profile.quickFacts.map((fact) => (
-            <article class="card-surface p-5">
-              <p class="section-body text-sm sm:text-base">{fact}</p>
-            </article>
-          ))
-        }
+  <section id="services" class="section-pad">
+    <Container size="wide">
+      <div data-motion="reveal">
+        <p class="section-label">Service</p>
+        <h2 class="section-title mt-3">Core Care Areas</h2>
+        <p class="section-body mt-3 reading-wrap">
+          Practice areas organized for quick recruiter review, emphasizing clinical support, patient education, and continuity-focused nursing care.
+        </p>
+      </div>
+
+      <div class="service-grid mt-5">
+        <article class="card-surface service-feature" data-motion="reveal" data-tilt-card>
+          <div class="service-feature__art"></div>
+          <div class="mt-4 grid gap-2 sm:grid-cols-2">
+            {profile.quickFacts.map((fact) => <p class="section-body text-sm">{fact}</p>)}
+          </div>
+        </article>
+
+        <div class="service-cards">
+          {
+            profile.practiceAreas.slice(0, 4).map((area, index) => (
+              <article class="card-surface service-card" data-motion="reveal" data-tilt-card>
+                <p class="eyebrow">Area 0{index + 1}</p>
+                <h3 class="mt-2">{area}</h3>
+                <p>
+                  {index === 0 &&
+                    'Frontline maternity and newborn support with safe routines, close observation, and respectful patient communication.'}
+                  {index === 1 &&
+                    'Clear pregnancy and postpartum guidance to support patient understanding, confidence, and follow-up care behavior.'}
+                  {index === 2 &&
+                    'Family-focused breastfeeding counselling and health teaching aligned with practical home care needs.'}
+                  {index === 3 &&
+                    'Ward-based nursing support with timely escalation, coordination, and continuity-focused handovers.'}
+                </p>
+                <a href="/#highlights">See Clinical Highlights</a>
+              </article>
+            ))
+          }
+        </div>
       </div>
     </Container>
   </section>
 
-  <section id="about" class="py-7 sm:py-10">
-    <Container>
-      <article class="card-surface p-6 sm:p-8" data-motion="reveal">
-        <h2 class="section-title">About Reeja</h2>
-        <p class="section-body mt-4">{profile.summary}</p>
-        <h3 class="mt-6 text-xl font-semibold">Care Philosophy</h3>
-        <ul class="detail-list mt-3">
-          {profile.carePhilosophy.map((point) => <li>{point}</li>)}
-        </ul>
-        <h3 class="mt-6 text-xl font-semibold">Professional Direction</h3>
-        <ul class="detail-list mt-3">
-          {profile.goals.map((goal) => <li>{goal}</li>)}
-        </ul>
-      </article>
-    </Container>
-  </section>
-
-  <section id="experience" class="py-7 sm:py-10">
-    <Container>
-      <header data-motion="reveal">
-        <h2 class="section-title">Clinical Experience</h2>
-        <p class="section-body mt-2">
-          Chronological hospital service with practical outcomes in maternity, ward care, counselling, and safe clinical coordination.
+  <section id="highlights" class="section-pad">
+    <Container size="wide">
+      <div data-motion="reveal">
+        <p class="section-label">Remarkable Clinical Work</p>
+        <h2 class="section-title mt-3">Experience Highlights</h2>
+        <p class="section-body mt-3 reading-wrap">
+          Hospital roles presented as layered proof cards for faster review of responsibilities, ward settings, and nursing scope.
         </p>
-      </header>
+      </div>
 
-      <div class="relative mt-5" data-timeline-root>
-        <div class="absolute top-0 bottom-0 left-3 w-px bg-[var(--line)]" aria-hidden="true"></div>
-        <div class="absolute top-0 left-3 w-px bg-[var(--accent)]" aria-hidden="true" data-timeline-progress></div>
-        <ol class="grid gap-5">
+      <div class="highlights-stage mt-5" data-timeline-root>
+        <div class="timeline-line timeline-line--bg" aria-hidden="true"></div>
+        <div class="timeline-line timeline-line--progress" aria-hidden="true" data-timeline-progress></div>
+        <ol class="highlight-list">
           {
             profile.experience.map((job) => (
-              <li class="relative pl-10" data-timeline-item>
-                <span
-                  class="absolute top-6 left-[0.19rem] h-3.5 w-3.5 rounded-full border-2 border-[var(--accent)] bg-white"
-                  aria-hidden="true"
-                ></span>
-                <article class="card-surface p-5 sm:p-6" data-motion="reveal">
-                  <div class="flex flex-wrap items-center justify-between gap-2">
-                    <h3 class="text-xl font-semibold sm:text-2xl">{job.role}</h3>
-                    <p class="text-xs font-semibold tracking-wide text-[var(--ink-soft)] uppercase">{job.period}</p>
+              <li class="highlight-item" data-timeline-item>
+                <article class="card-surface highlight-card" data-motion="reveal" data-tilt-card>
+                  <div class="highlight-header">
+                    <h3 class="highlight-role">{job.role}</h3>
+                    <p class="highlight-period">{job.period}</p>
                   </div>
-                  <p class="mt-1 text-sm font-semibold text-[var(--ink-soft)]">
-                    {job.organization} - {job.location}
+                  <p class="highlight-org">
+                    {job.organization} · {job.location}
                   </p>
-                  <ul class="detail-list mt-4">
-                    {job.highlights.map((line) => <li>{line}</li>)}
+                  <ul class="bullet-list">
+                    {job.highlights.map((item) => <li>{item}</li>)}
                   </ul>
                 </article>
               </li>
@@ -133,25 +142,69 @@ const publicDocs = profile.documentGallery.filter((doc) => doc.public);
     </Container>
   </section>
 
-  <section id="credentials" class="py-7 sm:py-10">
-    <Container>
-      <header data-motion="reveal">
-        <h2 class="section-title">Licensure and Training</h2>
-        <p class="section-body mt-2">
-          Core clinical credentials and certifications relevant to maternal, newborn, emergency response, and OT support.
-        </p>
-      </header>
+  <section id="about" class="section-pad">
+    <Container size="narrow">
+      <div data-motion="reveal">
+        <p class="section-label">About</p>
+        <h2 class="section-title mt-3">Professional Profile</h2>
+      </div>
 
-      <div class="mt-5 grid gap-4" data-motion="reveal">
+      <article class="card-surface mt-5 p-5 sm:p-6" data-motion="reveal" data-tilt-card>
+        <div class="reading-wrap">
+          <p class="section-body">{profile.summary}</p>
+          <h3 class="mt-6 text-2xl">Care Philosophy</h3>
+          <ul class="bullet-list mt-3">
+            {profile.carePhilosophy.map((point) => <li>{point}</li>)}
+          </ul>
+          <h3 class="mt-6 text-2xl">Professional Direction</h3>
+          <ul class="bullet-list mt-3">
+            {profile.goals.map((goal) => <li>{goal}</li>)}
+          </ul>
+        </div>
+      </article>
+
+      <div class="stats-grid mt-4">
+        {profile.stats.map((item) => <MetricCard item={item} />)}
+      </div>
+    </Container>
+  </section>
+
+  <section id="proof" class="section-pad">
+    <Container size="wide">
+      <div data-motion="reveal">
+        <p class="section-label">Exceeded Expectations</p>
+        <h2 class="section-title mt-3">Clinical Proof & Recommendations</h2>
+        <p class="section-body mt-3 reading-wrap">
+          Highlights paraphrased from official letters, documented training, and listed references to present evidence without exposing sensitive personal identifiers.
+        </p>
+      </div>
+
+      <div class="proof-grid mt-5">
+        {profile.proofSnippets.map((item) => <ProofSnippetCard item={item} />)}
+      </div>
+    </Container>
+  </section>
+
+  <section id="credentials" class="section-pad">
+    <Container size="narrow">
+      <div data-motion="reveal">
+        <p class="section-label">Credentials</p>
+        <h2 class="section-title mt-3">Licensure & Training</h2>
+        <p class="section-body mt-3 reading-wrap">
+          Core licensure and clinical training relevant to maternal care, newborn support, OT workflow readiness, and emergency response.
+        </p>
+      </div>
+
+      <div class="credential-list mt-5">
         {
           profile.credentials.map((item) => (
-            <article class="card-surface p-5 sm:p-6">
-              <div class="flex flex-wrap items-center justify-between gap-2">
-                <h3 class="text-lg font-semibold sm:text-xl">{item.title}</h3>
-                <p class="text-xs font-semibold tracking-wide text-[var(--accent)] uppercase">{item.date}</p>
+            <article class="card-surface credential-card" data-motion="reveal" data-tilt-card>
+              <div class="credential-head">
+                <h3 class="credential-title">{item.title}</h3>
+                <p class="credential-date">{item.date}</p>
               </div>
-              <p class="mt-1 text-sm font-semibold text-[var(--ink-soft)]">{item.issuer}</p>
-              <p class="section-body mt-3">{item.details}</p>
+              <p class="credential-issuer">{item.issuer}</p>
+              <p class="credential-copy">{item.details}</p>
             </article>
           ))
         }
@@ -159,187 +212,155 @@ const publicDocs = profile.documentGallery.filter((doc) => doc.public);
     </Container>
   </section>
 
-  <section id="documents" class="py-7 sm:py-10">
-    <Container>
-      <header data-motion="reveal">
-        <h2 class="section-title">Document Gallery</h2>
-        <p class="section-body mt-2">
-          Curated professional documents (training, experience, education). Sensitive identity documents are intentionally excluded from public display.
+  <section id="documents" class="section-pad">
+    <Container size="wide">
+      <div data-motion="reveal">
+        <p class="section-label">Verification</p>
+        <h2 class="section-title mt-3">Curated Document Gallery</h2>
+        <p class="section-body mt-3 reading-wrap">
+          Public portfolio evidence includes professional experience, training, and education records. Sensitive identity documents are intentionally excluded.
         </p>
-      </header>
+      </div>
 
-      <div class="mt-5 grid gap-4 sm:grid-cols-2" data-motion="reveal" data-auto-animate>
+      <div class="mt-5" data-doc-gallery>
+        <div class="doc-filter-row" data-motion="reveal">
+          {docCategories.map((category) => (
+            <button
+              type="button"
+              class="doc-filter"
+              data-doc-filter={category}
+              data-active={category === 'All' ? 'true' : 'false'}
+              aria-pressed={category === 'All' ? 'true' : 'false'}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div class="doc-grid mt-4" data-auto-animate>
+          {publicDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
+        </div>
+      </div>
+    </Container>
+    <DocumentLightbox />
+  </section>
+
+  <section id="skills" class="section-pad">
+    <Container size="narrow">
+      <div data-motion="reveal">
+        <p class="section-label">Practice Readiness</p>
+        <h2 class="section-title mt-3">Skills, Languages & Education</h2>
+      </div>
+
+      <div class="stack-list mt-5" data-skills-grid>
         {
-          publicDocs.map((doc) => (
-            <article class="card-surface overflow-hidden p-4">
-              <a href={doc.file} target="_blank" rel="noreferrer noopener">
-                <img
-                  src={doc.file}
-                  alt={`${doc.title} issued by ${doc.issuer}`}
-                  class="doc-thumb"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
-              <div class="mt-3">
-                <p class="text-xs font-semibold tracking-wide text-[var(--accent)] uppercase">{doc.category}</p>
-                <h3 class="mt-1 text-base font-semibold">{doc.title}</h3>
-                <p class="text-muted mt-1 text-xs font-semibold uppercase">{doc.issuer} - {doc.date}</p>
-                <p class="section-body mt-2 text-sm">{doc.summary}</p>
+          profile.skillGroups.map((group) => (
+            <article class="card-surface stack-card" data-motion="reveal">
+              <h3 class="stack-title">{group.area}</h3>
+              <div class="stack-chip-grid">
+                {group.items.map((item) => <span class="stack-chip" data-skill-chip>{item}</span>)}
               </div>
             </article>
           ))
         }
-      </div>
-    </Container>
-  </section>
 
-  <section id="skills" class="py-7 sm:py-10">
-    <Container>
-      <div class="grid gap-4 md:grid-cols-2">
-        <article class="card-surface p-5 sm:p-6" data-motion="reveal">
-          <h2 class="text-2xl font-semibold">Core Skills</h2>
-          <div class="mt-4 grid gap-3" data-skills-grid>
-            {
-              profile.skillGroups.map((group) => (
-                <section class="rounded-xl border border-[var(--line)] bg-[var(--surface-soft)] p-4">
-                  <h3 class="text-base font-semibold">{group.area}</h3>
-                  <ul class="mt-3 flex flex-wrap gap-2">
-                    {
-                      group.items.map((item) => (
-                        <li
-                          class="subtle-ring bg-white px-3 py-1.5 text-xs font-semibold text-[var(--ink-soft)]"
-                          data-skill-chip
-                        >
-                          {item}
-                        </li>
-                      ))
-                    }
-                  </ul>
-                </section>
-              ))
-            }
+        <article class="card-surface stack-card" data-motion="reveal" data-tilt-card>
+          <h3 class="stack-title">Education</h3>
+          <div class="mt-3 grid gap-3">
+            {profile.education.map((edu) => (
+              <div class="panel-outline p-3">
+                <p class="font-semibold">{edu.level}</p>
+                <p class="section-body mt-1 text-sm">{edu.institution}</p>
+                <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">
+                  {edu.period} · {edu.result}
+                </p>
+              </div>
+            ))}
           </div>
         </article>
 
-        <article class="card-surface p-5 sm:p-6" data-motion="reveal">
-          <h2 class="text-2xl font-semibold">Education, Languages, References</h2>
-          <h3 class="mt-4 text-base font-semibold">Education</h3>
-          <ul class="mt-2 grid gap-3">
-            {
-              profile.education.map((edu) => (
-                <li class="rounded-xl border border-[var(--line)] bg-[var(--surface-soft)] p-3">
-                  <p class="text-sm font-semibold">{edu.level}</p>
-                  <p class="section-body text-sm">{edu.institution}</p>
-                  <p class="text-muted text-xs font-semibold uppercase">
-                    {edu.period} - {edu.result}
-                  </p>
-                </li>
-              ))
-            }
-          </ul>
-
-          <h3 class="mt-5 text-base font-semibold">Languages</h3>
-          <ul class="mt-2 flex flex-wrap gap-2">
-            {
-              profile.languages.map((language) => (
-                <li class="subtle-ring bg-[var(--surface-soft)] px-3 py-1.5 text-xs font-semibold text-[var(--ink-soft)]">
-                  {language}
-                </li>
-              ))
-            }
-          </ul>
-
-          <h3 class="mt-5 text-base font-semibold">References</h3>
-          <ul class="mt-2 grid gap-2">
-            {
-              profile.references.map((ref) => (
-                <li class="rounded-xl border border-[var(--line)] bg-[var(--surface-soft)] p-3">
-                  <p class="text-sm font-semibold">{ref.name}</p>
-                  <p class="section-body text-sm">{ref.role}</p>
-                  <p class="text-xs font-semibold text-[var(--accent)]">{ref.contact}</p>
-                </li>
-              ))
-            }
-          </ul>
+        <article class="card-surface stack-card" data-motion="reveal" data-tilt-card>
+          <h3 class="stack-title">Languages</h3>
+          <div class="chip-row mt-3">
+            {profile.languages.map((lang) => <span class="chip">{lang}</span>)}
+          </div>
+          <h3 class="stack-title mt-6">References</h3>
+          <div class="mt-3 grid gap-3">
+            {profile.references.map((ref) => (
+              <div class="panel-outline p-3">
+                <p class="font-semibold">{ref.name}</p>
+                <p class="section-body mt-1 text-sm">{ref.role}</p>
+                <p class="text-link mt-2 text-sm">{ref.contact}</p>
+              </div>
+            ))}
+          </div>
         </article>
       </div>
     </Container>
   </section>
 
-  <section id="contact" class="pb-16 pt-7 sm:pb-20 sm:pt-10">
-    <Container>
-      <article class="card-surface p-6 sm:p-8" data-motion="reveal">
-        <h2 class="section-title">Contact</h2>
-        <p class="section-body mt-2">
-          Available for nursing opportunities focused on maternal and newborn care, patient counselling, and structured clinical coordination.
+  <section id="contact" class="section-pad pb-16 sm:pb-20">
+    <Container size="narrow">
+      <article class="card-surface contact-shell" data-motion="reveal" data-tilt-card>
+        <p class="section-label">Contact</p>
+        <h2 class="section-title mt-3">Let’s Discuss Nursing Opportunities</h2>
+        <p class="section-body mt-3 reading-wrap">
+          Available for roles related to maternal and newborn care, patient counselling, ward support, and structured clinical coordination.
         </p>
-        <div class="mt-4 grid gap-2 text-sm sm:text-base">
-          <p>
-            Email:
-            <a class="font-semibold text-[var(--accent)] hover:underline" href={`mailto:${profile.email}`}>
-              {profile.email}
-            </a>
-          </p>
-          <p>
-            Phone:
-            <a class="font-semibold text-[var(--accent)] hover:underline" href={`tel:${profile.phone}`}>
-              {profile.phone}
-            </a>
-          </p>
-          <p>
-            LinkedIn:
-            <a class="font-semibold text-[var(--accent)] hover:underline" href={profile.linkedin} target="_blank" rel="noreferrer noopener">
-              Open profile
-            </a>
-          </p>
-          <p>
-            Resume:
-            <a class="font-semibold text-[var(--accent)] hover:underline" href={profile.resumePdfPath}>
-              Open PDF
-            </a>
-          </p>
+
+        <div class="contact-grid mt-5">
+          <div>
+            <div class="contact-links">
+              <p>
+                Email: <a href={`mailto:${profile.email}`}>{profile.email}</a>
+              </p>
+              <p>
+                Phone: <a href={`tel:${profile.phone}`}>{profile.phone}</a>
+              </p>
+              <p>
+                LinkedIn:
+                <a href={profile.linkedin} target="_blank" rel="noreferrer noopener"> Open profile</a>
+              </p>
+              <p>
+                Resume: <a href={profile.resumePdfPath}>Download PDF</a>
+              </p>
+            </div>
+
+            <div class="mt-5">
+              <p class="eyebrow">Privacy Note</p>
+              <ul class="bullet-list mt-2">
+                {profile.privacyNotes.map((note) => <li>{note}</li>)}
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            {!formAction && <p class="notice">Set <code>PUBLIC_FORMSPREE_ENDPOINT</code> to enable live form submission.</p>}
+
+            <form method="POST" action={formAction || 'https://formspree.io/f/your-form-id'}>
+              <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" />
+              <label>
+                Name
+                <input required name="name" placeholder="Your name" />
+              </label>
+              <label>
+                Email
+                <input type="email" required name="email" placeholder="you@example.com" />
+              </label>
+              <label>
+                Subject
+                <input required name="subject" placeholder="Nursing position / inquiry" />
+              </label>
+              <label>
+                Message
+                <textarea rows={5} required name="message" placeholder="Please share role details, location, and expected responsibilities."></textarea>
+              </label>
+              <button type="submit" class="btn-inline-primary mt-1 w-fit">
+                Send Inquiry
+              </button>
+            </form>
+          </div>
         </div>
-
-        {
-          !formAction && (
-            <p class="mt-5 rounded-xl border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
-              Set <code>PUBLIC_FORMSPREE_ENDPOINT</code> to enable live form submission.
-            </p>
-          )
-        }
-
-        <form method="POST" action={formAction || 'https://formspree.io/f/your-form-id'} class="mt-5 grid gap-3">
-          <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" />
-          <label class="grid gap-1 text-sm font-semibold">
-            Name
-            <input class="rounded-xl border border-[var(--line)] bg-white px-3 py-2 font-normal" required name="name" />
-          </label>
-          <label class="grid gap-1 text-sm font-semibold">
-            Email
-            <input
-              type="email"
-              class="rounded-xl border border-[var(--line)] bg-white px-3 py-2 font-normal"
-              required
-              name="email"
-            />
-          </label>
-          <label class="grid gap-1 text-sm font-semibold">
-            Message
-            <textarea
-              rows={5}
-              class="rounded-xl border border-[var(--line)] bg-white px-3 py-2 font-normal"
-              required
-              name="message"
-            ></textarea>
-          </label>
-          <button
-            type="submit"
-            class="mt-1 inline-flex w-fit items-center justify-center rounded-full bg-[var(--accent)] px-5 py-2.5 text-sm font-semibold text-white hover:bg-[var(--accent-strong)]"
-          >
-            Send Inquiry
-          </button>
-        </form>
       </article>
     </Container>
   </section>

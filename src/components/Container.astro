@@ -1,7 +1,18 @@
 ---
-const { className = '' } = Astro.props;
+interface Props {
+  className?: string;
+  size?: 'narrow' | 'wide' | 'full';
+}
+
+const { className = '', size = 'narrow' } = Astro.props as Props;
+
+const sizeClassMap: Record<NonNullable<Props['size']>, string> = {
+  narrow: 'max-w-[860px]',
+  wide: 'max-w-[1120px]',
+  full: 'max-w-[1280px]',
+};
 ---
 
-<div class:list={['mx-auto w-full max-w-[820px] px-4 sm:px-6', className]}>
+<div class:list={['mx-auto w-full px-4 sm:px-6', sizeClassMap[size], className]}>
   <slot />
 </div>
