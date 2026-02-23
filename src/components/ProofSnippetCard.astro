@@ -15,5 +15,26 @@ const typeLabel =
   <p class="proof-type">{typeLabel}</p>
   <h3 class="proof-title">{item.title}</h3>
   <p class="proof-text">{item.text}</p>
+  {
+    item.evidence?.length ? (
+      <div class="proof-evidence-list">
+        {item.evidence.slice(0, 2).map((ev) => (
+          <a
+            href={ev.file}
+            target="_blank"
+            rel="noreferrer noopener"
+            class="proof-evidence-chip"
+            aria-label={`Open evidence: ${ev.title}`}
+          >
+            <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
+            <span>
+              <strong>{ev.title}</strong>
+              {ev.note && <small>{ev.note}</small>}
+            </span>
+          </a>
+        ))}
+      </div>
+    ) : null
+  }
   <p class="proof-source">{item.source}</p>
 </article>
