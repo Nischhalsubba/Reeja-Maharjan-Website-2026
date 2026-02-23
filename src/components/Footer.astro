@@ -10,7 +10,7 @@ const { variant = 'default' } = Astro.props as Props;
 ---
 
 <footer class:list={['site-footer', variant === 'source-home' && 'site-footer--source-home']}>
-  <Container size={variant === 'source-home' ? 'source-stage' : 'full'}>
+  <Container size={variant === 'source-home' ? 'wide' : 'full'}>
     <div class:list={['footer-shell', variant === 'source-home' && 'footer-shell--source-home']} data-motion="reveal">
       <div class="footer-watermark" aria-hidden="true">{profile.brand.watermarkWord}</div>
       <div class:list={['footer-inner-stage', variant === 'source-home' && 'footer-inner-stage--source-home']}>

@@ -24,7 +24,7 @@ const navLinks = variant === 'source-home' ? links.filter((link) => link.id !== 
 ---
 
 <header class:list={['site-nav sticky top-0 z-50', variant === 'source-home' && 'site-nav--source-home']}>
-  <Container size={variant === 'source-home' ? 'source-stage' : 'wide'} className="py-3">
+  <Container size={variant === 'source-home' ? 'wide' : 'wide'} className="py-3">
     <div class:list={['nav-shell', variant === 'source-home' && 'nav-shell--source-home']}>
       {
         variant === 'source-home' ? (
