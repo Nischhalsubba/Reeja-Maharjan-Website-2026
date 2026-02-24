@@ -1,6 +1,7 @@
 import { loadGSAP } from '../engines/gsap';
 
 export const bindEcgPulse = async (root: ParentNode, reduced: boolean): Promise<void> => {
+  if (root.querySelector('[data-home-figma]')) return;
   const path = root.querySelector<SVGPathElement>('[data-ecg-line]');
   if (!(path instanceof SVGPathElement)) return;
 
@@ -37,4 +38,3 @@ export const bindEcgPulse = async (root: ParentNode, reduced: boolean): Promise<
       ease: 'sine.out',
     });
 };
-

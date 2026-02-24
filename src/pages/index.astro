@@ -1,11 +1,10 @@
-﻿---
+---
 import { existsSync, statSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ButtonLink from '../components/ButtonLink.astro';
-import Container from '../components/Container.astro';
 import FloatingTagPill from '../components/FloatingTagPill.astro';
 import HeroDeviceMockup from '../components/HeroDeviceMockup.astro';
 import MetricCard from '../components/MetricCard.astro';
@@ -373,12 +372,6 @@ const extraSkillGroups = mergedSkillsCards.slice(3);
 const quickFactsPrimary = profile.quickFacts.slice(0, 4);
 const quickFactsSecondary = profile.quickFacts.slice(4);
 void _flatTimelineEntries;
-void additionalVerificationDocs;
-void featuredTimelineEntries;
-void timelineDetailEntries;
-void visibleSkillGroups;
-void extraSkillGroups;
-void quickFactsSecondary;
 ---
 
 <BaseLayout
@@ -391,7 +384,7 @@ void quickFactsSecondary;
 >
   <div class="home-figma-v1" data-home-figma>
     <section id="hero" class="section-pad home-core-section home-core-section--hero pt-5 sm:pt-6">
-      <Container size="wide">
+      <div class="home-figma-shell">
         <div class="hero-stage hero-stage--open" data-motion="reveal" data-medical-particles-root>
           <div class="hero-medical-particles" data-medical-particles-layer aria-hidden="true">
             <span></span><span></span><span></span><span></span><span></span><span></span>
@@ -427,23 +420,6 @@ void quickFactsSecondary;
                     {copy.hero.snapshotBody}
                   </p>
                 </div>
-                {
-                  heroImage && (
-                    <figure class="hero-photo-card card-surface" data-motion="reveal" data-tilt-card>
-                      <img
-                        src={heroImage.file}
-                        alt={heroImage.alt}
-                        loading="lazy"
-                        decoding="async"
-                        onerror="var f=this.closest('figure'); if(f){f.remove();}"
-                      />
-                      <figcaption>
-                        <p>{profile.name}</p>
-                        <small>{profile.role}</small>
-                      </figcaption>
-                    </figure>
-                  )
-                }
               </div>
             </div>
 
@@ -451,15 +427,34 @@ void quickFactsSecondary;
               <div class="hero-pill-cloud" aria-hidden="true">
                 {profile.hero.floatingTags.map((tag) => <FloatingTagPill label={tag} />)}
               </div>
-              <HeroDeviceMockup profile={profile} />
+              {
+                heroImage && (
+                  <figure class="hero-photo-card hero-photo-card--figma card-surface" data-motion="reveal" data-tilt-card>
+                    <img
+                      src={heroImage.file}
+                      alt={heroImage.alt}
+                      loading="lazy"
+                      decoding="async"
+                      onerror="var f=this.closest('figure'); if(f){f.remove();}"
+                    />
+                    <figcaption>
+                      <p>{profile.name}</p>
+                      <small>{profile.role}</small>
+                    </figcaption>
+                  </figure>
+                )
+              }
+              <div class="hero-device-secondary">
+                <HeroDeviceMockup profile={profile} />
+              </div>
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
 
     <section id="about" class="section-pad home-core-section">
-      <Container size="full">
+      <div class="home-figma-shell">
         <div class="home-open-section fh-about-shell">
           <div class="home-section-head fh-about-head" data-motion="reveal">
             <p class="section-label">{copy.skills.label}</p>
@@ -526,11 +521,11 @@ void quickFactsSecondary;
             </div>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
 
     <section id="highlights" class="section-pad home-core-section">
-      <Container size="wide">
+      <div class="home-figma-shell">
         <div class="home-open-section">
           <div class="home-section-head" data-motion="reveal">
             <p class="section-label">{copy.timeline.label}</p>
@@ -540,12 +535,47 @@ void quickFactsSecondary;
             </p>
           </div>
 
-          <div class="career-timeline mt-6" data-timeline-root>
-            <div class="timeline-line timeline-line--bg" aria-hidden="true"></div>
-            <div class="timeline-line timeline-line--progress" aria-hidden="true" data-timeline-progress></div>
-            <ol class="career-timeline__list">
-              {
-                timelineEntries.map((entry) => (
+          <div class="fh-feature-grid mt-6" data-motion="reveal">
+            {
+              featuredTimelineEntries.map((entry) => (
+                <article class:list={['card-surface', 'fh-feature-card', `fh-feature-card--${entry.kind}`]} data-tilt-card>
+                  <div class="fh-feature-card__pill-row">
+                    <p class:list={['career-event__kind', `career-event__kind--${entry.kind}`]}>{entry.kind}</p>
+                    <p class="career-event__date">{entry.displayDate}</p>
+                  </div>
+                  <h3 class="career-event__title mt-3">{entry.title}</h3>
+                  <p class="career-event__org">{entry.org}</p>
+                  {entry.summary && <p class="career-event__summary mt-3">{entry.summary}</p>}
+                  {
+                    entry.embeddedItems?.length ? (
+                      <div class="fh-embedded-chip-row mt-4">
+                        {entry.embeddedItems.slice(0, 3).map((embedded) => (
+                          <span class="fh-embedded-chip">{embedded.kind}: {embedded.title}</span>
+                        ))}
+                      </div>
+                    ) : null
+                  }
+                  {
+                    entry.evidence?.[0] ? (
+                      <a href={entry.evidence[0].file} target="_blank" rel="noreferrer noopener" class="fh-feature-evidence mt-4">
+                        <img src={entry.evidence[0].file} alt={entry.evidence[0].alt} loading="lazy" decoding="async" />
+                        <span>{entry.evidence[0].title}</span>
+                      </a>
+                    ) : null
+                  }
+                </article>
+              ))
+            }
+          </div>
+
+          <details class="home-details home-details--timeline mt-6" open>
+            <summary>Show complete career timeline</summary>
+            <div class="career-timeline mt-5" data-timeline-root>
+              <div class="timeline-line timeline-line--bg" aria-hidden="true"></div>
+              <div class="timeline-line timeline-line--progress" aria-hidden="true" data-timeline-progress></div>
+              <ol class="career-timeline__list">
+                {
+                  timelineDetailEntries.map((entry) => (
                   <li class="career-timeline__item" data-timeline-item>
                     <article class="card-surface career-event" data-motion="reveal" data-tilt-card>
                       <div class="career-event__top">
@@ -620,149 +650,27 @@ void quickFactsSecondary;
                       }
                     </article>
                   </li>
-                ))
-              }
-            </ol>
-          </div>
+                  ))
+                }
+              </ol>
+            </div>
+          </details>
         </div>
-      </Container>
+      </div>
     </section>
 
-    <section id="credentials" class="section-pad home-core-section">
-      <Container size="wide">
+    <section id="credentials-standalone" class="section-pad home-core-section" hidden aria-hidden="true">
+      <div class="home-figma-shell">
         <div class="home-open-section">
-          <div class="home-section-head" data-motion="reveal">
-            <p class="section-label">{copy.verification.label}</p>
-            <h2 class="section-title mt-3">{copy.verification.title}</h2>
-            <p class="section-body mt-3 reading-wrap">
-              {copy.verification.body}
-            </p>
-          </div>
-
-          <div class="credential-list mt-6 home-v46-credential-grid">
-            {
-              topCredentialCards.map((item) => (
-                <article class:list={['card-surface', 'credential-card', item.kind === 'licensure' ? 'credential-card--licensure' : '']} data-motion="reveal" data-tilt-card>
-                  <div class="credential-head">
-                    <h3 class="credential-title">{item.title}</h3>
-                    <p class="credential-date">{item.date}</p>
-                  </div>
-                  <p class="credential-issuer">{item.issuer}</p>
-                  <p class="credential-copy">{item.details}</p>
-                </article>
-              ))
-            }
-          </div>
-
+          <div id="credentials" class="home-anchor"></div>
           <div id="documents" class="home-anchor"></div>
-          <div class="home-section-head mt-10" data-motion="reveal">
-            <p class="section-label">{copy.verification.galleryLabel}</p>
-            <h2 class="section-title mt-3">{copy.verification.galleryTitle}</h2>
-            <p class="section-body mt-3 reading-wrap">
-              {copy.verification.galleryBody}
-            </p>
-          </div>
-
-          <div class="mt-5" data-doc-gallery>
-            <div class="doc-filter-row" data-motion="reveal">
-              {docCategories.map((category) => (
-                <button
-                  type="button"
-                  class="doc-filter"
-                  data-doc-filter={category}
-                  data-active={category === 'All' ? 'true' : 'false'}
-                  aria-pressed={category === 'All' ? 'true' : 'false'}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
-
-            <div class="doc-grid mt-4" data-auto-animate>
-              {verificationPreviewDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
-            </div>
-          </div>
-          <DocumentLightbox />
-
           <div id="proof" class="home-anchor"></div>
-          <div class="home-section-head mt-10" data-motion="reveal">
-            <p class="section-label">{copy.verification.proofLabel}</p>
-            <h2 class="section-title mt-3">{copy.verification.proofTitle}</h2>
-            <p class="section-body mt-3 reading-wrap">
-              {copy.verification.proofBody}
-            </p>
-          </div>
-
-          <div class="proof-grid mt-6">
-            {proofCards.map((item) => <ProofSnippetCard item={item} />)}
-          </div>
-
-          <div class="proof-subgrid mt-6">
-            <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
-              <p class="proof-type">Recognition & Academic Merit</p>
-              <h3 class="proof-title">Awards, Scholarship Merit & Professional Participation</h3>
-              <div class="mt-4 grid gap-4">
-                {profile.recognition.map((item) => (
-                  <article class="proof-list-item">
-                    <p class="font-semibold">{item.title}</p>
-                    <p class="section-body mt-1 text-sm">{item.summary}</p>
-                    <p class="proof-source mt-2">{item.issuer}{item.date ? ` · ${item.date}` : ''}</p>
-                    {
-                      item.evidence?.length ? (
-                        <div class="evidence-inline mt-3">
-                          {item.evidence.slice(0, 1).map((ev) => (
-                            <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card evidence-inline__card--compact">
-                              <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
-                              <span>
-                                <strong>{ev.title}</strong>
-                                {ev.note && <small>{ev.note}</small>}
-                              </span>
-                            </a>
-                          ))}
-                        </div>
-                      ) : null
-                    }
-                  </article>
-                ))}
-              </div>
-            </section>
-
-            <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
-              <p class="proof-type">Research & Academic Involvement</p>
-              <h3 class="proof-title">MMIHS IRC-Approved Research Participation</h3>
-              <div class="mt-4 grid gap-4">
-                {profile.research.map((item) => (
-                  <article class="proof-list-item">
-                    <p class="font-semibold">{item.title}</p>
-                    <p class="section-body mt-1 text-sm">{item.summary}</p>
-                    {item.status && <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.status}</p>}
-                    <p class="proof-source mt-2">{item.organization}</p>
-                    {
-                      item.evidence?.length ? (
-                        <div class="evidence-inline mt-3">
-                          {item.evidence.slice(0, 1).map((ev) => (
-                            <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card evidence-inline__card--compact">
-                              <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
-                              <span>
-                                <strong>{ev.title}</strong>
-                                {ev.note && <small>{ev.note}</small>}
-                              </span>
-                            </a>
-                          ))}
-                        </div>
-                      ) : null
-                    }
-                  </article>
-                ))}
-              </div>
-            </section>
-          </div>
         </div>
-      </Container>
+      </div>
     </section>
 
     <section id="proof-standalone" class="section-pad home-core-section" hidden aria-hidden="true">
-      <Container size="wide">
+      <div class="home-figma-shell">
         <div class="home-open-section">
           <div class="home-section-head" data-motion="reveal">
             <p class="section-label">Recommendations, Recognition & Evidence</p>
@@ -837,11 +745,11 @@ void quickFactsSecondary;
             </section>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
 
     <section id="skills" class="section-pad home-core-section">
-      <Container size="wide">
+      <div class="home-figma-shell">
         <div class="home-open-section">
           <div class="home-section-head" data-motion="reveal">
             <p class="section-label">{copy.skills.label}</p>
@@ -865,8 +773,18 @@ void quickFactsSecondary;
                 {profile.practiceAreas.map((area) => <span class="chip chip--soft">{area}</span>)}
               </div>
               <div class="mt-4 grid gap-2 sm:grid-cols-2">
-                {profile.quickFacts.map((fact) => <p class="section-body text-sm">{fact}</p>)}
+                {quickFactsPrimary.map((fact) => <p class="section-body text-sm">{fact}</p>)}
               </div>
+              {
+                quickFactsSecondary.length ? (
+                  <details class="home-details mt-4">
+                    <summary>More quick facts</summary>
+                    <div class="mt-3 grid gap-2 sm:grid-cols-2">
+                      {quickFactsSecondary.map((fact) => <p class="section-body text-sm">{fact}</p>)}
+                    </div>
+                  </details>
+                ) : null
+              }
             </section>
 
             <section class="card-surface stack-card" data-motion="reveal">
@@ -906,7 +824,7 @@ void quickFactsSecondary;
             <section class="card-surface stack-card" data-motion="reveal">
               <h3 class="stack-title">{copy.skills.skillsTitle}</h3>
               <div class="stack-list stack-list--nested mt-4" data-skills-grid>
-                {mergedSkillsCards.map((group) => (
+                {visibleSkillGroups.map((group) => (
                   <article class="panel-outline p-3">
                     <h4 class="stack-title stack-title--nested">{group.area}</h4>
                     <div class="stack-chip-grid">
@@ -915,6 +833,23 @@ void quickFactsSecondary;
                   </article>
                 ))}
               </div>
+              {
+                extraSkillGroups.length ? (
+                  <details class="home-details mt-4">
+                    <summary>Show more skill groups</summary>
+                    <div class="stack-list stack-list--nested mt-4" data-skills-grid>
+                      {extraSkillGroups.map((group) => (
+                        <article class="panel-outline p-3">
+                          <h4 class="stack-title stack-title--nested">{group.area}</h4>
+                          <div class="stack-chip-grid">
+                            {group.items.map((item) => <span class="stack-chip" data-skill-chip>{item}</span>)}
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </details>
+                ) : null
+              }
             </section>
 
             <section class="card-surface stack-card" data-motion="reveal" data-tilt-card>
@@ -943,12 +878,125 @@ void quickFactsSecondary;
             </section>
           </div>
         </div>
-      </Container>
+      </div>
     </section>
 
     <section id="contact" class="section-pad pb-16 sm:pb-20 home-core-section">
-      <Container size="wide">
+      <div class="home-figma-shell">
         <div class="home-open-section">
+          <div id="credentials" class="home-anchor"></div>
+          <div id="documents" class="home-anchor"></div>
+          <div id="proof" class="home-anchor"></div>
+
+          <div class="home-contact-stack">
+            <section class="home-figma-panel" data-motion="reveal">
+              <div class="home-section-head">
+                <p class="section-label">{copy.verification.proofLabel}</p>
+                <h2 class="section-title mt-3">{copy.verification.proofTitle}</h2>
+                <p class="section-body mt-3 reading-wrap">{copy.verification.proofBody}</p>
+              </div>
+
+              <div class="proof-grid mt-6">
+                {proofCards.map((item) => <ProofSnippetCard item={item} />)}
+              </div>
+
+              <details class="home-details mt-6">
+                <summary>Show recognition and research details</summary>
+                <div class="proof-subgrid mt-5">
+                  <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
+                    <p class="proof-type">Recognition & Academic Merit</p>
+                    <h3 class="proof-title">Awards, Scholarship Merit & Professional Participation</h3>
+                    <div class="mt-4 grid gap-4">
+                      {profile.recognition.map((item) => (
+                        <article class="proof-list-item">
+                          <p class="font-semibold">{item.title}</p>
+                          <p class="section-body mt-1 text-sm">{item.summary}</p>
+                          <p class="proof-source mt-2">{item.issuer}{item.date ? ` · ${item.date}` : ''}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
+                    <p class="proof-type">Research & Academic Involvement</p>
+                    <h3 class="proof-title">MMIHS IRC-Approved Research Participation</h3>
+                    <div class="mt-4 grid gap-4">
+                      {profile.research.map((item) => (
+                        <article class="proof-list-item">
+                          <p class="font-semibold">{item.title}</p>
+                          <p class="section-body mt-1 text-sm">{item.summary}</p>
+                          {item.status && <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.status}</p>}
+                          <p class="proof-source mt-2">{item.organization}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                </div>
+              </details>
+            </section>
+
+            <section class="home-figma-panel" data-motion="reveal">
+              <div class="home-section-head">
+                <p class="section-label">{copy.verification.label}</p>
+                <h2 class="section-title mt-3">{copy.verification.title}</h2>
+                <p class="section-body mt-3 reading-wrap">{copy.verification.body}</p>
+              </div>
+
+              <div class="credential-list mt-6">
+                {
+                  topCredentialCards.map((item) => (
+                    <article class:list={['card-surface', 'credential-card', item.kind === 'licensure' ? 'credential-card--licensure' : '']} data-tilt-card>
+                      <div class="credential-head">
+                        <h3 class="credential-title">{item.title}</h3>
+                        <p class="credential-date">{item.date}</p>
+                      </div>
+                      <p class="credential-issuer">{item.issuer}</p>
+                      <p class="credential-copy">{item.details}</p>
+                    </article>
+                  ))
+                }
+              </div>
+
+              <div class="home-section-head mt-10">
+                <p class="section-label">{copy.verification.galleryLabel}</p>
+                <h3 class="section-title mt-3">{copy.verification.galleryTitle}</h3>
+                <p class="section-body mt-3 reading-wrap">{copy.verification.galleryBody}</p>
+              </div>
+
+              <div class="mt-5" data-doc-gallery>
+                <div class="doc-filter-row" data-motion="reveal">
+                  {docCategories.map((category) => (
+                    <button
+                      type="button"
+                      class="doc-filter"
+                      data-doc-filter={category}
+                      data-active={category === 'All' ? 'true' : 'false'}
+                      aria-pressed={category === 'All' ? 'true' : 'false'}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+
+                <div class="doc-grid mt-4" data-auto-animate>
+                  {verificationPreviewDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
+                </div>
+
+                {
+                  additionalVerificationDocs.length ? (
+                    <details class="home-details mt-6">
+                      <summary>Show more evidence</summary>
+                      <div class="doc-grid mt-4">
+                        {additionalVerificationDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
+                      </div>
+                    </details>
+                  ) : null
+                }
+              </div>
+              <DocumentLightbox />
+            </section>
+          </div>
+
           <div class="contact-grid mt-0">
             <div data-motion="reveal">
               <p class="section-label">{copy.contact.label}</p>
@@ -1027,9 +1075,10 @@ void quickFactsSecondary;
             <FaqList items={contactFaqs} title={copy.contact.faqTitle} className="home-embedded-faq" />
           </div>
         </div>
-      </Container>
+      </div>
     </section>
   </div>
 </BaseLayout>
+
 
 

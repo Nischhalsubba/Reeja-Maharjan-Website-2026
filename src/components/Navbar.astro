@@ -91,17 +91,7 @@ const navLinks = isSourceHome ? selectedLinks.filter((link) => link.id !== 'cont
             <span>{profile.brand.displayName}</span>
           </a>
         ) : isFigmaHome ? (
-          <nav aria-label="Primary" class="nav-scroll nav-scroll--figma-home">
-            <ul class="nav-pills nav-pills--figma-home">
-              {navLinks.map((link) => (
-                <li>
-                  <a href={link.href} data-nav-spy-link={link.id} class="nav-pill nav-pill--figma-home">
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div class="nav-spacer nav-spacer--figma-home" aria-hidden="true"></div>
         ) : (
           <nav aria-label="Primary" class="nav-scroll">
             <ul class="nav-pills">
@@ -127,10 +117,38 @@ const navLinks = isSourceHome ? selectedLinks.filter((link) => link.id !== 'cont
             {contactLink.label}
           </a>
         )}
-        {isFigmaHome && <span class="nav-menu-label" aria-hidden="true">Menu</span>}
-        <button type="button" class="motion-toggle" data-motion-pref-toggle aria-pressed="false">
-          Reduce motion
-        </button>
+        {
+          isFigmaHome ? (
+            <details class="figma-menu">
+              <summary class="figma-menu__summary" aria-label="Open site menu">
+                <span class="figma-menu__icon" aria-hidden="true">
+                  <span></span><span></span>
+                </span>
+                <span class="nav-menu-label">Menu</span>
+              </summary>
+              <div class="figma-menu__panel" role="menu">
+                <nav aria-label="Homepage sections">
+                  <ul class="figma-menu__links">
+                    {selectedLinks.map((link) => (
+                      <li>
+                        <a href={link.href} data-nav-spy-link={link.id} class="figma-menu__link" role="menuitem">
+                          {link.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                <button type="button" class="motion-toggle motion-toggle--figma-panel" data-motion-pref-toggle aria-pressed="false">
+                  Reduce motion
+                </button>
+              </div>
+            </details>
+          ) : (
+            <button type="button" class="motion-toggle" data-motion-pref-toggle aria-pressed="false">
+              Reduce motion
+            </button>
+          )
+        }
       </div>
     </div>
   </Container>

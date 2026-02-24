@@ -1,6 +1,7 @@
 import { loadGSAP } from '../engines/gsap';
 
 export const bindFloatingPills = async (root: ParentNode, reduced: boolean): Promise<void> => {
+  if (root.querySelector('[data-home-figma]')) return;
   const pills = Array.from(root.querySelectorAll<HTMLElement>('[data-motion-float]'));
   if (!pills.length) return;
   const isHome = root.querySelector('main[data-page="home"]') instanceof HTMLElement;

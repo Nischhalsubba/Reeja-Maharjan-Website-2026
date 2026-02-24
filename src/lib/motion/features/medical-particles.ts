@@ -1,6 +1,7 @@
 import { loadGSAP } from '../engines/gsap';
 
 export const bindMedicalParticles = async (root: ParentNode, reduced: boolean): Promise<void> => {
+  if (root.querySelector('[data-home-figma]')) return;
   const layer = root.querySelector<HTMLElement>('[data-medical-particles-layer]');
   if (!(layer instanceof HTMLElement)) return;
 
@@ -32,4 +33,3 @@ export const bindMedicalParticles = async (root: ParentNode, reduced: boolean): 
     });
   });
 };
-

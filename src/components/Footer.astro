@@ -9,81 +9,125 @@ interface Props {
 const { variant = 'default' } = Astro.props as Props;
 ---
 
-<footer class:list={[
-  'site-footer',
-  variant === 'source-home' && 'site-footer--source-home',
-  variant === 'figma-home' && 'site-footer--figma-home',
-]}>
-  <Container size={variant === 'default' ? 'full' : 'full'}>
-    <div
-      class:list={[
-        'footer-shell',
-        variant === 'source-home' && 'footer-shell--source-home',
-        variant === 'figma-home' && 'footer-shell--figma-home',
-      ]}
-      data-motion="reveal"
-    >
-      <div class="footer-watermark" aria-hidden="true">{profile.brand.watermarkWord}</div>
-      <div
-        class:list={[
-          'footer-inner-stage',
-          variant === 'source-home' && 'footer-inner-stage--source-home',
-          variant === 'figma-home' && 'footer-inner-stage--figma-home',
-        ]}
-      >
-        <div
-          class:list={[
-            'footer-grid',
-            variant === 'source-home' && 'footer-grid--source-home',
-            variant === 'figma-home' && 'footer-grid--figma-home',
-          ]}
-        >
-          <section>
-            <p class="footer-kicker">Portfolio</p>
-            <p class="footer-title">{profile.name}</p>
-            <p class="footer-copy">{profile.role}</p>
-            <p class="footer-copy">{profile.location}</p>
-          </section>
+{
+  variant === 'figma-home' ? (
+    <footer class="site-footer site-footer--figma-home">
+      <div class="footer-shell footer-shell--figma-home" data-motion="reveal">
+        <div class="footer-watermark" aria-hidden="true">{profile.brand.watermarkWord}</div>
+        <div class="footer-inner-stage footer-inner-stage--figma-home">
+          <div class="footer-figma-row">
+            <section class="footer-figma-brand">
+              <p class="footer-kicker">Portfolio</p>
+              <p class="footer-title">{profile.name}</p>
+              <p class="footer-copy">{profile.role}</p>
+              <p class="footer-copy">{profile.location}</p>
+              <div class="footer-socials" aria-label="Social links">
+                <a href={profile.linkedin} target="_blank" rel="noreferrer noopener">LinkedIn</a>
+                <a href={`mailto:${profile.email}`}>Email</a>
+                <a href={profile.resumePdfPath}>Resume</a>
+              </div>
+            </section>
 
-          <section>
-            <p class="footer-kicker">Navigate</p>
-            <ul class="footer-links">
-              <li><a href="/#services">Care Areas</a></li>
-              <li><a href="/#highlights">Highlights</a></li>
-              <li><a href="/#credentials">Credentials</a></li>
-              <li><a href="/#documents">Documents</a></li>
-            </ul>
-          </section>
+            <section class="footer-figma-contact">
+              <a href={`mailto:${profile.email}`} class="footer-figma-link">{profile.email}</a>
+              <a href="/#contact" class="footer-figma-link">Request Interview</a>
+            </section>
 
-          <section>
-            <p class="footer-kicker">Contact</p>
-            <ul class="footer-links">
-              <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
-              <li><a href={`tel:${profile.phone}`}>{profile.phone}</a></li>
-              <li><a href={profile.resumePdfPath}>Resume PDF</a></li>
-            </ul>
-          </section>
+            <section class="footer-figma-top">
+              <a href="/#hero" class="footer-figma-toplink">Back to top</a>
+            </section>
+          </div>
 
-          <section>
-            <p class="footer-kicker">Role Pages</p>
-            <ul class="footer-links">
-              {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
-            </ul>
-          </section>
-        </div>
+          <div class="footer-figma-utility">
+            <details class="footer-role-pages">
+              <summary>Role Pages</summary>
+              <ul class="footer-links">
+                {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
+              </ul>
+            </details>
 
-        <div
-          class:list={[
-            'footer-meta',
-            variant === 'source-home' && 'footer-meta--source-home',
-            variant === 'figma-home' && 'footer-meta--figma-home',
-          ]}
-        >
-          <span>(c) {new Date().getFullYear()} {profile.name}</span>
-          <span>Registered Nurse Portfolio</span>
-          <span>Static Astro + Cloudflare Pages</span>
+            <div class="footer-meta footer-meta--figma-home">
+              <span>(c) {new Date().getFullYear()} {profile.name}</span>
+              <span>Registered Nurse Portfolio</span>
+              <span>Static Astro + Cloudflare Pages</span>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </Container>
-</footer>
+    </footer>
+  ) : (
+    <footer class:list={[
+      'site-footer',
+      variant === 'source-home' && 'site-footer--source-home',
+    ]}>
+      <Container size="full">
+        <div
+          class:list={[
+            'footer-shell',
+            variant === 'source-home' && 'footer-shell--source-home',
+          ]}
+          data-motion="reveal"
+        >
+          <div class="footer-watermark" aria-hidden="true">{profile.brand.watermarkWord}</div>
+          <div
+            class:list={[
+              'footer-inner-stage',
+              variant === 'source-home' && 'footer-inner-stage--source-home',
+            ]}
+          >
+            <div
+              class:list={[
+                'footer-grid',
+                variant === 'source-home' && 'footer-grid--source-home',
+              ]}
+            >
+              <section>
+                <p class="footer-kicker">Portfolio</p>
+                <p class="footer-title">{profile.name}</p>
+                <p class="footer-copy">{profile.role}</p>
+                <p class="footer-copy">{profile.location}</p>
+              </section>
+
+              <section>
+                <p class="footer-kicker">Navigate</p>
+                <ul class="footer-links">
+                  <li><a href="/#services">Care Areas</a></li>
+                  <li><a href="/#highlights">Highlights</a></li>
+                  <li><a href="/#credentials">Credentials</a></li>
+                  <li><a href="/#documents">Documents</a></li>
+                </ul>
+              </section>
+
+              <section>
+                <p class="footer-kicker">Contact</p>
+                <ul class="footer-links">
+                  <li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+                  <li><a href={`tel:${profile.phone}`}>{profile.phone}</a></li>
+                  <li><a href={profile.resumePdfPath}>Resume PDF</a></li>
+                </ul>
+              </section>
+
+              <section>
+                <p class="footer-kicker">Role Pages</p>
+                <ul class="footer-links">
+                  {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
+                </ul>
+              </section>
+            </div>
+
+            <div
+              class:list={[
+                'footer-meta',
+                variant === 'source-home' && 'footer-meta--source-home',
+              ]}
+            >
+              <span>(c) {new Date().getFullYear()} {profile.name}</span>
+              <span>Registered Nurse Portfolio</span>
+              <span>Static Astro + Cloudflare Pages</span>
+            </div>
+          </div>
+        </div>
+      </Container>
+    </footer>
+  )
+}

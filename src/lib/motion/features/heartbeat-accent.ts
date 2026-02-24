@@ -1,6 +1,7 @@
 import { loadGSAP } from '../engines/gsap';
 
 export const bindHeartbeatAccent = async (root: ParentNode, reduced: boolean): Promise<void> => {
+  if (root.querySelector('[data-home-figma]')) return;
   const accents = Array.from(root.querySelectorAll<HTMLElement>('[data-heartbeat-accent]'));
   if (!accents.length) return;
 
@@ -20,4 +21,3 @@ export const bindHeartbeatAccent = async (root: ParentNode, reduced: boolean): P
       .to(accent, { scale: 1, duration: 0.38, ease: 'sine.out' });
   });
 };
-
