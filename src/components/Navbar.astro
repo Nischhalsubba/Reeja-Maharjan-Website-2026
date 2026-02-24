@@ -18,9 +18,17 @@ const links = [
   { href: '/#contact', label: 'Contact', id: 'contact' },
 ];
 
+const sourceHomeLinks = [
+  { href: '/#hero', label: 'Home', id: 'hero' },
+  { href: '/#highlights', label: 'Timeline', id: 'highlights' },
+  { href: '/#credentials', label: 'Verification', id: 'credentials' },
+  { href: '/#skills', label: 'Skills & Fit', id: 'skills' },
+  { href: '/#contact', label: 'Contact', id: 'contact' },
+];
+
 const { variant = 'default' } = Astro.props as Props;
-const contactLink = links.find((link) => link.id === 'contact');
-const navLinks = variant === 'source-home' ? links.filter((link) => link.id !== 'contact') : links;
+const contactLink = (variant === 'source-home' ? sourceHomeLinks : links).find((link) => link.id === 'contact');
+const navLinks = variant === 'source-home' ? sourceHomeLinks.filter((link) => link.id !== 'contact') : links;
 ---
 
 <header class:list={['site-nav sticky top-0 z-50', variant === 'source-home' && 'site-nav--source-home']}>
