@@ -44,7 +44,7 @@ const { doc } = Astro.props as Props;
       {doc.featured && <span class="doc-card__featured">Featured</span>}
     </div>
     <h3 class="doc-card__title">{doc.title}</h3>
-    <p class="doc-card__meta">{doc.issuer} · {doc.date}</p>
+    <p class="doc-card__meta">{doc.issuer} | {doc.date}</p>
     <p class="doc-card__summary">{doc.summary}</p>
     {
       doc.usedIn?.length ? (
