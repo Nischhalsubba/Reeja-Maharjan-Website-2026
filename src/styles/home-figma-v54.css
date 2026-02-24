@@ -1,0 +1,728 @@
+/* Homepage Figma v5.4 override layer (loaded after v52) */
+
+body[data-page-name='home'] {
+  overflow-x: clip;
+  background: #f5f1e8;
+}
+
+main[data-page='home'] {
+  max-width: none !important;
+  width: 100% !important;
+  overflow-x: clip;
+}
+
+main[data-page='home'] .home-figma-v1 {
+  --fh54-bg: #f5f1e8;
+  --fh54-accent: #e7302a;
+  --fh54-accent-ink: #b61f1a;
+  --fh54-ink: #1e2229;
+  --fh54-ink-muted: #57606a;
+  --fh54-white: #f1fdf9;
+  --fh54-card: #fff;
+  --fh54-line: rgba(30, 34, 41, 0.1);
+  --fh54-shadow-sm: 0 10px 24px rgba(20, 23, 28, 0.06);
+  --fh54-shadow-md: 0 24px 50px rgba(20, 23, 28, 0.1);
+  --fh54-stage: 1360px;
+  --fh54-gutter: clamp(16px, 3vw, 40px);
+  --fh54-gap: clamp(14px, 2vw, 28px);
+  --fh54-section-y: clamp(40px, 6vw, 112px);
+  background: var(--fh54-bg) !important;
+  color: var(--fh54-ink) !important;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif !important;
+}
+
+main[data-page='home'] .home-figma-v1 *,
+main[data-page='home'] .home-figma-v1 *::before,
+main[data-page='home'] .home-figma-v1 *::after {
+  box-sizing: border-box;
+}
+
+main[data-page='home'] .home-figma-v1 .home-figma-shell {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-figma-canvas {
+  width: 100vw !important;
+  margin-inline: calc(50% - 50vw) !important;
+  padding-block: var(--fh54-section-y) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-figma-stage {
+  width: min(100%, var(--fh54-stage)) !important;
+  max-width: var(--fh54-stage) !important;
+  margin-inline: auto !important;
+  padding-inline: var(--fh54-gutter) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-pad {
+  padding-block: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-open-section,
+main[data-page='home'] .home-figma-v1 .hero-stage--open,
+main[data-page='home'] .home-figma-v1 .home-figma-panel {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-core-section + .home-core-section::before {
+  content: '';
+  display: block;
+  width: min(var(--fh54-stage), calc(100% - (var(--fh54-gutter) * 2)));
+  margin: 0 auto;
+  height: 1px;
+  background: rgba(30, 34, 41, 0.06);
+}
+
+main[data-page='home'] .home-figma-v1 .home-figma-canvas--hero {
+  background:
+    radial-gradient(60rem 28rem at 70% 32%, rgba(255,255,255,0.14), transparent 62%),
+    radial-gradient(28rem 14rem at 46% 86%, rgba(255,255,255,0.12), transparent 76%),
+    linear-gradient(180deg, #ef302a 0%, #ea2f29 58%, #eb5147 100%) !important;
+  padding-top: clamp(16px, 2.5vw, 28px) !important;
+  padding-bottom: clamp(24px, 4vw, 44px) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-figma-canvas--about,
+main[data-page='home'] .home-figma-v1 .home-figma-canvas--highlights,
+main[data-page='home'] .home-figma-v1 .home-figma-canvas--skills,
+main[data-page='home'] .home-figma-v1 .home-figma-canvas--contact {
+  background: var(--fh54-bg) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-label {
+  color: var(--fh54-accent) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.14em !important;
+  font-size: clamp(0.8rem, 0.7vw, 0.95rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-title {
+  color: var(--fh54-ink) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.04em !important;
+  line-height: 0.96 !important;
+  font-size: clamp(2rem, 3vw, 3.5rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-body,
+main[data-page='home'] .home-figma-v1 .reading-wrap,
+main[data-page='home'] .home-figma-v1 .proof-text,
+main[data-page='home'] .home-figma-v1 .proof-source {
+  color: var(--fh54-ink-muted) !important;
+  font-size: clamp(0.95rem, 0.3vw + 0.9rem, 1.125rem) !important;
+  line-height: 1.55 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .reading-wrap { max-width: 64ch !important; }
+
+main[data-page='home'] .home-figma-v1 .card-surface,
+main[data-page='home'] .home-figma-v1 .panel-outline,
+main[data-page='home'] .home-figma-v1 .contact-shell {
+  background: var(--fh54-card) !important;
+  border: 1px solid var(--fh54-line) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--fh54-shadow-sm) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .panel-outline { box-shadow: none !important; }
+
+/* Header / menu drawer */
+body[data-page-name='home'] .site-nav--figma-home {
+  position: absolute !important;
+  inset: 0 0 auto 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  backdrop-filter: none !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-home-header-wrap {
+  width: 100vw;
+  margin-inline: calc(50% - 50vw);
+}
+
+body[data-page-name='home'] .site-nav--figma-home .nav-shell--figma-home {
+  width: min(100%, var(--fh54-stage)) !important;
+  max-width: var(--fh54-stage) !important;
+  margin-inline: auto !important;
+  padding: clamp(12px, 2vw, 24px) var(--fh54-gutter) 0 !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  grid-template-columns: auto auto !important;
+  justify-content: space-between !important;
+  gap: 1rem !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .brand-mark--figma-home,
+body[data-page-name='home'] .site-nav--figma-home .brand-mark__label span,
+body[data-page-name='home'] .site-nav--figma-home .brand-mark__label small,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__summary {
+  color: rgba(241,253,249,0.95) !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__summary {
+  border-radius: 999px !important;
+  border: 1px solid rgba(241,253,249,0.2) !important;
+  background: rgba(241,253,249,0.06) !important;
+  min-height: 2.4rem !important;
+  padding: 0.35rem 0.75rem !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .nav-menu-label {
+  font-size: 0.78rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel {
+  min-width: min(22rem, calc(100vw - (var(--fh54-gutter) * 2))) !important;
+  background: rgba(255,255,255,0.98) !important;
+  border: 1px solid rgba(30,34,41,0.1) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--fh54-shadow-md) !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__link {
+  color: var(--fh54-ink) !important;
+  min-height: 2.5rem !important;
+  border-radius: 12px !important;
+  font-size: 0.95rem !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .motion-toggle--figma-panel {
+  color: var(--fh54-ink) !important;
+  border: 1px solid var(--fh54-line) !important;
+  background: #fbfaf7 !important;
+}
+
+/* Hero */
+main[data-page='home'] .home-figma-v1 #hero .hero-medical-particles,
+main[data-page='home'] .home-figma-v1 #hero .device-ecg-shell,
+main[data-page='home'] .home-figma-v1 #hero .heartbeat-accent,
+main[data-page='home'] .home-figma-v1 #hero .device-ambient-rings,
+main[data-page='home'] .home-figma-v1 #hero .device-glow,
+main[data-page='home'] .home-figma-v1 #hero .hero-pill-cloud {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .watermark {
+  color: rgba(241,253,249,0.13) !important;
+  font-size: clamp(4rem, 15vw, 13rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.06em !important;
+  line-height: 0.88 !important;
+  left: var(--fh54-gutter) !important;
+  top: clamp(40px, 6vw, 82px) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) !important;
+  gap: clamp(16px, 2.4vw, 34px) !important;
+  align-items: end !important;
+  min-height: clamp(720px, 62vw, 900px) !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: clamp(64px, 9vw, 110px) 0 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-grid::after { content: none !important; }
+
+main[data-page='home'] .home-figma-v1 #hero .hero-title {
+  color: var(--fh54-white) !important;
+  font-size: clamp(2.8rem, 6vw, 6.25rem) !important;
+  line-height: 0.92 !important;
+  letter-spacing: -0.055em !important;
+  max-width: 9.7ch !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-subtitle,
+main[data-page='home'] .home-figma-v1 #hero .hero-proof-line,
+main[data-page='home'] .home-figma-v1 #hero .hero-social-row a,
+main[data-page='home'] .home-figma-v1 #hero .hero-support-copy .section-body {
+  color: rgba(241,253,249,0.92) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-proof-line {
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-card--figma {
+  width: 100% !important;
+  max-width: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  overflow: visible !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-frame {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 28px !important;
+  min-height: clamp(420px, 42vw, 760px);
+  aspect-ratio: 1.35 / 0.98 !important;
+  box-shadow: 0 30px 70px rgba(18,14,14,0.16) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-main {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 30% !important;
+  mix-blend-mode: hard-light;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-overlay-svg {
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  z-index: 2;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-card--figma figcaption { display: none !important; }
+
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card {
+  position: absolute !important;
+  right: clamp(8px, 1vw, 16px) !important;
+  top: clamp(8px, 1vw, 16px) !important;
+  width: min(19rem, 46%) !important;
+  z-index: 4 !important;
+  background: rgba(255,255,255,0.95) !important;
+  border: 1px solid rgba(255,255,255,0.5) !important;
+  border-radius: 14px !important;
+  padding: 0.7rem 0.85rem !important;
+  box-shadow: var(--fh54-shadow-sm) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__label,
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__meta {
+  color: var(--fh54-ink-muted) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__value { color: var(--fh54-ink) !important; }
+
+main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary {
+  position: absolute !important;
+  right: clamp(8px, 1vw, 14px) !important;
+  bottom: clamp(-8px, -0.5vw, -6px) !important;
+  width: min(22rem, 48%) !important;
+  z-index: 5 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary .device-wrap--hero {
+  transform: none !important;
+  scale: 0.82;
+  transform-origin: bottom right;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary .device-frame {
+  background: #fbfbfb !important;
+  border: 1px solid rgba(30,34,41,0.14) !important;
+  box-shadow: 0 18px 40px rgba(19,24,33,0.14) !important;
+}
+
+/* Section grids */
+main[data-page='home'] .home-figma-v1 #about .fh-about-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr) !important;
+  gap: var(--fh54-gap) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .fh-feature-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: var(--fh54-gap) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) !important;
+  gap: var(--fh54-gap) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .home-stats-block { grid-column: span 2; }
+
+main[data-page='home'] .home-figma-v1 #contact .proof-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: var(--fh54-gap) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .proof-subgrid,
+main[data-page='home'] .home-figma-v1 #contact .credential-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: var(--fh54-gap) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .doc-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: var(--fh54-gap) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+  gap: calc(var(--fh54-gap) + 4px) !important;
+  align-items: start !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-grid > *,
+main[data-page='home'] .home-figma-v1 #contact .proof-grid > *,
+main[data-page='home'] .home-figma-v1 #contact .proof-subgrid > *,
+main[data-page='home'] .home-figma-v1 #contact .credential-list > *,
+main[data-page='home'] .home-figma-v1 #contact .doc-grid > *,
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > *,
+main[data-page='home'] .home-figma-v1 #about .fh-about-layout > *,
+main[data-page='home'] .home-figma-v1 #highlights .fh-feature-grid > * {
+  min-width: 0;
+}
+
+/* Footer full-bleed */
+body[data-page-name='home'] .site-footer--figma-home {
+  width: 100vw !important;
+  margin-inline: calc(50% - 50vw) !important;
+  background: var(--fh54-bg) !important;
+  border-top: 1px solid rgba(30,34,41,0.08) !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-shell--figma-home {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: clamp(28px, 4vw, 48px) 0 !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-watermark { display: none !important; }
+
+body[data-page-name='home'] .site-footer--figma-home .footer-inner-stage--figma-home {
+  width: min(100%, var(--fh54-stage)) !important;
+  max-width: var(--fh54-stage) !important;
+  margin-inline: auto !important;
+  padding-inline: var(--fh54-gutter) !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-row,
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-utility {
+  background: rgba(255,255,255,0.92) !important;
+  border: 1px solid rgba(30,34,41,0.08) !important;
+  border-radius: 18px !important;
+  box-shadow: var(--fh54-shadow-sm) !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-row {
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto !important;
+  gap: 16px !important;
+  padding: 16px !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-utility {
+  margin-top: 12px !important;
+  padding: 12px !important;
+}
+
+/* Contrast / form / controls */
+main[data-page='home'] .home-figma-v1 .chip,
+main[data-page='home'] .home-figma-v1 .stack-chip,
+main[data-page='home'] .home-figma-v1 .doc-filter {
+  color: #3f4750 !important;
+  background: #f1ede7 !important;
+  border: 1px solid rgba(30, 34, 41, 0.1) !important;
+  min-height: 2rem;
+  font-size: 0.84rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .doc-filter[data-active='true'] {
+  background: var(--fh54-accent) !important;
+  border-color: var(--fh54-accent) !important;
+  color: #fff !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact form label {
+  color: var(--fh54-ink) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact form input,
+main[data-page='home'] .home-figma-v1 #contact form textarea {
+  width: 100% !important;
+  background: #fff !important;
+  color: var(--fh54-ink) !important;
+  border: 1px solid rgba(30, 34, 41, 0.14) !important;
+  border-radius: 12px !important;
+  min-height: 2.9rem !important;
+  padding: 0.7rem 0.85rem !important;
+  font-size: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact form textarea { min-height: 8rem !important; }
+
+main[data-page='home'] .home-figma-v1 #contact form input::placeholder,
+main[data-page='home'] .home-figma-v1 #contact form textarea::placeholder,
+main[data-page='home'] .home-figma-v1 #contact .notice {
+  color: #6c7480 !important;
+  opacity: 1 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .btn-inline-primary {
+  background: var(--fh54-accent) !important;
+  color: #fff !important;
+  border: 0 !important;
+  min-height: 3rem !important;
+  border-radius: 999px !important;
+}
+
+/* Preserve focus visibility */
+main[data-page='home'] .home-figma-v1 a:focus-visible,
+main[data-page='home'] .home-figma-v1 button:focus-visible,
+main[data-page='home'] .home-figma-v1 summary:focus-visible,
+main[data-page='home'] .home-figma-v1 input:focus-visible,
+main[data-page='home'] .home-figma-v1 textarea:focus-visible {
+  outline: 2px solid var(--fh54-accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* Desktop/laptop downshift */
+@media (max-width: 1439px) {
+  main[data-page='home'] .home-figma-v1 .home-figma-stage {
+    padding-inline: clamp(20px, 3vw, 36px) !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary .device-wrap--hero {
+    scale: 0.76;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-availability-card {
+    width: min(17rem, 46%) !important;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+  main[data-page='home'] .home-figma-v1 { --fh54-gutter: clamp(20px, 3vw, 28px); }
+
+  main[data-page='home'] .home-figma-v1 .home-figma-canvas {
+    padding-block: clamp(48px, 7vw, 76px) !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 .section-title {
+    font-size: clamp(1.8rem, 3.8vw, 2.5rem) !important;
+  }
+
+  body[data-page-name='home'] .site-nav--figma-home .nav-shell--figma-home {
+    padding-top: 12px !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-grid {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    align-items: start !important;
+    padding-top: clamp(60px, 10vw, 92px) !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-visual-col { gap: 12px !important; }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-photo-frame {
+    min-height: clamp(320px, 56vw, 520px);
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-availability-card {
+    position: static !important;
+    width: 100% !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary {
+    position: static !important;
+    width: min(100%, 22rem) !important;
+    margin-left: auto !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary .device-wrap--hero {
+    scale: 0.8;
+    transform-origin: top right;
+  }
+
+  main[data-page='home'] .home-figma-v1 #about .fh-about-layout,
+  main[data-page='home'] .home-figma-v1 #skills .home-merge-grid,
+  main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #skills .home-stats-block { grid-column: auto; }
+
+  main[data-page='home'] .home-figma-v1 #highlights .fh-feature-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #contact .proof-grid,
+  main[data-page='home'] .home-figma-v1 #contact .proof-subgrid,
+  main[data-page='home'] .home-figma-v1 #contact .credential-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #contact .doc-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  body[data-page-name='home'] .site-footer--figma-home .footer-figma-row {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  body[data-page-name='home'] .site-footer--figma-home .footer-figma-top {
+    grid-column: 1 / -1;
+    justify-self: end;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  main[data-page='home'] .home-figma-v1 {
+    --fh54-gutter: clamp(16px, 4vw, 20px);
+    --fh54-gap: 12px;
+    --fh54-section-y: clamp(40px, 8vw, 56px);
+  }
+
+  main[data-page='home'] .home-figma-v1 .section-title {
+    font-size: clamp(1.5rem, 6vw, 2rem) !important;
+    line-height: 0.98 !important;
+    max-width: none !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 .section-body,
+  main[data-page='home'] .home-figma-v1 .reading-wrap {
+    font-size: 0.95rem !important;
+  }
+
+  body[data-page-name='home'] .site-nav--figma-home .brand-mark__label small { display: none !important; }
+  body[data-page-name='home'] .site-nav--figma-home .nav-menu-label { font-size: 0.72rem !important; }
+  body[data-page-name='home'] .site-nav--figma-home .figma-menu__summary { min-height: 2.25rem !important; }
+
+  main[data-page='home'] .home-figma-v1 #hero .watermark {
+    font-size: clamp(3rem, 18vw, 7rem) !important;
+    top: 44px !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-grid { padding-top: 56px !important; }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-title {
+    font-size: clamp(2rem, 9vw, 2.8rem) !important;
+    max-width: 10.2ch !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-subtitle,
+  main[data-page='home'] .home-figma-v1 #hero .hero-proof-line {
+    font-size: 0.9rem !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-actions .button-link {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-photo-frame {
+    min-height: clamp(260px, 70vw, 420px);
+    aspect-ratio: auto !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary {
+    width: 100% !important;
+    margin-left: 0 !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary .device-wrap--hero {
+    scale: 0.72;
+    transform-origin: top left;
+    margin-left: -8px;
+  }
+
+  main[data-page='home'] .home-figma-v1 #about .fh-about-stats,
+  main[data-page='home'] .home-figma-v1 #highlights .fh-feature-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #contact .doc-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 12px !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #contact .doc-filter {
+    font-size: 0.82rem !important;
+    min-height: 2.15rem !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #contact form input,
+  main[data-page='home'] .home-figma-v1 #contact form textarea {
+    font-size: 0.95rem !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #contact .btn-inline-primary {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  body[data-page-name='home'] .site-footer--figma-home .footer-figma-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  body[data-page-name='home'] .site-footer--figma-home .footer-figma-contact,
+  body[data-page-name='home'] .site-footer--figma-home .footer-socials {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+  }
+
+  body[data-page-name='home'] .site-footer--figma-home .footer-meta--figma-home {
+    display: grid !important;
+    gap: 4px !important;
+    justify-items: start !important;
+  }
+}
+
+/* Narrow mobile safety */
+@media (max-width: 375px) {
+  main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary .device-wrap--hero {
+    scale: 0.64;
+    margin-left: -12px;
+  }
+
+  main[data-page='home'] .home-figma-v1 #contact .doc-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 .chip,
+  main[data-page='home'] .home-figma-v1 .stack-chip,
+  main[data-page='home'] .home-figma-v1 .doc-filter {
+    max-width: 100%;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+

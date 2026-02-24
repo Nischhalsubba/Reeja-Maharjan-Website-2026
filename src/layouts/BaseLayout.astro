@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/home-figma-v52.css';
+import '../styles/home-figma-v54.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 
@@ -70,7 +71,7 @@ const schemaList = Array.isArray(schema) ? schema : schema ? [schema] : [];
       ))
     }
   </head>
-  <body class="antialiased" data-page-type={pageType}>
+  <body class="antialiased" data-page-type={pageType} data-page-name={page}>
     <a href="#main-content" class="skip-link rounded-md bg-[var(--accent)] px-4 py-2 text-white">
       Skip to content
     </a>
