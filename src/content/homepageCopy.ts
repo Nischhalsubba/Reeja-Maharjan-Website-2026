@@ -1,4 +1,4 @@
-export const homepageCopy = {
+﻿export const homepageCopy = {
   hero: {
     label: 'Reeja Maharjan · Licensed Registered Nurse (Nepal) · Hospital / NGO / INGO Opportunities',
     title: 'Registered Nurse Portfolio for Maternal, Newborn, and General Ward Care in Nepal',

@@ -1,4 +1,4 @@
----
+﻿---
 import { existsSync, statSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -363,8 +363,22 @@ const topCredentialCards = topCredentialCardsAll.slice(0, 5);
 const proofCards = proofCardsAll.slice(0, 3);
 const homepageStats = profile.stats.slice(0, 4);
 const verificationPreviewDocs = publicDocs.slice(0, 8);
+const additionalVerificationDocs = publicDocs.slice(8);
 const contactFaqs = homepageFaqs.slice(0, 4);
+const featuredTimelineEntries = timelineEntries.slice(0, 4);
+const timelineDetailEntries = timelineEntries;
+const aboutCredentialCards = topCredentialCards.slice(0, 3);
+const visibleSkillGroups = mergedSkillsCards.slice(0, 3);
+const extraSkillGroups = mergedSkillsCards.slice(3);
+const quickFactsPrimary = profile.quickFacts.slice(0, 4);
+const quickFactsSecondary = profile.quickFacts.slice(4);
 void _flatTimelineEntries;
+void additionalVerificationDocs;
+void featuredTimelineEntries;
+void timelineDetailEntries;
+void visibleSkillGroups;
+void extraSkillGroups;
+void quickFactsSecondary;
 ---
 
 <BaseLayout
@@ -375,7 +389,7 @@ void _flatTimelineEntries;
   keywords={getHomepageKeywords(profile)}
   schema={homeSchema}
 >
-  <div class="home-source-canvas home-v46" data-home-source-match>
+  <div class="home-figma-v1" data-home-figma>
     <section id="hero" class="section-pad home-core-section home-core-section--hero pt-5 sm:pt-6">
       <Container size="wide">
         <div class="hero-stage hero-stage--open" data-motion="reveal" data-medical-particles-root>
@@ -438,6 +452,77 @@ void _flatTimelineEntries;
                 {profile.hero.floatingTags.map((tag) => <FloatingTagPill label={tag} />)}
               </div>
               <HeroDeviceMockup profile={profile} />
+            </div>
+          </div>
+        </div>
+      </Container>
+    </section>
+
+    <section id="about" class="section-pad home-core-section">
+      <Container size="full">
+        <div class="home-open-section fh-about-shell">
+          <div class="home-section-head fh-about-head" data-motion="reveal">
+            <p class="section-label">{copy.skills.label}</p>
+            <h2 class="section-title mt-3">{copy.skills.profileTitle}</h2>
+            <p class="section-body mt-3 reading-wrap">
+              {profile.summary}
+            </p>
+          </div>
+
+          <div class="fh-about-layout mt-6">
+            <div class="fh-about-layout__left">
+              <section class="card-surface fh-light-card" data-motion="reveal">
+                <h3 class="stack-title">{copy.skills.preferencesTitle}</h3>
+                <div class="chip-row mt-3">
+                  {workPreferenceChips.map((chip) => <span class="chip">{chip}</span>)}
+                </div>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  {quickFactsPrimary.map((fact) => (
+                    <div class="panel-outline p-3">
+                      <p class="section-body text-sm">{fact}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <details class="home-details mt-4" data-motion="reveal">
+                <summary>Care Philosophy & Professional Direction</summary>
+                <div class="mt-4 grid gap-6 md:grid-cols-2">
+                  <div>
+                    <p class="font-semibold">Care Philosophy</p>
+                    <ul class="bullet-list mt-3">
+                      {profile.carePhilosophy.map((point) => <li>{point}</li>)}
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-semibold">Professional Direction</p>
+                    <ul class="bullet-list mt-3">
+                      {profile.goals.map((goal) => <li>{goal}</li>)}
+                    </ul>
+                  </div>
+                </div>
+              </details>
+            </div>
+
+            <div class="fh-about-layout__right">
+              <div class="stats-grid fh-about-stats" data-motion="reveal">
+                {homepageStats.map((item) => <MetricCard item={item} />)}
+              </div>
+
+              <section class="card-surface fh-light-card mt-4" data-motion="reveal">
+                <p class="section-label section-label--inline">{copy.verification.label}</p>
+                <h3 class="stack-title mt-2">{copy.verification.title}</h3>
+                <p class="section-body mt-3">{copy.verification.body}</p>
+                <div class="mt-4 grid gap-3">
+                  {aboutCredentialCards.map((item) => (
+                    <div class="panel-outline p-3">
+                      <p class="font-semibold">{item.title}</p>
+                      <p class="section-body mt-1 text-sm">{item.issuer}</p>
+                      <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.date}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
             </div>
           </div>
         </div>
@@ -767,7 +852,7 @@ void _flatTimelineEntries;
           </div>
 
           <div id="services" class="home-anchor"></div>
-          <div id="about" class="home-anchor"></div>
+          <div id="about-legacy" class="home-anchor"></div>
 
           <div class="home-merge-grid mt-6">
             <section class="card-surface stack-card" data-motion="reveal">

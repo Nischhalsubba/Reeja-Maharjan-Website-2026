@@ -3,18 +3,41 @@ import Container from './Container.astro';
 import { profile } from '../content/profile';
 
 interface Props {
-  variant?: 'default' | 'source-home';
+  variant?: 'default' | 'source-home' | 'figma-home';
 }
 
 const { variant = 'default' } = Astro.props as Props;
 ---
 
-<footer class:list={['site-footer', variant === 'source-home' && 'site-footer--source-home']}>
-  <Container size={variant === 'source-home' ? 'wide' : 'full'}>
-    <div class:list={['footer-shell', variant === 'source-home' && 'footer-shell--source-home']} data-motion="reveal">
+<footer class:list={[
+  'site-footer',
+  variant === 'source-home' && 'site-footer--source-home',
+  variant === 'figma-home' && 'site-footer--figma-home',
+]}>
+  <Container size={variant === 'default' ? 'full' : 'full'}>
+    <div
+      class:list={[
+        'footer-shell',
+        variant === 'source-home' && 'footer-shell--source-home',
+        variant === 'figma-home' && 'footer-shell--figma-home',
+      ]}
+      data-motion="reveal"
+    >
       <div class="footer-watermark" aria-hidden="true">{profile.brand.watermarkWord}</div>
-      <div class:list={['footer-inner-stage', variant === 'source-home' && 'footer-inner-stage--source-home']}>
-        <div class:list={['footer-grid', variant === 'source-home' && 'footer-grid--source-home']}>
+      <div
+        class:list={[
+          'footer-inner-stage',
+          variant === 'source-home' && 'footer-inner-stage--source-home',
+          variant === 'figma-home' && 'footer-inner-stage--figma-home',
+        ]}
+      >
+        <div
+          class:list={[
+            'footer-grid',
+            variant === 'source-home' && 'footer-grid--source-home',
+            variant === 'figma-home' && 'footer-grid--figma-home',
+          ]}
+        >
           <section>
             <p class="footer-kicker">Portfolio</p>
             <p class="footer-title">{profile.name}</p>
@@ -49,7 +72,13 @@ const { variant = 'default' } = Astro.props as Props;
           </section>
         </div>
 
-        <div class:list={['footer-meta', variant === 'source-home' && 'footer-meta--source-home']}>
+        <div
+          class:list={[
+            'footer-meta',
+            variant === 'source-home' && 'footer-meta--source-home',
+            variant === 'figma-home' && 'footer-meta--figma-home',
+          ]}
+        >
           <span>(c) {new Date().getFullYear()} {profile.name}</span>
           <span>Registered Nurse Portfolio</span>
           <span>Static Astro + Cloudflare Pages</span>

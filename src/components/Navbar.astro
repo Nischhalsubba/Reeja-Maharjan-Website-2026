@@ -3,7 +3,7 @@ import Container from './Container.astro';
 import { profile } from '../content/profile';
 
 interface Props {
-  variant?: 'default' | 'source-home';
+  variant?: 'default' | 'source-home' | 'figma-home';
 }
 
 const links = [
@@ -26,16 +26,35 @@ const sourceHomeLinks = [
   { href: '/#contact', label: 'Contact', id: 'contact' },
 ];
 
+const figmaHomeLinks = [
+  { href: '/#hero', label: 'Home', id: 'hero' },
+  { href: '/#about', label: 'About', id: 'about' },
+  { href: '/#highlights', label: 'Highlights', id: 'highlights' },
+  { href: '/#skills', label: 'Skills & Fit', id: 'skills' },
+  { href: '/#contact', label: 'Contact', id: 'contact' },
+];
+
 const { variant = 'default' } = Astro.props as Props;
-const contactLink = (variant === 'source-home' ? sourceHomeLinks : links).find((link) => link.id === 'contact');
-const navLinks = variant === 'source-home' ? sourceHomeLinks.filter((link) => link.id !== 'contact') : links;
+const isSourceHome = variant === 'source-home';
+const isFigmaHome = variant === 'figma-home';
+const selectedLinks = isSourceHome ? sourceHomeLinks : isFigmaHome ? figmaHomeLinks : links;
+const contactLink = selectedLinks.find((link) => link.id === 'contact');
+const navLinks = isSourceHome ? selectedLinks.filter((link) => link.id !== 'contact') : selectedLinks;
 ---
 
-<header class:list={['site-nav sticky top-0 z-50', variant === 'source-home' && 'site-nav--source-home']}>
-  <Container size={variant === 'source-home' ? 'wide' : 'wide'} className="py-3">
-    <div class:list={['nav-shell', variant === 'source-home' && 'nav-shell--source-home']}>
+<header class:list={[
+  'site-nav sticky top-0 z-50',
+  isSourceHome && 'site-nav--source-home',
+  isFigmaHome && 'site-nav--figma-home',
+]}>
+  <Container size={isFigmaHome ? 'full' : 'wide'} className={isFigmaHome ? 'py-5' : 'py-3'}>
+    <div class:list={[
+      'nav-shell',
+      isSourceHome && 'nav-shell--source-home',
+      isFigmaHome && 'nav-shell--figma-home',
+    ]}>
       {
-        variant === 'source-home' ? (
+        isSourceHome ? (
           <nav aria-label="Primary" class="nav-scroll nav-scroll--source-home">
             <ul class="nav-pills nav-pills--source-home">
               {navLinks.map((link) => (
@@ -47,6 +66,14 @@ const navLinks = variant === 'source-home' ? sourceHomeLinks.filter((link) => li
               ))}
             </ul>
           </nav>
+        ) : isFigmaHome ? (
+          <a href="/#hero" class="brand-mark brand-mark--figma-home" aria-label={`${profile.name} home`}>
+            <span class="brand-mark__mono">{profile.brand.monogram}</span>
+            <span class="brand-mark__label">
+              <span>{profile.brand.displayName}</span>
+              <small>{profile.role}</small>
+            </span>
+          </a>
         ) : (
           <a href="/#hero" class="brand-mark" aria-label={`${profile.name} home`}>
             <span class="brand-mark__mono">{profile.brand.monogram}</span>
@@ -59,10 +86,22 @@ const navLinks = variant === 'source-home' ? sourceHomeLinks.filter((link) => li
       }
 
       {
-        variant === 'source-home' ? (
+        isSourceHome ? (
           <a href="/#hero" class="brand-capsule" aria-label={`${profile.name} home`}>
             <span>{profile.brand.displayName}</span>
           </a>
+        ) : isFigmaHome ? (
+          <nav aria-label="Primary" class="nav-scroll nav-scroll--figma-home">
+            <ul class="nav-pills nav-pills--figma-home">
+              {navLinks.map((link) => (
+                <li>
+                  <a href={link.href} data-nav-spy-link={link.id} class="nav-pill nav-pill--figma-home">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
         ) : (
           <nav aria-label="Primary" class="nav-scroll">
             <ul class="nav-pills">
@@ -78,12 +117,17 @@ const navLinks = variant === 'source-home' ? sourceHomeLinks.filter((link) => li
         )
       }
 
-      <div class:list={['nav-actions', variant === 'source-home' && 'nav-actions--source-home']}>
-        {variant === 'source-home' && contactLink && (
+      <div class:list={[
+        'nav-actions',
+        isSourceHome && 'nav-actions--source-home',
+        isFigmaHome && 'nav-actions--figma-home',
+      ]}>
+        {isSourceHome && contactLink && (
           <a href={contactLink.href} data-nav-spy-link={contactLink.id} class="nav-contact-pill">
             {contactLink.label}
           </a>
         )}
+        {isFigmaHome && <span class="nav-menu-label" aria-hidden="true">Menu</span>}
         <button type="button" class="motion-toggle" data-motion-pref-toggle aria-pressed="false">
           Reduce motion
         </button>

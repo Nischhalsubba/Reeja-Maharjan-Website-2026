@@ -28,6 +28,1460 @@
   --shadow-card: 0 16px 44px rgb(0 0 0 / 34%);
 }
 
+/* v5.0 figma-home late overrides (must remain near EOF) */
+main[data-page='home'] {
+  max-width: none !important;
+  margin: 0 !important;
+  background: #f5f1e8 !important;
+}
+
+main[data-page='home']::before {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 {
+  background: #f5f1e8 !important;
+  color: #1e2229 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+main[data-page='home'] .home-figma-v1 > #hero { order: 1; }
+main[data-page='home'] .home-figma-v1 > #about { order: 2; }
+main[data-page='home'] .home-figma-v1 > #highlights { order: 3; }
+main[data-page='home'] .home-figma-v1 > #skills { order: 4; }
+main[data-page='home'] .home-figma-v1 > #credentials { order: 5; }
+main[data-page='home'] .home-figma-v1 > #contact { order: 6; }
+
+main[data-page='home'] .home-figma-v1 .mx-auto {
+  max-width: 1360px !important;
+  padding-inline: clamp(20px, 2.8vw, 40px) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-pad {
+  padding-block: clamp(2.5rem, 5vw, 4.75rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-core-section + .home-core-section::before {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-open-section {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-label,
+main[data-page='home'] .home-figma-v1 .fh-kicker {
+  color: #e7302a !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-title {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(2rem, 3.2vw, 3.25rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.03em !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-body,
+main[data-page='home'] .home-figma-v1 .reading-wrap,
+main[data-page='home'] .home-figma-v1 .proof-text,
+main[data-page='home'] .home-figma-v1 .proof-source {
+  color: #58616b !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(0.95rem, 1vw, 1.03rem) !important;
+  line-height: 1.65 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .card-surface {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 14px 34px rgba(19, 24, 33, 0.08) !important;
+}
+
+/* hero */
+main[data-page='home'] .home-figma-v1 .hero-stage--open {
+  background:
+    radial-gradient(1200px 400px at 90% 10%, rgba(231, 48, 42, 0.14), transparent 60%),
+    radial-gradient(900px 340px at 8% 14%, rgba(30, 34, 41, 0.1), transparent 65%),
+    linear-gradient(180deg, #faf7ef 0%, #f3eee4 100%) !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  box-shadow: 0 20px 46px rgba(19, 24, 33, 0.1) !important;
+  border-radius: 28px !important;
+  padding: clamp(1rem, 2vw, 1.4rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-stage--open::after {
+  background: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .watermark {
+  color: rgba(30, 34, 41, 0.06) !important;
+  font-size: clamp(5.5rem, 12vw, 11rem) !important;
+  letter-spacing: -0.06em !important;
+  top: 0.5rem !important;
+  left: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
+  gap: clamp(1rem, 2.4vw, 2rem) !important;
+  align-items: start !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-title {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(2.75rem, 5vw, 4.8rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.045em !important;
+  max-width: 14ch !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-subtitle {
+  color: #4f5862 !important;
+  max-width: 66ch !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-proof-line {
+  color: #1e2229 !important;
+  font: 700 0.9rem/1.4 Inter, system-ui, sans-serif !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+}
+
+main[data-page='home'] .home-figma-v1 .chip,
+main[data-page='home'] .home-figma-v1 .stack-chip {
+  background: rgba(30, 34, 41, 0.03) !important;
+  border: 1px solid rgba(30, 34, 41, 0.1) !important;
+  color: #3c454f !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-weight: 600 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions .button-link {
+  background: #e7302a !important;
+  border: 0 !important;
+  box-shadow: 0 10px 22px rgba(231, 48, 42, 0.24) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions .btn-inline-secondary {
+  background: rgba(255, 255, 255, 0.72) !important;
+  color: #1e2229 !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  border-radius: 999px !important;
+  height: 52px !important;
+  padding-inline: 1rem !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-weight: 700 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-support-grid {
+  grid-template-columns: minmax(0, 1.05fr) minmax(220px, 0.95fr) !important;
+  gap: 0.9rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-support-copy {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(30, 34, 41, 0.1) !important;
+  border-radius: 16px !important;
+  padding: 0.95rem 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  border-radius: 18px !important;
+  box-shadow: 0 10px 26px rgba(19, 24, 33, 0.08) !important;
+  transform: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card img {
+  aspect-ratio: 4/5 !important;
+  object-fit: cover !important;
+  object-position: center 38% !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-medical-particles,
+main[data-page='home'] .home-figma-v1 .device-ecg-shell,
+main[data-page='home'] .home-figma-v1 .heartbeat-accent,
+main[data-page='home'] .home-figma-v1 .device-ambient-rings,
+main[data-page='home'] .home-figma-v1 .device-glow {
+  opacity: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-pill-cloud .floating-pill {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border: 1px solid rgba(30, 34, 41, 0.1) !important;
+  color: #2f3740 !important;
+  box-shadow: 0 8px 20px rgba(19, 24, 33, 0.08) !important;
+  animation-duration: 18s !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-frame {
+  background: #f4f6fb !important;
+  border-color: rgba(30, 34, 41, 0.1) !important;
+  box-shadow: 0 18px 40px rgba(19, 24, 33, 0.14) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-screen,
+main[data-page='home'] .home-figma-v1 .device-panel {
+  background: #fff !important;
+  border-color: rgba(30, 34, 41, 0.08) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-chip {
+  color: #be2521 !important;
+  background: rgba(231, 48, 42, 0.08) !important;
+  border-color: rgba(231, 48, 42, 0.16) !important;
+}
+
+/* about + metrics */
+main[data-page='home'] .home-figma-v1 .fh-about-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
+  gap: 1rem !important;
+  align-items: start !important;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-about-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.9rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .metric-card,
+main[data-page='home'] .home-figma-v1 .proof-card,
+main[data-page='home'] .home-figma-v1 .proof-subcard,
+main[data-page='home'] .home-figma-v1 .doc-card,
+main[data-page='home'] .home-figma-v1 .credential-card,
+main[data-page='home'] .home-figma-v1 .contact-shell {
+  background: #fff !important;
+  border-color: rgba(30, 34, 41, 0.08) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .metric-label,
+main[data-page='home'] .home-figma-v1 .metric-note {
+  color: #6a727c !important;
+  font-family: Inter, system-ui, sans-serif !important;
+}
+
+main[data-page='home'] .home-figma-v1 .metric-value {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+}
+
+/* timeline */
+main[data-page='home'] .home-figma-v1 .timeline-line.timeline-line--bg {
+  background: rgba(30, 34, 41, 0.12) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .timeline-line.timeline-line--progress {
+  background: #e7302a !important;
+}
+
+main[data-page='home'] .home-figma-v1 .career-event {
+  transform: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .career-event__title,
+main[data-page='home'] .home-figma-v1 .career-event__org,
+main[data-page='home'] .home-figma-v1 .career-event__summary,
+main[data-page='home'] .home-figma-v1 .career-embedded__title,
+main[data-page='home'] .home-figma-v1 .career-embedded__org,
+main[data-page='home'] .home-figma-v1 .career-embedded__summary {
+  font-family: Inter, system-ui, sans-serif !important;
+}
+
+main[data-page='home'] .home-figma-v1 .career-event__title {
+  color: #1e2229 !important;
+  font-size: 1.12rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .career-event__org,
+main[data-page='home'] .home-figma-v1 .career-event__summary,
+main[data-page='home'] .home-figma-v1 .career-event__bullets li,
+main[data-page='home'] .home-figma-v1 .career-event__date,
+main[data-page='home'] .home-figma-v1 .career-embedded__org,
+main[data-page='home'] .home-figma-v1 .career-embedded__summary,
+main[data-page='home'] .home-figma-v1 .career-embedded__date {
+  color: #56616b !important;
+}
+
+main[data-page='home'] .home-figma-v1 .career-event__kind,
+main[data-page='home'] .home-figma-v1 .career-embedded__kind {
+  color: #e7302a !important;
+}
+
+/* skills density + layout */
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > section:nth-child(2),
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > section:last-child {
+  display: none !important;
+}
+
+/* credentials + proof + docs */
+main[data-page='home'] .home-figma-v1 #credentials .credential-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .proof-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .proof-subgrid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-filter {
+  background: rgba(255, 255, 255, 0.75) !important;
+  border-color: rgba(30, 34, 41, 0.12) !important;
+  color: #37404a !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-filter[data-active='true'] {
+  background: #1e2229 !important;
+  border-color: #1e2229 !important;
+  color: #f5f1e8 !important;
+}
+
+/* contact */
+main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) !important;
+  gap: 1.25rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-shell {
+  padding: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-shell label {
+  color: #2c3641 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-shell input,
+main[data-page='home'] .home-figma-v1 #contact .contact-shell textarea {
+  background: #fff !important;
+  border-color: rgba(30, 34, 41, 0.12) !important;
+  color: #1e2229 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .btn-inline-primary {
+  background: #e7302a !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+}
+
+/* figma-home footer full-bleed + inner compact */
+.site-footer--figma-home {
+  background: #efe9dc !important;
+  border-top: 1px solid rgba(30, 34, 41, 0.1) !important;
+}
+
+.site-footer--figma-home > .mx-auto {
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.site-footer--figma-home .footer-shell--figma-home {
+  width: 100% !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: clamp(2rem, 4vw, 3rem) 0 !important;
+}
+
+.site-footer--figma-home .footer-inner-stage--figma-home {
+  max-width: 1360px !important;
+  margin: 0 auto !important;
+  padding-inline: clamp(20px, 2.8vw, 40px) !important;
+}
+
+.site-footer--figma-home .footer-grid--figma-home {
+  display: grid !important;
+  grid-template-columns: 1.2fr 1fr 1fr 1.4fr !important;
+  gap: 1rem 1.5rem !important;
+  background: rgba(255, 255, 255, 0.65) !important;
+  border: 1px solid rgba(30, 34, 41, 0.1) !important;
+  border-radius: 24px !important;
+  padding: 1rem !important;
+}
+
+.site-footer--figma-home .footer-kicker {
+  color: #e7302a !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 0.74rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.14em !important;
+}
+
+.site-footer--figma-home .footer-title,
+.site-footer--figma-home .footer-copy,
+.site-footer--figma-home .footer-links a,
+.site-footer--figma-home .footer-meta--figma-home span {
+  color: #49525c !important;
+  font-family: Inter, system-ui, sans-serif !important;
+}
+
+.site-footer--figma-home .footer-title {
+  color: #1e2229 !important;
+}
+
+@media (max-width: 1180px) {
+  main[data-page='home'] .home-figma-v1 .hero-grid,
+  main[data-page='home'] .home-figma-v1 .fh-about-layout,
+  main[data-page='home'] .home-figma-v1 #credentials .proof-grid,
+  main[data-page='home'] .home-figma-v1 #credentials .proof-subgrid,
+  main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #skills .home-merge-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .site-footer--figma-home .footer-grid--figma-home {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+@media (max-width: 760px) {
+  main[data-page='home'] .home-figma-v1 .hero-grid,
+  main[data-page='home'] .home-figma-v1 .hero-support-grid,
+  main[data-page='home'] .home-figma-v1 .fh-about-layout,
+  main[data-page='home'] .home-figma-v1 #credentials .credential-list,
+  main[data-page='home'] .home-figma-v1 #credentials .doc-grid,
+  .site-footer--figma-home .footer-grid--figma-home {
+    grid-template-columns: 1fr !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 .hero-pill-cloud {
+    display: none !important;
+  }
+}
+
+/* v5.0 Homepage Figma redesign (homepage only) */
+main[data-page='home'] {
+  max-width: none !important;
+  margin: 0 !important;
+  background: #f5f1e8 !important;
+  color: #1e2229;
+}
+
+main[data-page='home']::before {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 {
+  --fh-bg: #f5f1e8;
+  --fh-panel: #fbf7ef;
+  --fh-panel-strong: #ffffff;
+  --fh-ink: #1e2229;
+  --fh-ink-soft: #565d66;
+  --fh-line: rgba(30, 34, 41, 0.12);
+  --fh-line-strong: rgba(30, 34, 41, 0.18);
+  --fh-red: #e7302a;
+  --fh-red-deep: #c81f1a;
+  --fh-accent-soft: rgba(231, 48, 42, 0.08);
+  --fh-shadow-sm: 0 10px 24px rgba(19, 24, 33, 0.08);
+  --fh-shadow-md: 0 18px 46px rgba(19, 24, 33, 0.12);
+  --fh-radius-xl: 28px;
+  --fh-radius-lg: 20px;
+  --fh-radius-md: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: var(--fh-bg);
+  color: var(--fh-ink);
+  position: relative;
+}
+
+main[data-page='home'] .home-figma-v1 > #hero { order: 1; }
+main[data-page='home'] .home-figma-v1 > #about { order: 2; }
+main[data-page='home'] .home-figma-v1 > #highlights { order: 3; }
+main[data-page='home'] .home-figma-v1 > #skills { order: 4; }
+main[data-page='home'] .home-figma-v1 > #credentials { order: 5; }
+main[data-page='home'] .home-figma-v1 > #contact { order: 6; }
+
+main[data-page='home'] .home-figma-v1 .mx-auto {
+  max-width: 1360px !important;
+  padding-left: clamp(20px, 2.8vw, 40px);
+  padding-right: clamp(20px, 2.8vw, 40px);
+}
+
+main[data-page='home'] .home-figma-v1 .section-pad {
+  padding-block: clamp(2.5rem, 5vw, 5rem);
+}
+
+main[data-page='home'] .home-figma-v1 .home-core-section + .home-core-section::before {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-open-section {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-section-head {
+  max-width: 760px;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+main[data-page='home'] .home-figma-v1 .section-label,
+main[data-page='home'] .home-figma-v1 .fh-kicker {
+  color: var(--fh-red) !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+main[data-page='home'] .home-figma-v1 .section-title {
+  color: var(--fh-ink) !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(2rem, 3.2vw, 3.4rem) !important;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.03em;
+}
+
+main[data-page='home'] .home-figma-v1 .section-body,
+main[data-page='home'] .home-figma-v1 .reading-wrap {
+  color: var(--fh-ink-soft) !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(0.95rem, 1.1vw, 1.04rem) !important;
+  line-height: 1.65;
+  max-width: 72ch;
+}
+
+main[data-page='home'] .home-figma-v1 .card-surface {
+  background: var(--fh-panel-strong) !important;
+  border: 1px solid var(--fh-line) !important;
+  box-shadow: var(--fh-shadow-sm) !important;
+  border-radius: var(--fh-radius-lg) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .panel-outline {
+  border-color: var(--fh-line) !important;
+  background: #fff !important;
+  border-radius: 14px;
+}
+
+/* header (figma-home variant) */
+.site-nav--figma-home {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(245, 241, 232, 0.86);
+  backdrop-filter: saturate(1.1) blur(12px);
+  border-bottom: 1px solid rgba(30, 34, 41, 0.08);
+}
+
+.site-nav--figma-home > .mx-auto {
+  max-width: 1440px !important;
+  padding-left: clamp(20px, 2.8vw, 40px);
+  padding-right: clamp(20px, 2.8vw, 40px);
+}
+
+.site-nav--figma-home .nav-shell--figma-home {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+.site-nav--figma-home .brand-mark--figma-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  text-decoration: none;
+  color: #1e2229;
+}
+
+.site-nav--figma-home .brand-mark__mono {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #1e2229;
+  color: #f5f1e8;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.site-nav--figma-home .brand-mark__label span {
+  display: block;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.1;
+}
+
+.site-nav--figma-home .brand-mark__label small {
+  display: block;
+  color: #686f78;
+  font-size: 0.74rem;
+  line-height: 1.2;
+}
+
+.site-nav--figma-home .nav-scroll--figma-home {
+  overflow-x: auto;
+  min-width: 0;
+}
+
+.site-nav--figma-home .nav-pills--figma-home {
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0;
+}
+
+.site-nav--figma-home .nav-pill--figma-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 42px;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 34, 41, 0.08);
+  background: rgba(255, 255, 255, 0.58);
+  color: #2b3036;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+.site-nav--figma-home .nav-pill--figma-home:hover,
+.site-nav--figma-home .nav-pill--figma-home[data-nav-active='true'] {
+  background: #1e2229;
+  border-color: #1e2229;
+  color: #f5f1e8;
+}
+
+.site-nav--figma-home .nav-actions--figma-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.site-nav--figma-home .nav-menu-label {
+  color: #6a717b;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.site-nav--figma-home .motion-toggle {
+  height: 42px;
+  padding: 0 0.95rem;
+  border-radius: 999px;
+  border: 1px solid rgba(30, 34, 41, 0.12);
+  background: rgba(255, 255, 255, 0.7);
+  color: #1e2229;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: none;
+}
+
+/* footer (figma-home variant) */
+.site-footer--figma-home {
+  background: #efe9dc;
+  border-top: 1px solid rgba(30, 34, 41, 0.1);
+  color: #1e2229;
+}
+
+.site-footer--figma-home > .mx-auto {
+  max-width: none !important;
+  padding: 0 !important;
+}
+
+.site-footer--figma-home .footer-shell--figma-home {
+  width: 100%;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  overflow: hidden;
+}
+
+.site-footer--figma-home .footer-watermark {
+  color: rgba(30, 34, 41, 0.05);
+  font-size: clamp(6rem, 16vw, 14rem);
+  letter-spacing: -0.06em;
+  left: 50%;
+  top: auto;
+  bottom: -1.5rem;
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.site-footer--figma-home .footer-inner-stage--figma-home {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 2.8vw, 40px);
+  position: relative;
+  z-index: 1;
+}
+
+.site-footer--figma-home .footer-grid--figma-home {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
+  gap: 1.25rem 2rem;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(30, 34, 41, 0.1);
+  border-radius: 24px;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  backdrop-filter: blur(8px);
+}
+
+.site-footer--figma-home .footer-kicker {
+  color: #e7302a;
+  font: 700 0.74rem/1.1 Inter, system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.site-footer--figma-home .footer-title {
+  color: #1e2229;
+  font: 700 1.15rem/1.15 Inter, system-ui, sans-serif;
+}
+
+.site-footer--figma-home .footer-copy,
+.site-footer--figma-home .footer-links a,
+.site-footer--figma-home .footer-meta--figma-home span {
+  color: #4f5760;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.site-footer--figma-home .footer-links a:hover {
+  color: #e7302a;
+}
+
+.site-footer--figma-home .footer-meta--figma-home {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1rem;
+  justify-content: space-between;
+}
+
+/* figma homepage layout + hero */
+main[data-page='home'] .home-figma-v1 .hero-stage--open {
+  position: relative;
+  background:
+    radial-gradient(90rem 30rem at 90% 5%, rgba(231, 48, 42, 0.16), transparent 55%),
+    radial-gradient(55rem 22rem at 10% 15%, rgba(30, 34, 41, 0.12), transparent 65%),
+    linear-gradient(180deg, #f8f5ee 0%, #f3eee4 100%);
+  border: 1px solid rgba(30, 34, 41, 0.08);
+  box-shadow: var(--fh-shadow-md);
+  border-radius: 28px;
+  padding: clamp(1.1rem, 2vw, 1.5rem);
+  overflow: hidden;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-stage--open::after {
+  content: '';
+  position: absolute;
+  inset: auto auto 0 0;
+  width: 45%;
+  height: 40%;
+  background: radial-gradient(circle at 25% 70%, rgba(231, 48, 42, 0.18), transparent 65%);
+  pointer-events: none;
+}
+
+main[data-page='home'] .home-figma-v1 .watermark {
+  color: rgba(30, 34, 41, 0.06) !important;
+  top: clamp(0.25rem, 1vw, 0.75rem);
+  left: clamp(0.75rem, 2vw, 1.25rem);
+  font-size: clamp(5rem, 12vw, 12rem);
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-medical-particles {
+  opacity: 0.12 !important;
+  filter: grayscale(1);
+}
+
+main[data-page='home'] .home-figma-v1 .hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  align-items: start;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-copy-block {
+  position: relative;
+  z-index: 2;
+  padding-top: clamp(1rem, 3vw, 2rem);
+}
+
+main[data-page='home'] .home-figma-v1 .hero-title {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(2.8rem, 5vw, 5rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.95;
+  letter-spacing: -0.045em;
+  max-width: 14ch;
+  margin-top: 0.65rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-subtitle {
+  color: #4d545d !important;
+  font-size: clamp(1rem, 1.15vw, 1.08rem) !important;
+  line-height: 1.7;
+  max-width: 64ch;
+  margin-top: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-proof-line {
+  color: #1e2229 !important;
+  font-size: 0.9rem !important;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.45;
+  margin-top: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .chip {
+  border-radius: 999px;
+  border: 1px solid rgba(30, 34, 41, 0.12);
+  background: rgba(255, 255, 255, 0.72);
+  color: #37404a;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.45rem 0.75rem;
+  line-height: 1.1;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.15rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions .button-link,
+main[data-page='home'] .home-figma-v1 .hero-actions .btn-inline-secondary {
+  height: 52px;
+  padding-inline: 1.15rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions .button-link {
+  border: 0 !important;
+  background: var(--fh-red) !important;
+  box-shadow: 0 10px 24px rgba(231, 48, 42, 0.25) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions .btn-inline-secondary {
+  border: 1px solid rgba(30, 34, 41, 0.14);
+  background: rgba(255, 255, 255, 0.65);
+  color: #1e2229;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-support-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(200px, 0.95fr);
+  gap: 0.9rem;
+  align-items: stretch;
+  margin-top: 1.15rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-support-copy {
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(30, 34, 41, 0.1);
+  border-radius: 18px;
+  padding: 0.95rem 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-support-copy .eyebrow {
+  color: var(--fh-red);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.73rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  border-radius: 18px !important;
+  overflow: hidden;
+  box-shadow: var(--fh-shadow-sm) !important;
+  transform: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 38%;
+  display: block;
+  filter: saturate(0.95) contrast(1.02);
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card figcaption {
+  padding: 0.75rem 0.9rem;
+  background: #fff;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card figcaption p {
+  color: #1e2229;
+  font: 700 0.95rem/1.2 Inter, system-ui, sans-serif;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card figcaption small {
+  color: #6a717b;
+  font: 500 0.8rem/1.3 Inter, system-ui, sans-serif;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-pill-cloud {
+  inset: 0;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-pill-cloud .floating-pill {
+  background: rgba(255, 255, 255, 0.84);
+  border: 1px solid rgba(30, 34, 41, 0.1);
+  color: #2d353f;
+  box-shadow: 0 8px 22px rgba(19, 24, 33, 0.08);
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-visual-col {
+  position: relative;
+  padding-top: clamp(0.2rem, 1vw, 0.5rem);
+}
+
+main[data-page='home'] .home-figma-v1 .device-glow,
+main[data-page='home'] .home-figma-v1 .device-ambient-rings,
+main[data-page='home'] .home-figma-v1 .device-ecg-shell,
+main[data-page='home'] .home-figma-v1 .heartbeat-accent {
+  opacity: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-wrap--hero {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+main[data-page='home'] .home-figma-v1 .device-frame {
+  background: #f5f6fb !important;
+  border-color: rgba(30, 34, 41, 0.1) !important;
+  box-shadow: 0 20px 40px rgba(19, 24, 33, 0.14) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-frame__rim {
+  border-color: rgba(30, 34, 41, 0.08) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-frame__sheen {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 0));
+}
+
+main[data-page='home'] .home-figma-v1 .device-screen {
+  background: #fdfdff !important;
+  color: #20242b !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-screen__vignette,
+main[data-page='home'] .home-figma-v1 .device-screen__mesh {
+  opacity: 0.08 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-panel {
+  background: #fff !important;
+  border-color: rgba(30, 34, 41, 0.08) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-chip {
+  background: rgba(231, 48, 42, 0.1) !important;
+  color: #b62421 !important;
+  border-color: rgba(231, 48, 42, 0.18) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-link {
+  color: var(--fh-red) !important;
+}
+
+/* about section additions */
+main[data-page='home'] .home-figma-v1 .fh-about-shell .section-title {
+  max-width: 18ch;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  gap: clamp(1rem, 2vw, 1.5rem);
+  align-items: start;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-about-layout__left,
+main[data-page='home'] .home-figma-v1 .fh-about-layout__right {
+  display: grid;
+  gap: 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-light-card {
+  padding: 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-about-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+/* reorder + density reduction for existing sections */
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > section {
+  min-width: 0;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > section:nth-child(2),
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > section:last-child {
+  display: none;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .stack-card {
+  padding: 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .stack-title {
+  color: #1e2229;
+  font: 700 1.15rem/1.2 Inter, system-ui, sans-serif;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .stack-chip-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .stack-chip {
+  background: rgba(30, 34, 41, 0.03);
+  border: 1px solid rgba(30, 34, 41, 0.08);
+  color: #3f4650;
+  font: 600 0.78rem/1 Inter, system-ui, sans-serif;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .chip,
+main[data-page='home'] .home-figma-v1 #skills .chip--soft {
+  background: rgba(30, 34, 41, 0.03);
+  border-color: rgba(30, 34, 41, 0.08);
+  color: #3f4650;
+}
+
+/* timeline / highlights light restyle */
+main[data-page='home'] .home-figma-v1 #highlights .career-timeline {
+  margin-top: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .timeline-line.timeline-line--bg,
+main[data-page='home'] .home-figma-v1 #highlights .timeline-line.timeline-line--progress {
+  background: rgba(30, 34, 41, 0.12) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .timeline-line.timeline-line--progress {
+  background: #e7302a !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .career-timeline__list {
+  gap: 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .career-event {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--fh-shadow-sm) !important;
+  transform: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .career-event__kind {
+  background: rgba(30, 34, 41, 0.04) !important;
+  color: #1e2229 !important;
+  border: 1px solid rgba(30, 34, 41, 0.08);
+  text-transform: uppercase;
+  font: 700 0.68rem/1 Inter, system-ui, sans-serif;
+  letter-spacing: 0.12em;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .career-event__date,
+main[data-page='home'] .home-figma-v1 #highlights .career-event__org,
+main[data-page='home'] .home-figma-v1 #highlights .career-event__summary,
+main[data-page='home'] .home-figma-v1 #highlights .career-event__bullets li {
+  color: #55606b !important;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .career-event__title {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .career-embedded {
+  background: rgba(30, 34, 41, 0.02) !important;
+  border-color: rgba(30, 34, 41, 0.08) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .career-embedded__kind {
+  color: #e7302a !important;
+}
+
+main[data-page='home'] .home-figma-v1 .evidence-inline__card,
+main[data-page='home'] .home-figma-v1 .evidence-inline__card--compact {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  border-radius: 14px !important;
+  box-shadow: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .evidence-inline__card img,
+main[data-page='home'] .home-figma-v1 .proof-evidence-chip img {
+  border-radius: 10px !important;
+}
+
+/* credentials/proof/documents/contact section */
+main[data-page='home'] .home-figma-v1 #credentials .credential-list,
+main[data-page='home'] .home-figma-v1 #credentials .proof-grid,
+main[data-page='home'] .home-figma-v1 #credentials .proof-subgrid,
+main[data-page='home'] .home-figma-v1 #credentials .doc-grid {
+  gap: 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .credential-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .credential-card {
+  padding: 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .credential-title {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .credential-issuer,
+main[data-page='home'] .home-figma-v1 #credentials .credential-date,
+main[data-page='home'] .home-figma-v1 #credentials .credential-copy {
+  color: #56616b !important;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-filter {
+  border: 1px solid rgba(30, 34, 41, 0.12);
+  background: rgba(255, 255, 255, 0.74);
+  color: #36404a;
+  border-radius: 999px;
+  padding: 0.5rem 0.9rem;
+  font: 600 0.78rem/1 Inter, system-ui, sans-serif;
+  transition: all 160ms ease;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-filter[data-active='true'] {
+  background: #1e2229;
+  border-color: #1e2229;
+  color: #f5f1e8;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .doc-card {
+  background: #fff !important;
+  border-color: rgba(30, 34, 41, 0.08) !important;
+  box-shadow: var(--fh-shadow-sm) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .proof-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .proof-grid .proof-card,
+main[data-page='home'] .home-figma-v1 #credentials .proof-subcard {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: var(--fh-shadow-sm) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .proof-type {
+  color: var(--fh-red) !important;
+  font: 700 0.72rem/1.2 Inter, system-ui, sans-serif !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+main[data-page='home'] .home-figma-v1 .proof-title,
+main[data-page='home'] .home-figma-v1 .proof-text {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+}
+
+main[data-page='home'] .home-figma-v1 .proof-text,
+main[data-page='home'] .home-figma-v1 .proof-source {
+  color: #59636d !important;
+}
+
+main[data-page='home'] .home-figma-v1 .proof-evidence-chip {
+  background: rgba(30, 34, 41, 0.02) !important;
+  border-color: rgba(30, 34, 41, 0.08) !important;
+}
+
+/* contact + faq */
+main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-shell {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  border-radius: 22px !important;
+  padding: 1rem !important;
+  box-shadow: var(--fh-shadow-sm) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-shell label {
+  color: #2b3440;
+  font-family: Inter, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.84rem;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-shell input,
+main[data-page='home'] .home-figma-v1 #contact .contact-shell textarea {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  color: #1e2229 !important;
+  border-radius: 12px !important;
+  padding: 0.8rem 0.9rem !important;
+  font: 500 0.92rem/1.4 Inter, system-ui, sans-serif !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .btn-inline-primary {
+  height: 52px;
+  border-radius: 999px;
+  background: #e7302a !important;
+  color: #fff !important;
+  border: 0 !important;
+  padding: 0 1rem;
+  font: 700 0.9rem/1 Inter, system-ui, sans-serif;
+  box-shadow: 0 10px 20px rgba(231, 48, 42, 0.22);
+}
+
+main[data-page='home'] .home-figma-v1 .home-contact-extras details.card-surface,
+main[data-page='home'] .home-figma-v1 .home-contact-extras .section-shell {
+  background: #fff !important;
+  border-color: rgba(30, 34, 41, 0.08) !important;
+}
+
+/* generic details / lists / links */
+main[data-page='home'] .home-figma-v1 .home-details {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(30, 34, 41, 0.1);
+  border-radius: 16px;
+  padding: 0.95rem 1rem;
+}
+
+main[data-page='home'] .home-figma-v1 .home-details summary {
+  color: #1e2229;
+  cursor: pointer;
+  font: 700 0.9rem/1.3 Inter, system-ui, sans-serif;
+}
+
+main[data-page='home'] .home-figma-v1 .bullet-list li,
+main[data-page='home'] .home-figma-v1 .contact-links p,
+main[data-page='home'] .home-figma-v1 .contact-links a {
+  color: #59636d !important;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+main[data-page='home'] .home-figma-v1 .contact-links a:hover {
+  color: #e7302a !important;
+}
+
+/* hide old standalone proof section entirely */
+main[data-page='home'] .home-figma-v1 #proof-standalone {
+  display: none !important;
+}
+
+/* minimal homepage motion feel */
+main[data-page='home'] .home-figma-v1 [data-tilt-card] {
+  transform-style: flat;
+}
+
+main[data-page='home'] .home-figma-v1 .floating-pill {
+  animation-duration: 18s !important;
+}
+
+/* responsive */
+@media (max-width: 1180px) {
+  main[data-page='home'] .home-figma-v1 .hero-grid,
+  main[data-page='home'] .home-figma-v1 .fh-about-layout,
+  main[data-page='home'] .home-figma-v1 #skills .home-merge-grid,
+  main[data-page='home'] .home-figma-v1 #credentials .proof-grid,
+  main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main[data-page='home'] .home-figma-v1 #credentials .credential-list,
+  main[data-page='home'] .home-figma-v1 #credentials .doc-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .site-nav--figma-home .nav-shell--figma-home {
+    grid-template-columns: 1fr auto;
+    gap: 0.75rem;
+  }
+
+  .site-nav--figma-home .nav-scroll--figma-home {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+
+  .site-footer--figma-home .footer-grid--figma-home {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  main[data-page='home'] .home-figma-v1 .hero-stage--open {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  main[data-page='home'] .home-figma-v1 .hero-title {
+    font-size: clamp(2rem, 12vw, 3rem) !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 .hero-pill-cloud {
+    display: none;
+  }
+
+  main[data-page='home'] .home-figma-v1 .hero-support-grid {
+    grid-template-columns: 1fr;
+  }
+
+  main[data-page='home'] .home-figma-v1 #credentials .credential-list,
+  main[data-page='home'] .home-figma-v1 #credentials .doc-grid,
+  .site-footer--figma-home .footer-grid--figma-home {
+    grid-template-columns: 1fr;
+  }
+
+  .site-nav--figma-home .nav-pill--figma-home,
+  .site-nav--figma-home .motion-toggle {
+    height: 38px;
+    font-size: 0.74rem;
+  }
+
+  .site-nav--figma-home .brand-mark__label small {
+    display: none;
+  }
+
+  main[data-page='home'] .home-figma-v1 .section-pad {
+    padding-block: 2rem;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -4646,4 +6100,247 @@ main[data-page='home'] .home-contact-extras {
   .site-footer--source-home .footer-grid--source-home {
     grid-template-columns: 1.2fr 1fr 1fr 1.4fr;
   }
+}
+
+/* ===== v5.0 figma-home final overrides (EOF) ===== */
+main[data-page='home'] {
+  max-width: none !important;
+  margin: 0 !important;
+  background: #f5f1e8 !important;
+}
+
+main[data-page='home']::before {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 {
+  background: #f5f1e8 !important;
+  color: #1e2229 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+main[data-page='home'] .home-figma-v1 > #hero { order: 1; }
+main[data-page='home'] .home-figma-v1 > #about { order: 2; }
+main[data-page='home'] .home-figma-v1 > #highlights { order: 3; }
+main[data-page='home'] .home-figma-v1 > #skills { order: 4; }
+main[data-page='home'] .home-figma-v1 > #credentials { order: 5; }
+main[data-page='home'] .home-figma-v1 > #contact { order: 6; }
+
+main[data-page='home'] .home-figma-v1 .mx-auto {
+  max-width: 1360px !important;
+  padding-left: clamp(20px, 2.8vw, 40px) !important;
+  padding-right: clamp(20px, 2.8vw, 40px) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-pad {
+  padding-block: clamp(2.5rem, 4.5vw, 4.75rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-open-section {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-core-section + .home-core-section::before {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-label,
+main[data-page='home'] .home-figma-v1 .fh-kicker {
+  color: #e7302a !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-title {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(2rem, 3.2vw, 3.25rem) !important;
+  font-weight: 700 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -0.03em !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-body,
+main[data-page='home'] .home-figma-v1 .reading-wrap {
+  color: #57606a !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  line-height: 1.65 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .card-surface {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 14px 34px rgba(19, 24, 33, 0.08) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-stage--open {
+  background: radial-gradient(1000px 360px at 88% 10%, rgba(231, 48, 42, 0.14), transparent 60%), linear-gradient(180deg, #faf7ef 0%, #f3eee4 100%) !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  box-shadow: 0 22px 48px rgba(19, 24, 33, 0.1) !important;
+  border-radius: 28px !important;
+  padding: clamp(1rem, 2vw, 1.35rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
+  gap: clamp(1rem, 2.4vw, 2rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-title {
+  color: #1e2229 !important;
+  font-family: Inter, system-ui, sans-serif !important;
+  font-size: clamp(2.75rem, 5vw, 4.8rem) !important;
+  font-weight: 700 !important;
+  line-height: 0.96 !important;
+  letter-spacing: -0.045em !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-subtitle,
+main[data-page='home'] .home-figma-v1 .hero-proof-line {
+  color: #4f5862 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-proof-line {
+  color: #1e2229 !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.1em !important;
+}
+
+main[data-page='home'] .home-figma-v1 .chip {
+  background: rgba(30, 34, 41, 0.03) !important;
+  border: 1px solid rgba(30, 34, 41, 0.1) !important;
+  color: #3c454f !important;
+  font-family: Inter, system-ui, sans-serif !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions .button-link {
+  background: #e7302a !important;
+  border: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-actions .btn-inline-secondary {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  color: #1e2229 !important;
+  border-radius: 999px !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card {
+  background: #fff !important;
+  border-color: rgba(30, 34, 41, 0.12) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-photo-card img {
+  object-position: center 38% !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-medical-particles,
+main[data-page='home'] .home-figma-v1 .device-ecg-shell,
+main[data-page='home'] .home-figma-v1 .heartbeat-accent,
+main[data-page='home'] .home-figma-v1 .device-glow,
+main[data-page='home'] .home-figma-v1 .device-ambient-rings {
+  opacity: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .hero-pill-cloud .floating-pill {
+  background: rgba(255, 255, 255, 0.82) !important;
+  border: 1px solid rgba(30, 34, 41, 0.1) !important;
+  color: #2f3740 !important;
+  animation-duration: 18s !important;
+}
+
+main[data-page='home'] .home-figma-v1 .device-frame,
+main[data-page='home'] .home-figma-v1 .device-screen,
+main[data-page='home'] .home-figma-v1 .device-panel {
+  background: #fff !important;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-about-layout {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-about-stats {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 0.9rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > section:nth-child(2),
+main[data-page='home'] .home-figma-v1 #skills .home-merge-grid > section:last-child {
+  display: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .credential-list {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .proof-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #credentials .proof-subgrid,
+main[data-page='home'] .home-figma-v1 #credentials .doc-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 1rem !important;
+}
+
+main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) !important;
+  gap: 1.25rem !important;
+}
+
+.site-nav--figma-home { background: rgba(245, 241, 232, 0.9) !important; border-bottom: 1px solid rgba(30,34,41,0.08) !important; }
+.site-nav--figma-home > .mx-auto { max-width: 1440px !important; padding-inline: clamp(20px, 2.8vw, 40px) !important; }
+.site-nav--figma-home .nav-shell--figma-home { grid-template-columns: auto 1fr auto !important; border: 0 !important; background: transparent !important; box-shadow: none !important; padding: 0 !important; }
+.site-nav--figma-home .nav-pill--figma-home { background: rgba(255,255,255,0.7) !important; border: 1px solid rgba(30,34,41,0.1) !important; color: #1e2229 !important; font-family: Inter,system-ui,sans-serif !important; }
+.site-nav--figma-home .nav-pill--figma-home:hover, .site-nav--figma-home .nav-pill--figma-home[data-nav-active='true'] { background: #1e2229 !important; color: #f5f1e8 !important; border-color: #1e2229 !important; }
+
+.site-footer--figma-home { background: #efe9dc !important; border-top: 1px solid rgba(30,34,41,0.1) !important; }
+.site-footer--figma-home > .mx-auto { max-width: none !important; padding: 0 !important; }
+.site-footer--figma-home .footer-shell--figma-home { width: 100% !important; background: transparent !important; border: 0 !important; border-radius: 0 !important; box-shadow: none !important; padding: clamp(2rem,4vw,3rem) 0 !important; }
+.site-footer--figma-home .footer-inner-stage--figma-home { max-width: 1360px !important; margin: 0 auto !important; padding-inline: clamp(20px, 2.8vw, 40px) !important; }
+.site-footer--figma-home .footer-grid--figma-home { grid-template-columns: 1.2fr 1fr 1fr 1.4fr !important; background: rgba(255,255,255,0.65) !important; border: 1px solid rgba(30,34,41,0.1) !important; border-radius: 24px !important; padding: 1rem !important; }
+
+@media (max-width: 1180px) {
+  main[data-page='home'] .home-figma-v1 .hero-grid,
+  main[data-page='home'] .home-figma-v1 .fh-about-layout,
+  main[data-page='home'] .home-figma-v1 #credentials .proof-grid,
+  main[data-page='home'] .home-figma-v1 #credentials .proof-subgrid,
+  main[data-page='home'] .home-figma-v1 #contact .contact-grid {
+    grid-template-columns: 1fr !important;
+  }
+  main[data-page='home'] .home-figma-v1 #skills .home-merge-grid { grid-template-columns: 1fr !important; }
+  .site-footer--figma-home .footer-grid--figma-home { grid-template-columns: 1fr 1fr !important; }
+}
+
+@media (max-width: 760px) {
+  main[data-page='home'] .home-figma-v1 .hero-grid,
+  main[data-page='home'] .home-figma-v1 .hero-support-grid,
+  main[data-page='home'] .home-figma-v1 .fh-about-layout,
+  main[data-page='home'] .home-figma-v1 #credentials .credential-list,
+  main[data-page='home'] .home-figma-v1 #credentials .doc-grid,
+  .site-footer--figma-home .footer-grid--figma-home { grid-template-columns: 1fr !important; }
+  main[data-page='home'] .home-figma-v1 .hero-pill-cloud { display: none !important; }
 }
