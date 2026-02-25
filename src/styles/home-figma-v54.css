@@ -970,3 +970,228 @@ main[data-page='home'] .home-figma-v1 textarea:focus-visible {
   }
 }
 
+/* v5.4.1 focused fixes: homepage menu contrast + full-viewport lightbox */
+body[data-page-name='home'] {
+  --fh54-bg: #f5f1e8;
+  --fh54-accent: #e7302a;
+  --fh54-accent-ink: #b61f1a;
+  --fh54-ink: #1e2229;
+  --fh54-ink-muted: #57606a;
+  --fh54-white: #f1fdf9;
+  --fh54-card: #ffffff;
+  --fh54-line: rgba(30, 34, 41, 0.1);
+  --fh54-shadow-sm: 0 10px 24px rgba(20, 23, 28, 0.06);
+  --fh54-shadow-md: 0 24px 50px rgba(20, 23, 28, 0.1);
+  --fh54-stage: 1360px;
+  --fh54-gutter: clamp(16px, 3vw, 40px);
+  --fh54-gap: clamp(14px, 2vw, 28px);
+  --fh54-section-y: clamp(40px, 6vw, 112px);
+}
+
+/* Header/menu live outside <main>, so lock colors from body scope */
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__summary,
+body[data-page-name='home'] .site-nav--figma-home .nav-menu-label,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__icon {
+  color: rgba(241, 253, 249, 0.98) !important;
+  opacity: 1 !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel {
+  background: #fffdfa !important;
+  color: #1e2229 !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  box-shadow: 0 22px 50px rgba(20, 23, 28, 0.14) !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel * {
+  color: inherit;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__link {
+  color: #1e2229 !important;
+  opacity: 1 !important;
+  background: transparent !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__link:hover,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__link:focus-visible {
+  color: #b61f1a !important;
+  background: rgba(231, 48, 42, 0.08) !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .motion-toggle--figma-panel {
+  color: #1e2229 !important;
+  background: #fffdfa !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  opacity: 1 !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .motion-toggle--figma-panel:hover,
+body[data-page-name='home'] .site-nav--figma-home .motion-toggle--figma-panel:focus-visible {
+  color: #b61f1a !important;
+  background: rgba(231, 48, 42, 0.06) !important;
+  border-color: rgba(231, 48, 42, 0.22) !important;
+}
+
+/* Homepage-only lightbox: full viewport + Figma light palette */
+body[data-page-name='home'] .doc-lightbox {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  min-height: 100dvh !important;
+  z-index: 200 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__backdrop {
+  position: absolute !important;
+  inset: 0 !important;
+  background: rgba(30, 34, 41, 0.34) !important;
+  backdrop-filter: blur(10px) saturate(0.95) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__dialog {
+  position: absolute !important;
+  inset: 0 !important;
+  margin: auto !important;
+  width: min(1120px, calc(100vw - 2rem)) !important;
+  max-width: min(1120px, calc(100vw - 2rem)) !important;
+  max-height: min(92dvh, 52rem) !important;
+  overflow: hidden !important;
+  background: rgba(255, 255, 255, 0.985) !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  border-radius: 22px !important;
+  box-shadow: 0 30px 70px rgba(20, 23, 28, 0.18) !important;
+  color: #1e2229 !important;
+  transform: none !important;
+  top: auto !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__header {
+  padding: 1rem 1rem 0.7rem !important;
+  color: #1e2229 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__kicker {
+  color: #e7302a !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__title {
+  color: #1e2229 !important;
+  font-size: clamp(1.05rem, 0.6vw + 0.95rem, 1.35rem) !important;
+  line-height: 1.15 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__meta {
+  color: #57606a !important;
+  font-size: 0.92rem !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__stage {
+  background: rgba(245, 241, 232, 0.76) !important;
+  border-top: 1px solid rgba(30, 34, 41, 0.06) !important;
+  gap: 0.75rem !important;
+  padding: 0.85rem !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__stage img {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.08) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 24px rgba(20, 23, 28, 0.08) !important;
+  max-height: min(66dvh, 44rem) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__close,
+body[data-page-name='home'] .doc-lightbox__nav {
+  background: rgba(255, 255, 255, 0.92) !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  color: #1e2229 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__close {
+  min-height: 2.1rem !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__close:hover,
+body[data-page-name='home'] .doc-lightbox__close:focus-visible,
+body[data-page-name='home'] .doc-lightbox__nav:hover:not(:disabled),
+body[data-page-name='home'] .doc-lightbox__nav:focus-visible:not(:disabled) {
+  background: rgba(231, 48, 42, 0.08) !important;
+  border-color: rgba(231, 48, 42, 0.2) !important;
+  color: #b61f1a !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__nav:disabled {
+  opacity: 0.45 !important;
+  color: rgba(30, 34, 41, 0.55) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__close:focus-visible,
+body[data-page-name='home'] .doc-lightbox__nav:focus-visible {
+  outline: 2px solid rgba(231, 48, 42, 0.45) !important;
+  outline-offset: 2px !important;
+}
+
+@media (max-width: 1023px) {
+  body[data-page-name='home'] .doc-lightbox__dialog {
+    width: min(calc(100vw - 1.2rem), 60rem) !important;
+    max-width: min(calc(100vw - 1.2rem), 60rem) !important;
+    border-radius: 18px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  body[data-page-name='home'] .doc-lightbox__dialog {
+    width: calc(100vw - 0.9rem) !important;
+    max-width: calc(100vw - 0.9rem) !important;
+    max-height: min(92dvh, 52rem) !important;
+    border-radius: 16px !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__close {
+    right: 0.6rem !important;
+    top: 0.6rem !important;
+    min-height: 2rem !important;
+    padding: 0.4rem 0.65rem !important;
+    font-size: 0.7rem !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__header {
+    padding: 0.85rem 0.8rem 0.55rem !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__title {
+    padding-right: 3.5rem !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__meta {
+    font-size: 0.82rem !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__stage {
+    grid-template-columns: 1fr !important;
+    padding: 0.7rem !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__nav {
+    min-width: 0 !important;
+    width: 100% !important;
+    min-height: 2.6rem !important;
+    order: 2;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__stage img {
+    order: 1;
+    max-height: 58dvh !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__stage [data-doc-next] {
+    order: 3;
+  }
+}
+
