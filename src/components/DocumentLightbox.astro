@@ -9,6 +9,20 @@
       <h3 id="doc-lightbox-title" class="doc-lightbox__title">Document</h3>
       <p class="doc-lightbox__meta" id="doc-lightbox-meta"></p>
     </div>
+    <div class="doc-lightbox__toolbar" aria-label="Image controls">
+      <div class="doc-lightbox__rotate-controls" role="group" aria-label="Rotate document image">
+        <button type="button" class="doc-lightbox__tool" data-doc-rotate-left aria-label="Rotate image left">
+          Rotate Left
+        </button>
+        <button type="button" class="doc-lightbox__tool" data-doc-rotate-right aria-label="Rotate image right">
+          Rotate Right
+        </button>
+        <button type="button" class="doc-lightbox__tool" data-doc-rotate-reset aria-label="Reset image rotation">
+          Reset
+        </button>
+      </div>
+      <p class="doc-lightbox__rotation" data-doc-rotation-value aria-live="polite">0°</p>
+    </div>
     <div class="doc-lightbox__stage">
       <button type="button" class="doc-lightbox__nav" data-doc-prev aria-label="Previous document">
         Prev

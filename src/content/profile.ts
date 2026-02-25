@@ -57,6 +57,7 @@ export type DocumentGalleryItem = {
   tags?: string[];
   previewAspect?: 'portrait' | 'landscape';
   usedIn?: string[];
+  lightboxRotateDeg?: 0 | 90 | 180 | 270;
 };
 
 export type BrandInfo = {

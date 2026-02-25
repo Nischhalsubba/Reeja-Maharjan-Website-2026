@@ -10,7 +10,6 @@ import HeroDeviceMockup from '../components/HeroDeviceMockup.astro';
 import MetricCard from '../components/MetricCard.astro';
 import ProofSnippetCard from '../components/ProofSnippetCard.astro';
 import DocumentGalleryCard from '../components/DocumentGalleryCard.astro';
-import DocumentLightbox from '../components/DocumentLightbox.astro';
 import FaqList from '../components/seo/FaqList.astro';
 import { profile } from '../content/profile';
 import { homepageCopy } from '../content/homepageCopy';
@@ -443,7 +442,20 @@ void _flatTimelineEntries;
               </div>
               {
                 heroImage && (
-                  <figure class="hero-photo-card hero-photo-card--figma" data-motion="reveal" data-tilt-card>
+                  <figure
+                    class="hero-photo-card hero-photo-card--figma"
+                    data-motion="reveal"
+                    data-tilt-card
+                    data-lightbox-trigger
+                    data-lightbox-id="hero-photo"
+                    data-lightbox-src={heroImage.file}
+                    data-lightbox-alt={heroImage.alt}
+                    data-lightbox-title={`${profile.name} photo`}
+                    data-lightbox-issuer={profile.name}
+                    data-lightbox-group="home-hero"
+                    role="button"
+                    tabindex="0"
+                  >
                     <div class="hero-photo-frame">
                       <img
                         src={heroImage.file}
@@ -496,7 +508,19 @@ void _flatTimelineEntries;
             <div class="fh-about-layout__left">
               {
                 aboutVisual && (
-                  <figure class="card-surface fh-about-media" data-motion="reveal">
+                  <figure
+                    class="card-surface fh-about-media"
+                    data-motion="reveal"
+                    data-lightbox-trigger
+                    data-lightbox-id={`about-${aboutVisual.id}`}
+                    data-lightbox-src={aboutVisual.file}
+                    data-lightbox-alt={aboutVisual.alt}
+                    data-lightbox-title={aboutVisual.title}
+                    data-lightbox-issuer={profile.name}
+                    data-lightbox-group="home-about"
+                    role="button"
+                    tabindex="0"
+                  >
                     <img src={aboutVisual.file} alt={aboutVisual.alt} loading="lazy" decoding="async" />
                     <figcaption>{aboutVisual.title}</figcaption>
                   </figure>
@@ -593,7 +617,20 @@ void _flatTimelineEntries;
                   }
                   {
                     entry.evidence?.[0] ? (
-                      <a href={entry.evidence[0].file} target="_blank" rel="noreferrer noopener" class="fh-feature-evidence mt-4">
+                      <a
+                        href={entry.evidence[0].file}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        class="fh-feature-evidence mt-4"
+                        data-lightbox-trigger
+                        data-lightbox-id={`featured-${entry.id}-${entry.evidence[0].title}`}
+                        data-lightbox-src={entry.evidence[0].file}
+                        data-lightbox-alt={entry.evidence[0].alt}
+                        data-lightbox-title={entry.evidence[0].title}
+                        data-lightbox-issuer={entry.org}
+                        data-lightbox-date={entry.displayDate}
+                        data-lightbox-group="home-highlights-featured"
+                      >
                         <img src={entry.evidence[0].file} alt={entry.evidence[0].alt} loading="lazy" decoding="async" />
                         <span>{entry.evidence[0].title}</span>
                       </a>
@@ -651,7 +688,20 @@ void _flatTimelineEntries;
                                     embedded.evidence?.length ? (
                                       <div class="evidence-inline evidence-inline--embedded mt-3">
                                         {embedded.evidence.slice(0, 1).map((ev) => (
-                                          <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card evidence-inline__card--compact">
+                                          <a
+                                            href={ev.file}
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                            class="evidence-inline__card evidence-inline__card--compact"
+                                            data-lightbox-trigger
+                                            data-lightbox-id={`timeline-embedded-${embedded.id}-${ev.title}`}
+                                            data-lightbox-src={ev.file}
+                                            data-lightbox-alt={ev.alt}
+                                            data-lightbox-title={ev.title}
+                                            data-lightbox-issuer={embedded.org}
+                                            data-lightbox-date={embedded.displayDate ?? ''}
+                                            data-lightbox-group={`timeline-${entry.id}`}
+                                          >
                                             <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
                                             <span>
                                               <strong>{ev.title}</strong>
@@ -673,7 +723,20 @@ void _flatTimelineEntries;
                         entry.evidence?.length ? (
                           <div class="evidence-inline mt-4">
                             {entry.evidence.slice(0, 2).map((ev) => (
-                              <a href={ev.file} target="_blank" rel="noreferrer noopener" class="evidence-inline__card">
+                              <a
+                                href={ev.file}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                class="evidence-inline__card"
+                                data-lightbox-trigger
+                                data-lightbox-id={`timeline-${entry.id}-${ev.title}`}
+                                data-lightbox-src={ev.file}
+                                data-lightbox-alt={ev.alt}
+                                data-lightbox-title={ev.title}
+                                data-lightbox-issuer={entry.org}
+                                data-lightbox-date={entry.displayDate}
+                                data-lightbox-group={`timeline-${entry.id}`}
+                              >
                                 <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
                                 <span>
                                   <strong>{ev.title}</strong>
@@ -1022,8 +1085,6 @@ void _flatTimelineEntries;
         </div>
       </div>
     </section>
-
-    <DocumentLightbox />
   </div>
 </BaseLayout>
 

@@ -24,6 +24,13 @@ const typeLabel =
             target="_blank"
             rel="noreferrer noopener"
             class="proof-evidence-chip"
+            data-lightbox-trigger
+            data-lightbox-id={`proof-${item.id}-${ev.title}`}
+            data-lightbox-src={ev.file}
+            data-lightbox-alt={ev.alt}
+            data-lightbox-title={ev.title}
+            data-lightbox-issuer={item.source}
+            data-lightbox-group={`proof-${item.id}`}
             aria-label={`Open evidence: ${ev.title}`}
           >
             <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />

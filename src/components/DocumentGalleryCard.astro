@@ -27,6 +27,16 @@ const { doc } = Astro.props as Props;
     data-doc-alt={doc.alt}
     data-doc-issuer={doc.issuer}
     data-doc-date={doc.date}
+    data-doc-rotate={doc.lightboxRotateDeg != null ? String(doc.lightboxRotateDeg) : undefined}
+    data-lightbox-trigger
+    data-lightbox-id={`doc-${doc.id}`}
+    data-lightbox-src={doc.file}
+    data-lightbox-alt={doc.alt}
+    data-lightbox-title={doc.title}
+    data-lightbox-issuer={doc.issuer}
+    data-lightbox-date={doc.date}
+    data-lightbox-group="documents"
+    data-lightbox-rotate={doc.lightboxRotateDeg != null ? String(doc.lightboxRotateDeg) : undefined}
     aria-label={`Open preview for ${doc.title}`}
   >
     <img

@@ -1,9 +1,9 @@
 ---
 import '../styles/global.css';
-import '../styles/home-figma-v52.css';
-import '../styles/home-figma-v54.css';
+import '../styles/home-figma-v55.css';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
+import DocumentLightbox from '../components/DocumentLightbox.astro';
 
 interface Props {
   title: string;
@@ -80,6 +80,7 @@ const schemaList = Array.isArray(schema) ? schema : schema ? [schema] : [];
       <slot />
     </main>
     <Footer variant={page === 'home' ? 'figma-home' : 'default'} />
+    {page === 'home' && <DocumentLightbox />}
 
     <script>
       import { initMotion } from '../lib/motion/core/init';
