@@ -1,4 +1,4 @@
-export type ExperienceEvidenceLink = {
+﻿export type ExperienceEvidenceLink = {
   title: string;
   file: string;
   type: 'document' | 'photo' | 'award';
@@ -307,14 +307,14 @@ export const profile: Profile = {
   linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
   resumePdfPath: '/resume.pdf',
   headline:
-    'Licensed Registered Nurse (Nepal) with hospital-based experience in maternal and newborn care, general ward nursing, patient counselling, and clinical coordination.',
+    'Licensed Registered Nurse (Nepal) with verified hospital experience in maternal-newborn care support, general ward nursing, patient counselling, and clinical coordination.',
   summary:
-    'Reeja Maharjan is a licensed Registered Nurse with Nepal Nursing Council (NNC) who has built practical clinical experience across teaching and regional hospital settings in Nepal. Her work spans maternal and newborn care support, general ward nursing (including Surgery and Gynaecology & Obstetrics exposure), patient and family counselling, ward documentation, and continuity-focused handover communication.',
+    'Reeja Maharjan is an NNC-licensed Registered Nurse with practical experience across teaching and regional hospitals in Nepal. Her work covers maternal and newborn support, general ward nursing exposure in Surgery and Gynaecology & Obstetrics settings, patient and family counselling, ward documentation, and continuity-focused handover communication.',
   seo: {
     homeTitle:
       'Reeja Maharjan | Registered Nurse Portfolio Nepal | Maternal, Newborn & General Ward Nursing',
     homeDescription:
-      'Licensed Registered Nurse (Nepal) portfolio of Reeja Maharjan with TUTH, MMTH, and Sindhuli Hospital experience. Maternal and newborn care, general ward nursing, counselling, OT readiness, CPR training, and verified credentials for hospital/NGO/INGO roles.',
+      'NNC-licensed Registered Nurse portfolio of Reeja Maharjan with verified experience at TUTH, MMTH, and Sindhuli Hospital. Includes maternal-newborn support, general ward nursing exposure, counselling, OT readiness, CPR participation, and public verification evidence for hospital, NGO, and INGO hiring.',
     keywords: [
       'Registered Nurse Nepal portfolio',
       'Maternal and newborn care nurse Nepal',
@@ -340,7 +340,7 @@ export const profile: Profile = {
   hero: {
     headline: 'Licensed RN for Maternal, Newborn, and General Ward Nursing Care',
     subheadline:
-      'NNC-licensed nurse with experience across TUTH, MMTH, and Sindhuli Hospital, offering patient counselling, ward support, maternal-newborn care exposure, and clinical coordination for hospital, NGO, and INGO opportunities.',
+      'NNC-licensed nurse with experience across TUTH, MMTH, and Sindhuli Hospital, supporting patient counselling, ward care, maternal-newborn service routines, and clinical coordination for hospital, NGO, and INGO opportunities.',
     floatingTags: [
       'NNC LICENSED RN',
       'MATERNAL CARE',
@@ -507,7 +507,7 @@ export const profile: Profile = {
       issuer: 'Nepal Nursing Council (NNC)',
       date: 'Licensure registered Sep 5, 2021',
       details:
-        'Licensed Registered Nurse in Nepal after passing the National Licensure Examination for Nurses (Reg. No. 65100). Full certificate scan is intentionally not displayed publicly due personal identifiers.',
+        'Licensed Registered Nurse in Nepal after passing the National Licensure Examination for Nurses (Reg. No. 65100). Full certificate scan is intentionally not displayed publicly due to personal identifiers.',
       kind: 'licensure',
     },
     {
@@ -1003,7 +1003,7 @@ export const profile: Profile = {
         'nepal nursing council rn',
       ],
       intro:
-        'This page summarizes Reeja Maharjan’s NNC-licensed Registered Nurse profile for hospitals, NGOs, INGOs, and recruiters seeking a verified nurse portfolio in Nepal.',
+        'This page summarizes Reeja Maharjan\'s NNC-licensed Registered Nurse profile for hospitals, NGOs, INGOs, and recruiters seeking a verified nurse portfolio in Nepal.',
       relatedExperienceIndexes: [0, 1, 2],
       relatedCredentialIndexes: [0, 1, 2, 3],
       relatedDocumentIds: ['mmth-exp-letter', 'exp-letter', 'cnc-level-ii', 'ottm', 'cpr', 'san-token'],
@@ -1033,7 +1033,7 @@ export const profile: Profile = {
         'reeja maharjan maternal newborn nurse',
       ],
       intro:
-        'This page focuses on Reeja Maharjan’s maternal and newborn care support experience, counselling strengths, and related training evidence relevant to maternity-focused roles in Nepal.',
+        'This page focuses on Reeja Maharjan\'s maternal and newborn care support experience, counselling strengths, and related training evidence relevant to maternity-focused roles in Nepal.',
       relatedExperienceIndexes: [0, 2],
       relatedCredentialIndexes: [1, 3],
       relatedDocumentIds: ['cnc-level-ii', 'cpr', 'san-token', 'exp-letter'],
@@ -1063,7 +1063,7 @@ export const profile: Profile = {
         'mmth staff nurse portfolio',
       ],
       intro:
-        'This page highlights Reeja Maharjan’s verified general ward nursing service at MMTH, including Surgery and Gynaecology & Obstetrics exposure, with supporting documentation for recruiters.',
+        'This page highlights Reeja Maharjan\'s verified general ward nursing service at MMTH, including Surgery and Gynaecology & Obstetrics exposure, with supporting documentation for recruiters.',
       relatedExperienceIndexes: [1],
       relatedCredentialIndexes: [0, 3],
       relatedDocumentIds: ['mmth-exp-letter', 'cpr', 'san-token'],
@@ -1093,7 +1093,7 @@ export const profile: Profile = {
         'reeja maharjan nursing officer',
       ],
       intro:
-        'This page focuses on Reeja Maharjan’s Nursing Officer experience at Sindhuli Hospital, including maternity and OT-related duties supported by experience and training documents.',
+        'This page focuses on Reeja Maharjan\'s Nursing Officer experience at Sindhuli Hospital, including maternity and OT-related duties supported by experience and training documents.',
       relatedExperienceIndexes: [2],
       relatedCredentialIndexes: [0, 1, 2],
       relatedDocumentIds: ['exp-letter', 'ottm', 'cnc-level-ii'],
@@ -1155,7 +1155,7 @@ export const profile: Profile = {
         'reeja maharjan ngo ingo nurse',
       ],
       intro:
-        'This page presents Reeja Maharjan’s nursing strengths relevant to NGO and INGO roles in Nepal, including counselling, patient education, documentation, communication, and research participation.',
+        'This page presents Reeja Maharjan\'s nursing strengths relevant to NGO and INGO roles in Nepal, including counselling, patient education, documentation, communication, and research participation.',
       relatedExperienceIndexes: [0, 1, 2],
       relatedCredentialIndexes: [0, 1, 3, 4],
       relatedDocumentIds: ['mmihs-irc-approval', 'san-token', 'vascular-conference', 'cpr'],
@@ -1177,4 +1177,7 @@ export const profile: Profile = {
     'Only professional certificates, training records, experience letters, recognition records, and education proofs are included in the document gallery.',
   ],
 };
+
+
+
 

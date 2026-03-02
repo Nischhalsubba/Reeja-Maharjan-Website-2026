@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ButtonLink from '../components/ButtonLink.astro';
 import Container from '../components/Container.astro';
@@ -122,7 +122,7 @@ const snapshotStats = [
       <SeoLandingSection
         label="Recruiter Snapshot"
         title="Availability, Licensure & Role Preferences"
-        description="Quick summary for hospital, NGO, INGO, and recruitment teams reviewing this role-specific profile."
+        description="Fast screening summary for hospital, NGO, INGO, and recruiter teams evaluating this role-specific nursing profile."
       >
         <div class="stats-grid mt-0">
           {snapshotStats.map((item) => <MetricCard item={item} />)}
@@ -141,7 +141,7 @@ const snapshotStats = [
       <SeoLandingSection
         label="Relevant Experience"
         title="Hospital Experience Most Relevant to This Search Intent"
-        description={seoPage.description}
+        description="Role-matched clinical experience selected from verified service history and aligned with this search intent."
       >
         <div class="grid gap-4">
           {relatedExperience.map((job) => (
@@ -167,7 +167,7 @@ const snapshotStats = [
       <SeoLandingSection
         label="Verification Evidence"
         title="Documents and Proof Relevant to This Profile"
-        description="Selected public records are included below. Full document gallery remains available on the main portfolio page."
+        description="Selected public records are listed below for recruiter verification. Full evidence remains available on the main portfolio page."
       >
         {relatedProof.length > 0 && (
           <div class="proof-grid">
@@ -188,7 +188,7 @@ const snapshotStats = [
       <SeoLandingSection
         label="Credentials & Skills"
         title="Training, Licensure and Role-Fit Competencies"
-        description="Role-specific subset selected from Reeja’s verified credential and skill profile."
+        description="Role-specific subset selected from Reeja's verified credentials, training history, and clinical capability profile."
       >
         <div class="grid gap-4">
           {relatedCredentials.map((item) => (
@@ -227,7 +227,7 @@ const snapshotStats = [
       <SeoLandingSection
         label="Contact"
         title="Discuss This Nursing Profile"
-        description="For interviews or role discussions, use the main portfolio contact section. The primary portfolio page includes the full contact form and complete verification gallery."
+        description="For interviews or role discussions, use the main portfolio contact section. The main homepage includes the full form, timeline, and complete verification gallery."
       >
         <div class="hero-actions mt-0">
           <ButtonLink href="/#contact">Go to Contact Section</ButtonLink>
@@ -243,3 +243,5 @@ const snapshotStats = [
     </Container>
   </section>
 </BaseLayout>
+
+

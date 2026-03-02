@@ -438,6 +438,7 @@ void _flatTimelineEntries;
                     class="hero-photo-card hero-photo-card--figma"
                     data-motion="reveal"
                     data-tilt-card
+                    data-hero-image-wrap
                     data-lightbox-trigger
                     data-lightbox-id="hero-photo"
                     data-lightbox-src={heroImage.file}
@@ -467,15 +468,6 @@ void _flatTimelineEntries;
                   </figure>
                 )
               }
-              <div class="hero-availability-card" data-motion="reveal">
-                <p class="hero-availability-card__label">Available for</p>
-                <p class="hero-availability-card__value">
-                  {profile.workPreferences.arrangements.length + profile.workPreferences.sectors.length} Opportunities
-                </p>
-                <p class="hero-availability-card__meta">
-                  {profile.workPreferences.availability} | {profile.workPreferences.relocation ? 'Relocation accepted' : 'Relocation not listed'}
-                </p>
-              </div>
               <div class="hero-bio-card" data-motion="reveal">
                 <p class="eyebrow">{copy.hero.snapshotTitle}</p>
                 <p class="section-body mt-2">

@@ -1,4 +1,4 @@
-﻿---
+---
 import type { Profile } from '../content/profile';
 
 interface Props {
@@ -6,34 +6,17 @@ interface Props {
 }
 
 const { profile } = Astro.props as Props;
-const topSkills = profile.practiceAreas.slice(0, 4);
-const topCredentials = profile.credentials.slice(0, 3);
-const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured) ?? profile.images?.find((img) => img.usage === 'hero' && img.public);
+const topSkills = profile.practiceAreas.slice(0, 3);
+const topCredentials = profile.credentials.slice(0, 2);
+const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured)
+  ?? profile.images?.find((img) => img.usage === 'hero' && img.public);
 ---
 
-<div class="device-wrap device-wrap--hero" data-hero-device data-tilt-card>
-  <div class="device-glow" aria-hidden="true"></div>
-  <div class="device-ambient-rings" aria-hidden="true">
-    <span></span>
-    <span></span>
-  </div>
-  <div class="device-ecg-shell" data-ecg-root aria-hidden="true">
-    <svg viewBox="0 0 300 60" class="device-ecg-svg">
-      <path
-        d="M0 35 L35 35 L48 35 L58 20 L70 46 L84 10 L98 35 L128 35 L145 35 L156 28 L167 40 L182 18 L196 35 L226 35 L242 35 L252 25 L264 39 L280 35 L300 35"
-        class="device-ecg-path"
-        data-ecg-line
-      ></path>
-    </svg>
-  </div>
+<div class="device-wrap device-wrap--hero" data-hero-device data-tilt-card data-cursor="card">
   <div class="device-frame">
-    <div class="device-frame__rim" aria-hidden="true"></div>
-    <div class="device-frame__sheen" aria-hidden="true"></div>
     <div class="device-notch" aria-hidden="true"></div>
     <div class="device-screen">
-      <div class="device-screen__vignette" aria-hidden="true"></div>
-      <div class="device-screen__mesh" aria-hidden="true"></div>
-      <div class="device-header">
+      <header class="device-header">
         <div class="device-header__identity">
           {
             heroPortrait && (
@@ -48,89 +31,47 @@ const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.p
             )
           }
           <div>
-          <p class="device-label">Clinical Profile</p>
-          <p class="device-name">{profile.name}</p>
-            <p class="device-subname">{profile.role}</p>
+            <p class="device-label">Clinical Profile</p>
+            <p class="device-name">{profile.name}</p>
+            <p class="device-subname">Licensed Registered Nurse (Nepal)</p>
           </div>
         </div>
-        <span class="device-chip" data-device-pulse-chip>
-          <span class="heartbeat-accent" data-heartbeat-accent aria-hidden="true"></span>
-          NNC RN
-        </span>
-      </div>
+        <span class="device-chip">NNC RN</span>
+      </header>
 
       <section class="device-panel device-panel--hero">
         <div class="device-status-row">
-          <span class="device-status-dot" aria-hidden="true">
-            <span class="heartbeat-accent heartbeat-accent--status" data-heartbeat-accent aria-hidden="true"></span>
-          </span>
+          <span class="device-status-dot" aria-hidden="true"></span>
           <span class="device-status-text">Immediate availability</span>
         </div>
         <div class="device-mini-grid">
           <div>
-            <p class="device-panel__title">Relocation</p>
-            <p class="device-value">Accepted</p>
+            <p class="device-panel__title">Location</p>
+            <p class="device-value">Lalitpur, Nepal</p>
           </div>
           <div>
-            <p class="device-panel__title">Roles</p>
-            <p class="device-value">Hospital / NGO / INGO</p>
+            <p class="device-panel__title">Relocation</p>
+            <p class="device-value">Accepted</p>
           </div>
         </div>
       </section>
 
       <section class="device-panel">
-        <p class="device-panel__title">Primary Focus</p>
+        <p class="device-panel__title">Primary Clinical Focus</p>
         <ul class="device-list">
           {topSkills.map((item) => <li>{item}</li>)}
         </ul>
       </section>
 
-      <section class="device-panel">
-        <p class="device-panel__title">Selected Credentials</p>
-        <div class="device-badges">
-          {topCredentials.map((item) => <span>{item.title.replace('Certificate', '').trim()}</span>)}
-        </div>
-      </section>
-
       <section class="device-panel device-panel--compact">
         <div>
-          <p class="device-panel__title">Clinical Settings</p>
-          <p class="device-value">TUTH · MMTH · Sindhuli Hospital</p>
-        </div>
-        <div>
-          <p class="device-panel__title">Availability</p>
-          <p class="device-value">{profile.workPreferences.arrangements.join(' / ')}</p>
+          <p class="device-panel__title">Key Credentials</p>
+          <p class="device-value">{topCredentials.map((item) => item.title.replace('Certificate', '').trim()).join(' · ')}</p>
         </div>
       </section>
 
-      <section class="device-panel device-panel--compact">
-        <div>
-          <p class="device-panel__title">Base</p>
-          <p class="device-value">{profile.location.split(',')[0]}</p>
-        </div>
-        <div>
-          <p class="device-panel__title">Credentials</p>
-          <p class="device-value">{profile.stats.find((s) => s.label === 'Public Evidence Files')?.value ?? '10'} files</p>
-        </div>
-      </section>
-
-      <div class="device-progresses" aria-hidden="true">
-        <div class="device-progress">
-          <span>Clinical readiness</span>
-          <i style="--fill: 86%"></i>
-        </div>
-        <div class="device-progress">
-          <span>Documentation & handover</span>
-          <i style="--fill: 92%"></i>
-        </div>
-        <div class="device-progress">
-          <span>Patient counselling</span>
-          <i style="--fill: 88%"></i>
-        </div>
-      </div>
-
-      <a href="/#credentials" class="device-link" data-scroll-target="#credentials">
-        View credentials
+      <a href="/#credentials" class="device-link" data-scroll-target="#credentials" data-cursor="link">
+        View verification
       </a>
     </div>
   </div>

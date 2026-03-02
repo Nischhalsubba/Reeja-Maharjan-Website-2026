@@ -1,13 +1,13 @@
-ï»¿export const homepageCopy = {
+export const homepageCopy = {
   hero: {
-    label: 'Reeja Maharjan Â· Licensed Registered Nurse (Nepal) Â· Hospital / NGO / INGO Opportunities',
-    title: 'Registered Nurse Portfolio for Maternal, Newborn, and General Ward Care in Nepal',
+    label: 'Reeja Maharjan · Licensed Registered Nurse (Nepal) · Hospital / NGO / INGO Roles',
+    title: 'Registered Nurse for Maternal, Newborn, and General Ward Care',
     subtitle:
-      'Reeja Maharjan is an NNC-licensed Registered Nurse with verified hospital experience across TUTH, MMTH, and Sindhuli Hospital. Her portfolio highlights maternal-newborn care support, general ward nursing exposure, patient counselling, clinical documentation, and readiness for full-time or contract roles in Nepal and international settings.',
-    proofLine: 'NNC Licensed RN Â· Immediate Availability Â· Relocation Accepted Â· Nepal & International Opportunities',
-    snapshotTitle: 'Recruiter Snapshot',
+      'Reeja Maharjan is an NNC-licensed Registered Nurse with documented clinical service at TUTH, MMTH, and Sindhuli Hospital. Her portfolio presents verified experience in maternal-newborn care support, general ward nursing exposure, patient counselling, safe documentation, and coordinated handover practice.',
+    proofLine: 'NNC Licensed RN · Immediate Availability · Relocation Accepted · Nepal & International Opportunities',
+    snapshotTitle: 'Clinical Snapshot',
     snapshotBody:
-      'Teaching-hospital and regional-hospital nursing experience with evidence-backed credentials, recognition, and training records. Suitable for hospital-based roles and mission-driven NGO/INGO healthcare teams requiring reliable ward support, patient education, and clinical coordination.',
+      'Teaching-hospital and regional-hospital nursing background with evidence-backed credentials, training, recognition, and public verification records for recruiter review.',
     primaryCta: 'Download Resume',
     secondaryCta: 'Request Interview',
     tertiaryCta: 'Review Verification',
@@ -16,30 +16,30 @@
     label: 'Career Timeline',
     title: 'Clinical Experience, Training, Recognition, and Research in Date Order',
     body:
-      'This timeline combines hospital service, licensure milestones, training, recognition, and research participation. Credentials and recognition are attached to the relevant job periods when the dates align, so employers can review growth and evidence together.',
+      'This timeline combines hospital service with licensure, training, recognition, and research milestones. Related credentials are embedded within matching work periods when dates align, helping employers review progression and proof in one place.',
   },
   verification: {
     label: 'Verification',
     title: 'Licensure, Training, and Supporting Evidence',
     body:
-      'Key credentials are prioritized for hiring review, followed by a filtered verification gallery of public documents supporting clinical roles, training, recognition, and academic participation.',
+      'Priority credentials are listed first for fast screening, followed by a filtered public evidence gallery that supports key clinical claims used across this portfolio.',
     galleryLabel: 'Verification Gallery',
     galleryTitle: 'Public Evidence for Recruiter Verification',
     galleryBody:
-      'Selected public documents support the experience, training, recognition, and academic claims used across this homepage. Sensitive personal-ID documents remain excluded.',
+      'These public documents support experience, training, recognition, and academic claims. Sensitive personal-ID records are intentionally excluded.',
     proofLabel: 'Recognition & Research Evidence',
     proofTitle: 'Verified Professional Recognition and Academic Involvement',
     proofBody:
-      'Condensed evidence panel highlighting recognition, training-supported readiness, and research participation that strengthen the clinical profile beyond a standard CV.',
+      'Condensed proof cards highlight recognition, training-supported readiness, and research participation that reinforce the clinical profile beyond a standard CV.',
   },
   skills: {
     label: 'Skills & Fit',
     title: 'Clinical Capability, Work Fit, and Readiness Summary',
     body:
-      'A recruiter-first summary of care areas, practical skills, communication strengths, education, and work preferences. Built for fast screening across hospital, NGO, and INGO nursing roles.',
+      'A recruiter-first summary of care areas, practical capability groups, communication strengths, education, and work preferences for hospital, NGO, and INGO hiring decisions.',
     practiceTitle: 'Clinical Areas of Practice',
     practiceBody:
-      'Core areas where Reeja can contribute immediately include maternal and newborn support, general ward nursing, patient counselling, OT-related readiness, and safe documentation and handover support.',
+      'Core contribution areas include maternal-newborn support, general ward nursing, patient counselling, OT readiness, and documentation plus shift handover discipline.',
     profileTitle: 'Professional Profile & Care Approach',
     preferencesTitle: 'Work Preferences & Availability',
     skillsTitle: 'Clinical Skills and Capability Groups',
@@ -50,10 +50,10 @@
     label: 'Contact',
     title: 'Interview and Opportunity Inquiries for Hospital, NGO, and INGO Nursing Roles',
     body:
-      'Use the contact form for interview requests, recruiter outreach, or role discussions. Reeja is open to Nepal-wide placements and international opportunities, with immediate availability and relocation accepted.',
+      'Use this form for interview scheduling, recruiter outreach, and role discussions. Reeja is available immediately and open to Nepal-wide and international opportunities with relocation accepted.',
     referencesTitle: 'References',
     referencesBody:
-      'Professional and clinical references are available for employer screening. Detailed contact sharing can be provided during interview coordination.',
+      'Professional references can be shared during active hiring conversations after initial screening and role alignment.',
     privacyTitle: 'Privacy Note',
     faqTitle: 'Recruiter FAQ',
     formButton: 'Send Opportunity Inquiry',
@@ -61,4 +61,3 @@
 } as const;
 
 export type HomepageCopy = typeof homepageCopy;
-

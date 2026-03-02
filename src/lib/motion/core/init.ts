@@ -28,9 +28,19 @@ const bindMotionPreferenceToggle = () => {
 
 const runFeature = async (feature: MotionFeature, main: HTMLElement, reduced: boolean): Promise<void> => {
   switch (feature) {
+    case 'custom-cursor': {
+      const { bindCustomCursor } = await import('../features/custom-cursor');
+      await bindCustomCursor(main, reduced);
+      return;
+    }
     case 'hero-intro': {
       const { runHeroIntro } = await import('../features/hero-intro');
       await runHeroIntro(main, reduced);
+      return;
+    }
+    case 'parallax': {
+      const { bindParallaxAccents } = await import('../features/parallax');
+      await bindParallaxAccents(main, reduced);
       return;
     }
     case 'medical-particles': {

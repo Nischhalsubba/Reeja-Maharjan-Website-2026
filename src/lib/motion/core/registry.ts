@@ -1,5 +1,7 @@
 export type MotionFeature =
   | 'hero-intro'
+  | 'parallax'
+  | 'custom-cursor'
   | 'medical-particles'
   | 'ecg-pulse'
   | 'heartbeat-accent'
@@ -15,7 +17,9 @@ export type MotionFeature =
 
 const pageMap: Record<string, MotionFeature[]> = {
   home: [
+    'custom-cursor',
     'hero-intro',
+    'parallax',
     'medical-particles',
     'ecg-pulse',
     'heartbeat-accent',

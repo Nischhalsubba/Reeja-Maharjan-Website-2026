@@ -81,7 +81,7 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     if (!modalImage) return;
     modalImage.style.transform = `rotate(${currentRotation}deg)`;
     modalImage.style.transformOrigin = 'center center';
-    modalRotationValue && (modalRotationValue.textContent = `${currentRotation}Â°`);
+    modalRotationValue && (modalRotationValue.textContent = `${currentRotation}°`);
   };
 
   const setRotation = (deg: number) => {
@@ -125,7 +125,7 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     modalImage.src = doc.src;
     modalImage.alt = doc.alt;
     modalTitle.textContent = doc.title;
-    modalMeta.textContent = `${doc.issuer}${doc.date ? ` Â· ${doc.date}` : ''}`;
+    modalMeta.textContent = `${doc.issuer}${doc.date ? ` · ${doc.date}` : ''}`;
     if (modalKicker) {
       modalKicker.textContent = doc.category ? `${doc.category} Preview` : 'Image Preview';
     }
@@ -223,3 +223,4 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     }
   });
 };
+
