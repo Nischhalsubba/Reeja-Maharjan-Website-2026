@@ -1,4 +1,4 @@
----
+﻿---
 import type { Profile } from '../content/profile';
 
 interface Props {
@@ -7,7 +7,8 @@ interface Props {
 
 const { profile } = Astro.props as Props;
 const topSkills = profile.practiceAreas.slice(0, 3);
-const topCredentials = profile.credentials.slice(0, 2);
+const topCredentials = profile.credentials.slice(0, 3);
+const topSettings = profile.experience.slice(0, 3).map((item) => item.organization);
 const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured)
   ?? profile.images?.find((img) => img.usage === 'hero' && img.public);
 ---
@@ -63,6 +64,13 @@ const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.p
         </ul>
       </section>
 
+      <section class="device-panel">
+        <p class="device-panel__title">Clinical Settings</p>
+        <ul class="device-list">
+          {topSettings.map((item) => <li>{item}</li>)}
+        </ul>
+      </section>
+
       <section class="device-panel device-panel--compact">
         <div>
           <p class="device-panel__title">Key Credentials</p>
@@ -76,4 +84,3 @@ const heroPortrait = profile.images?.find((img) => img.usage === 'hero' && img.p
     </div>
   </div>
 </div>
-

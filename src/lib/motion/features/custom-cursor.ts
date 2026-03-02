@@ -12,7 +12,6 @@ const isReduced = () =>
 export const bindCustomCursor = async (root: ParentNode, reduced: boolean): Promise<void> => {
   if (reduced || isReduced() || !prefersFinePointer()) return;
   if (!(root instanceof Document || root instanceof HTMLElement)) return;
-  if (!root.querySelector('[data-home-figma]')) return;
 
   const body = document.body;
   const cursor = document.createElement('div');
@@ -97,4 +96,3 @@ export const bindCustomCursor = async (root: ParentNode, reduced: boolean): Prom
 
   window.addEventListener('beforeunload', cleanup, { once: true });
 };
-

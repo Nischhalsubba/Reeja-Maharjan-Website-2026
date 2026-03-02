@@ -33,7 +33,14 @@ const pageMap: Record<string, MotionFeature[]> = {
     'counters',
     'doc-gallery',
   ],
+  'seo-landing': [
+    'custom-cursor',
+    'reveals',
+    'scroll-to',
+    'nav-spy',
+    'doc-gallery',
+  ],
   'not-found': ['reveals'],
 };
 
-export const getFeaturesForPage = (page: string): MotionFeature[] => pageMap[page] ?? ['reveals'];
+export const getFeaturesForPage = (page: string): MotionFeature[] => pageMap[page] ?? ['custom-cursor', 'reveals'];
