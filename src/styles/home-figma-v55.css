@@ -954,6 +954,223 @@ body[data-page-name='home'] .custom-cursor--ring[data-state='drag'] {
   }
 }
 
+/* ===== v5.6.3 focused fixes: footer, visibility, menu, hero image, popup ===== */
+body[data-page-name='home'] .site-nav--figma-home .brand-mark__mono,
+body[data-page-name='home'] .site-nav--figma-home .brand-mark__label span,
+body[data-page-name='home'] .site-nav--figma-home .brand-mark__label small,
+body[data-page-name='home'] .site-nav--figma-home .nav-menu-label,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__summary {
+  color: #f1fdf9 !important;
+  opacity: 1 !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu[open] .figma-menu__summary {
+  color: #1e2229 !important;
+  background: #fffdfa !important;
+  border: 1px solid rgba(30, 34, 41, 0.16) !important;
+  padding-inline: 10px !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel * {
+  color: #1e2229 !important;
+  opacity: 1 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-frame {
+  background: transparent !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-main {
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  background: transparent !important;
+  filter: drop-shadow(0 10px 36px rgba(20, 23, 28, 0.24));
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-overlay-svg {
+  width: min(62%, 560px) !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  opacity: 1 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .stack-title,
+main[data-page='home'] .home-figma-v1 .stack-card .stack-title,
+main[data-page='home'] .home-figma-v1 .fh-light-card .stack-title,
+main[data-page='home'] .home-figma-v1 .home-embedded-faq .card-surface > summary,
+main[data-page='home'] .home-figma-v1 .home-embedded-faq .section-title,
+main[data-page='home'] .home-figma-v1 .home-embedded-faq .section-label {
+  color: #1e2229 !important;
+  opacity: 1 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-embedded-faq .card-surface {
+  background: #ffffff !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-embedded-faq .card-surface > summary {
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  line-height: 1.45 !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-embedded-faq .section-title {
+  font-size: clamp(2rem, 3.4vw, 3.5rem) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .fh-feature-card {
+  padding: 18px !important;
+}
+
+main[data-page='home'] .home-figma-v1 #highlights .fh-feature-card .career-event__title,
+main[data-page='home'] .home-figma-v1 #highlights .fh-feature-card .career-event__org,
+main[data-page='home'] .home-figma-v1 #highlights .fh-feature-card .career-event__summary {
+  padding-inline: 2px !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__dialog {
+  width: min(1240px, calc(100vw - 40px)) !important;
+  max-height: min(96dvh, 980px) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__header {
+  padding: 20px 24px 12px !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__title {
+  margin-top: 4px !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__toolbar {
+  padding: 10px 24px 12px !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__rotate-controls {
+  display: inline-flex !important;
+  gap: 8px !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__tool {
+  min-height: 40px !important;
+  padding: 0 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__rotation {
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__stage {
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  padding: 16px 24px 24px !important;
+  min-height: min(72dvh, 760px) !important;
+  background: rgba(245, 241, 232, 0.78) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__stage img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: min(68dvh, 690px) !important;
+  object-fit: contain !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__nav {
+  min-width: 68px !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-inner-stage--figma-home {
+  display: grid !important;
+  gap: 14px !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-row {
+  display: grid !important;
+  grid-template-columns: 1.2fr auto auto !important;
+  gap: clamp(16px, 2.8vw, 36px) !important;
+  padding: 20px !important;
+  align-items: start !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-kicker {
+  color: #e7302a !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-title {
+  margin-top: 2px !important;
+  color: #1e2229 !important;
+  font-size: clamp(1.6rem, 2.5vw, 2.5rem) !important;
+  line-height: 1.06 !important;
+  letter-spacing: -0.03em !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-copy,
+body[data-page-name='home'] .site-footer--figma-home .footer-meta--figma-home span,
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-link,
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-toplink,
+body[data-page-name='home'] .site-footer--figma-home .footer-role-pages > summary {
+  color: #1e2229 !important;
+  opacity: 1 !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-socials {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 12px !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-socials a,
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-link,
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-toplink {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 38px !important;
+  padding: 0 12px !important;
+  border: 1px solid rgba(30, 34, 41, 0.15) !important;
+  background: #fff !important;
+  text-decoration: none !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-contact {
+  display: grid !important;
+  gap: 8px !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-figma-utility {
+  padding: 10px 16px !important;
+}
+
+body[data-page-name='home'] .site-footer--figma-home .footer-meta--figma-home {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  font-size: 0.9rem !important;
+}
+
+@media (max-width: 1023px) {
+  body[data-page-name='home'] .site-footer--figma-home .footer-figma-row {
+    grid-template-columns: 1fr !important;
+  }
+
+  body[data-page-name='home'] .site-footer--figma-home .footer-meta--figma-home {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (max-width: 375px) {
   main[data-page='home'] .home-figma-v1 .chip,
   main[data-page='home'] .home-figma-v1 .stack-chip,

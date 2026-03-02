@@ -44,21 +44,47 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
   const lightbox = document.querySelector<HTMLElement>('[data-doc-lightbox]');
   const docTriggers = Array.from(root.querySelectorAll<HTMLElement>('[data-doc-trigger]'));
   const genericTriggers = Array.from(root.querySelectorAll<HTMLElement>('[data-lightbox-trigger]:not([data-doc-trigger])'));
+  const autoImageTriggers = Array.from(
+    root.querySelectorAll<HTMLImageElement>(
+      ".home-figma-v1 img:not([data-doc-image]):not(.hero-photo-overlay-svg):not(.device-avatar):not(.figma-menu__icon):not([aria-hidden='true'])",
+    ),
+  )
+    .filter((img) => {
+      const src = img.currentSrc || img.src;
+      if (!src) return false;
+      if (img.closest('[data-lightbox-trigger], [data-doc-trigger], .doc-lightbox')) return false;
+      const renderedWidth = img.clientWidth;
+      const renderedHeight = img.clientHeight;
+      return renderedWidth >= 80 && renderedHeight >= 80;
+    })
+    .map((img, index) => {
+      const trigger = img.closest<HTMLElement>('a, figure, article, div, section') ?? img.parentElement ?? img;
+      if (!(trigger instanceof HTMLElement)) return null;
+      const src = img.getAttribute('src') ?? img.currentSrc ?? '';
+      if (!src) return null;
+      const title = img.getAttribute('alt') || trigger.getAttribute('data-lightbox-title') || `Image ${index + 1}`;
+      trigger.dataset.lightboxTrigger = '';
+      trigger.dataset.lightboxId = trigger.dataset.lightboxId || `auto-image-${index + 1}`;
+      trigger.dataset.lightboxSrc = trigger.dataset.lightboxSrc || src;
+      trigger.dataset.lightboxAlt = trigger.dataset.lightboxAlt || img.getAttribute('alt') || title;
+      trigger.dataset.lightboxTitle = trigger.dataset.lightboxTitle || title;
+      trigger.dataset.lightboxIssuer = trigger.dataset.lightboxIssuer || 'Portfolio media';
+      trigger.dataset.lightboxGroup = trigger.dataset.lightboxGroup || 'auto-images';
+      if (!trigger.hasAttribute('tabindex') && trigger.tagName !== 'A' && trigger.tagName !== 'BUTTON') {
+        trigger.setAttribute('tabindex', '0');
+        trigger.setAttribute('role', 'button');
+      }
+      return trigger;
+    })
+    .filter((el): el is HTMLElement => Boolean(el));
 
   if (!gallery && !lightbox) return;
 
-  const filterButtons = gallery
-    ? Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-doc-filter]'))
-    : [];
-  const items = gallery
-    ? Array.from(gallery.querySelectorAll<HTMLElement>('[data-doc-item]'))
-    : [];
+  const filterButtons = gallery ? Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-doc-filter]')) : [];
+  const items = gallery ? Array.from(gallery.querySelectorAll<HTMLElement>('[data-doc-item]')) : [];
+  const allTriggerEls = Array.from(new Set([...docTriggers, ...genericTriggers, ...autoImageTriggers]));
 
-  const allTriggerEls = [...docTriggers, ...genericTriggers];
-
-  const docs = docTriggers
-    .map((el) => toLightboxItem(el))
-    .filter((item): item is LightboxItem => item !== null);
+  const docs = docTriggers.map((el) => toLightboxItem(el)).filter((item): item is LightboxItem => item !== null);
 
   let currentList: LightboxItem[] = docs;
   let currentIndex = 0;
@@ -81,7 +107,7 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     if (!modalImage) return;
     modalImage.style.transform = `rotate(${currentRotation}deg)`;
     modalImage.style.transformOrigin = 'center center';
-    modalRotationValue && (modalRotationValue.textContent = `${currentRotation}°`);
+    if (modalRotationValue) modalRotationValue.textContent = `Rotation: ${currentRotation} deg`;
   };
 
   const setRotation = (deg: number) => {
@@ -124,13 +150,13 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     if (!lightbox || !modalImage || !modalTitle || !modalMeta) return;
     modalImage.src = doc.src;
     modalImage.alt = doc.alt;
+    modalImage.removeAttribute('width');
+    modalImage.removeAttribute('height');
     modalTitle.textContent = doc.title;
-    modalMeta.textContent = `${doc.issuer}${doc.date ? ` · ${doc.date}` : ''}`;
-    if (modalKicker) {
-      modalKicker.textContent = doc.category ? `${doc.category} Preview` : 'Image Preview';
-    }
-    modalPrev && (modalPrev.disabled = currentList.length <= 1);
-    modalNext && (modalNext.disabled = currentList.length <= 1);
+    modalMeta.textContent = `${doc.issuer}${doc.date ? ` - ${doc.date}` : ''}`;
+    if (modalKicker) modalKicker.textContent = doc.category ? `${doc.category} Preview` : 'Image Preview';
+    if (modalPrev) modalPrev.disabled = currentList.length <= 1;
+    if (modalNext) modalNext.disabled = currentList.length <= 1;
     setRotation(doc.rotateDeg);
   };
 
@@ -223,4 +249,3 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     }
   });
 };
-
