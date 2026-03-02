@@ -1119,6 +1119,49 @@ body .custom-cursor--ring {
   }
 }
 
+/* ===== v5.6.2 readability hardening ===== */
+main[data-page='home'] .home-figma-v1 .stack-title,
+main[data-page='home'] .home-figma-v1 .stack-title--nested,
+main[data-page='home'] .home-figma-v1 .section-label--inline,
+main[data-page='home'] .home-figma-v1 .home-details > summary,
+main[data-page='home'] .home-figma-v1 .contact-shell label,
+main[data-page='home'] .home-figma-v1 .doc-card__title,
+main[data-page='home'] .home-figma-v1 .proof-title,
+main[data-page='home'] .home-figma-v1 .credential-title,
+main[data-page='home'] .home-figma-v1 .career-event__title {
+  color: var(--home-ink) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .fh-light-card .stack-title,
+main[data-page='home'] .home-figma-v1 .stack-card .stack-title {
+  font-size: clamp(1.35rem, 1.55vw, 2rem) !important;
+  font-weight: 650 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.02em !important;
+}
+
+main[data-page='home'] .home-figma-v1 .section-body,
+main[data-page='home'] .home-figma-v1 .muted,
+main[data-page='home'] .home-figma-v1 .proof-source,
+main[data-page='home'] .home-figma-v1 .credential-copy,
+main[data-page='home'] .home-figma-v1 .doc-card__summary,
+main[data-page='home'] .home-figma-v1 .card-surface p,
+main[data-page='home'] .home-figma-v1 .panel-outline p {
+  color: var(--home-ink-muted) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .chip,
+main[data-page='home'] .home-figma-v1 .stack-chip,
+main[data-page='home'] .home-figma-v1 .doc-filter {
+  color: var(--home-ink) !important;
+}
+
+main[data-page='home'] .home-figma-v1 .home-details > summary {
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
 @media (max-width: 767px) {
   main[data-page='home'] .home-figma-v1 #hero .hero-grid {
     padding-top: 108px !important;

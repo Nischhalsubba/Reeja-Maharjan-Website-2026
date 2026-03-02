@@ -39,9 +39,22 @@ const hasUsablePublicImage = (file?: string) => {
   }
 };
 
+const heroCutoutPath = '/reeja-hero-cutout.png';
+const heroCutoutExists = hasUsablePublicImage(heroCutoutPath);
 const heroImageCandidate = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured)
   ?? profile.images?.find((img) => img.usage === 'hero' && img.public);
-const heroImage = heroImageCandidate && hasUsablePublicImage(heroImageCandidate.file) ? heroImageCandidate : undefined;
+const heroImage = heroCutoutExists
+  ? {
+      id: 'hero-cutout',
+      file: heroCutoutPath,
+      alt: `${profile.name} hero portrait`,
+      usage: 'hero' as const,
+      public: true,
+      featured: true,
+    }
+  : heroImageCandidate && hasUsablePublicImage(heroImageCandidate.file)
+    ? heroImageCandidate
+    : undefined;
 const fallbackVisualDoc = publicDocs.find((doc) => doc.previewAspect !== 'portrait') ?? publicDocs[0];
 
 const workPreferenceChips = [

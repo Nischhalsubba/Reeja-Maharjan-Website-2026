@@ -6344,3 +6344,87 @@ main[data-page='home'] .home-figma-v1 #contact .contact-grid {
   .site-footer--figma-home .footer-grid--figma-home { grid-template-columns: 1fr !important; }
   main[data-page='home'] .home-figma-v1 .hero-pill-cloud { display: none !important; }
 }
+
+/* ===== v5.6.2 global visibility + contrast patch ===== */
+:root {
+  --text-primary: #1e2229;
+  --text-secondary: #3e4854;
+  --text-muted: #57606a;
+  --surface-page: #f5f1e8;
+  --surface-card: #ffffff;
+  --ui-border: rgba(30, 34, 41, 0.14);
+  --focus-ring: #0d6efd;
+}
+
+main[data-page='seo-landing'] {
+  background: var(--surface-page);
+  color: var(--text-secondary);
+}
+
+main[data-page='seo-landing'] .section-shell,
+main[data-page='seo-landing'] .card-surface {
+  background: var(--surface-card);
+  border: 1px solid var(--ui-border);
+}
+
+main[data-page='seo-landing'] .section-title,
+main[data-page='seo-landing'] .stack-title,
+main[data-page='seo-landing'] .subsection-title,
+main[data-page='seo-landing'] .hero-title,
+main[data-page='seo-landing'] .highlight-role,
+main[data-page='seo-landing'] .proof-title,
+main[data-page='seo-landing'] h3 {
+  color: var(--text-primary) !important;
+}
+
+main[data-page='seo-landing'] .section-label,
+main[data-page='seo-landing'] .eyebrow {
+  color: #c52822 !important;
+}
+
+main[data-page='seo-landing'] .section-body,
+main[data-page='seo-landing'] .muted,
+main[data-page='seo-landing'] .proof-text,
+main[data-page='seo-landing'] .proof-source,
+main[data-page='seo-landing'] .highlight-org,
+main[data-page='seo-landing'] .highlight-outcome,
+main[data-page='seo-landing'] .bullet-list li,
+main[data-page='seo-landing'] p {
+  color: var(--text-secondary) !important;
+}
+
+main[data-page='seo-landing'] .chip,
+main[data-page='seo-landing'] .stack-chip {
+  color: var(--text-primary) !important;
+  border-color: var(--ui-border) !important;
+  background: rgba(255, 255, 255, 0.96) !important;
+}
+
+main[data-page='seo-landing'] .notice {
+  color: #6d200d !important;
+  border-color: #cf4632 !important;
+  background: #ffece8 !important;
+}
+
+main[data-page='seo-landing'] input,
+main[data-page='seo-landing'] textarea,
+main[data-page='seo-landing'] select {
+  color: var(--text-primary);
+  background: #fff;
+  border-color: var(--ui-border);
+}
+
+main[data-page='seo-landing'] input::placeholder,
+main[data-page='seo-landing'] textarea::placeholder {
+  color: #697482;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 2px;
+}
