@@ -1195,3 +1195,367 @@ body[data-page-name='home'] .doc-lightbox__nav:focus-visible {
   }
 }
 
+/* v5.5.1 authoritative overrides: hero 18:2 geometry + menu contrast + full viewport lightbox */
+body[data-page-name='home'] {
+  --fh54-bg: #f5f1e8;
+  --fh54-accent: #e7302a;
+  --fh54-accent-ink: #b61f1a;
+  --fh54-ink: #1e2229;
+  --fh54-ink-muted: #57606a;
+  --fh54-white: #f1fdf9;
+  --fh54-card: #ffffff;
+  --fh54-line: rgba(30, 34, 41, 0.1);
+  --fh54-stage: 1360px;
+  --fh54-gutter: clamp(16px, 3vw, 40px);
+}
+
+main[data-page='home'] .home-figma-v1 .home-figma-canvas--hero {
+  min-height: 900px !important;
+  padding-top: clamp(16px, 2.5vw, 28px) !important;
+  padding-bottom: clamp(24px, 4vw, 44px) !important;
+  background:
+    radial-gradient(40rem 18rem at 69% 35%, rgba(241, 253, 249, 0.16), rgba(241, 253, 249, 0) 70%),
+    linear-gradient(180deg, #ef302a 0%, #ea2f29 58%, #eb5147 100%) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-stage {
+  overflow: visible !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-grid {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 651px) minmax(0, 1fr) !important;
+  min-height: 900px !important;
+  align-items: start !important;
+  gap: clamp(12px, 1.4vw, 24px) !important;
+  padding-top: 86px !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-copy-block {
+  max-width: 651px !important;
+  width: 100% !important;
+  position: relative !important;
+  z-index: 4 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-title {
+  color: #f1fdf9 !important;
+  font-size: clamp(3.2rem, 6vw, 6.25rem) !important;
+  line-height: clamp(3rem, 5.6vw, 5.5rem) !important;
+  letter-spacing: -0.06em !important;
+  font-weight: 600 !important;
+  max-width: 9.2ch !important;
+  text-wrap: balance;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-subtitle {
+  font-size: clamp(1rem, 0.6vw + 0.9rem, 1.25rem) !important;
+  line-height: 1.5 !important;
+  max-width: 34ch !important;
+  color: rgba(241, 253, 249, 0.92) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-proof-line {
+  color: rgba(241, 253, 249, 0.96) !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-visual-col {
+  position: relative !important;
+  min-height: 873px !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-card--figma {
+  position: absolute !important;
+  right: 0 !important;
+  top: 0 !important;
+  width: min(74vw, 1208px) !important;
+  max-width: 1208px !important;
+  z-index: 1 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-frame {
+  height: clamp(520px, 60vw, 873px) !important;
+  min-height: clamp(520px, 60vw, 873px) !important;
+  width: 100% !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-main {
+  object-fit: cover !important;
+  object-position: center 34% !important;
+  mix-blend-mode: hard-light !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-overlay-svg {
+  position: absolute !important;
+  inset: auto 0 0 0 !important;
+  width: 100% !important;
+  z-index: 2 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card {
+  right: 0 !important;
+  top: 308px !important;
+  width: 244px !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  z-index: 5 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__label,
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__meta,
+main[data-page='home'] .home-figma-v1 #hero .hero-bio-card .section-body,
+main[data-page='home'] .home-figma-v1 #hero .hero-bio-card .eyebrow {
+  color: #f1fdf9 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__value {
+  color: #f1fdf9 !important;
+  font-size: clamp(2rem, 3vw, 3.5rem) !important;
+  line-height: 1 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-bio-card {
+  position: absolute !important;
+  right: 0 !important;
+  bottom: 130px !important;
+  width: 328px !important;
+  z-index: 5 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary {
+  right: 32px !important;
+  bottom: 24px !important;
+  width: min(21rem, 46%) !important;
+  z-index: 6 !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary .device-wrap--hero {
+  scale: 0.78 !important;
+  transform-origin: bottom right !important;
+}
+
+/* menu drawer contrast */
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__summary {
+  color: #f1fdf9 !important;
+  border-color: rgba(241, 253, 249, 0.35) !important;
+  background: rgba(241, 253, 249, 0.08) !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .nav-menu-label {
+  color: #f1fdf9 !important;
+  opacity: 1 !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel {
+  background: #fffdfa !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  color: #1e2229 !important;
+  box-shadow: 0 24px 56px rgba(20, 23, 28, 0.18) !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel a,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel button,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__link {
+  color: #1e2229 !important;
+  opacity: 1 !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__link:hover,
+body[data-page-name='home'] .site-nav--figma-home .figma-menu__link:focus-visible,
+body[data-page-name='home'] .site-nav--figma-home .motion-toggle--figma-panel:hover,
+body[data-page-name='home'] .site-nav--figma-home .motion-toggle--figma-panel:focus-visible {
+  color: #b61f1a !important;
+  background: rgba(231, 48, 42, 0.08) !important;
+}
+
+/* full viewport popup + light palette */
+body[data-page-name='home'] .doc-lightbox {
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  min-height: 100dvh !important;
+  z-index: 300 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox[hidden] {
+  display: none !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(30, 34, 41, 0.42) !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__dialog {
+  position: fixed !important;
+  left: 50% !important;
+  top: 50% !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translate(-50%, -50%) !important;
+  width: min(1140px, calc(100vw - 24px)) !important;
+  max-width: min(1140px, calc(100vw - 24px)) !important;
+  max-height: min(94dvh, 58rem) !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(30, 34, 41, 0.12) !important;
+  background: #fffdfa !important;
+  color: #1e2229 !important;
+  box-shadow: 0 28px 70px rgba(20, 23, 28, 0.2) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__header {
+  color: #1e2229 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__kicker {
+  color: #e7302a !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__title {
+  color: #1e2229 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__meta {
+  color: #57606a !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__toolbar {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0 1rem 0.75rem !important;
+  background: #fffdfa !important;
+  border-bottom: 1px solid rgba(30, 34, 41, 0.08) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__rotate-controls {
+  display: inline-flex !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__tool,
+body[data-page-name='home'] .doc-lightbox__close,
+body[data-page-name='home'] .doc-lightbox__nav {
+  background: #ffffff !important;
+  color: #1e2229 !important;
+  border: 1px solid rgba(30, 34, 41, 0.14) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__rotation {
+  color: #57606a !important;
+  font-size: 0.85rem !important;
+  font-weight: 600 !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__stage {
+  background: rgba(245, 241, 232, 0.7) !important;
+}
+
+body[data-page-name='home'] .doc-lightbox__stage img {
+  background: #fff !important;
+  border: 1px solid rgba(30, 34, 41, 0.09) !important;
+}
+
+@media (max-width: 1199px) {
+  main[data-page='home'] .home-figma-v1 #hero .hero-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+    min-height: auto !important;
+    padding-top: 88px !important;
+    gap: 1.5rem !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-visual-col {
+    min-height: clamp(460px, 72vw, 740px) !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-photo-card--figma {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-photo-frame {
+    height: clamp(420px, 66vw, 720px) !important;
+    min-height: 0 !important;
+    border-radius: 22px !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-availability-card {
+    right: 14px !important;
+    top: 14px !important;
+    width: min(19rem, 58vw) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 14px !important;
+    padding: 0.7rem 0.85rem !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__label,
+  main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__meta,
+  main[data-page='home'] .home-figma-v1 #hero .hero-availability-card__value {
+    color: #1e2229 !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-bio-card {
+    position: relative !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 100% !important;
+    margin-top: 0.75rem !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-bio-card .section-body,
+  main[data-page='home'] .home-figma-v1 #hero .hero-bio-card .eyebrow {
+    color: #1e2229 !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-device-secondary {
+    right: 0 !important;
+    bottom: 0 !important;
+  }
+}
+
+@media (max-width: 767px) {
+  main[data-page='home'] .home-figma-v1 #hero .hero-title {
+    font-size: clamp(2rem, 10vw, 2.8rem) !important;
+    line-height: 0.96 !important;
+    max-width: 100% !important;
+  }
+
+  main[data-page='home'] .home-figma-v1 #hero .hero-actions .fh-cta--primary {
+    width: 100% !important;
+  }
+
+  body[data-page-name='home'] .site-nav--figma-home .figma-menu__panel {
+    min-width: min(20rem, calc(100vw - 1rem)) !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__dialog {
+    width: calc(100vw - 12px) !important;
+    max-width: calc(100vw - 12px) !important;
+    max-height: 94dvh !important;
+    border-radius: 16px !important;
+  }
+
+  body[data-page-name='home'] .doc-lightbox__toolbar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+}
+

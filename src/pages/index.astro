@@ -363,8 +363,8 @@ const proofCards = proofCardsAll.slice(0, 3);
 const homepageStats = profile.stats.slice(0, 4);
 const verificationPreviewDocs = publicDocs.slice(0, 8);
 const additionalVerificationDocs = publicDocs.slice(8);
-const aboutVisual = heroImage ? { file: heroImage.file, alt: heroImage.alt, title: profile.name } : fallbackVisualDoc
-  ? { file: fallbackVisualDoc.file, alt: fallbackVisualDoc.alt, title: fallbackVisualDoc.title }
+const aboutVisual = heroImage ? { id: heroImage.id, file: heroImage.file, alt: heroImage.alt, title: profile.name } : fallbackVisualDoc
+  ? { id: fallbackVisualDoc.id, file: fallbackVisualDoc.file, alt: fallbackVisualDoc.alt, title: fallbackVisualDoc.title }
   : undefined;
 const contactFaqs = homepageFaqs.slice(0, 4);
 const featuredTimelineEntries = timelineEntries.slice(0, 4);
@@ -421,14 +421,6 @@ void _flatTimelineEntries;
                 </div>
               </details>
 
-              <div class="hero-support-grid mt-5">
-                <div class="hero-support-copy">
-                  <p class="eyebrow">{copy.hero.snapshotTitle}</p>
-                  <p class="section-body mt-2 reading-wrap">
-                    {copy.hero.snapshotBody}
-                  </p>
-                </div>
-              </div>
               <div class="hero-social-row mt-5" aria-label="Profile quick links">
                 <a href={profile.linkedin} target="_blank" rel="noreferrer noopener">LinkedIn</a>
                 <a href={`mailto:${profile.email}`}>Email</a>
@@ -482,6 +474,12 @@ void _flatTimelineEntries;
                 </p>
                 <p class="hero-availability-card__meta">
                   {profile.workPreferences.availability} | {profile.workPreferences.relocation ? 'Relocation accepted' : 'Relocation not listed'}
+                </p>
+              </div>
+              <div class="hero-bio-card" data-motion="reveal">
+                <p class="eyebrow">{copy.hero.snapshotTitle}</p>
+                <p class="section-body mt-2">
+                  {copy.hero.snapshotBody}
                 </p>
               </div>
               <div class="hero-device-secondary">

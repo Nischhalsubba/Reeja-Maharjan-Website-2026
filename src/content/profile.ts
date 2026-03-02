@@ -653,6 +653,7 @@ export const profile: Profile = {
       alt: 'MMTH experience letter for Staff Nurse role',
       public: true,
       featured: true,
+      lightboxRotateDeg: 90,
       tags: ['experience', 'mmth', 'general ward', 'surgery', 'gyn-obs'],
       previewAspect: 'portrait',
       usedIn: ['highlights', 'proof'],
@@ -796,6 +797,7 @@ export const profile: Profile = {
       summary: 'Subject-wise academic transcript for higher secondary studies.',
       alt: 'Higher secondary transcript marksheet',
       public: true,
+      lightboxRotateDeg: 90,
       tags: ['plus2', 'transcript'],
       previewAspect: 'portrait',
     },
@@ -809,6 +811,7 @@ export const profile: Profile = {
       summary: 'School leaving certificate completion record.',
       alt: 'School leaving certificate issued in 2014',
       public: true,
+      lightboxRotateDeg: 90,
       tags: ['slc', 'certificate'],
       previewAspect: 'portrait',
     },
@@ -1174,3 +1177,4 @@ export const profile: Profile = {
     'Only professional certificates, training records, experience letters, recognition records, and education proofs are included in the document gallery.',
   ],
 };
+
