@@ -40,6 +40,16 @@ const pageMap: Record<string, MotionFeature[]> = {
     'nav-spy',
     'doc-gallery',
   ],
+  blog: [
+    'custom-cursor',
+    'reveals',
+    'doc-gallery',
+  ],
+  'blog-detail': [
+    'custom-cursor',
+    'reveals',
+    'doc-gallery',
+  ],
   'not-found': ['reveals'],
 };
 

@@ -6439,7 +6439,68 @@ html body *::after {
 /* Necessary circular affordances */
 html body .custom-cursor--dot,
 html body .custom-cursor--ring,
-html body .device-status-dot,
-html body .brand-mark__mono {
+html body .device-status-dot {
   border-radius: 50% !important;
+}
+
+html body.has-custom-cursor,
+html body.has-custom-cursor a,
+html body.has-custom-cursor button,
+html body.has-custom-cursor [role='button'],
+html body.has-custom-cursor [data-lightbox-trigger],
+html body.has-custom-cursor [data-doc-trigger] {
+  cursor: none !important;
+}
+
+html body .custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 160ms ease;
+}
+
+html body .custom-cursor[data-visible='true'] {
+  opacity: 1;
+}
+
+html body .custom-cursor--dot {
+  width: 6px;
+  height: 6px;
+  background: #e7302a;
+}
+
+html body .custom-cursor--ring {
+  width: 28px;
+  height: 28px;
+  border: 1px solid rgba(231, 48, 42, 0.7);
+  background: transparent;
+  transition: width 180ms ease, height 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+html body .custom-cursor--ring[data-state='link'] {
+  width: 34px;
+  height: 34px;
+}
+
+html body .custom-cursor--ring[data-state='cta'] {
+  width: 40px;
+  height: 40px;
+  border-color: rgba(231, 48, 42, 0.95);
+}
+
+html body .custom-cursor--ring[data-state='media'],
+html body .custom-cursor--ring[data-state='card'] {
+  width: 46px;
+  height: 46px;
+  border-color: rgba(30, 34, 41, 0.45);
+  background: rgba(231, 48, 42, 0.08);
+}
+
+html body .custom-cursor--ring[data-state='drag'] {
+  width: 24px;
+  height: 24px;
+  border-color: rgba(30, 34, 41, 0.9);
 }

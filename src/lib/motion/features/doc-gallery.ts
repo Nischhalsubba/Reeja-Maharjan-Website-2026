@@ -46,7 +46,7 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
   const genericTriggers = Array.from(root.querySelectorAll<HTMLElement>('[data-lightbox-trigger]:not([data-doc-trigger])'));
   const autoImageTriggers = Array.from(
     root.querySelectorAll<HTMLImageElement>(
-      ".home-figma-v1 img:not([data-doc-image]):not(.hero-photo-overlay-svg):not(.device-avatar):not(.figma-menu__icon):not([aria-hidden='true'])",
+      "main img:not([data-doc-image]):not(.hero-photo-overlay-svg):not(.device-avatar):not([aria-hidden='true'])",
     ),
   )
     .filter((img) => {
@@ -58,10 +58,9 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
       return renderedWidth >= 80 && renderedHeight >= 80;
     })
     .map((img, index) => {
-      const trigger = img.closest<HTMLElement>('a, figure, article, div, section') ?? img.parentElement ?? img;
-      if (!(trigger instanceof HTMLElement)) return null;
       const src = img.getAttribute('src') ?? img.currentSrc ?? '';
       if (!src) return null;
+      const trigger = img;
       const title = img.getAttribute('alt') || trigger.getAttribute('data-lightbox-title') || `Image ${index + 1}`;
       trigger.dataset.lightboxTrigger = '';
       trigger.dataset.lightboxId = trigger.dataset.lightboxId || `auto-image-${index + 1}`;
@@ -70,19 +69,23 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
       trigger.dataset.lightboxTitle = trigger.dataset.lightboxTitle || title;
       trigger.dataset.lightboxIssuer = trigger.dataset.lightboxIssuer || 'Portfolio media';
       trigger.dataset.lightboxGroup = trigger.dataset.lightboxGroup || 'auto-images';
-      if (!trigger.hasAttribute('tabindex') && trigger.tagName !== 'A' && trigger.tagName !== 'BUTTON') {
+      if (!trigger.hasAttribute('tabindex')) {
         trigger.setAttribute('tabindex', '0');
         trigger.setAttribute('role', 'button');
       }
       return trigger;
     })
-    .filter((el): el is HTMLElement => Boolean(el));
+    .filter((el): el is HTMLImageElement => Boolean(el));
 
   if (!gallery && !lightbox) return;
 
   const filterButtons = gallery ? Array.from(gallery.querySelectorAll<HTMLButtonElement>('[data-doc-filter]')) : [];
   const items = gallery ? Array.from(gallery.querySelectorAll<HTMLElement>('[data-doc-item]')) : [];
-  const allTriggerEls = Array.from(new Set([...docTriggers, ...genericTriggers, ...autoImageTriggers]));
+  const allTriggerEls: HTMLElement[] = Array.from(new Set<HTMLElement>([
+    ...docTriggers,
+    ...genericTriggers,
+    ...autoImageTriggers,
+  ]));
 
   const docs = docTriggers.map((el) => toLightboxItem(el)).filter((item): item is LightboxItem => item !== null);
 
@@ -107,7 +110,7 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     if (!modalImage) return;
     modalImage.style.transform = `rotate(${currentRotation}deg)`;
     modalImage.style.transformOrigin = 'center center';
-    if (modalRotationValue) modalRotationValue.textContent = `Rotation: ${currentRotation} deg`;
+    if (modalRotationValue) modalRotationValue.textContent = `${currentRotation} deg`;
   };
 
   const setRotation = (deg: number) => {

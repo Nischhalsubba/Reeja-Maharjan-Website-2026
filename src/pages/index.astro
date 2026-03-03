@@ -1,8 +1,4 @@
 ---
-import { existsSync, statSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ButtonLink from '../components/ButtonLink.astro';
 import FloatingTagPill from '../components/FloatingTagPill.astro';
@@ -27,34 +23,15 @@ const publicDocs = profile.documentGallery
   .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
 const docCategories = ['All', ...new Set(publicDocs.map((doc) => doc.category))];
 
-const publicDir = resolve(dirname(fileURLToPath(import.meta.url)), '../../public');
-const hasUsablePublicImage = (file?: string) => {
-  if (!file || !file.startsWith('/')) return false;
-  const absolute = resolve(publicDir, file.slice(1));
-  if (!existsSync(absolute)) return false;
-  try {
-    return statSync(absolute).size > 10_000;
-  } catch {
-    return false;
-  }
-};
-
 const heroCutoutPath = '/reeja-hero-cutout.png';
-const heroCutoutExists = hasUsablePublicImage(heroCutoutPath);
-const heroImageCandidate = profile.images?.find((img) => img.usage === 'hero' && img.public && img.featured)
-  ?? profile.images?.find((img) => img.usage === 'hero' && img.public);
-const heroImage = heroCutoutExists
-  ? {
-      id: 'hero-cutout',
-      file: heroCutoutPath,
-      alt: `${profile.name} hero portrait`,
-      usage: 'hero' as const,
-      public: true,
-      featured: true,
-    }
-  : heroImageCandidate && hasUsablePublicImage(heroImageCandidate.file)
-    ? heroImageCandidate
-    : undefined;
+const heroImage = {
+  id: 'hero-cutout',
+  file: heroCutoutPath,
+  alt: `${profile.name} hero portrait`,
+  usage: 'hero' as const,
+  public: true,
+  featured: true,
+};
 const fallbackVisualDoc = publicDocs.find((doc) => doc.previewAspect !== 'portrait') ?? publicDocs[0];
 
 const workPreferenceChips = [
@@ -419,8 +396,8 @@ void _flatTimelineEntries;
                 <ButtonLink href={profile.resumePdfPath} variant="primary" className="fh-cta fh-cta--primary">{copy.hero.primaryCta}</ButtonLink>
               </div>
 
-              <details class="hero-more-details mt-4">
-                <summary>More options</summary>
+              <section class="hero-more-details mt-4" aria-label="More options">
+                <p class="section-label section-label--inline">More options</p>
                 <div class="chip-row mt-3">
                   {workPreferenceChips.map((chip) => <span class="chip chip--hero">{chip}</span>)}
                 </div>
@@ -432,7 +409,7 @@ void _flatTimelineEntries;
                     {copy.hero.tertiaryCta}
                   </button>
                 </div>
-              </details>
+              </section>
 
               <div class="hero-social-row mt-5" aria-label="Profile quick links">
                 <a href={profile.linkedin} target="_blank" rel="noreferrer noopener">LinkedIn</a>
@@ -543,8 +520,8 @@ void _flatTimelineEntries;
                 </div>
               </section>
 
-              <details class="home-details mt-4" data-motion="reveal">
-                <summary>Care Philosophy & Professional Direction</summary>
+              <section class="card-surface mt-4 p-4" data-motion="reveal">
+                <p class="section-label section-label--inline">Care Philosophy & Professional Direction</p>
                 <div class="mt-4 grid gap-6 md:grid-cols-2">
                   <div>
                     <p class="font-semibold">Care Philosophy</p>
@@ -559,7 +536,7 @@ void _flatTimelineEntries;
                     </ul>
                   </div>
                 </div>
-              </details>
+              </section>
             </div>
 
             <div class="fh-about-layout__right">
@@ -644,8 +621,8 @@ void _flatTimelineEntries;
             }
           </div>
 
-          <details class="home-details home-details--timeline mt-6">
-            <summary>Show complete career timeline</summary>
+          <section class="home-details home-details--timeline mt-6">
+            <p class="section-label section-label--inline">Complete Career Timeline</p>
             <div class="career-timeline mt-5" data-timeline-root>
               <div class="timeline-line timeline-line--bg" aria-hidden="true"></div>
               <div class="timeline-line timeline-line--progress" aria-hidden="true" data-timeline-progress></div>
@@ -756,7 +733,7 @@ void _flatTimelineEntries;
                 }
               </ol>
             </div>
-          </details>
+          </section>
         </div>
       </div>
     </section>
@@ -789,12 +766,12 @@ void _flatTimelineEntries;
               </div>
               {
                 quickFactsSecondary.length ? (
-                  <details class="home-details mt-4">
-                    <summary>More quick facts</summary>
+                  <section class="card-surface mt-4 p-3">
+                    <p class="section-label section-label--inline">More quick facts</p>
                     <div class="mt-3 grid gap-2 sm:grid-cols-2">
                       {quickFactsSecondary.map((fact) => <p class="section-body text-sm">{fact}</p>)}
                     </div>
-                  </details>
+                  </section>
                 ) : null
               }
             </section>
@@ -804,19 +781,19 @@ void _flatTimelineEntries;
               <h3 class="stack-title mt-2">{copy.skills.profileTitle}</h3>
               <p class="section-body mt-3">{profile.summary}</p>
 
-              <details class="home-details mt-4">
-                <summary>Care Philosophy</summary>
+              <section class="card-surface mt-4 p-3">
+                <p class="section-label section-label--inline">Care Philosophy</p>
                 <ul class="bullet-list mt-3">
                   {profile.carePhilosophy.map((point) => <li>{point}</li>)}
                 </ul>
-              </details>
+              </section>
 
-              <details class="home-details mt-3">
-                <summary>Professional Direction</summary>
+              <section class="card-surface mt-3 p-3">
+                <p class="section-label section-label--inline">Professional Direction</p>
                 <ul class="bullet-list mt-3">
                   {profile.goals.map((goal) => <li>{goal}</li>)}
                 </ul>
-              </details>
+              </section>
             </section>
 
             <section class="card-surface stack-card" data-motion="reveal">
@@ -847,8 +824,8 @@ void _flatTimelineEntries;
               </div>
               {
                 extraSkillGroups.length ? (
-                  <details class="home-details mt-4">
-                    <summary>Show more skill groups</summary>
+                  <section class="card-surface mt-4 p-3">
+                    <p class="section-label section-label--inline">Additional skill groups</p>
                     <div class="stack-list stack-list--nested mt-4" data-skills-grid>
                       {extraSkillGroups.map((group) => (
                         <article class="panel-outline p-3">
@@ -859,7 +836,7 @@ void _flatTimelineEntries;
                         </article>
                       ))}
                     </div>
-                  </details>
+                  </section>
                 ) : null
               }
             </section>
@@ -912,8 +889,8 @@ void _flatTimelineEntries;
                 {proofCards.map((item) => <ProofSnippetCard item={item} />)}
               </div>
 
-              <details class="home-details mt-6">
-                <summary>Show recognition and research details</summary>
+              <section class="home-details mt-6">
+                <p class="section-label section-label--inline">Recognition and Research Details</p>
                 <div class="proof-subgrid mt-5">
                   <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
                     <p class="proof-type">Recognition & Academic Merit</p>
@@ -944,7 +921,7 @@ void _flatTimelineEntries;
                     </div>
                   </section>
                 </div>
-              </details>
+              </section>
             </section>
 
             <section class="home-figma-panel" data-motion="reveal">
@@ -996,12 +973,12 @@ void _flatTimelineEntries;
 
                 {
                   additionalVerificationDocs.length ? (
-                    <details class="home-details mt-6">
-                      <summary>Show more evidence</summary>
+                    <section class="home-details mt-6">
+                      <p class="section-label section-label--inline">Additional evidence</p>
                       <div class="doc-grid mt-4">
                         {additionalVerificationDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
                       </div>
-                    </details>
+                    </section>
                   ) : null
                 }
               </div>
@@ -1032,22 +1009,22 @@ void _flatTimelineEntries;
                 </p>
               </div>
 
-              <details class="home-details mt-6">
-                <summary>{copy.contact.referencesTitle}</summary>
+              <section class="home-details mt-6">
+                <p class="section-label section-label--inline">{copy.contact.referencesTitle}</p>
                 <p class="section-body mt-3">
                   {copy.contact.referencesBody}
                 </p>
                 <ul class="bullet-list mt-3">
                   {profile.references.map((ref) => <li>{ref.name} - {ref.role}</li>)}
                 </ul>
-              </details>
+              </section>
 
-              <details class="home-details mt-3">
-                <summary>{copy.contact.privacyTitle}</summary>
+              <section class="home-details mt-3">
+                <p class="section-label section-label--inline">{copy.contact.privacyTitle}</p>
                 <ul class="bullet-list mt-3">
                   {profile.privacyNotes.map((note) => <li>{note}</li>)}
                 </ul>
-              </details>
+              </section>
             </div>
 
             <div class="card-surface contact-shell" data-motion="reveal" data-tilt-card>

@@ -39,14 +39,14 @@ const { variant = 'default' } = Astro.props as Props;
           </div>
 
           <div class="footer-figma-utility">
-            <details class="footer-role-pages">
-              <summary>Blog</summary>
+            <section class="footer-role-pages" aria-label="Blog">
+              <p class="footer-kicker">Blog</p>
               <ul class="footer-links">
                 <li><a href="/blog/">Blog list</a></li>
                 <li><a href="/blog/maternal-newborn-care-practice-notes/">Maternal and newborn care</a></li>
                 <li><a href="/blog/documentation-and-handover-discipline/">Documentation and handover</a></li>
               </ul>
-            </details>
+            </section>
 
             <div class="footer-meta footer-meta--figma-home">
               <span>(c) {new Date().getFullYear()} {profile.name}</span>
