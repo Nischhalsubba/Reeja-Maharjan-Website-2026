@@ -1421,3 +1421,69 @@ main[data-page='home'] .home-figma-v1 .home-details > summary {
     padding-bottom: 12px !important;
   }
 }
+
+/* ===== v5.7 strict user constraints ===== */
+body[data-page-name='home'] {
+  --home-section-y: 100px !important;
+}
+
+main[data-page='home'] .home-core-section + .home-core-section {
+  margin-top: 100px !important;
+}
+
+main[data-page='home'] .home-core-section + .home-core-section::before {
+  content: none !important;
+}
+
+main[data-page='home'] .home-figma-canvas--about,
+main[data-page='home'] .home-figma-canvas--highlights,
+main[data-page='home'] .home-figma-canvas--skills,
+main[data-page='home'] .home-figma-canvas--contact {
+  min-height: auto !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+body[data-page-name='home'] .site-nav--figma-home {
+  position: absolute !important;
+  inset: 0 0 auto 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-frame {
+  background: transparent !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-main {
+  object-fit: contain !important;
+  object-position: right bottom !important;
+  mix-blend-mode: normal !important;
+  background: transparent !important;
+}
+
+main[data-page='home'] .home-figma-v1 #hero .hero-photo-overlay-svg {
+  right: 0 !important;
+  bottom: 0 !important;
+  width: min(62%, 560px) !important;
+  opacity: 1 !important;
+}
+
+main[data-page='home'] .home-figma-v1 details.home-details,
+main[data-page='home'] .home-figma-v1 details.hero-more-details {
+  display: block !important;
+  border-radius: 0 !important;
+}
+
+main[data-page='home'] .home-figma-v1 details.home-details > summary,
+main[data-page='home'] .home-figma-v1 details.hero-more-details > summary {
+  list-style: none !important;
+  pointer-events: none !important;
+}
+
+main[data-page='home'] .home-figma-v1 details.home-details > :not(summary),
+main[data-page='home'] .home-figma-v1 details.hero-more-details > :not(summary) {
+  display: block !important;
+}

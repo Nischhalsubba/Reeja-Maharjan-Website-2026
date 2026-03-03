@@ -6428,3 +6428,18 @@ select:focus-visible {
   outline: 2px solid var(--focus-ring);
   outline-offset: 2px;
 }
+
+/* ===== v5.7 zero-radius baseline across site ===== */
+html body *,
+html body *::before,
+html body *::after {
+  border-radius: 0 !important;
+}
+
+/* Necessary circular affordances */
+html body .custom-cursor--dot,
+html body .custom-cursor--ring,
+html body .device-status-dot,
+html body .brand-mark__mono {
+  border-radius: 50% !important;
+}
