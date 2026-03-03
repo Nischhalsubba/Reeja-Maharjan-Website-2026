@@ -55,6 +55,14 @@ const navLinks = isSourceHome ? selectedLinks.filter((link) => link.id !== 'cont
             </span>
           </a>
 
+          <nav class="figma-top-links" aria-label="Primary sections">
+            <ul>
+              {selectedLinks.map((link) => (
+                <li><a href={link.href} data-nav-spy-link={link.id}>{link.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+
           <details class="figma-menu">
             <summary class="figma-menu__summary" aria-label="Open site menu">
               <span class="figma-menu__icon" aria-hidden="true">

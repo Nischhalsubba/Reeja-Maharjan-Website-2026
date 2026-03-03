@@ -40,7 +40,7 @@ const workPreferenceChips = [
   ...profile.workPreferences.arrangements,
   `Availability: ${profile.workPreferences.availability}`,
   profile.workPreferences.relocation ? 'Relocation: Accepted' : 'Relocation: Not listed',
-];
+].slice(0, 6);
 const homepageFaqs = profile.faqItems.filter((faq) => faq.appliesTo.includes('home')).slice(0, 5);
 const siteUrl = Astro.site?.toString() ?? import.meta.env.SITE_URL ?? 'https://example.com';
 const homepageUrl = new URL(Astro.url.pathname, siteUrl).toString();

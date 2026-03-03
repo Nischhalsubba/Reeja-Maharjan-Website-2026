@@ -1,9 +1,9 @@
 export const homepageCopy = {
   hero: {
     label: 'Reeja Maharjan · Licensed Registered Nurse (Nepal) · Hospital / NGO / INGO Roles',
-    title: 'Registered Nurse for Maternal, Newborn, and General Ward Care',
+    title: 'Registered Nurse Specializing in Maternal, Newborn, and General Ward Care',
     subtitle:
-      'Reeja Maharjan is an NNC-licensed Registered Nurse with documented clinical service at TUTH, MMTH, and Sindhuli Hospital. Her portfolio presents verified experience in maternal-newborn care support, general ward nursing exposure, patient counselling, safe documentation, and coordinated handover practice.',
+      'NNC-licensed Registered Nurse with documented clinical service at TUTH, MMTH, and Sindhuli Hospital. Verified focus areas include maternal-newborn support, general ward nursing, patient counselling, safe documentation, and coordinated handover practice.',
     proofLine: 'NNC Licensed RN · Immediate Availability · Relocation Accepted · Nepal & International Opportunities',
     snapshotTitle: 'Clinical Snapshot',
     snapshotBody:
@@ -14,13 +14,13 @@ export const homepageCopy = {
   },
   timeline: {
     label: 'Career Timeline',
-    title: 'Clinical Experience, Training, Recognition, and Research in Date Order',
+    title: 'Clinical Experience, Training, Recognition, and Research Timeline',
     body:
       'This timeline combines hospital service with licensure, training, recognition, and research milestones. Related credentials are embedded within matching work periods when dates align, helping employers review progression and proof in one place.',
   },
   verification: {
     label: 'Verification',
-    title: 'Licensure, Training, and Supporting Evidence',
+    title: 'Licensure, Training, and Clinical Evidence',
     body:
       'Priority credentials are listed first for fast screening, followed by a filtered public evidence gallery that supports key clinical claims used across this portfolio.',
     galleryLabel: 'Verification Gallery',
@@ -34,7 +34,7 @@ export const homepageCopy = {
   },
   skills: {
     label: 'Skills & Fit',
-    title: 'Clinical Capability, Work Fit, and Readiness Summary',
+    title: 'Clinical Capability, Work Fit, and Readiness',
     body:
       'A recruiter-first summary of care areas, practical capability groups, communication strengths, education, and work preferences for hospital, NGO, and INGO hiring decisions.',
     practiceTitle: 'Clinical Areas of Practice',
@@ -48,7 +48,7 @@ export const homepageCopy = {
   },
   contact: {
     label: 'Contact',
-    title: 'Interview and Opportunity Inquiries for Hospital, NGO, and INGO Nursing Roles',
+    title: 'Request Interview or Hiring Discussion',
     body:
       'Use this form for interview scheduling, recruiter outreach, and role discussions. Reeja is available immediately and open to Nepal-wide and international opportunities with relocation accepted.',
     referencesTitle: 'References',
@@ -61,3 +61,4 @@ export const homepageCopy = {
 } as const;
 
 export type HomepageCopy = typeof homepageCopy;
+
