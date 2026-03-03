@@ -40,9 +40,11 @@ const { variant = 'default' } = Astro.props as Props;
 
           <div class="footer-figma-utility">
             <details class="footer-role-pages">
-              <summary>Role Pages</summary>
+              <summary>Blog</summary>
               <ul class="footer-links">
-                {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
+                <li><a href="/blog/">Blog list</a></li>
+                <li><a href="/blog/maternal-newborn-care-practice-notes/">Maternal and newborn care</a></li>
+                <li><a href="/blog/documentation-and-handover-discipline/">Documentation and handover</a></li>
               </ul>
             </details>
 
@@ -108,9 +110,11 @@ const { variant = 'default' } = Astro.props as Props;
               </section>
 
               <section>
-                <p class="footer-kicker">Role Pages</p>
+                <p class="footer-kicker">Blog</p>
                 <ul class="footer-links">
-                  {profile.seoPages.slice(0, 6).map((page) => <li><a href={`/${page.slug}/`}>{page.h1}</a></li>)}
+                  <li><a href="/blog/">Blog list</a></li>
+                  <li><a href="/blog/maternal-newborn-care-practice-notes/">Maternal and newborn care</a></li>
+                  <li><a href="/blog/documentation-and-handover-discipline/">Documentation and handover</a></li>
                 </ul>
               </section>
             </div>
