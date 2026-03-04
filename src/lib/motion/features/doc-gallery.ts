@@ -110,7 +110,7 @@ export const bindDocGallery = async (root: ParentNode, reduced: boolean): Promis
     if (!modalImage) return;
     modalImage.style.transform = `rotate(${currentRotation}deg)`;
     modalImage.style.transformOrigin = 'center center';
-    if (modalRotationValue) modalRotationValue.textContent = `${currentRotation} deg`;
+    if (modalRotationValue) modalRotationValue.textContent = `${currentRotation}°`;
   };
 
   const setRotation = (deg: number) => {
