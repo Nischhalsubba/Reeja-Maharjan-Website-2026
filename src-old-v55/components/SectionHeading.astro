@@ -1,0 +1,22 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  centered?: boolean;
+}
+
+const { eyebrow, title, description, centered = false } = Astro.props as Props;
+---
+
+<header class:list={['mb-8 md:mb-12', centered && 'text-center']} data-motion="reveal">
+  {
+    eyebrow && (
+      <p class="accent-chip subtle-ring mb-3 inline-flex px-3 py-1 text-sm font-semibold tracking-wide">
+        {eyebrow}
+      </p>
+    )
+  }
+  <h2 class="text-3xl leading-tight font-semibold md:text-5xl">{title}</h2>
+  {description && <p class="text-muted mt-4 max-w-3xl text-base md:text-lg">{description}</p>}
+</header>

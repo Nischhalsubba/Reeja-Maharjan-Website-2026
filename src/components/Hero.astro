@@ -1,0 +1,32 @@
+---
+import type { HeroData } from '../content/profile';
+
+type Props = { hero: HeroData };
+const { hero } = Astro.props;
+---
+
+<section class="hero section" id="home" data-reveal-group>
+  <div class="container hero__grid">
+    <div class="hero__content">
+      {hero.available && <p class="badge">Available for work</p>}
+      <h1>{hero.title}</h1>
+      <p class="hero__role">{hero.role}</p>
+      <p class="hero__tagline">{hero.tagline}</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
+        <a class="btn btn--secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
+      </div>
+    </div>
+    <div class="hero__media" data-reveal>
+      <img src={hero.portrait.src} alt={hero.portrait.alt} width="720" height="860" loading="eager" />
+      <ul class="hero-meta">
+        {hero.meta.map((item) => (
+          <li>
+            <span>{item.label}</span>
+            <strong>{item.value}</strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

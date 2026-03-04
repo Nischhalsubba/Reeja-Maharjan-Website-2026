@@ -1,0 +1,36 @@
+---
+import SectionIntro from './SectionIntro.astro';
+import type { ProfileContent } from '../content/profile';
+
+type Props = { profile: ProfileContent };
+const { profile } = Astro.props;
+---
+
+<section class="section" data-reveal-group>
+  <div class="container section-stack">
+    <SectionIntro
+      id={profile.experienceIntro.id}
+      eyebrow={profile.experienceIntro.eyebrow}
+      title={profile.experienceIntro.title}
+      summary={profile.experienceIntro.summary}
+    />
+    <ol class="timeline">
+      {profile.experience.map((item) => (
+        <li class="timeline__item" data-reveal>
+          <div class="timeline__meta">
+            <span>{item.type}</span>
+            <time>{item.period}</time>
+          </div>
+          <h3>{item.role}</h3>
+          <p class="timeline__org">{item.organization}</p>
+          <p class="timeline__location">{item.location}</p>
+          <ul>
+            {item.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

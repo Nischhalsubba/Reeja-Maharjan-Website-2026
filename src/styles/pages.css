@@ -1,0 +1,10 @@
+.section--404 {
+  min-height: calc(100dvh - 200px);
+  display: grid;
+  align-items: center;
+}
+
+.section--404 h1 {
+  font-size: var(--h1);
+  line-height: 1.08;
+}

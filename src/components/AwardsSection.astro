@@ -1,0 +1,31 @@
+---
+import SectionIntro from './SectionIntro.astro';
+import type { ProfileContent } from '../content/profile';
+
+type Props = { profile: ProfileContent };
+const { profile } = Astro.props;
+const hasAwards = profile.awards.length > 0;
+---
+
+{
+  hasAwards && (
+    <section class="section" data-reveal-group>
+      <div class="container section-stack">
+        <SectionIntro
+          id={profile.awardsIntro.id}
+          eyebrow={profile.awardsIntro.eyebrow}
+          title={profile.awardsIntro.title}
+          summary={profile.awardsIntro.summary}
+        />
+        <div class="card-grid card-grid--1">
+          {profile.awards.map((award) => (
+            <article class="card" data-reveal>
+              <h3>{award.title}</h3>
+              <p>{award.note}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}

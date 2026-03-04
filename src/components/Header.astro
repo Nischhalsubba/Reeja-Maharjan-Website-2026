@@ -1,0 +1,45 @@
+---
+type Props = {
+  name: string;
+};
+
+const { name } = Astro.props;
+---
+
+<header class="site-header" aria-label="Primary">
+  <div class="container site-header__inner">
+    <a class="brand" href="#home" aria-label="Go to home section">
+      <span class="brand__mark">RM</span>
+      <span class="brand__text">
+        <strong>{name}</strong>
+        <small>Registered Nurse</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
+      Menu
+    </button>
+
+    <nav class="desktop-nav" aria-label="Section navigation">
+      <a href="#home">Home</a>
+      <a href="#profile">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" hidden>
+    <nav class="mobile-nav__panel" aria-label="Mobile section navigation">
+      <a href="#home">Home</a>
+      <a href="#profile">Profile</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>

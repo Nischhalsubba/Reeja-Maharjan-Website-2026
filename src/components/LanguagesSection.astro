@@ -1,0 +1,26 @@
+---
+import SectionIntro from './SectionIntro.astro';
+import type { ProfileContent } from '../content/profile';
+
+type Props = { profile: ProfileContent };
+const { profile } = Astro.props;
+---
+
+<section class="section" data-reveal-group>
+  <div class="container section-stack">
+    <SectionIntro
+      id={profile.languagesIntro.id}
+      eyebrow={profile.languagesIntro.eyebrow}
+      title={profile.languagesIntro.title}
+      summary={profile.languagesIntro.summary}
+    />
+    <div class="card-grid card-grid--2">
+      {profile.languages.map((language) => (
+        <article class="card language-card" data-reveal>
+          <h3>{language.name}</h3>
+          <p>{language.level}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

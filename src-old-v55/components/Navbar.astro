@@ -1,0 +1,164 @@
+---
+import Container from './Container.astro';
+import { profile } from '../content/profile';
+
+interface Props {
+  variant?: 'default' | 'source-home' | 'figma-home';
+}
+
+const links = [
+  { href: '/#hero', label: 'Home', id: 'hero' },
+  { href: '/#services', label: 'Care Areas', id: 'services' },
+  { href: '/#highlights', label: 'Highlights', id: 'highlights' },
+  { href: '/#about', label: 'About', id: 'about' },
+  { href: '/#proof', label: 'Proof', id: 'proof' },
+  { href: '/#credentials', label: 'Credentials', id: 'credentials' },
+  { href: '/#documents', label: 'Documents', id: 'documents' },
+  { href: '/#skills', label: 'Skills', id: 'skills' },
+  { href: '/#contact', label: 'Contact', id: 'contact' },
+];
+
+const sourceHomeLinks = [
+  { href: '/#hero', label: 'Home', id: 'hero' },
+  { href: '/#highlights', label: 'Timeline', id: 'highlights' },
+  { href: '/#credentials', label: 'Verification', id: 'credentials' },
+  { href: '/#skills', label: 'Skills & Fit', id: 'skills' },
+  { href: '/#contact', label: 'Contact', id: 'contact' },
+];
+
+const figmaHomeLinks = [
+  { href: '/#hero', label: 'Home', id: 'hero' },
+  { href: '/#about', label: 'About', id: 'about' },
+  { href: '/#highlights', label: 'Highlights', id: 'highlights' },
+  { href: '/#skills', label: 'Skills & Fit', id: 'skills' },
+  { href: '/#contact', label: 'Contact', id: 'contact' },
+];
+
+const { variant = 'default' } = Astro.props as Props;
+const isSourceHome = variant === 'source-home';
+const isFigmaHome = variant === 'figma-home';
+const selectedLinks = isSourceHome ? sourceHomeLinks : isFigmaHome ? figmaHomeLinks : links;
+const contactLink = selectedLinks.find((link) => link.id === 'contact');
+const navLinks = isSourceHome ? selectedLinks.filter((link) => link.id !== 'contact') : selectedLinks;
+---
+
+{
+  isFigmaHome ? (
+    <header class="site-nav site-nav--figma-home z-50">
+      <div class="figma-home-header-wrap">
+        <div class="nav-shell nav-shell--figma-home">
+          <a href="/#hero" class="brand-mark brand-mark--figma-home" aria-label={`${profile.name} home`}>
+            <span class="brand-mark__mono">{profile.brand.monogram}</span>
+            <span class="brand-mark__label">
+              <span>{profile.brand.displayName}</span>
+              <small>{profile.role}</small>
+            </span>
+          </a>
+
+          <nav class="figma-top-links" aria-label="Primary sections">
+            <ul>
+              {selectedLinks.map((link) => (
+                <li><a href={link.href} data-nav-spy-link={link.id}>{link.label}</a></li>
+              ))}
+            </ul>
+          </nav>
+
+          <details class="figma-menu">
+            <summary class="figma-menu__summary" aria-label="Open site menu">
+              <span class="figma-menu__icon" aria-hidden="true">
+                <span></span><span></span>
+              </span>
+              <span class="nav-menu-label">Menu</span>
+            </summary>
+            <div class="figma-menu__panel" role="menu">
+              <nav aria-label="Homepage sections">
+                <ul class="figma-menu__links">
+                  {selectedLinks.map((link) => (
+                    <li>
+                      <a href={link.href} data-nav-spy-link={link.id} class="figma-menu__link" role="menuitem">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+              <button type="button" class="motion-toggle motion-toggle--figma-panel" data-motion-pref-toggle aria-pressed="false">
+                Reduce motion
+              </button>
+            </div>
+          </details>
+        </div>
+      </div>
+    </header>
+  ) : (
+    <header class:list={[
+      'site-nav sticky top-0 z-50',
+      isSourceHome && 'site-nav--source-home',
+    ]}>
+      <Container size="wide" className="py-3">
+        <div class:list={[
+          'nav-shell',
+          isSourceHome && 'nav-shell--source-home',
+        ]}>
+          {
+            isSourceHome ? (
+              <nav aria-label="Primary" class="nav-scroll nav-scroll--source-home">
+                <ul class="nav-pills nav-pills--source-home">
+                  {navLinks.map((link) => (
+                    <li>
+                      <a href={link.href} data-nav-spy-link={link.id} class="nav-pill nav-pill--source-home">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            ) : (
+              <a href="/#hero" class="brand-mark" aria-label={`${profile.name} home`}>
+                <span class="brand-mark__mono">{profile.brand.monogram}</span>
+                <span class="brand-mark__label">
+                  <span>{profile.brand.displayName}</span>
+                  <small>{profile.role}</small>
+                </span>
+              </a>
+            )
+          }
+
+          {
+            isSourceHome ? (
+              <a href="/#hero" class="brand-capsule" aria-label={`${profile.name} home`}>
+                <span>{profile.brand.displayName}</span>
+              </a>
+            ) : (
+              <nav aria-label="Primary" class="nav-scroll">
+                <ul class="nav-pills">
+                  {navLinks.map((link) => (
+                    <li>
+                      <a href={link.href} data-nav-spy-link={link.id} class="nav-pill">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            )
+          }
+
+          <div class:list={[
+            'nav-actions',
+            isSourceHome && 'nav-actions--source-home',
+          ]}>
+            {isSourceHome && contactLink && (
+              <a href={contactLink.href} data-nav-spy-link={contactLink.id} class="nav-contact-pill">
+                {contactLink.label}
+              </a>
+            )}
+            <button type="button" class="motion-toggle" data-motion-pref-toggle aria-pressed="false">
+              Reduce motion
+            </button>
+          </div>
+        </div>
+      </Container>
+    </header>
+  )
+}

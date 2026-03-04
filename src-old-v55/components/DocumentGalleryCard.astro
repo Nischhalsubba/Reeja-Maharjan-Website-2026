@@ -1,0 +1,67 @@
+---
+import type { DocumentGalleryItem } from '../content/profile';
+
+interface Props {
+  doc: DocumentGalleryItem;
+}
+
+const { doc } = Astro.props as Props;
+---
+
+<article
+  class="doc-card card-surface"
+  data-motion="reveal"
+  data-doc-item
+  data-doc-category={doc.category}
+  data-tilt-card
+>
+  <a
+    href={doc.file}
+    target="_blank"
+    rel="noreferrer noopener"
+    class="doc-card__thumb"
+    data-doc-trigger
+    data-doc-id={doc.id}
+    data-doc-title={doc.title}
+    data-doc-src={doc.file}
+    data-doc-alt={doc.alt}
+    data-doc-issuer={doc.issuer}
+    data-doc-date={doc.date}
+    data-doc-rotate={doc.lightboxRotateDeg != null ? String(doc.lightboxRotateDeg) : undefined}
+    data-lightbox-trigger
+    data-lightbox-id={`doc-${doc.id}`}
+    data-lightbox-src={doc.file}
+    data-lightbox-alt={doc.alt}
+    data-lightbox-title={doc.title}
+    data-lightbox-issuer={doc.issuer}
+    data-lightbox-date={doc.date}
+    data-lightbox-group="documents"
+    data-lightbox-rotate={doc.lightboxRotateDeg != null ? String(doc.lightboxRotateDeg) : undefined}
+    aria-label={`Open preview for ${doc.title}`}
+  >
+    <img
+      src={doc.file}
+      alt={doc.alt}
+      loading="lazy"
+      decoding="async"
+      class:list={['doc-card__img', doc.previewAspect === 'landscape' ? 'doc-card__img--landscape' : 'doc-card__img--portrait']}
+    />
+  </a>
+
+  <div class="doc-card__body">
+    <div class="doc-card__row">
+      <p class="doc-card__category">{doc.category}</p>
+      {doc.featured && <span class="doc-card__featured">Featured</span>}
+    </div>
+    <h3 class="doc-card__title">{doc.title}</h3>
+    <p class="doc-card__meta">{doc.issuer} | {doc.date}</p>
+    <p class="doc-card__summary">{doc.summary}</p>
+    {
+      doc.usedIn?.length ? (
+        <p class="doc-card__usage">
+          Used in: {doc.usedIn.map((label, index) => `${index ? ', ' : ''}${label}`)}
+        </p>
+      ) : null
+    }
+  </div>
+</article>

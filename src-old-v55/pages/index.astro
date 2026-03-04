@@ -1,0 +1,1037 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ButtonLink from '../components/ButtonLink.astro';
+import FloatingTagPill from '../components/FloatingTagPill.astro';
+import HeroDeviceMockup from '../components/HeroDeviceMockup.astro';
+import MetricCard from '../components/MetricCard.astro';
+import ProofSnippetCard from '../components/ProofSnippetCard.astro';
+import DocumentGalleryCard from '../components/DocumentGalleryCard.astro';
+import FaqList from '../components/seo/FaqList.astro';
+import { profile } from '../content/profile';
+import { homepageCopy } from '../content/homepageCopy';
+import { getHomepageKeywords } from '../lib/seo/keywords';
+import {
+  buildFaqSchema,
+  buildPersonSchema,
+  buildProfilePageSchema,
+  buildWebSiteSchema,
+} from '../lib/seo/schema';
+
+const formAction = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ?? '';
+const publicDocs = profile.documentGallery
+  .filter((doc) => doc.public)
+  .sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)));
+const docCategories = ['All', ...new Set(publicDocs.map((doc) => doc.category))];
+
+const heroCutoutPath = '/reeja-hero-cutout.png';
+const heroImage = {
+  id: 'hero-cutout',
+  file: heroCutoutPath,
+  alt: `${profile.name} hero portrait`,
+  usage: 'hero' as const,
+  public: true,
+  featured: true,
+};
+const fallbackVisualDoc = publicDocs.find((doc) => doc.previewAspect !== 'portrait') ?? publicDocs[0];
+
+const workPreferenceChips = [
+  ...profile.workPreferences.geography,
+  ...profile.workPreferences.sectors,
+  ...profile.workPreferences.arrangements,
+  `Availability: ${profile.workPreferences.availability}`,
+  profile.workPreferences.relocation ? 'Relocation: Accepted' : 'Relocation: Not listed',
+].slice(0, 6);
+const homepageFaqs = profile.faqItems.filter((faq) => faq.appliesTo.includes('home')).slice(0, 5);
+const siteUrl = Astro.site?.toString() ?? import.meta.env.SITE_URL ?? 'https://example.com';
+const homepageUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const personSchema = buildPersonSchema(profile, siteUrl);
+const personId = String(personSchema['@id']);
+const homeSchema = [
+  personSchema,
+  buildProfilePageSchema({
+    url: homepageUrl,
+    title: profile.seo.homeTitle,
+    description: profile.seo.homeDescription,
+    personId,
+  }),
+  buildWebSiteSchema({ siteUrl, name: `${profile.name} Nurse Portfolio` }),
+  buildFaqSchema(homepageFaqs),
+];
+type EvidenceLink = NonNullable<(typeof profile.experience)[number]['evidence']>[number];
+type TimelineKind = 'experience' | 'credential' | 'recognition' | 'research';
+type TimelineEmbeddedItem = {
+  id: string;
+  kind: Exclude<TimelineKind, 'experience'>;
+  displayDate?: string;
+  sortKey: number;
+  title: string;
+  org: string;
+  summary?: string;
+  evidence?: EvidenceLink[];
+};
+type TimelineEntry = {
+  id: string;
+  kind: TimelineKind;
+  displayDate: string;
+  sortKey: number;
+  title: string;
+  org: string;
+  summary?: string;
+  bullets?: string[];
+  evidence?: EvidenceLink[];
+  embeddedItems?: TimelineEmbeddedItem[];
+};
+
+const docById = Object.fromEntries(publicDocs.map((doc) => [doc.id, doc]));
+const stripOrdinals = (value: string) => value.replace(/\b(\d+)(st|nd|rd|th)\b/gi, '$1');
+const safeDateUtc = (year: number, month = 1, day = 1) => Date.UTC(Math.max(1900, year), Math.max(0, month - 1), Math.max(1, Math.min(28, day)));
+
+const parseDateToSortKey = (value?: string): number | null => {
+  if (!value) return null;
+  const source = stripOrdinals(value);
+
+  const periodParts = source.split(/\s+-\s+/);
+  if (periodParts.length > 1) {
+    const lastPart = periodParts.at(-1);
+    if (lastPart) return parseDateToSortKey(lastPart.trim());
+  }
+
+  const bsMatch = source.match(/(20\d{2})\/(\d{1,2})\/(\d{1,2})\s*\(BS\)/i);
+  if (bsMatch) {
+    const year = Number(bsMatch[1]) - 57;
+    const month = Number(bsMatch[2]);
+    const day = Number(bsMatch[3]);
+    return safeDateUtc(year, month, day);
+  }
+
+  const adDateMatch = source.match(/[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}/);
+  if (adDateMatch) {
+    const parsed = Date.parse(adDateMatch[0]);
+    if (!Number.isNaN(parsed)) return parsed;
+  }
+
+  const yearOnly = source.match(/\b(19|20)\d{2}\b/);
+  if (yearOnly) {
+    return safeDateUtc(Number(yearOnly[0]), 12, 31);
+  }
+
+  return null;
+};
+
+const parseSingleDate = (value?: string): number | null => {
+  if (!value) return null;
+  const source = stripOrdinals(value);
+
+  const bsMatch = source.match(/(20\d{2})\/(\d{1,2})\/(\d{1,2})\s*\(BS\)/i);
+  if (bsMatch) {
+    return safeDateUtc(Number(bsMatch[1]) - 57, Number(bsMatch[2]), Number(bsMatch[3]));
+  }
+
+  const adDateMatch = source.match(/[A-Za-z]{3,9}\s+\d{1,2},\s+\d{4}/);
+  if (adDateMatch) {
+    const parsed = Date.parse(adDateMatch[0]);
+    if (!Number.isNaN(parsed)) return parsed;
+  }
+
+  const yearOnly = source.match(/\b(19|20)\d{2}\b/);
+  if (yearOnly) return safeDateUtc(Number(yearOnly[0]), 12, 31);
+
+  return null;
+};
+
+const parsePeriodRange = (period?: string): { start: number | null; end: number | null } => {
+  if (!period) return { start: null, end: null };
+  const parts = period.split(/\s+-\s+/).map((part) => part.trim());
+  if (parts.length === 2) {
+    return {
+      start: parseSingleDate(parts[0]),
+      end: parseSingleDate(parts[1]) ?? parseDateToSortKey(period),
+    };
+  }
+  const point = parseSingleDate(period);
+  return { start: point, end: point };
+};
+
+const asEvidenceLink = (doc: (typeof publicDocs)[number]): EvidenceLink => ({
+  title: doc.title,
+  file: doc.file,
+  type: 'document',
+  alt: doc.alt,
+  note: doc.summary,
+});
+
+const presentDocs = (items: Array<(typeof publicDocs)[number] | undefined>): EvidenceLink[] =>
+  items.filter((item): item is (typeof publicDocs)[number] => Boolean(item)).map(asEvidenceLink);
+
+const keywordDocEvidenceForCredential = (title: string): EvidenceLink[] => {
+  const lower = title.toLowerCase();
+  if (lower.includes('newborn')) return presentDocs([docById['cnc-level-ii']]);
+  if (lower.includes('operation theatre') || lower.includes('ottm')) return presentDocs([docById.ottm]);
+  if (lower.includes('cpr') || lower.includes('bls')) return presentDocs([docById.cpr]);
+  if (lower.includes('conference')) return presentDocs([docById['vascular-conference']]);
+  if (lower.includes('nepal nursing council') || lower.includes('registered nurse')) return [];
+  return [];
+};
+
+const _flatTimelineEntries: TimelineEntry[] = [
+  ...profile.experience.map((job, index) => ({
+    id: `exp-${index}`,
+    kind: 'experience' as const,
+    displayDate: job.period,
+    sortKey: parseDateToSortKey(job.period) ?? Date.UTC(2020, 0, 1) - index,
+    title: job.role,
+    org: `${job.organization} | ${job.location}`,
+    summary: job.outcomeLine,
+    bullets: job.highlights,
+    evidence: job.evidence,
+  })),
+  ...profile.credentials.map((item, index) => ({
+    id: `cred-${index}`,
+    kind: 'credential' as const,
+    displayDate: item.date,
+    sortKey: parseDateToSortKey(item.date) ?? Date.UTC(2018, 0, 1) - index,
+    title: item.title,
+    org: item.issuer,
+    summary: item.details,
+    evidence: keywordDocEvidenceForCredential(item.title),
+  })),
+  ...profile.recognition.map((item, index) => ({
+    id: `rec-${index}`,
+    kind: 'recognition' as const,
+    displayDate: item.date ?? item.issuer,
+    sortKey: parseDateToSortKey(item.date) ?? Date.UTC(2017, 0, 1) - index,
+    title: item.title,
+    org: item.issuer,
+    summary: item.summary,
+    evidence: item.evidence,
+  })),
+  ...profile.research.map((item, index) => ({
+    id: `res-${index}`,
+    kind: 'research' as const,
+    displayDate: item.evidence?.[0]?.title ? (item.evidence?.[0] ? (docById['mmihs-irc-approval']?.date ?? item.status ?? item.organization) : (item.status ?? item.organization)) : (item.status ?? item.organization),
+    sortKey:
+      parseDateToSortKey(docById['mmihs-irc-approval']?.date)
+      ?? parseDateToSortKey(item.status)
+      ?? Date.UTC(2016, 0, 1) - index,
+    title: item.title,
+    org: item.organization,
+    summary: item.summary,
+    evidence: item.evidence,
+  })),
+].sort((a, b) => b.sortKey - a.sortKey);
+
+const topCredentialCardsAll = profile.credentials;
+const proofCardsAll = profile.proofSnippets;
+const mergedSkillsCards = profile.skillGroups;
+const copy = homepageCopy;
+
+const experienceRanges = profile.experience.map((job, index) => {
+  const { start, end } = parsePeriodRange(job.period);
+  return {
+    index,
+    start,
+    end: end ?? parseDateToSortKey(job.period) ?? Date.UTC(2020, 0, 1) - index,
+  };
+});
+
+const experienceIndexByName = {
+  tuth: profile.experience.findIndex((job) => job.organization.includes('(TUTH)')),
+  sindhuli: profile.experience.findIndex((job) => job.organization.includes('Sindhuli Hospital')),
+};
+
+const embeddedByExperience = new Map<number, TimelineEmbeddedItem[]>();
+const pushEmbedded = (experienceIndex: number, item: TimelineEmbeddedItem) => {
+  if (experienceIndex < 0) return;
+  const list = embeddedByExperience.get(experienceIndex) ?? [];
+  list.push(item);
+  list.sort((a, b) => b.sortKey - a.sortKey);
+  embeddedByExperience.set(experienceIndex, list);
+};
+
+const standaloneTimelineEntries: TimelineEntry[] = [];
+const addStandaloneTimelineEntry = (item: TimelineEmbeddedItem) => {
+  standaloneTimelineEntries.push({
+    id: item.id,
+    kind: item.kind,
+    displayDate: item.displayDate ?? item.org,
+    sortKey: item.sortKey,
+    title: item.title,
+    org: item.org,
+    summary: item.summary,
+    evidence: item.evidence,
+  });
+};
+
+const inferExperienceByDate = (sortKey: number): number | null => {
+  for (const range of experienceRanges) {
+    if (range.start && sortKey >= range.start && sortKey <= range.end) return range.index;
+  }
+  return null;
+};
+
+const manualTimelineEmbedding: Record<string, number | 'standalone'> = {
+  'cred-0': 'standalone',
+  'cred-1': experienceIndexByName.sindhuli,
+  'cred-2': experienceIndexByName.sindhuli,
+  'cred-3': experienceIndexByName.tuth,
+  'cred-4': experienceIndexByName.tuth,
+  'rec-0': experienceIndexByName.tuth,
+  'rec-1': 'standalone',
+  'rec-2': experienceIndexByName.tuth,
+  'res-0': 'standalone',
+};
+
+const credentialMilestones = profile.credentials.map((item, index): TimelineEmbeddedItem => ({
+  id: `cred-${index}`,
+  kind: 'credential',
+  displayDate: item.date,
+  sortKey: parseDateToSortKey(item.date) ?? Date.UTC(2018, 0, 1) - index,
+  title: item.title,
+  org: item.issuer,
+  summary: item.details,
+  evidence: keywordDocEvidenceForCredential(item.title),
+}));
+
+const recognitionMilestones = profile.recognition.map((item, index): TimelineEmbeddedItem => ({
+  id: `rec-${index}`,
+  kind: 'recognition',
+  displayDate: item.date ?? item.issuer,
+  sortKey: parseDateToSortKey(item.date) ?? Date.UTC(2017, 0, 1) - index,
+  title: item.title,
+  org: item.issuer,
+  summary: item.summary,
+  evidence: item.evidence,
+}));
+
+const researchMilestones = profile.research.map((item, index): TimelineEmbeddedItem => ({
+  id: `res-${index}`,
+  kind: 'research',
+  displayDate: docById['mmihs-irc-approval']?.date ?? item.status ?? item.organization,
+  sortKey:
+    parseDateToSortKey(docById['mmihs-irc-approval']?.date)
+    ?? parseDateToSortKey(item.status)
+    ?? Date.UTC(2016, 0, 1) - index,
+  title: item.title,
+  org: item.organization,
+  summary: item.summary,
+  evidence: item.evidence,
+}));
+
+for (const milestone of [...credentialMilestones, ...recognitionMilestones, ...researchMilestones]) {
+  const manualTarget = manualTimelineEmbedding[milestone.id];
+  if (manualTarget === 'standalone') {
+    addStandaloneTimelineEntry(milestone);
+    continue;
+  }
+  if (typeof manualTarget === 'number') {
+    pushEmbedded(manualTarget, milestone);
+    continue;
+  }
+  const inferred = inferExperienceByDate(milestone.sortKey);
+  if (typeof inferred === 'number') pushEmbedded(inferred, milestone);
+  else addStandaloneTimelineEntry(milestone);
+}
+
+const timelineEntries: TimelineEntry[] = [
+  ...profile.experience.map((job, index) => ({
+    id: `exp-${index}`,
+    kind: 'experience' as const,
+    displayDate: job.period,
+    sortKey: parseDateToSortKey(job.period) ?? Date.UTC(2020, 0, 1) - index,
+    title: job.role,
+    org: `${job.organization} | ${job.location}`,
+    summary: job.outcomeLine,
+    bullets: job.highlights,
+    evidence: job.evidence,
+    embeddedItems: embeddedByExperience.get(index) ?? [],
+  })),
+  ...standaloneTimelineEntries,
+].sort((a, b) => b.sortKey - a.sortKey);
+
+const topCredentialCards = topCredentialCardsAll.slice(0, 5);
+const proofCards = proofCardsAll.slice(0, 3);
+const homepageStats = profile.stats.slice(0, 4);
+const verificationPreviewDocs = publicDocs.slice(0, 8);
+const additionalVerificationDocs = publicDocs.slice(8);
+const aboutVisual = heroImage ? { id: heroImage.id, file: heroImage.file, alt: heroImage.alt, title: profile.name } : fallbackVisualDoc
+  ? { id: fallbackVisualDoc.id, file: fallbackVisualDoc.file, alt: fallbackVisualDoc.alt, title: fallbackVisualDoc.title }
+  : undefined;
+const contactFaqs = homepageFaqs.slice(0, 4);
+const featuredTimelineEntries = timelineEntries.slice(0, 4);
+const timelineDetailEntries = timelineEntries;
+const aboutCredentialCards = topCredentialCards.slice(0, 3);
+const visibleSkillGroups = mergedSkillsCards.slice(0, 3);
+const extraSkillGroups = mergedSkillsCards.slice(3);
+const quickFactsPrimary = profile.quickFacts.slice(0, 4);
+const quickFactsSecondary = profile.quickFacts.slice(4);
+void _flatTimelineEntries;
+---
+
+<BaseLayout
+  title={profile.seo.homeTitle}
+  description={profile.seo.homeDescription}
+  page="home"
+  pageType="profile"
+  keywords={getHomepageKeywords(profile)}
+  schema={homeSchema}
+>
+  <div class="home-figma-v1" data-home-figma>
+    <section id="hero" class="section-pad home-core-section home-core-section--hero">
+      <div class="home-figma-shell home-figma-canvas home-figma-canvas--hero">
+        <div class="hero-stage hero-stage--open home-figma-stage" data-motion="reveal" data-medical-particles-root>
+          <div class="hero-medical-particles" data-medical-particles-layer aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="watermark" data-hero-watermark aria-hidden="true">{profile.brand.watermarkWord}</div>
+
+          <div class="hero-grid">
+            <div class="hero-copy-block" data-hero-root>
+              <p class="section-label">{copy.hero.label}</p>
+              <h1 class="hero-title mt-3" data-hero-title>{copy.hero.title}</h1>
+              <p class="hero-subtitle mt-4" data-hero-subtitle>{copy.hero.subtitle}</p>
+              <p class="hero-proof-line" data-hero-copy>{copy.hero.proofLine}</p>
+
+              <div class="hero-actions" data-hero-actions>
+                <ButtonLink href={profile.resumePdfPath} variant="primary" className="fh-cta fh-cta--primary">{copy.hero.primaryCta}</ButtonLink>
+              </div>
+
+              <section class="hero-more-details mt-4" aria-label="More options">
+                <p class="section-label section-label--inline">More options</p>
+                <div class="chip-row mt-3">
+                  {workPreferenceChips.map((chip) => <span class="chip chip--hero">{chip}</span>)}
+                </div>
+                <div class="hero-actions hero-actions--secondary mt-4">
+                  <button type="button" class="btn-inline-secondary" data-scroll-target="#contact">
+                    {copy.hero.secondaryCta}
+                  </button>
+                  <button type="button" class="btn-inline-secondary" data-scroll-target="#documents">
+                    {copy.hero.tertiaryCta}
+                  </button>
+                </div>
+              </section>
+
+              <div class="hero-social-row mt-5" aria-label="Profile quick links">
+                <a href={profile.linkedin} target="_blank" rel="noreferrer noopener">LinkedIn</a>
+                <a href={`mailto:${profile.email}`}>Email</a>
+                <a href={profile.resumePdfPath}>Resume</a>
+              </div>
+            </div>
+
+            <div class="hero-visual-col">
+              <div class="hero-pill-cloud" aria-hidden="true">
+                {profile.hero.floatingTags.map((tag) => <FloatingTagPill label={tag} />)}
+              </div>
+              <div class="hero-bio-card" data-motion="reveal">
+                <p class="eyebrow">{copy.hero.snapshotTitle}</p>
+                <p class="section-body mt-2">
+                  {copy.hero.snapshotBody}
+                </p>
+              </div>
+              <div class="hero-device-secondary">
+                <HeroDeviceMockup profile={profile} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section-pad home-core-section">
+      <div class="home-figma-shell home-figma-canvas home-figma-canvas--about">
+        <div class="home-open-section fh-about-shell home-figma-stage">
+          <div class="home-section-head fh-about-head" data-motion="reveal">
+            <p class="section-label">{copy.skills.label}</p>
+            <h2 class="section-title mt-3">{copy.skills.profileTitle}</h2>
+            <p class="section-body mt-3 reading-wrap">
+              {profile.summary}
+            </p>
+          </div>
+
+          <div class="fh-about-layout mt-6">
+            <div class="fh-about-layout__left">
+              {
+                aboutVisual && (
+                  <figure
+                    class="card-surface fh-about-media"
+                    data-motion="reveal"
+                    data-lightbox-trigger
+                    data-lightbox-id={`about-${aboutVisual.id}`}
+                    data-lightbox-src={aboutVisual.file}
+                    data-lightbox-alt={aboutVisual.alt}
+                    data-lightbox-title={aboutVisual.title}
+                    data-lightbox-issuer={profile.name}
+                    data-lightbox-group="home-about"
+                    role="button"
+                    tabindex="0"
+                  >
+                    <img src={aboutVisual.file} alt={aboutVisual.alt} loading="lazy" decoding="async" />
+                    <figcaption>{aboutVisual.title}</figcaption>
+                  </figure>
+                )
+              }
+              <section class="card-surface fh-light-card" data-motion="reveal">
+                <h3 class="stack-title">{copy.skills.preferencesTitle}</h3>
+                <div class="chip-row mt-3">
+                  {workPreferenceChips.map((chip) => <span class="chip">{chip}</span>)}
+                </div>
+                <div class="mt-5 grid gap-3 sm:grid-cols-2">
+                  {quickFactsPrimary.map((fact) => (
+                    <div class="panel-outline p-3">
+                      <p class="section-body text-sm">{fact}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <section class="card-surface mt-4 p-4" data-motion="reveal">
+                <p class="section-label section-label--inline">Care Philosophy & Professional Direction</p>
+                <div class="mt-4 grid gap-6 md:grid-cols-2">
+                  <div>
+                    <p class="font-semibold">Care Philosophy</p>
+                    <ul class="bullet-list mt-3">
+                      {profile.carePhilosophy.map((point) => <li>{point}</li>)}
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="font-semibold">Professional Direction</p>
+                    <ul class="bullet-list mt-3">
+                      {profile.goals.map((goal) => <li>{goal}</li>)}
+                    </ul>
+                  </div>
+                </div>
+              </section>
+            </div>
+
+            <div class="fh-about-layout__right">
+              <div class="stats-grid fh-about-stats" data-motion="reveal">
+                {homepageStats.map((item) => <MetricCard item={item} />)}
+              </div>
+
+              <section class="card-surface fh-light-card mt-4" data-motion="reveal">
+                <p class="section-label section-label--inline">{copy.verification.label}</p>
+                <h3 class="stack-title mt-2">{copy.verification.title}</h3>
+                <p class="section-body mt-3">{copy.verification.body}</p>
+                <div class="mt-4 grid gap-3">
+                  {aboutCredentialCards.map((item) => (
+                    <div class="panel-outline p-3">
+                      <p class="font-semibold">{item.title}</p>
+                      <p class="section-body mt-1 text-sm">{item.issuer}</p>
+                      <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.date}</p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="highlights" class="section-pad home-core-section">
+      <div class="home-figma-shell home-figma-canvas home-figma-canvas--highlights">
+        <div class="home-open-section home-figma-stage">
+          <div class="home-section-head" data-motion="reveal">
+            <p class="section-label">{copy.timeline.label}</p>
+            <h2 class="section-title mt-3">{copy.timeline.title}</h2>
+            <p class="section-body mt-3 reading-wrap">
+              {copy.timeline.body}
+            </p>
+          </div>
+
+          <div class="fh-feature-grid mt-6" data-motion="reveal">
+            {
+              featuredTimelineEntries.map((entry) => (
+                <article class:list={['card-surface', 'fh-feature-card', `fh-feature-card--${entry.kind}`]} data-tilt-card>
+                  <div class="fh-feature-card__pill-row">
+                    <p class:list={['career-event__kind', `career-event__kind--${entry.kind}`]}>{entry.kind}</p>
+                    <p class="career-event__date">{entry.displayDate}</p>
+                  </div>
+                  <h3 class="career-event__title mt-3">{entry.title}</h3>
+                  <p class="career-event__org">{entry.org}</p>
+                  {entry.summary && <p class="career-event__summary mt-3">{entry.summary}</p>}
+                  {
+                    entry.embeddedItems?.length ? (
+                      <div class="fh-embedded-chip-row mt-4">
+                        {entry.embeddedItems.slice(0, 3).map((embedded) => (
+                          <span class="fh-embedded-chip">{embedded.kind}: {embedded.title}</span>
+                        ))}
+                      </div>
+                    ) : null
+                  }
+                  {
+                    entry.evidence?.[0] ? (
+                      <a
+                        href={entry.evidence[0].file}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        class="fh-feature-evidence mt-4"
+                        data-lightbox-trigger
+                        data-lightbox-id={`featured-${entry.id}-${entry.evidence[0].title}`}
+                        data-lightbox-src={entry.evidence[0].file}
+                        data-lightbox-alt={entry.evidence[0].alt}
+                        data-lightbox-title={entry.evidence[0].title}
+                        data-lightbox-issuer={entry.org}
+                        data-lightbox-date={entry.displayDate}
+                        data-lightbox-group="home-highlights-featured"
+                      >
+                        <img src={entry.evidence[0].file} alt={entry.evidence[0].alt} loading="lazy" decoding="async" />
+                        <span>{entry.evidence[0].title}</span>
+                      </a>
+                    ) : null
+                  }
+                </article>
+              ))
+            }
+          </div>
+
+          <section class="home-details home-details--timeline mt-6">
+            <p class="section-label section-label--inline">Complete Career Timeline</p>
+            <div class="career-timeline mt-5" data-timeline-root>
+              <div class="timeline-line timeline-line--bg" aria-hidden="true"></div>
+              <div class="timeline-line timeline-line--progress" aria-hidden="true" data-timeline-progress></div>
+              <ol class="career-timeline__list">
+                {
+                  timelineDetailEntries.map((entry) => (
+                  <li class="career-timeline__item" data-timeline-item>
+                    <article class="card-surface career-event" data-motion="reveal" data-tilt-card>
+                      <div class="career-event__top">
+                        <p class:list={['career-event__kind', `career-event__kind--${entry.kind}`]}>
+                          {entry.kind}
+                        </p>
+                        <p class="career-event__date">{entry.displayDate}</p>
+                      </div>
+
+                      <h3 class="career-event__title">{entry.title}</h3>
+                      <p class="career-event__org">{entry.org}</p>
+                      {entry.summary && <p class="career-event__summary">{entry.summary}</p>}
+
+                      {
+                        entry.bullets?.length ? (
+                          <ul class="bullet-list career-event__bullets">
+                            {entry.bullets.map((item) => <li>{item}</li>)}
+                          </ul>
+                        ) : null
+                      }
+
+                      {
+                        entry.embeddedItems?.length ? (
+                          <div class="career-event__embedded">
+                            <p class="career-event__embedded-label">Training, Recognition & Research in this period</p>
+                            <div class="career-event__embedded-list">
+                              {entry.embeddedItems.map((embedded) => (
+                                <article class:list={['career-embedded', `career-embedded--${embedded.kind}`]}>
+                                  <div class="career-embedded__head">
+                                    <p class="career-embedded__kind">{embedded.kind}</p>
+                                    {embedded.displayDate && <p class="career-embedded__date">{embedded.displayDate}</p>}
+                                  </div>
+                                  <p class="career-embedded__title">{embedded.title}</p>
+                                  <p class="career-embedded__org">{embedded.org}</p>
+                                  {embedded.summary && <p class="career-embedded__summary">{embedded.summary}</p>}
+                                  {
+                                    embedded.evidence?.length ? (
+                                      <div class="evidence-inline evidence-inline--embedded mt-3">
+                                        {embedded.evidence.slice(0, 1).map((ev) => (
+                                          <a
+                                            href={ev.file}
+                                            target="_blank"
+                                            rel="noreferrer noopener"
+                                            class="evidence-inline__card evidence-inline__card--compact"
+                                            data-lightbox-trigger
+                                            data-lightbox-id={`timeline-embedded-${embedded.id}-${ev.title}`}
+                                            data-lightbox-src={ev.file}
+                                            data-lightbox-alt={ev.alt}
+                                            data-lightbox-title={ev.title}
+                                            data-lightbox-issuer={embedded.org}
+                                            data-lightbox-date={embedded.displayDate ?? ''}
+                                            data-lightbox-group={`timeline-${entry.id}`}
+                                          >
+                                            <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
+                                            <span>
+                                              <strong>{ev.title}</strong>
+                                              {ev.note && <small>{ev.note}</small>}
+                                            </span>
+                                          </a>
+                                        ))}
+                                      </div>
+                                    ) : null
+                                  }
+                                </article>
+                              ))}
+                            </div>
+                          </div>
+                        ) : null
+                      }
+
+                      {
+                        entry.evidence?.length ? (
+                          <div class="evidence-inline mt-4">
+                            {entry.evidence.slice(0, 2).map((ev) => (
+                              <a
+                                href={ev.file}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                class="evidence-inline__card"
+                                data-lightbox-trigger
+                                data-lightbox-id={`timeline-${entry.id}-${ev.title}`}
+                                data-lightbox-src={ev.file}
+                                data-lightbox-alt={ev.alt}
+                                data-lightbox-title={ev.title}
+                                data-lightbox-issuer={entry.org}
+                                data-lightbox-date={entry.displayDate}
+                                data-lightbox-group={`timeline-${entry.id}`}
+                              >
+                                <img src={ev.file} alt={ev.alt} loading="lazy" decoding="async" />
+                                <span>
+                                  <strong>{ev.title}</strong>
+                                  {ev.note && <small>{ev.note}</small>}
+                                </span>
+                              </a>
+                            ))}
+                          </div>
+                        ) : null
+                      }
+                    </article>
+                  </li>
+                  ))
+                }
+              </ol>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+    <section id="skills" class="section-pad home-core-section">
+      <div class="home-figma-shell home-figma-canvas home-figma-canvas--skills">
+        <div class="home-open-section home-figma-stage">
+          <div class="home-section-head" data-motion="reveal">
+            <p class="section-label">{copy.skills.label}</p>
+            <h2 class="section-title mt-3">{copy.skills.title}</h2>
+            <p class="section-body mt-3 reading-wrap">
+              {copy.skills.body}
+            </p>
+          </div>
+
+          <div id="services" class="home-anchor"></div>
+          <div id="about-legacy" class="home-anchor"></div>
+
+          <div class="home-merge-grid mt-6">
+            <section class="card-surface stack-card" data-motion="reveal">
+              <p class="section-label section-label--inline">{copy.skills.label}</p>
+              <h3 class="stack-title mt-2">{copy.skills.practiceTitle}</h3>
+              <p class="section-body mt-3">
+                {copy.skills.practiceBody}
+              </p>
+              <div class="chip-row mt-4">
+                {profile.practiceAreas.map((area) => <span class="chip chip--soft">{area}</span>)}
+              </div>
+              <div class="mt-4 grid gap-2 sm:grid-cols-2">
+                {quickFactsPrimary.map((fact) => <p class="section-body text-sm">{fact}</p>)}
+              </div>
+              {
+                quickFactsSecondary.length ? (
+                  <section class="card-surface mt-4 p-3">
+                    <p class="section-label section-label--inline">More quick facts</p>
+                    <div class="mt-3 grid gap-2 sm:grid-cols-2">
+                      {quickFactsSecondary.map((fact) => <p class="section-body text-sm">{fact}</p>)}
+                    </div>
+                  </section>
+                ) : null
+              }
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal">
+              <p class="section-label section-label--inline">{copy.skills.label}</p>
+              <h3 class="stack-title mt-2">{copy.skills.profileTitle}</h3>
+              <p class="section-body mt-3">{profile.summary}</p>
+
+              <section class="card-surface mt-4 p-3">
+                <p class="section-label section-label--inline">Care Philosophy</p>
+                <ul class="bullet-list mt-3">
+                  {profile.carePhilosophy.map((point) => <li>{point}</li>)}
+                </ul>
+              </section>
+
+              <section class="card-surface mt-3 p-3">
+                <p class="section-label section-label--inline">Professional Direction</p>
+                <ul class="bullet-list mt-3">
+                  {profile.goals.map((goal) => <li>{goal}</li>)}
+                </ul>
+              </section>
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal">
+              <h3 class="stack-title">{copy.skills.preferencesTitle}</h3>
+              <div class="chip-row mt-3">
+                {workPreferenceChips.map((chip) => <span class="chip">{chip}</span>)}
+              </div>
+              <div class="mt-5 grid gap-3">
+                {profile.quickFacts.slice(0, 4).map((fact) => (
+                  <div class="panel-outline p-3">
+                    <p class="section-body text-sm">{fact}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal">
+              <h3 class="stack-title">{copy.skills.skillsTitle}</h3>
+              <div class="stack-list stack-list--nested mt-4" data-skills-grid>
+                {visibleSkillGroups.map((group) => (
+                  <article class="panel-outline p-3">
+                    <h4 class="stack-title stack-title--nested">{group.area}</h4>
+                    <div class="stack-chip-grid">
+                      {group.items.map((item) => <span class="stack-chip" data-skill-chip>{item}</span>)}
+                    </div>
+                  </article>
+                ))}
+              </div>
+              {
+                extraSkillGroups.length ? (
+                  <section class="card-surface mt-4 p-3">
+                    <p class="section-label section-label--inline">Additional skill groups</p>
+                    <div class="stack-list stack-list--nested mt-4" data-skills-grid>
+                      {extraSkillGroups.map((group) => (
+                        <article class="panel-outline p-3">
+                          <h4 class="stack-title stack-title--nested">{group.area}</h4>
+                          <div class="stack-chip-grid">
+                            {group.items.map((item) => <span class="stack-chip" data-skill-chip>{item}</span>)}
+                          </div>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                ) : null
+              }
+            </section>
+
+            <section class="card-surface stack-card" data-motion="reveal" data-tilt-card>
+              <h3 class="stack-title">{copy.skills.educationTitle}</h3>
+              <div class="mt-3 grid gap-3">
+                {profile.education.map((edu) => (
+                  <div class="panel-outline p-3">
+                    <p class="font-semibold">{edu.level}</p>
+                    <p class="section-body mt-1 text-sm">{edu.institution}</p>
+                    <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">
+                      {edu.period} | {edu.result}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              <h3 class="stack-title mt-6">Languages</h3>
+              <div class="chip-row mt-3">
+                {profile.languages.map((lang) => <span class="chip">{lang}</span>)}
+              </div>
+            </section>
+
+            <section class="home-stats-block" data-motion="reveal">
+              <div class="stats-grid">
+                {homepageStats.map((item) => <MetricCard item={item} />)}
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-pad pb-16 sm:pb-20 home-core-section">
+      <div class="home-figma-shell home-figma-canvas home-figma-canvas--contact">
+        <div class="home-open-section home-figma-stage">
+          <div id="credentials" class="home-anchor"></div>
+          <div id="documents" class="home-anchor"></div>
+          <div id="proof" class="home-anchor"></div>
+
+          <div class="home-contact-stack">
+            <section class="home-figma-panel" data-motion="reveal">
+              <div class="home-section-head">
+                <p class="section-label">{copy.verification.proofLabel}</p>
+                <h2 class="section-title mt-3">{copy.verification.proofTitle}</h2>
+                <p class="section-body mt-3 reading-wrap">{copy.verification.proofBody}</p>
+              </div>
+
+              <div class="proof-grid mt-6">
+                {proofCards.map((item) => <ProofSnippetCard item={item} />)}
+              </div>
+
+              <section class="home-details mt-6">
+                <p class="section-label section-label--inline">Recognition and Research Details</p>
+                <div class="proof-subgrid mt-5">
+                  <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
+                    <p class="proof-type">Recognition & Academic Merit</p>
+                    <h3 class="proof-title">Awards, Scholarship Merit & Professional Participation</h3>
+                    <div class="mt-4 grid gap-4">
+                      {profile.recognition.map((item) => (
+                        <article class="proof-list-item">
+                          <p class="font-semibold">{item.title}</p>
+                          <p class="section-body mt-1 text-sm">{item.summary}</p>
+                          <p class="proof-source mt-2">{item.issuer}{item.date ? ` | ${item.date}` : ''}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+
+                  <section class="card-surface proof-subcard" data-motion="reveal" data-tilt-card>
+                    <p class="proof-type">Research & Academic Involvement</p>
+                    <h3 class="proof-title">MMIHS IRC-Approved Research Participation</h3>
+                    <div class="mt-4 grid gap-4">
+                      {profile.research.map((item) => (
+                        <article class="proof-list-item">
+                          <p class="font-semibold">{item.title}</p>
+                          <p class="section-body mt-1 text-sm">{item.summary}</p>
+                          {item.status && <p class="muted mt-2 text-xs uppercase tracking-[0.12em]">{item.status}</p>}
+                          <p class="proof-source mt-2">{item.organization}</p>
+                        </article>
+                      ))}
+                    </div>
+                  </section>
+                </div>
+              </section>
+            </section>
+
+            <section class="home-figma-panel" data-motion="reveal">
+              <div class="home-section-head">
+                <p class="section-label">{copy.verification.label}</p>
+                <h2 class="section-title mt-3">{copy.verification.title}</h2>
+                <p class="section-body mt-3 reading-wrap">{copy.verification.body}</p>
+              </div>
+
+              <div class="credential-list mt-6">
+                {
+                  topCredentialCards.map((item) => (
+                    <article class:list={['card-surface', 'credential-card', item.kind === 'licensure' ? 'credential-card--licensure' : '']} data-tilt-card>
+                      <div class="credential-head">
+                        <h3 class="credential-title">{item.title}</h3>
+                        <p class="credential-date">{item.date}</p>
+                      </div>
+                      <p class="credential-issuer">{item.issuer}</p>
+                      <p class="credential-copy">{item.details}</p>
+                    </article>
+                  ))
+                }
+              </div>
+
+              <div class="home-section-head mt-10">
+                <p class="section-label">{copy.verification.galleryLabel}</p>
+                <h3 class="section-title mt-3">{copy.verification.galleryTitle}</h3>
+                <p class="section-body mt-3 reading-wrap">{copy.verification.galleryBody}</p>
+              </div>
+
+              <div class="mt-5" data-doc-gallery>
+                <div class="doc-filter-row" data-motion="reveal">
+                  {docCategories.map((category) => (
+                    <button
+                      type="button"
+                      class="doc-filter"
+                      data-doc-filter={category}
+                      data-active={category === 'All' ? 'true' : 'false'}
+                      aria-pressed={category === 'All' ? 'true' : 'false'}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+
+                <div class="doc-grid mt-4" data-auto-animate>
+                  {verificationPreviewDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
+                </div>
+
+                {
+                  additionalVerificationDocs.length ? (
+                    <section class="home-details mt-6">
+                      <p class="section-label section-label--inline">Additional evidence</p>
+                      <div class="doc-grid mt-4">
+                        {additionalVerificationDocs.map((doc) => <DocumentGalleryCard doc={doc} />)}
+                      </div>
+                    </section>
+                  ) : null
+                }
+              </div>
+            </section>
+          </div>
+
+          <div class="contact-grid mt-0">
+            <div data-motion="reveal">
+              <p class="section-label">{copy.contact.label}</p>
+              <h2 class="section-title mt-3">{copy.contact.title}</h2>
+              <p class="section-body mt-3 reading-wrap">
+                {copy.contact.body}
+              </p>
+
+              <div class="contact-links mt-5">
+                <p>
+                  Phone: <a href={`tel:${profile.phone}`}>{profile.phone}</a>
+                </p>
+                <p>
+                  Email: <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                </p>
+                <p>
+                  LinkedIn:
+                  <a href={profile.linkedin} target="_blank" rel="noreferrer noopener"> {profile.linkedin.replace('https://', '')}</a>
+                </p>
+                <p>
+                  Resume: <a href={profile.resumePdfPath}>Download PDF</a>
+                </p>
+              </div>
+
+              <section class="home-details mt-6">
+                <p class="section-label section-label--inline">{copy.contact.referencesTitle}</p>
+                <p class="section-body mt-3">
+                  {copy.contact.referencesBody}
+                </p>
+                <ul class="bullet-list mt-3">
+                  {profile.references.map((ref) => <li>{ref.name} - {ref.role}</li>)}
+                </ul>
+              </section>
+
+              <section class="home-details mt-3">
+                <p class="section-label section-label--inline">{copy.contact.privacyTitle}</p>
+                <ul class="bullet-list mt-3">
+                  {profile.privacyNotes.map((note) => <li>{note}</li>)}
+                </ul>
+              </section>
+            </div>
+
+            <div class="card-surface contact-shell" data-motion="reveal" data-tilt-card>
+              {!formAction && <p class="notice">Set <code>PUBLIC_FORMSPREE_ENDPOINT</code> to enable live form submission.</p>}
+
+              <form method="POST" action={formAction || 'https://formspree.io/f/your-form-id'}>
+                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hidden" />
+                <label>
+                  Name
+                  <input required name="name" placeholder="Your full name" />
+                </label>
+                <label>
+                  Email
+                  <input type="email" required name="email" placeholder="you@example.com" />
+                </label>
+                <label>
+                  Organization / Role
+                  <input required name="subject" placeholder="Hospital, NGO, INGO, recruiter, or hiring manager" />
+                </label>
+                <label>
+                  Message
+                  <textarea
+                    rows={5}
+                    required
+                    name="message"
+                    placeholder="Please share role type, location, contract/full-time details, and interview availability."
+                  ></textarea>
+                </label>
+                <button type="submit" class="btn-inline-primary mt-1 w-fit">{copy.contact.formButton}</button>
+              </form>
+            </div>
+          </div>
+
+          <div id="faq" class="home-anchor"></div>
+          <div class="home-contact-extras mt-8">
+            <FaqList items={contactFaqs} title={copy.contact.faqTitle} className="home-embedded-faq" />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+
+
+

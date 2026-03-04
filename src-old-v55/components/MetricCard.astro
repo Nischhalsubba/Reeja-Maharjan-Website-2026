@@ -1,0 +1,15 @@
+---
+import type { StatItem } from '../content/profile';
+
+interface Props {
+  item: StatItem;
+}
+
+const { item } = Astro.props as Props;
+---
+
+<article class="metric-card card-surface" data-motion="reveal" data-tilt-card>
+  <p class="metric-label">{item.label}</p>
+  <p class="metric-value" data-counter={item.value}>{item.value}</p>
+  {item.note && <p class="metric-note">{item.note}</p>}
+</article>

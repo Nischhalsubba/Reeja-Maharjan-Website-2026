@@ -1,0 +1,39 @@
+:root {
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+  --bg: #f2efe7;
+  --surface: #ffffff;
+  --text: #111316;
+  --muted: #555f6f;
+  --accent: #d13c3c;
+  --line: #d9d6cf;
+
+  --container-max: 1160px;
+  --gutter: clamp(16px, 3vw, 40px);
+  --section-gap: clamp(56px, 6vw, 96px);
+
+  --s1: 8px;
+  --s2: 16px;
+  --s3: 24px;
+  --s4: 32px;
+  --s5: 40px;
+  --s6: 48px;
+  --s7: 56px;
+  --s8: 64px;
+  --s9: 72px;
+  --s10: 80px;
+  --s11: 88px;
+  --s12: 96px;
+
+  --h1: clamp(2.8rem, 5vw + 1rem, 4rem);
+  --h2: clamp(2rem, 2.6vw + 0.5rem, 2.75rem);
+  --h3: clamp(1.2rem, 0.8vw + 0.8rem, 1.35rem);
+  --p: clamp(1rem, 0.1vw + 0.95rem, 1.06rem);
+  --small: 0.9rem;
+
+  --r1: 10px;
+  --r2: 14px;
+
+  --shadow-1: 0 2px 8px rgba(17, 19, 22, 0.06);
+  --shadow-2: 0 10px 30px rgba(17, 19, 22, 0.12);
+}

@@ -1,0 +1,28 @@
+---
+import SectionIntro from './SectionIntro.astro';
+import type { ProfileContent } from '../content/profile';
+
+type Props = { profile: ProfileContent };
+const { profile } = Astro.props;
+---
+
+<section class="section" data-reveal-group>
+  <div class="container section-stack">
+    <SectionIntro
+      id={profile.educationIntro.id}
+      eyebrow={profile.educationIntro.eyebrow}
+      title={profile.educationIntro.title}
+      summary={profile.educationIntro.summary}
+    />
+    <div class="card-grid card-grid--3">
+      {profile.education.map((item) => (
+        <article class="card" data-reveal>
+          <h3>{item.level}</h3>
+          <p>{item.institution}</p>
+          <p class="muted">{item.period}</p>
+          <p class="strong">{item.result}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,22 @@
+---
+import SectionIntro from './SectionIntro.astro';
+import type { ProfileContent } from '../content/profile';
+
+type Props = { profile: ProfileContent };
+const { profile } = Astro.props;
+---
+
+<section class="section" aria-labelledby="profile-heading" data-reveal-group>
+  <div class="container section-stack">
+    <SectionIntro
+      id={profile.profileIntro.id}
+      eyebrow={profile.profileIntro.eyebrow}
+      title={profile.profileIntro.title}
+      summary={profile.profileIntro.summary}
+    />
+    <div class="text-card" data-reveal>
+      <h3 id="profile-heading">{profile.role}</h3>
+      <p>{profile.profileSummary}</p>
+    </div>
+  </div>
+</section>

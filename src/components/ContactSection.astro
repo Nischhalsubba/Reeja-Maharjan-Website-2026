@@ -1,0 +1,51 @@
+---
+import SectionIntro from './SectionIntro.astro';
+import type { ProfileContent } from '../content/profile';
+
+type Props = { profile: ProfileContent };
+const { profile } = Astro.props;
+---
+
+<section class="section" data-reveal-group>
+  <div class="container section-stack">
+    <SectionIntro
+      id={profile.contactIntro.id}
+      eyebrow={profile.contactIntro.eyebrow}
+      title={profile.contactIntro.title}
+      summary={profile.contactIntro.summary}
+    />
+
+    <div class="contact-grid">
+      <div class="card" data-reveal>
+        <h3>Direct Contact</h3>
+        <ul class="contact-list">
+          <li><span>Email</span><a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a></li>
+          <li><span>Phone</span><a href={`tel:${profile.contact.phone.replaceAll(' ', '')}`}>{profile.contact.phone}</a></li>
+          <li><span>Location</span><strong>{profile.contact.location}</strong></li>
+          <li><span>LinkedIn</span><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">Profile</a></li>
+        </ul>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Send Email</a>
+          <a class="btn btn--secondary" href={profile.contact.resumeUrl}>Download CV</a>
+        </div>
+      </div>
+
+      <form class="card contact-form" data-reveal aria-label="Contact form">
+        <h3>Send a message</h3>
+        <label>
+          Name
+          <input type="text" name="name" autocomplete="name" />
+        </label>
+        <label>
+          Email
+          <input type="email" name="email" autocomplete="email" />
+        </label>
+        <label>
+          Message
+          <textarea name="message" rows="5"></textarea>
+        </label>
+        <button type="button" class="btn btn--primary" disabled>Form endpoint pending</button>
+      </form>
+    </div>
+  </div>
+</section>
