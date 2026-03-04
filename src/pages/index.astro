@@ -422,42 +422,6 @@ void _flatTimelineEntries;
               <div class="hero-pill-cloud" aria-hidden="true">
                 {profile.hero.floatingTags.map((tag) => <FloatingTagPill label={tag} />)}
               </div>
-              {
-                heroImage && (
-                  <figure
-                    class="hero-photo-card hero-photo-card--figma"
-                    data-motion="reveal"
-                    data-tilt-card
-                    data-hero-image-wrap
-                    data-lightbox-trigger
-                    data-lightbox-id="hero-photo"
-                    data-lightbox-src={heroImage.file}
-                    data-lightbox-alt={heroImage.alt}
-                    data-lightbox-title={`${profile.name} photo`}
-                    data-lightbox-issuer={profile.name}
-                    data-lightbox-group="home-hero"
-                    role="button"
-                    tabindex="0"
-                  >
-                    <div class="hero-photo-frame">
-                      <img
-                        src={heroImage.file}
-                        alt={heroImage.alt}
-                        class="hero-photo-main"
-                        loading="eager"
-                        fetchpriority="high"
-                        decoding="async"
-                        onerror="var f=this.closest('figure'); if(f){f.remove();}"
-                      />
-                      <img src="/hero-bottom-overlay.svg" alt="" class="hero-photo-overlay-svg" aria-hidden="true" />
-                    </div>
-                    <figcaption>
-                      <p>{profile.name}</p>
-                      <small>{profile.role}</small>
-                    </figcaption>
-                  </figure>
-                )
-              }
               <div class="hero-bio-card" data-motion="reveal">
                 <p class="eyebrow">{copy.hero.snapshotTitle}</p>
                 <p class="section-body mt-2">

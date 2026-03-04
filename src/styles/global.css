@@ -6504,3 +6504,62 @@ html body .custom-cursor--ring[data-state='drag'] {
   height: 24px;
   border-color: rgba(30, 34, 41, 0.9);
 }
+/* v5.8 readability and spacing system (site-wide) */
+:root {
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-7: 56px;
+  --space-8: 64px;
+  --space-9: 72px;
+  --space-10: 80px;
+  --space-11: 88px;
+  --space-12: 96px;
+  --measure-body: 72ch;
+  --measure-copy-tight: 62ch;
+}
+
+body {
+  text-rendering: optimizeLegibility;
+}
+
+p,
+li,
+label,
+input,
+textarea,
+button {
+  line-height: 1.55;
+}
+
+p {
+  max-width: var(--measure-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+}
+
+.blog-listing p,
+.blog-post p {
+  max-width: var(--measure-copy-tight);
+}
+
+@media (max-width: 768px) {
+  p,
+  li,
+  label,
+  input,
+  textarea,
+  button {
+    line-height: 1.6;
+  }
+}

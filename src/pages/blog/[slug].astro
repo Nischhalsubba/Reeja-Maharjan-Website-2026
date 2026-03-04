@@ -18,9 +18,9 @@ const { post } = Astro.props as { post: (typeof blogPosts)[number] };
   title={post.title}
   description={post.description}
 >
-  <article class="mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
+  <article class="blog-post mx-auto max-w-3xl px-4 py-16 sm:px-6 lg:px-8">
     <a href="/blog/" class="text-sm font-semibold uppercase tracking-[0.1em] text-[var(--accent)]">
-      Back to blog
+      Back
     </a>
 
     <header class="mt-6 border-b border-[var(--line)] pb-6">
@@ -36,4 +36,3 @@ const { post } = Astro.props as { post: (typeof blogPosts)[number] };
     </div>
   </article>
 </BaseLayout>
-

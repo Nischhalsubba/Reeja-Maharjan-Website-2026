@@ -6,15 +6,15 @@ import { blogPosts } from '../../content/blogPosts';
 <BaseLayout
   page="blog"
   pageType="profile"
-  title="Blog"
-  description="Clinical nursing articles and practical notes by Reeja Maharjan."
+  title="Nursing Blog"
+  description="Short clinical notes by Reeja Maharjan."
 >
-  <section class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+  <section class="blog-listing mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
     <header class="mb-10">
       <p class="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--accent)]">Blog</p>
-      <h1 class="mt-3 text-4xl font-semibold tracking-tight text-[var(--ink)]">Clinical Notes and Articles</h1>
+      <h1 class="mt-3 text-4xl font-semibold tracking-tight text-[var(--ink)]">Clinical Notes</h1>
       <p class="mt-4 max-w-2xl text-base leading-7 text-[var(--ink-muted)]">
-        Practical nursing articles focused on maternal-newborn support, ward workflow, documentation, and care continuity.
+        Practical nursing notes on maternal-newborn care, ward workflow, and safe handovers.
       </p>
     </header>
 
@@ -29,11 +29,10 @@ import { blogPosts } from '../../content/blogPosts';
           </h2>
           <p class="mt-3 text-base leading-7 text-[var(--ink-muted)]">{post.description}</p>
           <a href={`/blog/${post.slug}/`} class="mt-5 inline-block text-sm font-semibold uppercase tracking-[0.1em] text-[var(--accent)]">
-            Read article
+            Read
           </a>
         </article>
       ))}
     </div>
   </section>
 </BaseLayout>
-

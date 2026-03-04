@@ -1,64 +1,63 @@
-export const homepageCopy = {
+ï»¿export const homepageCopy = {
   hero: {
-    label: 'Reeja Maharjan · Licensed Registered Nurse (Nepal) · Hospital / NGO / INGO Roles',
-    title: 'Registered Nurse Specializing in Maternal, Newborn, and General Ward Care',
+    label: 'Reeja Maharjan Â· Licensed RN (Nepal)',
+    title: 'Registered Nurse for Maternal, Newborn, and General Ward Care',
     subtitle:
-      'NNC-licensed Registered Nurse with documented clinical service at TUTH, MMTH, and Sindhuli Hospital. Verified focus areas include maternal-newborn support, general ward nursing, patient counselling, safe documentation, and coordinated handover practice.',
-    proofLine: 'NNC Licensed RN · Immediate Availability · Relocation Accepted · Nepal & International Opportunities',
+      'NNC-licensed nurse with verified hospital service at TUTH, MMTH, and Sindhuli Hospital. Focused on maternal-newborn care, ward support, counselling, and safe handovers.',
+    proofLine: 'NNC Licensed Â· Immediate Availability Â· Relocation Accepted',
     snapshotTitle: 'Clinical Snapshot',
     snapshotBody:
-      'Teaching-hospital and regional-hospital nursing background with evidence-backed credentials, training, recognition, and public verification records for recruiter review.',
+      'Teaching and regional hospital experience with public evidence for recruiter review.',
     primaryCta: 'Download Resume',
     secondaryCta: 'Request Interview',
-    tertiaryCta: 'Review Verification',
+    tertiaryCta: 'View Evidence',
   },
   timeline: {
     label: 'Career Timeline',
-    title: 'Clinical Experience, Training, Recognition, and Research Timeline',
+    title: 'Experience, Training, and Recognition Timeline',
     body:
-      'This timeline combines hospital service with licensure, training, recognition, and research milestones. Related credentials are embedded within matching work periods when dates align, helping employers review progression and proof in one place.',
+      'Hospital experience and key credentials shown in date order, with linked evidence.',
   },
   verification: {
     label: 'Verification',
-    title: 'Licensure, Training, and Clinical Evidence',
+    title: 'Licensure, Training, and Evidence',
     body:
-      'Priority credentials are listed first for fast screening, followed by a filtered public evidence gallery that supports key clinical claims used across this portfolio.',
+      'Key credentials first, followed by filtered public documents for quick verification.',
     galleryLabel: 'Verification Gallery',
     galleryTitle: 'Public Evidence for Recruiter Verification',
     galleryBody:
-      'These public documents support experience, training, recognition, and academic claims. Sensitive personal-ID records are intentionally excluded.',
+      'Public documents supporting experience, training, recognition, and academic claims.',
     proofLabel: 'Recognition & Research Evidence',
-    proofTitle: 'Verified Professional Recognition and Academic Involvement',
+    proofTitle: 'Recognition and Academic Involvement',
     proofBody:
-      'Condensed proof cards highlight recognition, training-supported readiness, and research participation that reinforce the clinical profile beyond a standard CV.',
+      'Condensed proof of recognition, training readiness, and research participation.',
   },
   skills: {
     label: 'Skills & Fit',
     title: 'Clinical Capability, Work Fit, and Readiness',
     body:
-      'A recruiter-first summary of care areas, practical capability groups, communication strengths, education, and work preferences for hospital, NGO, and INGO hiring decisions.',
+      'Core care areas, practical skills, education, and work preferences for hiring review.',
     practiceTitle: 'Clinical Areas of Practice',
     practiceBody:
-      'Core contribution areas include maternal-newborn support, general ward nursing, patient counselling, OT readiness, and documentation plus shift handover discipline.',
+      'Maternal-newborn support, general ward care, counselling, OT readiness, and clear handovers.',
     profileTitle: 'Professional Profile & Care Approach',
     preferencesTitle: 'Work Preferences & Availability',
     skillsTitle: 'Clinical Skills and Capability Groups',
-    educationTitle: 'Education, Languages, and Academic Performance',
+    educationTitle: 'Education and Languages',
     metricsTitle: 'Recruiter Snapshot Metrics',
   },
   contact: {
     label: 'Contact',
-    title: 'Request Interview or Hiring Discussion',
+    title: 'Request Interview',
     body:
-      'Use this form for interview scheduling, recruiter outreach, and role discussions. Reeja is available immediately and open to Nepal-wide and international opportunities with relocation accepted.',
+      'For interview requests and role discussions. Available immediately, relocation accepted.',
     referencesTitle: 'References',
     referencesBody:
-      'Professional references can be shared during active hiring conversations after initial screening and role alignment.',
+      'References available during active hiring discussions.',
     privacyTitle: 'Privacy Note',
     faqTitle: 'Recruiter FAQ',
-    formButton: 'Send Opportunity Inquiry',
+    formButton: 'Send Inquiry',
   },
 } as const;
 
 export type HomepageCopy = typeof homepageCopy;
-
