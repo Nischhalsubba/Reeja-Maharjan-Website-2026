@@ -19,9 +19,17 @@ const { profile } = Astro.props;
         <h3>Direct Nursing Contact</h3>
         <ul class="contact-list">
           <li><span>Email</span><a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a></li>
-          <li><span>Phone</span><a href={`tel:${profile.contact.phone.replaceAll(' ', '')}`}>{profile.contact.phone}</a></li>
+          <li><span>Mobile</span><strong>Available on request</strong></li>
           <li><span>Location</span><strong>{profile.contact.location}</strong></li>
           <li><span>LinkedIn</span><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">Profile</a></li>
+          {
+            profile.contact.instagram && (
+              <li>
+                <span>Instagram</span>
+                <a href={profile.contact.instagram} target="_blank" rel="noopener noreferrer">Profile</a>
+              </li>
+            )
+          }
         </ul>
         <div class="hero__actions">
           <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Send Email</a>
@@ -54,6 +62,11 @@ const { profile } = Astro.props;
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <button type="submit" class="btn btn--primary">Send Message</button>
+        <div class="form-success-card" hidden>
+          <h4>Message sent successfully</h4>
+          <p>Thank you for reaching out. Reeja will reply to your email soon.</p>
+          <button type="button" class="btn btn--secondary" data-reset-form>Send another message</button>
+        </div>
         <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
           Message sent. Reeja will reply soon.
         </p>
@@ -77,6 +90,25 @@ const { profile } = Astro.props;
     const success = form.querySelector('.form-status--success');
     const error = form.querySelector('.form-status--error');
     const submit = form.querySelector('button[type="submit"]');
+    const successCard = form.querySelector('.form-success-card');
+    const resetButton = form.querySelector('[data-reset-form]');
+    const fields = Array.from(form.querySelectorAll('label, input[type=\"hidden\"], button[type=\"submit\"]'));
+
+    const setSuccessView = (enabled) => {
+      fields.forEach((el) => {
+        if (!(el instanceof HTMLElement)) return;
+        el.hidden = enabled;
+      });
+      if (successCard instanceof HTMLElement) successCard.hidden = !enabled;
+    };
+
+    if (resetButton instanceof HTMLButtonElement) {
+      resetButton.addEventListener('click', () => {
+        setSuccessView(false);
+        if (success instanceof HTMLElement) success.hidden = true;
+        if (error instanceof HTMLElement) error.hidden = true;
+      });
+    }
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -97,6 +129,7 @@ const { profile } = Astro.props;
         if (!response.ok) throw new Error('Request failed');
         form.reset();
         if (success instanceof HTMLElement) success.hidden = false;
+        setSuccessView(true);
       } catch {
         if (error instanceof HTMLElement) error.hidden = false;
       } finally {

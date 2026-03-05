@@ -61,6 +61,25 @@ ol {
   padding: var(--s1) var(--s2);
 }
 
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 500;
+  background: color-mix(in srgb, var(--line) 40%, transparent);
+}
+
+.scroll-progress__bar {
+  display: block;
+  height: 100%;
+  width: 100%;
+  transform-origin: left center;
+  transform: scaleX(0);
+  background: var(--accent);
+}
+
 .skip-link:focus-visible {
   top: var(--s2);
 }

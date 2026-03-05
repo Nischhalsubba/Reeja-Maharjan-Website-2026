@@ -288,6 +288,14 @@
   box-shadow: var(--shadow-1);
 }
 
+.card[data-card-link] {
+  cursor: pointer;
+}
+
+.card[data-card-link]:focus-visible {
+  box-shadow: var(--focus-ring), var(--shadow-2);
+}
+
 .text-card h3,
 .card h3 {
   font-size: var(--h3);

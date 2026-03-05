@@ -19,6 +19,17 @@ const { profile } = Astro.props;
           <h3>{item.name}</h3>
           <p class="muted">{item.title}</p>
           <p>{item.quote}</p>
+          {
+            item.links && (
+              <ul class="chip-list">
+                {item.links.map((link) => (
+                  <li>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            )
+          }
         </article>
       ))}
     </div>

@@ -25,7 +25,12 @@ const { profile, mode = 'one-page' } = Astro.props;
     </nav>
     <div class="site-footer__contact">
       <a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
-      <a href={`tel:${profile.contact.phone.replaceAll(' ', '')}`}>{profile.contact.phone}</a>
+      <span>Mobile: Available on request</span>
+      {
+        profile.contact.instagram && (
+          <a href={profile.contact.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+        )
+      }
     </div>
   </div>
   <div class="container site-footer__legal">

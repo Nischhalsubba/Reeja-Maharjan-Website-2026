@@ -36,6 +36,7 @@ const isBlogPage = Astro.url.pathname.startsWith('/blog');
     />
   </head>
   <body>
+    <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header
       name={profile.name}

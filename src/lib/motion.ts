@@ -42,6 +42,8 @@ const initLightbox = (): void => {
 
   let currentIndex = 0;
   let rotation = 0;
+  let closing = false;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   const render = () => {
     const item = items[currentIndex];
@@ -71,10 +73,46 @@ const initLightbox = (): void => {
     image.style.transform = `rotate(${rotation}deg)`;
   };
 
-  const setOpen = (open: boolean) => {
-    lightbox.hidden = !open;
-    lightbox.setAttribute('aria-hidden', String(!open));
-    document.body.classList.toggle('lightbox-open', open);
+  const openLightbox = () => {
+    lightbox.hidden = false;
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+
+    if (prefersReduced) return;
+    gsap.killTweensOf(['.lightbox__backdrop', '.lightbox__dialog']);
+    gsap.fromTo('.lightbox__backdrop', { opacity: 0 }, { opacity: 1, duration: 0.22, ease: 'power2.out' });
+    gsap.fromTo(
+      '.lightbox__dialog',
+      { opacity: 0, y: 22, scale: 0.985 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'power2.out' }
+    );
+  };
+
+  const closeLightbox = () => {
+    if (closing) return;
+    if (prefersReduced) {
+      lightbox.hidden = true;
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+      return;
+    }
+
+    closing = true;
+    gsap.killTweensOf(['.lightbox__backdrop', '.lightbox__dialog']);
+    gsap.to('.lightbox__backdrop', { opacity: 0, duration: 0.18, ease: 'power2.in' });
+    gsap.to('.lightbox__dialog', {
+      opacity: 0,
+      y: 14,
+      scale: 0.99,
+      duration: 0.22,
+      ease: 'power2.in',
+      onComplete: () => {
+        lightbox.hidden = true;
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+        closing = false;
+      }
+    });
   };
 
   triggers.forEach((trigger, index) => {
@@ -83,11 +121,11 @@ const initLightbox = (): void => {
       currentIndex = index;
       rotation = 0;
       render();
-      setOpen(true);
+      openLightbox();
     });
   });
 
-  closeButtons.forEach((btn) => btn.addEventListener('click', () => setOpen(false)));
+  closeButtons.forEach((btn) => btn.addEventListener('click', () => closeLightbox()));
   prevBtn?.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + items.length) % items.length;
     rotation = 0;
@@ -113,15 +151,62 @@ const initLightbox = (): void => {
 
   document.addEventListener('keydown', (event) => {
     if (lightbox.hidden) return;
-    if (event.key === 'Escape') setOpen(false);
+    if (event.key === 'Escape') closeLightbox();
     if (event.key === 'ArrowLeft') prevBtn?.click();
     if (event.key === 'ArrowRight') nextBtn?.click();
   });
+};
+
+const initCardLinks = (): void => {
+  const cards = qsa<HTMLElement>('[data-card-link]');
+  cards.forEach((card) => {
+    const href = card.dataset.cardHref;
+    const target = card.dataset.cardTarget ?? '_self';
+    if (!href) return;
+
+    card.setAttribute('role', 'link');
+    card.setAttribute('tabindex', '0');
+
+    const canOpenFromTarget = (targetEl: EventTarget | null): boolean => {
+      if (!(targetEl instanceof Element)) return true;
+      return !Boolean(targetEl.closest('a, button, input, textarea, select, label'));
+    };
+
+    card.addEventListener('click', (event) => {
+      if (!canOpenFromTarget(event.target)) return;
+      if (target === '_blank') window.open(href, '_blank', 'noopener,noreferrer');
+      else window.location.href = href;
+    });
+
+    card.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      if (target === '_blank') window.open(href, '_blank', 'noopener,noreferrer');
+      else window.location.href = href;
+    });
+  });
+};
+
+const initScrollProgress = (): void => {
+  const bar = qs<HTMLElement>('.scroll-progress__bar');
+  if (!bar) return;
+
+  const update = () => {
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+    bar.style.transform = `scaleX(${progress})`;
+  };
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
 };
 
 export const initMotion = (): void => {
   initNavSpy();
   initHeroIntro();
   initReveal();
+  initCardLinks();
+  initScrollProgress();
   initLightbox();
 };

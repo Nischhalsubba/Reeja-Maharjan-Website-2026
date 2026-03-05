@@ -67,6 +67,7 @@ export type Recommendation = {
   name: string;
   title: string;
   quote: string;
+  links?: Array<{ label: string; href: string }>;
 };
 
 export type PersonalDetail = {
@@ -79,8 +80,17 @@ export type ContactData = {
   phone: string;
   location: string;
   linkedin: string;
+  instagram?: string;
   resumeUrl: string;
   formEndpoint?: string;
+};
+
+export type EvidenceItem = {
+  title: string;
+  category: string;
+  description: string;
+  src: string;
+  alt: string;
 };
 
 export type ProfileContent = {
@@ -109,6 +119,8 @@ export type ProfileContent = {
   recommendations: Recommendation[];
   personalDetailsIntro: SectionIntro;
   personalDetails: PersonalDetail[];
+  evidenceIntro: SectionIntro;
+  evidence: EvidenceItem[];
   keywordsIntro: SectionIntro;
   keywords: string[];
   contactIntro: SectionIntro;
@@ -431,7 +443,11 @@ export const profile: ProfileContent = {
       name: 'Dr. Nawaraj Subba',
       title: 'Public Health Professional',
       quote:
-        'Reeja demonstrates reliable nursing discipline, respectful communication, and steady coordination in clinical settings.'
+        'Reeja demonstrates reliable nursing discipline, respectful communication, and steady coordination in clinical settings.',
+      links: [
+        { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dr-nawa-raj-subba-93994860/' },
+        { label: 'Website', href: 'https://nrsubba.com.np/' }
+      ]
     },
     {
       name: 'Elisha Thapa Magar',
@@ -447,11 +463,125 @@ export const profile: ProfileContent = {
     summary: 'Public-safe details for recruiter screening and role matching.'
   },
   personalDetails: [
-    { key: 'Date of Birth', value: '1998 (year)' },
+    { key: 'Date of Birth', value: '1998 (year only)' },
     { key: 'Gender', value: 'Available on request' },
     { key: 'Marital Status', value: 'Available on request' },
     { key: 'Permanent Address', value: 'Lalitpur, Nepal' },
     { key: 'Current Address', value: 'Biratnagar, Nepal (relocation target)' }
+  ],
+  evidenceIntro: {
+    id: 'evidence',
+    eyebrow: 'Verification Library',
+    title: 'Credentials and Supporting Evidence',
+    summary:
+      'Verified documents for licensure, training, education, experience, scholarship, and research records.'
+  },
+  evidence: [
+    {
+      title: 'RN License Certificate',
+      category: 'Licensure',
+      description: 'Nepal Nursing Council registration certificate (RN).',
+      src: '/resume.pdf',
+      alt: 'RN license certificate record'
+    },
+    {
+      title: 'MMTH Experience Letter',
+      category: 'Experience',
+      description: 'Official MMTH staff nurse experience letter.',
+      src: '/documents/mmth-experience-letter.jpg',
+      alt: 'MMTH experience letter'
+    },
+    {
+      title: 'Sindhuli Hospital Experience Letter',
+      category: 'Experience',
+      description: 'Official experience letter from Sindhuli Hospital.',
+      src: '/documents/experience-letter.jpg',
+      alt: 'Sindhuli Hospital experience letter'
+    },
+    {
+      title: 'Comprehensive Newborn Care Level II',
+      category: 'Training',
+      description: 'CNC Level II training credential.',
+      src: '/documents/cnc-level-ii-certificate.jpg',
+      alt: 'Comprehensive Newborn Care Level II certificate'
+    },
+    {
+      title: 'OTTM Training Certificate',
+      category: 'Training',
+      description: 'Operation Theatre Techniques and Management credential.',
+      src: '/documents/ottm-certificate.jpg',
+      alt: 'OTTM training certificate'
+    },
+    {
+      title: 'CPR Training Certificate',
+      category: 'Training',
+      description: 'TUTH CPR participation certificate.',
+      src: '/documents/cpr-certificate.jpg',
+      alt: 'CPR training certificate'
+    },
+    {
+      title: 'National Nursing Conference Certificate',
+      category: 'Conference',
+      description: 'Delegate participation certificate.',
+      src: '/documents/vascular-nursing-conference-certificate.jpg',
+      alt: 'National nursing conference participation certificate'
+    },
+    {
+      title: 'SAN Token of Appreciation',
+      category: 'Recognition',
+      description: 'World Anesthesia Day 2024 recognition certificate.',
+      src: '/documents/san-token-of-appreciation.jpg',
+      alt: 'SAN token of appreciation certificate'
+    },
+    {
+      title: 'B.Sc Character Certificate',
+      category: 'Education',
+      description: 'B.Sc character certificate.',
+      src: '/documents/bsc-character-certificate.jpg',
+      alt: 'BSc character certificate'
+    },
+    {
+      title: 'B.Sc Degree Certificate',
+      category: 'Education',
+      description: 'B.Sc nursing degree certificate.',
+      src: '/documents/bsc-degree-certificate.jpg',
+      alt: 'BSc degree certificate'
+    },
+    {
+      title: '+2 Provisional Certificate',
+      category: 'Education',
+      description: 'Higher secondary provisional certificate.',
+      src: '/documents/plus2-provisional-certificate.jpg',
+      alt: '+2 provisional certificate'
+    },
+    {
+      title: '+2 Transcript',
+      category: 'Education',
+      description: 'Higher secondary transcript.',
+      src: '/documents/plus2-transcript.jpg',
+      alt: '+2 transcript'
+    },
+    {
+      title: 'SLC Certificate',
+      category: 'Education',
+      description: 'School Leaving Certificate.',
+      src: '/documents/slc-certificate.jpg',
+      alt: 'SLC certificate'
+    },
+    {
+      title: 'SLC Marksheet',
+      category: 'Education',
+      description: 'School Leaving marksheet.',
+      src: '/documents/slc-marksheet.jpg',
+      alt: 'SLC marksheet'
+    },
+    {
+      title: 'MMIHS IRC Ethical Approval',
+      category: 'Research',
+      description: 'Institutional review committee ethical approval letter.',
+      src: '/documents/mmihs-irc-ethical-approval.jpg',
+      alt: 'Institutional ethical approval letter'
+    }
   ],
   keywordsIntro: {
     id: 'keywords',
@@ -481,9 +611,10 @@ export const profile: ProfileContent = {
   },
   contact: {
     email: 'maharjanreeja88@gmail.com',
-    phone: '+977 9843704288',
+    phone: 'Available on request',
     location: 'Lalitpur, Nepal',
     linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
+    instagram: 'https://www.instagram.com/maharjan_reeja/',
     resumeUrl: '/resume.pdf',
     formEndpoint: 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'
   }
