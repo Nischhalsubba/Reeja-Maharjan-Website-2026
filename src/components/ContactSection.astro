@@ -144,18 +144,16 @@ const { profile } = Astro.props;
 
       try {
         const formData = new FormData(form);
-        const payload = Object.fromEntries(formData.entries());
-
         const response = await fetch(form.action, {
           method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload)
+          headers: { Accept: 'application/json' },
+          body: formData
         });
 
         if (!response.ok) throw new Error('Request failed');
+        const result = await response.json().catch(() => ({}));
+        const sent = String(result?.success ?? '').toLowerCase() === 'true';
+        if (!sent) throw new Error('Provider rejected');
 
         form.reset();
         if (success instanceof HTMLElement) success.hidden = false;

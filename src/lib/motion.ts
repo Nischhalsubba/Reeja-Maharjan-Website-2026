@@ -7,6 +7,7 @@ const initHeaderMenu = (): void => {
   const toggle = qs<HTMLButtonElement>('.menu-toggle');
   const nav = qs<HTMLElement>('.mobile-nav');
   if (!toggle || !nav) return;
+  const closeButton = qs<HTMLButtonElement>('[data-mobile-nav-close]', nav);
 
   let isOpen = false;
 
@@ -35,6 +36,7 @@ const initHeaderMenu = (): void => {
   qsa<HTMLAnchorElement>('.mobile-nav__panel a', nav).forEach((link) => {
     link.addEventListener('click', () => closeMenu());
   });
+  closeButton?.addEventListener('click', () => closeMenu());
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeMenu();
   });

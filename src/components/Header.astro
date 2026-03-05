@@ -47,6 +47,7 @@ const { name, showAwards = false, mode = 'one-page' } = Astro.props;
     {
       mode === 'one-page' ? (
         <nav class="mobile-nav__panel" aria-label="Mobile section navigation">
+          <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
           <a href="#home">Home</a>
           <a href="#profile">Profile</a>
           <a href="#competencies">Core Competencies</a>
@@ -66,6 +67,7 @@ const { name, showAwards = false, mode = 'one-page' } = Astro.props;
         </nav>
       ) : (
         <nav class="mobile-nav__panel" aria-label="Mobile site navigation">
+          <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
           <a href="/">Home</a>
           <a href="/blog/">Blog</a>
           <a href="/#contact">Contact Me</a>
