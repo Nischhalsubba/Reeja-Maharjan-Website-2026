@@ -46,5 +46,11 @@ const isBlogPage = Astro.url.pathname.startsWith('/blog');
       <slot />
     </main>
     <Footer profile={profile} mode={isBlogPage ? 'blog' : 'one-page'} />
+
+    <script>
+      import { initMotion } from '../lib/motion';
+
+      initMotion();
+    </script>
   </body>
 </html>

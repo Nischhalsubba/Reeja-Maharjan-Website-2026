@@ -16,7 +16,7 @@ const { profile } = Astro.props;
 
     <div class="contact-grid">
       <div class="card" data-reveal>
-        <h3>Direct Contact</h3>
+        <h3>Direct Nursing Contact</h3>
         <ul class="contact-list">
           <li><span>Email</span><a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a></li>
           <li><span>Phone</span><a href={`tel:${profile.contact.phone.replaceAll(' ', '')}`}>{profile.contact.phone}</a></li>
@@ -37,7 +37,7 @@ const { profile } = Astro.props;
         method="POST"
         data-endpoint={profile.contact.formEndpoint}
       >
-        <h3>Send a message</h3>
+        <h3>Send an Interview Inquiry</h3>
         <label>
           Name
           <input type="text" name="name" autocomplete="name" />
@@ -55,10 +55,10 @@ const { profile } = Astro.props;
         <input type="hidden" name="_template" value="table" />
         <button type="submit" class="btn btn--primary">Send Message</button>
         <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
-          Message sent successfully.
+          Message sent. Reeja will reply soon.
         </p>
         <p class="form-status form-status--error" role="alert" aria-live="assertive" hidden>
-          Unable to send message. Please retry.
+          Message could not be sent. Please try again.
         </p>
       </form>
     </div>

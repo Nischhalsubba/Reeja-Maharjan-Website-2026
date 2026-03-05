@@ -108,10 +108,10 @@ export const profile: ProfileContent = {
   role: 'Registered Nurse (Nepal Nursing Council)',
   hero: {
     available: true,
-    title: 'Registered nurse specialising in maternal, newborn, and general ward care',
-    role: 'Reeja Maharjan - Registered Nurse (Nepal Nursing Council)',
+    title: 'Registered Nurse for Maternal, Newborn, and General Ward Care',
+    role: 'Reeja Maharjan | Nepal Nursing Council Licensed Registered Nurse',
     tagline:
-      'Verified hospital experience in counselling, documentation, and safe shift handover.',
+      'Hospital-ready nurse with verified experience in counselling, documentation, and safe shift handover.',
     primaryCta: { label: 'Send Email', href: 'mailto:maharjanreeja88@gmail.com' },
     secondaryCta: { label: 'Download CV', href: '/resume.pdf' },
     portrait: { src: '/reeja-hero-cutout.png', alt: 'Portrait of Reeja Maharjan' },
@@ -123,16 +123,16 @@ export const profile: ProfileContent = {
   profileIntro: {
     id: 'profile',
     eyebrow: 'Profile',
-    title: 'Professional Profile',
-    summary: 'A concise overview of clinical background, care values, and work focus.'
+    title: 'Professional Nursing Profile',
+    summary: 'Recruiter-ready summary of clinical scope, care quality, and role fit in Nepal.'
   },
   profileSummary:
-    'NNC-licensed nurse with service in teaching and regional hospitals. Experienced in maternal-newborn support, general ward care, counselling, and accurate clinical documentation.',
+    'NNC-licensed nurse with experience across teaching and regional hospitals in Nepal. Focused on maternal-newborn support, general ward nursing, counselling, and accurate care documentation.',
   competenciesIntro: {
     id: 'competencies',
     eyebrow: 'Core Competencies',
-    title: 'Core Competencies',
-    summary: 'Clinical strengths presented in recruiter-friendly, role-ready terms.'
+    title: 'Core Nursing Competencies',
+    summary: 'Practical competencies aligned to hospital, NGO, and INGO nursing requirements.'
   },
   competencies: [
     'Patient counselling and health education (IEC)',
@@ -145,8 +145,8 @@ export const profile: ProfileContent = {
   experienceIntro: {
     id: 'experience',
     eyebrow: 'Experience',
-    title: 'Clinical Experience',
-    summary: 'Three recent roles summarised with practical responsibilities and outcomes.'
+    title: 'Clinical Experience Timeline',
+    summary: 'Recent nursing roles with concise, evidence-based responsibilities and outcomes.'
   },
   experience: [
     {
@@ -189,8 +189,8 @@ export const profile: ProfileContent = {
   educationIntro: {
     id: 'education',
     eyebrow: 'Education',
-    title: 'Academic Background',
-    summary: 'Formal education history with verified grades and completion periods.'
+    title: 'Nursing Education and Academic Results',
+    summary: 'Verified education history with degree progression and final academic scores.'
   },
   education: [
     {
@@ -215,8 +215,8 @@ export const profile: ProfileContent = {
   certificationsIntro: {
     id: 'certifications',
     eyebrow: 'Licenses & Certifications',
-    title: 'Licenses and Certifications',
-    summary: 'Current RN registration and key clinical training credentials.'
+    title: 'Nursing License and Clinical Certifications',
+    summary: 'Current RN registration and key competency-based training credentials.'
   },
   certifications: [
     {
@@ -251,8 +251,8 @@ export const profile: ProfileContent = {
   skillsIntro: {
     id: 'skills',
     eyebrow: 'Skills',
-    title: 'Professional Skills',
-    summary: 'Daily-practice skills used in ward care, communication, and safety.'
+    title: 'Professional Nursing Skills',
+    summary: 'Day-to-day capabilities used in direct care, teamwork, and patient safety.'
   },
   skills: [
     {
@@ -279,8 +279,8 @@ export const profile: ProfileContent = {
   skillDetailsIntro: {
     id: 'skill-details',
     eyebrow: 'Skill Details',
-    title: 'Skill Group Details',
-    summary: 'Role-focused detail for each clinical and coordination skill group.'
+    title: 'Detailed Skill Coverage',
+    summary: 'Role-level details for each nursing skill group and practical application.'
   },
   skillDetails: [
     {
@@ -312,8 +312,8 @@ export const profile: ProfileContent = {
   languagesIntro: {
     id: 'languages',
     eyebrow: 'Languages',
-    title: 'Languages',
-    summary: 'Communication coverage for hospital and community-facing nursing work.'
+    title: 'Languages for Clinical Communication',
+    summary: 'Language coverage used for patient communication and multidisciplinary coordination.'
   },
   languages: [
     { name: 'Nepali', level: 'Fluent' },
@@ -324,8 +324,8 @@ export const profile: ProfileContent = {
   awardsIntro: {
     id: 'awards',
     eyebrow: 'Honors',
-    title: 'Honors and Awards',
-    summary: 'Recognition records relevant to clinical professionalism.'
+    title: 'Honors and Professional Recognition',
+    summary: 'Verified recognition relevant to nursing professionalism and service contribution.'
   },
   awards: [
     {
@@ -337,7 +337,7 @@ export const profile: ProfileContent = {
     id: 'recommendations',
     eyebrow: 'Recommendations',
     title: 'Professional Recommendations',
-    summary: 'Short reference endorsements relevant to clinical professionalism.'
+    summary: 'Short reference endorsements reflecting reliability, discipline, and communication.'
   },
   recommendations: [
     {
@@ -356,8 +356,8 @@ export const profile: ProfileContent = {
   personalDetailsIntro: {
     id: 'personal-details',
     eyebrow: 'Personal Details',
-    title: 'Personal Details',
-    summary: 'Conservative public details for recruiter context and screening.'
+    title: 'Personal Details (Public-Safe)',
+    summary: 'Public-safe details for recruiter screening and role matching.'
   },
   personalDetails: [
     { key: 'Date of Birth', value: '1998 (year)' },
@@ -369,8 +369,8 @@ export const profile: ProfileContent = {
   keywordsIntro: {
     id: 'keywords',
     eyebrow: 'Keywords',
-    title: 'Clinical Keywords',
-    summary: 'Target terms aligned to care scope, counselling, and documentation.'
+    title: 'Recruiter Keywords',
+    summary: 'Role-relevant keywords for nursing search visibility and recruiter filtering.'
   },
   keywords: [
     'counselling',
@@ -388,8 +388,8 @@ export const profile: ProfileContent = {
   contactIntro: {
     id: 'contact',
     eyebrow: 'Contact',
-    title: 'Feel Free to Reach Out',
-    summary: 'Open to hospital, NGO, and INGO nursing opportunities.'
+    title: 'Contact Reeja for Nursing Opportunities',
+    summary: 'Open to hospital, NGO, and INGO nursing interviews in Nepal and relocation-ready roles.'
   },
   contact: {
     email: 'maharjanreeja88@gmail.com',

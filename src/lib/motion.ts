@@ -22,6 +22,16 @@ const initHeaderMenu = (): void => {
   qsa<HTMLAnchorElement>('.mobile-nav__panel a').forEach((link) => {
     link.addEventListener('click', () => setOpen(false));
   });
+
+  nav.addEventListener('click', (event) => {
+    if (event.target === nav) setOpen(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      setOpen(false);
+    }
+  });
 };
 
 const initHeroIntro = (): void => {

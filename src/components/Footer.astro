@@ -19,6 +19,7 @@ const { profile, mode = 'one-page' } = Astro.props;
     <nav aria-label="Footer quick links" class="site-footer__links">
       <a href={mode === 'blog' ? '/' : '#home'}>Home</a>
       <a href={mode === 'blog' ? '/blog/' : '#experience'}>{mode === 'blog' ? 'Blog' : 'Experience'}</a>
+      {mode === 'one-page' && <a href="/blog/">Blog</a>}
       <a href={mode === 'blog' ? '/#certifications' : '#certifications'}>Certifications</a>
       <a href={mode === 'blog' ? '/#contact' : '#contact'}>Contact</a>
     </nav>

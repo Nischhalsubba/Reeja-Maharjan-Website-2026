@@ -20,6 +20,11 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body.menu-open,
+body.lightbox-open {
+  overflow: hidden;
+}
+
 img {
   max-width: 100%;
   display: block;
