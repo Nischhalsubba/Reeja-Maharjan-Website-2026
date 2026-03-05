@@ -60,7 +60,10 @@ const { profile } = Astro.props;
         <input type="hidden" name="_template" value="table" />
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden />
 
-        <button type="submit" class="btn btn--primary">Send Message</button>
+        <div class="contact-form__actions">
+          <button type="submit" class="btn btn--primary">Send to Gmail</button>
+          <button type="button" class="btn btn--secondary" data-send-whatsapp>Send via WhatsApp</button>
+        </div>
 
         <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
           Message sent successfully. Reeja will reply by email.
@@ -90,9 +93,44 @@ const { profile } = Astro.props;
     const success = form.querySelector('.form-status--success');
     const error = form.querySelector('.form-status--error');
     const submit = form.querySelector('button[type="submit"]');
+    const whatsappButton = form.querySelector('[data-send-whatsapp]');
+
+    const buildWhatsappUrl = (): string | null => {
+      if (whatsappNumber.length < 10) return null;
+      const nameEl = form.querySelector('input[name="name"]');
+      const emailEl = form.querySelector('input[name="email"]');
+      const messageEl = form.querySelector('textarea[name="message"]');
+      const name = nameEl instanceof HTMLInputElement ? nameEl.value.trim() : '';
+      const email = emailEl instanceof HTMLInputElement ? emailEl.value.trim() : '';
+      const message = messageEl instanceof HTMLTextAreaElement ? messageEl.value.trim() : '';
+
+      const body =
+        `New inquiry from reejamaharjan.com.np\n` +
+        `Name: ${name || '-'}\n` +
+        `Email: ${email || '-'}\n` +
+        `Message: ${message || '-'}`;
+      return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(body)}`;
+    };
 
     if (success instanceof HTMLElement) success.hidden = true;
     if (error instanceof HTMLElement) error.hidden = true;
+
+    if (whatsappButton instanceof HTMLButtonElement) {
+      whatsappButton.addEventListener('click', () => {
+        if (success instanceof HTMLElement) success.hidden = true;
+        if (error instanceof HTMLElement) error.hidden = true;
+
+        const url = buildWhatsappUrl();
+        if (!url) {
+          if (error instanceof HTMLElement) {
+            error.textContent = 'WhatsApp send is unavailable right now.';
+            error.hidden = false;
+          }
+          return;
+        }
+        window.open(url, '_blank', 'noopener,noreferrer');
+      });
+    }
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -122,28 +160,18 @@ const { profile } = Astro.props;
         form.reset();
         if (success instanceof HTMLElement) success.hidden = false;
       } catch {
-        const nameEl = form.querySelector('input[name="name"]');
-        const emailEl = form.querySelector('input[name="email"]');
-        const messageEl = form.querySelector('textarea[name="message"]');
-        const name = nameEl instanceof HTMLInputElement ? nameEl.value : '';
-        const email = emailEl instanceof HTMLInputElement ? emailEl.value : '';
-        const message = messageEl instanceof HTMLTextAreaElement ? messageEl.value : '';
-
-        if (whatsappNumber.length >= 10) {
-          const text = `New contact from reejamaharjan.com.np%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
-          window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank', 'noopener,noreferrer');
-        }
+        const url = buildWhatsappUrl();
+        if (url) window.open(url, '_blank', 'noopener,noreferrer');
 
         if (error instanceof HTMLElement) {
-          error.textContent =
-            whatsappNumber.length >= 10
-              ? 'Email send failed. WhatsApp draft opened for backup delivery.'
-              : 'Message could not be sent. Please try again in a moment.';
+          error.textContent = url
+            ? 'Gmail send failed. WhatsApp draft opened as backup.'
+            : 'Message could not be sent. Please try again in a moment.';
           error.hidden = false;
         }
       } finally {
         submit.disabled = false;
-        submit.textContent = 'Send Message';
+        submit.textContent = 'Send to Gmail';
       }
     });
   }

@@ -656,6 +656,7 @@ export const profile: ProfileContent = {
     location: 'Lalitpur, Nepal',
     linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
     instagram: 'https://www.instagram.com/maharjan_reeja/',
+    whatsappNumber: '+9779843704288',
     resumeUrl: '/resume.pdf',
     formEndpoint: 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'
   }
