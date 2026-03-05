@@ -28,6 +28,20 @@ const { profile } = Astro.props;
               <li>{bullet}</li>
             ))}
           </ul>
+          {
+            item.credential && (
+              <a
+                class="text-link"
+                href={item.credential.src}
+                data-lightbox-src={item.credential.src}
+                data-lightbox-alt={item.credential.alt}
+                data-lightbox-title={item.credential.title}
+                data-lightbox-description={item.credential.description}
+              >
+                View credential
+              </a>
+            )
+          }
         </li>
       ))}
     </ol>

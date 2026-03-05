@@ -20,9 +20,16 @@ const { profile } = Astro.props;
           <p>{item.issuer}</p>
           <p class="muted">{item.date}</p>
           <p>{item.note}</p>
-          <a class="text-link" href={item.credentialUrl} target="_blank" rel="noopener noreferrer"
-            >Show credential</a
+          <a
+            class="text-link"
+            href={item.credentialUrl}
+            data-lightbox-src={item.preview.src}
+            data-lightbox-alt={item.preview.alt}
+            data-lightbox-title={item.preview.title}
+            data-lightbox-description={item.preview.description}
           >
+            Show credential
+          </a>
         </article>
       ))}
     </div>

@@ -3,37 +3,6 @@ import { qs, qsa } from './dom';
 import { initNavSpy } from './navSpy';
 import { initReveal } from './reveal';
 
-const initHeaderMenu = (): void => {
-  const toggle = qs<HTMLButtonElement>('.menu-toggle');
-  const nav = qs<HTMLElement>('.mobile-nav');
-  if (!toggle || !nav) return;
-
-  const setOpen = (open: boolean) => {
-    toggle.setAttribute('aria-expanded', String(open));
-    nav.hidden = !open;
-    document.body.classList.toggle('menu-open', open);
-  };
-
-  toggle.addEventListener('click', () => {
-    const open = toggle.getAttribute('aria-expanded') !== 'true';
-    setOpen(open);
-  });
-
-  qsa<HTMLAnchorElement>('.mobile-nav__panel a').forEach((link) => {
-    link.addEventListener('click', () => setOpen(false));
-  });
-
-  nav.addEventListener('click', (event) => {
-    if (event.target === nav) setOpen(false);
-  });
-
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
-      setOpen(false);
-    }
-  });
-};
-
 const initHeroIntro = (): void => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
@@ -49,8 +18,10 @@ const initHeroIntro = (): void => {
 const initLightbox = (): void => {
   const lightbox = qs<HTMLElement>('#image-lightbox');
   const image = qs<HTMLImageElement>('[data-lightbox-image]', lightbox ?? document);
+  const frame = qs<HTMLIFrameElement>('[data-lightbox-frame]', lightbox ?? document);
   const title = qs<HTMLElement>('[data-lightbox-title]', lightbox ?? document);
-  if (!lightbox || !image || !title) return;
+  const description = qs<HTMLElement>('[data-lightbox-description]', lightbox ?? document);
+  if (!lightbox || !image || !title || !frame) return;
 
   const closeButtons = qsa<HTMLElement>('[data-lightbox-close]', lightbox);
   const prevBtn = qs<HTMLButtonElement>('[data-lightbox-prev]', lightbox);
@@ -63,7 +34,8 @@ const initLightbox = (): void => {
   const items = triggers.map((el) => ({
     src: el.dataset.lightboxSrc ?? '',
     alt: el.dataset.lightboxAlt ?? 'Image',
-    title: el.dataset.lightboxTitle ?? 'Image preview'
+    title: el.dataset.lightboxTitle ?? 'Image preview',
+    description: el.dataset.lightboxDescription ?? ''
   }));
 
   if (!items.length) return;
@@ -74,9 +46,28 @@ const initLightbox = (): void => {
   const render = () => {
     const item = items[currentIndex];
     if (!item) return;
-    image.src = item.src;
-    image.alt = item.alt;
     title.textContent = item.title;
+    if (description) description.textContent = item.description;
+
+    const isPdf = item.src.toLowerCase().endsWith('.pdf');
+    if (isPdf) {
+      image.hidden = true;
+      frame.hidden = false;
+      frame.src = item.src;
+      frame.setAttribute('title', item.title);
+      rotateLeft?.setAttribute('disabled', 'true');
+      rotateRight?.setAttribute('disabled', 'true');
+      rotateReset?.setAttribute('disabled', 'true');
+    } else {
+      frame.hidden = true;
+      frame.src = '';
+      image.hidden = false;
+      image.src = item.src;
+      image.alt = item.alt;
+      rotateLeft?.removeAttribute('disabled');
+      rotateRight?.removeAttribute('disabled');
+      rotateReset?.removeAttribute('disabled');
+    }
     image.style.transform = `rotate(${rotation}deg)`;
   };
 
@@ -87,7 +78,8 @@ const initLightbox = (): void => {
   };
 
   triggers.forEach((trigger, index) => {
-    trigger.addEventListener('click', () => {
+    trigger.addEventListener('click', (event) => {
+      event.preventDefault();
       currentIndex = index;
       rotation = 0;
       render();
@@ -128,7 +120,6 @@ const initLightbox = (): void => {
 };
 
 export const initMotion = (): void => {
-  initHeaderMenu();
   initNavSpy();
   initHeroIntro();
   initReveal();

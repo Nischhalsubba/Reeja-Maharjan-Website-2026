@@ -73,3 +73,42 @@ const { name, showAwards = false, mode = 'one-page' } = Astro.props;
     }
   </div>
 </header>
+
+<script>
+  const initMenu = () => {
+    const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+    const nav = document.querySelector<HTMLElement>('.mobile-nav');
+    if (!toggle || !nav) return;
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.hidden = !open;
+      document.body.classList.toggle('menu-open', open);
+    };
+
+    toggle.addEventListener('click', () => {
+      const open = toggle.getAttribute('aria-expanded') !== 'true';
+      setOpen(open);
+    });
+
+    nav.addEventListener('click', (event) => {
+      if (event.target === nav) setOpen(false);
+    });
+
+    nav.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+      link.addEventListener('click', () => setOpen(false));
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+      }
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMenu, { once: true });
+  } else {
+    initMenu();
+  }
+</script>

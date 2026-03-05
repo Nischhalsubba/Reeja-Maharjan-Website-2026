@@ -2,7 +2,10 @@
   <div class="lightbox__backdrop" data-lightbox-close></div>
   <div class="lightbox__dialog" role="dialog" aria-modal="true" aria-label="Image preview">
     <header class="lightbox__header">
-      <h3 data-lightbox-title>Image preview</h3>
+      <div>
+        <h3 data-lightbox-title>Image preview</h3>
+        <p class="lightbox__description" data-lightbox-description></p>
+      </div>
       <button type="button" data-lightbox-close>Close</button>
     </header>
     <div class="lightbox__toolbar">
@@ -13,6 +16,7 @@
     <div class="lightbox__stage">
       <button type="button" data-lightbox-prev>Prev</button>
       <img src="" alt="" data-lightbox-image />
+      <iframe title="Credential preview" data-lightbox-frame hidden></iframe>
       <button type="button" data-lightbox-next>Next</button>
     </div>
   </div>

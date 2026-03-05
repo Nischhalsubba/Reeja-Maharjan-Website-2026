@@ -11,9 +11,9 @@ export type BlogPost = {
 export const blogPosts: BlogPost[] = [
   {
     slug: 'maternal-newborn-counselling-basics',
-    title: 'Maternal and Newborn Counselling: Practical Basics for Ward Rounds',
+    title: 'Maternal and Newborn Counselling Guide for Ward Nurses',
     excerpt:
-      'A concise checklist for patient-centred counselling during antenatal, postnatal, and newborn support routines.',
+      'A practical counselling framework for antenatal, postnatal, and newborn support in hospital and community-linked care.',
     publishedAt: '2026-02-10',
     readMinutes: 4,
     tags: ['Maternal Care', 'Newborn Care', 'Counselling'],
@@ -26,9 +26,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'safe-documentation-and-sbar-handover',
-    title: 'Safe Documentation and SBAR-Style Handover in Nursing Practice',
+    title: 'Safe Nursing Documentation and SBAR Handover Best Practices',
     excerpt:
-      'How structured documentation and handover habits reduce errors and improve continuity in busy clinical environments.',
+      'How structured notes and SBAR handover improve patient safety and continuity in busy nursing environments.',
     publishedAt: '2026-01-20',
     readMinutes: 5,
     tags: ['Documentation', 'SBAR', 'Clinical Safety'],
@@ -41,9 +41,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'general-ward-readiness-for-hospital-and-ngo-roles',
-    title: 'General Ward Readiness for Hospital and NGO Nursing Roles',
+    title: 'General Ward Readiness for Hospital, NGO, and INGO Nursing Roles',
     excerpt:
-      'Core readiness indicators recruiters look for in ward-based nurses across hospital, NGO, and INGO opportunities.',
+      'Key readiness indicators recruiters screen for in ward-based nursing candidates across hospital, NGO, and INGO settings.',
     publishedAt: '2025-12-15',
     readMinutes: 4,
     tags: ['General Ward', 'Career', 'Recruitment'],

@@ -23,6 +23,12 @@ export type ExperienceItem = {
   location: string;
   period: string;
   bullets: string[];
+  credential?: {
+    src: string;
+    alt: string;
+    title: string;
+    description: string;
+  };
 };
 
 export type EducationItem = {
@@ -38,6 +44,12 @@ export type CertificationItem = {
   date: string;
   note: string;
   credentialUrl: string;
+  preview: {
+    src: string;
+    alt: string;
+    title: string;
+    description: string;
+  };
 };
 
 export type SkillGroup = {
@@ -111,7 +123,7 @@ export const profile: ProfileContent = {
     title: 'Registered Nurse for Maternal, Newborn, and General Ward Care',
     role: 'Reeja Maharjan | Nepal Nursing Council Licensed Registered Nurse',
     tagline:
-      'Hospital-ready nurse with verified experience in counselling, documentation, and safe shift handover.',
+      'Nursing professional transitioning toward hospital, NGO, and INGO care-support roles with strong ward and counselling experience.',
     primaryCta: { label: 'Send Email', href: 'mailto:maharjanreeja88@gmail.com' },
     secondaryCta: { label: 'Download CV', href: '/resume.pdf' },
     portrait: { src: '/reeja-hero-cutout.png', alt: 'Portrait of Reeja Maharjan' },
@@ -127,7 +139,7 @@ export const profile: ProfileContent = {
     summary: 'Recruiter-ready summary of clinical scope, care quality, and role fit in Nepal.'
   },
   profileSummary:
-    'NNC-licensed nurse with experience across teaching and regional hospitals in Nepal. Focused on maternal-newborn support, general ward nursing, counselling, and accurate care documentation.',
+    'NNC-licensed registered nurse with verified experience in teaching and regional hospitals in Nepal. Brings practical strength in maternal-newborn support, general ward care, counselling, documentation, and coordinated handover. Now preparing for hospital, NGO, and INGO nursing opportunities.',
   competenciesIntro: {
     id: 'competencies',
     eyebrow: 'Core Competencies',
@@ -140,7 +152,8 @@ export const profile: ProfileContent = {
     'General ward nursing (Surgery / Gyn & Obs exposure)',
     'Clinical documentation and reporting',
     'Shift handover and team coordination',
-    'Safeguarding and professional conduct'
+    'Safeguarding and professional conduct',
+    'Community-health and NGO programme support readiness'
   ],
   experienceIntro: {
     id: 'experience',
@@ -159,7 +172,14 @@ export const profile: ProfileContent = {
         'Supported maternal and newborn care routines with counselling for patients and families.',
         'Maintained ward documentation and structured shift handover for continuity of care.',
         'Contributed to coordinated nursing support in a teaching-hospital setting.'
-      ]
+      ],
+      credential: {
+        src: '/documents/san-token-of-appreciation.jpg',
+        alt: 'SAN token of appreciation certificate',
+        title: 'TUTH Recognition: SAN Token of Appreciation',
+        description:
+          'Recognition for technical nursing assistance in a TUTH blood donation programme on World Anesthesia Day 2024.'
+      }
     },
     {
       role: 'Staff Nurse (General Ward)',
@@ -171,7 +191,14 @@ export const profile: ProfileContent = {
         'Worked in the general ward with Surgery and Gynaecology & Obstetrics exposure.',
         'Monitored patients, supported escalation, and coordinated with duty teams.',
         'Delivered patient and family education with clear communication.'
-      ]
+      ],
+      credential: {
+        src: '/documents/mmth-experience-letter.jpg',
+        alt: 'MMTH experience letter',
+        title: 'MMTH Experience Letter',
+        description:
+          'Official experience letter confirming staff nurse service at MMTH General Ward from February 2024 to August 2024.'
+      }
     },
     {
       role: 'Nursing Officer',
@@ -183,7 +210,14 @@ export const profile: ProfileContent = {
         'Handled maternity-related support including antenatal and postnatal routines.',
         'Supported OT-related duties with aseptic and workflow discipline.',
         'Managed documentation and ward coordination in daily operations.'
-      ]
+      ],
+      credential: {
+        src: '/documents/experience-letter.jpg',
+        alt: 'Sindhuli Hospital experience letter',
+        title: 'Sindhuli Hospital Experience Letter',
+        description:
+          'Experience letter documenting nursing officer service at Sindhuli Hospital with maternity and OT support responsibilities.'
+      }
     }
   ],
   educationIntro: {
@@ -224,28 +258,70 @@ export const profile: ProfileContent = {
       issuer: 'Nepal Nursing Council',
       date: 'Registered Sep 5, 2021',
       note: 'License No. 65100, valid for six years from decision date.',
-      credentialUrl: '/resume.pdf'
+      credentialUrl: '/resume.pdf',
+      preview: {
+        src: '/resume.pdf',
+        alt: 'Nepal Nursing Council RN license record',
+        title: 'Nepal Nursing Council RN License',
+        description:
+          'Registered Nurse licensure record for Reeja Maharjan (Registration No. 65100) issued by Nepal Nursing Council.'
+      }
     },
     {
       title: 'Comprehensive Newborn Care Level II',
       issuer: "Health Training Center / Paropakar Maternity and Women's Hospital",
       date: '2079/01/20 - 2079/02/03 (BS)',
       note: 'Structured newborn-care training exposure for hospital practice.',
-      credentialUrl: '/documents/cnc-level-ii-certificate.jpg'
+      credentialUrl: '/documents/cnc-level-ii-certificate.jpg',
+      preview: {
+        src: '/documents/cnc-level-ii-certificate.jpg',
+        alt: 'Comprehensive Newborn Care Level II certificate',
+        title: 'Comprehensive Newborn Care Level II Certificate',
+        description:
+          "Training certificate from Health Training Center and Paropakar Maternity and Women's Hospital focused on newborn care practice."
+      }
     },
     {
       title: 'Operation Theatre Techniques and Management (OTTM)',
       issuer: 'Health Training Center / Bharatpur Hospital',
       date: '2080/02/08 - 2080/03/17 (BS)',
       note: 'OT workflow readiness and perioperative support training.',
-      credentialUrl: '/documents/ottm-certificate.jpg'
+      credentialUrl: '/documents/ottm-certificate.jpg',
+      preview: {
+        src: '/documents/ottm-certificate.jpg',
+        alt: 'Operation Theatre Techniques and Management certificate',
+        title: 'OTTM Certificate',
+        description:
+          'Operation Theatre Techniques and Management training certificate from Health Training Center and Bharatpur Hospital.'
+      }
     },
     {
       title: 'CPR Training Participation',
       issuer: 'Nursing Inservice Education Unit, TUTH',
       date: 'May 30, 2025',
       note: 'Hands-on CPR training for emergency-response preparedness.',
-      credentialUrl: '/documents/cpr-certificate.jpg'
+      credentialUrl: '/documents/cpr-certificate.jpg',
+      preview: {
+        src: '/documents/cpr-certificate.jpg',
+        alt: 'CPR training certificate',
+        title: 'CPR Training Certificate',
+        description:
+          'CPR participation certificate from TUTH Nursing Inservice Education Unit confirming practical emergency response training.'
+      }
+    },
+    {
+      title: 'National Nursing Conference Delegate Participation',
+      issuer: 'Society of Cardiothoracic Vascular Nurses of Nepal',
+      date: 'May 31, 2025',
+      note: 'Delegate participation in national conference on cardiothoracic vascular nursing.',
+      credentialUrl: '/documents/vascular-nursing-conference-certificate.jpg',
+      preview: {
+        src: '/documents/vascular-nursing-conference-certificate.jpg',
+        alt: 'National nursing conference participation certificate',
+        title: 'National Nursing Conference Certificate',
+        description:
+          'Certificate of participation for the First National Conference of the Society of Cardiothoracic Vascular Nurses of Nepal.'
+      }
     }
   ],
   skillsIntro: {
@@ -272,6 +348,10 @@ export const profile: ProfileContent = {
       items: ['Team coordination', 'Referral communication', 'Professional conduct']
     },
     {
+      title: 'NGO & INGO Role Readiness',
+      items: ['Community-health programme support', 'Case coordination', 'Patient education outreach']
+    },
+    {
       title: 'OT & Emergency Readiness',
       items: ['OTTM exposure', 'Aseptic workflow', 'CPR participation']
     }
@@ -295,7 +375,8 @@ export const profile: ProfileContent = {
     },
     {
       title: 'Counselling and Education',
-      description: 'Delivers clear counselling so patients and families understand care plans and follow-up.',
+      description:
+        'Delivers clear counselling so patients and families understand care plans, follow-up actions, and referral pathways.',
       focus: ['IEC support', 'Family counselling', 'Adherence communication']
     },
     {
@@ -307,6 +388,12 @@ export const profile: ProfileContent = {
       title: 'Safety and Professional Discipline',
       description: 'Works with safeguarding awareness, aseptic discipline, and reliable team communication.',
       focus: ['Safeguarding awareness', 'PSEAH awareness', 'Referral support']
+    },
+    {
+      title: 'NGO and INGO Care Coordination Readiness',
+      description:
+        'Prepared to support programme-based nursing care with structured communication, reporting, and beneficiary-focused follow-up.',
+      focus: ['Case follow-up', 'Field-team coordination', 'Community care communication']
     }
   ],
   languagesIntro: {
@@ -389,7 +476,8 @@ export const profile: ProfileContent = {
     id: 'contact',
     eyebrow: 'Contact',
     title: 'Contact Reeja for Nursing Opportunities',
-    summary: 'Open to hospital, NGO, and INGO nursing interviews in Nepal and relocation-ready roles.'
+    summary:
+      'Open to hospital, NGO, and INGO nursing interviews, including relocation-ready opportunities in Nepal.'
   },
   contact: {
     email: 'maharjanreeja88@gmail.com',

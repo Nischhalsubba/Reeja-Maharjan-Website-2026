@@ -600,7 +600,7 @@
 
 .lightbox__header {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   gap: var(--s2);
   padding: var(--s2);
@@ -609,6 +609,13 @@
 
 .lightbox__header h3 {
   font-size: var(--h3);
+}
+
+.lightbox__description {
+  margin-top: 6px;
+  max-width: 70ch;
+  color: var(--muted);
+  font-size: var(--small-size);
 }
 
 .lightbox__header button,
@@ -622,6 +629,11 @@
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+}
+
+.lightbox__toolbar button[disabled] {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .lightbox__toolbar {
@@ -648,6 +660,13 @@
   object-position: center;
   background: var(--surface);
   border: 1px solid var(--line);
+}
+
+.lightbox__stage iframe {
+  width: 100%;
+  height: min(68dvh, 800px);
+  border: 1px solid var(--line);
+  background: var(--surface);
 }
 
 [data-reveal] {
