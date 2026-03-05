@@ -1,4 +1,4 @@
----
+﻿---
 import SectionIntro from './SectionIntro.astro';
 import SectionIcon from './SectionIcon.astro';
 import type { ProfileContent } from '../content/profile';
@@ -18,40 +18,44 @@ const { profile } = Astro.props;
           summary={profile.experienceIntro.summary}
         />
       </header>
+
       <div class="section-shell__body">
         <ol class="timeline-list">
-          {profile.experience.map((item) => (
-            <li class="timeline-list__item">
-              <div class="timeline-list__dot" aria-hidden="true"></div>
-              <div class="timeline-list__content">
-                <div class="timeline-list__row">
-                  <h3>{item.role}</h3>
-                  <time class="timeline-list__date">{item.period}</time>
-                </div>
-                <p class="timeline-list__meta">{item.organization} · {item.type}</p>
-                <p class="timeline-list__meta">{item.location}</p>
-                <ul class="timeline-list__bullets">
-                  {item.bullets.map((bullet) => (
-                    <li>{bullet}</li>
-                  ))}
-                </ul>
-                {
-                  item.credential && (
-                    <a
-                      class="text-link"
-                      href={item.credential.src}
-                      data-lightbox-src={item.credential.src}
-                      data-lightbox-alt={item.credential.alt}
-                      data-lightbox-title={item.credential.title}
-                      data-lightbox-description={item.credential.description}
-                    >
-                      View credential
-                    </a>
-                  )
-                }
-              </div>
-            </li>
-          ))}
+          {
+            profile.experience.map((item) => (
+              <li class="timeline-list__item">
+                <span class="timeline-list__dot" aria-hidden="true"></span>
+                <article class="timeline-list__content">
+                  <div class="timeline-list__row">
+                    <h3>{item.role}</h3>
+                    <time class="timeline-list__date">{item.period}</time>
+                  </div>
+
+                  <p class="timeline-list__meta">{item.organization} · {item.type}</p>
+                  <p class="timeline-list__meta timeline-list__meta--location">{item.location}</p>
+
+                  <div class="timeline-list__summary">
+                    {item.bullets.map((bullet) => <p>{bullet}</p>)}
+                  </div>
+
+                  {
+                    item.credential && (
+                      <a
+                        class="text-link"
+                        href={item.credential.src}
+                        data-lightbox-src={item.credential.src}
+                        data-lightbox-alt={item.credential.alt}
+                        data-lightbox-title={item.credential.title}
+                        data-lightbox-description={item.credential.description}
+                      >
+                        Show credential
+                      </a>
+                    )
+                  }
+                </article>
+              </li>
+            ))
+          }
         </ol>
       </div>
     </article>

@@ -138,7 +138,7 @@ export const profile: ProfileContent = {
   role: 'Registered Nurse (Nepal Nursing Council)',
   hero: {
     available: true,
-    title: 'Registered Nurse for Maternal, Newborn, and General Ward Care',
+    title: 'Registered Nurse for Maternal, Newborn, and General Care',
     role: 'Reeja Maharjan | Nepal Nursing Council Licensed Registered Nurse',
     tagline:
       'Nursing professional transitioning toward hospital, NGO, and INGO care-support roles with strong ward and counselling experience.',
@@ -157,7 +157,7 @@ export const profile: ProfileContent = {
     summary: 'Recruiter-ready summary of clinical scope, care quality, and role fit in Nepal.'
   },
   profileSummary:
-    'NNC-licensed registered nurse with verified experience in teaching and regional hospitals in Nepal. Brings practical strength in maternal-newborn support, general ward care, counselling, documentation, and coordinated handover. Now preparing for hospital, NGO, and INGO nursing opportunities.',
+    'NNC-licensed registered nurse with verified experience in teaching and regional hospitals in Nepal. Brings practical strength in maternal-newborn support, general care, counselling, documentation, and coordinated handover. Now preparing for hospital, NGO, and INGO nursing opportunities.',
   competenciesIntro: {
     id: 'competencies',
     eyebrow: 'Core Competencies',
@@ -167,7 +167,7 @@ export const profile: ProfileContent = {
   competencies: [
     'Patient counselling and health education (IEC)',
     'Maternal and newborn nursing support',
-    'General ward nursing (Surgery / Gyn & Obs exposure)',
+    'General care nursing (Surgery / Gyn & Obs exposure)',
     'Clinical documentation and reporting',
     'Shift handover and team coordination',
     'Safeguarding and professional conduct',
@@ -200,13 +200,13 @@ export const profile: ProfileContent = {
       }
     },
     {
-      role: 'Staff Nurse (General Ward)',
+      role: 'Staff Nurse (General Care)',
       organization: 'Manmohan Memorial Medical College & Teaching Hospital (MMTH)',
       type: 'Hospital',
       location: 'Swoyambhu, Kathmandu',
       period: 'Feb 2024 - Aug 2024',
       bullets: [
-        'Worked in the general ward with Surgery and Gynaecology & Obstetrics exposure.',
+        'Provided general care nursing support with Surgery and Gynaecology & Obstetrics exposure.',
         'Monitored patients, supported escalation, and coordinated with duty teams.',
         'Delivered patient and family education with clear communication.'
       ],
@@ -215,7 +215,7 @@ export const profile: ProfileContent = {
         alt: 'MMTH experience letter',
         title: 'MMTH Experience Letter',
         description:
-          'Official experience letter confirming staff nurse service at MMTH General Ward from February 2024 to August 2024.'
+          'Official experience letter confirming staff nurse service at MMTH General Care unit from February 2024 to August 2024.'
       }
     },
     {
@@ -369,7 +369,7 @@ export const profile: ProfileContent = {
   skills: [
     {
       title: 'Clinical Nursing',
-      items: ['Maternal-newborn support', 'General ward care', 'Patient monitoring']
+      items: ['Maternal-newborn support', 'General care', 'Patient monitoring']
     },
     {
       title: 'Counselling & Education',
@@ -405,8 +405,8 @@ export const profile: ProfileContent = {
       focus: ['Breastfeeding counselling', 'Postpartum support', 'Mother/newborn monitoring']
     },
     {
-      title: 'General Ward Practice',
-      description: 'Provides ward-based nursing support with Surgery and Gyn/Obs exposure.',
+      title: 'General Care Practice',
+      description: 'Provides general care nursing support with Surgery and Gyn/Obs exposure.',
       focus: ['Ward rounds support', 'Condition monitoring', 'Escalation coordination']
     },
     {

@@ -41,12 +41,12 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'general-ward-readiness-for-hospital-and-ngo-roles',
-    title: 'General Ward Readiness for Hospital, NGO, and INGO Nursing Roles',
+    title: 'General Care Readiness for Hospital, NGO, and INGO Nursing Roles',
     excerpt:
       'Key readiness indicators recruiters screen for in ward-based nursing candidates across hospital, NGO, and INGO settings.',
     publishedAt: '2025-12-15',
     readMinutes: 4,
-    tags: ['General Ward', 'Career', 'Recruitment'],
+    tags: ['General Care', 'Career', 'Recruitment'],
     body: [
       'Recruiters usually screen for three things first: clinical reliability, communication quality, and documentation discipline. These are visible in both interviews and reference feedback.',
       'Clinical reliability means consistent monitoring, timely escalation, and safe routine support. Communication quality means clear patient counselling and practical coordination with team members.',

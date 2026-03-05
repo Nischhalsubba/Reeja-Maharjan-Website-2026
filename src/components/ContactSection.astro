@@ -1,4 +1,4 @@
----
+﻿---
 import SectionIntro from './SectionIntro.astro';
 import SectionIcon from './SectionIcon.astro';
 import type { ProfileContent } from '../content/profile';
@@ -12,7 +12,7 @@ const { profile } = Astro.props;
     <div class="contact-cta" data-reveal>
       <img src="/reeja-headshot.jpg" alt="Reeja Maharjan profile portrait" width="84" height="84" />
       <h2>Feel Free to Reach Out</h2>
-      <p>Let’s discuss nursing, NGO, and INGO opportunities.</p>
+      <p>Let's discuss nursing, NGO, and INGO opportunities.</p>
       <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Send Email</a>
       <ul class="contact-socials">
         <li><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
@@ -39,6 +39,7 @@ const { profile } = Astro.props;
         class="section-shell__body contact-form"
         aria-label="Contact form"
         method="POST"
+        action={profile.contact.formEndpoint ?? 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'}
         data-endpoint={profile.contact.formEndpoint}
       >
         <label>
@@ -56,17 +57,15 @@ const { profile } = Astro.props;
         <input type="hidden" name="_subject" value="New contact from reejamaharjan.com.np" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden />
+
         <button type="submit" class="btn btn--primary">Send Message</button>
-        <div class="form-success-card" hidden>
-          <h4>Message sent successfully</h4>
-          <p>Thank you for reaching out. Reeja will reply to your email soon.</p>
-          <button type="button" class="btn btn--secondary" data-reset-form>Send another message</button>
-        </div>
+
         <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
-          Message sent. Reeja will reply soon.
+          Message sent successfully. Reeja will reply by email.
         </p>
         <p class="form-status form-status--error" role="alert" aria-live="assertive" hidden>
-          Message could not be sent. Please try again.
+          Message could not be sent. Please try again in a moment.
         </p>
       </form>
     </article>
@@ -75,43 +74,28 @@ const { profile } = Astro.props;
 
 <script>
   const form = document.getElementById('contact-form');
+
   if (form instanceof HTMLFormElement) {
     const configuredEndpoint = form.dataset.endpoint;
     const endpoint =
       configuredEndpoint ||
       import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ||
       'https://formsubmit.co/ajax/maharjanreeja88@gmail.com';
+
     form.action = endpoint;
+
     const success = form.querySelector('.form-status--success');
     const error = form.querySelector('.form-status--error');
     const submit = form.querySelector('button[type="submit"]');
-    const successCard = form.querySelector('.form-success-card');
-    const resetButton = form.querySelector('[data-reset-form]');
-    const fields = Array.from(form.querySelectorAll('label, input[type=\"hidden\"], button[type=\"submit\"]'));
 
-    const setSuccessView = (enabled: boolean) => {
-      fields.forEach((el) => {
-        if (!(el instanceof HTMLElement)) return;
-        el.hidden = enabled;
-      });
-      if (successCard instanceof HTMLElement) successCard.hidden = !enabled;
-    };
-
-    if (resetButton instanceof HTMLButtonElement) {
-      resetButton.addEventListener('click', () => {
-        setSuccessView(false);
-        if (success instanceof HTMLElement) success.hidden = true;
-        if (error instanceof HTMLElement) error.hidden = true;
-      });
-    }
-
-    setSuccessView(false);
     if (success instanceof HTMLElement) success.hidden = true;
     if (error instanceof HTMLElement) error.hidden = true;
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
+
       if (!(submit instanceof HTMLButtonElement)) return;
+
       submit.disabled = true;
       submit.textContent = 'Sending...';
       if (success instanceof HTMLElement) success.hidden = true;
@@ -120,6 +104,7 @@ const { profile } = Astro.props;
       try {
         const formData = new FormData(form);
         const payload = Object.fromEntries(formData.entries());
+
         const response = await fetch(form.action, {
           method: 'POST',
           headers: {
@@ -130,18 +115,10 @@ const { profile } = Astro.props;
         });
 
         if (!response.ok) throw new Error('Request failed');
+
         form.reset();
         if (success instanceof HTMLElement) success.hidden = false;
-        setSuccessView(true);
       } catch {
-        const nameEl = form.querySelector('input[name="name"]');
-        const messageEl = form.querySelector('textarea[name="message"]');
-        const name = nameEl instanceof HTMLInputElement ? nameEl.value : '';
-        const message = messageEl instanceof HTMLTextAreaElement ? messageEl.value : '';
-        const fallback = `mailto:maharjanreeja88@gmail.com?subject=${encodeURIComponent(
-          'Nursing Opportunity Inquiry'
-        )}&body=${encodeURIComponent(`Name: ${name}\n\nMessage:\n${message}`)}`;
-        window.location.href = fallback;
         if (error instanceof HTMLElement) error.hidden = false;
       } finally {
         submit.disabled = false;
