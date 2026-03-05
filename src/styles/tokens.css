@@ -41,9 +41,9 @@
   --shadow-2: 0 10px 24px rgba(29, 29, 38, 0.08);
 
   /* Radius */
-  --r-card: 16px;
-  --r-btn: 12px;
-  --r-pill: 999px;
+  --r-card: 14px;
+  --r-btn: 14px;
+  --r-pill: 14px;
 
   /* Layout */
   --container-max: 1120px;

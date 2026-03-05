@@ -6,56 +6,26 @@ import { initReveal } from './reveal';
 const initHeaderMenu = (): void => {
   const toggle = qs<HTMLButtonElement>('.menu-toggle');
   const nav = qs<HTMLElement>('.mobile-nav');
-  const panel = qs<HTMLElement>('.mobile-nav__panel');
-  if (!toggle || !nav || !panel) return;
+  if (!toggle || !nav) return;
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   let isOpen = false;
 
   const closeMenu = () => {
     if (!isOpen) return;
     isOpen = false;
     toggle.setAttribute('aria-expanded', 'false');
+    nav.setAttribute('aria-hidden', 'true');
+    nav.classList.remove('is-open');
     document.body.classList.remove('menu-open');
-
-    if (prefersReduced) {
-      nav.hidden = true;
-      nav.style.opacity = '';
-      panel.style.opacity = '';
-      panel.style.transform = '';
-      return;
-    }
-
-    gsap.to(panel, {
-      x: 24,
-      opacity: 0,
-      duration: 0.2,
-      ease: 'power2.in',
-      onComplete: () => {
-        nav.hidden = true;
-        nav.style.opacity = '';
-        panel.style.opacity = '';
-        panel.style.transform = '';
-      }
-    });
-    gsap.to(nav, { opacity: 0, duration: 0.2, ease: 'power2.in' });
   };
 
   const openMenu = () => {
     if (isOpen) return;
     isOpen = true;
-    nav.hidden = false;
-    nav.style.opacity = '1';
-    panel.style.opacity = '1';
-    panel.style.transform = 'none';
     toggle.setAttribute('aria-expanded', 'true');
+    nav.setAttribute('aria-hidden', 'false');
+    nav.classList.add('is-open');
     document.body.classList.add('menu-open');
-
-    if (prefersReduced) return;
-    gsap.set(nav, { opacity: 0 });
-    gsap.set(panel, { x: 24, opacity: 0 });
-    gsap.to(nav, { opacity: 1, duration: 0.22, ease: 'power2.out' });
-    gsap.to(panel, { x: 0, opacity: 1, duration: 0.24, ease: 'power2.out' });
   };
 
   toggle.addEventListener('click', () => (isOpen ? closeMenu() : openMenu()));

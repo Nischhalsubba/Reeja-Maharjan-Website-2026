@@ -87,6 +87,7 @@ export type ContactData = {
   location: string;
   linkedin: string;
   instagram?: string;
+  whatsappNumber?: string;
   resumeUrl: string;
   formEndpoint?: string;
 };
@@ -120,7 +121,16 @@ export type ProfileContent = {
   languagesIntro: SectionIntro;
   languages: Array<{ name: string; level: string }>;
   awardsIntro: SectionIntro;
-  awards: Array<{ title: string; note: string }>;
+  awards: Array<{
+    title: string;
+    note: string;
+    credential?: {
+      src: string;
+      alt: string;
+      title: string;
+      description: string;
+    };
+  }>;
   recommendationsIntro: SectionIntro;
   recommendations: Recommendation[];
   personalDetailsIntro: SectionIntro;
@@ -453,7 +463,14 @@ export const profile: ProfileContent = {
   awards: [
     {
       title: 'SAN Token of Appreciation (World Anesthesia Day 2024)',
-      note: 'Recognized for technical assistance in a TUTH blood donation programme.'
+      note: 'Recognized for technical assistance in a TUTH blood donation programme.',
+      credential: {
+        src: '/documents/san-token-of-appreciation.jpg',
+        alt: 'SAN Token of Appreciation certificate',
+        title: 'SAN Token of Appreciation',
+        description:
+          'Recognition certificate issued on World Anesthesia Day 2024 for technical nursing assistance in a blood donation programme.'
+      }
     }
   ],
   recommendationsIntro: {

@@ -43,7 +43,7 @@ const { name, showAwards = false, mode = 'one-page' } = Astro.props;
     }
   </div>
 
-  <div class="mobile-nav" id="mobile-nav" hidden>
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
     {
       mode === 'one-page' ? (
         <nav class="mobile-nav__panel" aria-label="Mobile section navigation">

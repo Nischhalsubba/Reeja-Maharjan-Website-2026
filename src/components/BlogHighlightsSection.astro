@@ -1,0 +1,37 @@
+﻿---
+import SectionIntro from './SectionIntro.astro';
+import SectionIcon from './SectionIcon.astro';
+import { blogPosts } from '../content/blog';
+
+const posts = blogPosts.slice(0, 3);
+---
+
+<section class="section" id="blog" data-reveal-group>
+  <div class="container">
+    <article class="section-shell" data-reveal>
+      <header class="section-shell__head">
+        <span class="section-shell__icon"><SectionIcon name="recommendations" /></span>
+        <SectionIntro
+          eyebrow="Blog"
+          title="Latest Nursing Articles"
+          summary="Practical articles on maternal care, general care nursing, documentation, and hospital/NGO role readiness."
+        />
+      </header>
+      <div class="section-shell__body">
+        <div class="card-grid card-grid--3">
+          {
+            posts.map((post) => (
+              <article class="card" data-card-link data-card-href={`/blog/${post.slug}/`}>
+                <h3>{post.title}</h3>
+                <p>{post.excerpt}</p>
+                <p class="note">{post.readMinutes} min read</p>
+                <a class="text-link" href={`/blog/${post.slug}/`}>Read article</a>
+              </article>
+            ))
+          }
+        </div>
+        <a class="text-link" href="/blog/">View all articles</a>
+      </div>
+    </article>
+  </div>
+</section>

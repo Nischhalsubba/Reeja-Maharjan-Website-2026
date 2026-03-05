@@ -27,6 +27,32 @@ const hasAwards = profile.awards.length > 0;
                 <article class="card">
                   <h3>{award.title}</h3>
                   <p>{award.note}</p>
+                  {
+                    award.credential && (
+                      <>
+                        <a
+                          href={award.credential.src}
+                          class="award-preview"
+                          data-lightbox-src={award.credential.src}
+                          data-lightbox-alt={award.credential.alt}
+                          data-lightbox-title={award.credential.title}
+                          data-lightbox-description={award.credential.description}
+                        >
+                          <img src={award.credential.src} alt={award.credential.alt} loading="lazy" />
+                        </a>
+                        <a
+                          class="text-link"
+                          href={award.credential.src}
+                          data-lightbox-src={award.credential.src}
+                          data-lightbox-alt={award.credential.alt}
+                          data-lightbox-title={award.credential.title}
+                          data-lightbox-description={award.credential.description}
+                        >
+                          Show credential
+                        </a>
+                      </>
+                    )
+                  }
                 </article>
               ))}
             </div>

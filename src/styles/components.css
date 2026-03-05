@@ -106,10 +106,18 @@
   bottom: 0;
   left: 0;
   background: rgba(17, 19, 22, 0.4);
-  z-index: 280;
+  z-index: 560;
   overflow-y: auto;
-  opacity: 1;
+  opacity: 0;
+  pointer-events: none;
+  display: none;
+  transition: opacity var(--dur-1) ease-in-out;
+}
+
+.mobile-nav.is-open {
   display: flex;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .mobile-nav__panel {
@@ -122,6 +130,13 @@
   align-content: start;
   gap: var(--s3);
   box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
+  border-radius: var(--r-card) 0 0 var(--r-card);
+  transform: translateX(16px);
+  transition: transform var(--dur-2) var(--ease-out);
+}
+
+.mobile-nav.is-open .mobile-nav__panel {
+  transform: translateX(0);
 }
 
 .hero {
@@ -378,7 +393,7 @@
 .chip-list li {
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--r-card);
   padding: 6px var(--s2);
   font-size: var(--small-size);
 }
@@ -397,16 +412,16 @@
 .timeline-list {
   position: relative;
   display: grid;
-  gap: var(--s5);
-  padding-left: 36px;
+  gap: 46px;
+  padding-left: 18px;
 }
 
 .timeline-list::before {
   content: '';
   position: absolute;
-  left: 10px;
-  top: 12px;
-  bottom: 12px;
+  left: -25px;
+  top: 14px;
+  bottom: 14px;
   width: 1px;
   background: #d2d3d6;
 }
@@ -417,8 +432,8 @@
 
 .timeline-list__dot {
   position: absolute;
-  left: 10px;
-  top: 9px;
+  left: -25px;
+  top: 10px;
   width: 8px;
   height: 8px;
   border-radius: 999px;
@@ -428,48 +443,59 @@
 
 .timeline-list__content {
   display: grid;
-  gap: 8px;
-  padding-left: 4px;
+  gap: 10px;
+  padding-left: 18px;
 }
 
 .timeline-list__row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: var(--s2);
+}
+
+.timeline-list__row h3 {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
 }
 
 .timeline-list__date {
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
-  padding: 0 var(--s2);
+  min-height: 40px;
+  padding: 0 16px;
   border: 1px solid var(--line);
-  border-radius: var(--r-pill);
+  border-radius: var(--r-card);
   color: var(--text);
   font-size: var(--small-size);
+  font-weight: var(--w-medium);
   white-space: nowrap;
 }
 
 .timeline-list__meta {
+  margin: 0;
   color: var(--muted);
   font-size: var(--small-size);
+  line-height: 1.4;
 }
 
 .timeline-list__summary {
   display: grid;
-  gap: 8px;
-  margin-top: 2px;
+  gap: 10px;
+  margin-top: 4px;
 }
 
 .timeline-list__summary p {
+  margin: 0;
   color: var(--muted);
   max-width: 64ch;
   line-height: 1.45;
 }
 
 .timeline-list__meta--location {
-  margin-top: -2px;
+  margin-top: -4px;
 }
 
 .education-list {
@@ -533,7 +559,7 @@
 .skills-chip-list li {
   border: 1px solid var(--line);
   background: var(--surface);
-  border-radius: 10px;
+  border-radius: var(--r-card);
   padding: 8px 12px;
   font-size: var(--small-size);
 }
@@ -736,6 +762,22 @@
   text-decoration: none;
 }
 
+.award-preview {
+  display: block;
+  margin-top: var(--s2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.award-preview img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
 .language-card p {
   color: var(--text);
   font-weight: 600;
@@ -805,7 +847,7 @@
 .contact-form textarea {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--r-card);
   padding: var(--s2);
   font: inherit;
   color: var(--text);
@@ -939,7 +981,7 @@
 .lightbox__toolbar button,
 .lightbox__stage button {
   border: 1px solid var(--line);
-  border-radius: 8px;
+  border-radius: var(--r-card);
   background: var(--surface);
   min-height: 36px;
   padding-inline: var(--s2);
@@ -1017,6 +1059,7 @@
 
   .timeline-list__row {
     flex-direction: column;
+    align-items: flex-start;
   }
 
   .timeline-list__date {
@@ -1063,6 +1106,24 @@
 }
 
 @media (max-width: 640px) {
+  .timeline-list {
+    gap: 34px;
+    padding-left: 28px;
+  }
+
+  .timeline-list::before,
+  .timeline-list__dot {
+    left: 9px;
+  }
+
+  .timeline-list__content {
+    padding-left: 18px;
+  }
+
+  .timeline-list__row h3 {
+    font-size: 1.5rem;
+  }
+
   .hero h1 {
     max-width: 100%;
     text-wrap: pretty;

@@ -41,6 +41,7 @@ const { profile } = Astro.props;
         method="POST"
         action={profile.contact.formEndpoint ?? 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'}
         data-endpoint={profile.contact.formEndpoint}
+        data-whatsapp={profile.contact.whatsappNumber}
       >
         <label>
           Name
@@ -81,6 +82,8 @@ const { profile } = Astro.props;
       configuredEndpoint ||
       import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ||
       'https://formsubmit.co/ajax/maharjanreeja88@gmail.com';
+    const whatsappRaw = form.dataset.whatsapp || import.meta.env.PUBLIC_WHATSAPP_NUMBER || '';
+    const whatsappNumber = whatsappRaw.replace(/[^\d]/g, '');
 
     form.action = endpoint;
 
@@ -119,7 +122,25 @@ const { profile } = Astro.props;
         form.reset();
         if (success instanceof HTMLElement) success.hidden = false;
       } catch {
-        if (error instanceof HTMLElement) error.hidden = false;
+        const nameEl = form.querySelector('input[name="name"]');
+        const emailEl = form.querySelector('input[name="email"]');
+        const messageEl = form.querySelector('textarea[name="message"]');
+        const name = nameEl instanceof HTMLInputElement ? nameEl.value : '';
+        const email = emailEl instanceof HTMLInputElement ? emailEl.value : '';
+        const message = messageEl instanceof HTMLTextAreaElement ? messageEl.value : '';
+
+        if (whatsappNumber.length >= 10) {
+          const text = `New contact from reejamaharjan.com.np%0AName: ${encodeURIComponent(name)}%0AEmail: ${encodeURIComponent(email)}%0AMessage: ${encodeURIComponent(message)}`;
+          window.open(`https://wa.me/${whatsappNumber}?text=${text}`, '_blank', 'noopener,noreferrer');
+        }
+
+        if (error instanceof HTMLElement) {
+          error.textContent =
+            whatsappNumber.length >= 10
+              ? 'Email send failed. WhatsApp draft opened for backup delivery.'
+              : 'Message could not be sent. Please try again in a moment.';
+          error.hidden = false;
+        }
       } finally {
         submit.disabled = false;
         submit.textContent = 'Send Message';
