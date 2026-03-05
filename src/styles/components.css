@@ -392,13 +392,13 @@
   position: relative;
   display: grid;
   gap: var(--s4);
-  padding-left: var(--s3);
+  padding-left: calc(var(--s3) + 4px);
 }
 
 .timeline-list::before {
   content: '';
   position: absolute;
-  left: 9px;
+  left: 12px;
   top: 4px;
   bottom: 4px;
   width: 1px;
@@ -411,12 +411,13 @@
 
 .timeline-list__dot {
   position: absolute;
-  left: -4px;
+  left: 12px;
   top: 12px;
   width: 8px;
   height: 8px;
   border-radius: 999px;
   background: color-mix(in srgb, var(--muted) 60%, var(--surface));
+  transform: translateX(-50%);
 }
 
 .timeline-list__content {
@@ -1005,7 +1006,7 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .desktop-nav {
     display: none;
   }
