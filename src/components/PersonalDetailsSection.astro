@@ -6,10 +6,9 @@ type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
 ---
 
-<section class="section" data-reveal-group>
+<section class="section" id={profile.personalDetailsIntro.id} data-reveal-group>
   <div class="container section-stack">
     <SectionIntro
-      id={profile.personalDetailsIntro.id}
       eyebrow={profile.personalDetailsIntro.eyebrow}
       title={profile.personalDetailsIntro.title}
       summary={profile.personalDetailsIntro.summary}

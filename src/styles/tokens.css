@@ -1,17 +1,56 @@
 :root {
-  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  /* Typography (reference-derived) */
+  --font-sans: Inter, sans-serif;
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --w-bold: 700;
 
-  --bg: #f2efe7;
+  --h1-size: 3rem;
+  --h1-lh: 1.2;
+  --h1-ls: -1.44px;
+  --h1-w: 500;
+
+  --h2-size: 1.3125rem;
+  --h2-lh: 1.2;
+  --h2-ls: -0.63px;
+  --h2-w: 500;
+
+  --body-size: 0.875rem;
+  --body-lh: 1.4;
+  --body-ls: -0.28px;
+  --body-w: 500;
+
+  --small-size: 0.75rem;
+
+  /* Colors (reference-derived) */
+  --bg: #f9f9f9;
   --surface: #ffffff;
-  --text: #111316;
-  --muted: #555f6f;
-  --accent: #d13c3c;
-  --line: #d9d6cf;
+  --text: #1d1d26;
+  --muted: #77777d;
+  --line: #ededee;
+  --accent: #1d1d26;
+  --accent-text: #ffffff;
+  --accent-hover: #33333b;
+  --surface-alt: #f6f6f6;
+  --line-strong: #e3e3e4;
+  --placeholder: #8e8e92;
 
-  --container-max: 1160px;
+  /* Elevation */
+  --shadow-1: 0 6px 12px rgba(29, 29, 38, 0.04);
+  --shadow-2: 0 10px 24px rgba(29, 29, 38, 0.08);
+
+  /* Radius */
+  --r-card: 16px;
+  --r-btn: 12px;
+  --r-pill: 999px;
+
+  /* Layout */
+  --container-max: 768px;
   --gutter: clamp(16px, 3vw, 40px);
   --section-gap: clamp(56px, 6vw, 96px);
 
+  /* 8pt spacing */
   --s1: 8px;
   --s2: 16px;
   --s3: 24px;
@@ -25,15 +64,26 @@
   --s11: 88px;
   --s12: 96px;
 
-  --h1: clamp(2.8rem, 5vw + 1rem, 4rem);
-  --h2: clamp(2rem, 2.6vw + 0.5rem, 2.75rem);
-  --h3: clamp(1.2rem, 0.8vw + 0.8rem, 1.35rem);
-  --p: clamp(1rem, 0.1vw + 0.95rem, 1.06rem);
-  --small: 0.9rem;
+  /* Buttons */
+  --btn-h: 48px;
+  --btn-pad-x: 16px;
+  --btn-pad-y: 10px;
 
-  --r1: 10px;
-  --r2: 14px;
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-1: 180ms;
+  --dur-2: 320ms;
+  --dur-3: 520ms;
 
-  --shadow-1: 0 2px 8px rgba(17, 19, 22, 0.06);
-  --shadow-2: 0 10px 30px rgba(17, 19, 22, 0.12);
+  /* Focus */
+  --focus-ring: 0 0 0 3px rgba(29, 29, 38, 0.18);
+
+  /* Compatibility aliases */
+  --h1: var(--h1-size);
+  --h2: var(--h2-size);
+  --h3: 1rem;
+  --p: var(--body-size);
+  --small: var(--small-size);
+  --r1: var(--r-btn);
+  --r2: var(--r-card);
 }

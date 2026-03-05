@@ -68,6 +68,7 @@ export type ContactData = {
   location: string;
   linkedin: string;
   resumeUrl: string;
+  formEndpoint?: string;
 };
 
 export type ProfileContent = {
@@ -397,6 +398,7 @@ export const profile: ProfileContent = {
     phone: '+977 9843704288',
     location: 'Lalitpur, Nepal',
     linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
-    resumeUrl: '/resume.pdf'
+    resumeUrl: '/resume.pdf',
+    formEndpoint: 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'
   }
 };

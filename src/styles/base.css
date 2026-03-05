@@ -13,8 +13,10 @@ body {
   font-family: var(--font-sans);
   color: var(--text);
   background: var(--bg);
-  font-size: var(--p);
-  line-height: 1.56;
+  font-size: var(--body-size);
+  line-height: var(--body-lh);
+  letter-spacing: var(--body-ls);
+  font-weight: var(--body-w);
   text-rendering: optimizeLegibility;
 }
 
@@ -59,8 +61,8 @@ ol {
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .muted {

@@ -36,7 +36,7 @@ const {
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header name={profile.name} />
+    <Header name={profile.name} showAwards={profile.awards.length > 0} />
     <main id="main-content">
       <slot />
     </main>

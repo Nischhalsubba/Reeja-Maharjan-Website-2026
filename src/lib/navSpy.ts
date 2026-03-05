@@ -18,7 +18,11 @@ export const initNavSpy = (): void => {
       const targetHref = `#${visible.target.id}`;
       links.forEach((link) => {
         const isActive = link.getAttribute('href') === targetHref;
-        link.toggleAttribute('aria-current', isActive);
+        if (isActive) {
+          link.setAttribute('aria-current', 'page');
+          return;
+        }
+        link.removeAttribute('aria-current');
       });
     },
     { rootMargin: '-30% 0px -60% 0px', threshold: [0.2, 0.35, 0.5, 0.7] }

@@ -6,10 +6,9 @@ type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
 ---
 
-<section class="section" data-reveal-group>
+<section class="section" id={profile.contactIntro.id} data-reveal-group>
   <div class="container section-stack">
     <SectionIntro
-      id={profile.contactIntro.id}
       eyebrow={profile.contactIntro.eyebrow}
       title={profile.contactIntro.title}
       summary={profile.contactIntro.summary}
@@ -30,7 +29,14 @@ const { profile } = Astro.props;
         </div>
       </div>
 
-      <form class="card contact-form" data-reveal aria-label="Contact form">
+      <form
+        id="contact-form"
+        class="card contact-form"
+        data-reveal
+        aria-label="Contact form"
+        method="POST"
+        data-endpoint={profile.contact.formEndpoint}
+      >
         <h3>Send a message</h3>
         <label>
           Name
@@ -44,8 +50,55 @@ const { profile } = Astro.props;
           Message
           <textarea name="message" rows="5"></textarea>
         </label>
-        <button type="button" class="btn btn--primary" disabled>Form endpoint pending</button>
+        <input type="hidden" name="_subject" value="New contact from reejamaharjan.com.np" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <button type="submit" class="btn btn--primary">Send Message</button>
+        <p class="form-status form-status--success" hidden>Message sent successfully.</p>
+        <p class="form-status form-status--error" hidden>Unable to send message. Please retry.</p>
       </form>
     </div>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById('contact-form');
+  if (form instanceof HTMLFormElement) {
+    const configuredEndpoint = form.dataset.endpoint;
+    const endpoint =
+      configuredEndpoint ||
+      import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ||
+      'https://formsubmit.co/ajax/maharjanreeja88@gmail.com';
+    form.action = endpoint;
+    const success = form.querySelector('.form-status--success');
+    const error = form.querySelector('.form-status--error');
+    const submit = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!(submit instanceof HTMLButtonElement)) return;
+      submit.disabled = true;
+      submit.textContent = 'Sending...';
+      if (success instanceof HTMLElement) success.hidden = true;
+      if (error instanceof HTMLElement) error.hidden = true;
+
+      try {
+        const formData = new FormData(form);
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('Request failed');
+        form.reset();
+        if (success instanceof HTMLElement) success.hidden = false;
+      } catch {
+        if (error instanceof HTMLElement) error.hidden = false;
+      } finally {
+        submit.disabled = false;
+        submit.textContent = 'Send Message';
+      }
+    });
+  }
+</script>
