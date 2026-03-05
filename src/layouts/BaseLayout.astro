@@ -17,6 +17,7 @@ const {
   title = `${profile.name} | ${profile.role}`,
   description = profile.hero.tagline
 } = Astro.props;
+const isBlogPage = Astro.url.pathname.startsWith('/blog');
 ---
 
 <!doctype html>
@@ -36,10 +37,14 @@ const {
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header name={profile.name} showAwards={profile.awards.length > 0} />
+    <Header
+      name={profile.name}
+      showAwards={profile.awards.length > 0}
+      mode={isBlogPage ? 'blog' : 'one-page'}
+    />
     <main id="main-content">
       <slot />
     </main>
-    <Footer profile={profile} />
+    <Footer profile={profile} mode={isBlogPage ? 'blog' : 'one-page'} />
   </body>
 </html>

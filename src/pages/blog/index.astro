@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { blogPosts } from '../../content/blog';
+
+const posts = [...blogPosts].sort(
+  (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+);
+
+const formatDate = (value: string) =>
+  new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<BaseLayout title="Blog | Reeja Maharjan" description="Clinical nursing notes and practical care insights.">
+  <section class="section blog-list">
+    <div class="container section-stack">
+      <div class="section-intro">
+        <p class="section-intro__eyebrow">Blog</p>
+        <h1>Clinical Notes and Nursing Insights</h1>
+        <p>Short, practical articles on ward care, counselling, handover quality, and nursing readiness.</p>
+      </div>
+
+      <div class="card-grid card-grid--1">
+        {posts.map((post) => (
+          <article class="card blog-card">
+            <p class="blog-card__meta">
+              <span>{formatDate(post.publishedAt)}</span>
+              <span>{post.readMinutes} min read</span>
+            </p>
+            <h2>{post.title}</h2>
+            <p>{post.excerpt}</p>
+            <ul class="chip-list">
+              {post.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+            <a class="text-link" href={`/blog/${post.slug}/`}>Read article</a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

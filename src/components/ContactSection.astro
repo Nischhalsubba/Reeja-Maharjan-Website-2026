@@ -54,8 +54,12 @@ const { profile } = Astro.props;
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <button type="submit" class="btn btn--primary">Send Message</button>
-        <p class="form-status form-status--success" hidden>Message sent successfully.</p>
-        <p class="form-status form-status--error" hidden>Unable to send message. Please retry.</p>
+        <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
+          Message sent successfully.
+        </p>
+        <p class="form-status form-status--error" role="alert" aria-live="assertive" hidden>
+          Unable to send message. Please retry.
+        </p>
       </form>
     </div>
   </div>

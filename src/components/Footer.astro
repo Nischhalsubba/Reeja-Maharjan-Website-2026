@@ -1,8 +1,12 @@
 ---
 import type { ProfileContent } from '../content/profile';
 
-type Props = { profile: ProfileContent };
-const { profile } = Astro.props;
+type Props = {
+  profile: ProfileContent;
+  mode?: 'one-page' | 'blog';
+};
+
+const { profile, mode = 'one-page' } = Astro.props;
 ---
 
 <footer class="site-footer">
@@ -13,10 +17,10 @@ const { profile } = Astro.props;
       <p>{profile.role}</p>
     </div>
     <nav aria-label="Footer quick links" class="site-footer__links">
-      <a href="#home">Home</a>
-      <a href="#experience">Experience</a>
-      <a href="#certifications">Certifications</a>
-      <a href="#contact">Contact</a>
+      <a href={mode === 'blog' ? '/' : '#home'}>Home</a>
+      <a href={mode === 'blog' ? '/blog/' : '#experience'}>{mode === 'blog' ? 'Blog' : 'Experience'}</a>
+      <a href={mode === 'blog' ? '/#certifications' : '#certifications'}>Certifications</a>
+      <a href={mode === 'blog' ? '/#contact' : '#contact'}>Contact</a>
     </nav>
     <div class="site-footer__contact">
       <a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
@@ -25,7 +29,7 @@ const { profile } = Astro.props;
   </div>
   <div class="container site-footer__legal">
     <small>(c) {new Date().getFullYear()} {profile.name}</small>
-    <a href="#home">Back to top</a>
+    <a href={mode === 'blog' ? '/#home' : '#home'}>Back to top</a>
   </div>
 </footer>
 
