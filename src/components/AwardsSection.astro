@@ -10,20 +10,27 @@ const hasAwards = profile.awards.length > 0;
 {
   hasAwards && (
     <section class="section" id={profile.awardsIntro.id} data-reveal-group>
-      <div class="container section-stack">
-        <SectionIntro
-          eyebrow={profile.awardsIntro.eyebrow}
-          title={profile.awardsIntro.title}
-          summary={profile.awardsIntro.summary}
-        />
-        <div class="card-grid card-grid--1">
-          {profile.awards.map((award) => (
-            <article class="card" data-reveal>
-              <h3>{award.title}</h3>
-              <p>{award.note}</p>
-            </article>
-          ))}
-        </div>
+      <div class="container">
+        <article class="section-shell" data-reveal>
+          <header class="section-shell__head">
+            <span class="section-shell__icon" aria-hidden="true">◍</span>
+            <SectionIntro
+              eyebrow={profile.awardsIntro.eyebrow}
+              title={profile.awardsIntro.title}
+              summary={profile.awardsIntro.summary}
+            />
+          </header>
+          <div class="section-shell__body">
+            <div class="card-grid card-grid--1">
+              {profile.awards.map((award) => (
+                <article class="card">
+                  <h3>{award.title}</h3>
+                  <p>{award.note}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </article>
       </div>
     </section>
   )

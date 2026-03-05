@@ -7,23 +7,30 @@ const { profile } = Astro.props;
 ---
 
 <section class="section" id={profile.skillsIntro.id} data-reveal-group>
-  <div class="container section-stack">
-    <SectionIntro
-      eyebrow={profile.skillsIntro.eyebrow}
-      title={profile.skillsIntro.title}
-      summary={profile.skillsIntro.summary}
-    />
-    <div class="card-grid card-grid--2">
-      {profile.skills.map((group) => (
-        <article class="card" data-reveal>
-          <h3>{group.title}</h3>
-          <ul class="check-list">
-            {group.items.map((item) => (
-              <li>{item}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
-    </div>
+  <div class="container">
+    <article class="section-shell" data-reveal>
+      <header class="section-shell__head">
+        <span class="section-shell__icon" aria-hidden="true">◌</span>
+        <SectionIntro
+          eyebrow={profile.skillsIntro.eyebrow}
+          title={profile.skillsIntro.title}
+          summary={profile.skillsIntro.summary}
+        />
+      </header>
+      <div class="section-shell__body">
+        <div class="skills-stack">
+          {profile.skills.map((group) => (
+            <article class="skills-group">
+              <h3>{group.title}</h3>
+              <ul class="skills-chip-list">
+                {group.items.map((item) => (
+                  <li>{item}</li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </article>
   </div>
 </section>

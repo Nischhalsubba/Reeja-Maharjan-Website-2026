@@ -7,19 +7,26 @@ const { profile } = Astro.props;
 ---
 
 <section class="section" id={profile.languagesIntro.id} data-reveal-group>
-  <div class="container section-stack">
-    <SectionIntro
-      eyebrow={profile.languagesIntro.eyebrow}
-      title={profile.languagesIntro.title}
-      summary={profile.languagesIntro.summary}
-    />
-    <div class="card-grid card-grid--2">
-      {profile.languages.map((language) => (
-        <article class="card language-card" data-reveal>
-          <h3>{language.name}</h3>
-          <p>{language.level}</p>
-        </article>
-      ))}
-    </div>
+  <div class="container">
+    <article class="section-shell" data-reveal>
+      <header class="section-shell__head">
+        <span class="section-shell__icon" aria-hidden="true">◎</span>
+        <SectionIntro
+          eyebrow={profile.languagesIntro.eyebrow}
+          title={profile.languagesIntro.title}
+          summary={profile.languagesIntro.summary}
+        />
+      </header>
+      <div class="section-shell__body">
+        <div class="language-list">
+          {profile.languages.map((language) => (
+            <article class="language-list__row">
+              <h3>{language.name}</h3>
+              <p>{language.level}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </article>
   </div>
 </section>

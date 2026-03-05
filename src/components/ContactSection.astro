@@ -8,44 +8,38 @@ const { profile } = Astro.props;
 
 <section class="section" id={profile.contactIntro.id} data-reveal-group>
   <div class="container section-stack">
-    <SectionIntro
-      eyebrow={profile.contactIntro.eyebrow}
-      title={profile.contactIntro.title}
-      summary={profile.contactIntro.summary}
-    />
+    <div class="contact-cta" data-reveal>
+      <img src="/reeja-headshot.jpg" alt="Reeja Maharjan profile portrait" width="84" height="84" />
+      <h2>Feel Free to Reach Out</h2>
+      <p>Let’s discuss nursing, NGO, and INGO opportunities.</p>
+      <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Send Email</a>
+      <ul class="contact-socials">
+        <li><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        {
+          profile.contact.instagram && (
+            <li><a href={profile.contact.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          )
+        }
+      </ul>
+    </div>
 
-    <div class="contact-grid">
-      <div class="card" data-reveal>
-        <h3>Direct Nursing Contact</h3>
-        <ul class="contact-list">
-          <li><span>Email</span><a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a></li>
-          <li><span>Mobile</span><strong>Available on request</strong></li>
-          <li><span>Location</span><strong>{profile.contact.location}</strong></li>
-          <li><span>LinkedIn</span><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">Profile</a></li>
-          {
-            profile.contact.instagram && (
-              <li>
-                <span>Instagram</span>
-                <a href={profile.contact.instagram} target="_blank" rel="noopener noreferrer">Profile</a>
-              </li>
-            )
-          }
-        </ul>
-        <div class="hero__actions">
-          <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Send Email</a>
-          <a class="btn btn--secondary" href={profile.contact.resumeUrl}>Download CV</a>
-        </div>
-      </div>
+    <article class="section-shell" data-reveal>
+      <header class="section-shell__head">
+        <span class="section-shell__icon" aria-hidden="true">✎</span>
+        <SectionIntro
+          eyebrow={profile.contactIntro.eyebrow}
+          title="Get in Touch with Me"
+          summary="Share your requirement and Reeja will respond by email."
+        />
+      </header>
 
       <form
         id="contact-form"
-        class="card contact-form"
-        data-reveal
+        class="section-shell__body contact-form"
         aria-label="Contact form"
         method="POST"
         data-endpoint={profile.contact.formEndpoint}
       >
-        <h3>Send an Interview Inquiry</h3>
         <label>
           Name
           <input type="text" name="name" autocomplete="name" />
@@ -74,7 +68,7 @@ const { profile } = Astro.props;
           Message could not be sent. Please try again.
         </p>
       </form>
-    </div>
+    </article>
   </div>
 </section>
 
@@ -94,7 +88,7 @@ const { profile } = Astro.props;
     const resetButton = form.querySelector('[data-reset-form]');
     const fields = Array.from(form.querySelectorAll('label, input[type=\"hidden\"], button[type=\"submit\"]'));
 
-    const setSuccessView = (enabled) => {
+    const setSuccessView = (enabled: boolean) => {
       fields.forEach((el) => {
         if (!(el instanceof HTMLElement)) return;
         el.hidden = enabled;

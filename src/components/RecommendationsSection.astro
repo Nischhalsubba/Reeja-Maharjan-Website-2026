@@ -7,32 +7,37 @@ const { profile } = Astro.props;
 ---
 
 <section class="section" id={profile.recommendationsIntro.id} data-reveal-group>
-  <div class="container section-stack">
-    <SectionIntro
-      eyebrow={profile.recommendationsIntro.eyebrow}
-      title={profile.recommendationsIntro.title}
-      summary={profile.recommendationsIntro.summary}
-    />
-    <div class="card-grid card-grid--2">
-      {profile.recommendations.map((item) => (
-        <article class="card" data-reveal>
-          <h3>{item.name}</h3>
-          <p class="muted">{item.title}</p>
-          <p>{item.quote}</p>
-          {
-            item.links && (
-              <ul class="chip-list">
-                {item.links.map((link) => (
-                  <li>
-                    <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
-                  </li>
-                ))}
-              </ul>
-            )
-          }
-        </article>
-      ))}
-    </div>
-    <p class="note">Contact details available on request.</p>
+  <div class="container">
+    <article class="section-shell" data-reveal>
+      <header class="section-shell__head">
+        <span class="section-shell__icon" aria-hidden="true">☰</span>
+        <SectionIntro
+          eyebrow={profile.recommendationsIntro.eyebrow}
+          title={profile.recommendationsIntro.title}
+          summary={profile.recommendationsIntro.summary}
+        />
+      </header>
+      <div class="section-shell__body recommendations-list">
+        {profile.recommendations.map((item, idx) => (
+          <article class={`recommendation-item recommendation-item--${idx % 2 === 0 ? 'a' : 'b'}`}>
+            <h3>{item.name}</h3>
+            <p class="muted">{item.title}</p>
+            <p>{item.quote}</p>
+            {
+              item.links && (
+                <ul class="chip-list">
+                  {item.links.map((link) => (
+                    <li>
+                      <a href={link.href} target="_blank" rel="noopener noreferrer">{link.label}</a>
+                    </li>
+                  ))}
+                </ul>
+              )
+            }
+          </article>
+        ))}
+        <p class="note">Contact details available on request.</p>
+      </div>
+    </article>
   </div>
 </section>

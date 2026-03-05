@@ -7,21 +7,30 @@ const { profile } = Astro.props;
 ---
 
 <section class="section" id={profile.educationIntro.id} data-reveal-group>
-  <div class="container section-stack">
-    <SectionIntro
-      eyebrow={profile.educationIntro.eyebrow}
-      title={profile.educationIntro.title}
-      summary={profile.educationIntro.summary}
-    />
-    <div class="card-grid card-grid--3">
-      {profile.education.map((item) => (
-        <article class="card" data-reveal>
-          <h3>{item.level}</h3>
-          <p>{item.institution}</p>
-          <p class="muted">{item.period}</p>
-          <p class="strong">{item.result}</p>
-        </article>
-      ))}
-    </div>
+  <div class="container">
+    <article class="section-shell" data-reveal>
+      <header class="section-shell__head">
+        <span class="section-shell__icon" aria-hidden="true">◈</span>
+        <SectionIntro
+          eyebrow={profile.educationIntro.eyebrow}
+          title={profile.educationIntro.title}
+          summary={profile.educationIntro.summary}
+        />
+      </header>
+      <div class="section-shell__body">
+        <div class="education-list">
+          {profile.education.map((item) => (
+            <article class="education-list__row">
+              <div>
+                <h3>{item.level}</h3>
+                <p class="education-list__meta">{item.institution}</p>
+                <p class="education-list__meta">{item.result}</p>
+              </div>
+              <time class="timeline-list__date">{item.period}</time>
+            </article>
+          ))}
+        </div>
+      </div>
+    </article>
   </div>
 </section>

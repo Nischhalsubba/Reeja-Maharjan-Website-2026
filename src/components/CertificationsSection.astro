@@ -7,31 +7,36 @@ const { profile } = Astro.props;
 ---
 
 <section class="section" id={profile.certificationsIntro.id} data-reveal-group>
-  <div class="container section-stack">
-    <SectionIntro
-      eyebrow={profile.certificationsIntro.eyebrow}
-      title={profile.certificationsIntro.title}
-      summary={profile.certificationsIntro.summary}
-    />
-    <div class="card-grid card-grid--2">
-      {profile.certifications.map((item) => (
-        <article class="card" data-reveal>
-          <h3>{item.title}</h3>
-          <p>{item.issuer}</p>
-          <p class="muted">{item.date}</p>
-          <p>{item.note}</p>
-          <a
-            class="text-link"
-            href={item.credentialUrl}
-            data-lightbox-src={item.preview.src}
-            data-lightbox-alt={item.preview.alt}
-            data-lightbox-title={item.preview.title}
-            data-lightbox-description={item.preview.description}
-          >
-            Show credential
-          </a>
-        </article>
-      ))}
-    </div>
+  <div class="container">
+    <article class="section-shell" data-reveal>
+      <header class="section-shell__head">
+        <span class="section-shell__icon" aria-hidden="true">▣</span>
+        <SectionIntro
+          eyebrow={profile.certificationsIntro.eyebrow}
+          title={profile.certificationsIntro.title}
+          summary={profile.certificationsIntro.summary}
+        />
+      </header>
+      <div class="section-shell__body">
+        <div class="cert-grid">
+          {profile.certifications.map((item) => (
+            <article class="cert-grid__item">
+              <h3>{item.title}</h3>
+              <p class="cert-grid__meta">{item.issuer} · {item.date}</p>
+              <a
+                class="btn btn--secondary cert-grid__action"
+                href={item.credentialUrl}
+                data-lightbox-src={item.preview.src}
+                data-lightbox-alt={item.preview.alt}
+                data-lightbox-title={item.preview.title}
+                data-lightbox-description={item.preview.description}
+              >
+                Show credential
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </article>
   </div>
 </section>
