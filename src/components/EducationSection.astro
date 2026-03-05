@@ -1,5 +1,6 @@
 ---
 import SectionIntro from './SectionIntro.astro';
+import SectionIcon from './SectionIcon.astro';
 import type { ProfileContent } from '../content/profile';
 
 type Props = { profile: ProfileContent };
@@ -10,7 +11,7 @@ const { profile } = Astro.props;
   <div class="container">
     <article class="section-shell" data-reveal>
       <header class="section-shell__head">
-        <span class="section-shell__icon" aria-hidden="true">◈</span>
+        <span class="section-shell__icon"><SectionIcon name="education" /></span>
         <SectionIntro
           eyebrow={profile.educationIntro.eyebrow}
           title={profile.educationIntro.title}
@@ -25,6 +26,20 @@ const { profile } = Astro.props;
                 <h3>{item.level}</h3>
                 <p class="education-list__meta">{item.institution}</p>
                 <p class="education-list__meta">{item.result}</p>
+                {
+                  item.credential && (
+                    <a
+                      class="text-link"
+                      href={item.credential.src}
+                      data-lightbox-src={item.credential.src}
+                      data-lightbox-alt={item.credential.alt}
+                      data-lightbox-title={item.credential.title}
+                      data-lightbox-description={item.credential.description}
+                    >
+                      View credential
+                    </a>
+                  )
+                }
               </div>
               <time class="timeline-list__date">{item.period}</time>
             </article>

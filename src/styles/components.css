@@ -106,6 +106,7 @@
   background: rgba(17, 19, 22, 0.4);
   z-index: 280;
   overflow-y: auto;
+  opacity: 1;
 }
 
 .mobile-nav__panel {
@@ -315,6 +316,16 @@
   color: var(--muted);
   font-size: 1rem;
   background: color-mix(in srgb, var(--surface-alt) 55%, transparent);
+}
+
+.section-shell__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .section-shell__body {

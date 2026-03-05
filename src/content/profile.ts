@@ -36,6 +36,12 @@ export type EducationItem = {
   institution: string;
   period: string;
   result: string;
+  credential?: {
+    src: string;
+    alt: string;
+    title: string;
+    description: string;
+  };
 };
 
 export type CertificationItem = {
@@ -243,19 +249,37 @@ export const profile: ProfileContent = {
       level: 'B.Sc. Nursing',
       institution: 'Manmohan Memorial Institute of Health Sciences / Tribhuvan University',
       period: 'Sep 2016 - Sep 2021',
-      result: 'First Division, 77.92%'
+      result: 'First Division, 77.92%',
+      credential: {
+        src: '/documents/bsc-degree-certificate.jpg',
+        alt: 'BSc nursing degree certificate',
+        title: 'B.Sc Nursing Degree Certificate',
+        description: 'Official B.Sc Nursing degree certificate from MMIHS / Tribhuvan University.'
+      }
     },
     {
       level: '+2 Science',
       institution: 'Pinnacle Academy, Lalitpur',
       period: 'Sep 2014 - Sep 2016',
-      result: 'First Division, 74.70%'
+      result: 'First Division, 74.70%',
+      credential: {
+        src: '/documents/plus2-transcript.jpg',
+        alt: 'Plus two science transcript',
+        title: '+2 Science Transcript',
+        description: 'Verified +2 Science transcript from Pinnacle Academy, Lalitpur.'
+      }
     },
     {
       level: 'SLC',
       institution: 'Aadarsha Saula Yubak Higher Secondary School, Lalitpur',
       period: 'May 2010 - Jun 2014',
-      result: 'First Division with Distinction, 83.25%'
+      result: 'First Division with Distinction, 83.25%',
+      credential: {
+        src: '/documents/slc-certificate.jpg',
+        alt: 'SLC certificate',
+        title: 'SLC Certificate',
+        description: 'School Leaving Certificate with first division distinction record.'
+      }
     }
   ],
   certificationsIntro: {

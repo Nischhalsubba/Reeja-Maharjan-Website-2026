@@ -3,6 +3,64 @@ import { qs, qsa } from './dom';
 import { initNavSpy } from './navSpy';
 import { initReveal } from './reveal';
 
+const initHeaderMenu = (): void => {
+  const toggle = qs<HTMLButtonElement>('.menu-toggle');
+  const nav = qs<HTMLElement>('.mobile-nav');
+  const panel = qs<HTMLElement>('.mobile-nav__panel');
+  if (!toggle || !nav || !panel) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let isOpen = false;
+
+  const closeMenu = () => {
+    if (!isOpen) return;
+    isOpen = false;
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+
+    if (prefersReduced) {
+      nav.hidden = true;
+      return;
+    }
+
+    gsap.to(panel, {
+      x: 24,
+      opacity: 0,
+      duration: 0.2,
+      ease: 'power2.in',
+      onComplete: () => {
+        nav.hidden = true;
+      }
+    });
+    gsap.to(nav, { opacity: 0, duration: 0.2, ease: 'power2.in' });
+  };
+
+  const openMenu = () => {
+    if (isOpen) return;
+    isOpen = true;
+    nav.hidden = false;
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+
+    if (prefersReduced) return;
+    gsap.set(nav, { opacity: 0 });
+    gsap.set(panel, { x: 24, opacity: 0 });
+    gsap.to(nav, { opacity: 1, duration: 0.22, ease: 'power2.out' });
+    gsap.to(panel, { x: 0, opacity: 1, duration: 0.24, ease: 'power2.out' });
+  };
+
+  toggle.addEventListener('click', () => (isOpen ? closeMenu() : openMenu()));
+  nav.addEventListener('click', (event) => {
+    if (event.target === nav) closeMenu();
+  });
+  qsa<HTMLAnchorElement>('.mobile-nav__panel a', nav).forEach((link) => {
+    link.addEventListener('click', () => closeMenu());
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') closeMenu();
+  });
+};
+
 const initHeroIntro = (): void => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
@@ -13,6 +71,21 @@ const initHeroIntro = (): void => {
     .from('.hero__role, .hero__tagline', { opacity: 0, y: 12, duration: 0.35, stagger: 0.08 }, '-=0.15')
     .from('.hero__actions .btn', { opacity: 0, y: 8, duration: 0.25, stagger: 0.08 }, '-=0.2')
     .from('.hero__media', { opacity: 0, y: 14, duration: 0.45 }, '-=0.25');
+};
+
+const initGlobalGsapInteractions = (): void => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const hoverTargets = qsa<HTMLElement>('.btn, .card, .section-shell');
+  hoverTargets.forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      gsap.to(el, { y: -1, duration: 0.18, ease: 'power2.out' });
+    });
+    el.addEventListener('mouseleave', () => {
+      gsap.to(el, { y: 0, duration: 0.18, ease: 'power2.out' });
+    });
+  });
 };
 
 const initLightbox = (): void => {
@@ -195,6 +268,7 @@ const initScrollProgress = (): void => {
     const max = document.documentElement.scrollHeight - window.innerHeight;
     const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
     bar.style.transform = `scaleX(${progress})`;
+    bar.style.opacity = String(0.45 + progress * 0.55);
   };
 
   window.addEventListener('scroll', update, { passive: true });
@@ -203,9 +277,11 @@ const initScrollProgress = (): void => {
 };
 
 export const initMotion = (): void => {
+  initHeaderMenu();
   initNavSpy();
   initHeroIntro();
   initReveal();
+  initGlobalGsapInteractions();
   initCardLinks();
   initScrollProgress();
   initLightbox();

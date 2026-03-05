@@ -1,5 +1,6 @@
 ---
 import SectionIntro from './SectionIntro.astro';
+import SectionIcon from './SectionIcon.astro';
 import type { ProfileContent } from '../content/profile';
 
 type Props = { profile: ProfileContent };
@@ -13,7 +14,7 @@ const hasAwards = profile.awards.length > 0;
       <div class="container">
         <article class="section-shell" data-reveal>
           <header class="section-shell__head">
-            <span class="section-shell__icon" aria-hidden="true">◍</span>
+            <span class="section-shell__icon"><SectionIcon name="awards" /></span>
             <SectionIntro
               eyebrow={profile.awardsIntro.eyebrow}
               title={profile.awardsIntro.title}

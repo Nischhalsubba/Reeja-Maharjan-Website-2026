@@ -1,5 +1,6 @@
 ---
 import SectionIntro from './SectionIntro.astro';
+import SectionIcon from './SectionIcon.astro';
 import type { ProfileContent } from '../content/profile';
 
 type Props = { profile: ProfileContent };
@@ -25,7 +26,7 @@ const { profile } = Astro.props;
 
     <article class="section-shell" data-reveal>
       <header class="section-shell__head">
-        <span class="section-shell__icon" aria-hidden="true">✎</span>
+        <span class="section-shell__icon"><SectionIcon name="contact" /></span>
         <SectionIntro
           eyebrow={profile.contactIntro.eyebrow}
           title="Get in Touch with Me"
@@ -103,6 +104,10 @@ const { profile } = Astro.props;
         if (error instanceof HTMLElement) error.hidden = true;
       });
     }
+
+    setSuccessView(false);
+    if (success instanceof HTMLElement) success.hidden = true;
+    if (error instanceof HTMLElement) error.hidden = true;
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
