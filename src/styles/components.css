@@ -101,21 +101,27 @@
 
 .mobile-nav {
   position: fixed;
-  inset: 0;
-  padding-top: 72px;
+  top: 72px;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background: rgba(17, 19, 22, 0.4);
   z-index: 280;
   overflow-y: auto;
   opacity: 1;
+  display: flex;
 }
 
 .mobile-nav__panel {
   background: var(--surface);
-  min-height: calc(100dvh - 72px);
+  width: min(360px, 100%);
+  margin-left: auto;
+  min-height: 100%;
   padding: var(--s4);
   display: grid;
   align-content: start;
   gap: var(--s3);
+  box-shadow: -8px 0 24px rgba(0, 0, 0, 0.08);
 }
 
 .hero {
@@ -391,16 +397,16 @@
 .timeline-list {
   position: relative;
   display: grid;
-  gap: var(--s4);
-  padding-left: calc(var(--s3) + 4px);
+  gap: var(--s5);
+  padding-left: 26px;
 }
 
 .timeline-list::before {
   content: '';
   position: absolute;
-  left: 12px;
-  top: 4px;
-  bottom: 4px;
+  left: 8px;
+  top: 18px;
+  bottom: 18px;
   width: 1px;
   background: var(--line);
 }
@@ -411,19 +417,19 @@
 
 .timeline-list__dot {
   position: absolute;
-  left: 12px;
-  top: 12px;
-  width: 8px;
-  height: 8px;
+  left: 8px;
+  top: 9px;
+  width: 7px;
+  height: 7px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--muted) 60%, var(--surface));
+  background: #9b9ba1;
   transform: translateX(-50%);
 }
 
 .timeline-list__content {
   display: grid;
-  gap: 8px;
-  padding-left: var(--s3);
+  gap: 10px;
+  padding-left: 12px;
 }
 
 .timeline-list__row {
@@ -452,7 +458,7 @@
 
 .timeline-list__bullets {
   list-style: disc;
-  padding-left: var(--s3);
+  padding-left: var(--s2);
   display: grid;
   gap: 6px;
   color: var(--muted);
@@ -1003,6 +1009,10 @@
 
   .timeline-list__date {
     align-self: flex-start;
+  }
+
+  .mobile-nav__panel {
+    width: min(420px, 100%);
   }
 }
 

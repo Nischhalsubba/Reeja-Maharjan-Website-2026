@@ -20,6 +20,9 @@ const initHeaderMenu = (): void => {
 
     if (prefersReduced) {
       nav.hidden = true;
+      nav.style.opacity = '';
+      panel.style.opacity = '';
+      panel.style.transform = '';
       return;
     }
 
@@ -30,6 +33,9 @@ const initHeaderMenu = (): void => {
       ease: 'power2.in',
       onComplete: () => {
         nav.hidden = true;
+        nav.style.opacity = '';
+        panel.style.opacity = '';
+        panel.style.transform = '';
       }
     });
     gsap.to(nav, { opacity: 0, duration: 0.2, ease: 'power2.in' });
@@ -39,6 +45,9 @@ const initHeaderMenu = (): void => {
     if (isOpen) return;
     isOpen = true;
     nav.hidden = false;
+    nav.style.opacity = '1';
+    panel.style.opacity = '1';
+    panel.style.transform = 'none';
     toggle.setAttribute('aria-expanded', 'true');
     document.body.classList.add('menu-open');
 
