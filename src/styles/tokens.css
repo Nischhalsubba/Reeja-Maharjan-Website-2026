@@ -46,7 +46,7 @@
   --r-pill: 999px;
 
   /* Layout */
-  --container-max: 768px;
+  --container-max: 1120px;
   --gutter: clamp(16px, 3vw, 40px);
   --section-gap: clamp(56px, 6vw, 96px);
 

@@ -108,17 +108,15 @@ export const profile: ProfileContent = {
   role: 'Registered Nurse (Nepal Nursing Council)',
   hero: {
     available: true,
-    title: 'Reeja Maharjan',
-    role: 'Registered Nurse',
+    title: 'Registered nurse specialising in maternal, newborn, and general ward care',
+    role: 'Reeja Maharjan - Registered Nurse (Nepal Nursing Council)',
     tagline:
-      'Maternal, newborn, and general ward nurse with verified hospital experience in counselling, documentation, and safe handover support.',
+      'Verified hospital experience in counselling, documentation, and safe shift handover.',
     primaryCta: { label: 'Send Email', href: 'mailto:maharjanreeja88@gmail.com' },
     secondaryCta: { label: 'Download CV', href: '/resume.pdf' },
     portrait: { src: '/reeja-hero-cutout.png', alt: 'Portrait of Reeja Maharjan' },
     meta: [
-      { label: 'Location', value: 'Lalitpur, Nepal' },
-      { label: 'Open to', value: 'Nepal and relocation to Biratnagar' },
-      { label: 'License', value: 'NNC RN 65100' },
+      { label: 'Based in', value: 'Lalitpur, Nepal' },
       { label: 'Availability', value: 'Immediate' }
     ]
   },
@@ -129,12 +127,12 @@ export const profile: ProfileContent = {
     summary: 'A concise overview of clinical background, care values, and work focus.'
   },
   profileSummary:
-    'NNC-licensed nurse with practical service in teaching and regional hospitals. Experience includes maternal-newborn support, general ward nursing exposure, patient counselling, ward documentation, and continuity-focused communication.',
+    'NNC-licensed nurse with service in teaching and regional hospitals. Experienced in maternal-newborn support, general ward care, counselling, and accurate clinical documentation.',
   competenciesIntro: {
     id: 'competencies',
     eyebrow: 'Core Competencies',
     title: 'Core Competencies',
-    summary: 'Key strengths mapped directly from résumé responsibilities.'
+    summary: 'Clinical strengths presented in recruiter-friendly, role-ready terms.'
   },
   competencies: [
     'Patient counselling and health education (IEC)',
@@ -148,7 +146,7 @@ export const profile: ProfileContent = {
     id: 'experience',
     eyebrow: 'Experience',
     title: 'Clinical Experience',
-    summary: 'Three recent roles with focused responsibilities and outcomes.'
+    summary: 'Three recent roles summarised with practical responsibilities and outcomes.'
   },
   experience: [
     {
@@ -156,7 +154,7 @@ export const profile: ProfileContent = {
       organization: 'Tribhuvan University Teaching Hospital (TUTH)',
       type: 'Hospital',
       location: 'Maharajgunj, Kathmandu',
-      period: 'Sep 2024 – Nov 2025',
+      period: 'Sep 2024 - Nov 2025',
       bullets: [
         'Supported maternal and newborn care routines with counselling for patients and families.',
         'Maintained ward documentation and structured shift handover for continuity of care.',
@@ -168,7 +166,7 @@ export const profile: ProfileContent = {
       organization: 'Manmohan Memorial Medical College & Teaching Hospital (MMTH)',
       type: 'Hospital',
       location: 'Swoyambhu, Kathmandu',
-      period: 'Feb 2024 – Aug 2024',
+      period: 'Feb 2024 - Aug 2024',
       bullets: [
         'Worked in the general ward with Surgery and Gynaecology & Obstetrics exposure.',
         'Monitored patients, supported escalation, and coordinated with duty teams.',
@@ -180,7 +178,7 @@ export const profile: ProfileContent = {
       organization: 'Sindhuli Hospital',
       type: 'Hospital',
       location: 'Sindhuli, Nepal',
-      period: 'Dec 2021 – Dec 2023',
+      period: 'Dec 2021 - Dec 2023',
       bullets: [
         'Handled maternity-related support including antenatal and postnatal routines.',
         'Supported OT-related duties with aseptic and workflow discipline.',
@@ -192,25 +190,25 @@ export const profile: ProfileContent = {
     id: 'education',
     eyebrow: 'Education',
     title: 'Academic Background',
-    summary: 'Formal education history with documented performance.'
+    summary: 'Formal education history with verified grades and completion periods.'
   },
   education: [
     {
       level: 'B.Sc. Nursing',
       institution: 'Manmohan Memorial Institute of Health Sciences / Tribhuvan University',
-      period: 'Sep 2016 – Sep 2021',
+      period: 'Sep 2016 - Sep 2021',
       result: 'First Division, 77.92%'
     },
     {
       level: '+2 Science',
       institution: 'Pinnacle Academy, Lalitpur',
-      period: 'Sep 2014 – Sep 2016',
+      period: 'Sep 2014 - Sep 2016',
       result: 'First Division, 74.70%'
     },
     {
       level: 'SLC',
       institution: 'Aadarsha Saula Yubak Higher Secondary School, Lalitpur',
-      period: 'May 2010 – Jun 2014',
+      period: 'May 2010 - Jun 2014',
       result: 'First Division with Distinction, 83.25%'
     }
   ],
@@ -218,7 +216,7 @@ export const profile: ProfileContent = {
     id: 'certifications',
     eyebrow: 'Licenses & Certifications',
     title: 'Licenses and Certifications',
-    summary: 'Current RN registration and professional training records.'
+    summary: 'Current RN registration and key clinical training credentials.'
   },
   certifications: [
     {
@@ -231,14 +229,14 @@ export const profile: ProfileContent = {
     {
       title: 'Comprehensive Newborn Care Level II',
       issuer: "Health Training Center / Paropakar Maternity and Women's Hospital",
-      date: '2079/01/20 – 2079/02/03 (BS)',
+      date: '2079/01/20 - 2079/02/03 (BS)',
       note: 'Structured newborn-care training exposure for hospital practice.',
       credentialUrl: '/documents/cnc-level-ii-certificate.jpg'
     },
     {
       title: 'Operation Theatre Techniques and Management (OTTM)',
       issuer: 'Health Training Center / Bharatpur Hospital',
-      date: '2080/02/08 – 2080/03/17 (BS)',
+      date: '2080/02/08 - 2080/03/17 (BS)',
       note: 'OT workflow readiness and perioperative support training.',
       credentialUrl: '/documents/ottm-certificate.jpg'
     },
@@ -254,7 +252,7 @@ export const profile: ProfileContent = {
     id: 'skills',
     eyebrow: 'Skills',
     title: 'Professional Skills',
-    summary: 'Practical strengths used in day-to-day clinical service.'
+    summary: 'Daily-practice skills used in ward care, communication, and safety.'
   },
   skills: [
     {
@@ -282,7 +280,7 @@ export const profile: ProfileContent = {
     id: 'skill-details',
     eyebrow: 'Skill Details',
     title: 'Skill Group Details',
-    summary: 'Short, role-focused descriptions for each skill area.'
+    summary: 'Role-focused detail for each clinical and coordination skill group.'
   },
   skillDetails: [
     {
@@ -315,7 +313,7 @@ export const profile: ProfileContent = {
     id: 'languages',
     eyebrow: 'Languages',
     title: 'Languages',
-    summary: 'Communication strengths used in clinical and community settings.'
+    summary: 'Communication coverage for hospital and community-facing nursing work.'
   },
   languages: [
     { name: 'Nepali', level: 'Fluent' },
@@ -339,7 +337,7 @@ export const profile: ProfileContent = {
     id: 'recommendations',
     eyebrow: 'Recommendations',
     title: 'Professional Recommendations',
-    summary: 'Short endorsements from professional references.'
+    summary: 'Short reference endorsements relevant to clinical professionalism.'
   },
   recommendations: [
     {
@@ -359,7 +357,7 @@ export const profile: ProfileContent = {
     id: 'personal-details',
     eyebrow: 'Personal Details',
     title: 'Personal Details',
-    summary: 'Conservative public profile details for recruiter context.'
+    summary: 'Conservative public details for recruiter context and screening.'
   },
   personalDetails: [
     { key: 'Date of Birth', value: '1998 (year)' },
@@ -372,7 +370,7 @@ export const profile: ProfileContent = {
     id: 'keywords',
     eyebrow: 'Keywords',
     title: 'Clinical Keywords',
-    summary: 'Targeted terms aligned with service focus and documentation.'
+    summary: 'Target terms aligned to care scope, counselling, and documentation.'
   },
   keywords: [
     'counselling',
@@ -390,7 +388,7 @@ export const profile: ProfileContent = {
   contactIntro: {
     id: 'contact',
     eyebrow: 'Contact',
-    title: 'Reach Out',
+    title: 'Feel Free to Reach Out',
     summary: 'Open to hospital, NGO, and INGO nursing opportunities.'
   },
   contact: {
@@ -402,3 +400,4 @@ export const profile: ProfileContent = {
     formEndpoint: 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'
   }
 };
+
