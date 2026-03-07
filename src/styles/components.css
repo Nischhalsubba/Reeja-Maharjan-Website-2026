@@ -436,7 +436,7 @@
 .timeline-list::before {
   content: '';
   position: absolute;
-  left: -25px;
+  left: -8px;
   top: 14px;
   bottom: 14px;
   width: 1px;
