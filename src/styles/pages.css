@@ -30,6 +30,12 @@
   font-size: var(--small-size);
 }
 
+.blog-card__keyword {
+  margin: 0;
+  color: var(--muted);
+  font-size: var(--small-size);
+}
+
 .blog-card h2 {
   font-size: var(--h2-size);
   line-height: var(--h2-lh);
@@ -41,13 +47,130 @@
   margin-top: calc(var(--s2) * -1);
 }
 
+.blog-post__layout {
+  display: grid;
+  gap: var(--s3);
+}
+
+.blog-post__aside {
+  display: grid;
+  gap: var(--s3);
+  align-content: start;
+}
+
+.blog-post__main {
+  display: grid;
+  gap: var(--s3);
+}
+
 .blog-post__content {
   display: grid;
   gap: var(--s2);
 }
 
-.blog-post__content p {
+.blog-post__content p,
+.blog-post__section p,
+.blog-post__faq p,
+.blog-post__author p,
+.blog-post__disclaimer p {
   max-width: 65ch;
   color: var(--text);
   line-height: 1.6;
+}
+
+.blog-post__quick-answer ul,
+.blog-post__toc ol,
+.blog-post__list {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: var(--s1);
+}
+
+.blog-post__toc ol {
+  color: var(--muted);
+}
+
+.blog-post__toc a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.blog-post__toc a:hover,
+.blog-post__toc a:focus-visible,
+.blog-post__sources a:hover,
+.blog-post__sources a:focus-visible {
+  text-decoration: underline;
+}
+
+.blog-post__section,
+.blog-post__author,
+.blog-post__faq,
+.blog-post__sources,
+.blog-post__disclaimer,
+.blog-post__related {
+  display: grid;
+  gap: var(--s2);
+}
+
+.blog-post__section h2,
+.blog-post__author h2,
+.blog-post__faq h2,
+.blog-post__sources h2,
+.blog-post__related h2,
+.blog-post__cta h2 {
+  font-size: var(--h2-size);
+  line-height: var(--h2-lh);
+  letter-spacing: var(--h2-ls);
+  font-weight: var(--h2-w);
+}
+
+.blog-post__faq-list {
+  display: grid;
+  gap: var(--s2);
+}
+
+.blog-post__faq-item {
+  padding-top: var(--s2);
+  border-top: 1px solid var(--line);
+}
+
+.blog-post__faq-item:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.blog-post__faq-item h3 {
+  margin: 0 0 var(--s1);
+  font-size: calc(var(--body-size) * 1.1);
+}
+
+.blog-post__cta {
+  position: sticky;
+  top: calc(var(--header-height, 80px) + var(--s2));
+}
+
+.blog-post__sources a {
+  color: var(--text);
+}
+
+@media (min-width: 960px) {
+  .blog-post__layout {
+    grid-template-columns: minmax(0, 2.1fr) minmax(18rem, 0.9fr);
+    align-items: start;
+  }
+
+  .blog-post__aside {
+    order: 2;
+  }
+
+  .blog-post__main {
+    order: 1;
+  }
+}
+
+@media (max-width: 959px) {
+  .blog-post__cta {
+    position: static;
+  }
 }

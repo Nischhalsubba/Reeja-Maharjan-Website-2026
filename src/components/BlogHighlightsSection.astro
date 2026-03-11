@@ -14,7 +14,7 @@ const posts = blogPosts.slice(0, 3);
         <SectionIntro
           eyebrow="Blog"
           title="Latest Nursing Articles"
-          summary="Practical articles on maternal care, general care nursing, documentation, and hospital/NGO role readiness."
+          summary="Evidence-based articles on maternal care, newborn support, documentation, safeguarding, and nursing career growth."
         />
       </header>
       <div class="section-shell__body">
@@ -25,6 +25,7 @@ const posts = blogPosts.slice(0, 3);
                 <h3>{post.title}</h3>
                 <p>{post.excerpt}</p>
                 <p class="note">{post.readMinutes} min read</p>
+                <p class="note">Primary topic: {post.primaryKeyword}</p>
                 <a class="text-link" href={`/blog/${post.slug}/`}>Read article</a>
               </article>
             ))
