@@ -8,10 +8,15 @@ const { hero } = Astro.props;
 <section class="hero section" id="home" data-reveal-group>
   <div class="container hero__grid">
     <div class="hero__content">
-      {hero.available && <p class="badge">Available for work</p>}
+      {hero.available && <p class="badge">Available for nursing opportunities</p>}
       <h1>{hero.title}</h1>
       <p class="hero__role">{hero.role}</p>
       <p class="hero__tagline">{hero.tagline}</p>
+      <ul class="chip-list hero__proof" aria-label="Professional proof points">
+        {hero.proof.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
       <div class="hero__actions">
         <a class="btn btn--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
         <a class="btn btn--secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
