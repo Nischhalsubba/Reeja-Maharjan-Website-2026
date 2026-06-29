@@ -3,6 +3,7 @@ export type HeroData = {
   title: string;
   role: string;
   tagline: string;
+  proof: string[];
   primaryCta: { label: string; href: string };
   secondaryCta: { label: string; href: string };
   portrait: { src: string; alt: string };
@@ -16,6 +17,13 @@ export type SectionIntro = {
   summary: string;
 };
 
+export type CredentialPreview = {
+  src: string;
+  alt: string;
+  title: string;
+  description: string;
+};
+
 export type ExperienceItem = {
   role: string;
   organization: string;
@@ -23,12 +31,8 @@ export type ExperienceItem = {
   location: string;
   period: string;
   bullets: string[];
-  credential?: {
-    src: string;
-    alt: string;
-    title: string;
-    description: string;
-  };
+  tags?: string[];
+  credential?: CredentialPreview;
 };
 
 export type EducationItem = {
@@ -36,12 +40,7 @@ export type EducationItem = {
   institution: string;
   period: string;
   result: string;
-  credential?: {
-    src: string;
-    alt: string;
-    title: string;
-    description: string;
-  };
+  credential?: CredentialPreview;
 };
 
 export type CertificationItem = {
@@ -49,13 +48,9 @@ export type CertificationItem = {
   issuer: string;
   date: string;
   note: string;
-  credentialUrl: string;
-  preview: {
-    src: string;
-    alt: string;
-    title: string;
-    description: string;
-  };
+  credentialUrl?: string;
+  credentialLabel?: string;
+  preview?: CredentialPreview;
 };
 
 export type SkillGroup = {
@@ -67,6 +62,12 @@ export type SkillDetail = {
   title: string;
   description: string;
   focus: string[];
+};
+
+export type RoleFitItem = {
+  title: string;
+  summary: string;
+  evidence: string[];
 };
 
 export type Recommendation = {
@@ -96,8 +97,9 @@ export type EvidenceItem = {
   title: string;
   category: string;
   description: string;
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
+  actionLabel?: string;
 };
 
 export type ProfileContent = {
@@ -106,6 +108,8 @@ export type ProfileContent = {
   hero: HeroData;
   profileIntro: SectionIntro;
   profileSummary: string;
+  roleFitIntro: SectionIntro;
+  roleFit: RoleFitItem[];
   competenciesIntro: SectionIntro;
   competencies: string[];
   experienceIntro: SectionIntro;
@@ -124,12 +128,7 @@ export type ProfileContent = {
   awards: Array<{
     title: string;
     note: string;
-    credential?: {
-      src: string;
-      alt: string;
-      title: string;
-      description: string;
-    };
+    credential?: CredentialPreview;
   }>;
   recommendationsIntro: SectionIntro;
   recommendations: Recommendation[];
@@ -145,49 +144,87 @@ export type ProfileContent = {
 
 export const profile: ProfileContent = {
   name: 'Reeja Maharjan',
-  role: 'Registered Nurse (Nepal Nursing Council)',
+  role: 'NNC Licensed Registered Nurse and Texas RN',
   hero: {
     available: true,
-    title: 'Registered Nurse for Maternal, Newborn, and General Care',
-    role: 'Reeja Maharjan | Nepal Nursing Council Licensed Registered Nurse',
+    title: 'Registered Nurse Specializing in Maternal, Newborn & General Ward Care',
+    role: 'Reeja Maharjan | NNC Licensed RN | Texas RN License Active',
     tagline:
-      'Nursing professional transitioning toward hospital, NGO, and INGO care-support roles with strong ward and counselling experience.',
-    primaryCta: { label: 'Send Email', href: 'mailto:maharjanreeja88@gmail.com' },
-    secondaryCta: { label: 'Download CV', href: '/resume.pdf' },
+      'NNC-licensed nurse and Texas RN with verified hospital experience in maternal-newborn care, general ward support, patient counselling, documentation, and safe clinical handover.',
+    proof: [
+      'NNC Licensed RN',
+      'Texas RN Active',
+      'NCLEX-RN Cleared',
+      'TUTH Experience',
+      'Maternal & Newborn Care',
+      'CPR Trained'
+    ],
+    primaryCta: { label: 'Contact for Nursing Opportunity', href: '#contact' },
+    secondaryCta: { label: 'View Credentials', href: '#certifications' },
     portrait: { src: '/reeja-hero-cutout.png', alt: 'Portrait of Reeja Maharjan' },
     meta: [
       { label: 'Based in', value: 'Lalitpur, Nepal' },
-      { label: 'Availability', value: 'Immediate' }
+      { label: 'Current location', value: 'Biratnagar, Nepal' },
+      { label: 'Availability', value: 'Immediate' },
+      { label: 'License scope', value: 'NNC RN + Texas RN' }
     ]
   },
   profileIntro: {
     id: 'profile',
     eyebrow: 'Profile',
     title: 'Professional Nursing Profile',
-    summary: 'Recruiter-ready summary of clinical scope, care quality, and role fit in Nepal.'
+    summary: 'Recruiter-ready summary of clinical scope, verified license status, and role fit.'
   },
   profileSummary:
-    'NNC-licensed registered nurse with verified experience in teaching and regional hospitals in Nepal. Brings practical strength in maternal-newborn support, general care, counselling, documentation, and coordinated handover. Now preparing for hospital, NGO, and INGO nursing opportunities.',
+    'NNC-licensed Registered Nurse and Texas RN with verified hospital experience across TUTH, MMTH, and Sindhuli Hospital. Brings practical strength in maternal-newborn support, general ward care, counselling, documentation, safe handover, escalation coordination, and patient education. Open to hospital, NGO, and INGO nursing roles in Nepal and internationally aligned care environments.',
+  roleFitIntro: {
+    id: 'role-fit',
+    eyebrow: 'Role Fit',
+    title: 'Where Reeja Fits Best',
+    summary: 'Clear role-fit cards for recruiters screening hospital, NGO, INGO, and care-coordination opportunities.'
+  },
+  roleFit: [
+    {
+      title: 'Hospital Staff Nurse',
+      summary: 'Strong fit for ward-based nursing roles requiring safe documentation, patient monitoring, counselling, and handover.',
+      evidence: ['TUTH staff nurse exposure', 'MMTH general care experience', 'Sindhuli Hospital nursing officer role']
+    },
+    {
+      title: 'Maternal & Newborn Care Support',
+      summary: 'Relevant experience and training for antenatal, postnatal, breastfeeding, newborn-care, and family counselling support.',
+      evidence: ['Maternal-newborn care routines', 'Comprehensive Newborn Care Level II', 'Breastfeeding counselling']
+    },
+    {
+      title: 'NGO / INGO Health Programme Support',
+      summary: 'Prepared for programme-based care support where communication, documentation, beneficiary follow-up, and safeguarding awareness matter.',
+      evidence: ['IEC and patient education', 'Reporting and coordination', 'Safeguarding and PSEAH awareness']
+    },
+    {
+      title: 'International Nursing Readiness',
+      summary: 'Texas RN license status supports international nursing credibility and NCLEX-RN pathway readiness.',
+      evidence: ['Texas RN active and unencumbered', 'Single-state license status', 'English clinical communication']
+    }
+  ],
   competenciesIntro: {
     id: 'competencies',
-    eyebrow: 'Core Competencies',
-    title: 'Core Nursing Competencies',
-    summary: 'Practical competencies aligned to hospital, NGO, and INGO nursing requirements.'
+    eyebrow: 'Clinical Strengths',
+    title: 'Core Nursing Strengths',
+    summary: 'Practical strengths aligned to direct care, patient safety, documentation, and programme-support roles.'
   },
   competencies: [
-    'Patient counselling and health education (IEC)',
-    'Maternal and newborn nursing support',
-    'General care nursing (Surgery / Gyn & Obs exposure)',
-    'Clinical documentation and reporting',
-    'Shift handover and team coordination',
-    'Safeguarding and professional conduct',
+    'Maternal-newborn support',
+    'General ward care',
+    'Patient counselling and health education',
+    'Clinical documentation and SBAR-style handover',
+    'Escalation coordination and team communication',
+    'Safeguarding-aware professional conduct',
     'Community-health and NGO programme support readiness'
   ],
   experienceIntro: {
     id: 'experience',
     eyebrow: 'Experience',
     title: 'Clinical Experience Timeline',
-    summary: 'Recent nursing roles with concise, evidence-based responsibilities and outcomes.'
+    summary: 'Recent nursing roles with concise, evidence-based responsibilities and care settings.'
   },
   experience: [
     {
@@ -201,13 +238,7 @@ export const profile: ProfileContent = {
         'Maintained ward documentation and structured shift handover for continuity of care.',
         'Contributed to coordinated nursing support in a teaching-hospital setting.'
       ],
-      credential: {
-        src: '/documents/san-token-of-appreciation.jpg',
-        alt: 'SAN token of appreciation certificate',
-        title: 'TUTH Recognition: SAN Token of Appreciation',
-        description:
-          'Recognition for technical nursing assistance in a TUTH blood donation programme on World Anesthesia Day 2024.'
-      }
+      tags: ['Maternal-newborn', 'Teaching hospital', 'Counselling', 'Handover']
     },
     {
       role: 'Staff Nurse (General Care)',
@@ -220,13 +251,7 @@ export const profile: ProfileContent = {
         'Monitored patients, supported escalation, and coordinated with duty teams.',
         'Delivered patient and family education with clear communication.'
       ],
-      credential: {
-        src: '/documents/mmth-experience-letter.jpg',
-        alt: 'MMTH experience letter',
-        title: 'MMTH Experience Letter',
-        description:
-          'Official experience letter confirming staff nurse service at MMTH General Care unit from February 2024 to August 2024.'
-      }
+      tags: ['General care', 'Surgery exposure', 'Gyn/Obs exposure', 'Escalation']
     },
     {
       role: 'Nursing Officer',
@@ -239,174 +264,127 @@ export const profile: ProfileContent = {
         'Supported OT-related duties with aseptic and workflow discipline.',
         'Managed documentation and ward coordination in daily operations.'
       ],
-      credential: {
-        src: '/documents/experience-letter.jpg',
-        alt: 'Sindhuli Hospital experience letter',
-        title: 'Sindhuli Hospital Experience Letter',
-        description:
-          'Experience letter documenting nursing officer service at Sindhuli Hospital with maternity and OT support responsibilities.'
-      }
+      tags: ['Maternity', 'Antenatal', 'Postnatal', 'OT support']
     }
   ],
   educationIntro: {
     id: 'education',
     eyebrow: 'Education',
-    title: 'Nursing Education and Academic Results',
-    summary: 'Verified education history with degree progression and final academic scores.'
+    title: 'Nursing Education',
+    summary: 'Verified education history with degree progression and final academic scores. Full documents are available on request.'
   },
   education: [
     {
       level: 'B.Sc. Nursing',
       institution: 'Manmohan Memorial Institute of Health Sciences / Tribhuvan University',
       period: 'Sep 2016 - Sep 2021',
-      result: 'First Division, 77.92%',
-      credential: {
-        src: '/documents/bsc-degree-certificate.jpg',
-        alt: 'BSc nursing degree certificate',
-        title: 'B.Sc Nursing Degree Certificate',
-        description: 'Official B.Sc Nursing degree certificate from MMIHS / Tribhuvan University.'
-      }
+      result: 'First Division, 77.92%'
     },
     {
       level: '+2 Science',
       institution: 'Pinnacle Academy, Lalitpur',
       period: 'Sep 2014 - Sep 2016',
-      result: 'First Division, 74.70%',
-      credential: {
-        src: '/documents/plus2-transcript.jpg',
-        alt: 'Plus two science transcript',
-        title: '+2 Science Transcript',
-        description: 'Verified +2 Science transcript from Pinnacle Academy, Lalitpur.'
-      }
+      result: 'First Division, 74.70%'
     },
     {
       level: 'SLC',
       institution: 'Aadarsha Saula Yubak Higher Secondary School, Lalitpur',
       period: 'May 2010 - Jun 2014',
-      result: 'First Division with Distinction, 83.25%',
-      credential: {
-        src: '/documents/slc-certificate.jpg',
-        alt: 'SLC certificate',
-        title: 'SLC Certificate',
-        description: 'School Leaving Certificate with first division distinction record.'
-      }
+      result: 'First Division with Distinction, 83.25%'
     }
   ],
   certificationsIntro: {
     id: 'certifications',
     eyebrow: 'Licenses & Certifications',
-    title: 'Nursing License and Clinical Certifications',
-    summary: 'Current RN registration and key competency-based training credentials.'
+    title: 'Priority Licenses and Clinical Certifications',
+    summary: 'Highest-value credentials are shown first. Sensitive documents are not published publicly and can be shared with recruiters on request.'
   },
   certifications: [
     {
       title: 'Registered Nurse (RN), Nepal Nursing Council',
       issuer: 'Nepal Nursing Council',
       date: 'Registered Sep 5, 2021',
-      note: 'License No. 65100, valid for six years from decision date.',
-      credentialUrl: '/resume.pdf',
-      preview: {
-        src: '/resume.pdf',
-        alt: 'Nepal Nursing Council RN license record',
-        title: 'Nepal Nursing Council RN License',
-        description:
-          'Registered Nurse licensure record for Reeja Maharjan (Registration No. 65100) issued by Nepal Nursing Council.'
-      }
+      note: 'Nepal Nursing Council RN registration. Full verification document is available on request after recruiter screening.',
+      credentialLabel: 'Verification available on request'
+    },
+    {
+      title: 'Texas RN License - Active, Unencumbered',
+      issuer: 'Texas Board of Nursing / Nursys QuickConfirm',
+      date: 'Original issue Sep 8, 2025; expires Oct 31, 2026',
+      note:
+        'Active, unencumbered Texas RN single-state license. Public summary only; full Nursys QuickConfirm verification can be shared on request.',
+      credentialLabel: 'Nursys verification available on request'
+    },
+    {
+      title: 'NCLEX-RN Cleared',
+      issuer: 'NCLEX-RN pathway / Texas RN licensure',
+      date: 'Texas RN license active from Sep 8, 2025',
+      note:
+        'Listed as NCLEX-RN cleared based on active Texas RN licensure. This is intentionally framed as credential status, not a public exam-result document.',
+      credentialLabel: 'Status supported by Texas RN verification'
     },
     {
       title: 'Comprehensive Newborn Care Level II',
       issuer: "Health Training Center / Paropakar Maternity and Women's Hospital",
       date: '2079/01/20 - 2079/02/03 (BS)',
       note: 'Structured newborn-care training exposure for hospital practice.',
-      credentialUrl: '/documents/cnc-level-ii-certificate.jpg',
-      preview: {
-        src: '/documents/cnc-level-ii-certificate.jpg',
-        alt: 'Comprehensive Newborn Care Level II certificate',
-        title: 'Comprehensive Newborn Care Level II Certificate',
-        description:
-          "Training certificate from Health Training Center and Paropakar Maternity and Women's Hospital focused on newborn care practice."
-      }
-    },
-    {
-      title: 'Operation Theatre Techniques and Management (OTTM)',
-      issuer: 'Health Training Center / Bharatpur Hospital',
-      date: '2080/02/08 - 2080/03/17 (BS)',
-      note: 'OT workflow readiness and perioperative support training.',
-      credentialUrl: '/documents/ottm-certificate.jpg',
-      preview: {
-        src: '/documents/ottm-certificate.jpg',
-        alt: 'Operation Theatre Techniques and Management certificate',
-        title: 'OTTM Certificate',
-        description:
-          'Operation Theatre Techniques and Management training certificate from Health Training Center and Bharatpur Hospital.'
-      }
+      credentialLabel: 'Certificate available on request'
     },
     {
       title: 'CPR Training Participation',
       issuer: 'Nursing Inservice Education Unit, TUTH',
       date: 'May 30, 2025',
       note: 'Hands-on CPR training for emergency-response preparedness.',
-      credentialUrl: '/documents/cpr-certificate.jpg',
-      preview: {
-        src: '/documents/cpr-certificate.jpg',
-        alt: 'CPR training certificate',
-        title: 'CPR Training Certificate',
-        description:
-          'CPR participation certificate from TUTH Nursing Inservice Education Unit confirming practical emergency response training.'
-      }
+      credentialLabel: 'Certificate available on request'
+    },
+    {
+      title: 'Operation Theatre Techniques and Management (OTTM)',
+      issuer: 'Health Training Center / Bharatpur Hospital',
+      date: '2080/02/08 - 2080/03/17 (BS)',
+      note: 'OT workflow readiness and perioperative support training.',
+      credentialLabel: 'Certificate available on request'
     },
     {
       title: 'National Nursing Conference Delegate Participation',
       issuer: 'Society of Cardiothoracic Vascular Nurses of Nepal',
       date: 'May 31, 2025',
-      note: 'Delegate participation in national conference on cardiothoracic vascular nursing.',
-      credentialUrl: '/documents/vascular-nursing-conference-certificate.jpg',
-      preview: {
-        src: '/documents/vascular-nursing-conference-certificate.jpg',
-        alt: 'National nursing conference participation certificate',
-        title: 'National Nursing Conference Certificate',
-        description:
-          'Certificate of participation for the First National Conference of the Society of Cardiothoracic Vascular Nurses of Nepal.'
-      }
+      note: 'Delegate participation in a national conference on cardiothoracic vascular nursing.',
+      credentialLabel: 'Certificate available on request'
     }
   ],
   skillsIntro: {
     id: 'skills',
-    eyebrow: 'Skills',
-    title: 'Professional Nursing Skills',
-    summary: 'Day-to-day capabilities used in direct care, teamwork, and patient safety.'
+    eyebrow: 'Clinical Strengths',
+    title: 'Clinical Strengths with Evidence',
+    summary: 'A consolidated skill section that avoids repetition and connects each strength to practical evidence.'
   },
   skills: [
     {
-      title: 'Clinical Nursing',
-      items: ['Maternal-newborn support', 'General care', 'Patient monitoring']
+      title: 'Maternal & Newborn Care',
+      items: ['Antenatal and postnatal routines', 'Breastfeeding counselling', 'Comprehensive Newborn Care Level II']
     },
     {
-      title: 'Counselling & Education',
-      items: ['Patient counselling', 'Family guidance', 'Breastfeeding support']
+      title: 'General Ward Care',
+      items: ['Patient monitoring', 'Surgery exposure', 'Gyn/Obs exposure', 'Escalation coordination']
     },
     {
-      title: 'Documentation & Reporting',
-      items: ['Clinical records', 'Shift handover', 'Routine reporting']
+      title: 'Documentation & Handover',
+      items: ['Clinical records', 'SBAR-style handover', 'Routine reporting', 'Continuity of care']
     },
     {
-      title: 'Coordination & Safeguarding',
-      items: ['Team coordination', 'Referral communication', 'Professional conduct']
-    },
-    {
-      title: 'NGO & INGO Role Readiness',
-      items: ['Community-health programme support', 'Case coordination', 'Patient education outreach']
+      title: 'Counselling & Programme Support',
+      items: ['Patient education', 'Family guidance', 'IEC support', 'Community-health readiness']
     },
     {
       title: 'OT & Emergency Readiness',
-      items: ['OTTM exposure', 'Aseptic workflow', 'CPR participation']
+      items: ['OTTM exposure', 'Aseptic workflow', 'CPR participation', 'Team communication']
     }
   ],
   skillDetailsIntro: {
     id: 'skill-details',
     eyebrow: 'Skill Details',
     title: 'Detailed Skill Coverage',
-    summary: 'Role-level details for each nursing skill group and practical application.'
+    summary: 'Archived detailed skill coverage retained in content, but not shown on the homepage to keep the page recruiter-focused.'
   },
   skillDetails: [
     {
@@ -424,22 +402,6 @@ export const profile: ProfileContent = {
       description:
         'Delivers clear counselling so patients and families understand care plans, follow-up actions, and referral pathways.',
       focus: ['IEC support', 'Family counselling', 'Adherence communication']
-    },
-    {
-      title: 'Documentation and Handover',
-      description: 'Maintains accurate records and structured handover to ensure safe continuity of care.',
-      focus: ['Nursing notes', 'SBAR-style handover', 'Routine reporting']
-    },
-    {
-      title: 'Safety and Professional Discipline',
-      description: 'Works with safeguarding awareness, aseptic discipline, and reliable team communication.',
-      focus: ['Safeguarding awareness', 'PSEAH awareness', 'Referral support']
-    },
-    {
-      title: 'NGO and INGO Care Coordination Readiness',
-      description:
-        'Prepared to support programme-based nursing care with structured communication, reporting, and beneficiary-focused follow-up.',
-      focus: ['Case follow-up', 'Field-team coordination', 'Community care communication']
     }
   ],
   languagesIntro: {
@@ -463,14 +425,7 @@ export const profile: ProfileContent = {
   awards: [
     {
       title: 'SAN Token of Appreciation (World Anesthesia Day 2024)',
-      note: 'Recognized for technical assistance in a TUTH blood donation programme.',
-      credential: {
-        src: '/documents/san-token-of-appreciation.jpg',
-        alt: 'SAN Token of Appreciation certificate',
-        title: 'SAN Token of Appreciation',
-        description:
-          'Recognition certificate issued on World Anesthesia Day 2024 for technical nursing assistance in a blood donation programme.'
-      }
+      note: 'Recognized for technical assistance in a TUTH blood donation programme. Credential available on request.'
     }
   ],
   recommendationsIntro: {
@@ -499,129 +454,60 @@ export const profile: ProfileContent = {
   ],
   personalDetailsIntro: {
     id: 'personal-details',
-    eyebrow: 'Personal Details',
-    title: 'Personal Details (Public-Safe)',
-    summary: 'Public-safe details for recruiter screening and role matching.'
+    eyebrow: 'Screening Details',
+    title: 'Public-Safe Screening Details',
+    summary: 'Only role-relevant public details are retained. Sensitive personal details are intentionally not published.'
   },
   personalDetails: [
-    { key: 'Date of Birth', value: '1998 (year only)' },
-    { key: 'Gender', value: 'Available on request' },
-    { key: 'Marital Status', value: 'Available on request' },
-    { key: 'Permanent Address', value: 'Lalitpur, Nepal' },
-    { key: 'Current Address', value: 'Biratnagar, Nepal (relocation target)' }
+    { key: 'Professional status', value: 'NNC Licensed RN and Texas RN' },
+    { key: 'Location', value: 'Lalitpur / Biratnagar, Nepal' },
+    { key: 'Availability', value: 'Immediate' },
+    { key: 'Open to', value: 'Hospital, NGO, INGO, and care-coordination roles' }
   ],
   evidenceIntro: {
     id: 'evidence',
-    eyebrow: 'Verification Library',
-    title: 'Credentials and Supporting Evidence',
+    eyebrow: 'Verification',
+    title: 'Selected Credential Evidence',
     summary:
-      'Verified documents for licensure, training, education, experience, scholarship, and research records.'
+      'Public-safe credential summaries are shown here. Full documents, transcripts, signatures, and license reports are not published publicly.'
   },
   evidence: [
     {
-      title: 'RN License Certificate',
+      title: 'NNC RN License',
       category: 'Licensure',
-      description: 'Nepal Nursing Council registration certificate (RN).',
-      src: '/resume.pdf',
-      alt: 'RN license certificate record'
+      description: 'Nepal Nursing Council RN registration summary. Full document available on request after recruiter screening.',
+      actionLabel: 'Available on request'
     },
     {
-      title: 'MMTH Experience Letter',
-      category: 'Experience',
-      description: 'Official MMTH staff nurse experience letter.',
-      src: '/documents/mmth-experience-letter.jpg',
-      alt: 'MMTH experience letter'
-    },
-    {
-      title: 'Sindhuli Hospital Experience Letter',
-      category: 'Experience',
-      description: 'Official experience letter from Sindhuli Hospital.',
-      src: '/documents/experience-letter.jpg',
-      alt: 'Sindhuli Hospital experience letter'
+      title: 'Texas RN License Verification',
+      category: 'International License',
+      description:
+        'Nursys QuickConfirm summary confirms active, unencumbered Texas RN single-state license. Full verification report available on request.',
+      actionLabel: 'Available on request'
     },
     {
       title: 'Comprehensive Newborn Care Level II',
       category: 'Training',
-      description: 'CNC Level II training credential.',
-      src: '/documents/cnc-level-ii-certificate.jpg',
-      alt: 'Comprehensive Newborn Care Level II certificate'
+      description: 'Newborn-care training credential summary. Redacted certificate can be shared when needed.',
+      actionLabel: 'Available on request'
     },
     {
-      title: 'OTTM Training Certificate',
-      category: 'Training',
-      description: 'Operation Theatre Techniques and Management credential.',
-      src: '/documents/ottm-certificate.jpg',
-      alt: 'OTTM training certificate'
+      title: 'CPR Training',
+      category: 'Emergency Readiness',
+      description: 'CPR training participation summary from TUTH Nursing Inservice Education Unit.',
+      actionLabel: 'Available on request'
     },
     {
-      title: 'CPR Training Certificate',
-      category: 'Training',
-      description: 'TUTH CPR participation certificate.',
-      src: '/documents/cpr-certificate.jpg',
-      alt: 'CPR training certificate'
+      title: 'Experience Letters',
+      category: 'Experience',
+      description: 'Experience verification summaries for TUTH, MMTH, and Sindhuli Hospital. Full letters are not public.',
+      actionLabel: 'Available on request'
     },
     {
-      title: 'National Nursing Conference Certificate',
-      category: 'Conference',
-      description: 'Delegate participation certificate.',
-      src: '/documents/vascular-nursing-conference-certificate.jpg',
-      alt: 'National nursing conference participation certificate'
-    },
-    {
-      title: 'SAN Token of Appreciation',
-      category: 'Recognition',
-      description: 'World Anesthesia Day 2024 recognition certificate.',
-      src: '/documents/san-token-of-appreciation.jpg',
-      alt: 'SAN token of appreciation certificate'
-    },
-    {
-      title: 'B.Sc Character Certificate',
+      title: 'Education Records',
       category: 'Education',
-      description: 'B.Sc character certificate.',
-      src: '/documents/bsc-character-certificate.jpg',
-      alt: 'BSc character certificate'
-    },
-    {
-      title: 'B.Sc Degree Certificate',
-      category: 'Education',
-      description: 'B.Sc nursing degree certificate.',
-      src: '/documents/bsc-degree-certificate.jpg',
-      alt: 'BSc degree certificate'
-    },
-    {
-      title: '+2 Provisional Certificate',
-      category: 'Education',
-      description: 'Higher secondary provisional certificate.',
-      src: '/documents/plus2-provisional-certificate.jpg',
-      alt: '+2 provisional certificate'
-    },
-    {
-      title: '+2 Transcript',
-      category: 'Education',
-      description: 'Higher secondary transcript.',
-      src: '/documents/plus2-transcript.jpg',
-      alt: '+2 transcript'
-    },
-    {
-      title: 'SLC Certificate',
-      category: 'Education',
-      description: 'School Leaving Certificate.',
-      src: '/documents/slc-certificate.jpg',
-      alt: 'SLC certificate'
-    },
-    {
-      title: 'SLC Marksheet',
-      category: 'Education',
-      description: 'School Leaving marksheet.',
-      src: '/documents/slc-marksheet.jpg',
-      alt: 'SLC marksheet'
-    },
-    {
-      title: 'MMIHS IRC Ethical Approval',
-      category: 'Research',
-      description: 'Institutional review committee ethical approval letter.',
-      src: '/documents/mmihs-irc-ethical-approval.jpg',
-      alt: 'Institutional ethical approval letter'
+      description: 'B.Sc Nursing, +2 Science, and SLC records are summarized publicly. Full transcripts are not public.',
+      actionLabel: 'Available on request'
     }
   ],
   keywordsIntro: {
@@ -631,34 +517,31 @@ export const profile: ProfileContent = {
     summary: 'Role-relevant keywords for nursing search visibility and recruiter filtering.'
   },
   keywords: [
-    'counselling',
-    'IEC',
-    'breastfeeding',
-    'postpartum care',
-    'maternity ward',
-    'newborn care',
-    'documentation',
+    'NNC licensed registered nurse',
+    'Texas RN license',
+    'NCLEX-RN cleared',
+    'maternal newborn care',
+    'general ward care',
+    'patient counselling',
+    'clinical documentation',
     'SBAR handover',
-    'safeguarding',
-    'PSEAH awareness',
-    'referral support'
+    'CPR training',
+    'NGO INGO nursing'
   ],
   contactIntro: {
     id: 'contact',
     eyebrow: 'Contact',
     title: 'Contact Reeja for Nursing Opportunities',
     summary:
-      'Open to hospital, NGO, and INGO nursing interviews, including relocation-ready opportunities in Nepal.'
+      'For hospital, NGO, INGO, or clinical care roles, send the role details, location, and expected start date.'
   },
   contact: {
     email: 'maharjanreeja88@gmail.com',
     phone: 'Available on request',
-    location: 'Lalitpur, Nepal',
+    location: 'Lalitpur / Biratnagar, Nepal',
     linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
     instagram: 'https://www.instagram.com/maharjan_reeja/',
-    whatsappNumber: '+9779843704288',
     resumeUrl: '/resume.pdf',
     formEndpoint: 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'
   }
 };
-
