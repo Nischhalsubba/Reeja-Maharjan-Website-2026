@@ -2,39 +2,33 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ProfileSection from '../components/ProfileSection.astro';
-import CoreCompetenciesSection from '../components/CoreCompetenciesSection.astro';
+import RoleFitSection from '../components/RoleFitSection.astro';
 import ExperienceSection from '../components/ExperienceSection.astro';
-import EducationSection from '../components/EducationSection.astro';
 import CertificationsSection from '../components/CertificationsSection.astro';
 import SkillsSection from '../components/SkillsSection.astro';
-import SkillDetailsSection from '../components/SkillDetailsSection.astro';
+import EducationSection from '../components/EducationSection.astro';
 import LanguagesSection from '../components/LanguagesSection.astro';
 import AwardsSection from '../components/AwardsSection.astro';
 import RecommendationsSection from '../components/RecommendationsSection.astro';
-import PersonalDetailsSection from '../components/PersonalDetailsSection.astro';
 import EvidenceSection from '../components/EvidenceSection.astro';
-import KeywordsSection from '../components/KeywordsSection.astro';
 import BlogHighlightsSection from '../components/BlogHighlightsSection.astro';
 import ContactSection from '../components/ContactSection.astro';
 import ImageLightbox from '../components/ImageLightbox.astro';
 import { profile } from '../content/profile';
 ---
 
-<BaseLayout title={`${profile.name} | Registered Nurse Portfolio`}>
+<BaseLayout title={`${profile.name} | NNC Licensed Registered Nurse and Texas RN`}>
   <Hero hero={profile.hero} />
   <ProfileSection profile={profile} />
-  <CoreCompetenciesSection profile={profile} />
+  <RoleFitSection profile={profile} />
   <ExperienceSection profile={profile} />
-  <EducationSection profile={profile} />
   <CertificationsSection profile={profile} />
   <SkillsSection profile={profile} />
-  <SkillDetailsSection profile={profile} />
+  <EducationSection profile={profile} />
   <LanguagesSection profile={profile} />
   <AwardsSection profile={profile} />
   <RecommendationsSection profile={profile} />
-  <PersonalDetailsSection profile={profile} />
   <EvidenceSection profile={profile} />
-  <KeywordsSection profile={profile} />
   <BlogHighlightsSection />
   <ContactSection profile={profile} />
   <ImageLightbox />
