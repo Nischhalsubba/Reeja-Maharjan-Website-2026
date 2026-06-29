@@ -1,0 +1,30 @@
+---
+import SectionIntro from './SectionIntro.astro';
+import type { ProfileContent } from '../content/profile';
+
+type Props = { profile: ProfileContent };
+const { profile } = Astro.props;
+---
+
+<section class="section" id={profile.roleFitIntro.id} data-reveal-group>
+  <div class="container section-stack">
+    <SectionIntro
+      eyebrow={profile.roleFitIntro.eyebrow}
+      title={profile.roleFitIntro.title}
+      summary={profile.roleFitIntro.summary}
+    />
+    <div class="card-grid card-grid--2">
+      {profile.roleFit.map((item) => (
+        <article class="card" data-reveal>
+          <h3>{item.title}</h3>
+          <p>{item.summary}</p>
+          <ul class="chip-list">
+            {item.evidence.map((evidence) => (
+              <li>{evidence}</li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
