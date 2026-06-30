@@ -8,7 +8,7 @@ const { profile } = Astro.props;
 ---
 
 <section class="section" id={profile.contactIntro.id} data-reveal-group>
-  <div class="container section-stack">
+  <div class="section-stack container">
     <div class="contact-cta" data-reveal>
       <img src="/reeja-headshot.jpg" alt="Reeja Maharjan profile portrait" width="84" height="84" />
       <p class="section-intro__eyebrow">Available for nursing and research roles</p>
@@ -24,10 +24,18 @@ const { profile } = Astro.props;
       </ul>
       <div class="contact-form__actions">
         <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Email Reeja</a>
-        <a class="btn btn--secondary" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn btn--secondary" href="/cv/">View CV</a>
+        <a
+          class="btn btn--secondary"
+          href={profile.contact.linkedin}
+          target="_blank"
+          rel="noopener noreferrer">LinkedIn</a
+        >
+        <a class="btn btn--secondary" href={profile.contact.resumeUrl}>View CV</a>
       </div>
-      <p class="note">Preferred contact: email or LinkedIn. Full documents can be shared privately after recruiter screening.</p>
+      <p class="note">
+        Preferred contact: email or LinkedIn. Full documents can be shared privately after recruiter
+        screening.
+      </p>
     </div>
 
     <article class="section-shell" data-reveal>
@@ -36,7 +44,7 @@ const { profile } = Astro.props;
         <SectionIntro
           eyebrow={profile.contactIntro.eyebrow}
           title="Send a Role Inquiry"
-          summary="Share the role, organization, location, and expected start date so the message is useful from the first email. Revolutionary, I know."
+          summary="Share the role, organization, location, and expected start date so Reeja can reply with relevant availability, documents, and next steps."
         />
       </header>
 
@@ -45,7 +53,8 @@ const { profile } = Astro.props;
         class="section-shell__body contact-form"
         aria-label="Recruiter contact form"
         method="POST"
-        action={profile.contact.formEndpoint ?? 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'}
+        action={profile.contact.formEndpoint ??
+          'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'}
         data-endpoint={profile.contact.formEndpoint}
       >
         <div class="contact-form__grid">
@@ -63,7 +72,11 @@ const { profile } = Astro.props;
           </label>
           <label>
             Role type
-            <input type="text" name="role_type" placeholder="Hospital, research, NGO, INGO, maternal care..." />
+            <input
+              type="text"
+              name="role_type"
+              placeholder="Hospital, research, NGO, INGO, maternal care..."
+            />
           </label>
           <label>
             Location
@@ -76,17 +89,28 @@ const { profile } = Astro.props;
         </div>
         <label>
           Message
-          <textarea name="message" rows="5" required placeholder="Briefly describe the role, care setting, research project, schedule, and next step."></textarea>
+          <textarea
+            name="message"
+            rows="5"
+            required
+            placeholder="Briefly describe the role, care setting, research project, schedule, and next step."
+          ></textarea>
         </label>
-        <input type="hidden" name="_subject" value="New nursing or research opportunity inquiry from reejamaharjan.com.np" />
+        <input
+          type="hidden"
+          name="_subject"
+          value="New nursing or research opportunity inquiry from reejamaharjan.com.np"
+        />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden />
 
         <div class="contact-form__actions">
           <button type="submit" class="btn btn--primary">Send Inquiry</button>
-          <a class="btn btn--secondary" href={`mailto:${profile.contact.email}`}>Use Email Instead</a>
-          <a class="btn btn--secondary" href="/cv/">Open CV</a>
+          <a class="btn btn--secondary" href={`mailto:${profile.contact.email}`}
+            >Use Email Instead</a
+          >
+          <a class="btn btn--secondary" href={profile.contact.resumeUrl}>Open CV</a>
         </div>
 
         <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
@@ -134,7 +158,7 @@ const { profile } = Astro.props;
         const response = await fetch(form.action, {
           method: 'POST',
           headers: { Accept: 'application/json' },
-          body: formData
+          body: formData,
         });
 
         if (!response.ok) throw new Error('Request failed');

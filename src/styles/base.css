@@ -20,6 +20,13 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}
+
 body.menu-open,
 body.lightbox-open {
   overflow: hidden;

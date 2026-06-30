@@ -584,7 +584,7 @@
 }
 
 .skills-chip-list li::before {
-  content: '✓';
+  content: '+';
   margin-right: 8px;
   color: var(--muted);
 }

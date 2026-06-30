@@ -7,24 +7,27 @@ const { profile } = Astro.props;
 ---
 
 <section class="section" id={profile.roleFitIntro.id} data-reveal-group>
-  <div class="container section-stack">
+  <div class="section-stack container">
     <SectionIntro
       eyebrow={profile.roleFitIntro.eyebrow}
       title={profile.roleFitIntro.title}
       summary={profile.roleFitIntro.summary}
     />
-    <div class="card-grid card-grid--2">
-      {profile.roleFit.map((item) => (
-        <article class="card" data-reveal>
-          <h3>{item.title}</h3>
-          <p>{item.summary}</p>
-          <ul class="chip-list">
-            {item.evidence.map((evidence) => (
-              <li>{evidence}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
+    <div class="role-fit-grid">
+      {
+        profile.roleFit.map((item, index) => (
+          <article class="card role-fit-card" data-reveal>
+            <p class="role-fit-card__eyebrow">Best fit {String(index + 1).padStart(2, '0')}</p>
+            <h3>{item.title}</h3>
+            <p>{item.summary}</p>
+            <ul class="chip-list">
+              {item.evidence.map((evidence) => (
+                <li>{evidence}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>

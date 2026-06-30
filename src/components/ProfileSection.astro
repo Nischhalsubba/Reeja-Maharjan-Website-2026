@@ -4,14 +4,37 @@ import type { ProfileContent } from '../content/profile';
 
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
+const profileHighlights = profile.competencies.slice(0, 4);
 ---
 
-<section class="section" id={profile.profileIntro.id} aria-labelledby="profile-heading" data-reveal-group>
-  <div class="container section-stack">
-    <SectionIntro eyebrow={profile.profileIntro.eyebrow} title={profile.profileIntro.title} summary={profile.profileIntro.summary} />
-    <div class="text-card" data-reveal>
-      <h3 id="profile-heading">{profile.role}</h3>
-      <p>{profile.profileSummary}</p>
+<section
+  class="section"
+  id={profile.profileIntro.id}
+  aria-labelledby="profile-heading"
+  data-reveal-group
+>
+  <div class="section-stack container">
+    <SectionIntro
+      eyebrow={profile.profileIntro.eyebrow}
+      title={profile.profileIntro.title}
+      summary={profile.profileIntro.summary}
+    />
+    <div class="profile-spotlight">
+      <div class="text-card profile-spotlight__summary" data-reveal>
+        <h3 id="profile-heading">{profile.role}</h3>
+        <p>{profile.profileSummary}</p>
+      </div>
+      <aside
+        class="card profile-spotlight__panel"
+        data-reveal
+        aria-label="Clinical focus highlights"
+      >
+        <p class="section-intro__eyebrow">Clinical focus</p>
+        <h3>Direct-care strengths aligned to her current profession</h3>
+        <ul class="check-list">
+          {profileHighlights.map((item) => <li>{item}</li>)}
+        </ul>
+      </aside>
     </div>
   </div>
 </section>

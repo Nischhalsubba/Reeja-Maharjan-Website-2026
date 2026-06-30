@@ -19,17 +19,19 @@ const { profile } = Astro.props;
         />
       </header>
       <div class="section-shell__body">
-        <div class="skills-stack">
-          {profile.skills.map((group) => (
-            <article class="skills-group">
-              <h3>{group.title}</h3>
-              <ul class="skills-chip-list">
-                {group.items.map((item) => (
-                  <li>{item}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
+        <div class="skills-groups-grid">
+          {
+            profile.skills.map((group) => (
+              <article class="skills-group">
+                <h3>{group.title}</h3>
+                <ul class="skills-chip-list">
+                  {group.items.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
         </div>
       </div>
     </article>

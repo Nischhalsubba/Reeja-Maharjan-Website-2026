@@ -1,6 +1,7 @@
 :root {
   /* Typography: calm clinical editorial system */
-  --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-sans: 'Public Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Source Serif 4', Georgia, Cambria, 'Times New Roman', serif;
   --w-regular: 400;
   --w-medium: 500;
   --w-semibold: 600;
@@ -9,12 +10,12 @@
   --h1-size: clamp(2.5rem, 6vw, 4.85rem);
   --h1-lh: 0.98;
   --h1-ls: -0.07em;
-  --h1-w: 800;
+  --h1-w: 700;
 
   --h2-size: clamp(1.75rem, 3.2vw, 3rem);
   --h2-lh: 1.04;
   --h2-ls: -0.055em;
-  --h2-w: 750;
+  --h2-w: 700;
 
   --body-size: 1rem;
   --body-lh: 1.65;
@@ -24,28 +25,28 @@
   --small-size: 0.8125rem;
 
   /* RN portfolio palette: clinical trust, not generic portfolio gray */
-  --bg: #edf8f6;
+  --bg: #f4fbf9;
   --surface: #ffffff;
-  --text: #102a35;
-  --muted: #5d7480;
-  --line: #d8e8e5;
-  --accent: #08766f;
+  --text: #163341;
+  --muted: #58707b;
+  --line: #d5e4e0;
+  --accent: #0f8078;
   --accent-text: #ffffff;
-  --accent-hover: #075c57;
-  --surface-alt: #f5fbfa;
-  --line-strong: #bfd7d2;
+  --accent-hover: #0b6761;
+  --surface-alt: #edf7f5;
+  --line-strong: #b8d2cc;
   --placeholder: #7f949c;
-  --clinical-blue: #0f6d91;
-  --clinical-mint: #dff5f0;
-  --clinical-cream: #fff9ef;
+  --clinical-blue: #145f86;
+  --clinical-mint: #e0f2ee;
+  --clinical-cream: #fff7ea;
   --success: #0b7a4b;
   --warning: #b86b00;
   --danger: #a33a3a;
 
   /* Elevation */
-  --shadow-1: 0 12px 36px rgba(8, 63, 74, 0.07);
-  --shadow-2: 0 22px 70px rgba(8, 63, 74, 0.12);
-  --shadow-3: 0 32px 90px rgba(8, 63, 74, 0.16);
+  --shadow-1: 0 14px 40px rgba(10, 54, 67, 0.08);
+  --shadow-2: 0 24px 76px rgba(10, 54, 67, 0.12);
+  --shadow-3: 0 34px 96px rgba(10, 54, 67, 0.16);
 
   /* Radius */
   --r-card: 24px;

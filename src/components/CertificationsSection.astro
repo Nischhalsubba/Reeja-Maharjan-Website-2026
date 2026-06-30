@@ -22,35 +22,43 @@ const supportingItems = profile.certifications.slice(3);
       </header>
       <div class="section-shell__body credential-section__body">
         <div class="credential-section__lead" aria-label="Primary professional credentials">
-          {primaryItems.map((item) => (
-            <article class="credential-tile credential-tile--primary">
-              <p class="credential-tile__label">Priority proof</p>
-              <h3>{item.title}</h3>
-              <p class="cert-grid__meta">{item.issuer} · {item.date}</p>
-              <p>{item.note}</p>
-              <p class="note">{item.credentialLabel ?? 'Available on request'}</p>
-            </article>
-          ))}
+          {
+            primaryItems.map((item) => (
+              <article class="credential-tile credential-tile--primary">
+                <p class="credential-tile__label">Priority proof</p>
+                <h3>{item.title}</h3>
+                <p class="cert-grid__meta">
+                  {item.issuer} | {item.date}
+                </p>
+                <p>{item.note}</p>
+                <p class="note">{item.credentialLabel ?? 'Available on request'}</p>
+              </article>
+            ))
+          }
         </div>
 
-        {supportingItems.length > 0 && (
-          <div class="credential-section__supporting">
-            <div class="section-intro">
-              <p class="section-intro__eyebrow">Additional training</p>
-              <h3>Clinical Training & Professional Development</h3>
+        {
+          supportingItems.length > 0 && (
+            <div class="credential-section__supporting">
+              <div class="section-intro">
+                <p class="section-intro__eyebrow">Additional training</p>
+                <h3>Clinical Training & Professional Development</h3>
+              </div>
+              <div class="cert-grid">
+                {supportingItems.map((item) => (
+                  <article class="cert-grid__item">
+                    <h4>{item.title}</h4>
+                    <p class="cert-grid__meta">
+                      {item.issuer} | {item.date}
+                    </p>
+                    <p>{item.note}</p>
+                    <p class="note">{item.credentialLabel ?? 'Available on request'}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-            <div class="cert-grid">
-              {supportingItems.map((item) => (
-                <article class="cert-grid__item">
-                  <h4>{item.title}</h4>
-                  <p class="cert-grid__meta">{item.issuer} · {item.date}</p>
-                  <p>{item.note}</p>
-                  <p class="note">{item.credentialLabel ?? 'Available on request'}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        )}
+          )
+        }
       </div>
     </article>
   </div>

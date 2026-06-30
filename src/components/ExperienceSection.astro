@@ -24,18 +24,23 @@ const { profile } = Astro.props;
           {
             profile.experience.map((item) => (
               <li class="timeline-list__item">
-                <span class="timeline-list__dot" aria-hidden="true"></span>
+                <span class="timeline-list__dot" aria-hidden="true" />
                 <article class="timeline-list__content">
                   <div class="timeline-list__row">
                     <h3>{item.role}</h3>
                     <time class="timeline-list__date">{item.period}</time>
                   </div>
 
-                  <p class="timeline-list__meta">{item.organization} · {item.type}</p>
+                  <p class="timeline-list__meta">
+                    {item.organization} | {item.type}
+                  </p>
                   <p class="timeline-list__meta timeline-list__meta--location">{item.location}</p>
 
                   {item.tags && item.tags.length > 0 && (
-                    <ul class="chip-list timeline-list__tags" aria-label={`${item.organization} experience tags`}>
+                    <ul
+                      class="chip-list timeline-list__tags"
+                      aria-label={`${item.organization} experience tags`}
+                    >
                       {item.tags.map((tag) => (
                         <li>{tag}</li>
                       ))}
@@ -43,10 +48,14 @@ const { profile } = Astro.props;
                   )}
 
                   <ul class="check-list timeline-list__summary">
-                    {item.bullets.map((bullet) => <li>{bullet}</li>)}
+                    {item.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
                   </ul>
 
-                  <p class="note">Experience verification can be shared privately with recruiters on request.</p>
+                  <p class="note">
+                    Experience verification can be shared privately with recruiters on request.
+                  </p>
                 </article>
               </li>
             ))
