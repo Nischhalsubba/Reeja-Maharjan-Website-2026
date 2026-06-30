@@ -1,54 +1,61 @@
 :root {
-  /* Typography (reference-derived) */
-  --font-sans: Inter, sans-serif;
+  /* Typography: calm clinical editorial system */
+  --font-sans: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --w-regular: 400;
   --w-medium: 500;
   --w-semibold: 600;
   --w-bold: 700;
 
-  --h1-size: 3rem;
-  --h1-lh: 1.2;
-  --h1-ls: -1.44px;
-  --h1-w: 500;
+  --h1-size: clamp(2.5rem, 6vw, 4.85rem);
+  --h1-lh: 0.98;
+  --h1-ls: -0.07em;
+  --h1-w: 800;
 
-  --h2-size: 1.3125rem;
-  --h2-lh: 1.2;
-  --h2-ls: -0.63px;
-  --h2-w: 500;
+  --h2-size: clamp(1.75rem, 3.2vw, 3rem);
+  --h2-lh: 1.04;
+  --h2-ls: -0.055em;
+  --h2-w: 750;
 
-  --body-size: 0.875rem;
-  --body-lh: 1.4;
-  --body-ls: -0.28px;
-  --body-w: 500;
+  --body-size: 1rem;
+  --body-lh: 1.65;
+  --body-ls: -0.01em;
+  --body-w: 400;
 
-  --small-size: 0.75rem;
+  --small-size: 0.8125rem;
 
-  /* Colors (reference-derived) */
-  --bg: #f9f9f9;
+  /* RN portfolio palette: clinical trust, not generic portfolio gray */
+  --bg: #edf8f6;
   --surface: #ffffff;
-  --text: #1d1d26;
-  --muted: #77777d;
-  --line: #ededee;
-  --accent: #1d1d26;
+  --text: #102a35;
+  --muted: #5d7480;
+  --line: #d8e8e5;
+  --accent: #08766f;
   --accent-text: #ffffff;
-  --accent-hover: #33333b;
-  --surface-alt: #f6f6f6;
-  --line-strong: #e3e3e4;
-  --placeholder: #8e8e92;
+  --accent-hover: #075c57;
+  --surface-alt: #f5fbfa;
+  --line-strong: #bfd7d2;
+  --placeholder: #7f949c;
+  --clinical-blue: #0f6d91;
+  --clinical-mint: #dff5f0;
+  --clinical-cream: #fff9ef;
+  --success: #0b7a4b;
+  --warning: #b86b00;
+  --danger: #a33a3a;
 
   /* Elevation */
-  --shadow-1: 0 6px 12px rgba(29, 29, 38, 0.04);
-  --shadow-2: 0 10px 24px rgba(29, 29, 38, 0.08);
+  --shadow-1: 0 12px 36px rgba(8, 63, 74, 0.07);
+  --shadow-2: 0 22px 70px rgba(8, 63, 74, 0.12);
+  --shadow-3: 0 32px 90px rgba(8, 63, 74, 0.16);
 
   /* Radius */
-  --r-card: 14px;
-  --r-btn: 14px;
-  --r-pill: 14px;
+  --r-card: 24px;
+  --r-btn: 999px;
+  --r-pill: 999px;
 
   /* Layout */
-  --container-max: 1120px;
-  --gutter: clamp(16px, 3vw, 40px);
-  --section-gap: clamp(40px, 4.5vw, 72px);
+  --container-max: 1180px;
+  --gutter: clamp(18px, 4vw, 48px);
+  --section-gap: clamp(56px, 7vw, 112px);
 
   /* 8pt spacing */
   --s1: 8px;
@@ -65,9 +72,9 @@
   --s12: 96px;
 
   /* Buttons */
-  --btn-h: 48px;
-  --btn-pad-x: 16px;
-  --btn-pad-y: 10px;
+  --btn-h: 50px;
+  --btn-pad-x: 20px;
+  --btn-pad-y: 12px;
 
   /* Motion */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -76,12 +83,12 @@
   --dur-3: 520ms;
 
   /* Focus */
-  --focus-ring: 0 0 0 3px rgba(29, 29, 38, 0.18);
+  --focus-ring: 0 0 0 4px rgba(8, 118, 111, 0.2);
 
   /* Compatibility aliases */
   --h1: var(--h1-size);
   --h2: var(--h2-size);
-  --h3: 1rem;
+  --h3: clamp(1.08rem, 1.7vw, 1.35rem);
   --p: var(--body-size);
   --small: var(--small-size);
   --r1: var(--r-btn);
