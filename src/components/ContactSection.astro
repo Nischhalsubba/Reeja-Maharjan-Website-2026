@@ -24,9 +24,9 @@ const { profile } = Astro.props;
       <div class="contact-form__actions">
         <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Email Reeja</a>
         <a class="btn btn--secondary" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn btn--secondary" href={profile.contact.resumeUrl}>Download CV</a>
+        <a class="btn btn--secondary" href="/cv/">View CV</a>
       </div>
-      <p class="note">Preferred contact: email or LinkedIn. Full credentials can be shared privately after recruiter screening.</p>
+      <p class="note">Preferred contact: email or LinkedIn. Full documents can be shared privately after recruiter screening.</p>
     </div>
 
     <article class="section-shell" data-reveal>
@@ -85,6 +85,7 @@ const { profile } = Astro.props;
         <div class="contact-form__actions">
           <button type="submit" class="btn btn--primary">Send Inquiry</button>
           <a class="btn btn--secondary" href={`mailto:${profile.contact.email}`}>Use Email Instead</a>
+          <a class="btn btn--secondary" href="/cv/">Open CV</a>
         </div>
 
         <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
