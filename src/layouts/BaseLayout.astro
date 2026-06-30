@@ -96,7 +96,7 @@ const personSchema = {
       }
 
       .container {
-        width: min(100% - clamp(32px, 6vw, 80px), 1120px);
+        width: min(100% - clamp(40px, 7vw, 112px), 1180px);
       }
 
       .site-header {
@@ -146,7 +146,7 @@ const personSchema = {
       }
 
       .btn {
-        min-height: 46px;
+        min-height: 48px;
         border-radius: var(--r-pill);
         transition: background-color var(--dur-1) ease, border-color var(--dur-1) ease, color var(--dur-1) ease;
       }
@@ -167,8 +167,8 @@ const personSchema = {
       }
 
       .section {
-        padding-block: clamp(48px, 8vw, 96px);
-        scroll-margin-top: 88px;
+        padding-block: clamp(72px, 10vw, 136px);
+        scroll-margin-top: 96px;
       }
 
       .section-stack,
@@ -176,7 +176,7 @@ const personSchema = {
       .credential-section__body,
       .credential-section__supporting {
         display: grid;
-        gap: clamp(20px, 3vw, 32px);
+        gap: clamp(32px, 5vw, 56px);
       }
 
       .section-shell,
@@ -188,7 +188,7 @@ const personSchema = {
       .credential-tile,
       .contact-cta {
         border: 1px solid var(--clinical-border);
-        border-radius: 22px;
+        border-radius: 24px;
         background: var(--surface);
         box-shadow: none;
       }
@@ -199,7 +199,7 @@ const personSchema = {
 
       .section-shell__head,
       .section-shell__body {
-        padding: clamp(24px, 4vw, 40px);
+        padding: clamp(36px, 5vw, 64px);
       }
 
       .section-shell__head {
@@ -229,16 +229,24 @@ const personSchema = {
         line-height: 1.18;
       }
 
+      .section-intro p:not(.section-intro__eyebrow),
+      .card p,
+      .text-card p,
+      .cert-grid__item p,
+      .credential-tile p {
+        line-height: 1.72;
+      }
+
       .section-intro__eyebrow {
         width: fit-content;
-        padding: 4px 9px;
+        padding: 5px 10px;
         border-radius: var(--r-pill);
         background: var(--clinical-panel);
         border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--line));
       }
 
       .hero {
-        padding-block: clamp(24px, 7vw, 76px);
+        padding-block: clamp(48px, 9vw, 112px);
         overflow: visible;
       }
 
@@ -248,17 +256,17 @@ const personSchema = {
 
       .hero__grid {
         grid-template-columns: 1fr;
-        gap: clamp(24px, 5vw, 48px);
+        gap: clamp(36px, 6vw, 72px);
         align-items: stretch;
-        padding: clamp(20px, 5vw, 48px);
+        padding: clamp(32px, 6vw, 72px);
         border: 1px solid var(--clinical-border);
-        border-radius: clamp(20px, 4vw, 32px);
+        border-radius: clamp(24px, 4vw, 36px);
         background: linear-gradient(180deg, var(--surface) 0%, var(--clinical-panel) 100%);
         box-shadow: none;
       }
 
       .hero__content {
-        max-width: 46rem;
+        max-width: 48rem;
       }
 
       .hero h1 {
@@ -279,15 +287,19 @@ const personSchema = {
 
       .hero__role {
         font-weight: 750;
+        margin-top: var(--s3);
       }
 
       .hero__tagline {
-        font-size: clamp(0.98rem, 1.25vw, 1.1rem);
-        max-width: 58ch;
+        font-size: clamp(1rem, 1.3vw, 1.16rem);
+        max-width: 60ch;
+        line-height: 1.75;
+        margin-top: var(--s2);
       }
 
       .hero__proof {
-        margin-top: var(--s3);
+        margin-top: var(--s4);
+        gap: var(--s2);
       }
 
       .hero__proof li,
@@ -301,7 +313,7 @@ const personSchema = {
       }
 
       .hero__actions {
-        margin-top: var(--s4);
+        margin-top: var(--s5);
       }
 
       .hero__actions .btn {
@@ -311,17 +323,17 @@ const personSchema = {
       .hero__media {
         display: grid;
         align-content: end;
-        min-height: 320px;
+        min-height: 340px;
         border: 1px solid var(--clinical-border);
-        border-radius: 24px;
+        border-radius: 26px;
         background: var(--surface);
         overflow: hidden;
         box-shadow: none;
       }
 
       .hero__media img {
-        width: min(74%, 320px);
-        max-height: 360px;
+        width: min(74%, 330px);
+        max-height: 380px;
         margin: 0 auto;
         object-fit: contain;
         object-position: center bottom;
@@ -330,21 +342,23 @@ const personSchema = {
 
       .hero-meta {
         position: static;
-        width: calc(100% - 24px);
-        margin: 0 auto 12px;
-        padding: var(--s2);
+        width: calc(100% - 32px);
+        margin: 0 auto 16px;
+        padding: var(--s3);
         border: 1px solid var(--clinical-border);
-        border-radius: 16px;
+        border-radius: 18px;
         background: var(--clinical-panel);
         box-shadow: none;
       }
 
       .hero-meta li {
         align-items: start;
+        gap: var(--s2);
       }
 
       .hero-meta strong {
-        max-width: 56%;
+        max-width: 58%;
+        line-height: 1.45;
       }
 
       .card,
@@ -353,9 +367,9 @@ const personSchema = {
       .credential-tile {
         display: grid;
         align-content: start;
-        gap: var(--s2);
+        gap: var(--s3);
         min-width: 0;
-        padding: clamp(20px, 3vw, 28px);
+        padding: clamp(28px, 4vw, 44px);
       }
 
       .card > *,
@@ -370,7 +384,7 @@ const personSchema = {
       .cert-grid,
       .credential-section__lead {
         display: grid;
-        gap: clamp(18px, 3vw, 28px);
+        gap: clamp(28px, 4vw, 48px);
       }
 
       .card-grid--2,
@@ -383,7 +397,7 @@ const personSchema = {
       .cert-grid__meta {
         color: var(--muted);
         font-size: var(--small-size);
-        line-height: 1.55;
+        line-height: 1.7;
       }
 
       .timeline-list::before {
@@ -402,12 +416,18 @@ const personSchema = {
       }
 
       .timeline-list__content {
-        padding-block: var(--s3);
+        padding-block: var(--s4);
       }
 
       .check-list li::before,
       .skills-chip-list li::before {
         color: var(--accent);
+      }
+
+      .check-list,
+      .skills-chip-list {
+        display: grid;
+        gap: var(--s2);
       }
 
       .credential-tile {
@@ -442,13 +462,13 @@ const personSchema = {
         background: var(--surface);
         color: var(--accent);
         font-weight: 700;
-        line-height: 1.25;
+        line-height: 1.35;
         white-space: normal;
       }
 
       .credential-tile__label {
         margin: 0;
-        padding: 5px 9px;
+        padding: 6px 11px;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -456,17 +476,18 @@ const personSchema = {
 
       .credential-section .note,
       #evidence .note {
-        padding: 8px 11px;
+        padding: 9px 13px;
         color: var(--text);
+        margin-top: auto;
       }
 
       .credential-section__supporting .section-intro {
         display: grid;
-        gap: var(--s2);
+        gap: var(--s3);
       }
 
       .contact-cta {
-        padding: clamp(24px, 4vw, 40px);
+        padding: clamp(36px, 5vw, 64px);
         background: var(--clinical-panel);
       }
 
@@ -502,10 +523,10 @@ const personSchema = {
         }
       }
 
-      @media (min-width: 980px) {
+      @media (min-width: 1020px) {
         .hero__grid {
-          grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.64fr);
-          gap: clamp(32px, 5vw, 64px);
+          grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.64fr);
+          gap: clamp(48px, 6vw, 88px);
         }
 
         .hero h1 {
@@ -514,19 +535,19 @@ const personSchema = {
         }
 
         .hero__media {
-          min-height: 480px;
+          min-height: 520px;
         }
 
         .hero__media img {
-          width: min(82%, 390px);
-          max-height: 500px;
+          width: min(82%, 400px);
+          max-height: 520px;
         }
 
         .hero-meta {
-          width: min(320px, calc(100% - 32px));
+          width: min(340px, calc(100% - 40px));
           justify-self: end;
-          margin-right: var(--s2);
-          margin-bottom: var(--s2);
+          margin-right: var(--s3);
+          margin-bottom: var(--s3);
         }
 
         .credential-section__lead,
@@ -537,7 +558,7 @@ const personSchema = {
 
       @media (max-width: 760px) {
         .container {
-          width: min(100% - 28px, 1120px);
+          width: min(100% - 32px, 1180px);
         }
 
         .site-header__inner {
@@ -549,29 +570,45 @@ const personSchema = {
         }
 
         .section {
-          padding-block: 44px;
+          padding-block: 64px;
+        }
+
+        .section-stack,
+        .section-shell__body,
+        .credential-section__body,
+        .credential-section__supporting {
+          gap: var(--s4);
         }
 
         .section-shell__head,
         .section-shell__body {
-          padding: var(--s3);
+          padding: var(--s4);
+        }
+
+        .card,
+        .text-card,
+        .cert-grid__item,
+        .credential-tile,
+        .contact-cta {
+          padding: var(--s4);
         }
 
         .hero {
-          padding-top: var(--s3);
+          padding-top: var(--s4);
         }
 
         .hero__grid {
-          padding: var(--s3);
+          padding: var(--s4);
+          gap: var(--s5);
         }
 
         .hero__media {
-          min-height: 300px;
+          min-height: 320px;
         }
 
         .hero__media img {
-          width: min(76%, 290px);
-          max-height: 330px;
+          width: min(76%, 300px);
+          max-height: 340px;
         }
 
         .badge {
@@ -584,7 +621,7 @@ const personSchema = {
         }
 
         .hero-meta {
-          width: calc(100% - 20px);
+          width: calc(100% - 24px);
         }
       }
 
