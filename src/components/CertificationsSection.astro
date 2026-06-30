@@ -24,16 +24,23 @@ const { profile } = Astro.props;
             <article class="cert-grid__item">
               <h3>{item.title}</h3>
               <p class="cert-grid__meta">{item.issuer} · {item.date}</p>
-              <a
-                class="btn btn--secondary cert-grid__action"
-                href={item.credentialUrl}
-                data-lightbox-src={item.preview.src}
-                data-lightbox-alt={item.preview.alt}
-                data-lightbox-title={item.preview.title}
-                data-lightbox-description={item.preview.description}
-              >
-                Show credential
-              </a>
+              <p>{item.note}</p>
+              {
+                item.preview && item.credentialUrl ? (
+                  <a
+                    class="btn btn--secondary cert-grid__action"
+                    href={item.credentialUrl}
+                    data-lightbox-src={item.preview.src}
+                    data-lightbox-alt={item.preview.alt}
+                    data-lightbox-title={item.preview.title}
+                    data-lightbox-description={item.preview.description}
+                  >
+                    {item.credentialLabel ?? 'Show credential'}
+                  </a>
+                ) : (
+                  <p class="note">{item.credentialLabel ?? 'Credential available on request'}</p>
+                )
+              }
             </article>
           ))}
         </div>
