@@ -73,19 +73,26 @@ const personSchema = {
       rel="stylesheet"
     />
     <style is:global>
+      :root {
+        --shadow-1: none;
+        --shadow-2: none;
+        --shadow-3: none;
+      }
+
       :where(a, button, input, textarea):focus-visible {
         outline: 3px solid color-mix(in srgb, var(--accent) 42%, transparent);
         outline-offset: 3px;
+        box-shadow: none;
       }
 
       body {
-        background: linear-gradient(180deg, #f7fffd 0%, var(--bg) 44%, #f8fbff 100%);
+        background: #f8fdfc;
       }
 
       .site-header {
-        background: color-mix(in srgb, var(--surface) 92%, transparent);
-        border-bottom-color: color-mix(in srgb, var(--line) 70%, transparent);
-        box-shadow: 0 8px 30px rgba(8, 63, 74, 0.05);
+        background: color-mix(in srgb, var(--surface) 96%, transparent);
+        border-bottom-color: var(--line);
+        box-shadow: none;
       }
 
       .site-header__inner {
@@ -95,7 +102,7 @@ const personSchema = {
       .brand__mark,
       .desktop-nav a:last-child,
       .btn--primary {
-        background: linear-gradient(135deg, var(--accent), var(--clinical-blue));
+        background: var(--accent);
         color: var(--accent-text);
       }
 
@@ -107,8 +114,20 @@ const personSchema = {
       }
 
       .desktop-nav a:last-child,
-      .btn--primary {
-        box-shadow: 0 14px 34px rgba(8, 118, 111, 0.18);
+      .btn--primary,
+      .btn:hover,
+      .card[data-card-link]:focus-visible {
+        box-shadow: none;
+      }
+
+      .btn:hover {
+        transform: none;
+      }
+
+      .btn--primary:hover,
+      .desktop-nav a:last-child:hover,
+      .desktop-nav a:last-child:focus-visible {
+        background: var(--accent-hover);
       }
 
       .btn--secondary {
@@ -117,7 +136,7 @@ const personSchema = {
       }
 
       .hero {
-        padding-block: clamp(28px, 8vw, 86px);
+        padding-block: clamp(24px, 7vw, 76px);
         overflow: visible;
       }
 
@@ -129,11 +148,11 @@ const personSchema = {
         grid-template-columns: 1fr;
         gap: var(--s4);
         align-items: stretch;
-        padding: clamp(20px, 5vw, 54px);
-        border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
-        border-radius: clamp(24px, 4vw, 42px);
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(223, 245, 240, 0.68));
-        box-shadow: var(--shadow-2);
+        padding: clamp(20px, 5vw, 48px);
+        border: 1px solid var(--line);
+        border-radius: clamp(20px, 4vw, 32px);
+        background: var(--surface);
+        box-shadow: none;
       }
 
       .hero__content {
@@ -141,19 +160,19 @@ const personSchema = {
       }
 
       .hero h1 {
-        max-width: 11ch;
-        font-size: clamp(2.35rem, 12vw, 4.25rem);
-        line-height: 1.02;
-        letter-spacing: -0.065em;
+        max-width: 12ch;
+        font-size: clamp(2.15rem, 11vw, 4rem);
+        line-height: 1.04;
+        letter-spacing: -0.058em;
       }
 
       .badge {
         border-radius: var(--r-pill);
-        border-color: color-mix(in srgb, var(--accent) 22%, var(--line));
-        background: color-mix(in srgb, var(--clinical-mint) 75%, var(--surface));
+        border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
+        background: var(--surface-alt);
         color: var(--accent);
         font-weight: 800;
-        letter-spacing: 0.08em;
+        letter-spacing: 0.075em;
       }
 
       .hero__role {
@@ -161,7 +180,8 @@ const personSchema = {
       }
 
       .hero__tagline {
-        font-size: clamp(1rem, 1.4vw, 1.15rem);
+        font-size: clamp(0.98rem, 1.25vw, 1.1rem);
+        max-width: 58ch;
       }
 
       .hero__proof {
@@ -171,8 +191,8 @@ const personSchema = {
       .hero__proof li,
       .skills-chip-list li,
       .chip-list li {
-        border-color: color-mix(in srgb, var(--accent) 18%, var(--line));
-        background: color-mix(in srgb, var(--surface) 78%, var(--clinical-mint));
+        border-color: color-mix(in srgb, var(--accent) 16%, var(--line));
+        background: var(--surface-alt);
         color: var(--text);
         font-weight: 650;
       }
@@ -188,20 +208,21 @@ const personSchema = {
       .hero__media {
         display: grid;
         align-content: end;
-        min-height: 360px;
-        border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
-        border-radius: 28px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(223,245,240,0.58));
+        min-height: 320px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: var(--surface-alt);
         overflow: hidden;
+        box-shadow: none;
       }
 
       .hero__media img {
-        width: min(78%, 360px);
-        max-height: 420px;
+        width: min(74%, 320px);
+        max-height: 360px;
         margin: 0 auto;
         object-fit: contain;
         object-position: center bottom;
-        filter: drop-shadow(0 26px 48px rgba(8, 63, 74, 0.14));
+        filter: none;
       }
 
       .hero-meta {
@@ -209,7 +230,9 @@ const personSchema = {
         width: calc(100% - 24px);
         margin: 0 auto 12px;
         padding: var(--s2);
-        border-radius: 18px;
+        border-radius: 16px;
+        background: var(--surface);
+        box-shadow: none;
       }
 
       .hero-meta li {
@@ -226,27 +249,28 @@ const personSchema = {
       .text-card,
       .timeline__item,
       .contact-cta {
-        border-color: color-mix(in srgb, var(--line) 82%, transparent);
-        box-shadow: var(--shadow-1);
+        border-color: var(--line);
+        box-shadow: none;
       }
 
       .section-shell__head {
-        background: linear-gradient(180deg, var(--surface), var(--surface-alt));
+        background: var(--surface);
       }
 
       .section-shell__icon {
         color: var(--accent);
-        border-color: color-mix(in srgb, var(--accent) 22%, var(--line));
-        background: color-mix(in srgb, var(--clinical-mint) 58%, var(--surface));
+        border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
+        background: var(--surface-alt);
       }
 
       .timeline-list::before {
-        background: color-mix(in srgb, var(--accent) 34%, var(--line));
+        background: color-mix(in srgb, var(--accent) 32%, var(--line));
       }
 
       .timeline-list__dot {
         background: var(--accent);
-        box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent);
+        border: 4px solid var(--clinical-mint);
+        box-shadow: none;
       }
 
       .credential-section__body,
@@ -264,9 +288,8 @@ const personSchema = {
       .credential-tile,
       .cert-grid__item {
         transition:
-          transform var(--dur-1) ease,
-          border-color var(--dur-1) ease,
-          box-shadow var(--dur-1) ease;
+          background-color var(--dur-1) ease,
+          border-color var(--dur-1) ease;
       }
 
       .credential-tile {
@@ -275,19 +298,19 @@ const personSchema = {
         gap: var(--s2);
         min-height: 100%;
         padding: var(--s3);
-        border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+        border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
         border-radius: var(--r-card);
-        background: linear-gradient(180deg, color-mix(in srgb, var(--clinical-mint) 46%, var(--surface)), var(--surface));
-        box-shadow: var(--shadow-1);
+        background: var(--surface-alt);
+        box-shadow: none;
       }
 
       .credential-tile:hover,
       .cert-grid__item:hover,
       .card:hover,
       .text-card:hover {
-        transform: translateY(-2px);
-        border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
-        box-shadow: var(--shadow-2);
+        transform: none;
+        border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+        box-shadow: none;
       }
 
       .credential-tile__label {
@@ -297,7 +320,7 @@ const personSchema = {
         border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
         border-radius: var(--r-pill);
         color: var(--accent);
-        background: color-mix(in srgb, var(--accent) 9%, var(--surface));
+        background: var(--surface);
         font-size: 0.72rem;
         font-weight: 800;
         letter-spacing: 0.08em;
@@ -315,7 +338,7 @@ const personSchema = {
         padding: 7px 10px;
         border: 1px solid var(--line);
         border-radius: var(--r-pill);
-        background: var(--surface-alt);
+        background: var(--surface);
         color: var(--text);
         font-weight: 650;
       }
@@ -328,27 +351,26 @@ const personSchema = {
 
       @media (min-width: 900px) {
         .hero__grid {
-          grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.68fr);
-          gap: clamp(32px, 5vw, 72px);
-          min-height: min(680px, calc(100vh - 110px));
+          grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.64fr);
+          gap: clamp(32px, 5vw, 64px);
         }
 
         .hero h1 {
           max-width: 12ch;
-          font-size: clamp(3.2rem, 5.8vw, 4.8rem);
+          font-size: clamp(3rem, 5.4vw, 4.45rem);
         }
 
         .hero__media {
-          min-height: 520px;
+          min-height: 480px;
         }
 
         .hero__media img {
-          width: min(86%, 430px);
-          max-height: 560px;
+          width: min(82%, 390px);
+          max-height: 500px;
         }
 
         .hero-meta {
-          width: min(330px, calc(100% - 32px));
+          width: min(320px, calc(100% - 32px));
           justify-self: end;
           margin-right: var(--s2);
           margin-bottom: var(--s2);
@@ -377,12 +399,12 @@ const personSchema = {
         }
 
         .hero__media {
-          min-height: 330px;
+          min-height: 300px;
         }
 
         .hero__media img {
-          width: min(78%, 310px);
-          max-height: 360px;
+          width: min(76%, 290px);
+          max-height: 330px;
         }
 
         .badge {
