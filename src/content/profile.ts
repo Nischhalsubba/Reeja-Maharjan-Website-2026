@@ -144,46 +144,53 @@ export type ProfileContent = {
 
 export const profile: ProfileContent = {
   name: 'Reeja Maharjan',
-  role: 'NNC Licensed Registered Nurse and Texas RN',
+  role: 'NNC Licensed Registered Nurse, Texas RN, and Research Assistant',
   hero: {
     available: true,
-    title: 'Registered Nurse Specializing in Maternal, Newborn & General Ward Care',
-    role: 'Reeja Maharjan | NNC Licensed RN | Texas RN License Active',
+    title: 'Registered Nurse and Maternal Health Research Assistant',
+    role: 'Reeja Maharjan | NNC Licensed RN | Texas RN | IISH Research Assistant',
     tagline:
-      'NNC-licensed nurse and Texas RN with verified hospital experience in maternal-newborn care, general ward support, patient counselling, documentation, and safe clinical handover.',
+      'NNC-licensed nurse and Texas RN now serving as a Research Assistant with IISH on the MOM-HD maternal health telemonitoring trial, combining hospital nursing, BP/BG monitoring, participant education, data quality, and safe clinical coordination.',
     proof: [
+      'IISH MOM-HD Research Assistant',
       'NNC Licensed RN',
       'Texas RN Active',
       'NCLEX-RN Cleared',
-      'TUTH Experience',
-      'Maternal & Newborn Care',
-      'CPR Trained'
+      'BP/BG Telemonitoring',
+      'REDCap Data Quality',
+      'Maternal & Newborn Care'
     ],
-    primaryCta: { label: 'Contact for Nursing Opportunity', href: '#contact' },
+    primaryCta: { label: 'Contact for Nursing or Research Role', href: '#contact' },
     secondaryCta: { label: 'View Credentials', href: '#certifications' },
     portrait: { src: '/reeja-hero-cutout.png', alt: 'Portrait of Reeja Maharjan' },
     meta: [
-      { label: 'Based in', value: 'Lalitpur, Nepal' },
-      { label: 'Current location', value: 'Biratnagar, Nepal' },
-      { label: 'Availability', value: 'Immediate' },
+      { label: 'Current role', value: 'Research Assistant, IISH' },
+      { label: 'Project focus', value: 'MOM-HD maternal telemonitoring' },
+      { label: 'Duty station', value: 'Biratnagar, Nepal' },
       { label: 'License scope', value: 'NNC RN + Texas RN' }
     ]
   },
   profileIntro: {
     id: 'profile',
     eyebrow: 'Profile',
-    title: 'Professional Nursing Profile',
-    summary: 'Recruiter-ready summary of clinical scope, verified license status, and role fit.'
+    title: 'Professional Nursing and Research Profile',
+    summary: 'Recruiter-ready summary of clinical scope, current research role, verified license status, and role fit.'
   },
   profileSummary:
-    'NNC-licensed Registered Nurse and Texas RN with verified hospital experience across TUTH, MMTH, and Sindhuli Hospital. Brings practical strength in maternal-newborn support, general ward care, counselling, documentation, safe handover, escalation coordination, and patient education. Open to hospital, NGO, and INGO nursing roles in Nepal and internationally aligned care environments.',
+    'NNC-licensed Registered Nurse and Texas RN with verified hospital experience across TUTH, MMTH, and Sindhuli Hospital, now working as a Research Assistant with the Institute for Implementation Science and Health (IISH) on the MOM-HD maternal health telemonitoring trial in Biratnagar. Brings practical strength in maternal-newborn support, ANC screening, HDP/GDM study workflows, BP/BG monitoring, participant counselling, tele-follow-up, REDCap-style data quality, documentation, safe handover, escalation coordination, and ethical participant communication.',
   roleFitIntro: {
     id: 'role-fit',
     eyebrow: 'Role Fit',
     title: 'Where Reeja Fits Best',
-    summary: 'Clear role-fit cards for recruiters screening hospital, NGO, INGO, and care-coordination opportunities.'
+    summary: 'Clear role-fit cards for recruiters screening hospital, research, NGO, INGO, and care-coordination opportunities.'
   },
   roleFit: [
+    {
+      title: 'Maternal Health Research Assistant',
+      summary:
+        'Strong current fit for implementation research and clinical-study roles involving participant screening, consent support, telemonitoring, data entry, and site coordination.',
+      evidence: ['IISH MOM-HD Research Assistant', 'HDP/GDM participant screening', 'BP/BG telemonitoring and follow-up']
+    },
     {
       title: 'Hospital Staff Nurse',
       summary: 'Strong fit for ward-based nursing roles requiring safe documentation, patient monitoring, counselling, and handover.',
@@ -196,8 +203,9 @@ export const profile: ProfileContent = {
     },
     {
       title: 'NGO / INGO Health Programme Support',
-      summary: 'Prepared for programme-based care support where communication, documentation, beneficiary follow-up, and safeguarding awareness matter.',
-      evidence: ['IEC and patient education', 'Reporting and coordination', 'Safeguarding and PSEAH awareness']
+      summary:
+        'Prepared for programme-based care support where communication, documentation, beneficiary follow-up, device logistics, and safeguarding awareness matter.',
+      evidence: ['Participant education', 'Reporting and coordination', 'Ethics and confidentiality awareness']
     },
     {
       title: 'International Nursing Readiness',
@@ -208,25 +216,42 @@ export const profile: ProfileContent = {
   competenciesIntro: {
     id: 'competencies',
     eyebrow: 'Clinical Strengths',
-    title: 'Core Nursing Strengths',
-    summary: 'Practical strengths aligned to direct care, patient safety, documentation, and programme-support roles.'
+    title: 'Core Nursing and Research Strengths',
+    summary: 'Practical strengths aligned to direct care, patient safety, documentation, telemonitoring, and programme-support roles.'
   },
   competencies: [
     'Maternal-newborn support',
-    'General ward care',
-    'Patient counselling and health education',
-    'Clinical documentation and SBAR-style handover',
+    'ANC screening and participant enrolment support',
+    'HDP/GDM study workflow support',
+    'Home-based BP and BG monitoring education',
+    'Telemonitoring follow-up and warning-symptom screening',
+    'Clinical documentation and REDCap-style data quality',
     'Escalation coordination and team communication',
-    'Safeguarding-aware professional conduct',
-    'Community-health and NGO programme support readiness'
+    'Adverse event documentation and reporting support',
+    'Device logistics and study-record confidentiality'
   ],
   experienceIntro: {
     id: 'experience',
     eyebrow: 'Experience',
-    title: 'Clinical Experience Timeline',
-    summary: 'Recent nursing roles with concise, evidence-based responsibilities and care settings.'
+    title: 'Clinical and Research Experience Timeline',
+    summary: 'Recent nursing and research roles with concise, evidence-based responsibilities and care settings.'
   },
   experience: [
+    {
+      role: 'Research Assistant',
+      organization: 'Institute for Implementation Science and Health (IISH) - MOM-HD Trial',
+      type: 'Implementation Research / Maternal Health',
+      location: 'Biratnagar, Nepal',
+      period: 'May 2026 - Present (contract through Nov 2026)',
+      bullets: [
+        'Supports the MOM-HD project focused on mobile-based obstetric monitoring for pregnancies complicated by hypertension and/or diabetes.',
+        'Screens ANC participants for HDP/GDM eligibility, supports informed-consent workflows, and maintains study screening and follow-up documentation.',
+        'Trains participants and family members on home BP/BG monitoring, glucometer use, mobile/web-app reporting, and monitoring adherence.',
+        'Reviews uploaded BP/BG data, supports bi-weekly tele-follow-ups, screens warning symptoms, and escalates concerns according to protocol.',
+        'Maintains study data quality across digital platforms, supports device logistics, and coordinates with obstetricians, nurses, hospital staff, and technical teams.'
+      ],
+      tags: ['Research assistant', 'MOM-HD', 'HDP/GDM', 'BP/BG monitoring', 'REDCap', 'Telemonitoring']
+    },
     {
       role: 'Staff Nurse',
       organization: 'Tribhuvan University Teaching Hospital (TUTH)',
@@ -355,29 +380,33 @@ export const profile: ProfileContent = {
   skillsIntro: {
     id: 'skills',
     eyebrow: 'Clinical Strengths',
-    title: 'Clinical Strengths with Evidence',
-    summary: 'A consolidated skill section that avoids repetition and connects each strength to practical evidence.'
+    title: 'Clinical and Research Strengths with Evidence',
+    summary: 'A consolidated skill section connecting direct nursing care, telemonitoring, and research documentation strengths to practical evidence.'
   },
   skills: [
+    {
+      title: 'Research & Telemonitoring',
+      items: ['Participant screening', 'HDP/GDM eligibility support', 'BP/BG data review', 'Bi-weekly tele-follow-up']
+    },
     {
       title: 'Maternal & Newborn Care',
       items: ['Antenatal and postnatal routines', 'Breastfeeding counselling', 'Comprehensive Newborn Care Level II']
     },
     {
-      title: 'General Ward Care',
-      items: ['Patient monitoring', 'Surgery exposure', 'Gyn/Obs exposure', 'Escalation coordination']
+      title: 'Data & Documentation',
+      items: ['REDCap-style data entry', 'Consent and source-document support', 'Teleconsultation notes', 'Progress reporting']
     },
     {
-      title: 'Documentation & Handover',
-      items: ['Clinical records', 'SBAR-style handover', 'Routine reporting', 'Continuity of care']
+      title: 'Participant Education',
+      items: ['Home BP/BG monitoring training', 'Glucometer use', 'Mobile/web-app guidance', 'Adherence reinforcement']
     },
     {
-      title: 'Counselling & Programme Support',
-      items: ['Patient education', 'Family guidance', 'IEC support', 'Community-health readiness']
+      title: 'Safety & Coordination',
+      items: ['Warning-symptom screening', 'Escalation/referral support', 'AE/SAE reporting support', 'Multidisciplinary coordination']
     },
     {
-      title: 'OT & Emergency Readiness',
-      items: ['OTTM exposure', 'Aseptic workflow', 'CPR participation', 'Team communication']
+      title: 'General Ward and OT Readiness',
+      items: ['Patient monitoring', 'Surgery and Gyn/Obs exposure', 'OTTM exposure', 'CPR participation']
     }
   ],
   skillDetailsIntro: {
@@ -387,6 +416,12 @@ export const profile: ProfileContent = {
     summary: 'Archived detailed skill coverage retained in content, but not shown on the homepage to keep the page recruiter-focused.'
   },
   skillDetails: [
+    {
+      title: 'Maternal Health Research Support',
+      description:
+        'Supports MOM-HD study activities including ANC screening, informed-consent workflows, BP/BG monitoring education, tele-follow-up, and study documentation.',
+      focus: ['HDP/GDM screening', 'BP/BG telemonitoring', 'REDCap-style documentation']
+    },
     {
       title: 'Maternal and Newborn Care',
       description: 'Supports antenatal, postnatal, and newborn-care routines with patient-centred communication.',
@@ -459,19 +494,26 @@ export const profile: ProfileContent = {
     summary: 'Only role-relevant public details are retained. Sensitive personal details are intentionally not published.'
   },
   personalDetails: [
-    { key: 'Professional status', value: 'NNC Licensed RN and Texas RN' },
-    { key: 'Location', value: 'Lalitpur / Biratnagar, Nepal' },
-    { key: 'Availability', value: 'Immediate' },
-    { key: 'Open to', value: 'Hospital, NGO, INGO, and care-coordination roles' }
+    { key: 'Professional status', value: 'NNC Licensed RN, Texas RN, and IISH Research Assistant' },
+    { key: 'Current role', value: 'Research Assistant, MOM-HD project' },
+    { key: 'Location', value: 'Biratnagar, Nepal' },
+    { key: 'Open to', value: 'Maternal health, research, hospital, NGO, INGO, and care-coordination roles' }
   ],
   evidenceIntro: {
     id: 'evidence',
     eyebrow: 'Verification',
     title: 'Selected Credential Evidence',
     summary:
-      'Public-safe credential summaries are shown here. Full documents, transcripts, signatures, and license reports are not published publicly.'
+      'Public-safe credential summaries are shown here. Full documents, contracts, transcripts, signatures, and license reports are not published publicly.'
   },
   evidence: [
+    {
+      title: 'IISH Research Assistant Appointment',
+      category: 'Research Role',
+      description:
+        'Signed contract and terms of reference confirm Research Assistant role for the MOM-HD maternal health telemonitoring project in Biratnagar. Full document is private.',
+      actionLabel: 'Private verification available'
+    },
     {
       title: 'NNC RN License',
       category: 'Licensure',
@@ -500,7 +542,7 @@ export const profile: ProfileContent = {
     {
       title: 'Experience Letters',
       category: 'Experience',
-      description: 'Experience verification summaries for TUTH, MMTH, and Sindhuli Hospital. Full letters are not public.',
+      description: 'Experience verification summaries for TUTH, MMTH, Sindhuli Hospital, and current research role. Full letters/contracts are not public.',
       actionLabel: 'Available on request'
     },
     {
@@ -520,6 +562,14 @@ export const profile: ProfileContent = {
     'NNC licensed registered nurse',
     'Texas RN license',
     'NCLEX-RN cleared',
+    'research assistant',
+    'MOM-HD trial',
+    'implementation science',
+    'maternal health telemonitoring',
+    'HDP GDM screening',
+    'blood pressure blood glucose monitoring',
+    'REDCap data entry',
+    'ANC participant enrolment',
     'maternal newborn care',
     'general ward care',
     'patient counselling',
@@ -531,14 +581,14 @@ export const profile: ProfileContent = {
   contactIntro: {
     id: 'contact',
     eyebrow: 'Contact',
-    title: 'Contact Reeja for Nursing Opportunities',
+    title: 'Contact Reeja for Nursing or Research Opportunities',
     summary:
-      'For hospital, NGO, INGO, or clinical care roles, send the role details, location, and expected start date.'
+      'For hospital, research, NGO, INGO, maternal-health, or clinical care roles, send the role details, location, and expected start date.'
   },
   contact: {
     email: 'maharjanreeja88@gmail.com',
     phone: 'Available on request',
-    location: 'Lalitpur / Biratnagar, Nepal',
+    location: 'Biratnagar, Nepal',
     linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
     instagram: 'https://www.instagram.com/maharjan_reeja/',
     resumeUrl: '/resume.pdf',
