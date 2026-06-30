@@ -41,7 +41,8 @@ const articleSchema = {
   author: {
     '@type': 'Person',
     name: profile.name,
-    jobTitle: profile.role
+    jobTitle: profile.role,
+    sameAs: [profile.contact.linkedin, profile.contact.instagram].filter(Boolean)
   },
   publisher: {
     '@type': 'Person',
@@ -75,7 +76,7 @@ const faqSchema = {
         <p>{post.excerpt}</p>
         <p class="blog-card__meta">
           <span>{published}</span>
-          <span>Updated {updated}</span>
+          <span>Reviewed {updated}</span>
           <span>{post.readMinutes} min read</span>
         </p>
         <ul class="chip-list">
@@ -136,14 +137,19 @@ const faqSchema = {
           ))}
 
           <section class="card blog-post__author">
-            <p class="section-intro__eyebrow">Author</p>
-            <h2>Reeja Maharjan, Registered Nurse</h2>
+            <p class="section-intro__eyebrow">Author & Review Note</p>
+            <h2>{profile.name}, {profile.role}</h2>
             <p>
-              Reeja Maharjan is an NNC-licensed registered nurse with verified experience in
-              maternal-newborn support, general care, counselling, documentation, and
-              safeguarding-aware communication.
+              Reeja Maharjan is a registered nurse with experience in maternal-newborn support,
+              general ward care, counselling, clinical documentation, and safe handover. This article
+              is written for education and general awareness, not as a replacement for direct clinical assessment.
             </p>
-            <p class="note">Last updated: {updated}</p>
+            <ul class="chip-list">
+              <li>NNC Licensed RN</li>
+              <li>Texas RN License Active</li>
+              <li>NCLEX-RN Cleared</li>
+            </ul>
+            <p class="note">Last reviewed: {updated}</p>
           </section>
 
           <section class="card blog-post__faq">
