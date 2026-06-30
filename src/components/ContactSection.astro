@@ -1,4 +1,4 @@
-﻿---
+---
 import SectionIntro from './SectionIntro.astro';
 import SectionIcon from './SectionIcon.astro';
 import type { ProfileContent } from '../content/profile';
@@ -11,17 +11,22 @@ const { profile } = Astro.props;
   <div class="container section-stack">
     <div class="contact-cta" data-reveal>
       <img src="/reeja-headshot.jpg" alt="Reeja Maharjan profile portrait" width="84" height="84" />
-      <h2>Feel Free to Reach Out</h2>
-      <p>Let's discuss nursing, NGO, and INGO opportunities.</p>
-      <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Send Email</a>
-      <ul class="contact-socials">
-        <li><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        {
-          profile.contact.instagram && (
-            <li><a href={profile.contact.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
-          )
-        }
+      <p class="section-intro__eyebrow">Available for nursing roles</p>
+      <h2>{profile.contactIntro.title}</h2>
+      <p>{profile.contactIntro.summary}</p>
+      <ul class="chip-list contact-availability" aria-label="Opportunity fit">
+        <li>Hospitals</li>
+        <li>NGOs</li>
+        <li>INGOs</li>
+        <li>Maternal health</li>
+        <li>General ward care</li>
       </ul>
+      <div class="contact-form__actions">
+        <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Email Reeja</a>
+        <a class="btn btn--secondary" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a class="btn btn--secondary" href={profile.contact.resumeUrl}>Download CV</a>
+      </div>
+      <p class="note">Preferred contact: email or LinkedIn. Full credentials can be shared privately after recruiter screening.</p>
     </div>
 
     <article class="section-shell" data-reveal>
@@ -29,47 +34,64 @@ const { profile } = Astro.props;
         <span class="section-shell__icon"><SectionIcon name="contact" /></span>
         <SectionIntro
           eyebrow={profile.contactIntro.eyebrow}
-          title="Get in Touch with Me"
-          summary="Share your requirement and Reeja will respond by email."
+          title="Send a Role Inquiry"
+          summary="Share the role, organization, location, and expected start date so the message is useful from the first email. Revolutionary, I know."
         />
       </header>
 
       <form
         id="contact-form"
         class="section-shell__body contact-form"
-        aria-label="Contact form"
+        aria-label="Recruiter contact form"
         method="POST"
         action={profile.contact.formEndpoint ?? 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'}
         data-endpoint={profile.contact.formEndpoint}
-        data-whatsapp={profile.contact.whatsappNumber}
       >
-        <label>
-          Name
-          <input type="text" name="name" autocomplete="name" required />
-        </label>
-        <label>
-          Email
-          <input type="email" name="email" autocomplete="email" required />
-        </label>
+        <div class="contact-form__grid">
+          <label>
+            Name
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <label>
+            Organization / Hospital
+            <input type="text" name="organization" autocomplete="organization" />
+          </label>
+          <label>
+            Role type
+            <input type="text" name="role_type" placeholder="Hospital, NGO, INGO, maternal care..." />
+          </label>
+          <label>
+            Location
+            <input type="text" name="location" autocomplete="address-level2" />
+          </label>
+          <label>
+            Expected start date
+            <input type="text" name="start_date" placeholder="Immediate, month, or flexible" />
+          </label>
+        </div>
         <label>
           Message
-          <textarea name="message" rows="5" required></textarea>
+          <textarea name="message" rows="5" required placeholder="Briefly describe the role, care setting, schedule, and next step."></textarea>
         </label>
-        <input type="hidden" name="_subject" value="New contact from reejamaharjan.com.np" />
+        <input type="hidden" name="_subject" value="New nursing opportunity inquiry from reejamaharjan.com.np" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden />
 
         <div class="contact-form__actions">
-          <button type="submit" class="btn btn--primary">Send to Gmail</button>
-          <button type="button" class="btn btn--secondary" data-send-whatsapp>Send via WhatsApp</button>
+          <button type="submit" class="btn btn--primary">Send Inquiry</button>
+          <a class="btn btn--secondary" href={`mailto:${profile.contact.email}`}>Use Email Instead</a>
         </div>
 
         <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
           Message sent successfully. Reeja will reply by email.
         </p>
         <p class="form-status form-status--error" role="alert" aria-live="assertive" hidden>
-          Message could not be sent. Please try again in a moment.
+          Message could not be sent. Please use the email button instead.
         </p>
       </form>
     </article>
@@ -85,52 +107,15 @@ const { profile } = Astro.props;
       configuredEndpoint ||
       import.meta.env.PUBLIC_FORMSPREE_ENDPOINT ||
       'https://formsubmit.co/ajax/maharjanreeja88@gmail.com';
-    const whatsappRaw = form.dataset.whatsapp || import.meta.env.PUBLIC_WHATSAPP_NUMBER || '';
-    const whatsappNumber = whatsappRaw.replace(/[^\d]/g, '');
 
     form.action = endpoint;
 
     const success = form.querySelector('.form-status--success');
     const error = form.querySelector('.form-status--error');
     const submit = form.querySelector('button[type="submit"]');
-    const whatsappButton = form.querySelector('[data-send-whatsapp]');
-
-    const buildWhatsappUrl = (): string | null => {
-      if (whatsappNumber.length < 10) return null;
-      const nameEl = form.querySelector('input[name="name"]');
-      const emailEl = form.querySelector('input[name="email"]');
-      const messageEl = form.querySelector('textarea[name="message"]');
-      const name = nameEl instanceof HTMLInputElement ? nameEl.value.trim() : '';
-      const email = emailEl instanceof HTMLInputElement ? emailEl.value.trim() : '';
-      const message = messageEl instanceof HTMLTextAreaElement ? messageEl.value.trim() : '';
-
-      const body =
-        `New inquiry from reejamaharjan.com.np\n` +
-        `Name: ${name || '-'}\n` +
-        `Email: ${email || '-'}\n` +
-        `Message: ${message || '-'}`;
-      return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(body)}`;
-    };
 
     if (success instanceof HTMLElement) success.hidden = true;
     if (error instanceof HTMLElement) error.hidden = true;
-
-    if (whatsappButton instanceof HTMLButtonElement) {
-      whatsappButton.addEventListener('click', () => {
-        if (success instanceof HTMLElement) success.hidden = true;
-        if (error instanceof HTMLElement) error.hidden = true;
-
-        const url = buildWhatsappUrl();
-        if (!url) {
-          if (error instanceof HTMLElement) {
-            error.textContent = 'WhatsApp send is unavailable right now.';
-            error.hidden = false;
-          }
-          return;
-        }
-        window.open(url, '_blank', 'noopener,noreferrer');
-      });
-    }
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -158,18 +143,10 @@ const { profile } = Astro.props;
         form.reset();
         if (success instanceof HTMLElement) success.hidden = false;
       } catch {
-        const url = buildWhatsappUrl();
-        if (url) window.open(url, '_blank', 'noopener,noreferrer');
-
-        if (error instanceof HTMLElement) {
-          error.textContent = url
-            ? 'Gmail send failed. WhatsApp draft opened as backup.'
-            : 'Message could not be sent. Please try again in a moment.';
-          error.hidden = false;
-        }
+        if (error instanceof HTMLElement) error.hidden = false;
       } finally {
         submit.disabled = false;
-        submit.textContent = 'Send to Gmail';
+        submit.textContent = 'Send Inquiry';
       }
     });
   }
