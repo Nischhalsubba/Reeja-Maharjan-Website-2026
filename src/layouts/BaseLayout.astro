@@ -70,6 +70,35 @@ const personSchema = {
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <style is:global>
+      :where(a, button, input, textarea):focus-visible {
+        outline: 3px solid color-mix(in srgb, var(--accent) 42%, transparent);
+        outline-offset: 3px;
+      }
+
+      @media (max-width: 760px) {
+        .hero h1 {
+          max-width: 100%;
+        }
+
+        .hero-meta {
+          position: static;
+          width: 100%;
+          margin-top: var(--s2);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          scroll-behavior: auto !important;
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+    </style>
   </head>
   <body>
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
