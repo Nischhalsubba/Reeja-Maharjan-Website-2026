@@ -77,6 +77,10 @@ const personSchema = {
         --shadow-1: none;
         --shadow-2: none;
         --shadow-3: none;
+        --clinical-paper: #fbfefd;
+        --clinical-panel: #f1faf8;
+        --clinical-ink: #102a35;
+        --clinical-border: #d7e9e6;
       }
 
       :where(a, button, input, textarea):focus-visible {
@@ -86,13 +90,14 @@ const personSchema = {
       }
 
       body {
-        background: #f8fdfc;
+        background: var(--clinical-paper);
       }
 
       .site-header {
         background: color-mix(in srgb, var(--surface) 96%, transparent);
-        border-bottom-color: var(--line);
+        border-bottom: 1px solid var(--clinical-border);
         box-shadow: none;
+        backdrop-filter: blur(12px);
       }
 
       .site-header__inner {
@@ -113,11 +118,31 @@ const personSchema = {
         color: var(--accent);
       }
 
+      .desktop-nav a,
+      .mobile-nav__panel a {
+        color: var(--muted);
+        font-weight: 650;
+      }
+
+      .desktop-nav a:hover,
+      .desktop-nav a:focus-visible,
+      .mobile-nav__panel a:hover,
+      .mobile-nav__panel a:focus-visible {
+        color: var(--text);
+        background: var(--surface-alt);
+      }
+
       .desktop-nav a:last-child,
-      .btn--primary,
+      .btn,
       .btn:hover,
       .card[data-card-link]:focus-visible {
         box-shadow: none;
+      }
+
+      .btn {
+        min-height: 46px;
+        border-radius: var(--r-pill);
+        transition: background-color var(--dur-1) ease, border-color var(--dur-1) ease, color var(--dur-1) ease;
       }
 
       .btn:hover {
@@ -135,6 +160,51 @@ const personSchema = {
         border-color: var(--line-strong);
       }
 
+      .section {
+        scroll-margin-top: 88px;
+      }
+
+      .section-shell,
+      .card,
+      .text-card,
+      .timeline__item,
+      .cert-grid__item,
+      .contact-cta {
+        border: 1px solid var(--clinical-border);
+        border-radius: 22px;
+        background: var(--surface);
+        box-shadow: none;
+      }
+
+      .section-shell__head {
+        background: var(--surface);
+      }
+
+      .section-shell__body {
+        background: var(--clinical-paper);
+      }
+
+      .section-shell__icon {
+        color: var(--accent);
+        border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
+        background: var(--clinical-panel);
+      }
+
+      .section-intro h1,
+      .section-intro h2,
+      .section-intro h3,
+      .hero h1 {
+        color: var(--clinical-ink);
+      }
+
+      .section-intro__eyebrow {
+        width: fit-content;
+        padding: 4px 9px;
+        border-radius: var(--r-pill);
+        background: var(--clinical-panel);
+        border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--line));
+      }
+
       .hero {
         padding-block: clamp(24px, 7vw, 76px);
         overflow: visible;
@@ -149,9 +219,9 @@ const personSchema = {
         gap: var(--s4);
         align-items: stretch;
         padding: clamp(20px, 5vw, 48px);
-        border: 1px solid var(--line);
+        border: 1px solid var(--clinical-border);
         border-radius: clamp(20px, 4vw, 32px);
-        background: var(--surface);
+        background: linear-gradient(180deg, var(--surface) 0%, var(--clinical-panel) 100%);
         box-shadow: none;
       }
 
@@ -169,7 +239,7 @@ const personSchema = {
       .badge {
         border-radius: var(--r-pill);
         border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
-        background: var(--surface-alt);
+        background: var(--surface);
         color: var(--accent);
         font-weight: 800;
         letter-spacing: 0.075em;
@@ -191,8 +261,8 @@ const personSchema = {
       .hero__proof li,
       .skills-chip-list li,
       .chip-list li {
-        border-color: color-mix(in srgb, var(--accent) 16%, var(--line));
-        background: var(--surface-alt);
+        border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
+        background: var(--surface);
         color: var(--text);
         font-weight: 650;
       }
@@ -209,9 +279,9 @@ const personSchema = {
         display: grid;
         align-content: end;
         min-height: 320px;
-        border: 1px solid var(--line);
+        border: 1px solid var(--clinical-border);
         border-radius: 24px;
-        background: var(--surface-alt);
+        background: var(--surface);
         overflow: hidden;
         box-shadow: none;
       }
@@ -230,8 +300,9 @@ const personSchema = {
         width: calc(100% - 24px);
         margin: 0 auto 12px;
         padding: var(--s2);
+        border: 1px solid var(--clinical-border);
         border-radius: 16px;
-        background: var(--surface);
+        background: var(--clinical-panel);
         box-shadow: none;
       }
 
@@ -243,34 +314,28 @@ const personSchema = {
         max-width: 56%;
       }
 
-      .hero-meta,
-      .section-shell,
-      .card,
-      .text-card,
-      .timeline__item,
-      .contact-cta {
-        border-color: var(--line);
-        box-shadow: none;
-      }
-
-      .section-shell__head {
-        background: var(--surface);
-      }
-
-      .section-shell__icon {
-        color: var(--accent);
-        border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
-        background: var(--surface-alt);
-      }
-
       .timeline-list::before {
-        background: color-mix(in srgb, var(--accent) 32%, var(--line));
+        background: color-mix(in srgb, var(--accent) 30%, var(--line));
       }
 
       .timeline-list__dot {
         background: var(--accent);
-        border: 4px solid var(--clinical-mint);
+        border: 4px solid var(--clinical-panel);
         box-shadow: none;
+      }
+
+      .timeline-list__date {
+        background: var(--surface);
+        border-color: var(--clinical-border);
+      }
+
+      .timeline-list__content {
+        padding-block: var(--s1);
+      }
+
+      .check-list li::before,
+      .skills-chip-list li::before {
+        color: var(--accent);
       }
 
       .credential-section__body,
@@ -286,10 +351,10 @@ const personSchema = {
       }
 
       .credential-tile,
-      .cert-grid__item {
-        transition:
-          background-color var(--dur-1) ease,
-          border-color var(--dur-1) ease;
+      .cert-grid__item,
+      .card,
+      .text-card {
+        transition: background-color var(--dur-1) ease, border-color var(--dur-1) ease;
       }
 
       .credential-tile {
@@ -300,7 +365,7 @@ const personSchema = {
         padding: var(--s3);
         border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
         border-radius: var(--r-card);
-        background: var(--surface-alt);
+        background: var(--clinical-panel);
         box-shadow: none;
       }
 
@@ -313,34 +378,54 @@ const personSchema = {
         box-shadow: none;
       }
 
-      .credential-tile__label {
+      .credential-tile__label,
+      .credential-section .note,
+      #evidence .note {
+        display: inline-flex;
         width: fit-content;
+        border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+        border-radius: var(--r-pill);
+        background: var(--surface);
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .credential-tile__label {
         margin: 0;
         padding: 5px 9px;
-        border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
-        border-radius: var(--r-pill);
-        color: var(--accent);
-        background: var(--surface);
         font-size: 0.72rem;
-        font-weight: 800;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+      }
+
+      .credential-section .note,
+      #evidence .note {
+        padding: 7px 10px;
+        color: var(--text);
       }
 
       .credential-tile p {
         margin-top: 0;
       }
 
-      .credential-section .note,
-      #evidence .note {
-        display: inline-flex;
-        width: fit-content;
-        padding: 7px 10px;
-        border: 1px solid var(--line);
-        border-radius: var(--r-pill);
+      .contact-cta {
+        padding-inline: var(--s3);
+        background: var(--clinical-panel);
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        border-color: var(--clinical-border);
+      }
+
+      .contact-form input:focus-visible,
+      .contact-form textarea:focus-visible {
+        border-color: var(--accent);
+      }
+
+      .site-footer {
         background: var(--surface);
-        color: var(--text);
-        font-weight: 650;
+        border-top-color: var(--clinical-border);
       }
 
       @media (min-width: 560px) {
