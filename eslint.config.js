@@ -4,11 +4,11 @@ import astroPlugin from "eslint-plugin-astro";
 
 export default [
   {
-    ignores: ["dist", ".astro", "node_modules"],
+    ignores: ["dist", ".astro", "node_modules", "src-old-v55", "src-legacy-v55"],
   },
   ...astroPlugin.configs["flat/recommended"],
   {
-    files: ["**/*.{ts,tsx,js,jsx,mjs,cjs}"],
+    files: ["src/**/*.{ts,js,mjs,cjs}"],
     languageOptions: {
       parser: tsParser,
       parserOptions: {
