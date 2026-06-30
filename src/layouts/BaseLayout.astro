@@ -83,25 +83,31 @@ const personSchema = {
       }
 
       .site-header {
-        background: color-mix(in srgb, var(--surface) 82%, transparent);
-        border-bottom-color: color-mix(in srgb, var(--line) 72%, transparent);
+        background: color-mix(in srgb, var(--surface) 92%, transparent);
+        border-bottom-color: color-mix(in srgb, var(--line) 70%, transparent);
         box-shadow: 0 8px 30px rgba(8, 63, 74, 0.05);
       }
 
-      .brand__mark {
-        background: linear-gradient(135deg, var(--accent), var(--clinical-blue));
-        color: var(--accent-text);
+      .site-header__inner {
+        min-height: 64px;
       }
 
-      .brand__text small {
-        color: var(--accent);
-        font-weight: 700;
-      }
-
+      .brand__mark,
       .desktop-nav a:last-child,
       .btn--primary {
         background: linear-gradient(135deg, var(--accent), var(--clinical-blue));
         color: var(--accent-text);
+      }
+
+      .brand__text small,
+      .section-intro__eyebrow,
+      .text-link,
+      .hero__role {
+        color: var(--accent);
+      }
+
+      .desktop-nav a:last-child,
+      .btn--primary {
         box-shadow: 0 14px 34px rgba(8, 118, 111, 0.18);
       }
 
@@ -111,20 +117,34 @@ const personSchema = {
       }
 
       .hero {
-        position: relative;
-        overflow: hidden;
+        padding-block: clamp(28px, 8vw, 86px);
+        overflow: visible;
       }
 
       .hero::before {
-        content: '';
-        position: absolute;
-        inset: 24px var(--gutter) auto var(--gutter);
-        height: min(68vh, 720px);
-        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
-        border-radius: 40px;
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(223, 245, 240, 0.58));
+        display: none;
+      }
+
+      .hero__grid {
+        grid-template-columns: 1fr;
+        gap: var(--s4);
+        align-items: stretch;
+        padding: clamp(20px, 5vw, 54px);
+        border: 1px solid color-mix(in srgb, var(--line) 78%, transparent);
+        border-radius: clamp(24px, 4vw, 42px);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(223, 245, 240, 0.68));
         box-shadow: var(--shadow-2);
-        z-index: -1;
+      }
+
+      .hero__content {
+        max-width: 46rem;
+      }
+
+      .hero h1 {
+        max-width: 11ch;
+        font-size: clamp(2.35rem, 12vw, 4.25rem);
+        line-height: 1.02;
+        letter-spacing: -0.065em;
       }
 
       .badge {
@@ -137,12 +157,15 @@ const personSchema = {
       }
 
       .hero__role {
-        color: var(--accent);
         font-weight: 750;
       }
 
       .hero__tagline {
-        font-size: clamp(1rem, 1.3vw, 1.15rem);
+        font-size: clamp(1rem, 1.4vw, 1.15rem);
+      }
+
+      .hero__proof {
+        margin-top: var(--s3);
       }
 
       .hero__proof li,
@@ -154,13 +177,47 @@ const personSchema = {
         font-weight: 650;
       }
 
+      .hero__actions {
+        margin-top: var(--s4);
+      }
+
+      .hero__actions .btn {
+        flex: 1 1 100%;
+      }
+
       .hero__media {
-        border-radius: 36px;
-        background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(223,245,240,0.5));
+        display: grid;
+        align-content: end;
+        min-height: 360px;
+        border: 1px solid color-mix(in srgb, var(--line) 80%, transparent);
+        border-radius: 28px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(223,245,240,0.58));
+        overflow: hidden;
       }
 
       .hero__media img {
+        width: min(78%, 360px);
+        max-height: 420px;
+        margin: 0 auto;
+        object-fit: contain;
+        object-position: center bottom;
         filter: drop-shadow(0 26px 48px rgba(8, 63, 74, 0.14));
+      }
+
+      .hero-meta {
+        position: static;
+        width: calc(100% - 24px);
+        margin: 0 auto 12px;
+        padding: var(--s2);
+        border-radius: 18px;
+      }
+
+      .hero-meta li {
+        align-items: start;
+      }
+
+      .hero-meta strong {
+        max-width: 56%;
       }
 
       .hero-meta,
@@ -183,11 +240,6 @@ const personSchema = {
         background: color-mix(in srgb, var(--clinical-mint) 58%, var(--surface));
       }
 
-      .section-intro__eyebrow,
-      .text-link {
-        color: var(--accent);
-      }
-
       .timeline-list::before {
         background: color-mix(in srgb, var(--accent) 34%, var(--line));
       }
@@ -205,7 +257,7 @@ const personSchema = {
 
       .credential-section__lead {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: 1fr;
         gap: var(--s2);
       }
 
@@ -256,10 +308,6 @@ const personSchema = {
         margin-top: 0;
       }
 
-      .credential-section__supporting h3 {
-        font-size: var(--h3);
-      }
-
       .credential-section .note,
       #evidence .note {
         display: inline-flex;
@@ -272,17 +320,74 @@ const personSchema = {
         font-weight: 650;
       }
 
-      @media (max-width: 980px) {
+      @media (min-width: 560px) {
+        .hero__actions .btn {
+          flex: 0 1 auto;
+        }
+      }
+
+      @media (min-width: 900px) {
+        .hero__grid {
+          grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.68fr);
+          gap: clamp(32px, 5vw, 72px);
+          min-height: min(680px, calc(100vh - 110px));
+        }
+
+        .hero h1 {
+          max-width: 12ch;
+          font-size: clamp(3.2rem, 5.8vw, 4.8rem);
+        }
+
+        .hero__media {
+          min-height: 520px;
+        }
+
+        .hero__media img {
+          width: min(86%, 430px);
+          max-height: 560px;
+        }
+
+        .hero-meta {
+          width: min(330px, calc(100% - 32px));
+          justify-self: end;
+          margin-right: var(--s2);
+          margin-bottom: var(--s2);
+        }
+
         .credential-section__lead {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
         }
       }
 
       @media (max-width: 760px) {
-        .hero::before {
-          inset: 8px 10px auto 10px;
-          height: 84%;
-          border-radius: 28px;
+        .site-header__inner {
+          min-height: 60px;
+        }
+
+        .brand__text small {
+          display: none;
+        }
+
+        .hero {
+          padding-top: var(--s3);
+        }
+
+        .hero__grid {
+          padding: var(--s3);
+        }
+
+        .hero__media {
+          min-height: 330px;
+        }
+
+        .hero__media img {
+          width: min(78%, 310px);
+          max-height: 360px;
+        }
+
+        .badge {
+          font-size: 0.68rem;
+          line-height: 1.2;
         }
 
         .hero h1 {
@@ -290,9 +395,7 @@ const personSchema = {
         }
 
         .hero-meta {
-          position: static;
-          width: 100%;
-          margin-top: var(--s2);
+          width: calc(100% - 20px);
         }
       }
 
