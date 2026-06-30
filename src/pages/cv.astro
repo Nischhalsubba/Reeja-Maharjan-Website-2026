@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../content/profile';
+---
+
+<BaseLayout title={`${profile.name} | Professional CV`} description={profile.profileSummary}>
+  <section class="section">
+    <div class="container section-stack">
+      <header class="section-intro">
+        <p class="section-intro__eyebrow">Professional CV</p>
+        <h1>{profile.name}</h1>
+        <p>{profile.role}</p>
+        <ul class="chip-list">
+          {profile.hero.proof.map((item) => <li>{item}</li>)}
+        </ul>
+        <div class="hero__actions">
+          <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Email Reeja</a>
+          <button class="btn btn--secondary" type="button" onclick="window.print()">Print / Save PDF</button>
+        </div>
+      </header>
+
+      <article class="section-shell">
+        <header class="section-shell__head">
+          <div class="section-intro">
+            <p class="section-intro__eyebrow">Summary</p>
+            <h2>Professional Profile</h2>
+            <p>{profile.profileSummary}</p>
+          </div>
+        </header>
+      </article>
+
+      <article class="section-shell">
+        <header class="section-shell__head">
+          <div class="section-intro">
+            <p class="section-intro__eyebrow">Experience</p>
+            <h2>Clinical Experience</h2>
+          </div>
+        </header>
+        <div class="section-shell__body">
+          <div class="card-grid card-grid--3">
+            {profile.experience.map((item) => (
+              <article class="card">
+                <h3>{item.role}</h3>
+                <p>{item.organization}</p>
+                <p class="cert-grid__meta">{item.location} · {item.period}</p>
+                <ul class="check-list">
+                  {item.bullets.map((bullet) => <li>{bullet}</li>)}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </div>
+      </article>
+
+      <article class="section-shell">
+        <header class="section-shell__head">
+          <div class="section-intro">
+            <p class="section-intro__eyebrow">Credentials</p>
+            <h2>Licenses, Registration & Training</h2>
+          </div>
+        </header>
+        <div class="section-shell__body">
+          <div class="card-grid card-grid--2">
+            {profile.certifications.map((item) => (
+              <article class="card">
+                <h3>{item.title}</h3>
+                <p class="cert-grid__meta">{item.issuer} · {item.date}</p>
+                <p>{item.note}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </article>
+
+      <article class="section-shell">
+        <header class="section-shell__head">
+          <div class="section-intro">
+            <p class="section-intro__eyebrow">Education & Contact</p>
+            <h2>Education and Contact</h2>
+          </div>
+        </header>
+        <div class="section-shell__body">
+          <div class="card-grid card-grid--2">
+            <article class="card">
+              <h3>Education</h3>
+              <ul class="check-list">
+                {profile.education.map((item) => <li>{item.level} · {item.institution} · {item.result}</li>)}
+              </ul>
+            </article>
+            <article class="card">
+              <h3>Contact</h3>
+              <p>Email: <a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a></p>
+              <p>Location: {profile.contact.location}</p>
+              <p><a href={profile.contact.linkedin}>LinkedIn profile</a></p>
+            </article>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
