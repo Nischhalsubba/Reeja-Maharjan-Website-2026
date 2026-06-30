@@ -78,6 +78,125 @@ const personSchema = {
         outline-offset: 3px;
       }
 
+      body {
+        background: linear-gradient(180deg, #f7fffd 0%, var(--bg) 44%, #f8fbff 100%);
+      }
+
+      .site-header {
+        background: color-mix(in srgb, var(--surface) 82%, transparent);
+        border-bottom-color: color-mix(in srgb, var(--line) 72%, transparent);
+        box-shadow: 0 8px 30px rgba(8, 63, 74, 0.05);
+      }
+
+      .brand__mark {
+        background: linear-gradient(135deg, var(--accent), var(--clinical-blue));
+        color: var(--accent-text);
+      }
+
+      .brand__text small {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .desktop-nav a:last-child,
+      .btn--primary {
+        background: linear-gradient(135deg, var(--accent), var(--clinical-blue));
+        color: var(--accent-text);
+        box-shadow: 0 14px 34px rgba(8, 118, 111, 0.18);
+      }
+
+      .btn--secondary {
+        background: var(--surface);
+        border-color: var(--line-strong);
+      }
+
+      .hero {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: 24px var(--gutter) auto var(--gutter);
+        height: min(68vh, 720px);
+        border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+        border-radius: 40px;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(223, 245, 240, 0.58));
+        box-shadow: var(--shadow-2);
+        z-index: -1;
+      }
+
+      .badge {
+        border-radius: var(--r-pill);
+        border-color: color-mix(in srgb, var(--accent) 22%, var(--line));
+        background: color-mix(in srgb, var(--clinical-mint) 75%, var(--surface));
+        color: var(--accent);
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+
+      .hero__role {
+        color: var(--accent);
+        font-weight: 750;
+      }
+
+      .hero__tagline {
+        font-size: clamp(1rem, 1.3vw, 1.15rem);
+      }
+
+      .hero__proof li,
+      .skills-chip-list li,
+      .chip-list li {
+        border-color: color-mix(in srgb, var(--accent) 18%, var(--line));
+        background: color-mix(in srgb, var(--surface) 78%, var(--clinical-mint));
+        color: var(--text);
+        font-weight: 650;
+      }
+
+      .hero__media {
+        border-radius: 36px;
+        background: linear-gradient(180deg, rgba(255,255,255,0.72), rgba(223,245,240,0.5));
+      }
+
+      .hero__media img {
+        filter: drop-shadow(0 26px 48px rgba(8, 63, 74, 0.14));
+      }
+
+      .hero-meta,
+      .section-shell,
+      .card,
+      .text-card,
+      .timeline__item,
+      .contact-cta {
+        border-color: color-mix(in srgb, var(--line) 82%, transparent);
+        box-shadow: var(--shadow-1);
+      }
+
+      .section-shell__head {
+        background: linear-gradient(180deg, var(--surface), var(--surface-alt));
+      }
+
+      .section-shell__icon {
+        color: var(--accent);
+        border-color: color-mix(in srgb, var(--accent) 22%, var(--line));
+        background: color-mix(in srgb, var(--clinical-mint) 58%, var(--surface));
+      }
+
+      .section-intro__eyebrow,
+      .text-link {
+        color: var(--accent);
+      }
+
+      .timeline-list::before {
+        background: color-mix(in srgb, var(--accent) 34%, var(--line));
+      }
+
+      .timeline-list__dot {
+        background: var(--accent);
+        box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent) 12%, transparent);
+      }
+
       .credential-section__body,
       .credential-section__supporting {
         display: grid;
@@ -104,17 +223,19 @@ const personSchema = {
         gap: var(--s2);
         min-height: 100%;
         padding: var(--s3);
-        border: 1px solid var(--line);
+        border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
         border-radius: var(--r-card);
-        background: linear-gradient(180deg, color-mix(in srgb, var(--surface-alt) 72%, var(--surface)), var(--surface));
-        box-shadow: 0 18px 50px rgba(20, 28, 38, 0.08);
+        background: linear-gradient(180deg, color-mix(in srgb, var(--clinical-mint) 46%, var(--surface)), var(--surface));
+        box-shadow: var(--shadow-1);
       }
 
       .credential-tile:hover,
-      .cert-grid__item:hover {
+      .cert-grid__item:hover,
+      .card:hover,
+      .text-card:hover {
         transform: translateY(-2px);
         border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
-        box-shadow: 0 24px 70px rgba(20, 28, 38, 0.12);
+        box-shadow: var(--shadow-2);
       }
 
       .credential-tile__label {
@@ -122,7 +243,7 @@ const personSchema = {
         margin: 0;
         padding: 5px 9px;
         border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--line));
-        border-radius: 999px;
+        border-radius: var(--r-pill);
         color: var(--accent);
         background: color-mix(in srgb, var(--accent) 9%, var(--surface));
         font-size: 0.72rem;
@@ -145,7 +266,7 @@ const personSchema = {
         width: fit-content;
         padding: 7px 10px;
         border: 1px solid var(--line);
-        border-radius: 999px;
+        border-radius: var(--r-pill);
         background: var(--surface-alt);
         color: var(--text);
         font-weight: 650;
@@ -158,6 +279,12 @@ const personSchema = {
       }
 
       @media (max-width: 760px) {
+        .hero::before {
+          inset: 8px 10px auto 10px;
+          height: 84%;
+          border-radius: 28px;
+        }
+
         .hero h1 {
           max-width: 100%;
         }
