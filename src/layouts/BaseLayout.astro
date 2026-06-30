@@ -20,6 +20,8 @@ const {
   image = '/reeja-headshot.jpg'
 } = Astro.props;
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
+const isOnePage = Astro.url.pathname === '/';
+const navigationMode = isOnePage ? 'one-page' : 'blog';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
 const sameAs = [profile.contact.linkedin, profile.contact.instagram].filter(Boolean);
@@ -185,12 +187,12 @@ const personSchema = {
     <Header
       name={profile.name}
       showAwards={profile.awards.length > 0}
-      mode={isBlogPage ? 'blog' : 'one-page'}
+      mode={navigationMode}
     />
     <main id="main-content">
       <slot />
     </main>
-    <Footer profile={profile} mode={isBlogPage ? 'blog' : 'one-page'} />
+    <Footer profile={profile} mode={navigationMode} />
 
     <script>
       import { initMotion } from '../lib/motion';
