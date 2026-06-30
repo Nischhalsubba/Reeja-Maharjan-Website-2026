@@ -11,15 +11,16 @@ const { profile } = Astro.props;
   <div class="container section-stack">
     <div class="contact-cta" data-reveal>
       <img src="/reeja-headshot.jpg" alt="Reeja Maharjan profile portrait" width="84" height="84" />
-      <p class="section-intro__eyebrow">Available for nursing roles</p>
+      <p class="section-intro__eyebrow">Available for nursing and research roles</p>
       <h2>{profile.contactIntro.title}</h2>
       <p>{profile.contactIntro.summary}</p>
       <ul class="chip-list contact-availability" aria-label="Opportunity fit">
         <li>Hospitals</li>
-        <li>NGOs</li>
-        <li>INGOs</li>
+        <li>Research projects</li>
+        <li>NGOs / INGOs</li>
         <li>Maternal health</li>
-        <li>General ward care</li>
+        <li>Telemonitoring</li>
+        <li>Data documentation</li>
       </ul>
       <div class="contact-form__actions">
         <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Email Reeja</a>
@@ -62,7 +63,7 @@ const { profile } = Astro.props;
           </label>
           <label>
             Role type
-            <input type="text" name="role_type" placeholder="Hospital, NGO, INGO, maternal care..." />
+            <input type="text" name="role_type" placeholder="Hospital, research, NGO, INGO, maternal care..." />
           </label>
           <label>
             Location
@@ -75,9 +76,9 @@ const { profile } = Astro.props;
         </div>
         <label>
           Message
-          <textarea name="message" rows="5" required placeholder="Briefly describe the role, care setting, schedule, and next step."></textarea>
+          <textarea name="message" rows="5" required placeholder="Briefly describe the role, care setting, research project, schedule, and next step."></textarea>
         </label>
-        <input type="hidden" name="_subject" value="New nursing opportunity inquiry from reejamaharjan.com.np" />
+        <input type="hidden" name="_subject" value="New nursing or research opportunity inquiry from reejamaharjan.com.np" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden />
