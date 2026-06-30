@@ -5,11 +5,13 @@ import type { ProfileContent } from '../content/profile';
 
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
+const primaryItems = profile.certifications.slice(0, 3);
+const supportingItems = profile.certifications.slice(3);
 ---
 
 <section class="section" id={profile.certificationsIntro.id} data-reveal-group>
   <div class="container">
-    <article class="section-shell" data-reveal>
+    <article class="section-shell credential-section" data-reveal>
       <header class="section-shell__head">
         <span class="section-shell__icon"><SectionIcon name="certifications" /></span>
         <SectionIntro
@@ -18,32 +20,37 @@ const { profile } = Astro.props;
           summary={profile.certificationsIntro.summary}
         />
       </header>
-      <div class="section-shell__body">
-        <div class="cert-grid">
-          {profile.certifications.map((item) => (
-            <article class="cert-grid__item">
+      <div class="section-shell__body credential-section__body">
+        <div class="credential-section__lead" aria-label="Primary professional credentials">
+          {primaryItems.map((item) => (
+            <article class="credential-tile credential-tile--primary">
+              <p class="credential-tile__label">Priority proof</p>
               <h3>{item.title}</h3>
               <p class="cert-grid__meta">{item.issuer} · {item.date}</p>
               <p>{item.note}</p>
-              {
-                item.preview && item.credentialUrl ? (
-                  <a
-                    class="btn btn--secondary cert-grid__action"
-                    href={item.credentialUrl}
-                    data-lightbox-src={item.preview.src}
-                    data-lightbox-alt={item.preview.alt}
-                    data-lightbox-title={item.preview.title}
-                    data-lightbox-description={item.preview.description}
-                  >
-                    {item.credentialLabel ?? 'Show credential'}
-                  </a>
-                ) : (
-                  <p class="note">{item.credentialLabel ?? 'Credential available on request'}</p>
-                )
-              }
+              <p class="note">{item.credentialLabel ?? 'Available on request'}</p>
             </article>
           ))}
         </div>
+
+        {supportingItems.length > 0 && (
+          <div class="credential-section__supporting">
+            <div class="section-intro">
+              <p class="section-intro__eyebrow">Additional training</p>
+              <h3>Clinical Training & Professional Development</h3>
+            </div>
+            <div class="cert-grid">
+              {supportingItems.map((item) => (
+                <article class="cert-grid__item">
+                  <h4>{item.title}</h4>
+                  <p class="cert-grid__meta">{item.issuer} · {item.date}</p>
+                  <p>{item.note}</p>
+                  <p class="note">{item.credentialLabel ?? 'Available on request'}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </article>
   </div>
