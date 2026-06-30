@@ -2,14 +2,16 @@
   "extends": "astro/tsconfigs/strict",
   "include": [
     ".astro/types.d.ts",
-    "**/*"
+    "src/**/*.astro",
+    "src/**/*.ts"
   ],
   "exclude": [
-    "dist"
+    "dist",
+    "node_modules",
+    "src-old-v55",
+    "src-legacy-v55"
   ],
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
     "noUncheckedIndexedAccess": true
   }
 }
