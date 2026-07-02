@@ -12,7 +12,7 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--text);
-  background: var(--bg);
+  background: #ffffff !important;
   font-size: var(--body-size);
   line-height: var(--body-lh);
   letter-spacing: var(--body-ls);
@@ -95,4 +95,102 @@ ol {
 
 .strong {
   font-weight: 700;
+}
+
+/* Monochrome Astro-style UI overrides. Content remains unchanged. */
+:root {
+  --bg: #ffffff !important;
+  --surface: #ffffff !important;
+  --text: #0a0a0a !important;
+  --muted: #707070 !important;
+  --line: #e8e8e8 !important;
+  --accent: #0a0a0a !important;
+  --accent-text: #ffffff !important;
+  --accent-hover: #2b2b2b !important;
+  --surface-alt: #f7f7f7 !important;
+  --line-strong: #cfcfcf !important;
+  --clinical-paper: #ffffff !important;
+  --clinical-panel: #fafafa !important;
+  --clinical-panel-2: #f5f5f5 !important;
+  --clinical-ink: #0a0a0a !important;
+  --clinical-border: #e8e8e8 !important;
+  --clinical-border-strong: #cfcfcf !important;
+  --shadow-1: none !important;
+  --shadow-2: none !important;
+  --shadow-3: none !important;
+}
+
+.site-header,
+.section-shell,
+.card,
+.text-card,
+.timeline__item,
+.timeline-list__content,
+.cert-grid__item,
+.credential-tile,
+.contact-cta,
+.hero__grid,
+.hero__media,
+.hero-meta,
+.section-shell__head,
+.section-shell__body {
+  background: #ffffff !important;
+  border-color: #e8e8e8 !important;
+  box-shadow: none !important;
+}
+
+.brand__mark,
+.btn--primary,
+.desktop-nav a:last-child {
+  background: #0a0a0a !important;
+  color: #ffffff !important;
+}
+
+.btn--secondary,
+.section-shell__icon,
+.section-intro__eyebrow,
+.badge,
+.credential-tile__label,
+.credential-section .note,
+#evidence .note,
+.hero__proof li,
+.skills-chip-list li,
+.chip-list li {
+  background: #ffffff !important;
+  border-color: #cfcfcf !important;
+  color: #0a0a0a !important;
+}
+
+.hero__media,
+.credential-tile,
+.contact-cta {
+  background: #f7f7f7 !important;
+}
+
+.hero__media img {
+  filter: grayscale(100%) !important;
+}
+
+.card:hover,
+.text-card:hover,
+.cert-grid__item:hover,
+.credential-tile:hover,
+.btn:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.timeline-list::before {
+  background: #cfcfcf !important;
+}
+
+.timeline-list__dot,
+.check-list li::before,
+.skills-chip-list li::before {
+  color: #0a0a0a !important;
+}
+
+.timeline-list__dot {
+  background: #0a0a0a !important;
+  box-shadow: none !important;
 }
