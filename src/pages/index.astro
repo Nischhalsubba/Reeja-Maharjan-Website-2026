@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
+import { professionalFacts } from '../content/professional-facts';
 import '../styles/home-redesign.css';
 import '../styles/home-seo.css';
 
@@ -28,10 +29,10 @@ const focusAreas = [
 ];
 
 const hiringStrengths = [
-  'NNC-licensed Registered Nurse',
-  'Active Texas RN',
+  professionalFacts.nepalLicense,
+  professionalFacts.texasLicense,
   'Hospital experience in Nepal',
-  'Current IISH MOM-HD Research Assistant',
+  `${professionalFacts.currentEmployerShort} ${professionalFacts.currentProjectShort} ${professionalFacts.currentRole}`,
   'Maternal-newborn and telemonitoring experience',
   'Nepali, Newari, English, and Hindi communication'
 ];
@@ -54,44 +55,44 @@ const featuredWriting = [
   }
 ];
 
-const emailSubject = encodeURIComponent('Nursing or research opportunity for Reeja Maharjan');
+const emailSubject = encodeURIComponent(`Nursing or research opportunity for ${professionalFacts.name}`);
 ---
 
 <BaseLayout
-  title="Reeja Maharjan | Registered Nurse in Nepal and Maternal Health Research Assistant"
-  description="Reeja Maharjan is an NNC-licensed Registered Nurse in Nepal, active Texas RN, and maternal-health Research Assistant with hospital, telemonitoring, patient education, and clinical research experience."
+  title={`${professionalFacts.name} | ${professionalFacts.primaryRole}`}
+  description={`${professionalFacts.name} is a ${professionalFacts.nepalLicense}, ${professionalFacts.texasLicense}, and ${professionalFacts.currentRole} with hospital, telemonitoring, patient education, and clinical research experience.`}
 >
   <div class="home-v2">
     <section class="home-hero" id="home" aria-labelledby="home-title">
       <div class="container home-hero__grid">
         <div class="home-hero__content">
           <p class="home-kicker">Registered Nurse in Nepal · Maternal Health Research</p>
-          <p class="home-hero__name">Reeja Maharjan, B.Sc. Nursing</p>
+          <p class="home-hero__name">{professionalFacts.name}, {professionalFacts.credential}</p>
           <h1 id="home-title">
             <span>Registered nurse.</span>
             <span>Research ready.</span>
           </h1>
           <p class="home-hero__intro">
-            NNC-licensed nurse and active Texas RN with hospital experience and current work on the IISH MOM-HD maternal telemonitoring trial in Biratnagar.
+            {professionalFacts.nepalLicense} and {professionalFacts.texasLicense}, with hospital experience and current work on the {professionalFacts.currentProject} in {professionalFacts.locationLocality}.
           </p>
 
           <div class="home-actions" aria-label="Primary actions">
             <a class="home-button home-button--dark" href="/hire-reeja/" data-track="home-hire">Hire Reeja</a>
-            <a class="home-button home-button--light" href="/cv/" data-track="home-cv">View CV</a>
+            <a class="home-button home-button--light" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
           </div>
 
           <ul class="home-proof" aria-label="Professional highlights">
-            <li>NNC licensed RN</li>
-            <li>Active Texas RN</li>
-            <li>IISH research assistant</li>
+            <li>{professionalFacts.nepalLicenseShort}</li>
+            <li>{professionalFacts.texasLicenseShort}</li>
+            <li>{professionalFacts.currentEmployerShort} research assistant</li>
           </ul>
         </div>
 
         <dl class="home-hero__summary" aria-label="Professional summary">
-          <div><dt>Current role</dt><dd>Research Assistant, IISH MOM-HD</dd></div>
+          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}</dd></div>
           <div><dt>Experience</dt><dd>TUTH, MMTH, and Sindhuli Hospital</dd></div>
           <div><dt>Focus</dt><dd>Maternal health, clinical nursing, patient education, and research</dd></div>
-          <div><dt>Location</dt><dd>{profile.contact.location}</dd></div>
+          <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
         </dl>
       </div>
     </section>
@@ -115,12 +116,12 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
 
         <div class="home-about-copy">
           <p>
-            Reeja Maharjan is a B.Sc. Nursing graduate, Nepal Nursing Council-licensed Registered Nurse, and active Texas RN. Her background includes maternal-newborn care, general ward nursing, patient counselling, documentation, structured handover, BP/BG telemonitoring, and clinical research coordination.
+            {professionalFacts.name} is a {professionalFacts.credential} graduate, {professionalFacts.nepalLicense}, and {professionalFacts.texasLicense}. Her background includes maternal-newborn care, general ward nursing, patient counselling, documentation, structured handover, BP/BG telemonitoring, and clinical research coordination.
           </p>
           <dl class="home-facts">
-            <div><dt>Current role</dt><dd>Research Assistant, Institute for Implementation Science and Health</dd></div>
-            <div><dt>Based in</dt><dd>{profile.contact.location}</dd></div>
-            <div><dt>Open to</dt><dd>Nursing, maternal health, research, NGO/INGO, and care-coordination roles</dd></div>
+            <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployer}</dd></div>
+            <div><dt>Based in</dt><dd>{professionalFacts.currentLocation}</dd></div>
+            <div><dt>Open to</dt><dd>{professionalFacts.availability}</dd></div>
           </dl>
         </div>
       </div>
@@ -133,7 +134,7 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
             <p class="home-kicker">Experience</p>
             <h2 id="experience-title">Hospital nursing and maternal-health research.</h2>
           </div>
-          <a class="home-text-link" href="/cv/">View full CV <span aria-hidden="true">-&gt;</span></a>
+          <a class="home-text-link" href={professionalFacts.publicCvPath}>View full CV <span aria-hidden="true">-&gt;</span></a>
         </div>
 
         <ol class="home-experience-list">
@@ -243,10 +244,10 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
         <div class="home-contact__content">
           <p>Send the role, organisation, location, start date, and a short description of the work.</p>
           <div class="home-contact__actions">
-            <a class="home-button home-button--white" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="contact-email">Email Reeja</a>
-            <a class="home-button home-button--outline" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">LinkedIn</a>
+            <a class="home-button home-button--white" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="contact-email">Email Reeja</a>
+            <a class="home-button home-button--outline" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">LinkedIn</a>
           </div>
-          <a class="home-contact__email" href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
+          <a class="home-contact__email" href={`mailto:${professionalFacts.professionalEmail}`}>{professionalFacts.professionalEmail}</a>
         </div>
       </div>
     </section>
