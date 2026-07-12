@@ -1,26 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
+import { professionalFacts } from '../content/professional-facts';
 ---
 
-<BaseLayout title={`${profile.name} | Nursing CV`} description={profile.profileSummary}>
+<BaseLayout title={`${professionalFacts.name} | Nursing CV`} description={profile.profileSummary}>
   <div class="site-page">
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
           <p class="site-eyebrow">Professional CV</p>
-          <h1>{profile.name}</h1>
-          <p class="site-page__lede">NNC-licensed Registered Nurse, active Texas RN, and maternal-health Research Assistant based in Biratnagar, Nepal.</p>
+          <h1>{professionalFacts.name}</h1>
+          <p class="site-page__lede">{professionalFacts.nepalLicense}, {professionalFacts.texasLicenseShort}, and maternal-health {professionalFacts.currentRole} based in {professionalFacts.currentLocation}.</p>
           <div class="site-actions">
-            <a class="site-button site-button--primary" href={`mailto:${profile.contact.email}`}>Email Reeja</a>
+            <a class="site-button site-button--primary" href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja</a>
             <button class="site-button" type="button" onclick="window.print()">Print / Save PDF</button>
           </div>
         </div>
         <dl class="site-page__summary">
-          <div><dt>Current role</dt><dd>Research Assistant, IISH MOM-HD</dd></div>
+          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}</dd></div>
           <div><dt>Clinical background</dt><dd>TUTH, MMTH, and Sindhuli Hospital</dd></div>
-          <div><dt>Education</dt><dd>B.Sc. Nursing</dd></div>
-          <div><dt>Location</dt><dd>Biratnagar, Nepal</dd></div>
+          <div><dt>Education</dt><dd>{professionalFacts.credential}</dd></div>
+          <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
         </dl>
       </div>
     </section>
@@ -70,7 +71,7 @@ import { profile } from '../content/profile';
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
         <div><p class="site-eyebrow">Contact</p><h2>Discuss a nursing or research opportunity.</h2><p>Share the role, organisation, location, start date, and responsibilities.</p></div>
-        <div class="site-actions"><a class="site-button" href={`mailto:${profile.contact.email}`}>Email Reeja</a><a class="site-button" href="/hire-reeja/">Recruiter profile</a></div>
+        <div class="site-actions"><a class="site-button" href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja</a><a class="site-button" href="/hire-reeja/">Recruiter profile</a></div>
       </div>
     </section>
   </div>
