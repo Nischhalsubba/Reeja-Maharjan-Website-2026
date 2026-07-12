@@ -10,7 +10,7 @@ const { name, mode = 'one-page' } = Astro.props;
 
 <header class="site-header" aria-label="Primary">
   <div class="container site-header__inner">
-    <a class="brand" href={mode === 'blog' ? '/' : '#home'} aria-label="Go to Reeja Maharjan homepage">
+    <a class="brand" href={mode === 'one-page' ? '#home' : '/'} aria-label="Go to Reeja Maharjan homepage">
       <span class="brand__mark">RM</span>
       <span class="brand__text">
         <strong>{name}</strong>
@@ -22,54 +22,28 @@ const { name, mode = 'one-page' } = Astro.props;
       Menu
     </button>
 
-    {
-      mode === 'one-page' ? (
-        <nav class="desktop-nav" aria-label="Section navigation">
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#focus">Focus</a>
-          <a href="#credentials">Credentials</a>
-          <a href="#writing">Writing</a>
-          <a href="/cv/">CV</a>
-          <a href="#contact">Hire Reeja</a>
-        </nav>
-      ) : (
-        <nav class="desktop-nav" aria-label="Site navigation">
-          <a href="/">Home</a>
-          <a href="/#experience">Experience</a>
-          <a href="/#credentials">Credentials</a>
-          <a href="/cv/">CV</a>
-          <a href="/blog/">Writing</a>
-          <a href="/#contact">Hire Reeja</a>
-        </nav>
-      )
-    }
+    <nav class="desktop-nav" aria-label="Site navigation">
+      <a href={mode === 'one-page' ? '#experience' : '/#experience'}>Experience</a>
+      <a href="/maternal-health/">Maternal health</a>
+      <a href="/nursing-practice/">Nursing</a>
+      <a href="/clinical-research/">Research</a>
+      <a href="/blog/">Writing</a>
+      <a href="/cv/">CV</a>
+      <a href="/hire-reeja/" data-track="hire-nav">Hire Reeja</a>
+    </nav>
   </div>
 
   <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
-    {
-      mode === 'one-page' ? (
-        <nav class="mobile-nav__panel" aria-label="Mobile section navigation">
-          <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#focus">Focus</a>
-          <a href="#credentials">Credentials</a>
-          <a href="#writing">Writing</a>
-          <a href="/cv/">CV</a>
-          <a href="#contact">Hire Reeja</a>
-        </nav>
-      ) : (
-        <nav class="mobile-nav__panel" aria-label="Mobile site navigation">
-          <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
-          <a href="/">Home</a>
-          <a href="/#experience">Experience</a>
-          <a href="/#credentials">Credentials</a>
-          <a href="/cv/">CV</a>
-          <a href="/blog/">Writing</a>
-          <a href="/#contact">Hire Reeja</a>
-        </nav>
-      )
-    }
+    <nav class="mobile-nav__panel" aria-label="Mobile site navigation">
+      <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
+      <a href="/">Home</a>
+      <a href="/#experience">Experience</a>
+      <a href="/maternal-health/">Maternal health</a>
+      <a href="/nursing-practice/">Nursing practice</a>
+      <a href="/clinical-research/">Clinical research</a>
+      <a href="/blog/">Writing</a>
+      <a href="/cv/">CV</a>
+      <a href="/hire-reeja/" data-track="hire-mobile-nav">Hire Reeja</a>
+    </nav>
   </div>
 </header>
