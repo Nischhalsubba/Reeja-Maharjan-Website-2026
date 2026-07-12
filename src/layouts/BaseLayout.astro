@@ -168,7 +168,10 @@ const graphSchema = {
 
     <script>
       import { initMotion } from '../lib/motion';
+      import { initMobileNavA11y } from '../lib/mobileNavA11y';
+
       initMotion();
+      initMobileNavA11y();
 
       document.querySelectorAll<HTMLElement>('[data-track]').forEach((element) => {
         element.addEventListener('click', () => {
