@@ -8,6 +8,7 @@ import '../styles/site-pages.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
+import { professionalFacts } from '../content/professional-facts';
 
 type Props = {
   title?: string;
@@ -16,7 +17,7 @@ type Props = {
 };
 
 const {
-  title = `${profile.name} | Registered Nurse and Maternal Health Research Assistant`,
+  title = `${professionalFacts.name} | ${professionalFacts.primaryRole}`,
   description = profile.hero.tagline,
   image = '/og-default.svg'
 } = Astro.props;
@@ -26,23 +27,23 @@ const isOnePage = Astro.url.pathname === '/';
 const isProfilePage = isOnePage || Astro.url.pathname === '/hire-reeja/';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
-const sameAs = [profile.contact.linkedin, profile.contact.instagram].filter(Boolean);
+const sameAs = [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean);
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const searchConsoleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 const personSchema = {
   '@type': 'Person',
   '@id': 'https://reejamaharjan.com.np/#person',
-  name: profile.name,
+  name: professionalFacts.name,
   url: 'https://reejamaharjan.com.np/',
-  jobTitle: profile.role,
+  jobTitle: professionalFacts.primaryRole,
   description: profile.profileSummary,
-  email: profile.contact.email,
+  email: professionalFacts.professionalEmail,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Biratnagar',
-    addressRegion: 'Koshi Province',
-    addressCountry: 'NP'
+    addressLocality: professionalFacts.locationLocality,
+    addressRegion: professionalFacts.locationRegion,
+    addressCountry: professionalFacts.countryCode
   },
   knowsAbout: profile.keywords,
   sameAs
@@ -55,7 +56,7 @@ const graphSchema = {
       '@type': 'WebSite',
       '@id': 'https://reejamaharjan.com.np/#website',
       url: 'https://reejamaharjan.com.np/',
-      name: 'Reeja Maharjan',
+      name: professionalFacts.name,
       description: profile.hero.tagline,
       inLanguage: 'en',
       publisher: { '@id': 'https://reejamaharjan.com.np/#person' }
@@ -68,7 +69,7 @@ const graphSchema = {
           url: canonicalUrl,
           name: title,
           description,
-          dateModified: '2026-07-12',
+          dateModified: professionalFacts.lastVerified,
           mainEntity: { '@id': 'https://reejamaharjan.com.np/#person' },
           isPartOf: { '@id': 'https://reejamaharjan.com.np/#website' }
         }]
@@ -92,7 +93,7 @@ const graphSchema = {
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
     <meta property="og:image:alt" content={`${title} social preview`} />
-    <meta property="og:site_name" content="Reeja Maharjan" />
+    <meta property="og:site_name" content={professionalFacts.name} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -161,7 +162,7 @@ const graphSchema = {
   <body>
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header name={profile.name} />
+    <Header name={professionalFacts.name} />
     <main id="main-content"><slot /></main>
     <Footer profile={profile} />
 
