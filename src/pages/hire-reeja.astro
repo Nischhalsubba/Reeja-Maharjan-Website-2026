@@ -10,8 +10,116 @@ const hiringSchema = {
   dateModified: '2026-07-12',
   mainEntity: {
     '@type': 'Person',
+    '@id': 'https://reejamaharjan.com.np/#person',
     name: profile.name,
     jobTitle: profile.role,
     description: profile.profileSummary,
     email: profile.contact.email,
-    url: 'https://
+    url: 'https://reejamaharjan.com.np/hire-reeja/',
+    sameAs: [profile.contact.linkedin, profile.contact.instagram].filter(Boolean)
+  }
+};
+---
+
+<BaseLayout
+  title="Hire Reeja Maharjan | Registered Nurse and Maternal Health Research Assistant"
+  description="Review Reeja Maharjan's nursing experience, maternal-health research background, licenses, role fit, availability, and contact details."
+>
+  <div class="traffic-page">
+    <section class="traffic-hero">
+      <div class="container traffic-hero__grid">
+        <div>
+          <p class="traffic-eyebrow">Recruiter overview</p>
+          <h1>Hire a nurse who combines clinical care with research discipline.</h1>
+          <p class="traffic-lede">Reeja Maharjan is an NNC-licensed Registered Nurse, active Texas RN, and maternal-health Research Assistant with experience across hospital care, participant education, telemonitoring, documentation, and coordination.</p>
+          <div class="traffic-actions">
+            <a class="traffic-button traffic-button--primary" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-email">Email Reeja</a>
+            <a class="traffic-button" href={profile.contact.resumeUrl} download data-track="hire-cv">Download CV</a>
+            <a class="traffic-button" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
+          </div>
+        </div>
+        <aside class="traffic-summary">
+          <h2>Professional snapshot</h2>
+          <ul>
+            <li>NNC licensed Registered Nurse</li>
+            <li>Active Texas RN license</li>
+            <li>Current IISH MOM-HD Research Assistant</li>
+            <li>Hospital experience at TUTH, MMTH, and Sindhuli Hospital</li>
+            <li>Based in Biratnagar, Nepal</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="traffic-section">
+      <div class="container">
+        <div class="traffic-section__heading">
+          <p class="traffic-eyebrow">Best-fit opportunities</p>
+          <h2>Roles aligned with Reeja's verified experience</h2>
+          <p>Her strongest fit is in roles where clinical judgement, communication, documentation, participant safety, and dependable follow-through matter.</p>
+        </div>
+        <div class="traffic-grid">
+          {profile.roleFit.map((item) => (
+            <article class="traffic-card">
+              <h3>{item.title}</h3>
+              <p>{item.summary}</p>
+              <ul class="traffic-list">{item.evidence.map((evidence) => <li>{evidence}</li>)}</ul>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="traffic-section">
+      <div class="container traffic-split">
+        <div class="traffic-section__heading">
+          <p class="traffic-eyebrow">Experience</p>
+          <h2>Clinical and research background</h2>
+          <p>{profile.profileSummary}</p>
+        </div>
+        <dl class="traffic-facts">
+          {profile.experience.map((item) => (
+            <div>
+              <dt>{item.role}</dt>
+              <dd><strong>{item.organization}</strong><br />{item.period}<br />{item.location}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <section class="traffic-section">
+      <div class="container">
+        <div class="traffic-section__heading">
+          <p class="traffic-eyebrow">Credentials</p>
+          <h2>Licenses and professional preparation</h2>
+          <p>Sensitive license documents are not published publicly. Verification can be shared with legitimate recruiters after initial screening.</p>
+        </div>
+        <div class="traffic-grid">
+          {profile.certifications.slice(0, 6).map((item) => (
+            <article class="traffic-card">
+              <h3>{item.title}</h3>
+              <p><strong>{item.issuer}</strong><br />{item.date}</p>
+              <p>{item.note}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="traffic-section traffic-dark">
+      <div class="container traffic-split">
+        <div>
+          <p class="traffic-eyebrow">Start a conversation</p>
+          <h2>Include the role, location, expected start date, and work summary.</h2>
+          <p>This helps Reeja respond with relevant availability and credential information rather than beginning with six rounds of mysterious recruiter messages.</p>
+        </div>
+        <div class="traffic-actions">
+          <a class="traffic-button" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-bottom-email">Contact Reeja</a>
+          <a class="traffic-button" href="/clinical-research/">Research experience</a>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(hiringSchema)}></script>
+</BaseLayout>
