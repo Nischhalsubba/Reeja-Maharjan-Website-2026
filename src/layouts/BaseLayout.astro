@@ -4,6 +4,7 @@ import '../styles/base.css';
 import '../styles/layout.css';
 import '../styles/components.css';
 import '../styles/pages.css';
+import '../styles/site-pages.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -23,7 +24,6 @@ const {
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
 const isOnePage = Astro.url.pathname === '/';
 const isProfilePage = isOnePage || Astro.url.pathname === '/hire-reeja/';
-const navigationMode = isOnePage ? 'one-page' : 'blog';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
 const sameAs = [profile.contact.linkedin, profile.contact.instagram].filter(Boolean);
@@ -40,7 +40,8 @@ const personSchema = {
   email: profile.contact.email,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: profile.contact.location,
+    addressLocality: 'Biratnagar',
+    addressRegion: 'Koshi Province',
     addressCountry: 'NP'
   },
   knowsAbout: profile.keywords,
@@ -136,9 +137,10 @@ const graphSchema = {
       .brand__text small { font-size: 0.72rem; color: #737373; }
       .desktop-nav { gap: 2px; }
       .desktop-nav a, .mobile-nav__panel a { color: #575757; font-size: 0.86rem; font-weight: 600; }
-      .desktop-nav a:hover, .desktop-nav a:focus-visible, .mobile-nav__panel a:hover, .mobile-nav__panel a:focus-visible { color: #0a0a0a; background: #f2f2f2; }
-      .desktop-nav a:last-child { background: #0a0a0a; color: #ffffff; padding-inline: 18px; }
-      .desktop-nav a:last-child:hover, .desktop-nav a:last-child:focus-visible { background: #2b2b2b; color: #ffffff; }
+      .desktop-nav a:hover, .desktop-nav a:focus-visible, .mobile-nav__panel a:hover, .mobile-nav__panel a:focus-visible,
+      .desktop-nav a[aria-current="page"], .mobile-nav__panel a[aria-current="page"] { color: #0a0a0a; background: #f2f2f2; }
+      .desktop-nav .nav-cta { background: #0a0a0a; color: #ffffff; padding-inline: 18px; }
+      .desktop-nav .nav-cta:hover, .desktop-nav .nav-cta:focus-visible, .desktop-nav .nav-cta[aria-current="page"] { background: #2b2b2b; color: #ffffff; }
       .mobile-nav { top: 68px; background: rgba(0, 0, 0, 0.52); }
       .mobile-nav__panel { border-radius: 0; box-shadow: none; }
       .site-footer { background: #0a0a0a; color: #ffffff; border-top: 0; }
@@ -159,9 +161,9 @@ const graphSchema = {
   <body>
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header name={profile.name} showAwards={profile.awards.length > 0} mode={navigationMode} />
+    <Header name={profile.name} />
     <main id="main-content"><slot /></main>
-    <Footer profile={profile} mode={navigationMode} />
+    <Footer profile={profile} />
 
     <script>
       import { initMotion } from '../lib/motion';
