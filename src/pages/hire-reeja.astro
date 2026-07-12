@@ -1,47 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
+import { professionalFacts } from '../content/professional-facts';
 
-const emailSubject = encodeURIComponent('Nursing or Research Opportunity for Reeja Maharjan');
+const emailSubject = encodeURIComponent(`Nursing or Research Opportunity for ${professionalFacts.name}`);
 const hiringSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
-  dateModified: '2026-07-12',
+  dateModified: professionalFacts.lastVerified,
   mainEntity: {
     '@type': 'Person',
     '@id': 'https://reejamaharjan.com.np/#person',
-    name: profile.name,
-    jobTitle: profile.role,
+    name: professionalFacts.name,
+    jobTitle: professionalFacts.primaryRole,
     description: profile.profileSummary,
-    email: profile.contact.email,
+    email: professionalFacts.professionalEmail,
     url: 'https://reejamaharjan.com.np/hire-reeja/',
-    sameAs: [profile.contact.linkedin, profile.contact.instagram].filter(Boolean)
+    sameAs: [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean)
   }
 };
 ---
 
 <BaseLayout
-  title="Hire Reeja Maharjan | Registered Nurse in Nepal"
-  description="Hire Reeja Maharjan, an NNC-licensed Registered Nurse, active Texas RN, and maternal-health Research Assistant with hospital and clinical research experience."
+  title={`Hire ${professionalFacts.name} | Registered Nurse in Nepal`}
+  description={`Hire ${professionalFacts.name}, ${professionalFacts.nepalLicense}, ${professionalFacts.texasLicenseShort}, and maternal-health ${professionalFacts.currentRole} with hospital and clinical research experience.`}
 >
   <div class="site-page">
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
           <p class="site-eyebrow">Recruiter profile</p>
-          <h1>Hire Reeja Maharjan.</h1>
-          <p class="site-page__lede">Registered Nurse in Nepal, active Texas RN, and IISH MOM-HD Research Assistant with hospital, maternal-health, documentation, and telemonitoring experience.</p>
+          <h1>Hire {professionalFacts.name}.</h1>
+          <p class="site-page__lede">{professionalFacts.nepalLicense}, {professionalFacts.texasLicenseShort}, and {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort} {professionalFacts.currentRole} with hospital, maternal-health, documentation, and telemonitoring experience.</p>
           <div class="site-actions">
-            <a class="site-button site-button--primary" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-email">Email Reeja</a>
-            <a class="site-button" href="/cv/" data-track="hire-cv">View CV</a>
-            <a class="site-button" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
+            <a class="site-button site-button--primary" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-email">Email Reeja</a>
+            <a class="site-button" href={professionalFacts.publicCvPath} data-track="hire-cv">View CV</a>
+            <a class="site-button" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
           </div>
         </div>
         <dl class="site-page__summary">
-          <div><dt>Registration</dt><dd>Nepal Nursing Council RN</dd></div>
-          <div><dt>International license</dt><dd>Active Texas RN</dd></div>
-          <div><dt>Current role</dt><dd>Research Assistant, IISH MOM-HD</dd></div>
-          <div><dt>Based in</dt><dd>Biratnagar, Nepal</dd></div>
+          <div><dt>Registration</dt><dd>{professionalFacts.nepalLicenseShort}</dd></div>
+          <div><dt>International license</dt><dd>{professionalFacts.texasLicenseShort}</dd></div>
+          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}</dd></div>
+          <div><dt>Based in</dt><dd>{professionalFacts.currentLocation}</dd></div>
         </dl>
       </div>
     </section>
@@ -95,7 +96,7 @@ const hiringSchema = {
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
         <div><p class="site-eyebrow">Contact</p><h2>Share the role details.</h2><p>Include the organisation, location, start date, employment type, and responsibilities.</p></div>
-        <div class="site-actions"><a class="site-button" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-bottom-email">Email Reeja</a><a class="site-button" href="/cv/">View CV</a></div>
+        <div class="site-actions"><a class="site-button" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-bottom-email">Email Reeja</a><a class="site-button" href={professionalFacts.publicCvPath}>View CV</a></div>
       </div>
     </section>
   </div>
