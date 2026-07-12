@@ -2,13 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Page Not Found">
-  <section class="section section--404">
-    <div class="container section-stack">
-      <p class="section-intro__eyebrow">404</p>
-      <h1>Page Not Found</h1>
-      <p>The page you requested is not available in this phase.</p>
-      <a class="btn btn--primary" href="/">Return Home</a>
-    </div>
-  </section>
+<BaseLayout title="Page Not Found | Reeja Maharjan" description="The requested page could not be found.">
+  <div class="site-page">
+    <section class="site-page__hero site-empty">
+      <div class="container">
+        <p class="site-eyebrow">404</p>
+        <h1>Page not found.</h1>
+        <p class="site-page__lede">The page may have moved, changed, or never existed. The internet is littered with such tiny monuments.</p>
+        <div class="site-actions"><a class="site-button site-button--primary" href="/">Return home</a><a class="site-button" href="/blog/">Browse articles</a></div>
+      </div>
+    </section>
+  </div>
 </BaseLayout>

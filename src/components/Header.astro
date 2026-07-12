@@ -1,16 +1,21 @@
 ---
-type Props = {
-  name: string;
-  showAwards?: boolean;
-  mode?: 'one-page' | 'blog';
-};
-
-const { name, mode = 'one-page' } = Astro.props;
+type Props = { name: string };
+const { name } = Astro.props;
+const path = Astro.url.pathname;
+const current = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
+const links = [
+  { href: '/#experience', label: 'Experience', match: '/' },
+  { href: '/maternal-health/', label: 'Maternal health' },
+  { href: '/nursing-practice/', label: 'Nursing practice' },
+  { href: '/clinical-research/', label: 'Research' },
+  { href: '/blog/', label: 'Articles' },
+  { href: '/cv/', label: 'CV' }
+];
 ---
 
 <header class="site-header" aria-label="Primary navigation">
   <div class="container site-header__inner">
-    <a class="brand" href={mode === 'one-page' ? '#home' : '/'} aria-label="Reeja Maharjan registered nurse homepage">
+    <a class="brand" href="/" aria-label="Reeja Maharjan homepage">
       <span class="brand__mark">RM</span>
       <span class="brand__text">
         <strong>{name}</strong>
@@ -18,32 +23,24 @@ const { name, mode = 'one-page' } = Astro.props;
       </span>
     </a>
 
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">
-      Menu
-    </button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
 
-    <nav class="desktop-nav" aria-label="Website navigation">
-      <a href={mode === 'one-page' ? '#experience' : '/#experience'}>Experience</a>
-      <a href="/maternal-health/">Maternal health</a>
-      <a href="/nursing-practice/">Nursing guides</a>
-      <a href="/clinical-research/">Clinical research</a>
-      <a href="/blog/">Articles</a>
-      <a href="/cv/">Nursing CV</a>
-      <a href="/hire-reeja/" data-track="hire-nav">Hire Reeja</a>
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {links.map((link) => (
+        <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>
+      ))}
+      <a class="nav-cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-nav">Hire Reeja</a>
     </nav>
   </div>
 
   <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
-    <nav class="mobile-nav__panel" aria-label="Mobile website navigation">
-      <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close menu</button>
-      <a href="/">Home</a>
-      <a href="/#experience">Clinical experience</a>
-      <a href="/maternal-health/">Maternal health resources</a>
-      <a href="/nursing-practice/">Nursing practice guides</a>
-      <a href="/clinical-research/">Clinical research experience</a>
-      <a href="/blog/">Nursing articles</a>
-      <a href="/cv/">Download nursing CV</a>
-      <a href="/hire-reeja/" data-track="hire-mobile-nav">Recruit Reeja</a>
+    <nav class="mobile-nav__panel" aria-label="Mobile navigation">
+      <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+      {links.map((link) => (
+        <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>
+      ))}
+      <a href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">Hire Reeja</a>
     </nav>
   </div>
 </header>

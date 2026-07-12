@@ -1,9 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
-import '../styles/traffic-pages.css';
 
-const emailSubject = encodeURIComponent('Registered Nurse or Clinical Research Opportunity for Reeja Maharjan');
+const emailSubject = encodeURIComponent('Nursing or Research Opportunity for Reeja Maharjan');
 const hiringSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
@@ -23,101 +22,80 @@ const hiringSchema = {
 
 <BaseLayout
   title="Hire Reeja Maharjan | Registered Nurse in Nepal"
-  description="Hire Reeja Maharjan, an NNC-licensed Registered Nurse in Nepal, active Texas RN, and maternal-health Research Assistant with hospital and clinical research experience."
+  description="Hire Reeja Maharjan, an NNC-licensed Registered Nurse, active Texas RN, and maternal-health Research Assistant with hospital and clinical research experience."
 >
-  <div class="traffic-page">
-    <section class="traffic-hero">
-      <div class="container traffic-hero__grid">
+  <div class="site-page">
+    <section class="site-page__hero">
+      <div class="container site-page__hero-grid">
         <div>
-          <p class="traffic-eyebrow">Recruiter profile</p>
+          <p class="site-eyebrow">Recruiter profile</p>
           <h1>Hire Reeja Maharjan.</h1>
-          <p class="traffic-lede">Registered Nurse in Nepal, active Texas RN, and IISH MOM-HD Research Assistant with hospital, maternal-health, telemonitoring, and documentation experience.</p>
-          <div class="traffic-actions">
-            <a class="traffic-button traffic-button--primary" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-email">Email Reeja</a>
-            <a class="traffic-button" href={profile.contact.resumeUrl} download data-track="hire-cv">Download CV</a>
-            <a class="traffic-button" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
+          <p class="site-page__lede">Registered Nurse in Nepal, active Texas RN, and IISH MOM-HD Research Assistant with hospital, maternal-health, documentation, and telemonitoring experience.</p>
+          <div class="site-actions">
+            <a class="site-button site-button--primary" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-email">Email Reeja</a>
+            <a class="site-button" href={profile.contact.resumeUrl} download data-track="hire-cv">Download CV</a>
+            <a class="site-button" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
           </div>
         </div>
-        <aside class="traffic-summary">
-          <h2>At a glance</h2>
-          <ul>
-            <li>NNC-licensed Registered Nurse</li>
-            <li>Active Texas RN</li>
-            <li>IISH MOM-HD Research Assistant</li>
-            <li>Hospital experience at TUTH, MMTH, and Sindhuli Hospital</li>
-            <li>Based in Biratnagar, Nepal</li>
-          </ul>
-        </aside>
-      </div>
-    </section>
-
-    <section class="traffic-section">
-      <div class="container">
-        <div class="traffic-section__heading">
-          <p class="traffic-eyebrow">Role fit</p>
-          <h2>Best suited to nursing and health-research roles.</h2>
-          <p>Strongest where patient safety, communication, documentation, participant support, and dependable coordination matter.</p>
-        </div>
-        <div class="traffic-grid">
-          {profile.roleFit.map((item) => (
-            <article class="traffic-card">
-              <h3>{item.title}</h3>
-              <p>{item.summary}</p>
-              <ul class="traffic-list">{item.evidence.map((evidence) => <li>{evidence}</li>)}</ul>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="traffic-section">
-      <div class="container traffic-split">
-        <div class="traffic-section__heading">
-          <p class="traffic-eyebrow">Experience</p>
-          <h2>Clinical care and implementation research.</h2>
-          <p>Experience includes direct patient care, participant screening, home-monitoring education, tele-follow-up, documentation, and escalation support.</p>
-        </div>
-        <dl class="traffic-facts">
-          {profile.experience.map((item) => (
-            <div>
-              <dt>{item.role}</dt>
-              <dd><strong>{item.organization}</strong><br />{item.period}<br />{item.location}</dd>
-            </div>
-          ))}
+        <dl class="site-page__summary">
+          <div><dt>Registration</dt><dd>Nepal Nursing Council RN</dd></div>
+          <div><dt>International license</dt><dd>Active Texas RN</dd></div>
+          <div><dt>Current role</dt><dd>Research Assistant, IISH MOM-HD</dd></div>
+          <div><dt>Based in</dt><dd>Biratnagar, Nepal</dd></div>
         </dl>
       </div>
     </section>
 
-    <section class="traffic-section">
+    <section class="site-section">
       <div class="container">
-        <div class="traffic-section__heading">
-          <p class="traffic-eyebrow">Credentials</p>
-          <h2>Licenses and clinical training.</h2>
-          <p>Verification documents are available privately to legitimate employers and recruiters.</p>
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Role fit</p><h2>Clinical care, research, and health programmes.</h2></div>
+          <p>Best suited to roles where patient safety, communication, documentation, participant support, and dependable coordination matter.</p>
         </div>
-        <div class="traffic-grid">
-          {profile.certifications.slice(0, 6).map((item) => (
-            <article class="traffic-card">
-              <h3>{item.title}</h3>
-              <p><strong>{item.issuer}</strong><br />{item.date}</p>
-              <p>{item.note}</p>
+        <div class="site-grid">
+          {profile.roleFit.map((item) => (
+            <article class="site-card"><h3>{item.title}</h3><p>{item.summary}</p><ul>{item.evidence.map((evidence) => <li>{evidence}</li>)}</ul></article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="site-section site-section--soft">
+      <div class="container">
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Experience</p><h2>Hospital nursing and implementation research.</h2></div>
+          <p>Experience includes patient care, counselling, documentation, handover, screening, home-monitoring education, follow-up, and escalation support.</p>
+        </div>
+        <div class="site-list">
+          {profile.experience.map((item) => (
+            <article class="site-list__item">
+              <div><h3>{item.role}</h3><p>{item.organization}</p></div>
+              <p>{item.bullets[0]}</p>
+              <p class="site-list__meta">{item.period}<br />{item.location}</p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="traffic-section traffic-dark">
-      <div class="container traffic-split">
-        <div>
-          <p class="traffic-eyebrow">Contact</p>
-          <h2>Share the role details.</h2>
-          <p>Include the organisation, location, start date, employment type, and responsibilities.</p>
+    <section class="site-section">
+      <div class="container">
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Credentials</p><h2>Licenses and clinical training.</h2></div>
+          <p>Sensitive documents are not published. Verification can be shared privately with legitimate employers.</p>
         </div>
-        <div class="traffic-actions">
-          <a class="traffic-button" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-bottom-email">Email Reeja</a>
-          <a class="traffic-button" href="/clinical-research/">Research experience</a>
+        <div class="site-grid">
+          {profile.certifications.slice(0, 6).map((item) => (
+            <article class="site-card"><h3>{item.title}</h3><p><strong>{item.issuer}</strong><br />{item.date}</p><p>{item.note}</p></article>
+          ))}
         </div>
+      </div>
+    </section>
+
+    <section class="site-section site-section--dark">
+      <div class="container site-page__split">
+        <div><p class="site-eyebrow">Contact</p><h2>Share the role details.</h2><p>Include the organisation, location, start date, employment type, and responsibilities.</p></div>
+        <div class="site-actions"><a class="site-button" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="hire-bottom-email">Email Reeja</a><a class="site-button" href="/cv/">View CV</a></div>
       </div>
     </section>
   </div>
