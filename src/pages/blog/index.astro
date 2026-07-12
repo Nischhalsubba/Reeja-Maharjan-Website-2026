@@ -9,17 +9,16 @@ const formatDate = (value: string) =>
 ---
 
 <BaseLayout
-  title="Blog | Reeja Maharjan"
-  description="Evidence-based nursing articles on maternal care, newborn care, documentation, safeguarding, and Nepal nursing careers."
+  title="Nursing Articles on Maternal Health, Documentation and Careers"
+  description="Read nurse-led articles on maternal and newborn care, nursing documentation, SBAR handover, patient confidentiality, clinical practice, telehealth, and nursing careers in Nepal."
 >
   <section class="section blog-list">
     <div class="container section-stack">
       <div class="section-intro">
-        <p class="section-intro__eyebrow">Blog</p>
-        <h1>Nursing Blog: Practical Guides for Parents, Nurses, and Recruiters</h1>
+        <p class="section-intro__eyebrow">Nursing knowledge centre</p>
+        <h1>Practical nursing and maternal-health articles</h1>
         <p>
-          Evidence-based articles on maternal care, newborn support, general care nursing,
-          counselling, safe handover, and nurse career growth in Nepal.
+          Evidence-informed guides for parents, nurses, nursing students, healthcare teams, and recruiters. Topics include maternal-newborn care, postnatal support, clinical documentation, SBAR handover, confidentiality, telehealth, and nursing career development.
         </p>
       </div>
 
@@ -27,8 +26,8 @@ const formatDate = (value: string) =>
         {posts.map((post) => (
           <article class="card blog-card" data-card-link data-card-href={`/blog/${post.slug}/`}>
             <p class="blog-card__meta">
-              <span>{formatDate(post.publishedAt)}</span>
-              <span>{post.readMinutes} min read</span>
+              <span>Published {formatDate(post.publishedAt)}</span>
+              <span>{post.readMinutes} minute read</span>
             </p>
             <h2>{post.title}</h2>
             <p>{post.excerpt}</p>
@@ -38,9 +37,9 @@ const formatDate = (value: string) =>
               ))}
             </ul>
             <p class="blog-card__keyword">
-              <strong>Primary topic:</strong> {post.primaryKeyword}
+              <strong>Main topic:</strong> {post.primaryKeyword}
             </p>
-            <a class="text-link" href={`/blog/${post.slug}/`}>Read article</a>
+            <a class="text-link" href={`/blog/${post.slug}/`}>Read the complete guide</a>
           </article>
         ))}
       </div>
