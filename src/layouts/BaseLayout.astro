@@ -22,24 +22,58 @@ const {
 
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
 const isOnePage = Astro.url.pathname === '/';
+const isProfilePage = isOnePage || Astro.url.pathname === '/hire-reeja/';
 const navigationMode = isOnePage ? 'one-page' : 'blog';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
 const sameAs = [profile.contact.linkedin, profile.contact.instagram].filter(Boolean);
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const searchConsoleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 const personSchema = {
-  '@context': 'https://schema.org',
   '@type': 'Person',
+  '@id': 'https://reejamaharjan.com.np/#person',
   name: profile.name,
+  url: 'https://reejamaharjan.com.np/',
+  image: new URL(profile.hero.portrait.src, Astro.site ?? Astro.url.origin).toString(),
   jobTitle: profile.role,
-  description,
+  description: profile.profileSummary,
   email: profile.contact.email,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: profile.contact.location
+    addressLocality: profile.contact.location,
+    addressCountry: 'NP'
   },
   knowsAbout: profile.keywords,
   sameAs
+};
+
+const graphSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': 'https://reejamaharjan.com.np/#website',
+      url: 'https://reejamaharjan.com.np/',
+      name: 'Reeja Maharjan',
+      description: profile.hero.tagline,
+      inLanguage: 'en',
+      publisher: { '@id': 'https://reejamaharjan.com.np/#person' }
+    },
+    personSchema,
+    ...(isProfilePage
+      ? [{
+          '@type': 'ProfilePage',
+          '@id': `${canonicalUrl}#profilepage`,
+          url: canonicalUrl,
+          name: title,
+          description,
+          dateModified: '2026-07-12',
+          mainEntity: { '@id': 'https://reejamaharjan.com.np/#person' },
+          isPartOf: { '@id': 'https://reejamaharjan.com.np/#website' }
+        }]
+      : [])
+  ]
 };
 ---
 
@@ -57,16 +91,29 @@ const personSchema = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
+    <meta property="og:image:alt" content={`${title} social preview`} />
     <meta property="og:site_name" content="Reeja Maharjan" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    {searchConsoleVerification && <meta name="google-site-verification" content={searchConsoleVerification} />}
 
-    <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(graphSchema)}></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {gaId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>}
+    {gaId && (
+      <script is:inline define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){window.dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', gaId, { anonymize_ip: true });
+      </script>
+    )}
 
     <style is:global>
       :root {
@@ -79,155 +126,34 @@ const personSchema = {
         --r-pill: 999px;
       }
 
-      body {
-        min-width: 320px;
-        background: #ffffff;
-        color: #0a0a0a;
-      }
-
-      ::selection {
-        background: #0a0a0a;
-        color: #ffffff;
-      }
-
-      :where(a, button, input, textarea):focus-visible {
-        outline: 2px solid #0a0a0a;
-        outline-offset: 3px;
-        box-shadow: none;
-      }
-
-      .scroll-progress {
-        height: 2px;
-        background: transparent;
-      }
-
-      .site-header {
-        min-height: 68px;
-        background: color-mix(in srgb, #ffffff 94%, transparent);
-        border-bottom: 1px solid #d9d9d9;
-        box-shadow: none;
-        backdrop-filter: blur(14px);
-      }
-
-      .site-header__inner {
-        min-height: 68px;
-      }
-
-      .brand__mark {
-        width: 34px;
-        height: 34px;
-        border-radius: 50%;
-        background: #0a0a0a;
-        color: #ffffff;
-      }
-
-      .brand__text strong {
-        font-size: 0.9rem;
-        letter-spacing: -0.02em;
-      }
-
-      .brand__text small {
-        font-size: 0.72rem;
-        color: #737373;
-      }
-
-      .desktop-nav {
-        gap: 2px;
-      }
-
-      .desktop-nav a,
-      .mobile-nav__panel a {
-        color: #575757;
-        font-size: 0.86rem;
-        font-weight: 600;
-      }
-
-      .desktop-nav a:hover,
-      .desktop-nav a:focus-visible,
-      .mobile-nav__panel a:hover,
-      .mobile-nav__panel a:focus-visible {
-        color: #0a0a0a;
-        background: #f2f2f2;
-      }
-
-      .desktop-nav a:last-child {
-        background: #0a0a0a;
-        color: #ffffff;
-        padding-inline: 18px;
-      }
-
-      .desktop-nav a:last-child:hover,
-      .desktop-nav a:last-child:focus-visible {
-        background: #2b2b2b;
-        color: #ffffff;
-      }
-
-      .mobile-nav {
-        top: 68px;
-        background: rgba(0, 0, 0, 0.52);
-      }
-
-      .mobile-nav__panel {
-        border-radius: 0;
-        box-shadow: none;
-      }
-
-      .site-footer {
-        background: #0a0a0a;
-        color: #ffffff;
-        border-top: 0;
-      }
-
-      .site-footer p,
-      .site-footer small,
-      .site-footer__eyebrow {
-        color: #a9a9a9;
-      }
-
-      .site-footer a {
-        color: #ffffff;
-      }
-
-      .site-footer__legal {
-        border-top-color: #2d2d2d;
-      }
+      body { min-width: 320px; background: #ffffff; color: #0a0a0a; }
+      ::selection { background: #0a0a0a; color: #ffffff; }
+      :where(a, button, input, textarea):focus-visible { outline: 2px solid #0a0a0a; outline-offset: 3px; box-shadow: none; }
+      .scroll-progress { height: 2px; background: transparent; }
+      .site-header { min-height: 68px; background: color-mix(in srgb, #ffffff 94%, transparent); border-bottom: 1px solid #d9d9d9; box-shadow: none; backdrop-filter: blur(14px); }
+      .site-header__inner { min-height: 68px; }
+      .brand__mark { width: 34px; height: 34px; border-radius: 50%; background: #0a0a0a; color: #ffffff; }
+      .brand__text strong { font-size: 0.9rem; letter-spacing: -0.02em; }
+      .brand__text small { font-size: 0.72rem; color: #737373; }
+      .desktop-nav { gap: 2px; }
+      .desktop-nav a, .mobile-nav__panel a { color: #575757; font-size: 0.86rem; font-weight: 600; }
+      .desktop-nav a:hover, .desktop-nav a:focus-visible, .mobile-nav__panel a:hover, .mobile-nav__panel a:focus-visible { color: #0a0a0a; background: #f2f2f2; }
+      .desktop-nav a:last-child { background: #0a0a0a; color: #ffffff; padding-inline: 18px; }
+      .desktop-nav a:last-child:hover, .desktop-nav a:last-child:focus-visible { background: #2b2b2b; color: #ffffff; }
+      .mobile-nav { top: 68px; background: rgba(0, 0, 0, 0.52); }
+      .mobile-nav__panel { border-radius: 0; box-shadow: none; }
+      .site-footer { background: #0a0a0a; color: #ffffff; border-top: 0; }
+      .site-footer p, .site-footer small, .site-footer__eyebrow { color: #a9a9a9; }
+      .site-footer a { color: #ffffff; }
+      .site-footer__legal { border-top-color: #2d2d2d; }
 
       @media (max-width: 1080px) {
-        .desktop-nav {
-          display: none;
-        }
-
-        .menu-toggle {
-          display: inline-flex;
-          min-height: 40px;
-          align-items: center;
-          justify-content: center;
-          padding: 0 16px;
-          border: 1px solid #cfcfcf;
-          border-radius: 999px;
-          background: #ffffff;
-          color: #0a0a0a;
-          font: inherit;
-          font-size: 0.84rem;
-          font-weight: 700;
-        }
+        .desktop-nav { display: none; }
+        .menu-toggle { display: inline-flex; min-height: 40px; align-items: center; justify-content: center; padding: 0 16px; border: 1px solid #cfcfcf; border-radius: 999px; background: #ffffff; color: #0a0a0a; font: inherit; font-size: 0.84rem; font-weight: 700; }
       }
-
-      @media (max-width: 560px) {
-        .brand__text small {
-          display: none;
-        }
-      }
-
+      @media (max-width: 560px) { .brand__text small { display: none; } }
       @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          scroll-behavior: auto !important;
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-        }
+        *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
       }
     </style>
   </head>
@@ -235,14 +161,20 @@ const personSchema = {
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header name={profile.name} showAwards={profile.awards.length > 0} mode={navigationMode} />
-    <main id="main-content">
-      <slot />
-    </main>
+    <main id="main-content"><slot /></main>
     <Footer profile={profile} mode={navigationMode} />
 
     <script>
       import { initMotion } from '../lib/motion';
       initMotion();
+
+      document.querySelectorAll<HTMLElement>('[data-track]').forEach((element) => {
+        element.addEventListener('click', () => {
+          const eventName = element.dataset.track ?? 'site_action';
+          const gtag = (window as typeof window & { gtag?: (...args: unknown[]) => void }).gtag;
+          gtag?.('event', eventName, { page_path: window.location.pathname });
+        });
+      });
     </script>
   </body>
 </html>

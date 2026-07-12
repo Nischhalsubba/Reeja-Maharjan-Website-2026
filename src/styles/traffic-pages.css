@@ -1,0 +1,204 @@
+:root {
+  --traffic-ink: #0a0a0a;
+  --traffic-muted: #626262;
+  --traffic-line: #d8d8d8;
+  --traffic-soft: #f4f4f2;
+}
+
+.traffic-page {
+  background: #fff;
+  color: var(--traffic-ink);
+}
+
+.traffic-hero {
+  padding: clamp(88px, 11vw, 156px) 0 clamp(64px, 8vw, 112px);
+  border-bottom: 1px solid var(--traffic-line);
+}
+
+.traffic-hero__grid,
+.traffic-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(280px, 0.7fr);
+  gap: clamp(40px, 7vw, 104px);
+  align-items: start;
+}
+
+.traffic-eyebrow {
+  margin: 0 0 18px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.traffic-hero h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(3rem, 7vw, 7.25rem);
+  line-height: 0.94;
+  letter-spacing: -0.065em;
+}
+
+.traffic-lede {
+  max-width: 760px;
+  margin: 30px 0 0;
+  color: var(--traffic-muted);
+  font-size: clamp(1.1rem, 1.7vw, 1.45rem);
+  line-height: 1.65;
+}
+
+.traffic-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.traffic-button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 22px;
+  border: 1px solid var(--traffic-ink);
+  border-radius: 999px;
+  color: var(--traffic-ink);
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.traffic-button--primary {
+  background: var(--traffic-ink);
+  color: #fff;
+}
+
+.traffic-summary {
+  padding: 26px;
+  border: 1px solid var(--traffic-line);
+  background: var(--traffic-soft);
+}
+
+.traffic-summary h2,
+.traffic-card h2,
+.traffic-card h3 {
+  margin-top: 0;
+}
+
+.traffic-summary ul,
+.traffic-list {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.traffic-summary li,
+.traffic-list li {
+  margin: 10px 0;
+  line-height: 1.55;
+}
+
+.traffic-section {
+  padding: clamp(72px, 9vw, 132px) 0;
+  border-bottom: 1px solid var(--traffic-line);
+}
+
+.traffic-section__heading {
+  max-width: 780px;
+  margin-bottom: 42px;
+}
+
+.traffic-section__heading h2 {
+  margin: 0;
+  font-size: clamp(2.2rem, 4vw, 4.4rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+.traffic-section__heading p {
+  color: var(--traffic-muted);
+  font-size: 1.08rem;
+  line-height: 1.7;
+}
+
+.traffic-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--traffic-line);
+  border: 1px solid var(--traffic-line);
+}
+
+.traffic-card {
+  min-height: 100%;
+  padding: clamp(24px, 3vw, 38px);
+  background: #fff;
+}
+
+.traffic-card p {
+  color: var(--traffic-muted);
+  line-height: 1.65;
+}
+
+.traffic-card a {
+  color: var(--traffic-ink);
+  font-weight: 800;
+}
+
+.traffic-facts {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--traffic-line);
+}
+
+.traffic-facts div {
+  display: grid;
+  grid-template-columns: minmax(150px, 0.35fr) 1fr;
+  gap: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--traffic-line);
+}
+
+.traffic-facts dt {
+  font-weight: 800;
+}
+
+.traffic-facts dd {
+  margin: 0;
+  color: var(--traffic-muted);
+  line-height: 1.55;
+}
+
+.traffic-dark {
+  background: var(--traffic-ink);
+  color: #fff;
+}
+
+.traffic-dark p {
+  color: #bdbdbd;
+}
+
+.traffic-dark .traffic-button {
+  border-color: #fff;
+  background: #fff;
+  color: var(--traffic-ink);
+}
+
+@media (max-width: 900px) {
+  .traffic-hero__grid,
+  .traffic-split,
+  .traffic-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .traffic-actions,
+  .traffic-button {
+    width: 100%;
+  }
+
+  .traffic-facts div {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}
