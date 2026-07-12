@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { blogPosts } from '../content/blog';
-import '../styles/traffic-pages.css';
 
 const posts = blogPosts.filter((post) =>
   [post.primaryKeyword, ...post.supportingKeywords, ...post.tags]
@@ -12,60 +11,48 @@ const posts = blogPosts.filter((post) =>
 ---
 
 <BaseLayout
-  title="Maternal Health and Newborn Care Guides | Nurse-Led Resources"
-  description="Read nurse-led maternal health and newborn care guides covering postnatal care, breastfeeding support, maternal and newborn warning signs, family education, and when to seek urgent medical help."
+  title="Maternal Health and Newborn Care Guides | Reeja Maharjan"
+  description="Nurse-led maternal health and newborn care guides on postnatal recovery, breastfeeding, warning signs, family education, and when to seek clinical care."
 >
-  <div class="traffic-page">
-    <section class="traffic-hero">
-      <div class="container traffic-hero__grid">
+  <div class="site-page">
+    <section class="site-page__hero">
+      <div class="container site-page__hero-grid">
         <div>
-          <p class="traffic-eyebrow">Maternal health and newborn care resources</p>
-          <h1>Practical maternal and newborn care guidance for families.</h1>
-          <p class="traffic-lede">Nurse-led educational resources on postnatal recovery, breastfeeding, newborn care, maternal warning signs, newborn danger signs, and safe decisions about when to contact a qualified healthcare professional.</p>
+          <p class="site-eyebrow">Maternal health</p>
+          <h1>Clear guidance for mothers and newborns.</h1>
+          <p class="site-page__lede">Practical, nurse-led education on postnatal recovery, breastfeeding, newborn care, warning signs, and safe decisions about seeking help.</p>
         </div>
-        <aside class="traffic-summary">
-          <h2>Topics covered</h2>
-          <ul>
-            <li>Maternal recovery and postnatal care</li>
-            <li>Newborn feeding, warmth, hygiene, and observation</li>
-            <li>Breastfeeding support and common early concerns</li>
-            <li>Maternal and newborn danger signs requiring urgent care</li>
-          </ul>
-        </aside>
+        <dl class="site-page__summary">
+          <div><dt>Audience</dt><dd>Pregnant women, new mothers, families, and caregivers</dd></div>
+          <div><dt>Focus</dt><dd>Maternal recovery, newborn care, feeding, and danger signs</dd></div>
+          <div><dt>Safety</dt><dd>Education only, not diagnosis or emergency care</dd></div>
+        </dl>
       </div>
     </section>
 
-    <section class="traffic-section">
+    <section class="site-section">
       <div class="container">
-        <div class="traffic-section__heading">
-          <p class="traffic-eyebrow">Nurse-led educational articles</p>
-          <h2>Maternal health and newborn care guides</h2>
-          <p>Each article is written for education and general awareness. The guidance does not diagnose illness or replace direct assessment by a doctor, nurse, midwife, or emergency service.</p>
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Featured guides</p><h2>Maternal and newborn care resources.</h2></div>
+          <p>Each guide is written for general education and should be used alongside advice from qualified healthcare professionals.</p>
         </div>
-        <div class="traffic-grid">
+        <div class="site-grid">
           {posts.map((post) => (
-            <article class="traffic-card">
-              <p class="traffic-eyebrow">{post.readMinutes} minute guide</p>
+            <article class="site-card">
+              <p class="site-eyebrow">{post.readMinutes} min read</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
-              <a href={`/blog/${post.slug}/`}>Read maternal-health guide</a>
+              <p><a href={`/blog/${post.slug}/`}>Read guide</a></p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="traffic-section traffic-dark">
-      <div class="container traffic-split">
-        <div>
-          <p class="traffic-eyebrow">Maternal-health nursing and research</p>
-          <h2>Looking for a registered nurse with maternal-health experience?</h2>
-          <p>Review Reeja Maharjan's hospital nursing background, IISH MOM-HD research experience, professional licenses, CV, and recruiter contact information.</p>
-        </div>
-        <div class="traffic-actions">
-          <a class="traffic-button" href="/hire-reeja/">View recruiter profile</a>
-          <a class="traffic-button" href="/clinical-research/">Explore maternal-health research work</a>
-        </div>
+    <section class="site-section site-section--dark">
+      <div class="container site-page__split">
+        <div><p class="site-eyebrow">Professional profile</p><h2>Maternal-health nursing and research experience.</h2><p>Review Reeja's hospital background, MOM-HD research work, licenses, and availability.</p></div>
+        <div class="site-actions"><a class="site-button" href="/clinical-research/">Research experience</a><a class="site-button" href="/hire-reeja/">Hire Reeja</a></div>
       </div>
     </section>
   </div>
