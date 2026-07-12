@@ -15,9 +15,9 @@ type Props = {
 };
 
 const {
-  title = `${profile.name} | ${profile.role}`,
+  title = `${profile.name} | Registered Nurse and Maternal Health Research Assistant`,
   description = profile.hero.tagline,
-  image = '/reeja-headshot.jpg'
+  image = '/og-default.svg'
 } = Astro.props;
 
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
@@ -35,7 +35,6 @@ const personSchema = {
   '@id': 'https://reejamaharjan.com.np/#person',
   name: profile.name,
   url: 'https://reejamaharjan.com.np/',
-  image: new URL(profile.hero.portrait.src, Astro.site ?? Astro.url.origin).toString(),
   jobTitle: profile.role,
   description: profile.profileSummary,
   email: profile.contact.email,
