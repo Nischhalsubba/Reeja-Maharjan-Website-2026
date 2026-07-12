@@ -4,40 +4,4 @@
   "version": "0.1.0",
   "private": true,
   "description": "An Astro, Tailwind CSS, and TypeScript professional nurse portfolio for Reeja Maharjan with recruiter-first homepage architecture, privacy-safe credential summaries, structured Person metadata, blog credibility notes, Cloudflare Pages deployment, and Build Check workflow support.",
-  "author": "Nischhal Raj Subba",
-  "license": "UNLICENSED",
-  "packageManager": "npm@11.6.2",
-  "engines": {
-    "node": "22.x",
-    "npm": ">=10 <12"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "check": "astro check",
-    "lint": "eslint .",
-    "format": "prettier --write .",
-    "astro": "astro",
-    "verify": "npm run check && npm run lint && npm run build"
-  },
-  "dependencies": {
-    "@astrojs/sitemap": "^3.7.0",
-    "@tailwindcss/vite": "^4.2.0",
-    "astro": "^5.17.1",
-    "gsap": "^3.14.2",
-    "split-type": "^0.3.4",
-    "tailwindcss": "^4.2.0"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.6",
-    "@typescript-eslint/eslint-plugin": "^8.56.0",
-    "@typescript-eslint/parser": "^8.56.0",
-    "eslint": "^9.39.2",
-    "eslint-plugin-astro": "^1.6.0",
-    "prettier": "^3.8.1",
-    "prettier-plugin-astro": "^0.14.1",
-    "prettier-plugin-tailwindcss": "^0.7.2",
-    "typescript": "^5.9.3"
-  }
-}
+  "author": "N
