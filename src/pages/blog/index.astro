@@ -2,47 +2,46 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { blogPosts } from '../../content/blog';
 
-const posts = blogPosts;
-
 const formatDate = (value: string) =>
   new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 ---
 
 <BaseLayout
-  title="Nursing Articles on Maternal Health, Documentation and Careers"
-  description="Read nurse-led articles on maternal and newborn care, nursing documentation, SBAR handover, patient confidentiality, clinical practice, telehealth, and nursing careers in Nepal."
+  title="Nursing and Maternal Health Articles | Reeja Maharjan"
+  description="Nurse-led articles on maternal and newborn care, documentation, SBAR handover, confidentiality, telehealth, and nursing careers in Nepal."
 >
-  <section class="section blog-list">
-    <div class="container section-stack">
-      <div class="section-intro">
-        <p class="section-intro__eyebrow">Nursing knowledge centre</p>
-        <h1>Practical nursing and maternal-health articles</h1>
-        <p>
-          Evidence-informed guides for parents, nurses, nursing students, healthcare teams, and recruiters. Topics include maternal-newborn care, postnatal support, clinical documentation, SBAR handover, confidentiality, telehealth, and nursing career development.
-        </p>
+  <div class="site-page">
+    <section class="site-page__hero">
+      <div class="container site-page__hero-grid">
+        <div>
+          <p class="site-eyebrow">Articles</p>
+          <h1>Practical nursing knowledge.</h1>
+          <p class="site-page__lede">Evidence-informed guides for patients, families, nurses, students, and healthcare teams.</p>
+        </div>
+        <dl class="site-page__summary">
+          <div><dt>Maternal health</dt><dd>Pregnancy, postnatal care, breastfeeding, and newborn support</dd></div>
+          <div><dt>Nursing practice</dt><dd>Documentation, SBAR, confidentiality, and communication</dd></div>
+          <div><dt>Professional growth</dt><dd>Licensure, careers, and digital health</dd></div>
+        </dl>
       </div>
+    </section>
 
-      <div class="card-grid card-grid--1">
-        {posts.map((post) => (
-          <article class="card blog-card" data-card-link data-card-href={`/blog/${post.slug}/`}>
-            <p class="blog-card__meta">
-              <span>Published {formatDate(post.publishedAt)}</span>
-              <span>{post.readMinutes} minute read</span>
-            </p>
-            <h2>{post.title}</h2>
-            <p>{post.excerpt}</p>
-            <ul class="chip-list">
-              {post.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
-            <p class="blog-card__keyword">
-              <strong>Main topic:</strong> {post.primaryKeyword}
-            </p>
-            <a class="text-link" href={`/blog/${post.slug}/`}>Read the complete guide</a>
-          </article>
-        ))}
+    <section class="site-section">
+      <div class="container">
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">All articles</p><h2>Read by topic.</h2></div>
+          <p>Clear, practical writing with sources, review dates, and safety notes where clinical decisions are involved.</p>
+        </div>
+        <div class="site-list">
+          {blogPosts.map((post) => (
+            <article class="site-list__item">
+              <div><p class="site-eyebrow">{post.tags[0]}</p><h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3></div>
+              <p>{post.excerpt}</p>
+              <p class="site-list__meta">{formatDate(post.publishedAt)}<br />{post.readMinutes} min read</p>
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </BaseLayout>
