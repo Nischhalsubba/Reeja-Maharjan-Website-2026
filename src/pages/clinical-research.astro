@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../content/profile';
+import '../styles/traffic-pages.css';
+---
+
+<BaseLayout
+  title="Clinical Research and Maternal Telemonitoring | Reeja Maharjan"
+  description="Learn about Reeja Maharjan's maternal-health research experience, telemonitoring workflow support, participant education, data quality, and clinical coordination."
+>
+  <div class="traffic-page">
+    <section class="traffic-hero">
+      <div class="container traffic-hero__grid">
+        <div>
+          <p class="traffic-eyebrow">Clinical research hub</p>
+          <h1>Nursing experience applied to maternal-health research.</h1>
+          <p class="traffic-lede">A privacy-safe overview of Reeja's work supporting participant education, BP/BG telemonitoring, study documentation, data quality, and escalation coordination.</p>
+        </div>
+        <aside class="traffic-summary">
+          <h2>Current focus</h2>
+          <ul>
+            <li>MOM-HD maternal telemonitoring trial</li>
+            <li>HDP and GDM study workflows</li>
+            <li>Home BP/BG monitoring education</li>
+            <li>Participant follow-up and data quality</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="traffic-section">
+      <div class="container traffic-split">
+        <div class="traffic-section__heading">
+          <p class="traffic-eyebrow">Research responsibilities</p>
+          <h2>Clinical understanding, careful documentation, and participant communication.</h2>
+          <p>{profile.experience[0]?.bullets[0]}</p>
+        </div>
+        <dl class="traffic-facts">
+          <div><dt>Screening support</dt><dd>ANC participant screening, eligibility workflow support, and consent-process coordination.</dd></div>
+          <div><dt>Device education</dt><dd>Practical guidance for home blood-pressure and blood-glucose monitoring and mobile reporting.</dd></div>
+          <div><dt>Follow-up</dt><dd>Review of submitted readings, warning-symptom screening, tele-follow-up, and protocol-based escalation.</dd></div>
+          <div><dt>Data quality</dt><dd>Study documentation, digital-platform review, confidentiality, and coordination across clinical and technical teams.</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="traffic-section">
+      <div class="container">
+        <div class="traffic-section__heading">
+          <p class="traffic-eyebrow">Relevant strengths</p>
+          <h2>Useful for implementation research and health programmes</h2>
+        </div>
+        <div class="traffic-grid">
+          <article class="traffic-card"><h3>Participant education</h3><p>Explaining monitoring routines, supporting adherence, and communicating safely with participants and families.</p></article>
+          <article class="traffic-card"><h3>Clinical coordination</h3><p>Working with nurses, obstetricians, hospital teams, researchers, and technical staff when information or escalation is needed.</p></article>
+          <article class="traffic-card"><h3>Ethical data handling</h3><p>Maintaining documentation quality and confidentiality without publishing participant data or confidential study material.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="traffic-section traffic-dark">
+      <div class="container traffic-split">
+        <div>
+          <p class="traffic-eyebrow">Research and programme opportunities</p>
+          <h2>Discuss a maternal-health, clinical-research, NGO, or INGO role.</h2>
+          <p>Share the role, location, expected start date, and a short description of the work.</p>
+        </div>
+        <div class="traffic-actions">
+          <a class="traffic-button" href="/hire-reeja/">Hire Reeja</a>
+          <a class="traffic-button" href="/cv/">View CV</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
