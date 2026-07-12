@@ -10,6 +10,7 @@ export const professionalFacts = {
   currentProject: 'MOM-HD maternal health telemonitoring trial',
   currentProjectShort: 'MOM-HD maternal telemonitoring',
   currentRolePeriod: 'May 2026 - Present (contract through Nov 2026)',
+  currentRoleContractEnd: '2026-11-30',
 
   currentLocation: 'Biratnagar, Nepal',
   locationLocality: 'Biratnagar',
