@@ -6,7 +6,7 @@ type Props = {
   mode?: 'one-page' | 'blog';
 };
 
-const { profile, mode = 'one-page' } = Astro.props;
+const { profile } = Astro.props;
 ---
 
 <footer class="site-footer">
@@ -14,26 +14,27 @@ const { profile, mode = 'one-page' } = Astro.props;
     <div>
       <p class="site-footer__eyebrow">Registered Nurse</p>
       <h2>{profile.name}</h2>
-      <p>Clinical care, maternal health research, and clear patient communication.</p>
+      <p>Clinical care, maternal health research, patient education, and careful documentation.</p>
     </div>
 
-    <nav aria-label="Footer quick links" class="site-footer__links">
-      <a href={mode === 'blog' ? '/' : '#home'}>Home</a>
-      <a href={mode === 'blog' ? '/#experience' : '#experience'}>Experience</a>
-      <a href={mode === 'blog' ? '/#credentials' : '#credentials'}>Credentials</a>
-      <a href="/cv/">CV</a>
+    <nav aria-label="Professional resources" class="site-footer__links">
+      <a href="/maternal-health/">Maternal health</a>
+      <a href="/nursing-practice/">Nursing practice</a>
+      <a href="/clinical-research/">Clinical research</a>
       <a href="/blog/">Writing</a>
+      <a href="/cv/" data-track="cv-footer">CV</a>
+      <a href="/hire-reeja/" data-track="hire-footer">Hire Reeja</a>
     </nav>
 
     <div class="site-footer__contact">
-      <a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
-      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
+      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn</a>
       <span>{profile.contact.location}</span>
     </div>
   </div>
 
   <div class="container site-footer__legal">
     <small>(c) {new Date().getFullYear()} {profile.name}</small>
-    <a href={mode === 'blog' ? '/#home' : '#home'}>Back to top</a>
+    <a href="#main-content">Back to top</a>
   </div>
 </footer>
