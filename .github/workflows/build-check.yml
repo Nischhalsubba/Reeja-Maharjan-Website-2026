@@ -26,6 +26,9 @@ jobs:
       - name: Verify professional facts
         run: npm run verify:facts
 
+      - name: Verify license and contract expiry
+        run: node scripts/check-expiry-controls.mjs
+
       - name: Type check
         run: npm run check
 
