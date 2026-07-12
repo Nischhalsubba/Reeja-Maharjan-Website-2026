@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { blogPosts } from '../content/blog';
-import '../styles/traffic-pages.css';
 
 const posts = blogPosts.filter((post) =>
   [post.primaryKeyword, ...post.supportingKeywords, ...post.tags]
@@ -12,60 +11,48 @@ const posts = blogPosts.filter((post) =>
 ---
 
 <BaseLayout
-  title="Nursing Practice Guides: Documentation, SBAR, Handover and Careers"
-  description="Explore practical nursing guides on clinical documentation, SBAR handover, patient confidentiality, general care nursing, licensure, career development, and safer communication."
+  title="Nursing Practice Guides | Documentation, SBAR and Careers"
+  description="Practical nursing guides on documentation, SBAR handover, confidentiality, clinical communication, licensure, and professional development."
 >
-  <div class="traffic-page">
-    <section class="traffic-hero">
-      <div class="container traffic-hero__grid">
+  <div class="site-page">
+    <section class="site-page__hero">
+      <div class="container site-page__hero-grid">
         <div>
-          <p class="traffic-eyebrow">Nursing practice and professional development</p>
-          <h1>Practical nursing guides for safer care and clearer communication.</h1>
-          <p class="traffic-lede">Resources for nurses, nursing students, and healthcare teams covering clinical documentation, SBAR handover, patient confidentiality, general ward routines, licensure, and professional readiness.</p>
+          <p class="site-eyebrow">Nursing practice</p>
+          <h1>Safer care starts with clear practice.</h1>
+          <p class="site-page__lede">Practical resources for nurses and students on documentation, SBAR handover, confidentiality, clinical communication, and career readiness.</p>
         </div>
-        <aside class="traffic-summary">
-          <h2>Core nursing topics</h2>
-          <ul>
-            <li>SBAR communication and shift handover</li>
-            <li>Accurate and defensible clinical documentation</li>
-            <li>Patient confidentiality and professional ethics</li>
-            <li>Nursing careers, licensure, and continuing development</li>
-          </ul>
-        </aside>
+        <dl class="site-page__summary">
+          <div><dt>Communication</dt><dd>SBAR, shift handover, referrals, and escalation</dd></div>
+          <div><dt>Documentation</dt><dd>Accurate, timely, and defensible clinical records</dd></div>
+          <div><dt>Professional growth</dt><dd>Licensure, ethics, and career preparation</dd></div>
+        </dl>
       </div>
     </section>
 
-    <section class="traffic-section">
+    <section class="site-section">
       <div class="container">
-        <div class="traffic-section__heading">
-          <p class="traffic-eyebrow">Nursing education resources</p>
-          <h2>Clinical nursing and career articles</h2>
-          <p>These guides focus on practical communication, documentation, patient safety, professional accountability, and realistic nursing career preparation.</p>
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Nursing resources</p><h2>Guides for clinical work and career growth.</h2></div>
+          <p>Focused on practical habits that improve communication, continuity of care, professional accountability, and patient safety.</p>
         </div>
-        <div class="traffic-grid">
+        <div class="site-grid">
           {posts.map((post) => (
-            <article class="traffic-card">
-              <p class="traffic-eyebrow">{post.readMinutes} minute guide</p>
+            <article class="site-card">
+              <p class="site-eyebrow">{post.readMinutes} min read</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
-              <a href={`/blog/${post.slug}/`}>Read nursing practice guide</a>
+              <p><a href={`/blog/${post.slug}/`}>Read guide</a></p>
             </article>
           ))}
         </div>
       </div>
     </section>
 
-    <section class="traffic-section traffic-dark">
-      <div class="container traffic-split">
-        <div>
-          <p class="traffic-eyebrow">Registered nurse recruitment</p>
-          <h2>Recruit for hospital nursing, research, or health-programme support.</h2>
-          <p>Review Reeja Maharjan's clinical experience, nursing licenses, maternal-health research responsibilities, professional CV, and availability for relevant roles.</p>
-        </div>
-        <div class="traffic-actions">
-          <a class="traffic-button" href="/hire-reeja/">View recruiter profile</a>
-          <a class="traffic-button" href="/cv/">Download nursing CV</a>
-        </div>
+    <section class="site-section site-section--dark">
+      <div class="container site-page__split">
+        <div><p class="site-eyebrow">Recruitment</p><h2>Looking for a nurse with clinical and research experience?</h2><p>Review Reeja's experience, credentials, and availability for hospital, research, and health-programme roles.</p></div>
+        <div class="site-actions"><a class="site-button" href="/cv/">View CV</a><a class="site-button" href="/hire-reeja/">Hire Reeja</a></div>
       </div>
     </section>
   </div>
