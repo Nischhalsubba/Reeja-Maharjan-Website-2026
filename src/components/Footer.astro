@@ -1,40 +1,36 @@
 ---
 import type { ProfileContent } from '../content/profile';
-
-type Props = {
-  profile: ProfileContent;
-  mode?: 'one-page' | 'blog';
-};
-
+type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
 ---
 
 <footer class="site-footer">
   <div class="container site-footer__inner">
     <div>
-      <p class="site-footer__eyebrow">Registered Nurse and Maternal Health Research Assistant</p>
+      <p class="site-footer__eyebrow">Registered Nurse · Maternal Health Research</p>
       <h2>{profile.name}</h2>
-      <p>Hospital nursing, maternal-newborn care, participant education, telemonitoring, clinical documentation, and health-research coordination.</p>
+      <p>Clinical care, patient education, documentation, telemonitoring, and research coordination.</p>
     </div>
 
-    <nav aria-label="Nursing and research resources" class="site-footer__links">
-      <a href="/maternal-health/">Maternal health resources</a>
-      <a href="/nursing-practice/">Nursing practice guides</a>
-      <a href="/clinical-research/">Clinical research profile</a>
-      <a href="/blog/">Nursing articles</a>
-      <a href="/cv/" data-track="cv-footer">Download nursing CV</a>
-      <a href="/hire-reeja/" data-track="hire-footer">Recruit Reeja</a>
+    <nav aria-label="Professional pages" class="site-footer__links">
+      <a href="/#experience">Experience</a>
+      <a href="/maternal-health/">Maternal health</a>
+      <a href="/nursing-practice/">Nursing practice</a>
+      <a href="/clinical-research/">Clinical research</a>
+      <a href="/blog/">Articles</a>
+      <a href="/cv/" data-track="cv-footer">CV</a>
+      <a href="/hire-reeja/" data-track="hire-footer">Hire Reeja</a>
     </nav>
 
     <div class="site-footer__contact">
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
-      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn profile</a>
-      <span>{profile.contact.location}</span>
+      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn</a>
+      <span>Biratnagar, Nepal</span>
     </div>
   </div>
 
   <div class="container site-footer__legal">
-    <small>(c) {new Date().getFullYear()} {profile.name}. Professional nursing portfolio.</small>
-    <a href="#main-content">Back to page content</a>
+    <small>© {new Date().getFullYear()} {profile.name}</small>
+    <a href="#main-content">Back to top</a>
   </div>
 </footer>
