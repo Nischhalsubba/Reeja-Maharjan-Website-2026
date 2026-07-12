@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../content/profile';
+import '../styles/traffic-pages.css';
+
+const emailSubject = encodeURIComponent('Nursing or research opportunity for Reeja Maharjan');
+const hiringSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  dateModified: '2026-07-12',
+  mainEntity: {
+    '@type': 'Person',
+    name: profile.name,
+    jobTitle: profile.role,
+    description: profile.profileSummary,
+    email: profile.contact.email,
+    url: 'https://
