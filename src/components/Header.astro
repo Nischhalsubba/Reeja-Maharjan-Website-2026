@@ -7,4 +7,40 @@ const links = [
   { href: '/#experience', label: 'Experience', match: '/' },
   { href: '/maternal-health/', label: 'Maternal health' },
   { href: '/nursing-practice/', label: 'Nursing practice' },
-  {
+  { href: '/clinical-research/', label: 'Research' },
+  { href: '/blog/', label: 'Articles' },
+  { href: '/cv/', label: 'CV' }
+];
+---
+
+<header class="site-header" aria-label="Primary navigation">
+  <div class="container site-header__inner">
+    <a class="brand" href="/" aria-label="Reeja Maharjan homepage">
+      <span class="brand__mark">RM</span>
+      <span class="brand__text">
+        <strong>{name}</strong>
+        <small>Registered Nurse · Research Assistant</small>
+      </span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      {links.map((link) => (
+        <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>
+      ))}
+      <a class="nav-cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-nav">Opportunities</a>
+    </nav>
+  </div>
+
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <nav class="mobile-nav__panel" aria-label="Mobile navigation">
+      <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+      {links.map((link) => (
+        <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>
+      ))}
+      <a href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">Professional opportunities</a>
+    </nav>
+  </div>
+</header>
