@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { blogPosts } from '../content/blog';
+import '../styles/traffic-pages.css';
+
+const posts = blogPosts.filter((post) =>
+  [post.primaryKeyword, ...post.supportingKeywords, ...post.tags]
+    .join(' ')
+    .toLowerCase()
+    .match(/maternal|newborn|postnatal|breastfeeding|pregnan|mother/)
+);
+---
+
+<BaseLayout
+  title="Maternal Health and Newborn Care Resources | Reeja Maharjan"
+  description="Practical, nurse-led maternal health and newborn care resources covering postnatal care, warning signs, breastfeeding support, and family education."
+>
+  <div class="traffic-page">
+    <section class="traffic-hero">
+      <div class="container traffic-hero__grid">
+        <div>
+          <p class="traffic-eyebrow">Maternal health hub</p>
+          <h1>Clear guidance for mothers, newborns, and families.</h1>
+          <p class="traffic-lede">Evidence-informed educational resources written from a nursing perspective, with practical explanations and clear safety advice.</p>
+        </div>
+        <aside class="traffic-summary">
+          <h2>What you will find</h2>
+          <ul>
+            <li>Maternal and newborn care basics</li>
+            <li>Postnatal warning signs</li>
+            <li>Breastfeeding and family education</li>
+            <li>When to seek qualified medical care</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="traffic-section">
+      <div class="container">
+        <div class="traffic-section__heading">
+          <p class="traffic-eyebrow">Featured guidance</p>
+          <h2>Maternal and newborn articles</h2>
+          <p>These resources are for education and general awareness and do not replace direct clinical assessment.</p>
+        </div>
+        <div class="traffic-grid">
+          {posts.map((post) => (
+            <article class="traffic-card">
+              <p class="traffic-eyebrow">{post.readMinutes} min read</p>
+              <h3>{post.title}</h3>
+              <p>{post.excerpt}</p>
+              <a href={`/blog/${post.slug}/`}>Read article</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="traffic-section traffic-dark">
+      <div class="container traffic-split">
+        <div>
+          <p class="traffic-eyebrow">Professional profile</p>
+          <h2>Need nursing or maternal-health research support?</h2>
+          <p>Review Reeja's clinical experience, current maternal-health research work, licenses, and availability.</p>
+        </div>
+        <div class="traffic-actions">
+          <a class="traffic-button" href="/hire-reeja/">Hire Reeja</a>
+          <a class="traffic-button" href="/cv/">View CV</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
