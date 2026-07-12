@@ -5,12 +5,12 @@ type Props = {
   mode?: 'one-page' | 'blog';
 };
 
-const { name, showAwards = false, mode = 'one-page' } = Astro.props;
+const { name, mode = 'one-page' } = Astro.props;
 ---
 
 <header class="site-header" aria-label="Primary">
   <div class="container site-header__inner">
-    <a class="brand" href={mode === 'blog' ? '/' : '#home'} aria-label="Go to home section">
+    <a class="brand" href={mode === 'blog' ? '/' : '#home'} aria-label="Go to Reeja Maharjan homepage">
       <span class="brand__mark">RM</span>
       <span class="brand__text">
         <strong>{name}</strong>
@@ -25,23 +25,22 @@ const { name, showAwards = false, mode = 'one-page' } = Astro.props;
     {
       mode === 'one-page' ? (
         <nav class="desktop-nav" aria-label="Section navigation">
-          <a href="#home">Home</a>
-          <a href="#profile">Profile</a>
-          <a href="#role-fit">Role Fit</a>
+          <a href="#about">About</a>
           <a href="#experience">Experience</a>
-          <a href="#certifications">Credentials</a>
-          <a href="#skills">Strengths</a>
+          <a href="#focus">Focus</a>
+          <a href="#credentials">Credentials</a>
+          <a href="#writing">Writing</a>
           <a href="/cv/">CV</a>
-          <a href="/blog/">Blog</a>
-          <a href="#contact">Contact</a>
+          <a href="#contact">Hire Reeja</a>
         </nav>
       ) : (
         <nav class="desktop-nav" aria-label="Site navigation">
           <a href="/">Home</a>
-          <a href="/#certifications">Credentials</a>
+          <a href="/#experience">Experience</a>
+          <a href="/#credentials">Credentials</a>
           <a href="/cv/">CV</a>
-          <a href="/blog/">Blog</a>
-          <a href="/#contact">Contact</a>
+          <a href="/blog/">Writing</a>
+          <a href="/#contact">Hire Reeja</a>
         </nav>
       )
     }
@@ -52,29 +51,23 @@ const { name, showAwards = false, mode = 'one-page' } = Astro.props;
       mode === 'one-page' ? (
         <nav class="mobile-nav__panel" aria-label="Mobile section navigation">
           <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
-          <a href="#home">Home</a>
-          <a href="#profile">Profile</a>
-          <a href="#role-fit">Role Fit</a>
+          <a href="#about">About</a>
           <a href="#experience">Experience</a>
-          <a href="#certifications">Credentials</a>
-          <a href="#skills">Strengths</a>
-          <a href="#education">Education</a>
-          <a href="#languages">Languages</a>
-          {showAwards && <a href="#awards">Awards</a>}
-          <a href="#recommendations">Recommendations</a>
-          <a href="#evidence">Verification</a>
+          <a href="#focus">Focus</a>
+          <a href="#credentials">Credentials</a>
+          <a href="#writing">Writing</a>
           <a href="/cv/">CV</a>
-          <a href="/blog/">Blog</a>
-          <a href="#contact">Contact</a>
+          <a href="#contact">Hire Reeja</a>
         </nav>
       ) : (
         <nav class="mobile-nav__panel" aria-label="Mobile site navigation">
           <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
           <a href="/">Home</a>
-          <a href="/#certifications">Credentials</a>
+          <a href="/#experience">Experience</a>
+          <a href="/#credentials">Credentials</a>
           <a href="/cv/">CV</a>
-          <a href="/blog/">Blog</a>
-          <a href="/#contact">Contact</a>
+          <a href="/blog/">Writing</a>
+          <a href="/#contact">Hire Reeja</a>
         </nav>
       )
     }

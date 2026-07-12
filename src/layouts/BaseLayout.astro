@@ -19,6 +19,7 @@ const {
   description = profile.hero.tagline,
   image = '/reeja-headshot.jpg'
 } = Astro.props;
+
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
 const isOnePage = Astro.url.pathname === '/';
 const navigationMode = isOnePage ? 'one-page' : 'blog';
@@ -62,566 +63,159 @@ const personSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-
     <meta name="robots" content="index, follow" />
+
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)}></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+
     <style is:global>
       :root {
-        --shadow-1: none;
-        --shadow-2: none;
-        --shadow-3: none;
-        --clinical-paper: #fbfefd;
-        --clinical-panel: #f1faf8;
-        --clinical-panel-2: #eaf7f4;
-        --clinical-ink: #102a35;
-        --clinical-border: #d7e9e6;
-        --clinical-border-strong: #b9d8d3;
+        --font-sans: Arial, Helvetica, system-ui, sans-serif;
+        --container-max: 1280px;
+        --gutter: clamp(20px, 4vw, 56px);
+        --section-gap: clamp(80px, 10vw, 152px);
+        --r-card: 18px;
+        --r-btn: 999px;
+        --r-pill: 999px;
       }
 
       body {
-        background: var(--clinical-paper);
+        min-width: 320px;
+        background: #ffffff;
+        color: #0a0a0a;
+      }
+
+      ::selection {
+        background: #0a0a0a;
+        color: #ffffff;
       }
 
       :where(a, button, input, textarea):focus-visible {
-        outline: 3px solid color-mix(in srgb, var(--accent) 42%, transparent);
+        outline: 2px solid #0a0a0a;
         outline-offset: 3px;
         box-shadow: none;
       }
 
-      .container {
-        width: min(100% - clamp(40px, 7vw, 112px), 1180px);
+      .scroll-progress {
+        height: 2px;
+        background: transparent;
       }
 
       .site-header {
-        background: color-mix(in srgb, var(--surface) 96%, transparent);
-        border-bottom: 1px solid var(--clinical-border);
+        min-height: 68px;
+        background: color-mix(in srgb, #ffffff 94%, transparent);
+        border-bottom: 1px solid #d9d9d9;
         box-shadow: none;
-        backdrop-filter: blur(12px);
+        backdrop-filter: blur(14px);
       }
 
       .site-header__inner {
-        min-height: 64px;
+        min-height: 68px;
       }
 
-      .brand__mark,
-      .desktop-nav a:last-child,
-      .btn--primary {
-        background: var(--accent);
-        color: var(--accent-text);
+      .brand__mark {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: #0a0a0a;
+        color: #ffffff;
       }
 
-      .brand__text small,
-      .section-intro__eyebrow,
-      .text-link,
-      .hero__role {
-        color: var(--accent);
+      .brand__text strong {
+        font-size: 0.9rem;
+        letter-spacing: -0.02em;
+      }
+
+      .brand__text small {
+        font-size: 0.72rem;
+        color: #737373;
+      }
+
+      .desktop-nav {
+        gap: 2px;
       }
 
       .desktop-nav a,
       .mobile-nav__panel a {
-        color: var(--muted);
-        font-weight: 650;
+        color: #575757;
+        font-size: 0.86rem;
+        font-weight: 600;
       }
 
       .desktop-nav a:hover,
       .desktop-nav a:focus-visible,
       .mobile-nav__panel a:hover,
       .mobile-nav__panel a:focus-visible {
-        color: var(--text);
-        background: var(--surface-alt);
+        color: #0a0a0a;
+        background: #f2f2f2;
       }
 
-      .desktop-nav a:last-child,
-      .btn,
-      .btn:hover,
-      .card[data-card-link]:focus-visible {
-        box-shadow: none;
+      .desktop-nav a:last-child {
+        background: #0a0a0a;
+        color: #ffffff;
+        padding-inline: 18px;
       }
 
-      .btn {
-        min-height: 48px;
-        border-radius: var(--r-pill);
-        transition: background-color var(--dur-1) ease, border-color var(--dur-1) ease, color var(--dur-1) ease;
-      }
-
-      .btn:hover {
-        transform: none;
-      }
-
-      .btn--primary:hover,
       .desktop-nav a:last-child:hover,
       .desktop-nav a:last-child:focus-visible {
-        background: var(--accent-hover);
+        background: #2b2b2b;
+        color: #ffffff;
       }
 
-      .btn--secondary {
-        background: var(--surface);
-        border-color: var(--clinical-border-strong);
+      .mobile-nav {
+        top: 68px;
+        background: rgba(0, 0, 0, 0.52);
       }
 
-      .section {
-        padding-block: clamp(72px, 10vw, 136px);
-        scroll-margin-top: 96px;
-      }
-
-      .section-stack,
-      .section-shell__body,
-      .credential-section__body,
-      .credential-section__supporting {
-        display: grid;
-        gap: clamp(32px, 5vw, 56px);
-      }
-
-      .section-shell,
-      .card,
-      .text-card,
-      .timeline__item,
-      .timeline-list__content,
-      .cert-grid__item,
-      .credential-tile,
-      .contact-cta {
-        border: 1px solid var(--clinical-border);
-        border-radius: 24px;
-        background: var(--surface);
+      .mobile-nav__panel {
+        border-radius: 0;
         box-shadow: none;
-      }
-
-      .section-shell {
-        overflow: hidden;
-      }
-
-      .section-shell__head,
-      .section-shell__body {
-        padding: clamp(36px, 5vw, 64px);
-      }
-
-      .section-shell__head {
-        background: var(--surface);
-        border-bottom: 1px solid var(--clinical-border);
-      }
-
-      .section-shell__body {
-        background: var(--clinical-paper);
-      }
-
-      .section-shell__icon {
-        color: var(--accent);
-        border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
-        background: var(--clinical-panel);
-      }
-
-      .section-intro h1,
-      .section-intro h2,
-      .section-intro h3,
-      .hero h1,
-      .card h3,
-      .card h4,
-      .cert-grid__item h4,
-      .credential-tile h3 {
-        color: var(--clinical-ink);
-        line-height: 1.18;
-      }
-
-      .section-intro p:not(.section-intro__eyebrow),
-      .card p,
-      .text-card p,
-      .cert-grid__item p,
-      .credential-tile p {
-        line-height: 1.72;
-      }
-
-      .section-intro__eyebrow {
-        width: fit-content;
-        padding: 5px 10px;
-        border-radius: var(--r-pill);
-        background: var(--clinical-panel);
-        border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--line));
-      }
-
-      .hero {
-        padding-block: clamp(48px, 9vw, 112px);
-        overflow: visible;
-      }
-
-      .hero::before {
-        display: none;
-      }
-
-      .hero__grid {
-        grid-template-columns: 1fr;
-        gap: clamp(36px, 6vw, 72px);
-        align-items: stretch;
-        padding: clamp(32px, 6vw, 72px);
-        border: 1px solid var(--clinical-border);
-        border-radius: clamp(24px, 4vw, 36px);
-        background: linear-gradient(180deg, var(--surface) 0%, var(--clinical-panel) 100%);
-        box-shadow: none;
-      }
-
-      .hero__content {
-        max-width: 48rem;
-      }
-
-      .hero h1 {
-        max-width: 12ch;
-        font-size: clamp(2.15rem, 11vw, 4rem);
-        line-height: 1.04;
-        letter-spacing: -0.058em;
-      }
-
-      .badge {
-        border-radius: var(--r-pill);
-        border-color: color-mix(in srgb, var(--accent) 20%, var(--line));
-        background: var(--surface);
-        color: var(--accent);
-        font-weight: 800;
-        letter-spacing: 0.075em;
-      }
-
-      .hero__role {
-        font-weight: 750;
-        margin-top: var(--s3);
-      }
-
-      .hero__tagline {
-        font-size: clamp(1rem, 1.3vw, 1.16rem);
-        max-width: 60ch;
-        line-height: 1.75;
-        margin-top: var(--s2);
-      }
-
-      .hero__proof {
-        margin-top: var(--s4);
-        gap: var(--s2);
-      }
-
-      .hero__proof li,
-      .skills-chip-list li,
-      .chip-list li {
-        border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
-        background: var(--surface);
-        color: var(--text);
-        font-weight: 650;
-        line-height: 1.25;
-      }
-
-      .hero__actions {
-        margin-top: var(--s5);
-      }
-
-      .hero__actions .btn {
-        flex: 1 1 100%;
-      }
-
-      .hero__media {
-        display: grid;
-        align-content: end;
-        min-height: 340px;
-        border: 1px solid var(--clinical-border);
-        border-radius: 26px;
-        background: var(--surface);
-        overflow: hidden;
-        box-shadow: none;
-      }
-
-      .hero__media img {
-        width: min(74%, 330px);
-        max-height: 380px;
-        margin: 0 auto;
-        object-fit: contain;
-        object-position: center bottom;
-        filter: none;
-      }
-
-      .hero-meta {
-        position: static;
-        width: calc(100% - 32px);
-        margin: 0 auto 16px;
-        padding: var(--s3);
-        border: 1px solid var(--clinical-border);
-        border-radius: 18px;
-        background: var(--clinical-panel);
-        box-shadow: none;
-      }
-
-      .hero-meta li {
-        align-items: start;
-        gap: var(--s2);
-      }
-
-      .hero-meta strong {
-        max-width: 58%;
-        line-height: 1.45;
-      }
-
-      .card,
-      .text-card,
-      .cert-grid__item,
-      .credential-tile {
-        display: grid;
-        align-content: start;
-        gap: var(--s3);
-        min-width: 0;
-        padding: clamp(28px, 4vw, 44px);
-      }
-
-      .card > *,
-      .text-card > *,
-      .cert-grid__item > *,
-      .credential-tile > * {
-        margin-top: 0;
-        min-width: 0;
-      }
-
-      .card-grid,
-      .cert-grid,
-      .credential-section__lead {
-        display: grid;
-        gap: clamp(28px, 4vw, 48px);
-      }
-
-      .card-grid--2,
-      .card-grid--3,
-      .cert-grid,
-      .credential-section__lead {
-        grid-template-columns: 1fr;
-      }
-
-      .cert-grid__meta {
-        color: var(--muted);
-        font-size: var(--small-size);
-        line-height: 1.7;
-      }
-
-      .timeline-list::before {
-        background: color-mix(in srgb, var(--accent) 30%, var(--line));
-      }
-
-      .timeline-list__dot {
-        background: var(--accent);
-        border: 4px solid var(--clinical-panel);
-        box-shadow: none;
-      }
-
-      .timeline-list__date {
-        background: var(--surface);
-        border-color: var(--clinical-border);
-      }
-
-      .timeline-list__content {
-        padding-block: var(--s4);
-      }
-
-      .check-list li::before,
-      .skills-chip-list li::before {
-        color: var(--accent);
-      }
-
-      .check-list,
-      .skills-chip-list {
-        display: grid;
-        gap: var(--s2);
-      }
-
-      .credential-tile {
-        border-color: color-mix(in srgb, var(--accent) 16%, var(--line));
-        background: var(--clinical-panel);
-      }
-
-      .credential-tile,
-      .cert-grid__item,
-      .card,
-      .text-card {
-        transition: background-color var(--dur-1) ease, border-color var(--dur-1) ease;
-      }
-
-      .credential-tile:hover,
-      .cert-grid__item:hover,
-      .card:hover,
-      .text-card:hover {
-        transform: none;
-        border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
-        box-shadow: none;
-      }
-
-      .credential-tile__label,
-      .credential-section .note,
-      #evidence .note {
-        display: inline-flex;
-        width: fit-content;
-        max-width: 100%;
-        border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
-        border-radius: var(--r-pill);
-        background: var(--surface);
-        color: var(--accent);
-        font-weight: 700;
-        line-height: 1.35;
-        white-space: normal;
-      }
-
-      .credential-tile__label {
-        margin: 0;
-        padding: 6px 11px;
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .credential-section .note,
-      #evidence .note {
-        padding: 9px 13px;
-        color: var(--text);
-        margin-top: auto;
-      }
-
-      .credential-section__supporting .section-intro {
-        display: grid;
-        gap: var(--s3);
-      }
-
-      .contact-cta {
-        padding: clamp(36px, 5vw, 64px);
-        background: var(--clinical-panel);
-      }
-
-      .contact-form input,
-      .contact-form textarea {
-        border-color: var(--clinical-border);
-      }
-
-      .contact-form input:focus-visible,
-      .contact-form textarea:focus-visible {
-        border-color: var(--accent);
       }
 
       .site-footer {
-        background: var(--surface);
-        border-top-color: var(--clinical-border);
+        background: #0a0a0a;
+        color: #ffffff;
+        border-top: 0;
       }
 
-      @media (min-width: 560px) {
-        .hero__actions .btn {
-          flex: 0 1 auto;
-        }
+      .site-footer p,
+      .site-footer small,
+      .site-footer__eyebrow {
+        color: #a9a9a9;
       }
 
-      @media (min-width: 760px) {
-        .card-grid--2,
-        .cert-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .card-grid--3 {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
+      .site-footer a {
+        color: #ffffff;
       }
 
-      @media (min-width: 1020px) {
-        .hero__grid {
-          grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.64fr);
-          gap: clamp(48px, 6vw, 88px);
-        }
-
-        .hero h1 {
-          max-width: 12ch;
-          font-size: clamp(3rem, 5.4vw, 4.45rem);
-        }
-
-        .hero__media {
-          min-height: 520px;
-        }
-
-        .hero__media img {
-          width: min(82%, 400px);
-          max-height: 520px;
-        }
-
-        .hero-meta {
-          width: min(340px, calc(100% - 40px));
-          justify-self: end;
-          margin-right: var(--s3);
-          margin-bottom: var(--s3);
-        }
-
-        .credential-section__lead,
-        .card-grid--3 {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
+      .site-footer__legal {
+        border-top-color: #2d2d2d;
       }
 
-      @media (max-width: 760px) {
-        .container {
-          width: min(100% - 32px, 1180px);
-        }
-
-        .site-header__inner {
-          min-height: 60px;
-        }
-
-        .brand__text small {
+      @media (max-width: 1080px) {
+        .desktop-nav {
           display: none;
         }
 
-        .section {
-          padding-block: 64px;
+        .menu-toggle {
+          display: inline-flex;
+          min-height: 40px;
+          align-items: center;
+          justify-content: center;
+          padding: 0 16px;
+          border: 1px solid #cfcfcf;
+          border-radius: 999px;
+          background: #ffffff;
+          color: #0a0a0a;
+          font: inherit;
+          font-size: 0.84rem;
+          font-weight: 700;
         }
+      }
 
-        .section-stack,
-        .section-shell__body,
-        .credential-section__body,
-        .credential-section__supporting {
-          gap: var(--s4);
-        }
-
-        .section-shell__head,
-        .section-shell__body {
-          padding: var(--s4);
-        }
-
-        .card,
-        .text-card,
-        .cert-grid__item,
-        .credential-tile,
-        .contact-cta {
-          padding: var(--s4);
-        }
-
-        .hero {
-          padding-top: var(--s4);
-        }
-
-        .hero__grid {
-          padding: var(--s4);
-          gap: var(--s5);
-        }
-
-        .hero__media {
-          min-height: 320px;
-        }
-
-        .hero__media img {
-          width: min(76%, 300px);
-          max-height: 340px;
-        }
-
-        .badge {
-          font-size: 0.68rem;
-          line-height: 1.2;
-        }
-
-        .hero h1 {
-          max-width: 100%;
-        }
-
-        .hero-meta {
-          width: calc(100% - 24px);
+      @media (max-width: 560px) {
+        .brand__text small {
+          display: none;
         }
       }
 
@@ -640,11 +234,7 @@ const personSchema = {
   <body>
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
-    <Header
-      name={profile.name}
-      showAwards={profile.awards.length > 0}
-      mode={navigationMode}
-    />
+    <Header name={profile.name} showAwards={profile.awards.length > 0} mode={navigationMode} />
     <main id="main-content">
       <slot />
     </main>
@@ -652,7 +242,6 @@ const personSchema = {
 
     <script>
       import { initMotion } from '../lib/motion';
-
       initMotion();
     </script>
   </body>
