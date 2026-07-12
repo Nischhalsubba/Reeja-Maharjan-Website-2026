@@ -5,6 +5,10 @@ import process from 'node:process';
 const root = process.cwd();
 const sourceRoot = join(root, 'src');
 const factsPath = join(sourceRoot, 'content', 'professional-facts.ts');
+const facadePath = join(sourceRoot, 'content', 'profile.ts');
+const ignoredCompatibilityFiles = new Set([
+  join(sourceRoot, 'content', 'profile.raw.ts')
+]);
 const allowedExtensions = new Set(['.astro', '.ts', '.tsx', '.js', '.jsx', '.md', '.mdx']);
 
 const requiredFacts = [
@@ -14,6 +18,18 @@ const requiredFacts = [
   "currentEmployer: 'Institute for Implementation Science and Health (IISH)'",
   "texasLicenseExpiry: '2026-10-31'",
   "lastVerified: '2026-07-12'"
+];
+
+const requiredFacadeFragments = [
+  "import { professionalFacts } from './professional-facts';",
+  "import { profile as sourceProfile } from './profile.raw';",
+  'name: professionalFacts.name',
+  'role: professionalFacts.publicRoleLabel',
+  'resumeUrl: professionalFacts.publicCvPath',
+  'location: professionalFacts.currentLocation',
+  'email: professionalFacts.professionalEmail',
+  'linkedin: professionalFacts.linkedin',
+  'formEndpoint: professionalFacts.contactFormEndpoint'
 ];
 
 const forbiddenPatterns = [
@@ -49,6 +65,7 @@ async function walk(directory) {
 
 const failures = [];
 const factsSource = await readFile(factsPath, 'utf8');
+const facadeSource = await readFile(facadePath, 'utf8');
 
 for (const fact of requiredFacts) {
   if (!factsSource.includes(fact)) {
@@ -56,7 +73,15 @@ for (const fact of requiredFacts) {
   }
 }
 
+for (const fragment of requiredFacadeFragments) {
+  if (!facadeSource.includes(fragment)) {
+    failures.push(`profile.ts is missing canonical facade fragment: ${fragment}`);
+  }
+}
+
 for (const file of await walk(sourceRoot)) {
+  if (ignoredCompatibilityFiles.has(file)) continue;
+
   const source = await readFile(file, 'utf8');
   const displayPath = relative(root, file);
 
