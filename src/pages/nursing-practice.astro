@@ -12,24 +12,24 @@ const posts = blogPosts.filter((post) =>
 ---
 
 <BaseLayout
-  title="Nursing Practice, Documentation and Career Resources | Reeja Maharjan"
-  description="Practical nursing resources on documentation, SBAR handover, confidentiality, clinical practice, licensure, and professional development."
+  title="Nursing Practice Guides: Documentation, SBAR, Handover and Careers"
+  description="Explore practical nursing guides on clinical documentation, SBAR handover, patient confidentiality, general care nursing, licensure, career development, and safer communication."
 >
   <div class="traffic-page">
     <section class="traffic-hero">
       <div class="container traffic-hero__grid">
         <div>
-          <p class="traffic-eyebrow">Nursing practice hub</p>
-          <h1>Practical nursing knowledge for safer, clearer care.</h1>
-          <p class="traffic-lede">Resources for nurses, students, and healthcare teams on documentation, handover, confidentiality, clinical routines, and career development.</p>
+          <p class="traffic-eyebrow">Nursing practice and professional development</p>
+          <h1>Practical nursing guides for safer care and clearer communication.</h1>
+          <p class="traffic-lede">Resources for nurses, nursing students, and healthcare teams covering clinical documentation, SBAR handover, patient confidentiality, general ward routines, licensure, and professional readiness.</p>
         </div>
         <aside class="traffic-summary">
-          <h2>Core topics</h2>
+          <h2>Core nursing topics</h2>
           <ul>
-            <li>SBAR and shift handover</li>
-            <li>Clinical documentation</li>
-            <li>Patient confidentiality</li>
-            <li>Nursing careers and licensure</li>
+            <li>SBAR communication and shift handover</li>
+            <li>Accurate and defensible clinical documentation</li>
+            <li>Patient confidentiality and professional ethics</li>
+            <li>Nursing careers, licensure, and continuing development</li>
           </ul>
         </aside>
       </div>
@@ -38,17 +38,17 @@ const posts = blogPosts.filter((post) =>
     <section class="traffic-section">
       <div class="container">
         <div class="traffic-section__heading">
-          <p class="traffic-eyebrow">Professional resources</p>
-          <h2>Nursing practice articles</h2>
-          <p>Grounded guidance focused on real clinical communication, patient safety, and professional readiness.</p>
+          <p class="traffic-eyebrow">Nursing education resources</p>
+          <h2>Clinical nursing and career articles</h2>
+          <p>These guides focus on practical communication, documentation, patient safety, professional accountability, and realistic nursing career preparation.</p>
         </div>
         <div class="traffic-grid">
           {posts.map((post) => (
             <article class="traffic-card">
-              <p class="traffic-eyebrow">{post.readMinutes} min read</p>
+              <p class="traffic-eyebrow">{post.readMinutes} minute guide</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
-              <a href={`/blog/${post.slug}/`}>Read article</a>
+              <a href={`/blog/${post.slug}/`}>Read nursing practice guide</a>
             </article>
           ))}
         </div>
@@ -58,13 +58,13 @@ const posts = blogPosts.filter((post) =>
     <section class="traffic-section traffic-dark">
       <div class="container traffic-split">
         <div>
-          <p class="traffic-eyebrow">Work with Reeja</p>
-          <h2>Hospital, research, NGO, and care-coordination roles.</h2>
-          <p>See the experience and credentials most relevant to nursing and health-programme recruiters.</p>
+          <p class="traffic-eyebrow">Registered nurse recruitment</p>
+          <h2>Recruit for hospital nursing, research, or health-programme support.</h2>
+          <p>Review Reeja Maharjan's clinical experience, nursing licenses, maternal-health research responsibilities, professional CV, and availability for relevant roles.</p>
         </div>
         <div class="traffic-actions">
-          <a class="traffic-button" href="/hire-reeja/">Recruiter overview</a>
-          <a class="traffic-button" href="/cv/">View CV</a>
+          <a class="traffic-button" href="/hire-reeja/">View recruiter profile</a>
+          <a class="traffic-button" href="/cv/">Download nursing CV</a>
         </div>
       </div>
     </section>
