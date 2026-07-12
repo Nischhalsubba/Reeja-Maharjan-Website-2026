@@ -8,7 +8,7 @@ on:
       - portfolio-priority-roadmap
 
 jobs:
-  build:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,10 +21,16 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
+
+      - name: Verify professional facts
+        run: npm run verify:facts
 
       - name: Type check
         run: npm run check
+
+      - name: Lint
+        run: npm run lint
 
       - name: Build
         run: npm run build
