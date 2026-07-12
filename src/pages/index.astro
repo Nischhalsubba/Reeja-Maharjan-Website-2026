@@ -2,53 +2,54 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
 import '../styles/home-redesign.css';
+import '../styles/home-seo.css';
 
 const focusAreas = [
   {
     number: '01',
-    title: 'Maternal health research',
-    copy: 'Participant screening, consent support, HDP/GDM workflows, tele-follow-up, and safe escalation for the MOM-HD trial.'
+    title: 'Maternal health research support',
+    copy: 'Participant screening, consent-process support, HDP and GDM study workflows, home BP/BG monitoring education, tele-follow-up, and protocol-based escalation.'
   },
   {
     number: '02',
-    title: 'Clinical nursing',
-    copy: 'Hospital experience across maternity, general care, surgery, gynaecology and obstetrics, ward coordination, and OT support.'
+    title: 'Registered nursing care',
+    copy: 'Hospital nursing experience across maternity, general care, surgery, gynaecology and obstetrics, documentation, structured handover, and ward coordination.'
   },
   {
     number: '03',
-    title: 'Patient education',
-    copy: 'Clear counselling for patients and families, including home blood pressure and blood glucose monitoring and adherence support.'
+    title: 'Patient and family education',
+    copy: 'Clear counselling on maternal-newborn care, treatment adherence, home blood-pressure monitoring, blood-glucose monitoring, warning signs, and follow-up.'
   },
   {
     number: '04',
-    title: 'Data and coordination',
-    copy: 'Structured documentation, REDCap-style data quality, handover, device logistics, and multidisciplinary communication.'
+    title: 'Clinical data and coordination',
+    copy: 'Careful study documentation, REDCap-style data review, confidentiality, device logistics, multidisciplinary communication, and reliable follow-through.'
   }
 ];
 
 const hiringStrengths = [
-  'Patient safety and respectful care',
-  'Clear clinical documentation and handover',
-  'Maternal and newborn care experience',
-  'Research protocol and data discipline',
+  'NNC-licensed Registered Nurse with active Texas RN status',
+  'Hospital experience at TUTH, MMTH, and Sindhuli Hospital',
+  'Current maternal-health research experience with IISH MOM-HD',
+  'Patient education, documentation, handover, and escalation support',
   'Nepali, Newari, English, and Hindi communication',
-  'Hospital, NGO/INGO, and research role readiness'
+  'Suitable for nursing, research, NGO/INGO, and health-programme roles'
 ];
 
 const featuredWriting = [
   {
-    category: 'Maternal care',
-    title: 'Essential maternal and newborn care guide',
+    category: 'Maternal and newborn care',
+    title: 'Essential maternal and newborn care: a practical guide for parents',
     href: '/blog/essential-maternal-newborn-care-guide-2026/'
   },
   {
-    category: 'Clinical practice',
-    title: 'Mastering nursing documentation and SBAR handover',
+    category: 'Nursing documentation',
+    title: 'SBAR handover and nursing documentation for safer continuity of care',
     href: '/blog/mastering-nursing-documentation-sbar-handover/'
   },
   {
-    category: 'Future of care',
-    title: 'Telehealth and community nursing in Nepal',
+    category: 'Telehealth in Nepal',
+    title: 'How telehealth and community nursing can strengthen continuity of care',
     href: '/blog/future-of-nursing-in-nepal-telehealth-community-care-post-covid/'
   }
 ];
@@ -58,46 +59,58 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
 
 <BaseLayout
   title="Reeja Maharjan | Registered Nurse and Maternal Health Research Assistant"
-  description="NNC licensed Registered Nurse, active Texas RN, and maternal health Research Assistant available for nursing, research, NGO, INGO, and care coordination opportunities."
+  description="Hire Reeja Maharjan, an NNC-licensed Registered Nurse, active Texas RN, and maternal-health Research Assistant with hospital, telemonitoring, patient education, documentation, and clinical research experience."
 >
   <div class="home-v2">
     <section class="home-hero" id="home" aria-labelledby="home-title">
       <div class="container home-hero__grid">
         <div class="home-hero__content">
-          <p class="home-kicker">Registered Nurse / Maternal Health Research</p>
-          <h1 id="home-title">Care, evidence, and calm coordination.</h1>
+          <p class="home-kicker">Registered Nurse · Maternal Health Research · Biratnagar, Nepal</p>
+          <p class="home-hero__name">Reeja Maharjan, B.Sc. Nursing</p>
+          <h1 id="home-title">
+            <span>Clinical care.</span>
+            <span>Research discipline.</span>
+          </h1>
           <p class="home-hero__intro">
-            Reeja Maharjan is an NNC licensed Registered Nurse, active Texas RN, and Research Assistant supporting the MOM-HD maternal health telemonitoring trial in Biratnagar.
+            NNC-licensed Registered Nurse and active Texas RN with hospital experience and current maternal-health research work supporting the IISH MOM-HD telemonitoring trial. Skilled in patient education, maternal-newborn care, home BP/BG monitoring, clinical documentation, study coordination, and safe escalation.
           </p>
 
           <div class="home-actions" aria-label="Primary actions">
-            <a class="home-button home-button--dark" href={`mailto:${profile.contact.email}?subject=${emailSubject}`}>Hire Reeja</a>
-            <a class="home-button home-button--light" href={profile.contact.resumeUrl} download>Download CV</a>
+            <a class="home-button home-button--dark" href="/hire-reeja/" data-track="home-hire">View recruiter profile</a>
+            <a class="home-button home-button--light" href={profile.contact.resumeUrl} download data-track="home-cv">Download nursing CV</a>
           </div>
 
           <ul class="home-proof" aria-label="Professional highlights">
             <li>NNC licensed RN</li>
             <li>Active Texas RN</li>
-            <li>IISH research assistant</li>
+            <li>IISH MOM-HD Research Assistant</li>
           </ul>
         </div>
 
-        <div class="home-hero__visual">
-          <figure class="home-portrait">
-            <img src={profile.hero.portrait.src} alt={profile.hero.portrait.alt} width="720" height="900" loading="eager" />
-            <figcaption>
-              <span>Currently</span>
-              <strong>MOM-HD Research Assistant</strong>
-              <small>Biratnagar, Nepal</small>
-            </figcaption>
-          </figure>
-        </div>
+        <dl class="home-hero__summary" aria-label="Professional summary">
+          <div>
+            <dt>Current role</dt>
+            <dd>Research Assistant, IISH MOM-HD maternal telemonitoring trial</dd>
+          </div>
+          <div>
+            <dt>Clinical background</dt>
+            <dd>TUTH, MMTH, and Sindhuli Hospital</dd>
+          </div>
+          <div>
+            <dt>Professional focus</dt>
+            <dd>Maternal health, clinical nursing, patient education, and research coordination</dd>
+          </div>
+          <div>
+            <dt>Contact</dt>
+            <dd><a href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="home-email">{profile.contact.email}</a></dd>
+          </div>
+        </dl>
       </div>
     </section>
 
-    <section class="home-marquee" aria-label="Professional scope">
+    <section class="home-marquee" aria-label="Professional expertise">
       <div class="container home-marquee__inner">
-        <span>Hospital nursing</span>
+        <span>Registered nursing</span>
         <span>Maternal and newborn care</span>
         <span>HDP/GDM telemonitoring</span>
         <span>Patient education</span>
@@ -108,24 +121,26 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
     <section class="home-section" id="about" aria-labelledby="about-title">
       <div class="container home-two-column">
         <div class="home-section__heading">
-          <p class="home-kicker">About</p>
-          <h2 id="about-title">A nurse who works carefully, communicates clearly, and follows through.</h2>
+          <p class="home-kicker">Professional profile</p>
+          <h2 id="about-title">A registered nurse prepared for clinical care and health research roles.</h2>
         </div>
 
         <div class="home-about-copy">
-          <p>{profile.profileSummary}</p>
+          <p>
+            Reeja Maharjan is a B.Sc. Nursing graduate, Nepal Nursing Council-licensed Registered Nurse, and active Texas RN. Her experience spans maternal-newborn support, general ward nursing, surgery and gynaecology-obstetrics exposure, clinical documentation, patient counselling, safe handover, and implementation research. She currently supports the IISH MOM-HD trial in Biratnagar through ANC participant screening, BP/BG monitoring education, tele-follow-up, study documentation, data-quality review, and coordination with clinical and technical teams.
+          </p>
           <dl class="home-facts">
             <div>
-              <dt>Current role</dt>
-              <dd>Research Assistant, IISH MOM-HD Trial</dd>
+              <dt>Current position</dt>
+              <dd>Research Assistant, Institute for Implementation Science and Health</dd>
             </div>
             <div>
-              <dt>Based in</dt>
+              <dt>Location</dt>
               <dd>{profile.contact.location}</dd>
             </div>
             <div>
               <dt>Open to</dt>
-              <dd>Nursing, maternal health, research, NGO/INGO, and care coordination roles</dd>
+              <dd>Registered nurse, maternal-health research, clinical research, NGO/INGO, programme support, and care-coordination opportunities</dd>
             </div>
           </dl>
         </div>
@@ -136,10 +151,10 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
       <div class="container">
         <div class="home-section__topline">
           <div>
-            <p class="home-kicker">Experience</p>
-            <h2 id="experience-title">Clinical practice meets implementation research.</h2>
+            <p class="home-kicker">Clinical and research experience</p>
+            <h2 id="experience-title">Hospital nursing experience strengthened by maternal-health research.</h2>
           </div>
-          <a class="home-text-link" href="/cv/">View complete CV <span aria-hidden="true">-></span></a>
+          <a class="home-text-link" href="/cv/">View complete nursing CV <span aria-hidden="true">-&gt;</span></a>
         </div>
 
         <ol class="home-experience-list">
@@ -170,10 +185,10 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
       <div class="container">
         <div class="home-section__topline">
           <div>
-            <p class="home-kicker">Professional focus</p>
-            <h2 id="focus-title">Where Reeja creates value.</h2>
+            <p class="home-kicker">Core nursing capabilities</p>
+            <h2 id="focus-title">Professional strengths relevant to hospitals, studies, and health programmes.</h2>
           </div>
-          <p class="home-section__summary">Practical capability for direct care, research delivery, participant support, and reliable clinical operations.</p>
+          <p class="home-section__summary">Evidence-based capability across direct care, participant support, documentation, telemonitoring, and multidisciplinary coordination.</p>
         </div>
 
         <div class="home-focus-grid">
@@ -191,8 +206,8 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
     <section class="home-section home-section--black" aria-labelledby="strengths-title">
       <div class="container home-strengths">
         <div>
-          <p class="home-kicker home-kicker--inverse">Why hire Reeja</p>
-          <h2 id="strengths-title">Safe care is built from hundreds of small, disciplined decisions.</h2>
+          <p class="home-kicker home-kicker--inverse">Why recruit Reeja</p>
+          <h2 id="strengths-title">Clinical credibility, careful communication, and dependable follow-through.</h2>
         </div>
         <ul class="home-strengths-list">
           {hiringStrengths.map((strength) => <li>{strength}</li>)}
@@ -204,10 +219,10 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
       <div class="container">
         <div class="home-section__topline">
           <div>
-            <p class="home-kicker">Credentials</p>
-            <h2 id="credentials-title">Professional proof, without publishing sensitive documents.</h2>
+            <p class="home-kicker">Nursing licenses and certifications</p>
+            <h2 id="credentials-title">Professional credentials available for recruiter verification.</h2>
           </div>
-          <p class="home-section__summary">Full verification documents can be shared privately with legitimate recruiters and employers.</p>
+          <p class="home-section__summary">Sensitive license documents are not published publicly. Verification can be shared privately with legitimate employers and recruiters.</p>
         </div>
 
         <div class="home-credential-list">
@@ -231,10 +246,10 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
       <div class="container">
         <div class="home-section__topline">
           <div>
-            <p class="home-kicker">Writing</p>
-            <h2 id="writing-title">Notes on nursing practice and better care.</h2>
+            <p class="home-kicker">Nursing and maternal-health resources</p>
+            <h2 id="writing-title">Practical articles for parents, nurses, and healthcare teams.</h2>
           </div>
-          <a class="home-text-link" href="/blog/">Read all articles <span aria-hidden="true">-></span></a>
+          <a class="home-text-link" href="/blog/">Browse all nursing articles <span aria-hidden="true">-&gt;</span></a>
         </div>
 
         <div class="home-writing-grid">
@@ -242,7 +257,7 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
             <a class="home-writing-card" href={article.href}>
               <span>{article.category}</span>
               <h3>{article.title}</h3>
-              <small>Read article <span aria-hidden="true">-></span></small>
+              <small>Read nursing guide <span aria-hidden="true">-&gt;</span></small>
             </a>
           ))}
         </div>
@@ -252,15 +267,15 @@ const emailSubject = encodeURIComponent('Nursing or research opportunity for Ree
     <section class="home-contact" id="contact" aria-labelledby="contact-title">
       <div class="container home-contact__grid">
         <div>
-          <p class="home-kicker home-kicker--inverse">Hire Reeja</p>
-          <h2 id="contact-title">Looking for a dependable nurse or research professional?</h2>
+          <p class="home-kicker home-kicker--inverse">Recruitment and opportunities</p>
+          <h2 id="contact-title">Hiring for a nursing, maternal-health, or clinical-research role?</h2>
         </div>
 
         <div class="home-contact__content">
-          <p>Send the role title, location, expected start date, and a short summary of the work. Reeja is open to suitable hospital, research, maternal health, NGO/INGO, and care coordination opportunities.</p>
+          <p>Share the role title, organisation, location, expected start date, and a short description of the responsibilities. Relevant license and credential documents can be provided after initial recruiter screening.</p>
           <div class="home-contact__actions">
-            <a class="home-button home-button--white" href={`mailto:${profile.contact.email}?subject=${emailSubject}`}>Email Reeja</a>
-            <a class="home-button home-button--outline" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a class="home-button home-button--white" href={`mailto:${profile.contact.email}?subject=${emailSubject}`} data-track="contact-email">Email Reeja</a>
+            <a class="home-button home-button--outline" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">View LinkedIn profile</a>
           </div>
           <a class="home-contact__email" href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a>
         </div>
