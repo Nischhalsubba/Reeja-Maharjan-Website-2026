@@ -1,0 +1,32 @@
+---
+import { professionalFacts } from '../content/professional-facts';
+---
+
+<section class="home-hero" id="home" aria-labelledby="home-title">
+  <div class="container home-hero__grid">
+    <div class="home-hero__content">
+      <p class="home-kicker">Registered Nurse · Maternal Health Research</p>
+      <p class="home-hero__name">{professionalFacts.name}, {professionalFacts.credential}</p>
+      <h1 id="home-title">Clinical care with research discipline.</h1>
+      <p class="home-hero__intro">
+        {professionalFacts.nepalLicense} and {professionalFacts.texasLicense}, with hospital experience and current maternal-health research work involving participant education, BP/BG telemonitoring, documentation, and care coordination.
+      </p>
+      <div class="home-actions" aria-label="Primary actions">
+        <a class="home-button home-button--dark" href="/hire-reeja/" data-track="home-hire">Discuss an opportunity</a>
+        <a class="home-button home-button--light" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
+      </div>
+      <ul class="home-proof" aria-label="Professional credibility">
+        <li>{professionalFacts.nepalLicenseShort}</li>
+        <li>{professionalFacts.texasLicenseShort}</li>
+        <li>{professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort} Research Assistant</li>
+        <li>Hospital experience in Nepal</li>
+      </ul>
+    </div>
+    <dl class="home-hero__summary" aria-label="Professional summary">
+      <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</dd></div>
+      <div><dt>Project</dt><dd>{professionalFacts.currentProjectShort}</dd></div>
+      <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
+      <div><dt>Status</dt><dd>{professionalFacts.availability}</dd></div>
+    </dl>
+  </div>
+</section>

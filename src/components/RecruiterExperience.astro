@@ -1,0 +1,27 @@
+---
+import { profile } from '../content/profile';
+import { professionalFacts } from '../content/professional-facts';
+const selectedExperience = profile.experience.slice(0, 3);
+---
+
+<section class="home-section home-section--soft" id="experience" aria-labelledby="experience-title">
+  <div class="container">
+    <div class="home-section__topline">
+      <div>
+        <p class="home-kicker">Selected experience</p>
+        <h2 id="experience-title">Hospital nursing and maternal-health research.</h2>
+      </div>
+      <a class="home-text-link" href={professionalFacts.publicCvPath}>View full CV <span aria-hidden="true">-&gt;</span></a>
+    </div>
+    <ol class="home-experience-list">
+      {selectedExperience.map((item, index) => (
+        <li class="home-experience-item">
+          <div class="home-experience-item__index">{String(index + 1).padStart(2, '0')}</div>
+          <div class="home-experience-item__role"><h3>{item.role}</h3><p>{item.organization}</p></div>
+          <div class="home-experience-item__details"><p>{item.bullets[0]}</p><ul>{item.tags?.slice(0, 4).map((tag) => <li>{tag}</li>)}</ul></div>
+          <div class="home-experience-item__meta"><span>{item.period}</span><span>{item.location}</span></div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
