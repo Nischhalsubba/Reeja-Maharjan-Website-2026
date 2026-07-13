@@ -38,6 +38,9 @@ jobs:
       - name: Verify accessibility contract
         run: npm run verify:a11y
 
+      - name: Verify source and style ownership
+        run: npm run verify:source
+
       - name: Type check
         id: typecheck
         shell: bash
