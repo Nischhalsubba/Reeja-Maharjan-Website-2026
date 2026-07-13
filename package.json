@@ -21,7 +21,7 @@
     "format": "prettier --write .",
     "astro": "astro",
     "verify:deployment": "node scripts/validate-deployment-config.mjs",
-    "verify:facts": "node scripts/verify-professional-facts.mjs",
+    "verify:facts": "node scripts/verify-professional-facts.mjs && node scripts/verify-fact-evidence.mjs",
     "verify:expiry": "node scripts/check-expiry-controls.mjs",
     "verify:editorial": "node scripts/verify-editorial-governance.mjs",
     "verify:a11y": "node scripts/verify-accessibility-contract.mjs",
