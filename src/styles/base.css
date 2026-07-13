@@ -9,10 +9,11 @@ html {
 }
 
 body {
+  min-width: 320px;
   margin: 0;
   font-family: var(--font-sans);
   color: var(--text);
-  background: #ffffff !important;
+  background: var(--bg);
   font-size: var(--body-size);
   line-height: var(--body-lh);
   letter-spacing: var(--body-ls);
@@ -23,6 +24,11 @@ body {
 body.menu-open,
 body.lightbox-open {
   overflow: hidden;
+}
+
+::selection {
+  background: var(--text);
+  color: var(--surface);
 }
 
 img {
@@ -66,9 +72,9 @@ ol {
   top: 0;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 2px;
   z-index: 500;
-  background: color-mix(in srgb, var(--line) 40%, transparent);
+  background: transparent;
 }
 
 .scroll-progress__bar {
@@ -84,9 +90,10 @@ ol {
   top: var(--s2);
 }
 
-:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
+:where(a, button, input, textarea):focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+  box-shadow: none;
 }
 
 .muted {
@@ -97,29 +104,7 @@ ol {
   font-weight: 700;
 }
 
-/* Monochrome Astro-style UI overrides. Content remains unchanged. */
-:root {
-  --bg: #ffffff !important;
-  --surface: #ffffff !important;
-  --text: #0a0a0a !important;
-  --muted: #707070 !important;
-  --line: #e8e8e8 !important;
-  --accent: #0a0a0a !important;
-  --accent-text: #ffffff !important;
-  --accent-hover: #2b2b2b !important;
-  --surface-alt: #f7f7f7 !important;
-  --line-strong: #cfcfcf !important;
-  --clinical-paper: #ffffff !important;
-  --clinical-panel: #fafafa !important;
-  --clinical-panel-2: #f5f5f5 !important;
-  --clinical-ink: #0a0a0a !important;
-  --clinical-border: #e8e8e8 !important;
-  --clinical-border-strong: #cfcfcf !important;
-  --shadow-1: none !important;
-  --shadow-2: none !important;
-  --shadow-3: none !important;
-}
-
+/* Monochrome component normalization. */
 .site-header,
 .section-shell,
 .card,
@@ -134,16 +119,16 @@ ol {
 .hero-meta,
 .section-shell__head,
 .section-shell__body {
-  background: #ffffff !important;
-  border-color: #e8e8e8 !important;
+  background: var(--surface) !important;
+  border-color: var(--line) !important;
   box-shadow: none !important;
 }
 
 .brand__mark,
 .btn--primary,
 .desktop-nav a:last-child {
-  background: #0a0a0a !important;
-  color: #ffffff !important;
+  background: var(--text) !important;
+  color: var(--surface) !important;
 }
 
 .btn--secondary,
@@ -156,15 +141,15 @@ ol {
 .hero__proof li,
 .skills-chip-list li,
 .chip-list li {
-  background: #ffffff !important;
-  border-color: #cfcfcf !important;
-  color: #0a0a0a !important;
+  background: var(--surface) !important;
+  border-color: var(--line-strong) !important;
+  color: var(--text) !important;
 }
 
 .hero__media,
 .credential-tile,
 .contact-cta {
-  background: #f7f7f7 !important;
+  background: var(--surface-alt) !important;
 }
 
 .hero__media img {
@@ -181,16 +166,27 @@ ol {
 }
 
 .timeline-list::before {
-  background: #cfcfcf !important;
+  background: var(--line-strong) !important;
 }
 
 .timeline-list__dot,
 .check-list li::before,
 .skills-chip-list li::before {
-  color: #0a0a0a !important;
+  color: var(--text) !important;
 }
 
 .timeline-list__dot {
-  background: #0a0a0a !important;
+  background: var(--text) !important;
   box-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
