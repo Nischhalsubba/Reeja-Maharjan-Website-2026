@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleGovernance from '../../components/ArticleGovernance.astro';
 import { blogPosts, getBlogPost } from '../../content/blog';
-import { profile } from '../../content/profile';
+import { professionalFacts } from '../../content/professional-facts';
 
 export const getStaticPaths = () =>
   blogPosts.map((post) => ({ params: { slug: post.slug } }));
@@ -10,12 +11,13 @@ const { slug } = Astro.params;
 const post = slug ? getBlogPost(slug) : undefined;
 if (!post) return Astro.redirect('/404');
 
-const published = new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
-const updated = new Date(post.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 const articleUrl = new URL(`/blog/${post.slug}/`, Astro.site ?? Astro.url.origin).toString();
-const articleImage = new URL('/og-default.svg', Astro.site ?? Astro.url.origin).toString();
+const articleImagePath = `/og/articles/${post.slug}.svg`;
+const articleImage = new URL(articleImagePath, Astro.site ?? Astro.url.origin).toString();
 const authorUrl = new URL('/hire-reeja/', Astro.site ?? Astro.url.origin).toString();
-const relatedPosts = post.relatedSlugs.map((relatedSlug) => blogPosts.find((candidate) => candidate.slug === relatedSlug)).filter(Boolean);
+const relatedPosts = post.relatedSlugs
+  .map((relatedSlug) => blogPosts.find((candidate) => candidate.slug === relatedSlug))
+  .filter(Boolean);
 const topicText = [post.primaryKeyword, ...post.supportingKeywords, ...post.tags].join(' ').toLowerCase();
 const topicHub = topicText.match(/maternal|newborn|postnatal|breastfeeding|pregnan|mother/)
   ? { href: '/maternal-health/', label: 'Maternal health resources' }
@@ -29,30 +31,25 @@ const articleSchema = {
   url: articleUrl,
   headline: post.title,
   description: post.metaDescription,
-  image: [articleImage],
+  image: {
+    '@type': 'ImageObject',
+    url: articleImage,
+    width: 1200,
+    height: 630
+  },
   datePublished: post.publishedAt,
   dateModified: post.updatedAt,
   inLanguage: 'en',
   author: {
     '@type': 'Person',
     '@id': 'https://reejamaharjan.com.np/#person',
-    name: profile.name,
-    jobTitle: profile.role,
+    name: professionalFacts.name,
+    jobTitle: professionalFacts.primaryRole,
     url: authorUrl,
-    sameAs: [profile.contact.linkedin, profile.contact.instagram].filter(Boolean)
+    sameAs: [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean)
   },
   publisher: { '@id': 'https://reejamaharjan.com.np/#person' },
   keywords: [post.primaryKeyword, ...post.supportingKeywords]
-};
-
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: post.faq.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: { '@type': 'Answer', text: item.answer }
-  }))
 };
 
 const breadcrumbSchema = {
@@ -66,7 +63,7 @@ const breadcrumbSchema = {
 };
 ---
 
-<BaseLayout title={`${post.title} | Reeja Maharjan`} description={post.metaDescription} image="/og-default.svg">
+<BaseLayout title={`${post.title} | Reeja Maharjan`} description={post.metaDescription} image={articleImagePath}>
   <div class="site-page">
     <article class="site-article">
       <header class="site-article__header">
@@ -74,18 +71,22 @@ const breadcrumbSchema = {
         <p class="site-eyebrow">Nurse-led education</p>
         <h1>{post.title}</h1>
         <p>{post.excerpt}</p>
-        <div class="site-article__meta"><span>Published {published}</span><span>Reviewed {updated}</span><span>{post.readMinutes} min read</span></div>
+        <div class="site-article__meta">
+          <span>Published {post.publishedAt}</span>
+          <span>Last updated {post.updatedAt}</span>
+          <span>{post.readMinutes} min read</span>
+        </div>
       </header>
 
       <div class="site-article__body">
+        <ArticleGovernance publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
+
         <section class="site-note">
           <p class="site-eyebrow">Key points</p>
           <ul>{post.quickAnswer.map((item) => <li>{item}</li>)}</ul>
         </section>
 
-        <section>
-          {post.intro.map((paragraph) => <p>{paragraph}</p>)}
-        </section>
+        <section>{post.intro.map((paragraph) => <p>{paragraph}</p>)}</section>
 
         {post.sections.map((section) => (
           <section id={section.id}>
@@ -114,7 +115,7 @@ const breadcrumbSchema = {
 
         <section>
           <p class="site-eyebrow">Author</p>
-          <h2>{profile.name}</h2>
+          <h2>{professionalFacts.name}</h2>
           <p>Registered Nurse with hospital and maternal-health research experience in patient education, documentation, telemonitoring, and care coordination.</p>
           <p><a href="/hire-reeja/">View professional profile</a> · <a href={topicHub.href}>{topicHub.label}</a></p>
         </section>
@@ -135,6 +136,5 @@ const breadcrumbSchema = {
   </div>
 
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)}></script>
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
 </BaseLayout>
