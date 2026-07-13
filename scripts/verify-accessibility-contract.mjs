@@ -6,7 +6,7 @@ const headerSource = await readFile(new URL('../src/components/Header.astro', im
 const layoutSource = await readFile(new URL('../src/layouts/BaseLayout.astro', import.meta.url), 'utf8');
 const failures = [];
 
-for (const fragment of ['Escape', "event.key !== 'Tab'", 'restoreFocus', 'focusFirstControl', 'aria-expanded']) {
+for (const fragment of ['Escape', "event.key !== 'Tab'", 'restoreFocus', 'focusFirstControl', 'aria-expanded', 'element.inert = value', '{ capture: true }']) {
   if (!navSource.includes(fragment)) failures.push(`Mobile navigation is missing ${fragment}.`);
 }
 for (const fragment of ['id="mobile-nav"', 'aria-controls="mobile-nav"', 'aria-expanded="false"']) {
