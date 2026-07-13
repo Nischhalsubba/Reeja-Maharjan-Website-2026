@@ -7,9 +7,7 @@
   ],
   "exclude": [
     "dist",
-    "node_modules",
-    "src-old-v55",
-    "src-legacy-v55"
+    "node_modules"
   ],
   "compilerOptions": {
     "noUncheckedIndexedAccess": true
