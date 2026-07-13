@@ -23,7 +23,8 @@
     "verify:deployment": "node scripts/validate-deployment-config.mjs",
     "verify:facts": "node scripts/verify-professional-facts.mjs",
     "verify:expiry": "node scripts/check-expiry-controls.mjs",
-    "verify": "npm run verify:deployment && npm run verify:facts && npm run verify:expiry && npm run check && npm run lint && npm run build"
+    "verify:editorial": "node scripts/verify-editorial-governance.mjs",
+    "verify": "npm run verify:deployment && npm run verify:facts && npm run verify:expiry && npm run verify:editorial && npm run check && npm run lint && npm run build"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
