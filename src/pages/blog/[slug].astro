@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleGovernance from '../../components/ArticleGovernance.astro';
 import { blogPosts, getBlogPost } from '../../content/blog';
+import { getBlogGovernance } from '../../content/blog/governance';
 import { professionalFacts } from '../../content/professional-facts';
 
 export const getStaticPaths = () =>
@@ -11,6 +12,7 @@ const { slug } = Astro.params;
 const post = slug ? getBlogPost(slug) : undefined;
 if (!post) return Astro.redirect('/404');
 
+const governance = getBlogGovernance(post.slug);
 const articleUrl = new URL(`/blog/${post.slug}/`, Astro.site ?? Astro.url.origin).toString();
 const articleImagePath = `/og/articles/${post.slug}.svg`;
 const articleImage = new URL(articleImagePath, Astro.site ?? Astro.url.origin).toString();
@@ -79,7 +81,7 @@ const breadcrumbSchema = {
       </header>
 
       <div class="site-article__body">
-        <ArticleGovernance publishedAt={post.publishedAt} updatedAt={post.updatedAt} />
+        <ArticleGovernance publishedAt={post.publishedAt} updatedAt={post.updatedAt} governance={governance} />
 
         <section class="site-note">
           <p class="site-eyebrow">Key points</p>
