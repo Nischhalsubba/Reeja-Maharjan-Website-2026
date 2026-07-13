@@ -58,8 +58,10 @@ export const initMobileNavA11y = (): void => {
       return;
     }
 
-    const first = controls[0];
-    const last = controls[controls.length - 1];
+    const first = controls.at(0);
+    const last = controls.at(-1);
+    if (!first || !last) return;
+
     const active = document.activeElement;
 
     if (event.shiftKey && active === first) {
