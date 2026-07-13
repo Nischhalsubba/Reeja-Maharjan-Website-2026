@@ -1,3 +1,4 @@
+import process from 'node:process';
 import type { APIRoute } from 'astro';
 
 export const prerender = true;
