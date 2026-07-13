@@ -1,10 +1,10 @@
-import process from 'node:process';
 import type { APIRoute } from 'astro';
 
 export const prerender = true;
 
-const commit = process.env.CF_PAGES_COMMIT_SHA ?? process.env.GITHUB_SHA ?? 'local';
-const branch = process.env.CF_PAGES_BRANCH ?? process.env.GITHUB_REF_NAME ?? 'local';
+const env = import.meta.env as Record<string, string | undefined>;
+const commit = env.CF_PAGES_COMMIT_SHA ?? env.GITHUB_SHA ?? 'local';
+const branch = env.CF_PAGES_BRANCH ?? env.GITHUB_REF_NAME ?? 'local';
 const builtAt = new Date().toISOString();
 
 export const GET: APIRoute = () =>
