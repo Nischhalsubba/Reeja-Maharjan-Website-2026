@@ -1,0 +1,77 @@
+---
+const pathways = [
+  {
+    number: '01',
+    label: 'Maternal-health research',
+    title: 'Participant support grounded in clinical understanding.',
+    summary: 'Relevant for research teams that need clear participant education, dependable follow-up, accurate records, and protocol-based escalation support.',
+    evidence: [
+      'Participant screening and consent-workflow support',
+      'Home BP and blood-glucose monitoring education',
+      'Tele-follow-up, warning-sign screening, and escalation',
+      'Study documentation and data-quality checks'
+    ],
+    scope: 'Supports protocol-led research activity within the documented study role and clinical governance structure.',
+    href: '/clinical-research/',
+    cta: 'Review research experience'
+  },
+  {
+    number: '02',
+    label: 'Hospital nursing',
+    title: 'Reliable ward practice and patient communication.',
+    summary: 'Relevant for hospital roles requiring safe bedside care, structured handover, patient counselling, monitoring, documentation, and coordinated escalation.',
+    evidence: [
+      'Maternal-newborn and general ward nursing experience',
+      'Clinical observation, monitoring, and documentation',
+      'SBAR-style handover and multidisciplinary communication',
+      'Patient and family education'
+    ],
+    scope: 'Practice remains subject to employer credentialing, local regulation, orientation, and assigned clinical scope.',
+    href: '/nursing-practice/',
+    cta: 'Review nursing practice'
+  },
+  {
+    number: '03',
+    label: 'NGO and health programmes',
+    title: 'Care communication, follow-up, and programme coordination.',
+    summary: 'Relevant for programmes that need beneficiary education, monitoring support, confidential records, device logistics, and coordination across clinical and programme teams.',
+    evidence: [
+      'Health education and adherence reinforcement',
+      'Remote follow-up and monitoring support',
+      'Device distribution and tracking workflows',
+      'Confidential documentation and team coordination'
+    ],
+    scope: 'International licensing is listed as a credential only and does not represent work authorisation or independent programme authority.',
+    href: '/hire-reeja/',
+    cta: 'Discuss programme fit'
+  }
+];
+---
+
+<section class="home-section" id="role-fit" aria-labelledby="role-fit-title">
+  <div class="container">
+    <div class="home-section__topline">
+      <div>
+        <p class="home-kicker">Role fit</p>
+        <h2 id="role-fit-title">Three ways Reeja can support your team.</h2>
+      </div>
+      <p class="home-section__summary">Each pathway maps documented experience to a specific hiring context without overstating scope or work authorisation.</p>
+    </div>
+
+    <div class="home-role-grid">
+      {pathways.map((pathway) => (
+        <article class="home-role-card">
+          <span class="home-role-card__number">{pathway.number}</span>
+          <p class="home-role-card__label">{pathway.label}</p>
+          <h3>{pathway.title}</h3>
+          <p class="home-role-card__summary">{pathway.summary}</p>
+          <ul class="home-role-card__evidence">
+            {pathway.evidence.map((item) => <li>{item}</li>)}
+          </ul>
+          <p class="home-role-card__scope"><strong>Scope</strong>{pathway.scope}</p>
+          <a class="home-text-link" href={pathway.href}>{pathway.cta} <span aria-hidden="true">-&gt;</span></a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
