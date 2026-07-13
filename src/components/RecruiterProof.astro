@@ -1,0 +1,41 @@
+---
+import { profile } from '../content/profile';
+const featuredWriting = [
+  { category: 'Maternal care', title: 'Essential maternal and newborn care guide', href: '/blog/essential-maternal-newborn-care-guide-2026/' },
+  { category: 'Clinical practice', title: 'SBAR handover and nursing documentation', href: '/blog/mastering-nursing-documentation-sbar-handover/' },
+  { category: 'Digital health', title: 'Telehealth and community nursing in Nepal', href: '/blog/future-of-nursing-in-nepal-telehealth-community-care-post-covid/' }
+];
+---
+
+<section class="home-section" id="credentials" aria-labelledby="credentials-title">
+  <div class="container">
+    <div class="home-section__topline">
+      <div><p class="home-kicker">Credentials</p><h2 id="credentials-title">Licenses and clinical training.</h2></div>
+      <p class="home-section__summary">Verification documents are shared privately with legitimate employers and recruiters.</p>
+    </div>
+    <div class="home-credential-list">
+      {profile.certifications.slice(0, 6).map((credential) => (
+        <article class="home-credential-item">
+          <div><p>{credential.issuer}</p><h3>{credential.title}</h3></div>
+          <div><p>{credential.date}</p><span>{credential.credentialLabel ?? 'Verification available on request'}</span></div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="home-section home-section--soft" id="writing" aria-labelledby="writing-title">
+  <div class="container">
+    <div class="home-section__topline">
+      <div><p class="home-kicker">Selected writing</p><h2 id="writing-title">Practical nursing resources.</h2></div>
+      <a class="home-text-link" href="/blog/">Browse articles <span aria-hidden="true">-&gt;</span></a>
+    </div>
+    <div class="home-writing-grid">
+      {featuredWriting.map((article) => (
+        <a class="home-writing-card" href={article.href}>
+          <span>{article.category}</span><h3>{article.title}</h3><small>Read guide <span aria-hidden="true">-&gt;</span></small>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
