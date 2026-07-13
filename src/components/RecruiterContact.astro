@@ -1,0 +1,21 @@
+---
+import { professionalFacts } from '../content/professional-facts';
+const emailSubject = encodeURIComponent(`Nursing or research opportunity for ${professionalFacts.name}`);
+---
+
+<section class="home-contact" id="contact" aria-labelledby="contact-title">
+  <div class="container home-contact__grid">
+    <div>
+      <p class="home-kicker home-kicker--inverse">Current status and contact</p>
+      <h2 id="contact-title">Planning a nursing, research, or health-programme role?</h2>
+    </div>
+    <div class="home-contact__content">
+      <p>Share the organisation, role title, location, expected start date, and a short description of the responsibilities. Private verification documents can be provided where appropriate.</p>
+      <div class="home-contact__actions">
+        <a class="home-button home-button--white" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="contact-email">Share opportunity details</a>
+        <a class="home-button home-button--outline" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">Connect on LinkedIn</a>
+      </div>
+      <a class="home-contact__email" href={`mailto:${professionalFacts.professionalEmail}`}>{professionalFacts.professionalEmail}</a>
+    </div>
+  </div>
+</section>
