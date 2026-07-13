@@ -1,11 +1,15 @@
 ---
+import RecruiterHero from './RecruiterHero.astro';
 import RecruiterRolePaths from './RecruiterRolePaths.astro';
-import { profile } from '../content/profile';
-import { professionalFacts } from '../content/professional-facts';
+import RecruiterExperience from './RecruiterExperience.astro';
+import RecruiterProof from './RecruiterProof.astro';
+import RecruiterContact from './RecruiterContact.astro';
+---
 
-const emailSubject = encodeURIComponent(`Nursing or research opportunity for ${professionalFacts.name}`);
-const featuredWriting = [
-  {
-    category: 'Maternal care',
-    title: 'Essential maternal and newborn care guide',
-    href: '/blog/essential-mater
+<div class="home-v2">
+  <RecruiterHero />
+  <RecruiterRolePaths />
+  <RecruiterExperience />
+  <RecruiterProof />
+  <RecruiterContact />
+</div>
