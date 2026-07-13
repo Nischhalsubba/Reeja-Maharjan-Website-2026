@@ -19,13 +19,13 @@ const { profile } = Astro.props;
       <a href="/clinical-research/">Clinical research</a>
       <a href="/blog/">Articles</a>
       <a href="/cv/" data-track="cv-footer">CV</a>
-      <a href="/hire-reeja/" data-track="hire-footer">Hire Reeja</a>
+      <a href="/hire-reeja/" data-track="hire-footer">Professional opportunities</a>
     </nav>
 
     <div class="site-footer__contact">
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
       <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn</a>
-      <span>Biratnagar, Nepal</span>
+      <span>{profile.contact.location}</span>
     </div>
   </div>
 

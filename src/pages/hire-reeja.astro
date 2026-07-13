@@ -22,18 +22,18 @@ const hiringSchema = {
 ---
 
 <BaseLayout
-  title={`Hire ${professionalFacts.name} | Registered Nurse in Nepal`}
-  description={`Hire ${professionalFacts.name}, ${professionalFacts.nepalLicense}, ${professionalFacts.texasLicenseShort}, and maternal-health ${professionalFacts.currentRole} with hospital and clinical research experience.`}
+  title={`${professionalFacts.name} | Nursing and Research Opportunities`}
+  description={`Review ${professionalFacts.name}'s fit for nursing, maternal-health research, and health-programme opportunities. ${professionalFacts.nepalLicense}, ${professionalFacts.texasLicenseShort}, and current ${professionalFacts.currentRole} experience.`}
 >
   <div class="site-page">
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">Recruiter profile</p>
-          <h1>Hire {professionalFacts.name}.</h1>
+          <p class="site-eyebrow">Professional opportunities</p>
+          <h1>Discuss a nursing or research opportunity with {professionalFacts.name}.</h1>
           <p class="site-page__lede">{professionalFacts.nepalLicense}, {professionalFacts.texasLicenseShort}, and {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort} {professionalFacts.currentRole} with hospital, maternal-health, documentation, and telemonitoring experience.</p>
           <div class="site-actions">
-            <a class="site-button site-button--primary" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-email">Email Reeja</a>
+            <a class="site-button site-button--primary" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-email">Share opportunity details</a>
             <a class="site-button" href={professionalFacts.publicCvPath} data-track="hire-cv">View CV</a>
             <a class="site-button" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
           </div>
@@ -95,8 +95,8 @@ const hiringSchema = {
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">Contact</p><h2>Share the role details.</h2><p>Include the organisation, location, start date, employment type, and responsibilities.</p></div>
-        <div class="site-actions"><a class="site-button" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-bottom-email">Email Reeja</a><a class="site-button" href={professionalFacts.publicCvPath}>View CV</a></div>
+        <div><p class="site-eyebrow">Contact</p><h2>Share the opportunity details.</h2><p>Include the organisation, location, start date, employment type, and responsibilities.</p></div>
+        <div class="site-actions"><a class="site-button" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-bottom-email">Share opportunity details</a><a class="site-button" href={professionalFacts.publicCvPath}>View CV</a></div>
       </div>
     </section>
   </div>
