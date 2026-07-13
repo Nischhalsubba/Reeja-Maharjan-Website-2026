@@ -77,7 +77,7 @@ const emailSubject = encodeURIComponent(`Nursing or research opportunity for ${p
           </p>
 
           <div class="home-actions" aria-label="Primary actions">
-            <a class="home-button home-button--dark" href="/hire-reeja/" data-track="home-hire">Hire Reeja</a>
+            <a class="home-button home-button--dark" href="/hire-reeja/" data-track="home-hire">Discuss an opportunity</a>
             <a class="home-button home-button--light" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
           </div>
 
@@ -184,7 +184,7 @@ const emailSubject = encodeURIComponent(`Nursing or research opportunity for ${p
     <section class="home-section home-section--black" aria-labelledby="strengths-title">
       <div class="container home-strengths">
         <div>
-          <p class="home-kicker home-kicker--inverse">Why hire Reeja</p>
+          <p class="home-kicker home-kicker--inverse">Why consider Reeja</p>
           <h2 id="strengths-title">Qualified, careful, and dependable.</h2>
         </div>
         <ul class="home-strengths-list">{hiringStrengths.map((strength) => <li>{strength}</li>)}</ul>
@@ -237,14 +237,14 @@ const emailSubject = encodeURIComponent(`Nursing or research opportunity for ${p
     <section class="home-contact" id="contact" aria-labelledby="contact-title">
       <div class="container home-contact__grid">
         <div>
-          <p class="home-kicker home-kicker--inverse">Recruitment</p>
-          <h2 id="contact-title">Hiring a nurse or research professional?</h2>
+          <p class="home-kicker home-kicker--inverse">Professional opportunities</p>
+          <h2 id="contact-title">Planning a nursing, research, or health-programme role?</h2>
         </div>
 
         <div class="home-contact__content">
-          <p>Send the role, organisation, location, start date, and a short description of the work.</p>
+          <p>Share the organisation, role title, location, expected start date, and a short description of the responsibilities.</p>
           <div class="home-contact__actions">
-            <a class="home-button home-button--white" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="contact-email">Email Reeja</a>
+            <a class="home-button home-button--white" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="contact-email">Share opportunity details</a>
             <a class="home-button home-button--outline" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">LinkedIn</a>
           </div>
           <a class="home-contact__email" href={`mailto:${professionalFacts.professionalEmail}`}>{professionalFacts.professionalEmail}</a>
