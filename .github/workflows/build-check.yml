@@ -32,6 +32,9 @@ jobs:
       - name: Verify license and contract expiry
         run: npm run verify:expiry
 
+      - name: Verify editorial governance
+        run: npm run verify:editorial
+
       - name: Type check
         id: typecheck
         shell: bash
