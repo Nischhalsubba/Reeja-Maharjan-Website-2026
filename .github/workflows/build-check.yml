@@ -29,11 +29,14 @@ jobs:
       - name: Verify professional facts
         run: npm run verify:facts
 
-      - name: Verify license and contract expiry
+      - name: Verify license, contract, and content expiry
         run: npm run verify:expiry
 
       - name: Verify editorial governance
         run: npm run verify:editorial
+
+      - name: Verify accessibility contract
+        run: npm run verify:a11y
 
       - name: Type check
         id: typecheck
