@@ -1,0 +1,41 @@
+name: Production Diagnostics
+
+on:
+  workflow_dispatch:
+    inputs:
+      pages_origin:
+        description: Optional Cloudflare Pages preview origin
+        required: false
+        type: string
+  schedule:
+    - cron: '47 2 * * *'
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run production diagnostics
+        continue-on-error: true
+        env:
+          SITE_ORIGIN: https://reejamaharjan.com.np
+          PAGES_ORIGIN: ${{ inputs.pages_origin }}
+          EXPECTED_COMMIT: ${{ github.sha }}
+          DIAGNOSTICS_REPORT: production-diagnostics.json
+        run: node scripts/diagnose-production.mjs
+
+      - name: Upload diagnostics report
+        uses: actions/upload-artifact@v4
+        with:
+          name: production-diagnostics
+          path: production-diagnostics.json
+          if-no-files-found: error
+          retention-days: 14
