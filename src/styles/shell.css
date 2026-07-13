@@ -1,0 +1,120 @@
+.site-header {
+  min-height: 68px;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  border-bottom: 1px solid #d9d9d9;
+  box-shadow: none;
+  backdrop-filter: blur(14px);
+}
+
+.site-header__inner {
+  min-height: 68px;
+}
+
+.brand__mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--text);
+  color: var(--surface);
+}
+
+.brand__text strong {
+  font-size: 0.9rem;
+  letter-spacing: -0.02em;
+}
+
+.brand__text small {
+  font-size: 0.72rem;
+  color: #737373;
+}
+
+.desktop-nav {
+  gap: 2px;
+}
+
+.desktop-nav a,
+.mobile-nav__panel a {
+  color: #575757;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+
+.desktop-nav a:hover,
+.desktop-nav a:focus-visible,
+.mobile-nav__panel a:hover,
+.mobile-nav__panel a:focus-visible,
+.desktop-nav a[aria-current="page"],
+.mobile-nav__panel a[aria-current="page"] {
+  color: var(--text);
+  background: #f2f2f2;
+}
+
+.desktop-nav .nav-cta {
+  background: var(--text);
+  color: var(--surface);
+  padding-inline: 18px;
+}
+
+.desktop-nav .nav-cta:hover,
+.desktop-nav .nav-cta:focus-visible,
+.desktop-nav .nav-cta[aria-current="page"] {
+  background: var(--accent-hover);
+  color: var(--surface);
+}
+
+.mobile-nav {
+  top: 68px;
+  background: rgba(0, 0, 0, 0.52);
+}
+
+.mobile-nav__panel {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.site-footer {
+  background: var(--text);
+  color: var(--surface);
+  border-top: 0;
+}
+
+.site-footer p,
+.site-footer small,
+.site-footer__eyebrow {
+  color: #a9a9a9;
+}
+
+.site-footer a {
+  color: var(--surface);
+}
+
+.site-footer__legal {
+  border-top-color: #2d2d2d;
+}
+
+@media (max-width: 1080px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+    min-height: 40px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--r-btn);
+    background: var(--surface);
+    color: var(--text);
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand__text small {
+    display: none;
+  }
+}
