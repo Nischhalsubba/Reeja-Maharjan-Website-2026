@@ -8,12 +8,17 @@ export type ClinicalReviewer = {
 };
 
 export const editorialPolicy = {
-  author: {
-    name: professionalFacts.name,
-    qualification: `${professionalFacts.credential}, RN`,
-    profileUrl: '/hire-reeja/'
-  },
+  authorName: professionalFacts.name,
+  authorQualification: `${professionalFacts.credential}, RN`,
+  authorProfileUrl: '/hire-reeja/',
   correctionEmail: professionalFacts.professionalEmail,
   reviewIntervalMonths: 12,
-  safetyNote:
-    'This article provides general education and does not replace individual assessment, diagnosis, or treatment. Seek urgent medical care for severe, sudden, or rapidly worsening
+  safetyNote: 'This article provides general education and does not replace individual assessment, diagnosis, or treatment. Seek urgent medical care for severe, sudden, or rapidly worsening symptoms.'
+} as const;
+
+export const formatEditorialDate = (value: string): string =>
+  new Date(value).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
+  });
