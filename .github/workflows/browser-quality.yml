@@ -3,6 +3,11 @@ name: Browser Quality
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      origin:
+        description: Optional deployed origin, such as a Cloudflare Pages preview URL
+        required: false
+        type: string
 
 jobs:
   browser:
@@ -42,7 +47,7 @@ jobs:
 
       - name: Run browser quality checks
         env:
-          BROWSER_TEST_ORIGIN: http://127.0.0.1:4321
+          BROWSER_TEST_ORIGIN: ${{ inputs.origin || 'http://127.0.0.1:4321' }}
         run: npx playwright test tests/browser --reporter=line
 
       - name: Upload preview log on failure
