@@ -1,24 +1,47 @@
 name: Production Smoke
 
 on:
+  workflow_run:
+    workflows:
+      - Build Check
+    types:
+      - completed
   workflow_dispatch:
   schedule:
     - cron: '17 2 * * *'
 
 jobs:
   smoke:
+    if: >-
+      github.event_name != 'workflow_run' ||
+      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
 
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
 
-      - name: Verify production domain
+      - name: Resolve expected production commit
+        id: expected
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify production domain and deployed commit
         env:
           SITE_ORIGIN: https://reejamaharjan.com.np
+          EXPECTED_COMMIT: ${{ steps.expected.outputs.sha }}
+          SMOKE_ATTEMPTS: '20'
+          SMOKE_DELAY_MS: '30000'
         run: node scripts/smoke-production.mjs

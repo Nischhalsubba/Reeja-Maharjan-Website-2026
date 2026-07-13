@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "npm run verify:deployment",
-    "build": "astro build",
+    "build": "node scripts/generate-build-fingerprint.mjs && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint .",
