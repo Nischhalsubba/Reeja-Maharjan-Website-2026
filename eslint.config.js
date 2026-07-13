@@ -4,7 +4,7 @@ import astroPlugin from "eslint-plugin-astro";
 
 export default [
   {
-    ignores: ["dist", ".astro", "node_modules", "src-old-v55", "src-legacy-v55"],
+    ignores: ["dist", ".astro", "node_modules"],
   },
   ...astroPlugin.configs["flat/recommended"],
   {
