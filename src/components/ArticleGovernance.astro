@@ -1,0 +1,38 @@
+---
+import { editorialPolicy, formatEditorialDate } from '../content/editorial-policy';
+
+type Props = {
+  publishedAt: string;
+  updatedAt: string;
+  reviewer?: {
+    name: string;
+    qualification: string;
+    role: string;
+    reviewedAt: string;
+  };
+};
+
+const { publishedAt, updatedAt, reviewer } = Astro.props;
+---
+
+<section class="site-note" aria-labelledby="article-governance-title">
+  <p class="site-eyebrow">Editorial information</p>
+  <h2 id="article-governance-title">Who wrote and checked this article</h2>
+  <dl>
+    <div>
+      <dt>Written by</dt>
+      <dd><a href={editorialPolicy.authorProfileUrl}>{editorialPolicy.authorName}, {editorialPolicy.authorQualification}</a></dd>
+    </div>
+    <div><dt>Published</dt><dd>{formatEditorialDate(publishedAt)}</dd></div>
+    <div><dt>Last updated</dt><dd>{formatEditorialDate(updatedAt)}</dd></div>
+    {reviewer && (
+      <div>
+        <dt>Clinically reviewed by</dt>
+        <dd>{reviewer.name}, {reviewer.qualification}, {reviewer.role} · {formatEditorialDate(reviewer.reviewedAt)}</dd>
+      </div>
+    )}
+  </dl>
+  {!reviewer && <p>No named clinical review is claimed for this article.</p>}
+  <p>{editorialPolicy.safetyNote}</p>
+  <p>Corrections: <a href={`mailto:${editorialPolicy.correctionEmail}`}>{editorialPolicy.correctionEmail}</a></p>
+</section>
