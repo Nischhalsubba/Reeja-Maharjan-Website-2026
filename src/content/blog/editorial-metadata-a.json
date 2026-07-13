@@ -1,0 +1,37 @@
+{
+  "essential-maternal-newborn-care-guide-2026": {
+    "audience": "Parents, caregivers, and nurses supporting early postnatal care",
+    "userNeed": "A practical checklist for routine maternal and newborn care and urgent warning signs",
+    "originalValue": "Discharge-style teaching points organised around feeding, warmth, hygiene, recovery, and escalation",
+    "topicLabel": "Maternal and newborn care",
+    "reviewDueAt": "2027-03-11"
+  },
+  "top-10-postpartum-counselling-tips-new-nurses": {
+    "audience": "New nurses providing postpartum counselling",
+    "userNeed": "A structured way to explain recovery, feeding, self-care, and danger signs",
+    "originalValue": "A bedside counselling checklist focused on understandable, family-facing communication",
+    "topicLabel": "Postpartum counselling",
+    "reviewDueAt": "2027-03-11"
+  },
+  "mastering-nursing-documentation-sbar-handover": {
+    "audience": "Nurses and nursing students preparing clinical handovers",
+    "userNeed": "Clear examples of concise documentation and SBAR communication",
+    "originalValue": "Practice-oriented handover prompts that connect observation, escalation, and record quality",
+    "topicLabel": "Documentation and handover",
+    "reviewDueAt": "2027-03-11"
+  },
+  "general-care-nursing-common-challenges": {
+    "audience": "Early-career nurses working in general wards",
+    "userNeed": "Practical ways to manage workload, communication, monitoring, and escalation challenges",
+    "originalValue": "Ward-focused problem-solving points grounded in routine nursing responsibilities",
+    "topicLabel": "General nursing practice",
+    "reviewDueAt": "2027-03-11"
+  },
+  "safeguarding-confidentiality-healthcare-nurses-protect-patient-rights": {
+    "audience": "Nurses, students, and health-programme staff handling patient information",
+    "userNeed": "A usable confidentiality checklist for conversations, records, devices, and referrals",
+    "originalValue": "Everyday privacy scenarios translated into practical nursing safeguards",
+    "topicLabel": "Patient confidentiality",
+    "reviewDueAt": "2027-03-11"
+  }
+}
