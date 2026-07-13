@@ -1,5 +1,5 @@
 import { chromium } from '@playwright/test';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import process from 'node:process';
 
@@ -35,6 +35,11 @@ function digest(buffer) {
 async function capture(origin, route, viewport, label) {
   const context = await browser.newContext({ viewport, reducedMotion: 'reduce' });
   const page = await context.newPage();
+  const response = await page.goto(new URL(route, origin).toString(), { waitUntil: 'networkidle' });
+
+  if (!response?.ok()) {
+    failures.push(`${label} ${route} returned ${response?.status() ?? 'no response'}.`);
+  }
 
   await page.addStyleTag({
     content: `
@@ -47,11 +52,6 @@ async function capture(origin, route, viewport, label) {
       .scroll-progress { visibility: hidden !important; }
     `
   });
-
-  const response = await page.goto(new URL(route, origin).toString(), { waitUntil: 'networkidle' });
-  if (!response?.ok()) {
-    failures.push(`${label} ${route} returned ${response?.status() ?? 'no response'}.`);
-  }
 
   await page.evaluate(async () => {
     await document.fonts.ready;
