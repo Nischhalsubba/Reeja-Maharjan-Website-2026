@@ -1,9 +1,19 @@
 import process from 'node:process';
+import { origin } from './smoke/config.mjs';
+import { waitForExpectedDeployment } from './smoke/deployment.mjs';
+import { collectProductionFailures } from './smoke/assertions.mjs';
 
-const origin = process.env.SITE_ORIGIN ?? 'https://reejamaharjan.com.np';
-const expectedCommit = process.env.EXPECTED_COMMIT?.trim();
-const maxAttempts = Number(process.env.SMOKE_ATTEMPTS ?? 20);
-const retryDelayMs = Number(process.env.SMOKE_DELAY_MS ?? 30000);
-
-const requiredText = [
-  'Clinical
+try {
+  await waitForExpectedDeployment();
+  const failures = await collectProductionFailures();
+  if (failures.length) {
+    console.error('\nProduction smoke verification failed:\n');
+    for (const failure of failures) console.error(`- ${failure}`);
+    console.error('');
+    process.exit(1);
+  }
+  console.log(`Production smoke verification passed for ${origin}.`);
+} catch (error) {
+  console.error(`\nProduction deployment verification failed:\n\n- ${error.message}\n`);
+  process.exit(1);
+}
