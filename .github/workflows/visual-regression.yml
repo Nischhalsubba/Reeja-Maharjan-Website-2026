@@ -2,22 +2,25 @@ name: Visual Regression
 
 on:
   pull_request:
+  push:
+    branches:
+      - main
 
 jobs:
   compare-main:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
-      - name: Checkout main baseline
+      - name: Checkout baseline
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
           path: baseline
 
-      - name: Checkout pull request candidate
+      - name: Checkout candidate
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
           path: candidate
 
       - name: Setup Node
