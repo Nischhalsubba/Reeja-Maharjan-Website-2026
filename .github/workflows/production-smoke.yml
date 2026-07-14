@@ -7,6 +7,16 @@ on:
     types:
       - completed
   workflow_dispatch:
+    inputs:
+      origin:
+        description: Deployed origin to verify
+        required: false
+        default: https://reejamaharjan.com.np
+        type: string
+      expected_commit:
+        description: Optional commit SHA expected in /build.json
+        required: false
+        type: string
   schedule:
     - cron: '17 2 * * *'
 
@@ -28,20 +38,25 @@ jobs:
         with:
           node-version: 22
 
-      - name: Resolve expected production commit
-        id: expected
+      - name: Resolve deployed origin and expected commit
+        id: target
         shell: bash
         run: |
           if [ "${{ github.event_name }}" = "workflow_run" ]; then
+            echo "origin=https://reejamaharjan.com.np" >> "$GITHUB_OUTPUT"
             echo "sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "origin=${{ inputs.origin }}" >> "$GITHUB_OUTPUT"
+            echo "sha=${{ inputs.expected_commit }}" >> "$GITHUB_OUTPUT"
           else
+            echo "origin=https://reejamaharjan.com.np" >> "$GITHUB_OUTPUT"
             echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Verify production domain and deployed commit
+      - name: Verify deployed domain and commit
         env:
-          SITE_ORIGIN: https://reejamaharjan.com.np
-          EXPECTED_COMMIT: ${{ steps.expected.outputs.sha }}
+          SITE_ORIGIN: ${{ steps.target.outputs.origin }}
+          EXPECTED_COMMIT: ${{ steps.target.outputs.sha }}
           SMOKE_ATTEMPTS: '20'
           SMOKE_DELAY_MS: '30000'
         run: node scripts/smoke-production.mjs
