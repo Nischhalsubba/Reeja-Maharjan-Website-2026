@@ -1,39 +1,59 @@
-import { forbiddenHomepageText, requiredHomepageText, retiredPaths } from './config.mjs';
-import { request } from './http.mjs';
+import {
+  forbiddenHomepageText,
+  requiredHomepageText,
+  requiredPublicFacts,
+  requiredRoutes,
+  retiredPaths,
+  requiredSecurityHeaders
+} from './config.mjs';
+import { readBuildFingerprint, request } from './http.mjs';
+
+async function readHtml(path, failures) {
+  const response = await request(path, { cacheBust: true });
+  if (!response.ok) {
+    failures.push(`${path} returned ${response.status}.`);
+    return null;
+  }
+
+  const contentType = response.headers.get('content-type') ?? '';
+  if (!contentType.includes('text/html')) failures.push(`${path} returned unexpected content-type ${contentType || '(missing)'}.`);
+  return response.text();
+}
+
+function assertContainsAll(source, values, label, failures) {
+  for (const value of values) if (!source.includes(value)) failures.push(`${label} is missing: ${value}`);
+}
+
+function assertContainsNone(source, values, label, failures) {
+  for (const value of values) if (source.includes(value)) failures.push(`${label} contains retired content: ${value}`);
+}
 
 export async function collectProductionFailures() {
   const failures = [];
-  const homepage = await request('/');
-  if (!homepage.ok) {
-    failures.push(`Homepage returned ${homepage.status}.`);
-  } else {
-    const html = await homepage.text();
-    for (const value of requiredHomepageText) if (!html.includes(value)) failures.push(`Homepage is missing: ${value}`);
-    for (const value of forbiddenHomepageText) if (html.includes(value)) failures.push(`Homepage contains retired content: ${value}`);
-  }
 
-  const cv = await request('/cv/');
-  if (!cv.ok) failures.push(`/cv/ returned ${cv.status}.`);
+  for (const path of requiredRoutes) await readHtml(path, failures);
+
+  const homepage = await readHtml('/', failures);
+  if (homepage) {
+    assertContainsAll(homepage, requiredHomepageText, 'Homepage', failures);
+    assertContainsAll(homepage, requiredPublicFacts, 'Homepage', failures);
+    assertContainsNone(homepage, forbiddenHomepageText, 'Homepage', failures);
+  }
 
   for (const path of retiredPaths) {
-    const response = await request(path);
-    if (response.status === 200) failures.push(`${path} is still publicly available.`);
+    const response = await request(path, { cacheBust: true });
+    if (response.status !== 404) failures.push(`${path} returned ${response.status}; expected a real 404.`);
   }
 
-  const article = await request('/blog/essential-maternal-newborn-care-guide-2026/');
-  if (!article.ok) {
-    failures.push(`Priority article returned ${article.status}.`);
-  } else {
-    const html = await article.text();
-    for (const value of ['Last updated', 'Written by', 'No named clinical review is claimed']) {
-      if (!html.includes(value)) failures.push(`Priority article is missing: ${value}`);
-    }
-    if (html.includes('FAQPage')) failures.push('Priority article still emits FAQPage schema.');
+  const article = await readHtml('/blog/essential-maternal-newborn-care-guide-2026/', failures);
+  if (article) {
+    assertContainsAll(article, ['Last updated', 'Written by', 'No named clinical review is claimed'], 'Priority article', failures);
+    if (article.includes('FAQPage')) failures.push('Priority article still emits FAQPage schema.');
   }
 
-  const missingPage = await request('/qa-nonexistent-route');
+  const missingPage = await request('/qa-nonexistent-route', { cacheBust: true });
   if (missingPage.status !== 404) {
-    failures.push(`Missing page returned ${missingPage.status} instead of 404.`);
+    failures.push(`Missing page returned ${missingPage.status}; expected 404.`);
   } else {
     const html = await missingPage.text();
     if (!html.includes('name="robots" content="noindex, nofollow"')) {
@@ -41,15 +61,27 @@ export async function collectProductionFailures() {
     }
   }
 
-  const headers = await request('/', { method: 'HEAD' });
-  for (const name of [
-    'content-security-policy',
-    'x-content-type-options',
-    'referrer-policy',
-    'x-frame-options',
-    'permissions-policy'
-  ]) {
-    if (!headers.headers.get(name)) failures.push(`Missing production security header: ${name}`);
+  const fingerprint = await readBuildFingerprint();
+  if (!fingerprint.ok) {
+    failures.push(fingerprint.message);
+  } else {
+    const cacheControl = fingerprint.headers?.['cache-control'] ?? '';
+    if (!cacheControl.includes('no-store')) failures.push('/build.json is missing Cache-Control: no-store.');
   }
+
+  const headersResponse = await request('/', { method: 'HEAD', cacheBust: true });
+  if (!headersResponse.ok) failures.push(`Homepage HEAD request returned ${headersResponse.status}.`);
+  const headers = headersResponse.headers;
+  for (const [name, fragments] of Object.entries(requiredSecurityHeaders)) {
+    const actual = headers.get(name) ?? '';
+    if (!actual) {
+      failures.push(`Missing production security header: ${name}`);
+      continue;
+    }
+    for (const fragment of fragments) {
+      if (!actual.includes(fragment)) failures.push(`${name} is missing required policy fragment: ${fragment}`);
+    }
+  }
+
   return failures;
 }
