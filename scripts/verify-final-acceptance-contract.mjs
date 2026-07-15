@@ -20,7 +20,7 @@ const contracts = [
   [header, 'aria-modal="true"', 'Mobile navigation must be modal to assistive technology.'],
   [header, 'aria-labelledby="mobile-nav-title"', 'Mobile navigation must have a stable accessible name.'],
   [header, 'aria-haspopup="dialog"', 'Menu trigger must announce that it opens a dialog.'],
-  [mobileTest, "getByRole('dialog', { name: 'Mobile navigation' })", 'Browser coverage must query the accessible dialog.'],
+  [mobileTest, "getByRole('dialog', { name: 'Mobile navigation', exact: true })", 'Browser coverage must query the accessible dialog with an exact name.'],
   [mobileTest, "toHaveAttribute('aria-modal', 'true')", 'Browser coverage must verify modal semantics.'],
   [accountAudit, 'CLOUDFLARE_API_TOKEN', 'Cloudflare account audit must require scoped credentials.'],
   [accountAudit, '/workers/routes', 'Cloudflare account audit must inspect Worker routes.'],
