@@ -23,7 +23,13 @@ const links = [
       </span>
     </a>
 
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">Menu</button>
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="mobile-nav"
+      aria-haspopup="dialog"
+    >Menu</button>
 
     <nav class="desktop-nav" aria-label="Main navigation">
       {links.map((link) => (
@@ -33,9 +39,17 @@ const links = [
     </nav>
   </div>
 
-  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+  <div
+    class="mobile-nav"
+    id="mobile-nav"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="mobile-nav-title"
+    aria-hidden="true"
+  >
     <nav class="mobile-nav__panel" aria-label="Mobile navigation">
-      <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close</button>
+      <span id="mobile-nav-title" class="sr-only">Mobile navigation</span>
+      <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close menu</button>
       <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
       {links.map((link) => (
         <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>

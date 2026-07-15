@@ -1,0 +1,51 @@
+name: Cloudflare Account Audit
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloudflare-account-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Audit Cloudflare routing configuration
+        id: audit
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_HOSTNAME: reejamaharjan.com.np
+          CLOUDFLARE_PAGES_PROJECT: reeja-maharjan-website-2026
+          CLOUDFLARE_AUDIT_REPORT: cloudflare-account-audit.json
+        run: node scripts/audit-cloudflare-account.mjs
+
+      - name: Upload account audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-account-audit
+          path: cloudflare-account-audit.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Fail when routing conflicts remain
+        if: steps.audit.outcome != 'success'
+        run: |
+          echo 'Cloudflare account routing is not ready. Review the uploaded audit report.'
+          exit 1
