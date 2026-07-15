@@ -1,6 +1,7 @@
 import { chromium } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import process from 'node:process';
 
 const baselineOrigin = process.env.BASELINE_ORIGIN ?? 'http://127.0.0.1:4321';
@@ -92,7 +93,7 @@ async function capture(origin, route, viewport, label) {
   await page.waitForTimeout(250);
 
   const filename = `${slugFor(route)}-${viewport.name}-${label}.png`;
-  const path = new URL(filename, outputDir);
+  const path = fileURLToPath(new URL(filename, outputDir));
   const screenshot = await page.screenshot({ path, fullPage: true, animations: 'disabled' });
   await context.close();
   return screenshot;
