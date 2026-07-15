@@ -71,6 +71,7 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Verify deployed domain and commit
+        id: smoke-check
         env:
           SITE_ORIGIN: ${{ steps.target.outputs.origin }}
           EXPECTED_COMMIT: ${{ steps.target.outputs.sha }}
@@ -80,9 +81,10 @@ jobs:
         run: node scripts/smoke-production.mjs
 
       - name: Run live browser quality suite
+        id: browser-check
         env:
           BROWSER_TEST_ORIGIN: ${{ steps.target.outputs.origin }}
-        run: npx playwright test tests/browser --reporter=line,json
+        run: npx playwright test tests/browser --reporter=line
 
       - name: Write release summary
         if: always()
@@ -93,8 +95,8 @@ jobs:
             echo ""
             echo "- Origin: \`${{ steps.target.outputs.origin }}\`"
             echo "- Expected commit: \`${{ steps.target.outputs.sha || 'not specified' }}\`"
-            echo "- Smoke result: \`${{ steps.smoke.outcome || 'see job result' }}\`"
-            echo "- Browser result: \`${{ steps.browser.outcome || 'see job result' }}\`"
+            echo "- Smoke result: \`${{ steps.smoke-check.outcome }}\`"
+            echo "- Browser result: \`${{ steps.browser-check.outcome }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload production evidence
