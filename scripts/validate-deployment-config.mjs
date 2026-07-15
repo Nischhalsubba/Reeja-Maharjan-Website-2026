@@ -24,6 +24,10 @@ function parseJson(path, source) {
 const packageSource = await readText('package.json');
 const lockSource = await readText('package-lock.json');
 const headersSource = await readText('public/_headers');
+const smokeConfigSource = await readText('scripts/smoke/config.mjs');
+const smokeAssertionsSource = await readText('scripts/smoke/assertions.mjs');
+const layoutSource = await readText('src/layouts/BaseLayout.astro');
+const notFoundSource = await readText('src/pages/404.astro');
 const packageJson = parseJson('package.json', packageSource);
 const packageLock = parseJson('package-lock.json', lockSource);
 
@@ -44,11 +48,13 @@ if (packageJson && packageLock) {
 }
 
 const requiredHeaderFragments = [
-  "Content-Security-Policy:",
+  'Content-Security-Policy:',
   "base-uri 'self';",
   "frame-ancestors 'none';",
   'X-Content-Type-Options: nosniff',
-  'Referrer-Policy: strict-origin-when-cross-origin'
+  'Referrer-Policy: strict-origin-when-cross-origin',
+  'X-Frame-Options: DENY',
+  'Permissions-Policy: camera=()'
 ];
 
 for (const fragment of requiredHeaderFragments) {
@@ -61,6 +67,31 @@ const cspLine = headersSource
 
 if (!cspLine?.trim().endsWith(';')) {
   failures.push('public/_headers Content-Security-Policy must end with a semicolon.');
+}
+
+for (const exportName of ['requiredHomepageText', 'forbiddenHomepageText', 'retiredPaths']) {
+  if (!smokeConfigSource.includes(`export const ${exportName}`)) {
+    failures.push(`scripts/smoke/config.mjs must export ${exportName}.`);
+  }
+  if (!smokeAssertionsSource.includes(exportName)) {
+    failures.push(`scripts/smoke/assertions.mjs must use ${exportName}.`);
+  }
+}
+
+if (/\bexport\s*$/.test(smokeConfigSource.trim())) {
+  failures.push('scripts/smoke/config.mjs ends with an incomplete export statement.');
+}
+
+if (!layoutSource.includes('robots?: string') || !layoutSource.includes('<meta name="robots" content={robots} />')) {
+  failures.push('BaseLayout must support page-specific robots metadata.');
+}
+
+if (!notFoundSource.includes('robots="noindex, nofollow"')) {
+  failures.push('404 page must use noindex, nofollow robots metadata.');
+}
+
+if (!smokeAssertionsSource.includes('/qa-nonexistent-route') || !smokeAssertionsSource.includes('noindex, nofollow')) {
+  failures.push('Production smoke assertions must verify the 404 status and noindex metadata.');
 }
 
 if (failures.length) {
