@@ -11,7 +11,7 @@ test('mobile navigation exposes dialog semantics and manages focus', async ({ pa
   });
 
   await page.goto(origin, { waitUntil: 'networkidle' });
-  const toggle = page.getByRole('button', { name: 'Menu' });
+  const toggle = page.getByRole('button', { name: 'Menu', exact: true });
   const dialogElement = page.locator('#mobile-nav');
 
   await expect(toggle).toHaveAttribute('aria-haspopup', 'dialog');
@@ -23,8 +23,8 @@ test('mobile navigation exposes dialog semantics and manages focus', async ({ pa
   await toggle.focus();
   await toggle.click();
 
-  const dialog = page.getByRole('dialog', { name: 'Mobile navigation' });
-  const close = dialog.getByRole('button', { name: 'Close menu' });
+  const dialog = page.getByRole('dialog', { name: 'Mobile navigation', exact: true });
+  const close = dialog.getByRole('button', { name: 'Close menu', exact: true });
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await expect(dialog).toHaveAttribute('aria-hidden', 'false');
   await expect(close).toBeFocused();
