@@ -16,15 +16,15 @@ export function targetUrl(path, cacheBust = false) {
 }
 
 export const request = (path, options = {}) => {
+  const { cacheBust = false, headers: customHeaders, ...requestOptions } = options;
   const headers = new Headers(defaultHeaders);
-  for (const [name, value] of new Headers(options.headers ?? {}).entries()) headers.set(name, value);
+  for (const [name, value] of new Headers(customHeaders ?? {}).entries()) headers.set(name, value);
 
-  return fetch(targetUrl(path, options.cacheBust === true), {
-    ...options,
-    cacheBust: undefined,
-    redirect: options.redirect ?? 'manual',
+  return fetch(targetUrl(path, cacheBust), {
+    ...requestOptions,
+    redirect: requestOptions.redirect ?? 'manual',
     headers,
-    signal: options.signal ?? AbortSignal.timeout(requestTimeoutMs)
+    signal: requestOptions.signal ?? AbortSignal.timeout(requestTimeoutMs)
   });
 };
 
