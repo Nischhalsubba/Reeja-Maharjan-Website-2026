@@ -12,16 +12,19 @@ test('mobile navigation exposes dialog semantics and manages focus', async ({ pa
 
   await page.goto(origin, { waitUntil: 'networkidle' });
   const toggle = page.getByRole('button', { name: 'Menu' });
-  const dialog = page.getByRole('dialog', { name: 'Mobile navigation' });
-  const close = page.getByRole('button', { name: 'Close menu' });
+  const dialogElement = page.locator('#mobile-nav');
 
   await expect(toggle).toHaveAttribute('aria-haspopup', 'dialog');
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-  await expect(dialog).toHaveAttribute('aria-modal', 'true');
-  await expect(dialog).toHaveAttribute('aria-hidden', 'true');
+  await expect(dialogElement).toHaveAttribute('role', 'dialog');
+  await expect(dialogElement).toHaveAttribute('aria-modal', 'true');
+  await expect(dialogElement).toHaveAttribute('aria-hidden', 'true');
 
   await toggle.focus();
   await toggle.click();
+
+  const dialog = page.getByRole('dialog', { name: 'Mobile navigation' });
+  const close = dialog.getByRole('button', { name: 'Close menu' });
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await expect(dialog).toHaveAttribute('aria-hidden', 'false');
   await expect(close).toBeFocused();
@@ -31,7 +34,7 @@ test('mobile navigation exposes dialog semantics and manages focus', async ({ pa
   await expect(dialog.getByRole('link').last()).toBeFocused();
   await page.keyboard.press('Escape');
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
-  await expect(dialog).toHaveAttribute('aria-hidden', 'true');
+  await expect(dialogElement).toHaveAttribute('aria-hidden', 'true');
   await expect(toggle).toBeFocused();
   await expect(page.locator('main')).not.toHaveAttribute('inert', '');
   expect(errors).toEqual([]);
