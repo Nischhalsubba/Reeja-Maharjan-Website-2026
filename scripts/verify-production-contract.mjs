@@ -64,8 +64,9 @@ for (const fragment of [
 }
 
 const smokeRunner = await readFile(new URL('./smoke-production.mjs', import.meta.url), 'utf8');
-for (const fragment of ['schemaVersion: 1', "status: 'passed'", "status: 'failed'", "status: 'error'"]) {
-  if (!smokeRunner.includes(fragment)) failures.push(`Smoke report implementation is missing: ${fragment}`);
+if (!smokeRunner.includes('schemaVersion: 1')) failures.push('Smoke report implementation is missing schemaVersion: 1.');
+for (const status of ['passed', 'failed', 'error']) {
+  if (!smokeRunner.includes(`'${status}'`)) failures.push(`Smoke report implementation is missing status value: ${status}`);
 }
 
 if (failures.length) {
