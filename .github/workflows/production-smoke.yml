@@ -20,24 +20,21 @@ on:
   schedule:
     - cron: '17 2 * * *'
 
+permissions:
+  contents: read
+
+concurrency:
+  group: production-verification-${{ github.event.workflow_run.head_sha || github.sha }}
+  cancel-in-progress: false
+
 jobs:
   smoke:
     if: >-
       github.event_name != 'workflow_run' ||
       (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
       - name: Resolve deployed origin and expected commit
         id: target
         shell: bash
@@ -45,13 +42,33 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_run" ]; then
             echo "origin=https://reejamaharjan.com.np" >> "$GITHUB_OUTPUT"
             echo "sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+            echo "checkout=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "origin=${{ inputs.origin }}" >> "$GITHUB_OUTPUT"
             echo "sha=${{ inputs.expected_commit }}" >> "$GITHUB_OUTPUT"
+            echo "checkout=main" >> "$GITHUB_OUTPUT"
           else
             echo "origin=https://reejamaharjan.com.np" >> "$GITHUB_OUTPUT"
-            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
+            echo "checkout=main" >> "$GITHUB_OUTPUT"
           fi
+
+      - name: Checkout exact release source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.target.outputs.checkout }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
 
       - name: Verify deployed domain and commit
         env:
@@ -59,4 +76,34 @@ jobs:
           EXPECTED_COMMIT: ${{ steps.target.outputs.sha }}
           SMOKE_ATTEMPTS: '20'
           SMOKE_DELAY_MS: '30000'
+          PRODUCTION_REPORT: production-smoke-report.json
         run: node scripts/smoke-production.mjs
+
+      - name: Run live browser quality suite
+        env:
+          BROWSER_TEST_ORIGIN: ${{ steps.target.outputs.origin }}
+        run: npx playwright test tests/browser --reporter=line,json
+
+      - name: Write release summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## Cloudflare production verification"
+            echo ""
+            echo "- Origin: \`${{ steps.target.outputs.origin }}\`"
+            echo "- Expected commit: \`${{ steps.target.outputs.sha || 'not specified' }}\`"
+            echo "- Smoke result: \`${{ steps.smoke.outcome || 'see job result' }}\`"
+            echo "- Browser result: \`${{ steps.browser.outcome || 'see job result' }}\`"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload production evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudflare-production-evidence-${{ steps.target.outputs.sha || github.run_id }}
+          path: |
+            production-smoke-report.json
+            test-results/
+          if-no-files-found: warn
+          retention-days: 30
