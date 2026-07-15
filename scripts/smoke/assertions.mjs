@@ -31,8 +31,24 @@ export async function collectProductionFailures() {
     if (html.includes('FAQPage')) failures.push('Priority article still emits FAQPage schema.');
   }
 
+  const missingPage = await request('/qa-nonexistent-route');
+  if (missingPage.status !== 404) {
+    failures.push(`Missing page returned ${missingPage.status} instead of 404.`);
+  } else {
+    const html = await missingPage.text();
+    if (!html.includes('name="robots" content="noindex, nofollow"')) {
+      failures.push('404 page is missing noindex, nofollow robots metadata.');
+    }
+  }
+
   const headers = await request('/', { method: 'HEAD' });
-  for (const name of ['content-security-policy', 'x-content-type-options', 'referrer-policy']) {
+  for (const name of [
+    'content-security-policy',
+    'x-content-type-options',
+    'referrer-policy',
+    'x-frame-options',
+    'permissions-policy'
+  ]) {
     if (!headers.headers.get(name)) failures.push(`Missing production security header: ${name}`);
   }
   return failures;
