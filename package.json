@@ -22,12 +22,13 @@
     "astro": "astro",
     "verify:deployment": "node scripts/validate-deployment-config.mjs",
     "verify:production-contract": "node scripts/verify-production-contract.mjs",
+    "verify:final-acceptance": "node scripts/verify-final-acceptance-contract.mjs",
     "verify:facts": "node scripts/verify-professional-facts.mjs && node scripts/verify-fact-evidence.mjs",
     "verify:expiry": "node scripts/check-expiry-controls.mjs",
     "verify:editorial": "node scripts/verify-editorial-governance.mjs",
     "verify:a11y": "node scripts/verify-accessibility-contract.mjs",
     "verify:source": "node scripts/verify-source-ownership.mjs",
-    "verify": "npm run verify:deployment && npm run verify:production-contract && npm run verify:facts && npm run verify:expiry && npm run verify:editorial && npm run verify:a11y && npm run verify:source && npm run check && npm run lint && npm run build"
+    "verify": "npm run verify:deployment && npm run verify:production-contract && npm run verify:final-acceptance && npm run verify:facts && npm run verify:expiry && npm run verify:editorial && npm run verify:a11y && npm run verify:source && npm run check && npm run lint && npm run build"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
