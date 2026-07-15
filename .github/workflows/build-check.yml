@@ -37,6 +37,9 @@ jobs:
       - name: Verify production release contract
         run: npm run verify:production-contract
 
+      - name: Verify final acceptance contracts
+        run: npm run verify:final-acceptance
+
       - name: Verify professional facts
         run: npm run verify:facts
 
