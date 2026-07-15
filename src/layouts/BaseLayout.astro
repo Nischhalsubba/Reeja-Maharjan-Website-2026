@@ -15,12 +15,14 @@ type Props = {
   title?: string;
   description?: string;
   image?: string;
+  robots?: string;
 };
 
 const {
   title = `${professionalFacts.name} | ${professionalFacts.primaryRole}`,
   description = profile.hero.tagline,
-  image = '/og-default.svg'
+  image = '/og-default.svg',
+  robots = 'index, follow, max-image-preview:large'
 } = Astro.props;
 
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
@@ -100,7 +102,7 @@ const graphSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={robots} />
     {searchConsoleVerification && <meta name="google-site-verification" content={searchConsoleVerification} />}
 
     <script type="application/ld+json" set:html={JSON.stringify(graphSchema)}></script>
