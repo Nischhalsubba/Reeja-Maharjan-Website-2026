@@ -1,6 +1,14 @@
 # Final acceptance evidence
 
-This record closes the remaining delivery stories only when each section contains real evidence. Automated systems must not fabricate human approval or claim Cloudflare account changes they did not perform.
+This record closes the remaining delivery stories only when each section contains real evidence. Automated systems must not fabricate human approval, assistive-technology review results, or Cloudflare account changes they did not perform.
+
+## Verified engineering baseline
+
+- PR #20 merged into `main` as `83e79d9ca692fe0799f74c45b41fd2c382a2b094`.
+- Build Check #130: passed.
+- Browser Quality #18: passed.
+- Visual Regression #15: passed.
+- Cloudflare Pages preview deployment for PR head `2b8dcb8`: passed.
 
 ## RW-3: Cloudflare production integrity
 
@@ -12,6 +20,7 @@ Required evidence:
 - Expected production branch: `main`
 - `/build.json` commit: pending
 - Production Smoke workflow result: pending
+- Routing conflict corrected: pending
 
 ## RW-4: professional facts approval
 
@@ -58,6 +67,16 @@ Automated browser coverage is enforced in `tests/browser/mobile-navigation.spec.
 - Failed external requests: pending
 - Result: pending
 
-## Closure rule
+## Final merge gate
 
-A story moves to Done only after its corresponding evidence is recorded. A passing repository build proves implementation quality; it does not substitute for account-level routing, human assistive-technology testing, or owner approval.
+This pull request must remain a draft until all of the following are true:
+
+1. The authenticated Cloudflare Account Audit has completed.
+2. The custom domain serves the expected `main` commit.
+3. Production Smoke and deployed-origin Browser Quality pass.
+4. Reeja Maharjan approves the canonical professional facts and external profiles.
+5. A real NVDA, VoiceOver, or equivalent review passes and is documented.
+6. Every `pending` field above is replaced with verifiable evidence.
+7. The five corresponding Notion stories are updated to Done.
+
+A passing repository build proves implementation quality. It does not substitute for account-level routing, owner approval, or human assistive-technology testing.
