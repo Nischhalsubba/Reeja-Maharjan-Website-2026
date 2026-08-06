@@ -6,7 +6,7 @@
 
 **Branch-aware technical guide for [`main`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main)**
 
-<p><img alt="branch: main" src="https://img.shields.io/static/v1?label=&message=branch%3A%20main&color=5965F2&style=flat-square"> <img alt="Astro" src="https://img.shields.io/static/v1?label=&message=Astro&color=24292F&style=flat-square"> <img alt="Tailwind CSS" src="https://img.shields.io/static/v1?label=&message=Tailwind%20CSS&color=24292F&style=flat-square"> <img alt="TypeScript" src="https://img.shields.io/static/v1?label=&message=TypeScript&color=24292F&style=flat-square"> <img alt="JavaScript" src="https://img.shields.io/static/v1?label=&message=JavaScript&color=24292F&style=flat-square"> <img alt="CSS" src="https://img.shields.io/static/v1?label=&message=CSS&color=24292F&style=flat-square"> <img alt="docs: branch-aware" src="https://img.shields.io/static/v1?label=&message=docs%3A%20branch-aware&color=8250DF&style=flat-square"></p>
+<p><img alt="branch: main" src="https://img.shields.io/static/v1?label=&message=branch%3A%20main&color=5965F2&style=flat-square"> <img alt="React" src="https://img.shields.io/static/v1?label=&message=React&color=24292F&style=flat-square"> <img alt="Astro" src="https://img.shields.io/static/v1?label=&message=Astro&color=24292F&style=flat-square"> <img alt="Tailwind CSS" src="https://img.shields.io/static/v1?label=&message=Tailwind%20CSS&color=24292F&style=flat-square"> <img alt="TypeScript" src="https://img.shields.io/static/v1?label=&message=TypeScript&color=24292F&style=flat-square"> <img alt="JavaScript" src="https://img.shields.io/static/v1?label=&message=JavaScript&color=24292F&style=flat-square"> <img alt="CSS" src="https://img.shields.io/static/v1?label=&message=CSS&color=24292F&style=flat-square"> <img alt="docs: branch-aware" src="https://img.shields.io/static/v1?label=&message=docs%3A%20branch-aware&color=8250DF&style=flat-square"></p>
 
 <p>
   <a href="https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main"><strong>Browse source</strong></a> ·
@@ -25,7 +25,7 @@
 |---|---|
 | Purpose | An Astro, Tailwind CSS, and TypeScript professional nurse portfolio for Reeja Maharjan with recruiter-first homepage architecture, privacy-safe credential summaries, structured Person metadata, blog credibility notes, Cloudflare Pages deployment, and Build Check workflow support. |
 | Branch role | Default branch |
-| Stack | Astro, Tailwind CSS, TypeScript, JavaScript, CSS |
+| Stack | React, Astro, Tailwind CSS, TypeScript, JavaScript, CSS |
 | Manifests | package.json |
 | Prerequisites | Node.js |
 | Delivery | GitHub Actions |
