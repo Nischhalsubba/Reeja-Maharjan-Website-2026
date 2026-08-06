@@ -4,6 +4,7 @@ import ArticleGovernance from '../../components/ArticleGovernance.astro';
 import { blogPosts, getBlogPost } from '../../content/blog';
 import { getBlogGovernance } from '../../content/blog/governance';
 import { professionalFacts } from '../../content/professional-facts';
+import '../../styles/blog.css';
 
 export const getStaticPaths = () =>
   blogPosts.map((post) => ({ params: { slug: post.slug } }));
@@ -66,73 +67,93 @@ const breadcrumbSchema = {
 ---
 
 <BaseLayout title={`${post.title} | Reeja Maharjan`} description={post.metaDescription} image={articleImagePath}>
-  <div class="site-page">
-    <article class="site-article">
-      <header class="site-article__header">
-        <a class="site-back" href="/blog/">← Back to articles</a>
-        <p class="site-eyebrow">Nurse-led education</p>
-        <h1>{post.title}</h1>
-        <p>{post.excerpt}</p>
-        <div class="site-article__meta">
-          <span>Published {post.publishedAt}</span>
-          <span>Last updated {post.updatedAt}</span>
-          <span>{post.readMinutes} min read</span>
+  <div class="site-page blog-article-page">
+    <article class="site-article blog-article">
+      <header class="blog-article__header">
+        <div class="blog-article__shell blog-article__intro">
+          <div>
+            <a class="site-back" href="/blog/">Back to articles</a>
+            <p class="site-eyebrow">Nurse-led education</p>
+            <h1>{post.title}</h1>
+            <p class="blog-article__dek">{post.excerpt}</p>
+          </div>
+
+          <dl class="blog-article__meta-panel">
+            <div><dt>Published</dt><dd>{post.publishedAt}</dd></div>
+            <div><dt>Updated</dt><dd>{post.updatedAt}</dd></div>
+            <div><dt>Reading time</dt><dd>{post.readMinutes} min read</dd></div>
+            <div><dt>Primary topic</dt><dd>{post.primaryKeyword}</dd></div>
+          </dl>
         </div>
       </header>
 
-      <div class="site-article__body">
-        <ArticleGovernance publishedAt={post.publishedAt} updatedAt={post.updatedAt} governance={governance} />
+      <div class="blog-article__shell blog-article__layout">
+        <aside class="blog-toc" aria-labelledby="article-toc-title">
+          <p class="site-eyebrow">In this guide</p>
+          <h2 id="article-toc-title">Sections</h2>
+          <nav aria-label="Article sections">
+            <a href="#key-points">Key points</a>
+            {post.sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
+            <a href="#faq">Common questions</a>
+            <a href="#sources">Sources</a>
+            <a href="#safety-note">Safety note</a>
+          </nav>
+        </aside>
 
-        <section class="site-note">
-          <p class="site-eyebrow">Key points</p>
-          <ul>{post.quickAnswer.map((item) => <li>{item}</li>)}</ul>
-        </section>
+        <div class="site-article__body blog-article__body">
+          <ArticleGovernance publishedAt={post.publishedAt} updatedAt={post.updatedAt} governance={governance} />
 
-        <section>{post.intro.map((paragraph) => <p>{paragraph}</p>)}</section>
-
-        {post.sections.map((section) => (
-          <section id={section.id}>
-            <h2>{section.title}</h2>
-            {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
-            {section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}
+          <section class="site-note blog-note-strong" id="key-points">
+            <p class="site-eyebrow">Key points</p>
+            <ul>{post.quickAnswer.map((item) => <li>{item}</li>)}</ul>
           </section>
-        ))}
 
-        <section>
-          <p class="site-eyebrow">Frequently asked questions</p>
-          <h2>Common questions</h2>
-          {post.faq.map((item) => <div><h3>{item.question}</h3><p>{item.answer}</p></div>)}
-        </section>
+          <section aria-label="Introduction">{post.intro.map((paragraph) => <p>{paragraph}</p>)}</section>
 
-        <section>
-          <p class="site-eyebrow">Sources</p>
-          <h2>References and further reading</h2>
-          <ul>{post.sources.map((source) => <li><a href={source.href} target="_blank" rel="noreferrer">{source.label}</a></li>)}</ul>
-        </section>
+          {post.sections.map((section) => (
+            <section id={section.id}>
+              <h2>{section.title}</h2>
+              {section.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+              {section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}
+            </section>
+          ))}
 
-        <section class="site-note">
-          <p class="site-eyebrow">Medical safety note</p>
-          <p>{post.disclaimer}</p>
-        </section>
-
-        <section>
-          <p class="site-eyebrow">Author</p>
-          <h2>{professionalFacts.name}</h2>
-          <p>Registered Nurse with hospital and maternal-health research experience in patient education, documentation, telemonitoring, and care coordination.</p>
-          <p><a href="/hire-reeja/">View professional profile</a> · <a href={topicHub.href}>{topicHub.label}</a></p>
-        </section>
-
-        {relatedPosts.length > 0 && (
-          <section>
-            <p class="site-eyebrow">Read next</p>
-            <h2>Related articles</h2>
-            <div class="site-grid">
-              {relatedPosts.map((relatedPost) => relatedPost && (
-                <article class="site-card"><h3>{relatedPost.title}</h3><p>{relatedPost.excerpt}</p><p><a href={`/blog/${relatedPost.slug}/`}>Read article</a></p></article>
-              ))}
-            </div>
+          <section id="faq">
+            <p class="site-eyebrow">Frequently asked questions</p>
+            <h2>Common questions</h2>
+            {post.faq.map((item) => <div><h3>{item.question}</h3><p>{item.answer}</p></div>)}
           </section>
-        )}
+
+          <section id="sources">
+            <p class="site-eyebrow">Sources</p>
+            <h2>References and further reading</h2>
+            <ul>{post.sources.map((source) => <li><a href={source.href} target="_blank" rel="noreferrer">{source.label}</a></li>)}</ul>
+          </section>
+
+          <section class="site-note blog-note-strong" id="safety-note">
+            <p class="site-eyebrow">Medical safety note</p>
+            <p>{post.disclaimer}</p>
+          </section>
+
+          <section class="blog-author-card">
+            <p class="site-eyebrow">Author</p>
+            <h2>{professionalFacts.name}</h2>
+            <p>Registered Nurse with hospital and maternal-health research experience in patient education, documentation, telemonitoring, and care coordination.</p>
+            <p><a href="/hire-reeja/">View professional profile</a> · <a href={topicHub.href}>{topicHub.label}</a></p>
+          </section>
+
+          {relatedPosts.length > 0 && (
+            <section>
+              <p class="site-eyebrow">Read next</p>
+              <h2>Related articles</h2>
+              <div class="blog-related-grid">
+                {relatedPosts.map((relatedPost) => relatedPost && (
+                  <article class="blog-card"><h3>{relatedPost.title}</h3><p>{relatedPost.excerpt}</p><p><a href={`/blog/${relatedPost.slug}/`}>Read article</a></p></article>
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
       </div>
     </article>
   </div>
