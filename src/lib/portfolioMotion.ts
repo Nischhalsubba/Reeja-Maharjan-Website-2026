@@ -93,7 +93,10 @@ export const initPortfolioMotion = (): (() => void) => {
         }
 
         const revealElements = gsap.utils.toArray<HTMLElement>(REVEAL_SELECTOR).filter(
-          (element) => !element.closest('.ledger-hero') && !element.closest('.site-page__hero')
+          (element) =>
+            !element.closest('.ledger-hero') &&
+            !element.closest('.site-page__hero') &&
+            !element.closest('[data-ledger-group]')
         );
 
         revealElements.forEach((element) => {
