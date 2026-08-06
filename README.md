@@ -35,6 +35,7 @@
 
 This branch differs from the default branch in the following detected paths:
 
+- [`README.md`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/README.md)
 - [`docs/redesign/CURRENT_DESIGN_DNA.json`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/docs/redesign/CURRENT_DESIGN_DNA.json)
 - [`docs/redesign/TARGET_DESIGN_DNA.json`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/docs/redesign/TARGET_DESIGN_DNA.json)
 - [`docs/redesign/repository-inventory.csv`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/docs/redesign/repository-inventory.csv)
