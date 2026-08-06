@@ -60,9 +60,9 @@ const topicGroups = [
           <p>Each article keeps source links, review dates, and safety notes visible where clinical decisions are involved.</p>
         </div>
 
-        <div class="blog-index__featured" data-reveal-group>
+        <div class="blog-index__featured" data-ledger-group>
           {featuredPost && (
-            <a class="blog-index__lead-card" href={`/blog/${featuredPost.slug}/`} data-reveal>
+            <a class="blog-index__lead-card" href={`/blog/${featuredPost.slug}/`} data-ledger-reveal>
               <p class="site-eyebrow">Featured guide</p>
               <h3>{featuredPost.title}</h3>
               <p>{featuredPost.excerpt}</p>
@@ -70,7 +70,7 @@ const topicGroups = [
             </a>
           )}
 
-          <aside class="blog-topic-panel" aria-labelledby="blog-topic-title" data-reveal>
+          <aside class="blog-topic-panel" aria-labelledby="blog-topic-title" data-ledger-reveal>
             <p class="site-eyebrow">Topics</p>
             <h3 id="blog-topic-title">Find the right reading path.</h3>
             {topicGroups.map((topic) => (
@@ -89,9 +89,9 @@ const topicGroups = [
           <div><p class="site-eyebrow">All articles</p><h2>Browse the full library.</h2></div>
         </div>
 
-        <div class="blog-grid" data-reveal-group>
+        <div class="blog-grid" data-ledger-group>
           {articleList.map((post) => (
-            <article class="blog-card" data-reveal>
+            <article class="blog-card" data-ledger-reveal>
               <div>
                 <p class="site-eyebrow">{post.tags[0]}</p>
                 <h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3>
