@@ -1,4 +1,10 @@
 ---
+import '@fontsource/source-serif-4/400.css';
+import '@fontsource/source-serif-4/500.css';
+import '@fontsource/source-serif-4/600.css';
+import '@fontsource/public-sans/400.css';
+import '@fontsource/public-sans/600.css';
+import '@fontsource/public-sans/700.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
 import '../styles/layout.css';
@@ -6,7 +12,7 @@ import '../styles/components.css';
 import '../styles/pages.css';
 import '../styles/site-pages.css';
 import '../styles/shell.css';
-import '../styles/portfolio-v4.css';
+import '../styles/care-ledger.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -120,7 +126,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body class="portfolio-v4">
+  <body class="care-ledger">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header name={professionalFacts.name} />
