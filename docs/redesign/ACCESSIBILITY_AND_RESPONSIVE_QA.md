@@ -39,4 +39,4 @@ Required viewport widths from the brief:
 
 ## Current limitation
 
-This runtime cannot install dependencies or run a browser against the built Astro site because DNS resolution for `github.com` is unavailable. The code contracts are recorded here, but final proof still requires the repository Build Check or an equivalent live browser QA run. Charming that networking is still the villain in a web project.
+This runtime cannot install dependencies or run a browser against the built Astro site because DNS resolution for `github.com` is unavailable. The code contracts are recorded here, but final proof still requires the repository Build Check or an equivalent live browser QA run.
