@@ -1,92 +1,349 @@
+.home-v2 {
+  --home-ink: var(--text);
+  --home-muted: var(--muted);
+  --home-line: var(--line);
+  --home-soft: var(--surface-alt);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.home-hero {
+  position: relative;
+  border-bottom: 1px solid var(--line);
+  background:
+    linear-gradient(90deg, var(--accent) 0 6px, transparent 6px),
+    linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+}
+
+.home-kicker {
+  color: var(--accent);
+  font-family: var(--font-sans);
+}
+
+.home-hero__name {
+  color: var(--muted-strong);
+  font-family: var(--font-sans);
+}
+
 .home-v2 .home-hero h1 {
+  max-width: 12ch;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 6.8vw, 6.75rem);
+  font-weight: var(--h1-w);
+  letter-spacing: var(--h1-ls);
+  line-height: var(--h1-lh);
+}
+
+.home-hero__intro {
+  max-width: var(--reading-max);
+  color: var(--muted-strong);
+  letter-spacing: var(--body-ls);
+  line-height: 1.68;
+}
+
+.home-button {
+  min-height: var(--btn-h);
+  padding: var(--btn-pad-y) var(--btn-pad-x);
+  border-radius: var(--r-btn);
+  font-family: var(--font-sans);
+  transition:
+    transform var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out),
+    color var(--dur-1) var(--ease-out),
+    border-color var(--dur-1) var(--ease-out);
+}
+
+.home-button:hover,
+.home-button:focus-visible {
+  transform: translateY(-1px);
+}
+
+.home-button--dark {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+}
+
+.home-button--dark:hover,
+.home-button--dark:focus-visible {
+  border-color: var(--accent-hover);
+  background: var(--accent-hover);
+}
+
+.home-button--light {
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+
+.home-button--light:hover,
+.home-button--light:focus-visible {
+  border-color: var(--accent-hover);
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.home-proof {
+  color: var(--muted);
+}
+
+.home-proof li::before {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+.home-hero__summary {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: color-mix(in srgb, var(--surface) 88%, var(--accent-soft));
+  box-shadow: var(--shadow-1);
+}
+
+.home-hero__summary div {
+  padding: 17px 20px;
+  border-bottom-color: var(--line);
+}
+
+.home-hero__summary div:last-child {
+  border-bottom: 0;
+}
+
+.home-hero__summary dt {
+  color: var(--accent);
+  font-family: var(--font-sans);
+}
+
+.home-hero__summary dd {
+  color: var(--text);
+}
+
+.home-section {
+  padding: var(--section-gap) 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.home-section--soft {
+  background: var(--surface-alt);
+}
+
+.home-section__topline h2,
+.home-contact h2 {
   max-width: 13ch;
-  font-size: clamp(3.4rem, 7vw, 7.2rem);
-  line-height: 0.92;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: var(--h2-size);
+  font-weight: var(--h2-w);
+  letter-spacing: var(--h2-ls);
+  line-height: var(--h2-lh);
+}
+
+.home-section__summary {
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+.home-text-link {
+  min-height: var(--touch-target);
+  display: inline-flex;
+  align-items: center;
+  color: var(--accent);
+  font-family: var(--font-sans);
 }
 
 .home-role-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s2);
   margin-top: clamp(48px, 7vw, 88px);
-  border-top: 1px solid var(--home-line);
-  border-left: 1px solid var(--home-line);
+  border: 0;
 }
 
 .home-role-card {
-  display: flex;
-  min-height: 560px;
-  flex-direction: column;
-  padding: clamp(28px, 3vw, 42px);
-  border-right: 1px solid var(--home-line);
-  border-bottom: 1px solid var(--home-line);
+  min-height: 520px;
+  padding: clamp(28px, 3vw, 40px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  box-shadow: var(--shadow-1);
 }
 
 .home-role-card__number,
 .home-role-card__label,
 .home-role-card__scope strong {
-  color: var(--home-muted);
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.home-role-card__label {
-  margin-top: 38px !important;
+  color: var(--accent);
+  font-family: var(--font-sans);
 }
 
 .home-role-card h3 {
-  margin-top: 14px !important;
-  font-size: clamp(1.7rem, 2.7vw, 2.65rem);
-  letter-spacing: -0.05em;
-  line-height: 1.04;
-  text-wrap: balance;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+  letter-spacing: -0.025em;
 }
 
-.home-role-card__summary {
-  margin-top: 22px !important;
-  color: var(--home-muted);
-  line-height: 1.65;
-}
-
-.home-role-card__evidence {
-  display: grid;
-  gap: 10px;
-  margin-top: 28px;
-}
-
-.home-role-card__evidence li {
-  position: relative;
-  padding-left: 18px;
-  color: #303030;
-  font-size: 0.92rem;
-  line-height: 1.5;
+.home-role-card__summary,
+.home-role-card__evidence li,
+.home-role-card__scope {
+  color: var(--muted);
 }
 
 .home-role-card__evidence li::before {
-  position: absolute;
-  left: 0;
-  content: '+';
-  color: #888888;
+  color: var(--accent);
 }
 
 .home-role-card__scope {
-  margin-top: 28px !important;
-  padding-top: 20px;
-  border-top: 1px solid var(--home-line);
-  color: var(--home-muted);
-  font-size: 0.84rem;
-  line-height: 1.55;
+  border-top-color: var(--line);
 }
 
-.home-role-card__scope strong {
-  display: block;
-  margin-bottom: 8px;
+.home-role-card:hover {
+  border-color: var(--line-strong);
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent-soft));
 }
 
-.home-role-card .home-text-link {
-  margin-top: auto;
-  padding-top: 30px;
+.home-experience-list {
+  border-top-color: var(--line-strong);
+}
+
+.home-experience-item {
+  border-bottom-color: var(--line);
+}
+
+.home-experience-item__index {
+  color: var(--accent);
+  font-family: var(--font-sans);
+}
+
+.home-experience-item__role h3,
+.home-credential-item h3,
+.home-writing-card h3 {
+  color: var(--text);
+  font-family: var(--font-display);
+  font-weight: var(--w-semibold);
+}
+
+.home-experience-item__role p,
+.home-experience-item__details p,
+.home-experience-item__meta {
+  color: var(--muted);
+}
+
+.home-experience-item__details li {
+  border-color: var(--line-strong);
+  border-radius: 4px;
+  background: var(--surface);
+  color: var(--muted-strong);
+}
+
+.home-credential-list {
+  border-top-color: var(--line-strong);
+}
+
+.home-credential-item {
+  border-bottom-color: var(--line);
+}
+
+.home-credential-item p {
+  color: var(--accent);
+  font-family: var(--font-sans);
+}
+
+.home-credential-item span {
+  color: var(--muted-strong);
+}
+
+.home-writing-grid {
+  counter-reset: writing;
+  gap: var(--s2);
+  border: 0;
+}
+
+.home-writing-card {
+  counter-increment: writing;
+  position: relative;
+  min-height: 300px;
+  padding: 64px 32px 32px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-1);
+  transition:
+    background-color var(--dur-1) var(--ease-out),
+    border-color var(--dur-1) var(--ease-out);
+}
+
+.home-writing-card::before {
+  position: absolute;
+  top: 24px;
+  left: 32px;
+  color: var(--accent);
+  content: counter(writing, decimal-leading-zero);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: var(--w-bold);
+  letter-spacing: 0.12em;
+}
+
+.home-writing-card:hover,
+.home-writing-card:focus-visible {
+  border-color: var(--line-strong);
+  background: color-mix(in srgb, var(--surface) 92%, var(--accent-soft));
+}
+
+.home-writing-card > span,
+.home-writing-card small {
+  color: var(--accent);
+  font-family: var(--font-sans);
+}
+
+.home-contact {
+  border-bottom: 0;
+  background: var(--accent-hover);
+  color: var(--accent-text);
+}
+
+.home-contact h2 {
+  color: var(--accent-text);
+}
+
+.home-kicker--inverse,
+.home-contact__content > p {
+  color: #c8d7d1;
+}
+
+.home-button--white {
+  border-color: var(--accent-text);
+  background: var(--accent-text);
+  color: var(--accent-hover);
+}
+
+.home-button--white:hover,
+.home-button--white:focus-visible {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--accent-hover);
+}
+
+.home-button--outline {
+  border-color: #c8d7d1;
+  background: transparent;
+  color: var(--accent-text);
+}
+
+.home-button--outline:hover,
+.home-button--outline:focus-visible {
+  border-color: var(--accent-text);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-text);
+}
+
+.home-contact__email {
+  color: var(--accent-text);
 }
 
 @media (max-width: 980px) {
@@ -100,12 +357,31 @@
 }
 
 @media (max-width: 640px) {
-  .home-v2 .home-hero h1 {
-    font-size: clamp(3rem, 15vw, 4.9rem);
-    line-height: 0.95;
+  .home-hero {
+    background:
+      linear-gradient(90deg, var(--accent) 0 4px, transparent 4px),
+      linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
   }
 
-  .home-role-card {
-    padding: 28px 24px;
+  .home-v2 .home-hero h1 {
+    max-width: 100%;
+    font-size: clamp(2.9rem, 14vw, 4.8rem);
+  }
+
+  .home-role-card,
+  .home-writing-card {
+    padding-right: 24px;
+    padding-left: 24px;
+  }
+
+  .home-writing-card::before {
+    left: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-button,
+  .home-writing-card {
+    transition: none;
   }
 }
