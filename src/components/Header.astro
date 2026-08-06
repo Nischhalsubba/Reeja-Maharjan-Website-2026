@@ -1,4 +1,6 @@
 ---
+import { professionalFacts } from '../content/professional-facts';
+
 type Props = { name: string };
 const { name } = Astro.props;
 const path = Astro.url.pathname;
@@ -13,13 +15,13 @@ const links = [
 ];
 ---
 
-<header class="site-header" aria-label="Primary navigation">
+<header class="site-header" aria-label="Primary navigation" data-site-header>
   <div class="container site-header__inner">
     <a class="brand" href="/" aria-label="Reeja Maharjan homepage">
-      <span class="brand__mark">RM</span>
+      <span class="brand__mark" aria-hidden="true">RM</span>
       <span class="brand__text">
         <strong>{name}</strong>
-        <small>Registered Nurse · Research Assistant</small>
+        <small>{professionalFacts.nepalLicenseShort} · {professionalFacts.currentEmployerShort} Research Assistant</small>
       </span>
     </a>
 
@@ -29,7 +31,11 @@ const links = [
       aria-expanded="false"
       aria-controls="mobile-nav"
       aria-haspopup="dialog"
-    >Menu</button>
+      aria-label="Open navigation menu"
+    >
+      <span class="menu-toggle__label">Menu</span>
+      <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
+    </button>
 
     <nav class="desktop-nav" aria-label="Main navigation">
       {links.map((link) => (
@@ -48,13 +54,20 @@ const links = [
     aria-hidden="true"
   >
     <nav class="mobile-nav__panel" aria-label="Mobile navigation">
-      <span id="mobile-nav-title" class="sr-only">Mobile navigation</span>
-      <button class="mobile-nav__close" type="button" data-mobile-nav-close>Close menu</button>
+      <div class="mobile-nav__head">
+        <div>
+          <span class="mobile-nav__eyebrow">Navigation</span>
+          <strong id="mobile-nav-title">Professional portfolio</strong>
+        </div>
+        <button class="mobile-nav__close" type="button" data-mobile-nav-close aria-label="Close navigation menu">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
       <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
       {links.map((link) => (
         <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>
       ))}
-      <a href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">Professional opportunities</a>
+      <a class="mobile-nav__cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">Professional opportunities</a>
     </nav>
   </div>
 </header>
