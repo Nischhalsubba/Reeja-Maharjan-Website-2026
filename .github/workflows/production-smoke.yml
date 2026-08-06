@@ -25,8 +25,8 @@ permissions:
   statuses: write
 
 concurrency:
-  group: production-verification-${{ github.event.workflow_run.head_sha || github.sha }}
-  cancel-in-progress: false
+  group: production-verification-main
+  cancel-in-progress: true
 
 jobs:
   smoke:
@@ -34,7 +34,7 @@ jobs:
       github.event_name != 'workflow_run' ||
       (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
     steps:
       - name: Resolve deployed origin and expected commit
         id: target
@@ -80,25 +80,27 @@ jobs:
           node-version: 22
           cache: npm
 
-      - name: Install dependencies
+      - name: Install application dependencies
         run: npm ci --no-audit --no-fund
-
-      - name: Install browser test runner
-        run: |
-          npm install --no-save --no-package-lock @playwright/test@1.62.1
-          npx playwright install --with-deps chromium
 
       - name: Verify deployed domain and commit
         id: smoke_check
         env:
           SITE_ORIGIN: ${{ steps.target.outputs.origin }}
           EXPECTED_COMMIT: ${{ steps.target.outputs.sha }}
-          SMOKE_ATTEMPTS: '20'
+          SMOKE_ATTEMPTS: '40'
           SMOKE_DELAY_MS: '30000'
           PRODUCTION_REPORT: production-smoke-report.json
         run: node scripts/smoke-production.mjs
 
+      - name: Install browser test runner
+        if: steps.smoke_check.outcome == 'success'
+        run: |
+          npm install --no-save --no-package-lock @playwright/test@1.62.1
+          npx playwright install --with-deps chromium
+
       - name: Run live browser quality suite
+        if: steps.smoke_check.outcome == 'success'
         id: browser_check
         env:
           BROWSER_TEST_ORIGIN: ${{ steps.target.outputs.origin }}
@@ -114,7 +116,7 @@ jobs:
             echo "- Origin: \`${{ steps.target.outputs.origin }}\`"
             echo "- Expected commit: \`${{ steps.target.outputs.sha || 'not specified' }}\`"
             echo "- Smoke result: \`${{ steps.smoke_check.outcome }}\`"
-            echo "- Browser result: \`${{ steps.browser_check.outcome }}\`"
+            echo "- Browser result: \`${{ steps.browser_check.outcome || 'not run' }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
 
       - name: Upload production evidence
