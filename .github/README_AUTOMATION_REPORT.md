@@ -6,28 +6,29 @@ Generator: `aed303eed8a536f2dda075c8be583693325aac37`
 
 | Branch | Result | Detail |
 |---|---|---|
-| `agent/cloudflare-pages-qa-fixes` | updated | Branch-specific README committed |
-| `agent/cloudflare-production-completion` | updated | Branch-specific README committed |
-| `agent/complete-all-in-progress-tasks` | updated | Branch-specific README committed |
-| `agent/deployment-recovery` | updated | Branch-specific README committed |
-| `agent/minimal-nurse-redesign` | updated | Branch-specific README committed |
-| `agent/seo-traffic-growth` | updated | Branch-specific README committed |
-| `agent/unified-site-system` | updated | Branch-specific README committed |
-| `backup/pre-public-documents-removal-2026-07-12` | updated | Branch-specific README committed |
-| `codex/nurse-theme-redesign` | updated | Branch-specific README committed |
-| `final/release-acceptance-closure` | updated | Branch-specific README committed |
-| `fix/complete-in-progress-blockers` | updated | Branch-specific README committed |
-| `main` | updated | Branch-specific README committed |
-| `portfolio-priority-roadmap` | updated | Branch-specific README committed |
-| `work/rw11-rw13-browser-verification` | updated | Branch-specific README committed |
-| `work/rw12-rw13-pages-browser-checks` | updated | Branch-specific README committed |
-| `work/rw14-legacy-source-cleanup` | updated | Branch-specific README committed |
-| `work/rw14-regression-guards` | updated | Branch-specific README committed |
-| `work/rw14-style-ownership` | updated | Branch-specific README committed |
-| `work/rw14-visual-regression` | updated | Branch-specific README committed |
-| `work/rw3-cloudflare-cutover-runbook` | updated | Branch-specific README committed |
-| `work/rw3-rw4-production-verification` | updated | Branch-specific README committed |
-| `work/rw5-rw6-recruiter-homepage` | updated | Branch-specific README committed |
-| `work/rw7-complete-2026-07-13` | updated | Branch-specific README committed |
-| `work/rw8-rw10-editorial-seo` | updated | Branch-specific README committed |
-| `work/safe-remaining-2026-07-12` | updated | Branch-specific README committed |
+| `agent/cloudflare-pages-qa-fixes` | unchanged | README already matched the standard |
+| `agent/cloudflare-production-completion` | unchanged | README already matched the standard |
+| `agent/complete-all-in-progress-tasks` | unchanged | README already matched the standard |
+| `agent/deployment-recovery` | unchanged | README already matched the standard |
+| `agent/master-redesign-2026-08-06` | updated | Branch-specific README committed |
+| `agent/minimal-nurse-redesign` | unchanged | README already matched the standard |
+| `agent/seo-traffic-growth` | unchanged | README already matched the standard |
+| `agent/unified-site-system` | unchanged | README already matched the standard |
+| `backup/pre-public-documents-removal-2026-07-12` | unchanged | README already matched the standard |
+| `codex/nurse-theme-redesign` | unchanged | README already matched the standard |
+| `final/release-acceptance-closure` | unchanged | README already matched the standard |
+| `fix/complete-in-progress-blockers` | unchanged | README already matched the standard |
+| `main` | unchanged | README already matched the standard |
+| `portfolio-priority-roadmap` | unchanged | README already matched the standard |
+| `work/rw11-rw13-browser-verification` | unchanged | README already matched the standard |
+| `work/rw12-rw13-pages-browser-checks` | unchanged | README already matched the standard |
+| `work/rw14-legacy-source-cleanup` | unchanged | README already matched the standard |
+| `work/rw14-regression-guards` | unchanged | README already matched the standard |
+| `work/rw14-style-ownership` | unchanged | README already matched the standard |
+| `work/rw14-visual-regression` | unchanged | README already matched the standard |
+| `work/rw3-cloudflare-cutover-runbook` | unchanged | README already matched the standard |
+| `work/rw3-rw4-production-verification` | unchanged | README already matched the standard |
+| `work/rw5-rw6-recruiter-homepage` | unchanged | README already matched the standard |
+| `work/rw7-complete-2026-07-13` | unchanged | README already matched the standard |
+| `work/rw8-rw10-editorial-seo` | unchanged | README already matched the standard |
+| `work/safe-remaining-2026-07-12` | unchanged | README already matched the standard |
