@@ -1,17 +1,14 @@
 import { gsap } from 'gsap';
 import { qs, qsa } from './dom';
-import { initNavSpy } from './navSpy';
-import { initReveal } from './reveal';
 
 const initHeaderMenu = (): void => {
   const toggle = qs<HTMLButtonElement>('.menu-toggle');
   const nav = qs<HTMLElement>('.mobile-nav');
   if (!toggle || !nav) return;
   const closeButton = qs<HTMLButtonElement>('[data-mobile-nav-close]', nav);
-
   let isOpen = false;
 
-  const closeMenu = () => {
+  const closeMenu = (): void => {
     if (!isOpen) return;
     isOpen = false;
     toggle.setAttribute('aria-expanded', 'false');
@@ -20,7 +17,7 @@ const initHeaderMenu = (): void => {
     document.body.classList.remove('menu-open');
   };
 
-  const openMenu = () => {
+  const openMenu = (): void => {
     if (isOpen) return;
     isOpen = true;
     toggle.setAttribute('aria-expanded', 'true');
@@ -30,60 +27,14 @@ const initHeaderMenu = (): void => {
   };
 
   toggle.addEventListener('click', () => (isOpen ? closeMenu() : openMenu()));
+  closeButton?.addEventListener('click', closeMenu);
   nav.addEventListener('click', (event) => {
     if (event.target === nav) closeMenu();
   });
-  qsa<HTMLAnchorElement>('.mobile-nav__panel a', nav).forEach((link) => {
-    link.addEventListener('click', () => closeMenu());
-  });
-  closeButton?.addEventListener('click', () => closeMenu());
+  qsa<HTMLAnchorElement>('.mobile-nav__panel a', nav).forEach((link) => link.addEventListener('click', closeMenu));
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeMenu();
   });
-};
-
-const initHeroIntro = (): void => {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  if (qs<HTMLElement>('.home-hero')) {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
-    tl.from('.home-hero .home-kicker, .home-hero .home-hero__name', {
-      autoAlpha: 0,
-      y: 10,
-      duration: 0.24,
-      stagger: 0.04
-    })
-      .from('.home-hero h1', { autoAlpha: 0, y: 14, duration: 0.38 }, '-=0.12')
-      .from('.home-hero__intro, .home-proof', { autoAlpha: 0, y: 12, duration: 0.28, stagger: 0.04 }, '-=0.24')
-      .from('.home-actions .home-button', { autoAlpha: 0, y: 8, duration: 0.22, stagger: 0.04 }, '-=0.18')
-      .from('.home-hero__summary', { autoAlpha: 0, y: 12, duration: 0.34 }, '-=0.18');
-    return;
-  }
-
-  if (qs<HTMLElement>('.site-page__hero')) {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
-    tl.from('.site-page__hero .site-eyebrow', { autoAlpha: 0, y: 10, duration: 0.24 })
-      .from('.site-page__hero h1', { autoAlpha: 0, y: 14, duration: 0.38 }, '-=0.12')
-      .from('.site-page__hero .site-page__lede', { autoAlpha: 0, y: 12, duration: 0.28 }, '-=0.22')
-      .from('.site-page__hero .site-actions .site-button', {
-        autoAlpha: 0,
-        y: 8,
-        duration: 0.22,
-        stagger: 0.04
-      }, '-=0.16')
-      .from('.site-page__hero .site-page__summary', { autoAlpha: 0, y: 12, duration: 0.34 }, '-=0.18');
-    return;
-  }
-
-  if (qs<HTMLElement>('.hero')) {
-    const tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
-    tl.from('.hero .badge', { autoAlpha: 0, y: 10, duration: 0.24 })
-      .from('.hero h1', { autoAlpha: 0, y: 14, duration: 0.38 }, '-=0.12')
-      .from('.hero__role, .hero__tagline', { autoAlpha: 0, y: 12, duration: 0.28, stagger: 0.04 }, '-=0.22')
-      .from('.hero__actions .btn', { autoAlpha: 0, y: 8, duration: 0.22, stagger: 0.04 }, '-=0.16')
-      .from('.hero__media', { autoAlpha: 0, y: 12, duration: 0.34 }, '-=0.18');
-  }
 };
 
 const initLightbox = (): void => {
@@ -95,28 +46,27 @@ const initLightbox = (): void => {
   if (!lightbox || !image || !title || !frame) return;
 
   const closeButtons = qsa<HTMLElement>('[data-lightbox-close]', lightbox);
-  const prevBtn = qs<HTMLButtonElement>('[data-lightbox-prev]', lightbox);
-  const nextBtn = qs<HTMLButtonElement>('[data-lightbox-next]', lightbox);
+  const prevButton = qs<HTMLButtonElement>('[data-lightbox-prev]', lightbox);
+  const nextButton = qs<HTMLButtonElement>('[data-lightbox-next]', lightbox);
   const rotateLeft = qs<HTMLButtonElement>('[data-rotate-left]', lightbox);
   const rotateRight = qs<HTMLButtonElement>('[data-rotate-right]', lightbox);
   const rotateReset = qs<HTMLButtonElement>('[data-rotate-reset]', lightbox);
-
   const triggers = qsa<HTMLElement>('[data-lightbox-src]');
-  const items = triggers.map((el) => ({
-    src: el.dataset.lightboxSrc ?? '',
-    alt: el.dataset.lightboxAlt ?? 'Image',
-    title: el.dataset.lightboxTitle ?? 'Image preview',
-    description: el.dataset.lightboxDescription ?? ''
+  const items = triggers.map((element) => ({
+    src: element.dataset.lightboxSrc ?? '',
+    alt: element.dataset.lightboxAlt ?? 'Image',
+    title: element.dataset.lightboxTitle ?? 'Image preview',
+    description: element.dataset.lightboxDescription ?? ''
   }));
-
   if (!items.length) return;
 
   let currentIndex = 0;
   let rotation = 0;
   let closing = false;
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let previousFocus: HTMLElement | null = null;
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const render = () => {
+  const render = (): void => {
     const item = items[currentIndex];
     if (!item) return;
     title.textContent = item.title;
@@ -144,55 +94,48 @@ const initLightbox = (): void => {
     image.style.transform = `rotate(${rotation}deg)`;
   };
 
-  const openLightbox = () => {
+  const finishClose = (): void => {
+    lightbox.hidden = true;
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+    previousFocus?.focus();
+    previousFocus = null;
+    closing = false;
+  };
+
+  const openLightbox = (): void => {
+    previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     lightbox.hidden = false;
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
+    closeButtons.at(0)?.focus();
 
-    if (prefersReduced) return;
+    if (reducedMotion) return;
     gsap.killTweensOf(['.lightbox__backdrop', '.lightbox__dialog']);
-    gsap.fromTo(
-      '.lightbox__backdrop',
-      { autoAlpha: 0 },
-      { autoAlpha: 1, duration: 0.22, ease: 'power2.out', overwrite: 'auto' }
-    );
+    gsap.fromTo('.lightbox__backdrop', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18, ease: 'power2.out' });
     gsap.fromTo(
       '.lightbox__dialog',
-      { autoAlpha: 0, y: 22, scale: 0.985 },
-      { autoAlpha: 1, y: 0, scale: 1, duration: 0.3, ease: 'power2.out', overwrite: 'auto' }
+      { autoAlpha: 0, y: 18, scale: 0.99 },
+      { autoAlpha: 1, y: 0, scale: 1, duration: 0.28, ease: 'power3.out', overwrite: 'auto' }
     );
   };
 
-  const closeLightbox = () => {
-    if (closing) return;
-    if (prefersReduced) {
-      lightbox.hidden = true;
-      lightbox.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('lightbox-open');
+  const closeLightbox = (): void => {
+    if (closing || lightbox.hidden) return;
+    if (reducedMotion) {
+      finishClose();
       return;
     }
-
     closing = true;
     gsap.killTweensOf(['.lightbox__backdrop', '.lightbox__dialog']);
-    gsap.to('.lightbox__backdrop', {
-      autoAlpha: 0,
-      duration: 0.18,
-      ease: 'power2.in',
-      overwrite: 'auto'
-    });
+    gsap.to('.lightbox__backdrop', { autoAlpha: 0, duration: 0.14, ease: 'power2.in', overwrite: 'auto' });
     gsap.to('.lightbox__dialog', {
       autoAlpha: 0,
-      y: 14,
-      scale: 0.99,
-      duration: 0.22,
+      y: 12,
+      duration: 0.18,
       ease: 'power2.in',
       overwrite: 'auto',
-      onComplete: () => {
-        lightbox.hidden = true;
-        lightbox.setAttribute('aria-hidden', 'true');
-        document.body.classList.remove('lightbox-open');
-        closing = false;
-      }
+      onComplete: finishClose
     });
   };
 
@@ -205,14 +148,13 @@ const initLightbox = (): void => {
       openLightbox();
     });
   });
-
-  closeButtons.forEach((btn) => btn.addEventListener('click', () => closeLightbox()));
-  prevBtn?.addEventListener('click', () => {
+  closeButtons.forEach((button) => button.addEventListener('click', closeLightbox));
+  prevButton?.addEventListener('click', () => {
     currentIndex = (currentIndex - 1 + items.length) % items.length;
     rotation = 0;
     render();
   });
-  nextBtn?.addEventListener('click', () => {
+  nextButton?.addEventListener('click', () => {
     currentIndex = (currentIndex + 1) % items.length;
     rotation = 0;
     render();
@@ -229,41 +171,37 @@ const initLightbox = (): void => {
     rotation = 0;
     render();
   });
-
   document.addEventListener('keydown', (event) => {
     if (lightbox.hidden) return;
     if (event.key === 'Escape') closeLightbox();
-    if (event.key === 'ArrowLeft') prevBtn?.click();
-    if (event.key === 'ArrowRight') nextBtn?.click();
+    if (event.key === 'ArrowLeft') prevButton?.click();
+    if (event.key === 'ArrowRight') nextButton?.click();
   });
 };
 
 const initCardLinks = (): void => {
-  const cards = qsa<HTMLElement>('[data-card-link]');
-  cards.forEach((card) => {
+  qsa<HTMLElement>('[data-card-link]').forEach((card) => {
     const href = card.dataset.cardHref;
     const target = card.dataset.cardTarget ?? '_self';
     if (!href) return;
-
     card.setAttribute('role', 'link');
     card.setAttribute('tabindex', '0');
 
-    const canOpenFromTarget = (targetEl: EventTarget | null): boolean => {
-      if (!(targetEl instanceof Element)) return true;
-      return !Boolean(targetEl.closest('a, button, input, textarea, select, label'));
+    const isInteractiveChild = (targetElement: EventTarget | null): boolean =>
+      targetElement instanceof Element && Boolean(targetElement.closest('a, button, input, textarea, select, label'));
+
+    const open = (): void => {
+      if (target === '_blank') window.open(href, '_blank', 'noopener,noreferrer');
+      else window.location.href = href;
     };
 
     card.addEventListener('click', (event) => {
-      if (!canOpenFromTarget(event.target)) return;
-      if (target === '_blank') window.open(href, '_blank', 'noopener,noreferrer');
-      else window.location.href = href;
+      if (!isInteractiveChild(event.target)) open();
     });
-
     card.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') return;
       event.preventDefault();
-      if (target === '_blank') window.open(href, '_blank', 'noopener,noreferrer');
-      else window.location.href = href;
+      open();
     });
   });
 };
@@ -271,27 +209,28 @@ const initCardLinks = (): void => {
 const initScrollProgress = (): void => {
   const bar = qs<HTMLElement>('.scroll-progress__bar');
   if (!bar) return;
+  let frame = 0;
 
-  const update = () => {
-    const max = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+  const update = (): void => {
+    frame = 0;
+    const maximum = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maximum > 0 ? Math.min(1, Math.max(0, window.scrollY / maximum)) : 0;
     bar.style.transform = `scaleX(${progress})`;
-    bar.style.opacity = String(0.45 + progress * 0.55);
   };
 
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
+  const requestUpdate = (): void => {
+    if (!frame) frame = window.requestAnimationFrame(update);
+  };
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
   update();
 };
 
 export const initMotion = (): void => {
   if (document.documentElement.dataset.motionInitialized === 'true') return;
   document.documentElement.dataset.motionInitialized = 'true';
-
   initHeaderMenu();
-  initNavSpy();
-  initHeroIntro();
-  initReveal();
   initCardLinks();
   initScrollProgress();
   initLightbox();
