@@ -7,15 +7,16 @@ const featuredWriting = [
 ];
 ---
 
-<section class="home-section" id="credentials" aria-labelledby="credentials-title">
+<section class="home-section home-section--credentials" id="credentials" aria-labelledby="credentials-title">
   <div class="container">
-    <div class="home-section__topline">
+    <div class="home-section__topline" data-reveal>
       <div><p class="home-kicker">Credentials</p><h2 id="credentials-title">Licenses and clinical training.</h2></div>
       <p class="home-section__summary">Verification documents are shared privately with legitimate employers and recruiters.</p>
     </div>
-    <div class="home-credential-list">
-      {profile.certifications.slice(0, 6).map((credential) => (
-        <article class="home-credential-item">
+    <div class="home-credential-list" data-reveal-group>
+      {profile.certifications.slice(0, 6).map((credential, index) => (
+        <article class="home-credential-item" data-reveal>
+          <span class="home-credential-item__index">{String(index + 1).padStart(2, '0')}</span>
           <div><p>{credential.issuer}</p><h3>{credential.title}</h3></div>
           <div><p>{credential.date}</p><span>{credential.credentialLabel ?? 'Verification available on request'}</span></div>
         </article>
@@ -24,16 +25,17 @@ const featuredWriting = [
   </div>
 </section>
 
-<section class="home-section home-section--soft" id="writing" aria-labelledby="writing-title">
+<section class="home-section home-section--writing" id="writing" aria-labelledby="writing-title">
   <div class="container">
-    <div class="home-section__topline">
+    <div class="home-section__topline" data-reveal>
       <div><p class="home-kicker">Selected writing</p><h2 id="writing-title">Practical nursing resources.</h2></div>
-      <a class="home-text-link" href="/blog/">Browse articles <span aria-hidden="true">-&gt;</span></a>
+      <a class="home-text-link" href="/blog/">Browse articles <span aria-hidden="true">↗</span></a>
     </div>
-    <div class="home-writing-grid">
-      {featuredWriting.map((article) => (
-        <a class="home-writing-card" href={article.href}>
-          <span>{article.category}</span><h3>{article.title}</h3><small>Read guide <span aria-hidden="true">-&gt;</span></small>
+    <div class="home-writing-grid" data-reveal-group>
+      {featuredWriting.map((article, index) => (
+        <a class="home-writing-card" href={article.href} data-reveal>
+          <span class="home-writing-card__index">{String(index + 1).padStart(2, '0')}</span>
+          <span>{article.category}</span><h3>{article.title}</h3><small>Read guide <span aria-hidden="true">↗</span></small>
         </a>
       ))}
     </div>
