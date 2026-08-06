@@ -2,11 +2,12 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
+import '../styles/cv.css';
 ---
 
 <BaseLayout title={`${professionalFacts.name} | Nursing CV`} description={profile.profileSummary}>
-  <div class="site-page">
-    <section class="site-page__hero">
+  <div class="site-page cv-page">
+    <section class="site-page__hero cv-page__hero">
       <div class="container site-page__hero-grid">
         <div>
           <p class="site-eyebrow">Professional CV</p>
@@ -27,44 +28,110 @@ import { professionalFacts } from '../content/professional-facts';
     </section>
 
     <section class="site-section">
-      <div class="container site-page__split">
-        <div><p class="site-eyebrow">Profile</p><h2>Clinical care with research discipline.</h2></div>
-        <p>{profile.profileSummary}</p>
+      <div class="container cv-profile-grid">
+        <div>
+          <p class="site-eyebrow">Profile</p>
+          <h2>Clinical care with research discipline.</h2>
+        </div>
+        <p class="cv-profile-copy">{profile.profileSummary}</p>
+      </div>
+    </section>
+
+    <section class="site-section site-section--soft" id="experience">
+      <div class="container">
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Experience</p><h2>Clinical and research roles.</h2></div>
+        </div>
+        <ol class="cv-experience">
+          {profile.experience.map((item, index) => (
+            <li class="cv-experience__item">
+              <span class="cv-experience__index">{String(index + 1).padStart(2, '0')}</span>
+              <div class="cv-experience__heading">
+                <h3>{item.role}</h3>
+                <p>{item.organization}</p>
+              </div>
+              <ul class="cv-experience__details">
+                {item.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+              <p class="cv-experience__meta"><span>{item.period}</span><span>{item.location}</span></p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="site-section" id="credentials">
+      <div class="container">
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Credentials</p><h2>Licenses and clinical training.</h2></div>
+          <p>Verification documents are available privately to legitimate employers.</p>
+        </div>
+        <ol class="cv-credentials">
+          {profile.certifications.map((item, index) => (
+            <li class="cv-credential">
+              <span class="cv-credential__index">{String(index + 1).padStart(2, '0')}</span>
+              <div>
+                <p class="cv-credential__issuer">{item.issuer}</p>
+                <h3>{item.title}</h3>
+                <p class="cv-credential__note">{item.note}</p>
+              </div>
+              <div class="cv-credential__verification">
+                <p class="cv-credential__date">{item.date}</p>
+                <p>{item.credentialLabel ?? 'Verification available on request'}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
       </div>
     </section>
 
     <section class="site-section site-section--soft">
-      <div class="container">
-        <div class="site-section__head"><div><p class="site-eyebrow">Experience</p><h2>Clinical and research roles.</h2></div></div>
-        <div class="site-list">
-          {profile.experience.map((item) => (
-            <article class="site-list__item">
-              <div><h3>{item.role}</h3><p>{item.organization}</p></div>
-              <div><ul>{item.bullets.map((bullet) => <li>{bullet}</li>)}</ul></div>
-              <p class="site-list__meta">{item.period}<br />{item.location}</p>
-            </article>
-          ))}
-        </div>
+      <div class="container cv-columns">
+        <section class="cv-panel" aria-labelledby="cv-education-title">
+          <p class="site-eyebrow">Education</p>
+          <h2 id="cv-education-title">Academic background.</h2>
+          <div class="cv-education">
+            {profile.education.map((item) => (
+              <article class="cv-education__item">
+                <div><h3>{item.level}</h3><p>{item.institution}</p></div>
+                <div><span>{item.period}</span><p>{item.result}</p></div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section class="cv-panel" aria-labelledby="cv-skills-title">
+          <p class="site-eyebrow">{profile.skillsIntro.eyebrow}</p>
+          <h2 id="cv-skills-title">{profile.skillsIntro.title}</h2>
+          <div class="cv-skill-list">
+            {profile.skills.map((group) => (
+              <article class="cv-skill-group">
+                <h3>{group.title}</h3>
+                <ul>{group.items.map((item) => <li>{item}</li>)}</ul>
+              </article>
+            ))}
+          </div>
+        </section>
       </div>
     </section>
 
     <section class="site-section">
-      <div class="container">
-        <div class="site-section__head"><div><p class="site-eyebrow">Credentials</p><h2>Licenses and training.</h2></div><p>Verification documents are available privately to legitimate employers.</p></div>
-        <div class="site-grid">
-          {profile.certifications.map((item) => (
-            <article class="site-card"><h3>{item.title}</h3><p><strong>{item.issuer}</strong><br />{item.date}</p><p>{item.note}</p></article>
-          ))}
-        </div>
-      </div>
-    </section>
+      <div class="container cv-columns">
+        <section class="cv-panel" aria-labelledby="cv-languages-title">
+          <p class="site-eyebrow">{profile.languagesIntro.eyebrow}</p>
+          <h2 id="cv-languages-title">{profile.languagesIntro.title}</h2>
+          <dl class="cv-language-list">
+            {profile.languages.map((item) => <div><dt>{item.name}</dt><dd>{item.level}</dd></div>)}
+          </dl>
+        </section>
 
-    <section class="site-section site-section--soft">
-      <div class="container site-page__split">
-        <div><p class="site-eyebrow">Education</p><h2>Academic background.</h2></div>
-        <dl class="site-page__summary">
-          {profile.education.map((item) => <div><dt>{item.period}</dt><dd>{item.level}<br />{item.institution}<br />{item.result}</dd></div>)}
-        </dl>
+        <section class="cv-panel" aria-labelledby="cv-details-title">
+          <p class="site-eyebrow">{profile.personalDetailsIntro.eyebrow}</p>
+          <h2 id="cv-details-title">{profile.personalDetailsIntro.title}</h2>
+          <dl class="cv-detail-list">
+            {profile.personalDetails.map((item) => <div><dt>{item.key}</dt><dd>{item.value}</dd></div>)}
+          </dl>
+        </section>
       </div>
     </section>
 
