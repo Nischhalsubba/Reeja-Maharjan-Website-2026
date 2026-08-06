@@ -1,0 +1,374 @@
+{
+  "meta": {
+    "name": "Care Ledger",
+    "description": "A human-authored clinical field-journal identity for Reeja Maharjan's nursing and maternal-health research portfolio. It uses paper, ink, rules, chronology, evidence indexes, and one restrained red thread of care instead of generic portfolio cards and startup effects.",
+    "source_references": [
+      "Reeja Maharjan professional facts and profile content",
+      "Existing portrait and approved portfolio routes",
+      "UI/UX Pro Max editorial-grid and accessibility guidance",
+      "Genjutsu anti-AI-slop and motion guidance",
+      "Motion Design purposeful choreography guidance",
+      "GSAP Web Animation lifecycle and reduced-motion guidance",
+      "Three.js Guide performance, geometry, shader, and cleanup guidance"
+    ],
+    "created_at": "2026-08-06"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "split-complementary",
+      "primary": {
+        "hex": "#1B211C",
+        "role": "Ink for primary text, rules, major fills, and high-contrast navigation states"
+      },
+      "secondary": {
+        "hex": "#667A68",
+        "role": "Sage for care-oriented supporting details, list markers, and calm secondary emphasis"
+      },
+      "accent": {
+        "hex": "#8C2F39",
+        "role": "Oxblood for the red thread of care, section notation, active links, and correspondence emphasis"
+      },
+      "neutral": {
+        "scale": [
+          "#FBF8F2",
+          "#F2EEE5",
+          "#E9E3D7",
+          "#DDD4C5",
+          "#CFC7BA",
+          "#9F978A",
+          "#5C625B",
+          "#3E463F",
+          "#1B211C"
+        ],
+        "usage": "Warm paper surfaces progress to charcoal ink. Neutral contrast, borders, and spacing carry most hierarchy."
+      },
+      "semantic": {
+        "success": "#35654C",
+        "warning": "#825D14",
+        "error": "#9B2C2C",
+        "info": "#2D4C63"
+      },
+      "surface": {
+        "background": "#F2EEE5",
+        "card": "#FBF8F2",
+        "elevated": "#FBF8F2"
+      },
+      "contrast_strategy": "Dark-on-light dominant with near-black ink on warm paper, white-on-oxblood reserved for correspondence, and no low-contrast decorative text"
+    },
+    "typography": {
+      "type_scale": {
+        "display": {
+          "size": "clamp(3.4rem, 6.8vw, 7.2rem)",
+          "weight": "490",
+          "line_height": "0.90",
+          "tracking": "-0.066em"
+        },
+        "heading_1": {
+          "size": "clamp(3.2rem, 6.5vw, 7rem)",
+          "weight": "490",
+          "line_height": "0.91",
+          "tracking": "-0.060em"
+        },
+        "heading_2": {
+          "size": "clamp(2.5rem, 4.6vw, 5.2rem)",
+          "weight": "520",
+          "line_height": "0.98",
+          "tracking": "-0.045em"
+        },
+        "heading_3": {
+          "size": "clamp(1.55rem, 2.8vw, 3.25rem)",
+          "weight": "540",
+          "line_height": "1.04",
+          "tracking": "-0.035em"
+        },
+        "body": {
+          "size": "1rem",
+          "weight": "400",
+          "line_height": "1.70",
+          "tracking": "-0.006em"
+        },
+        "body_small": {
+          "size": "0.82rem",
+          "weight": "400",
+          "line_height": "1.58",
+          "tracking": "0"
+        },
+        "caption": {
+          "size": "0.65rem",
+          "weight": "500",
+          "line_height": "1.50",
+          "tracking": "0.04em"
+        },
+        "overline": {
+          "size": "0.68rem",
+          "weight": "600",
+          "line_height": "1.45",
+          "tracking": "0.12em"
+        }
+      },
+      "font_families": {
+        "heading": "Source Serif 4, Georgia, Cambria, Times New Roman, serif",
+        "body": "Public Sans, Aptos, Segoe UI, system-ui, sans-serif",
+        "mono": "SFMono-Regular, Consolas, Liberation Mono, monospace"
+      },
+      "font_style_notes": "Editorial serif headlines provide authored character; a neutral public-service sans handles body copy; mono marginalia makes dates, folios, verification notes, and section indexes feel documented rather than decorated."
+    },
+    "spacing": {
+      "base_unit": "8px",
+      "scale": ["4px", "8px", "12px", "16px", "24px", "32px", "48px", "64px", "88px", "120px", "148px"],
+      "content_density": "spacious",
+      "section_rhythm": "Large paper-like pauses between chapters, compact evidence rows within each chapter, and consistent rule-led section openings"
+    },
+    "layout": {
+      "grid_system": "Asymmetric twelve-column editorial grid with a narrow folio or marginalia column",
+      "max_content_width": "1320px",
+      "columns": "12 desktop, 6 tablet, 1 to 2 mobile depending on evidence structure",
+      "gutter": "clamp(20px, 4.8vw, 72px)",
+      "breakpoints": ["640px", "900px", "1120px"],
+      "alignment_tendency": "asymmetric"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "0px",
+        "medium": "2px",
+        "large": "6px",
+        "pill": "999px only for true status dots or tags"
+      },
+      "border_usage": "Frequent precise 1px ink and warm-neutral rules; borders establish hierarchy instead of shadows",
+      "divider_style": "Full-width ledger rules, occasional oxblood margin lines, and numbered folio separators"
+    },
+    "elevation": {
+      "shadow_style": "none for normal content; one deep shadow for the modal navigation sheet",
+      "levels": {
+        "low": "none",
+        "medium": "none",
+        "high": "0 28px 70px rgba(27,33,28,0.20)"
+      },
+      "depth_cues": "Paper color changes, border hierarchy, overlapping portrait/thread composition, and modal occlusion"
+    },
+    "iconography": {
+      "style": "Minimal functional line symbols only",
+      "stroke_weight": "1.5px",
+      "size_scale": ["16px", "20px", "24px"],
+      "preferred_set": "Inline SVG or CSS geometry; no emoji and no decorative medical icon set"
+    },
+    "motion": {
+      "easing": "Enter: cubic-bezier(0.2,0,0,1) / GSAP power3.out; Exit: cubic-bezier(0.3,0,1,1) / GSAP power2.in",
+      "duration_scale": {
+        "micro": "120ms",
+        "normal": "320ms",
+        "macro": "560ms"
+      },
+      "entrance_pattern": "Rules establish the frame, title lines rise from clipped bounds, portrait reveals vertically, then evidence entries file into place",
+      "exit_pattern": "Short opacity or translation reversal without bounce",
+      "philosophy": "Quiet precision. Motion explains filing, revealing, indexing, and tracing rather than making every element perform."
+    },
+    "components": {
+      "button_style": "Rectangular ink or paper controls with one-pixel borders and fast color inversion; no pills or lift shadows",
+      "input_style": "Open paper fields with a strong bottom rule, visible labels, and oxblood focus indication",
+      "card_style": "Cards are replaced by bordered evidence rows, case files, registry entries, and reading indexes",
+      "navigation_pattern": "Numbered editorial index on desktop and a full-height paper contents sheet on mobile",
+      "modal_style": "Paper sheet over an ink scrim with exact dialog semantics, focus trapping, inert background, and Escape support",
+      "list_style": "Chronological ledger rows, ruled evidence lists, and mono folio numbers",
+      "component_notes": "Every component must communicate a documented professional fact, reading path, or action. Decorative containers without information architecture are prohibited."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": ["calm", "meticulous", "warm", "credible", "human"],
+      "visual_metaphor": "A nurse-researcher's field journal and evidence ledger",
+      "era_influence": "Contemporary editorial design informed by archival case files, public-health reports, and print journals",
+      "genre": "clinical editorial portfolio",
+      "personality_traits": ["observant", "dependable", "thoughtful", "direct", "careful"],
+      "adjectives": ["tactile", "documentary", "restrained", "specific", "literate", "unfashionably useful"]
+    },
+    "visual_language": {
+      "complexity": "moderate",
+      "ornamentation": "subtle functional accents",
+      "whitespace_usage": "Generous chapter spacing with denser evidence rows",
+      "visual_weight_distribution": "Heavy serif mastheads balanced by light rules, narrow marginalia, and one portrait",
+      "focal_strategy": "Progressive reveal from professional identity to documented evidence to correspondence",
+      "contrast_level": "high",
+      "texture_usage": "Warm paper color, photographic desaturation, ruled structures, and no synthetic noise overlays"
+    },
+    "composition": {
+      "hierarchy_method": "Typographic scale, spatial isolation, ruled chronology, and numbered indexing",
+      "balance_type": "asymmetric",
+      "flow_direction": "Top-to-bottom chapter sequence with left-margin folios and rightward evidence reading",
+      "grouping_strategy": "Rules and chronology rather than floating containers",
+      "negative_space_role": "Creates pauses between professional chapters and gives evidence the visual dignity of a report"
+    },
+    "imagery": {
+      "photo_treatment": "Natural portrait with reduced saturation, mild contrast, warm documentary tone, and a precise crop",
+      "illustration_style": "No stock illustrations; one abstract Three.js thread based on the care continuum",
+      "graphic_elements": "Oxblood margin line, folio numbers, ruled evidence tables, registration marks, and the red thread",
+      "pattern_usage": "None",
+      "image_shape": "Rectangular documented figure with a caption and corner registration marks"
+    },
+    "interaction_feel": {
+      "feedback_style": "Immediate ink inversion, underline emphasis, and visible focus rings",
+      "hover_behavior": "No movement or bounce; text and background invert or accent color strengthens",
+      "transition_personality": "measured and precise",
+      "loading_style": "Content-first static rendering; advanced effects progressively enhance after content is usable",
+      "microinteraction_density": "low"
+    },
+    "brand_voice_in_ui": {
+      "tone": "Clear, evidence-aware, and respectful",
+      "formality": "Professional without institutional stiffness",
+      "cta_style": "Direct invitation using concrete actions such as Read the CV or Discuss an opportunity",
+      "empty_state_approach": "Plain explanation with useful routes and no jokes in clinical contexts",
+      "error_tone": "Calm, specific, and recovery-oriented"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "subtle-accent",
+      "performance_tier": "medium",
+      "fallback_strategy": "Static SVG thread on low-end devices or missing WebGL2; final static composition for reduced motion",
+      "primary_technology": "GSAP plus WebGL/Three.js"
+    },
+    "background_effects": {
+      "type": "none",
+      "description": "No animated gradients, mesh fields, glow clouds, or decorative background video",
+      "technology": "CSS solid surfaces",
+      "params": {
+        "color_palette": ["#F2EEE5", "#FBF8F2"],
+        "speed": "0",
+        "density": "0",
+        "opacity": "1",
+        "blend_mode": "normal"
+      }
+    },
+    "particle_systems": {
+      "enabled": false,
+      "type": "none",
+      "description": "Particles and connected-node networks are explicitly prohibited",
+      "technology": "none",
+      "params": {
+        "count": "0",
+        "shape": "none",
+        "size_range": "none",
+        "movement_pattern": "none",
+        "color_behavior": "none",
+        "interaction": "none",
+        "spawn_area": "none"
+      }
+    },
+    "3d_elements": {
+      "enabled": true,
+      "type": "abstract-geometry",
+      "description": "A single oxblood thread traces a care-and-research path behind the portrait, with four brass milestone markers",
+      "technology": "Three.js",
+      "params": {
+        "renderer": "WebGLRenderer with transparent canvas, WebGL2 requirement, DPR capped at 1.5",
+        "lighting": "Unlit shader and basic materials; no lighting rig",
+        "camera": "PerspectiveCamera, 34 degree field of view, fixed editorial framing",
+        "materials": ["Custom transparent ShaderMaterial for the thread", "MeshBasicMaterial for instanced milestone markers"],
+        "geometry": ["CatmullRomCurve3", "TubeGeometry", "InstancedMesh with SphereGeometry"],
+        "post_processing": [],
+        "interaction_model": "Very small pointer-driven rotation on fine pointers only; no orbit, drag, zoom, or scroll-jacking"
+      }
+    },
+    "shader_effects": {
+      "enabled": true,
+      "type": "custom-GLSL",
+      "description": "The thread is progressively revealed along its UV length, like a line being traced through the record",
+      "technology": "Three.js ShaderMaterial",
+      "params": {
+        "uniforms": ["uColor", "uReveal", "uOpacity"],
+        "vertex_manipulation": "None; geometry remains stable",
+        "fragment_output": "Oxblood line with a soft leading edge, tone mapping, and output color-space conversion",
+        "noise_type": "none",
+        "distortion": "none"
+      }
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": false,
+        "layers": "0",
+        "depth_range": "0",
+        "speed_curve": "none"
+      },
+      "scroll_triggered_animations": {
+        "enabled": true,
+        "trigger_points": "Element top at 86 to 88 percent of the viewport",
+        "animation_type": "Short rise-and-resolve plus grouped filing stagger",
+        "scrub_behavior": "none; one-shot triggers only"
+      },
+      "scroll_morphing": {
+        "enabled": false,
+        "description": "No scroll-driven shape morphing or pinned sections"
+      }
+    },
+    "text_effects": {
+      "type": "split-line-animate",
+      "description": "Only the hero title is split by authored lines and revealed from clipped bounds",
+      "technology": "GSAP",
+      "params": {
+        "split_strategy": "by-line using explicit semantic spans",
+        "animation_per_unit": "Translate from yPercent 112 to 0",
+        "stagger": "70ms",
+        "effect_style": "editorial line reveal"
+      }
+    },
+    "cursor_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "The native cursor is preserved for familiarity and accessibility",
+      "params": {
+        "shape": "native",
+        "size": "native",
+        "blend_mode": "normal",
+        "trail": "none",
+        "interaction_zone": "none"
+      }
+    },
+    "image_effects": {
+      "type": "reveal-clip",
+      "description": "The hero portrait opens once like a documented figure being uncovered; it then remains stable",
+      "technology": "GSAP plus CSS clip-path",
+      "params": {
+        "filter_pipeline": ["saturate(0.82)", "contrast(1.04)", "sepia(0.08)"],
+        "hover_transform": "none",
+        "reveal_animation": "Vertical inset reveal over 660ms",
+        "distortion_type": "none"
+      }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": false,
+      "style": "none",
+      "params": {
+        "blur_radius": "0",
+        "transparency": "0",
+        "border_treatment": "precise solid rules",
+        "shadow_type": "none",
+        "light_source_angle": "none"
+      }
+    },
+    "canvas_drawings": {
+      "enabled": true,
+      "type": "generative-lines",
+      "description": "The canvas renders the Three.js red thread only; it is not a decorative full-screen generative background",
+      "technology": "WebGL canvas",
+      "params": {
+        "draw_method": "Tube mesh sampled from a centripetal Catmull-Rom curve",
+        "animation_loop": "No permanent loop; render on reveal, resize, visibility changes, and fine-pointer interaction",
+        "color_scheme": ["#8C2F39", "#D9B56D"],
+        "responsiveness": "ResizeObserver with camera aspect updates and mobile scale adjustment",
+        "interaction": "Subtle pointer response on fine pointers"
+      }
+    },
+    "svg_animations": {
+      "enabled": false,
+      "type": "none",
+      "description": "The SVG is a static accessibility and performance fallback for the red thread",
+      "params": {
+        "animation_method": "none",
+        "path_morphing": "none",
+        "stroke_animation": "none",
+        "filter_effects": "none"
+      }
+    },
+    "composite_notes": "Effects are deliberately subordinate to content. GSAP establishes hierarchy and files evidence into view; Three.js contributes one memorable signature behind the portrait. There is no continuous parallax, particle field, glow system, custom cursor, glass layer, or decorative motion. Reduced-motion users receive the complete final state immediately, and low-end or non-WebGL2 devices receive a static SVG thread."
+  }
+}
