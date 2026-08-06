@@ -1,4 +1,4 @@
-import gsap from 'gsap';
+import { gsap } from 'gsap';
 import { qs, qsa } from './dom';
 import { initNavSpy } from './navSpy';
 import { initReveal } from './reveal';
@@ -46,27 +46,44 @@ const initHeroIntro = (): void => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  const tl = gsap.timeline({ defaults: { ease: 'power2.out' } });
-  tl.from('.hero .badge', { opacity: 0, y: 10, duration: 0.3 })
-    .from('.hero h1', { opacity: 0, y: 14, duration: 0.4 }, '-=0.1')
-    .from('.hero__role, .hero__tagline', { opacity: 0, y: 12, duration: 0.35, stagger: 0.08 }, '-=0.15')
-    .from('.hero__actions .btn', { opacity: 0, y: 8, duration: 0.25, stagger: 0.08 }, '-=0.2')
-    .from('.hero__media', { opacity: 0, y: 14, duration: 0.45 }, '-=0.25');
-};
+  if (qs<HTMLElement>('.home-hero')) {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
+    tl.from('.home-hero .home-kicker, .home-hero .home-hero__name', {
+      autoAlpha: 0,
+      y: 10,
+      duration: 0.24,
+      stagger: 0.04
+    })
+      .from('.home-hero h1', { autoAlpha: 0, y: 14, duration: 0.38 }, '-=0.12')
+      .from('.home-hero__intro, .home-proof', { autoAlpha: 0, y: 12, duration: 0.28, stagger: 0.04 }, '-=0.24')
+      .from('.home-actions .home-button', { autoAlpha: 0, y: 8, duration: 0.22, stagger: 0.04 }, '-=0.18')
+      .from('.home-hero__summary', { autoAlpha: 0, y: 12, duration: 0.34 }, '-=0.18');
+    return;
+  }
 
-const initGlobalGsapInteractions = (): void => {
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
+  if (qs<HTMLElement>('.site-page__hero')) {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
+    tl.from('.site-page__hero .site-eyebrow', { autoAlpha: 0, y: 10, duration: 0.24 })
+      .from('.site-page__hero h1', { autoAlpha: 0, y: 14, duration: 0.38 }, '-=0.12')
+      .from('.site-page__hero .site-page__lede', { autoAlpha: 0, y: 12, duration: 0.28 }, '-=0.22')
+      .from('.site-page__hero .site-actions .site-button', {
+        autoAlpha: 0,
+        y: 8,
+        duration: 0.22,
+        stagger: 0.04
+      }, '-=0.16')
+      .from('.site-page__hero .site-page__summary', { autoAlpha: 0, y: 12, duration: 0.34 }, '-=0.18');
+    return;
+  }
 
-  const hoverTargets = qsa<HTMLElement>('.btn, .card, .section-shell');
-  hoverTargets.forEach((el) => {
-    el.addEventListener('mouseenter', () => {
-      gsap.to(el, { y: -1, duration: 0.18, ease: 'power2.out' });
-    });
-    el.addEventListener('mouseleave', () => {
-      gsap.to(el, { y: 0, duration: 0.18, ease: 'power2.out' });
-    });
-  });
+  if (qs<HTMLElement>('.hero')) {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
+    tl.from('.hero .badge', { autoAlpha: 0, y: 10, duration: 0.24 })
+      .from('.hero h1', { autoAlpha: 0, y: 14, duration: 0.38 }, '-=0.12')
+      .from('.hero__role, .hero__tagline', { autoAlpha: 0, y: 12, duration: 0.28, stagger: 0.04 }, '-=0.22')
+      .from('.hero__actions .btn', { autoAlpha: 0, y: 8, duration: 0.22, stagger: 0.04 }, '-=0.16')
+      .from('.hero__media', { autoAlpha: 0, y: 12, duration: 0.34 }, '-=0.18');
+  }
 };
 
 const initLightbox = (): void => {
@@ -134,11 +151,15 @@ const initLightbox = (): void => {
 
     if (prefersReduced) return;
     gsap.killTweensOf(['.lightbox__backdrop', '.lightbox__dialog']);
-    gsap.fromTo('.lightbox__backdrop', { opacity: 0 }, { opacity: 1, duration: 0.22, ease: 'power2.out' });
+    gsap.fromTo(
+      '.lightbox__backdrop',
+      { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.22, ease: 'power2.out', overwrite: 'auto' }
+    );
     gsap.fromTo(
       '.lightbox__dialog',
-      { opacity: 0, y: 22, scale: 0.985 },
-      { opacity: 1, y: 0, scale: 1, duration: 0.3, ease: 'power2.out' }
+      { autoAlpha: 0, y: 22, scale: 0.985 },
+      { autoAlpha: 1, y: 0, scale: 1, duration: 0.3, ease: 'power2.out', overwrite: 'auto' }
     );
   };
 
@@ -153,13 +174,19 @@ const initLightbox = (): void => {
 
     closing = true;
     gsap.killTweensOf(['.lightbox__backdrop', '.lightbox__dialog']);
-    gsap.to('.lightbox__backdrop', { opacity: 0, duration: 0.18, ease: 'power2.in' });
+    gsap.to('.lightbox__backdrop', {
+      autoAlpha: 0,
+      duration: 0.18,
+      ease: 'power2.in',
+      overwrite: 'auto'
+    });
     gsap.to('.lightbox__dialog', {
-      opacity: 0,
+      autoAlpha: 0,
       y: 14,
       scale: 0.99,
       duration: 0.22,
       ease: 'power2.in',
+      overwrite: 'auto',
       onComplete: () => {
         lightbox.hidden = true;
         lightbox.setAttribute('aria-hidden', 'true');
@@ -258,11 +285,13 @@ const initScrollProgress = (): void => {
 };
 
 export const initMotion = (): void => {
+  if (document.documentElement.dataset.motionInitialized === 'true') return;
+  document.documentElement.dataset.motionInitialized = 'true';
+
   initHeaderMenu();
   initNavSpy();
   initHeroIntro();
   initReveal();
-  initGlobalGsapInteractions();
   initCardLinks();
   initScrollProgress();
   initLightbox();
