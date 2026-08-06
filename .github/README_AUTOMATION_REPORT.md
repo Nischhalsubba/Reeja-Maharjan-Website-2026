@@ -18,7 +18,7 @@ Generator: `aed303eed8a536f2dda075c8be583693325aac37`
 | `codex/nurse-theme-redesign` | unchanged | README already matched the standard |
 | `final/release-acceptance-closure` | unchanged | README already matched the standard |
 | `fix/complete-in-progress-blockers` | unchanged | README already matched the standard |
-| `main` | updated | Branch-specific README committed |
+| `main` | unchanged | README already matched the standard |
 | `portfolio-priority-roadmap` | unchanged | README already matched the standard |
 | `work/rw11-rw13-browser-verification` | unchanged | README already matched the standard |
 | `work/rw12-rw13-pages-browser-checks` | unchanged | README already matched the standard |
