@@ -4,34 +4,41 @@ import { professionalFacts } from '../content/professional-facts';
 import HeroSpatialScene from './HeroSpatialScene.astro';
 ---
 
-<section class="portfolio-hero" id="home" aria-labelledby="home-title">
-  <div class="portfolio-hero__ambient" data-hero-ambient aria-hidden="true"></div>
+<section class="ledger-hero" id="home" aria-labelledby="home-title">
+  <div class="ledger-hero__scene" aria-hidden="true"><HeroSpatialScene /></div>
 
-  <div class="container portfolio-hero__grid">
-    <div class="portfolio-hero__content">
-      <p class="portfolio-hero__eyebrow" data-hero-stage>Registered Nurse · Maternal Health Research</p>
-      <p class="portfolio-hero__name" data-hero-stage>{professionalFacts.name}, {professionalFacts.credential}</p>
-      <h1 id="home-title" data-hero-stage>Clinical care with research discipline.</h1>
-      <p class="portfolio-hero__intro" data-hero-stage>
+  <div class="container ledger-hero__grid">
+    <aside class="ledger-hero__margin" aria-label="Profile index" data-ledger-stage>
+      <span>Profile / 01</span>
+      <span>Biratnagar, Nepal</span>
+      <span>Verified {professionalFacts.lastVerified}</span>
+    </aside>
+
+    <div class="ledger-hero__content">
+      <p class="ledger-kicker" data-ledger-stage>Registered Nurse · Maternal-health research</p>
+      <p class="ledger-hero__name" data-ledger-stage>{professionalFacts.name}, {professionalFacts.credential}</p>
+      <h1 id="home-title" data-ledger-title>
+        <span>Clinical care,</span>
+        <span>recorded with</span>
+        <span>research discipline.</span>
+      </h1>
+      <p class="ledger-hero__intro" data-ledger-stage>
         {professionalFacts.nepalLicense} and {professionalFacts.texasLicense}, with hospital experience and current maternal-health research work involving participant education, BP/BG telemonitoring, documentation, and care coordination.
       </p>
 
-      <div class="portfolio-hero__actions" aria-label="Primary actions" data-hero-stage>
-        <a class="portfolio-button portfolio-button--primary" href="/hire-reeja/" data-track="home-hire">Discuss an opportunity</a>
-        <a class="portfolio-button portfolio-button--ghost" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
+      <div class="ledger-hero__actions" aria-label="Primary actions" data-ledger-stage>
+        <a class="ledger-button ledger-button--ink" href="/hire-reeja/" data-track="home-hire">Discuss an opportunity</a>
+        <a class="ledger-link" href={professionalFacts.publicCvPath} data-track="home-cv">Read the CV</a>
       </div>
 
-      <ul class="portfolio-hero__proof" aria-label="Professional credibility" data-hero-stage>
-        <li>{professionalFacts.nepalLicenseShort}</li>
-        <li>{professionalFacts.texasLicenseShort}</li>
-        <li>{professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort} Research Assistant</li>
-        <li>Hospital experience in Nepal</li>
-      </ul>
+      <p class="ledger-hero__status" data-ledger-stage>
+        <span aria-hidden="true"></span>
+        {professionalFacts.availability}
+      </p>
     </div>
 
-    <div class="portfolio-hero__visual" data-hero-visual>
-      <HeroSpatialScene />
-      <figure class="portfolio-hero__portrait">
+    <figure class="ledger-portrait" data-ledger-portrait>
+      <div class="ledger-portrait__frame">
         <img
           src={profile.hero.portrait.src}
           alt={profile.hero.portrait.alt}
@@ -41,18 +48,18 @@ import HeroSpatialScene from './HeroSpatialScene.astro';
           fetchpriority="high"
           decoding="async"
         />
-      </figure>
+      </div>
+      <figcaption>
+        <span>Fig. 01</span>
+        <span>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</span>
+      </figcaption>
+    </figure>
+  </div>
 
-      <dl class="portfolio-hero__summary" aria-label="Professional summary">
-        <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</dd></div>
-        <div><dt>Project</dt><dd>{professionalFacts.currentProjectShort}</dd></div>
-        <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
-      </dl>
-
-      <p class="portfolio-hero__availability">
-        <span aria-hidden="true"></span>
-        {professionalFacts.availability}
-      </p>
-    </div>
+  <div class="container ledger-proof" aria-label="Professional credibility" data-ledger-proof>
+    <div><span>Registration</span><strong>{professionalFacts.nepalLicenseShort}</strong></div>
+    <div><span>International license</span><strong>{professionalFacts.texasLicenseShort}</strong></div>
+    <div><span>Current work</span><strong>{professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}</strong></div>
+    <div><span>Clinical background</span><strong>Hospital nursing in Nepal</strong></div>
   </div>
 </section>
