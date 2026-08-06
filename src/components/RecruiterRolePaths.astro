@@ -48,30 +48,31 @@ const pathways = [
 ];
 ---
 
-<section class="home-section home-section--role-fit" id="role-fit" aria-labelledby="role-fit-title">
+<section class="ledger-section ledger-section--cases" id="role-fit" aria-labelledby="role-fit-title">
   <div class="container">
-    <div class="home-section__topline" data-reveal>
-      <div>
-        <p class="home-kicker">Role fit</p>
-        <h2 id="role-fit-title">Three ways Reeja can support your team.</h2>
-      </div>
-      <p class="home-section__summary">Each pathway maps documented experience to a specific hiring context without overstating scope or work authorisation.</p>
-    </div>
+    <header class="ledger-section__header" data-ledger-reveal>
+      <p class="ledger-kicker">Role fit / case files</p>
+      <h2 id="role-fit-title">Three working contexts, documented plainly.</h2>
+      <p>Each file maps recorded experience to a hiring context without overstating scope, authority, or work authorisation.</p>
+    </header>
 
-    <div class="home-role-grid" data-reveal-group>
+    <div class="case-file-list" data-ledger-group>
       {pathways.map((pathway) => (
-        <article class="home-role-card" data-reveal>
-          <div class="home-role-card__top">
-            <span class="home-role-card__number">{pathway.number}</span>
-            <p class="home-role-card__label">{pathway.label}</p>
+        <article class="case-file" data-ledger-reveal>
+          <div class="case-file__index">
+            <span>{pathway.number}</span>
+            <p>{pathway.label}</p>
           </div>
-          <h3>{pathway.title}</h3>
-          <p class="home-role-card__summary">{pathway.summary}</p>
-          <ul class="home-role-card__evidence">
-            {pathway.evidence.map((item) => <li>{item}</li>)}
-          </ul>
-          <p class="home-role-card__scope"><strong>Scope</strong>{pathway.scope}</p>
-          <a class="home-text-link" href={pathway.href}>{pathway.cta} <span aria-hidden="true">↗</span></a>
+          <div class="case-file__statement">
+            <h3>{pathway.title}</h3>
+            <p>{pathway.summary}</p>
+            <a class="ledger-link" href={pathway.href}>{pathway.cta}</a>
+          </div>
+          <div class="case-file__evidence">
+            <p class="case-file__label">Evidence</p>
+            <ul>{pathway.evidence.map((item) => <li>{item}</li>)}</ul>
+          </div>
+          <p class="case-file__scope"><strong>Scope note</strong>{pathway.scope}</p>
         </article>
       ))}
     </div>
