@@ -129,6 +129,7 @@ export const initHeroSpatialScene = (): (() => void) => {
 
   let disposed = false;
   let isVisible = true;
+  let revealed = reducedMotion;
   const render = (): void => {
     if (!disposed) renderer.render(scene, camera);
   };
@@ -155,6 +156,8 @@ export const initHeroSpatialScene = (): (() => void) => {
     .to(markerMaterial, { opacity: 0.92, duration: 0.3, ease: 'power2.out' }, 0.64);
 
   const reveal = (): void => {
+    if (revealed || disposed) return;
+    revealed = true;
     if (reducedMotion) {
       threadUniforms.uReveal.value = 1;
       markerMaterial.opacity = 0.92;
@@ -194,7 +197,7 @@ export const initHeroSpatialScene = (): (() => void) => {
 
   const handleVisibility = (): void => {
     if (document.hidden) revealTimeline.pause();
-    else if (isVisible && revealTimeline.progress() < 1) revealTimeline.resume();
+    else if (isVisible && revealed && revealTimeline.progress() < 1) revealTimeline.resume();
   };
 
   const resizeObserver = new ResizeObserver(resize);
@@ -204,7 +207,7 @@ export const initHeroSpatialScene = (): (() => void) => {
     ([entry]) => {
       isVisible = Boolean(entry?.isIntersecting);
       if (!isVisible) revealTimeline.pause();
-      else if (!document.hidden && revealTimeline.progress() < 1) revealTimeline.resume();
+      else if (!document.hidden && revealed && revealTimeline.progress() < 1) revealTimeline.resume();
     },
     { threshold: 0.04 }
   );
@@ -217,11 +220,12 @@ export const initHeroSpatialScene = (): (() => void) => {
 
   resize();
   root.dataset.sceneReady = 'true';
-  window.setTimeout(reveal, 420);
+  const revealFallbackTimer = window.setTimeout(reveal, 420);
 
   return () => {
     if (disposed) return;
     disposed = true;
+    window.clearTimeout(revealFallbackTimer);
     revealTimeline.kill();
     gsap.killTweensOf(group.rotation);
     resizeObserver.disconnect();
