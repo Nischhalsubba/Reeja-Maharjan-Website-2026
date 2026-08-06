@@ -36,10 +36,12 @@
     "astro": "^5.17.1",
     "gsap": "^3.14.2",
     "split-type": "^0.3.4",
-    "tailwindcss": "^4.2.0"
+    "tailwindcss": "^4.2.0",
+    "three": "^0.183.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.6",
+    "@types/three": "^0.183.0",
     "@typescript-eslint/eslint-plugin": "^8.56.0",
     "@typescript-eslint/parser": "^8.56.0",
     "eslint": "^9.39.2",
