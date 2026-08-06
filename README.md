@@ -100,9 +100,9 @@ flowchart TD
     APP["Reeja-Maharjan-Website-2026"]
     APP --> R0["src/pages"]
     APP --> R1["public"]
-    R0 --> F0["src/pages/404.astro"]
+    R0 --> F0["src/pages/cv.astro"]
     R0 --> F1["src/pages/index.astro"]
-    R0 --> F2["src/pages/cv.astro"]
+    R0 --> F2["src/pages/404.astro"]
     R0 --> F3["src/pages/blog/index.astro"]
     R0 --> F4["src/pages/blog/(slug).astro"]
 ```
