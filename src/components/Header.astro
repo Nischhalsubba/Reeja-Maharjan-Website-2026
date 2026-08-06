@@ -55,14 +55,15 @@ const links = [
     id="mobile-nav"
     role="dialog"
     aria-modal="true"
-    aria-label="Mobile navigation"
+    aria-labelledby="mobile-nav-title"
     aria-hidden="true"
   >
     <nav class="mobile-nav__panel" aria-label="Mobile navigation links">
       <div class="mobile-nav__head">
         <div>
           <span class="mobile-nav__eyebrow">Contents</span>
-          <strong>Professional field notes</strong>
+          <strong id="mobile-nav-title">Mobile navigation</strong>
+          <small>Professional field notes</small>
         </div>
         <button class="mobile-nav__close" type="button" data-mobile-nav-close aria-label="Close menu">
           <span aria-hidden="true"></span>
