@@ -1,0 +1,16 @@
+<div class="hero-spatial-scene" data-hero-scene aria-hidden="true">
+  <canvas class="hero-spatial-scene__canvas" data-hero-canvas></canvas>
+  <div class="hero-spatial-scene__fallback">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<script>
+  import { initHeroSpatialScene } from '../lib/heroSpatialScene';
+
+  const disposeScene = initHeroSpatialScene();
+  window.addEventListener('pagehide', disposeScene, { once: true });
+  document.addEventListener('astro:before-swap', disposeScene, { once: true });
+</script>
