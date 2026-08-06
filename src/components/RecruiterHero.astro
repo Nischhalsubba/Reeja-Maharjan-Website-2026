@@ -1,32 +1,58 @@
 ---
+import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
+import HeroSpatialScene from './HeroSpatialScene.astro';
 ---
 
-<section class="home-hero" id="home" aria-labelledby="home-title">
-  <div class="container home-hero__grid">
-    <div class="home-hero__content">
-      <p class="home-kicker">Registered Nurse · Maternal Health Research</p>
-      <p class="home-hero__name">{professionalFacts.name}, {professionalFacts.credential}</p>
-      <h1 id="home-title">Clinical care with research discipline.</h1>
-      <p class="home-hero__intro">
+<section class="portfolio-hero" id="home" aria-labelledby="home-title">
+  <div class="portfolio-hero__ambient" data-hero-ambient aria-hidden="true"></div>
+
+  <div class="container portfolio-hero__grid">
+    <div class="portfolio-hero__content">
+      <p class="portfolio-hero__eyebrow" data-hero-stage>Registered Nurse · Maternal Health Research</p>
+      <p class="portfolio-hero__name" data-hero-stage>{professionalFacts.name}, {professionalFacts.credential}</p>
+      <h1 id="home-title" data-hero-stage>Clinical care with research discipline.</h1>
+      <p class="portfolio-hero__intro" data-hero-stage>
         {professionalFacts.nepalLicense} and {professionalFacts.texasLicense}, with hospital experience and current maternal-health research work involving participant education, BP/BG telemonitoring, documentation, and care coordination.
       </p>
-      <div class="home-actions" aria-label="Primary actions">
-        <a class="home-button home-button--dark" href="/hire-reeja/" data-track="home-hire">Discuss an opportunity</a>
-        <a class="home-button home-button--light" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
+
+      <div class="portfolio-hero__actions" aria-label="Primary actions" data-hero-stage>
+        <a class="portfolio-button portfolio-button--primary" href="/hire-reeja/" data-track="home-hire">Discuss an opportunity</a>
+        <a class="portfolio-button portfolio-button--ghost" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
       </div>
-      <ul class="home-proof" aria-label="Professional credibility">
+
+      <ul class="portfolio-hero__proof" aria-label="Professional credibility" data-hero-stage>
         <li>{professionalFacts.nepalLicenseShort}</li>
         <li>{professionalFacts.texasLicenseShort}</li>
         <li>{professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort} Research Assistant</li>
         <li>Hospital experience in Nepal</li>
       </ul>
     </div>
-    <dl class="home-hero__summary" aria-label="Professional summary">
-      <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</dd></div>
-      <div><dt>Project</dt><dd>{professionalFacts.currentProjectShort}</dd></div>
-      <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
-      <div><dt>Status</dt><dd>{professionalFacts.availability}</dd></div>
-    </dl>
+
+    <div class="portfolio-hero__visual" data-hero-visual>
+      <HeroSpatialScene />
+      <figure class="portfolio-hero__portrait">
+        <img
+          src={profile.hero.portrait.src}
+          alt={profile.hero.portrait.alt}
+          width="760"
+          height="920"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
+
+      <dl class="portfolio-hero__summary" aria-label="Professional summary">
+        <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</dd></div>
+        <div><dt>Project</dt><dd>{professionalFacts.currentProjectShort}</dd></div>
+        <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
+      </dl>
+
+      <p class="portfolio-hero__availability">
+        <span aria-hidden="true"></span>
+        {professionalFacts.availability}
+      </p>
+    </div>
   </div>
 </section>
