@@ -12,7 +12,7 @@ const canUseWebGL = (): boolean => {
   }
 };
 
-const buildNodeGeometry = (count = 84) => {
+const buildNodeGeometry = (count = 84): THREE.BufferGeometry => {
   const positions = new Float32Array(count * 3);
   const goldenAngle = Math.PI * (3 - Math.sqrt(5));
 
@@ -45,7 +45,7 @@ export const initHeroSpatialScene = (): (() => void) => {
     return () => undefined;
   }
 
-  let renderer;
+  let renderer: THREE.WebGLRenderer;
   try {
     renderer = new THREE.WebGLRenderer({
       canvas,
