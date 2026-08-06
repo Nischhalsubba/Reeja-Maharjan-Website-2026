@@ -6,6 +6,7 @@ import '../styles/components.css';
 import '../styles/pages.css';
 import '../styles/site-pages.css';
 import '../styles/shell.css';
+import '../styles/zero-redesign.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -119,7 +120,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body>
+  <body class="zero-redesign">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header name={professionalFacts.name} />
