@@ -1,63 +1,71 @@
 :root {
-  /* Typography: monochrome editorial system */
-  --font-sans: Arial, Helvetica, system-ui, sans-serif;
+  /* Typography: clinical editorial system using local, privacy-safe fallbacks. */
+  --font-display: Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: Aptos, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   --w-regular: 400;
   --w-medium: 500;
   --w-semibold: 600;
   --w-bold: 700;
 
-  --h1-size: clamp(2.5rem, 6vw, 4.85rem);
-  --h1-lh: 0.98;
-  --h1-ls: -0.07em;
-  --h1-w: 800;
+  --h1-size: clamp(3rem, 7vw, 6.75rem);
+  --h1-lh: 0.95;
+  --h1-ls: -0.045em;
+  --h1-w: 600;
 
-  --h2-size: clamp(1.75rem, 3.2vw, 3rem);
-  --h2-lh: 1.04;
-  --h2-ls: -0.055em;
-  --h2-w: 750;
+  --h2-size: clamp(2.15rem, 4.5vw, 4.5rem);
+  --h2-lh: 1;
+  --h2-ls: -0.035em;
+  --h2-w: 600;
 
   --body-size: 1rem;
-  --body-lh: 1.65;
-  --body-ls: -0.01em;
+  --body-lh: 1.68;
+  --body-ls: -0.006em;
   --body-w: 400;
-
   --small-size: 0.8125rem;
+  --reading-max: 45rem;
 
-  /* Monochrome portfolio palette */
-  --bg: #ffffff;
+  /* Clinical editorial palette. Color supports hierarchy, never invented meaning. */
+  --bg: #f6f7f3;
   --surface: #ffffff;
-  --text: #0a0a0a;
-  --muted: #6f6f6f;
-  --line: #e8e8e8;
-  --accent: #0a0a0a;
+  --surface-alt: #ecefe9;
+  --surface-strong: #dfeae5;
+  --text: #17211d;
+  --muted: #58625d;
+  --muted-strong: #3d4742;
+  --line: #cfd6d1;
+  --line-strong: #aebbb4;
+  --accent: #1f5b4f;
   --accent-text: #ffffff;
-  --accent-hover: #2a2a2a;
-  --surface-alt: #f7f7f7;
-  --line-strong: #cfcfcf;
-  --placeholder: #8a8a8a;
-  --clinical-blue: #0a0a0a;
-  --clinical-mint: #f7f7f7;
-  --clinical-cream: #ffffff;
-  --success: #171717;
-  --warning: #525252;
-  --danger: #171717;
+  --accent-hover: #123d35;
+  --accent-soft: #dfeae5;
+  --signal: #a44b34;
+  --placeholder: #707a75;
+  --success: #1f5b4f;
+  --warning: #815b16;
+  --danger: #a13f35;
 
-  /* Elevation: deliberately flat */
-  --shadow-1: none;
-  --shadow-2: none;
-  --shadow-3: none;
+  /* Compatibility aliases retained while page modules are consolidated. */
+  --clinical-blue: var(--accent);
+  --clinical-mint: var(--accent-soft);
+  --clinical-cream: var(--bg);
 
-  /* Radius */
-  --r-card: 18px;
-  --r-btn: 999px;
+  /* Elevation: borders and tonal planes first; shadows only for overlays. */
+  --shadow-1: 0 1px 0 rgba(23, 33, 29, 0.04);
+  --shadow-2: 0 12px 30px rgba(23, 33, 29, 0.08);
+  --shadow-3: 0 22px 54px rgba(23, 33, 29, 0.12);
+
+  /* Shape: precise and document-like rather than universally pill-shaped. */
+  --r-card: 8px;
+  --r-btn: 6px;
   --r-pill: 999px;
 
-  /* Layout */
-  --container-max: 1280px;
-  --gutter: clamp(20px, 4vw, 56px);
-  --section-gap: clamp(80px, 10vw, 152px);
+  /* Layout. */
+  --container-max: 1240px;
+  --reading-measure: 72ch;
+  --gutter: clamp(20px, 4vw, 52px);
+  --section-gap: clamp(72px, 9vw, 136px);
 
-  /* 8pt spacing */
+  /* Eight-point spacing scale. */
   --s1: 8px;
   --s2: 16px;
   --s3: 24px;
@@ -71,24 +79,26 @@
   --s11: 88px;
   --s12: 96px;
 
-  /* Buttons */
-  --btn-h: 50px;
+  /* Controls. */
+  --btn-h: 48px;
   --btn-pad-x: 20px;
-  --btn-pad-y: 12px;
+  --btn-pad-y: 11px;
+  --touch-target: 44px;
 
-  /* Motion */
+  /* Motion. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --dur-1: 180ms;
-  --dur-2: 320ms;
-  --dur-3: 520ms;
+  --dur-1: 160ms;
+  --dur-2: 260ms;
+  --dur-3: 420ms;
+  --stagger: 40ms;
 
-  /* Focus */
-  --focus-ring: 0 0 0 4px rgba(10, 10, 10, 0.14);
+  /* Focus. */
+  --focus-ring: 0 0 0 3px rgba(31, 91, 79, 0.28);
 
-  /* Compatibility aliases */
+  /* Compatibility aliases used by existing components. */
   --h1: var(--h1-size);
   --h2: var(--h2-size);
-  --h3: clamp(1.08rem, 1.7vw, 1.35rem);
+  --h3: clamp(1.15rem, 1.8vw, 1.5rem);
   --p: var(--body-size);
   --small: var(--small-size);
   --r1: var(--r-btn);
