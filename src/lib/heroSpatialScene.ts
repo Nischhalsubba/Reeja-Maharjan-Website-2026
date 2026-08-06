@@ -169,7 +169,9 @@ export const initHeroSpatialScene = (): (() => void) => {
     );
   };
 
-  const resetPointer = (): void => pointerTarget.set(0, 0);
+  const resetPointer = (): void => {
+    pointerTarget.set(0, 0);
+  };
   const handleVisibility = (): void => {
     isDocumentVisible = !document.hidden;
     if (isDocumentVisible) clock.start();
