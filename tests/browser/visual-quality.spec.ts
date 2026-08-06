@@ -25,7 +25,9 @@ test('Care Ledger remains composed across release viewports', async ({ browser }
 
     for (const route of routes) {
       await page.goto(`${origin}${route.path}`, { waitUntil: 'networkidle' });
-      await page.evaluate(async () => document.fonts.ready);
+      await page.evaluate(async () => {
+        await document.fonts.ready;
+      });
 
       const dimensions = await page.evaluate(() => ({
         clientWidth: document.documentElement.clientWidth,
