@@ -1,0 +1,20 @@
+category,item,path,current_system,redesign_action,status
+Route,Homepage,src/pages/index.astro,home-v2,Preserve modules and unify with shared clinical-editorial tokens,In progress
+Route,CV,src/pages/cv.astro,site-page,Improve screen and print scanning without changing facts,Audited
+Route,Opportunity profile,src/pages/hire-reeja.astro,site-page,Unify hero summary evidence and CTA hierarchy,Audited
+Route,Maternal health,src/pages/maternal-health.astro,site-page,Improve long-form resource discovery and editorial hierarchy,Audited
+Route,Nursing practice,src/pages/nursing-practice.astro,site-page,Improve guide scanning and article pathways,Audited
+Route,Clinical research,src/pages/clinical-research.astro,site-page,Replace repetitive cards with evidence-led responsibility structure,Audited
+Route,Blog index,src/pages/blog/index.astro,site-page,Pending detailed audit,Pending
+Route,Blog article,src/pages/blog/[slug].astro,article system,Pending reading-width metadata and content-style audit,Pending
+Route,404,src/pages/404.astro,site-page,Remove comedy copy and strengthen recovery layout,Corrected
+Shared,Base layout,src/layouts/BaseLayout.astro,mixed shared styles,Retain metadata analytics and initialization while consolidating visual ownership,Audited
+Shared,Header,src/components/Header.astro,shell,Retain verified modal semantics and improve visual states,Pending implementation
+Shared,Footer,src/components/Footer.astro,shell,Improve information hierarchy and closing treatment,Pending implementation
+Styles,Global tokens,src/styles/tokens.css,monochrome,Replace with clinical-editorial semantic token layer,Planned
+Styles,Homepage,src/styles/home-redesign.css,home-v2,Merge reusable rules into shared system,Audited
+Styles,Homepage role paths,src/styles/home-recruiter.css,home-v2,Reduce oversized cards and improve responsive density,Audited
+Styles,Supporting pages,src/styles/site-pages.css,site-page,Unify with homepage grammar,Pending detailed audit
+Motion,Initialization,src/lib/motion.ts,GSAP,Retain single initialization and reduced-motion contract,Pending detailed audit
+Accessibility,Mobile navigation,src/lib/mobileNavA11y.ts,verified modal pattern,Preserve semantics focus trap Escape and restoration,Protected
+Deployment,Cloudflare Pages,.github/workflows,production verified,Do not migrate or add Netlify configuration,Protected
