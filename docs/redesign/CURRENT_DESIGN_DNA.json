@@ -1,0 +1,69 @@
+{
+  "version": "1.0",
+  "source": "main branch audit, 2026-08-06",
+  "design_system": {
+    "color": {
+      "background": "#ffffff",
+      "surface": "#ffffff",
+      "surface_alt": "#f7f7f7",
+      "text": "#0a0a0a",
+      "muted": "#646464",
+      "border": "#d9d9d9",
+      "accent": "#0a0a0a",
+      "semantic": "Monochrome mappings; success, warning, danger are visually weak and insufficiently differentiated"
+    },
+    "typography": {
+      "families": ["Arial", "Helvetica", "system-ui", "sans-serif"],
+      "display_character": "Oversized, tightly tracked, heavy editorial sans",
+      "body_character": "Neutral system sans with generous line height",
+      "issue": "Display scale is expressive but generic; body and interface typography lack a distinctive professional-healthcare voice"
+    },
+    "spacing": {
+      "base": "8px",
+      "section_gap": "80px to 152px",
+      "density": "Spacious on homepage, medium on supporting pages",
+      "issue": "Homepage and site-page systems use separate rhythm rules"
+    },
+    "layout": {
+      "container_max": "1280px",
+      "homepage": "Bespoke asymmetric editorial grids",
+      "supporting_pages": "Generic hero, summary, card, list, and split layouts",
+      "issue": "Two parallel visual systems create inconsistent hierarchy and component character"
+    },
+    "shape": {
+      "cards": "18px to 28px radii",
+      "buttons": "Fully rounded pills",
+      "borders": "Thin grey dividers",
+      "issue": "Rounded portrait and pill buttons conflict with otherwise sharp editorial composition"
+    },
+    "elevation": {
+      "shadows": "None",
+      "depth_strategy": "Borders, tone changes, and occasional backdrop blur"
+    },
+    "motion": {
+      "library": "GSAP",
+      "tokens": ["180ms", "320ms", "520ms"],
+      "character": "Restrained reveals and navigation transitions",
+      "requirements": ["transform and opacity only", "reduced-motion support", "no duplicate initialization"]
+    }
+  },
+  "design_style": {
+    "mood": ["editorial", "minimal", "serious", "recruiter-oriented"],
+    "personality": ["direct", "structured", "high-contrast"],
+    "composition": "Large typography, broad whitespace, bordered grids, black closing sections",
+    "imagery": "Mostly monochrome; portrait treatment exists but is not consistently integrated",
+    "strengths": ["Strong scanning", "Clear evidence hierarchy", "Minimal decorative clutter", "Privacy-aware credential presentation"],
+    "weaknesses": ["Clinical identity is underexpressed", "Homepage and internal pages feel designed by different systems", "Repeated generic cards", "Pure monochrome limits semantic communication", "Some content modules are visually dense"]
+  },
+  "visual_effects": {
+    "effect_intensity": "low",
+    "canvas": false,
+    "webgl": false,
+    "threejs": false,
+    "particles": false,
+    "scroll_reveals": true,
+    "backdrop_blur": true,
+    "continuous_animation": false,
+    "assessment": "Appropriately restrained; no heavy visual effect is currently justified"
+  }
+}
