@@ -1,0 +1,197 @@
+# Clinical Editorial Design System
+
+## Purpose
+
+This design system translates Reeja Maharjan's professional nursing portfolio into a calm, credible, evidence-led editorial interface. It preserves all factual content and professional claims while standardising presentation, interaction, accessibility, and responsive behaviour.
+
+The system is intentionally restrained. It uses document-like structure, clinical-green hierarchy, warm mineral backgrounds, strong typographic contrast, and limited motion. It must not drift into a generic SaaS landing page, decorative hospital brochure, or animation showcase.
+
+## Source ownership
+
+- `src/styles/tokens.css` owns all global design tokens.
+- `src/styles/base.css` owns browser normalisation, document typography, focus, selection, and reduced-motion behaviour.
+- `src/styles/layout.css` owns containers, shared grids, reading widths, and responsive layout primitives.
+- `src/styles/components.css` owns reusable component structures.
+- `src/styles/site-pages.css` owns the shared supporting-page and article grammar.
+- `src/styles/shell.css` owns header, navigation, mobile-menu, and footer presentation.
+- Page-specific styles may consume tokens but must not define a competing global palette, spacing scale, or radius system.
+
+## Visual thesis
+
+A professional clinical dossier translated into a warm editorial website: credible, precise, human, and quietly distinctive.
+
+## Interaction thesis
+
+Interactions should feel immediate and composed. Navigation, disclosure, and feedback receive motion; reading content remains stable. Content must remain fully usable when animation is disabled.
+
+## Colour
+
+| Token | Value | Use |
+|---|---:|---|
+| `--bg` | `#f6f7f3` | Main mineral canvas |
+| `--surface` | `#ffffff` | Reading and component surfaces |
+| `--surface-alt` | `#ecefe9` | Alternate sections |
+| `--surface-strong` | `#dfeae5` | Stronger tonal plane |
+| `--text` | `#17211d` | Primary text |
+| `--muted` | `#58625d` | Secondary text |
+| `--line` | `#cfd6d1` | Standard rules and borders |
+| `--line-strong` | `#aebbb4` | Emphasised borders |
+| `--accent` | `#1f5b4f` | Primary action and orientation |
+| `--accent-hover` | `#123d35` | Hover, active, and dark fields |
+| `--accent-soft` | `#dfeae5` | Selected and supporting states |
+| `--signal` | `#a44b34` | Reserved signal colour |
+
+Normal text contrast exceeds WCAG AA. `--text` on `--bg` is approximately 15.3:1, `--muted` on `--bg` is approximately 5.9:1, and white text on `--accent` is approximately 7.9:1.
+
+Colour must not imply a credential, clinical severity, proficiency level, or verified status unless the underlying content explicitly supports that meaning.
+
+## Typography
+
+### Families
+
+- Display: Georgia, Cambria, Times New Roman, serif fallbacks.
+- Body and interface: Aptos, Segoe UI, system UI, sans-serif fallbacks.
+
+No external font request is required. This avoids rendering delays, privacy concerns, and deployment dependencies.
+
+### Scale
+
+- H1: `clamp(3rem, 7vw, 6.75rem)`
+- H2: `clamp(2.15rem, 4.5vw, 4.5rem)`
+- H3: `clamp(1.15rem, 1.8vw, 1.5rem)`
+- Body: `1rem`, line height `1.68`
+- Small interface text: `0.8125rem`
+- Reading measure: up to `72ch`
+
+Headings use the display family. Navigation, labels, controls, metadata, and body copy use the sans-serif family.
+
+## Layout
+
+- Maximum container: `1240px`
+- Main gutter: `clamp(20px, 4vw, 52px)`
+- Section spacing: `clamp(72px, 9vw, 136px)`
+- Desktop grid: 12 columns
+- Tablet grid: 6 columns
+- Mobile grid: 1 column
+- Reading column: maximum 45rem to 72 characters depending on context
+
+Layouts may be asymmetric, but their alignment rails must remain consistent across routes.
+
+## Shape and elevation
+
+- Cards: 8px radius
+- Buttons and controls: 6px radius
+- Pills: reserved for genuinely compact categorical metadata
+- Default surfaces: flat or a one-pixel tonal shadow
+- Raised overlays: `0 12px 30px rgba(23, 33, 29, 0.08)`
+- Borders and tonal planes should provide hierarchy before shadows
+
+Avoid universal pills, floating card clouds, excessive rounded containers, and ornamental glass surfaces.
+
+## Components
+
+### Buttons
+
+- Minimum height: 48px
+- Minimum touch target: 44px
+- Primary: clinical-green background, white text
+- Secondary: transparent or surface background, clinical-green border and text
+- Hover: maximum 1px vertical movement
+- Focus: 3px clinical-green outline with offset
+- Disabled states must remain recognisable without relying on opacity alone
+
+### Navigation
+
+- Sticky header must not obstruct page content.
+- Desktop links use compact rectangular states, not pills.
+- Active and hover states use the soft clinical field.
+- Mobile navigation remains a labelled modal dialog.
+- Focus enters the panel, wraps within it, closes on Escape, and returns to the trigger.
+- The page behind the mobile navigation remains inert while the menu is open.
+
+### Evidence cards
+
+- Cards use numbered evidence markers generated by CSS.
+- Claims must come from existing content modules.
+- Do not add ratings, percentages, decorative charts, or progress bars.
+- Use short labels, rules, and grouped evidence rather than repetitive icon cards.
+
+### Experience lists
+
+- Preserve chronology and organisation metadata.
+- Desktop rows may use role, evidence, and date columns.
+- Mobile rows collapse to a readable single column.
+- Animation is optional enhancement only; the list must remain complete without it.
+
+### Article pages
+
+- Use a maximum reading width.
+- Maintain visible heading rhythm and section rules.
+- Body text uses at least 1.68 line height.
+- Notes use a soft clinical field and a strong left rule.
+- Lists retain semantic bullets or numbers.
+
+## Motion
+
+| Token | Value | Use |
+|---|---:|---|
+| `--dur-1` | `160ms` | Hover and small feedback |
+| `--dur-2` | `260ms` | Menu and component state changes |
+| `--dur-3` | `420ms` | Restrained section entrances |
+| `--ease-out` | `cubic-bezier(0.16, 1, 0.3, 1)` | Standard easing |
+| `--stagger` | `40ms` | Maximum reveal stagger |
+
+Use transform and opacity. Avoid scroll hijacking, continuous decorative motion, excessive pinning, and layout-property animation. Reduced-motion mode disables spatial animation while preserving state clarity.
+
+## Responsive verification
+
+Test every production page at:
+
+- 375px
+- 768px
+- 1024px
+- 1440px
+
+Verify no horizontal overflow, readable line lengths, 44px touch targets, unobstructed sticky navigation, correct menu focus behaviour, and sensible content order.
+
+## Accessibility requirements
+
+- Normal text contrast: minimum 4.5:1
+- Large text contrast: minimum 3:1
+- Visible keyboard focus on every interactive element
+- Semantic headings and landmarks
+- Accessible names for controls
+- No information conveyed by colour alone
+- Reduced-motion support
+- Screen-reader-compatible navigation and forms
+- Print output that removes navigation and preserves document hierarchy
+
+## Anti-generic rules
+
+- No purple gradients
+- No random blobs
+- No fake dashboards
+- No decorative medical icons
+- No generic glassmorphism
+- No repeated pill clouds
+- No skill ratings or proficiency bars
+- No invented metrics or professional claims
+- No Three.js unless a future information need justifies its cost
+
+## Migration status
+
+Implemented:
+
+- Central colour, typography, spacing, radius, motion, focus, and layout tokens
+- Global base typography and focus treatment
+- Shared container and editorial grid primitives
+- Header, navigation, mobile-menu surface, and footer presentation
+- Shared CV, recruiter, topic, article, and 404 page grammar
+
+Remaining:
+
+- Homepage-specific migration from local monochrome variables
+- Shared legacy component migration
+- Motion specification and GSAP implementation review
+- Route-by-route responsive and visual verification
+- Automated performance and accessibility evidence
