@@ -1,0 +1,76 @@
+{
+  "version": "1.0",
+  "name": "Clinical Editorial",
+  "design_system": {
+    "color": {
+      "canvas": "#f6f7f3",
+      "surface": "#ffffff",
+      "surface_subtle": "#ecefe9",
+      "ink": "#17211d",
+      "ink_muted": "#58625d",
+      "line": "#cfd6d1",
+      "clinical": "#1f5b4f",
+      "clinical_dark": "#123d35",
+      "clinical_soft": "#dfeae5",
+      "signal": "#a44b34",
+      "focus": "#1f5b4f",
+      "rule": "Color supports hierarchy and state; it must never imply unverified clinical meaning"
+    },
+    "typography": {
+      "display": "Humanist editorial serif or locally available serif fallback",
+      "body": "Accessible humanist sans or system sans fallback",
+      "interface": "Body family with medium and semibold weights",
+      "display_scale": "clamp(3rem, 7vw, 6.75rem)",
+      "body_measure": "60ch to 72ch",
+      "principle": "Professional, calm, legible, and less fashion-editorial than the current oversized grotesk treatment"
+    },
+    "spacing": {
+      "base": "8px",
+      "section_gap": "72px to 136px",
+      "content_gap": "24px to 48px",
+      "principle": "Use whitespace to separate evidence groups, not to create spectacle"
+    },
+    "layout": {
+      "container_max": "1240px",
+      "reading_max": "720px",
+      "grid": "12-column desktop, 6-column tablet, single-column mobile",
+      "composition": "Asymmetric editorial layouts with consistent alignment rails",
+      "principle": "One shared shell and one shared section grammar across every route"
+    },
+    "shape": {
+      "cards": "4px to 10px",
+      "buttons": "4px to 8px; no universal pill treatment",
+      "images": "Controlled rectangular crops with thin keylines",
+      "principle": "Precise and document-like, avoiding soft SaaS containers"
+    },
+    "elevation": {
+      "default": "Flat",
+      "raised": "Subtle 0 12px 30px rgba(23,33,29,0.08) only for overlays",
+      "principle": "Use borders and tonal planes before shadows"
+    },
+    "motion": {
+      "fast": "160ms",
+      "standard": "260ms",
+      "slow": "420ms",
+      "ease": "cubic-bezier(0.16, 1, 0.3, 1)",
+      "stagger": "40ms maximum",
+      "principle": "Motion confirms hierarchy and state; no constant animation, scroll hijacking, or decorative loops"
+    }
+  },
+  "design_style": {
+    "visual_thesis": "A professional clinical dossier translated into a warm editorial website: credible, precise, human, and quietly distinctive.",
+    "interaction_thesis": "Interactions should feel immediate and composed. Navigation, disclosure, and feedback receive motion; reading content remains stable.",
+    "mood": ["calm", "credible", "warm", "precise", "evidence-led"],
+    "composition": "Structured asymmetry, document margins, annotated evidence rows, restrained fields of clinical green",
+    "graphic_language": ["rules", "index numbers", "small labels", "evidence rows", "clinical-green fields", "document-like annotations"],
+    "signature_elements": ["credential index rail", "evidence-led timeline", "editorial portrait frame", "section folio labels"],
+    "anti_generic_rules": ["No floating card clouds", "No purple gradients", "No random blobs", "No glass panels except functional overlays", "No fake metrics", "No skill progress bars", "No repeated pill clouds", "No decorative medical icons"]
+  },
+  "visual_effects": {
+    "effect_intensity": "low",
+    "threejs": false,
+    "threejs_decision": "Rejected: no meaningful information benefit, added bundle cost, maintenance burden, and accessibility risk",
+    "preferred": ["CSS tonal transitions", "SVG rules and line drawing", "GSAP opacity and transform reveals"],
+    "reduced_motion": "All content visible immediately; state changes remain clear without spatial movement"
+  }
+}
