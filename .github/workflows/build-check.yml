@@ -10,6 +10,7 @@ on:
 permissions:
   contents: read
   statuses: write
+  deployments: write
 
 concurrency:
   group: build-check-${{ github.ref }}
@@ -18,7 +19,7 @@ concurrency:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -92,6 +93,15 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Deploy verified main build to Cloudflare Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=reeja-maharjan-website-2026 --branch=main --commit-hash=${{ github.sha }} --commit-message="Care Ledger release ${{ github.sha }}"
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Publish build check status
         if: always()
         env:
@@ -103,15 +113,15 @@ jobs:
           case "${JOB_STATUS}" in
             success)
               STATE=success
-              DESCRIPTION='Full repository verification passed.'
+              DESCRIPTION='Verification, build, and production deployment passed.'
               ;;
             cancelled)
               STATE=error
-              DESCRIPTION='Repository verification was cancelled.'
+              DESCRIPTION='Repository verification or deployment was cancelled.'
               ;;
             *)
               STATE=failure
-              DESCRIPTION='Repository verification failed. Open the run for diagnostics.'
+              DESCRIPTION='Verification, build, or deployment failed. Open the run for diagnostics.'
               ;;
           esac
 
