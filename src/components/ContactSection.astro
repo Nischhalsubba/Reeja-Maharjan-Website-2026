@@ -125,7 +125,7 @@ const { profile } = Astro.props;
     const submit = form.querySelector('button[type="submit"]');
     const defaultLabel = submit instanceof HTMLButtonElement ? submit.dataset.defaultLabel ?? submit.textContent ?? 'Send Inquiry' : 'Send Inquiry';
 
-    const setStatus = (state) => {
+    const setStatus = (state: 'idle' | 'loading' | 'success' | 'error') => {
       for (const element of [loading, success, error]) {
         if (element instanceof HTMLElement) element.hidden = true;
       }
