@@ -2,6 +2,7 @@
 import SectionIntro from './SectionIntro.astro';
 import SectionIcon from './SectionIcon.astro';
 import type { ProfileContent } from '../content/profile';
+import '../styles/contact-flow.css';
 
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
@@ -23,9 +24,9 @@ const { profile } = Astro.props;
         <li>Data documentation</li>
       </ul>
       <div class="contact-form__actions">
-        <a class="btn btn--primary" href={`mailto:${profile.contact.email}`}>Email Reeja</a>
-        <a class="btn btn--secondary" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a class="btn btn--secondary" href="/cv/">View CV</a>
+        <a class="btn btn--primary" href={`mailto:${profile.contact.email}`} data-track="contact-direct-email">Email Reeja</a>
+        <a class="btn btn--secondary" href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">LinkedIn</a>
+        <a class="btn btn--secondary" href="/cv/" data-track="contact-cv">View CV</a>
       </div>
       <p class="note">Preferred contact: email or LinkedIn. Full documents can be shared privately after recruiter screening.</p>
     </div>
@@ -36,7 +37,7 @@ const { profile } = Astro.props;
         <SectionIntro
           eyebrow={profile.contactIntro.eyebrow}
           title="Send a Role Inquiry"
-          summary="Share the role, organization, location, and expected start date so the message is useful from the first email. Revolutionary, I know."
+          summary="Share the role, organisation, location, expected timing, and responsibilities so the first message is useful for screening."
         />
       </header>
 
@@ -47,18 +48,19 @@ const { profile } = Astro.props;
         method="POST"
         action={profile.contact.formEndpoint ?? 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'}
         data-endpoint={profile.contact.formEndpoint}
+        novalidate
       >
         <div class="contact-form__grid">
           <label>
             Name
-            <input type="text" name="name" autocomplete="name" required />
+            <input type="text" name="name" autocomplete="name" required minlength="2" />
           </label>
           <label>
             Email
             <input type="email" name="email" autocomplete="email" required />
           </label>
           <label>
-            Organization / Hospital
+            Organisation / hospital
             <input type="text" name="organization" autocomplete="organization" />
           </label>
           <label>
@@ -70,30 +72,35 @@ const { profile } = Astro.props;
             <input type="text" name="location" autocomplete="address-level2" />
           </label>
           <label>
-            Expected start date
-            <input type="text" name="start_date" placeholder="Immediate, month, or flexible" />
+            Expected timing
+            <input type="text" name="start_date" placeholder="Month, quarter, or flexible timing" />
           </label>
         </div>
         <label>
           Message
-          <textarea name="message" rows="5" required placeholder="Briefly describe the role, care setting, research project, schedule, and next step."></textarea>
+          <textarea name="message" rows="5" required minlength="20" placeholder="Briefly describe the role, care setting, research project, schedule, responsibilities, and next step."></textarea>
         </label>
         <input type="hidden" name="_subject" value="New nursing or research opportunity inquiry from reejamaharjan.com.np" />
         <input type="hidden" name="_captcha" value="false" />
         <input type="hidden" name="_template" value="table" />
-        <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden aria-hidden="true" />
+
+        <p class="contact-form__privacy-note">Do not send confidential patient information, license documents, transcripts, identity documents, or private health records through this public form.</p>
 
         <div class="contact-form__actions">
-          <button type="submit" class="btn btn--primary">Send Inquiry</button>
-          <a class="btn btn--secondary" href={`mailto:${profile.contact.email}`}>Use Email Instead</a>
-          <a class="btn btn--secondary" href="/cv/">Open CV</a>
+          <button type="submit" class="btn btn--primary" data-default-label="Send Inquiry">Send Inquiry</button>
+          <a class="btn btn--secondary" href={`mailto:${profile.contact.email}`} data-track="contact-form-email-fallback">Use Email Instead</a>
+          <a class="btn btn--secondary" href="/cv/" data-track="contact-form-cv">Open CV</a>
         </div>
 
-        <p class="form-status form-status--success" role="status" aria-live="polite" hidden>
-          Message sent successfully. Reeja will reply by email.
+        <p class="form-status form-status--loading" role="status" aria-live="polite" hidden>
+          Sending inquiry. Please keep this page open until the result appears.
         </p>
-        <p class="form-status form-status--error" role="alert" aria-live="assertive" hidden>
-          Message could not be sent. Please use the email button instead.
+        <p class="form-status form-status--success" role="status" aria-live="polite" hidden tabindex="-1">
+          Message sent successfully. Reeja will reply by email when appropriate.
+        </p>
+        <p class="form-status form-status--error" role="alert" aria-live="assertive" hidden tabindex="-1">
+          Message could not be sent. Please use the email button instead and include the same role details.
         </p>
       </form>
     </article>
@@ -112,22 +119,38 @@ const { profile } = Astro.props;
 
     form.action = endpoint;
 
+    const loading = form.querySelector('.form-status--loading');
     const success = form.querySelector('.form-status--success');
     const error = form.querySelector('.form-status--error');
     const submit = form.querySelector('button[type="submit"]');
+    const defaultLabel = submit instanceof HTMLButtonElement ? submit.dataset.defaultLabel ?? submit.textContent ?? 'Send Inquiry' : 'Send Inquiry';
 
-    if (success instanceof HTMLElement) success.hidden = true;
-    if (error instanceof HTMLElement) error.hidden = true;
+    const setStatus = (state) => {
+      for (const element of [loading, success, error]) {
+        if (element instanceof HTMLElement) element.hidden = true;
+      }
+
+      const active = state === 'loading' ? loading : state === 'success' ? success : state === 'error' ? error : null;
+      if (active instanceof HTMLElement) {
+        active.hidden = false;
+        if (state !== 'loading') active.focus({ preventScroll: false });
+      }
+    };
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
 
       if (!(submit instanceof HTMLButtonElement)) return;
 
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
       submit.disabled = true;
+      submit.setAttribute('aria-busy', 'true');
       submit.textContent = 'Sending...';
-      if (success instanceof HTMLElement) success.hidden = true;
-      if (error instanceof HTMLElement) error.hidden = true;
+      setStatus('loading');
 
       try {
         const formData = new FormData(form);
@@ -139,16 +162,17 @@ const { profile } = Astro.props;
 
         if (!response.ok) throw new Error('Request failed');
         const result = await response.json().catch(() => ({}));
-        const sent = String(result?.success ?? '').toLowerCase() === 'true';
+        const sent = String(result?.success ?? response.ok).toLowerCase() !== 'false';
         if (!sent) throw new Error('Provider rejected');
 
         form.reset();
-        if (success instanceof HTMLElement) success.hidden = false;
+        setStatus('success');
       } catch {
-        if (error instanceof HTMLElement) error.hidden = false;
+        setStatus('error');
       } finally {
         submit.disabled = false;
-        submit.textContent = 'Send Inquiry';
+        submit.removeAttribute('aria-busy');
+        submit.textContent = defaultLabel;
       }
     });
   }
