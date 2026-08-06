@@ -7,16 +7,18 @@ const featuredWriting = [
 ];
 ---
 
-<section class="home-section home-section--credentials" id="credentials" aria-labelledby="credentials-title">
+<section class="ledger-section ledger-section--registry" id="credentials" aria-labelledby="credentials-title">
   <div class="container">
-    <div class="home-section__topline" data-reveal>
-      <div><p class="home-kicker">Credentials</p><h2 id="credentials-title">Licenses and clinical training.</h2></div>
-      <p class="home-section__summary">Verification documents are shared privately with legitimate employers and recruiters.</p>
-    </div>
-    <div class="home-credential-list" data-reveal-group>
+    <header class="ledger-section__header" data-ledger-reveal>
+      <p class="ledger-kicker">Credential registry</p>
+      <h2 id="credentials-title">Licenses and clinical training, indexed.</h2>
+      <p>Verification documents are shared privately with legitimate employers and recruiters.</p>
+    </header>
+
+    <div class="credential-registry" data-ledger-group>
       {profile.certifications.slice(0, 6).map((credential, index) => (
-        <article class="home-credential-item" data-reveal>
-          <span class="home-credential-item__index">{String(index + 1).padStart(2, '0')}</span>
+        <article class="credential-registry__entry" data-ledger-reveal>
+          <span class="credential-registry__number">{String(index + 1).padStart(2, '0')}</span>
           <div><p>{credential.issuer}</p><h3>{credential.title}</h3></div>
           <div><p>{credential.date}</p><span>{credential.credentialLabel ?? 'Verification available on request'}</span></div>
         </article>
@@ -25,17 +27,23 @@ const featuredWriting = [
   </div>
 </section>
 
-<section class="home-section home-section--writing" id="writing" aria-labelledby="writing-title">
+<section class="ledger-section ledger-section--reading" id="writing" aria-labelledby="writing-title">
   <div class="container">
-    <div class="home-section__topline" data-reveal>
-      <div><p class="home-kicker">Selected writing</p><h2 id="writing-title">Practical nursing resources.</h2></div>
-      <a class="home-text-link" href="/blog/">Browse articles <span aria-hidden="true">↗</span></a>
-    </div>
-    <div class="home-writing-grid" data-reveal-group>
+    <header class="ledger-section__header ledger-section__header--split" data-ledger-reveal>
+      <div>
+        <p class="ledger-kicker">Selected writing / reading file</p>
+        <h2 id="writing-title">Practical nursing notes for real decisions.</h2>
+      </div>
+      <a class="ledger-link" href="/blog/">Open the article index</a>
+    </header>
+
+    <div class="reading-index" data-ledger-group>
       {featuredWriting.map((article, index) => (
-        <a class="home-writing-card" href={article.href} data-reveal>
-          <span class="home-writing-card__index">{String(index + 1).padStart(2, '0')}</span>
-          <span>{article.category}</span><h3>{article.title}</h3><small>Read guide <span aria-hidden="true">↗</span></small>
+        <a class={`reading-index__entry ${index === 0 ? 'reading-index__entry--feature' : ''}`} href={article.href} data-ledger-reveal>
+          <span>{String(index + 1).padStart(2, '0')}</span>
+          <p>{article.category}</p>
+          <h3>{article.title}</h3>
+          <small>Read guide</small>
         </a>
       ))}
     </div>
