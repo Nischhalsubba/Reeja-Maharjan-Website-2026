@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  statuses: write
 
 concurrency:
   group: build-check-${{ github.ref }}
@@ -21,6 +22,20 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Mark build check pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STATUS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/statuses/${{ github.sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "${STATUS_URL}" \
+            --data "$(jq -nc --arg state pending --arg target_url "${RUN_URL}" --arg description 'Full repository verification is running.' --arg context 'Build Check / verify' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -76,3 +91,34 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Publish build check status
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          JOB_STATUS: ${{ job.status }}
+          STATUS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/statuses/${{ github.sha }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          case "${JOB_STATUS}" in
+            success)
+              STATE=success
+              DESCRIPTION='Full repository verification passed.'
+              ;;
+            cancelled)
+              STATE=error
+              DESCRIPTION='Repository verification was cancelled.'
+              ;;
+            *)
+              STATE=failure
+              DESCRIPTION='Repository verification failed. Open the run for diagnostics.'
+              ;;
+          esac
+
+          curl --fail-with-body --silent --show-error \
+            --request POST \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "${STATUS_URL}" \
+            --data "$(jq -nc --arg state "${STATE}" --arg target_url "${RUN_URL}" --arg description "${DESCRIPTION}" --arg context 'Build Check / verify' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
