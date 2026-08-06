@@ -54,6 +54,43 @@ jobs:
             echo "checkout=main" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Resolve verified release fingerprint
+        id: release
+        if: steps.target.outputs.sha != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE_SHA: ${{ steps.target.outputs.sha }}
+          API_ROOT: ${{ github.api_url }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          EXPECTED_SHA="${BASE_SHA}"
+          MAIN_JSON=$(curl --fail-with-body --silent --show-error \
+            --header "Authorization: Bearer ${GH_TOKEN}" \
+            --header "Accept: application/vnd.github+json" \
+            --header "X-GitHub-Api-Version: 2022-11-28" \
+            "${API_ROOT}/repos/${REPOSITORY}/commits/main")
+          MAIN_SHA=$(jq -r '.sha' <<< "${MAIN_JSON}")
+
+          if [ -n "${MAIN_SHA}" ] && [ "${MAIN_SHA}" != "${BASE_SHA}" ]; then
+            COMPARE_JSON=$(curl --fail-with-body --silent --show-error \
+              --header "Authorization: Bearer ${GH_TOKEN}" \
+              --header "Accept: application/vnd.github+json" \
+              --header "X-GitHub-Api-Version: 2022-11-28" \
+              "${API_ROOT}/repos/${REPOSITORY}/compare/${BASE_SHA}...${MAIN_SHA}")
+            COMPARE_STATUS=$(jq -r '.status' <<< "${COMPARE_JSON}")
+            DISALLOWED_COUNT=$(jq '[.files[]?.filename | select(. != "README.md" and . != ".github/README_AUTOMATION_REPORT.md")] | length' <<< "${COMPARE_JSON}")
+
+            if [ "${COMPARE_STATUS}" = "ahead" ] && [ "${DISALLOWED_COUNT}" -eq 0 ]; then
+              EXPECTED_SHA="${MAIN_SHA}"
+              echo "Using documentation-only descendant ${MAIN_SHA} as the deployed fingerprint."
+            else
+              echo "Main moved beyond ${BASE_SHA} with non-documentation changes; retaining the tested commit as the required fingerprint."
+            fi
+          fi
+
+          echo "sha=${EXPECTED_SHA}" >> "$GITHUB_OUTPUT"
+
       - name: Mark production smoke pending
         if: steps.target.outputs.sha != ''
         env:
@@ -87,7 +124,7 @@ jobs:
         id: smoke_check
         env:
           SITE_ORIGIN: ${{ steps.target.outputs.origin }}
-          EXPECTED_COMMIT: ${{ steps.target.outputs.sha }}
+          EXPECTED_COMMIT: ${{ steps.release.outputs.sha || steps.target.outputs.sha }}
           SMOKE_ATTEMPTS: '40'
           SMOKE_DELAY_MS: '30000'
           PRODUCTION_REPORT: production-smoke-report.json
@@ -114,7 +151,8 @@ jobs:
             echo "## Cloudflare production verification"
             echo ""
             echo "- Origin: \`${{ steps.target.outputs.origin }}\`"
-            echo "- Expected commit: \`${{ steps.target.outputs.sha || 'not specified' }}\`"
+            echo "- Tested code commit: \`${{ steps.target.outputs.sha || 'not specified' }}\`"
+            echo "- Accepted deployed fingerprint: \`${{ steps.release.outputs.sha || steps.target.outputs.sha || 'not specified' }}\`"
             echo "- Smoke result: \`${{ steps.smoke_check.outcome }}\`"
             echo "- Browser result: \`${{ steps.browser_check.outcome || 'not run' }}\`"
           } >> "$GITHUB_STEP_SUMMARY"
