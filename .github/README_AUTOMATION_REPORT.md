@@ -10,7 +10,7 @@ Generator: `aed303eed8a536f2dda075c8be583693325aac37`
 | `agent/cloudflare-production-completion` | unchanged | README already matched the standard |
 | `agent/complete-all-in-progress-tasks` | unchanged | README already matched the standard |
 | `agent/deployment-recovery` | unchanged | README already matched the standard |
-| `agent/master-redesign-2026-08-06` | updated | Branch-specific README committed |
+| `agent/master-redesign-2026-08-06` | unchanged | README already matched the standard |
 | `agent/minimal-nurse-redesign` | unchanged | README already matched the standard |
 | `agent/seo-traffic-growth` | unchanged | README already matched the standard |
 | `agent/unified-site-system` | unchanged | README already matched the standard |
