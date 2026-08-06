@@ -6,7 +6,7 @@ import '../styles/components.css';
 import '../styles/pages.css';
 import '../styles/site-pages.css';
 import '../styles/shell.css';
-import '../styles/zero-redesign.css';
+import '../styles/portfolio-v4.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -120,7 +120,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body class="zero-redesign">
+  <body class="portfolio-v4">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header name={professionalFacts.name} />
@@ -130,9 +130,11 @@ const graphSchema = {
     <script>
       import { initMotion } from '../lib/motion';
       import { initMobileNavA11y } from '../lib/mobileNavA11y';
+      import { initPortfolioMotion } from '../lib/portfolioMotion';
 
       initMotion();
       initMobileNavA11y();
+      initPortfolioMotion();
 
       document.querySelectorAll<HTMLElement>('[data-track]').forEach((element) => {
         element.addEventListener('click', () => {
