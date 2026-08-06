@@ -1,5 +1,99 @@
 # Reeja Maharjan Website 2026
 
+<!-- interactive-readme-standard:start -->
+
+> [!NOTE]
+> **Branch-specific documentation:** this section is maintained for [`codex/nurse-theme-redesign`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/codex/nurse-theme-redesign). It is generated from the files present on this branch and preserves the project-authored README below.
+
+<details open>
+<summary><strong>Interactive repository guide</strong></summary>
+
+## Branch overview
+
+| Item | Value |
+|---|---|
+| Repository | [`Nischhalsubba/Reeja-Maharjan-Website-2026`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026) |
+| Branch | [`codex/nurse-theme-redesign`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/codex/nurse-theme-redesign) |
+| Detected stack | Astro, Tailwind CSS, TypeScript, CSS, JavaScript |
+| Detected manifests | package.json |
+| Documentation policy | Every maintained branch must explain purpose, setup, structure, architecture, flows, testing, delivery, security, and ownership. |
+
+## Repository structure
+
+```mermaid
+flowchart TD
+    ROOT["Reeja-Maharjan-Website-2026 / codex/nurse-theme-redesign"]
+    ROOT --> P0[".github/"]
+    ROOT --> P1[".vscode/"]
+    ROOT --> P2["public/"]
+    ROOT --> P3["src/"]
+    ROOT --> P4["src-legacy-v55/"]
+    ROOT --> P5["src-old-v55/"]
+    ROOT --> P6[".gitignore"]
+    ROOT --> P7[".node-version"]
+    ROOT --> P8[".nvmrc"]
+    ROOT --> P9[".prettierignore"]
+    ROOT --> P10[".prettierrc"]
+    ROOT --> P11["astro.config.mjs"]
+    ROOT --> P12["eslint.config.js"]
+    ROOT --> P13["package-lock.json"]
+    ROOT --> P14["package.json"]
+    ROOT --> P15["PARITY.md"]
+    ROOT --> P16["RESUME_COVERAGE.md"]
+    ROOT --> P17["tsconfig.json"]
+```
+
+The diagram is generated from the branch's actual top-level files and directories. Use the branch link above for complete source navigation.
+
+## Website or application structure
+
+```mermaid
+flowchart TD
+    APP["Reeja-Maharjan-Website-2026"]
+    APP --> R0["src/pages"]
+    APP --> R1["public"]
+    R0 --> F0["src/pages/404.astro"]
+    R0 --> F1["src/pages/blog/(slug).astro"]
+    R0 --> F2["src/pages/blog/index.astro"]
+    R0 --> F3["src/pages/cv.astro"]
+    R0 --> F4["src/pages/index.astro"]
+```
+
+## Application and responsibility flow
+
+```mermaid
+flowchart LR
+    ACTOR["User / contributor"]
+    ACTOR --> A0["Interface: public, src"]
+    A0 --> A1["Delivery: .github"]
+    A1 --> DELIVERY["Delivery: GitHub Actions"]
+```
+
+## Change-to-delivery flow
+
+```mermaid
+flowchart LR
+    CHANGE["Change on codex/nurse-theme-redesign"]
+    CHECK["Validate: npm run dev, npm run build, npm run lint, npm run preview"]
+    REVIEW["Review documentation and architecture impact"]
+    RELEASE["Merge, release, or deploy according to this branch"]
+    CHANGE --> CHECK --> REVIEW --> RELEASE
+```
+
+## README requirements for this branch
+
+- Explain what this branch contains and how it differs from the default branch.
+- Keep installation, configuration, usage, testing, deployment, security, support, and license information accurate.
+- Document repository, website or application, API, data, authentication, background-job, and deployment flows when they exist.
+- Prefer Mermaid diagrams and expandable `<details>` sections for visual navigation.
+- Link diagrams and modules to real source paths; never invent missing components.
+- Preserve project-specific documentation and update diagrams whenever architecture or major paths change.
+- Treat secrets, private infrastructure, customer data, and credentials as prohibited README content.
+
+</details>
+
+<!-- interactive-readme-standard:end -->
+
 > A static, SEO-focused professional nurse portfolio for **Reeja Maharjan**, built with Astro, Tailwind CSS, TypeScript, structured content, privacy-safe credential summaries, and recruiter-first UX.
 
 ## Production Status
