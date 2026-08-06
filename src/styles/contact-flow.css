@@ -1,0 +1,111 @@
+.contact-form {
+  display: grid;
+  gap: var(--s3);
+}
+
+.contact-form__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s2);
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--text);
+  font-size: var(--small-size);
+  font-weight: var(--w-bold);
+  letter-spacing: 0.03em;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  min-height: var(--touch-target);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-btn);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: var(--w-regular);
+  letter-spacing: var(--body-ls);
+  padding: 12px 14px;
+}
+
+.contact-form textarea {
+  min-height: 150px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: color-mix(in srgb, var(--muted) 76%, transparent);
+}
+
+.contact-form input:focus-visible,
+.contact-form textarea:focus-visible {
+  border-color: var(--accent);
+}
+
+.contact-form__privacy-note {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--muted-strong);
+  line-height: 1.62;
+  padding: var(--s2);
+}
+
+.contact-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s2);
+  align-items: center;
+}
+
+.contact-form button[aria-busy='true'] {
+  cursor: wait;
+}
+
+.form-status {
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-card);
+  line-height: 1.55;
+  padding: var(--s2);
+}
+
+.form-status--loading {
+  background: var(--surface-alt);
+  color: var(--muted-strong);
+}
+
+.form-status--success {
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--line));
+  background: var(--accent-soft);
+  color: var(--accent-hover);
+}
+
+.form-status--error {
+  border-color: color-mix(in srgb, var(--signal) 50%, var(--line));
+  background: color-mix(in srgb, var(--signal) 13%, var(--surface));
+  color: #672d1f;
+}
+
+@media (max-width: 760px) {
+  .contact-form__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form__actions,
+  .contact-form__actions .btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-form input,
+  .contact-form textarea {
+    transition: none;
+  }
+}
