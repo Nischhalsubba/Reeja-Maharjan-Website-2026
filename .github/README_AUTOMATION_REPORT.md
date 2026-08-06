@@ -18,7 +18,7 @@ Generator: `aed303eed8a536f2dda075c8be583693325aac37`
 | `codex/nurse-theme-redesign` | updated | Branch-specific README committed |
 | `final/release-acceptance-closure` | updated | Branch-specific README committed |
 | `fix/complete-in-progress-blockers` | updated | Branch-specific README committed |
-| `main` | updated | Branch-specific README committed |
+| `main` | failed | Push rejected, commonly due to branch protection |
 | `portfolio-priority-roadmap` | updated | Branch-specific README committed |
 | `work/rw11-rw13-browser-verification` | updated | Branch-specific README committed |
 | `work/rw12-rw13-pages-browser-checks` | updated | Branch-specific README committed |
