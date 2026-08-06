@@ -75,7 +75,9 @@ export const initPortfolioMotion = (): (() => void) => {
               0.2
             )
             .to(proof?.children ?? [], { autoAlpha: 1, y: 0, duration: 0.32, stagger: 0.04, clearProps: 'transform,opacity,visibility' }, 0.48)
-            .call(() => thread?.dispatchEvent(new CustomEvent('care-ledger:reveal-thread')), [], 0.28);
+            .call(() => {
+              thread?.dispatchEvent(new CustomEvent('care-ledger:reveal-thread'));
+            }, [], 0.28);
         } else if (pageHero) {
           const pageTimeline = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
           pageTimeline
