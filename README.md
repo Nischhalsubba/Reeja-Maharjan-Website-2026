@@ -4,27 +4,27 @@
 
 # Reeja-Maharjan-Website-2026
 
-**Branch-aware technical guide for [`main`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main)**
+**Branch-aware technical guide for [`agent/master-redesign-2026-08-06`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06)**
 
-<p><img alt="branch: main" src="https://img.shields.io/static/v1?label=&message=branch%3A%20main&color=5965F2&style=flat-square"> <img alt="Astro" src="https://img.shields.io/static/v1?label=&message=Astro&color=24292F&style=flat-square"> <img alt="Tailwind CSS" src="https://img.shields.io/static/v1?label=&message=Tailwind%20CSS&color=24292F&style=flat-square"> <img alt="TypeScript" src="https://img.shields.io/static/v1?label=&message=TypeScript&color=24292F&style=flat-square"> <img alt="JavaScript" src="https://img.shields.io/static/v1?label=&message=JavaScript&color=24292F&style=flat-square"> <img alt="CSS" src="https://img.shields.io/static/v1?label=&message=CSS&color=24292F&style=flat-square"> <img alt="docs: branch-aware" src="https://img.shields.io/static/v1?label=&message=docs%3A%20branch-aware&color=8250DF&style=flat-square"></p>
+<p><img alt="branch: agent/master-redesign-2026-08-06" src="https://img.shields.io/static/v1?label=&message=branch%3A%20agent%2Fmaster-redesign-2026-08-06&color=5965F2&style=flat-square"> <img alt="Astro" src="https://img.shields.io/static/v1?label=&message=Astro&color=24292F&style=flat-square"> <img alt="Tailwind CSS" src="https://img.shields.io/static/v1?label=&message=Tailwind%20CSS&color=24292F&style=flat-square"> <img alt="TypeScript" src="https://img.shields.io/static/v1?label=&message=TypeScript&color=24292F&style=flat-square"> <img alt="JavaScript" src="https://img.shields.io/static/v1?label=&message=JavaScript&color=24292F&style=flat-square"> <img alt="CSS" src="https://img.shields.io/static/v1?label=&message=CSS&color=24292F&style=flat-square"> <img alt="docs: branch-aware" src="https://img.shields.io/static/v1?label=&message=docs%3A%20branch-aware&color=8250DF&style=flat-square"></p>
 
 <p>
-  <a href="https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main"><strong>Browse source</strong></a> ·
+  <a href="https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06"><strong>Browse source</strong></a> ·
   <a href="https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/issues"><strong>Issues</strong></a> ·
-  <a href="https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/codespaces/new?ref=main"><strong>Open in Codespaces</strong></a>
+  <a href="https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/codespaces/new?ref=agent%2Fmaster-redesign-2026-08-06"><strong>Open in Codespaces</strong></a>
 </p>
 
 </div>
 
 > [!IMPORTANT]
-> This guide is generated from the files actually present on `main`. It links to detected source paths, preserves project-authored notes, and avoids claiming components that were not found.
+> This guide is generated from the files actually present on `agent/master-redesign-2026-08-06`. It links to detected source paths, preserves project-authored notes, and avoids claiming components that were not found.
 
 ## At a glance
 
 | Item | Detected value |
 |---|---|
 | Purpose | An Astro, Tailwind CSS, and TypeScript professional nurse portfolio for Reeja Maharjan with recruiter-first homepage architecture, privacy-safe credential summaries, structured Person metadata, blog credibility notes, Cloudflare Pages deployment, and Build Check workflow support. |
-| Branch role | Default branch |
+| Branch role | Compared with `main` |
 | Stack | Astro, Tailwind CSS, TypeScript, JavaScript, CSS |
 | Manifests | package.json |
 | Prerequisites | Node.js |
@@ -33,9 +33,12 @@
 
 ## Branch scope
 
-This is the repository's default branch.
+This branch differs from the default branch in the following detected paths:
 
-
+- [`docs/redesign/CURRENT_DESIGN_DNA.json`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/docs/redesign/CURRENT_DESIGN_DNA.json)
+- [`docs/redesign/TARGET_DESIGN_DNA.json`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/docs/redesign/TARGET_DESIGN_DNA.json)
+- [`docs/redesign/repository-inventory.csv`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/docs/redesign/repository-inventory.csv)
+- [`src/pages/404.astro`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/src/pages/404.astro)
 
 ## Quick start
 
@@ -57,7 +60,7 @@ npm run preview
 
 ```mermaid
 flowchart TD
-    ROOT["Reeja-Maharjan-Website-2026 / main"]
+    ROOT["Reeja-Maharjan-Website-2026 / agent/master-redesign-2026-08-06"]
     ROOT --> P0[".github/"]
     ROOT --> P1["docs/"]
     ROOT --> P2["public/"]
@@ -80,10 +83,10 @@ flowchart TD
 
 | Responsibility | Detected source paths |
 |---|---|
-| Interface | [`public`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main/public), [`src`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main/src) |
-| Quality | [`tests`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main/tests) |
-| Documentation | [`docs`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main/docs) |
-| Delivery | [`.github`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main/.github), [`scripts`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main/scripts) |
+| Interface | [`public`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06/public), [`src`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06/src) |
+| Quality | [`tests`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06/tests) |
+| Documentation | [`docs`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06/docs) |
+| Delivery | [`.github`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06/.github), [`scripts`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06/scripts) |
 
 ## Website or application map
 
@@ -125,7 +128,7 @@ flowchart LR
 
 ### Quality
 
-- [`tests`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main/tests)
+- [`tests`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06/tests)
 
 Detected commands:
 - `npm run dev`
@@ -160,7 +163,7 @@ Define useful logs, metrics, traces, alerts, and rollback signals for production
 
 ```mermaid
 flowchart LR
-    CHANGE["Change on main"] --> CHECK["Tests and quality checks"]
+    CHANGE["Change on agent/master-redesign-2026-08-06"] --> CHECK["Tests and quality checks"]
     CHECK --> REVIEW["Review architecture and documentation impact"]
     REVIEW --> BUILD["Build or package"]
     BUILD --> DEPLOY["Deploy or release"]
@@ -169,13 +172,13 @@ flowchart LR
 
 ### Automation detected
 
-- [`.github/workflows/apply-interactive-readme.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/main/.github/workflows/apply-interactive-readme.yml)
-- [`.github/workflows/browser-quality.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/main/.github/workflows/browser-quality.yml)
-- [`.github/workflows/build-check.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/main/.github/workflows/build-check.yml)
-- [`.github/workflows/cloudflare-account-audit.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/main/.github/workflows/cloudflare-account-audit.yml)
-- [`.github/workflows/production-diagnostics.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/main/.github/workflows/production-diagnostics.yml)
-- [`.github/workflows/production-smoke.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/main/.github/workflows/production-smoke.yml)
-- [`.github/workflows/visual-regression.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/main/.github/workflows/visual-regression.yml)
+- [`.github/workflows/apply-interactive-readme.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/.github/workflows/apply-interactive-readme.yml)
+- [`.github/workflows/browser-quality.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/.github/workflows/browser-quality.yml)
+- [`.github/workflows/build-check.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/.github/workflows/build-check.yml)
+- [`.github/workflows/cloudflare-account-audit.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/.github/workflows/cloudflare-account-audit.yml)
+- [`.github/workflows/production-diagnostics.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/.github/workflows/production-diagnostics.yml)
+- [`.github/workflows/production-smoke.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/.github/workflows/production-smoke.yml)
+- [`.github/workflows/visual-regression.yml`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/blob/agent/master-redesign-2026-08-06/.github/workflows/visual-regression.yml)
 
 ## Contribution flow
 
@@ -200,7 +203,7 @@ flowchart LR
 | Topic | Source |
 |---|---|
 | Repository | [`Nischhalsubba/Reeja-Maharjan-Website-2026`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026) |
-| Branch | [`main`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/main) |
+| Branch | [`agent/master-redesign-2026-08-06`](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/tree/agent/master-redesign-2026-08-06) |
 | Ownership | No CODEOWNERS file detected |
 | Contributing | Use the contribution flow above |
 | Support | [Open or review issues](https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026/issues) |
