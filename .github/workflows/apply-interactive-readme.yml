@@ -2,14 +2,6 @@ name: Apply designer README standard
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 4 * * 0"
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - README.md
-      - .github/README_AUTOMATION_REPORT.md
 
 permissions:
   contents: write
