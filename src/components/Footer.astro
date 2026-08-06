@@ -2,38 +2,41 @@
 import type { ProfileContent } from '../content/profile';
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
+const year = new Date().getFullYear();
 ---
 
 <footer class="site-footer">
-  <div class="container site-footer__lead">
+  <div class="container site-footer__masthead">
+    <p class="site-footer__folio">Field notes / {year}</p>
     <div>
       <p class="site-footer__eyebrow">Registered Nurse · Maternal Health Research</p>
       <h2>{profile.name}</h2>
     </div>
-    <p>Clinical care, patient education, documentation, telemonitoring, and research coordination.</p>
+    <p class="site-footer__statement">Clinical care, patient education, documentation, telemonitoring, and research coordination.</p>
   </div>
 
-  <div class="container site-footer__inner">
+  <div class="container site-footer__index">
     <nav aria-label="Professional pages" class="site-footer__links">
-      <a href="/#experience">Experience</a>
-      <a href="/maternal-health/">Maternal health</a>
-      <a href="/nursing-practice/">Nursing practice</a>
-      <a href="/clinical-research/">Clinical research</a>
-      <a href="/blog/">Articles</a>
-      <a href="/cv/" data-track="cv-footer">CV</a>
-      <a href="/hire-reeja/" data-track="hire-footer">Professional opportunities</a>
+      <p class="site-footer__label">Index</p>
+      <a href="/#experience"><span aria-hidden="true">01</span>Experience</a>
+      <a href="/maternal-health/"><span aria-hidden="true">02</span>Maternal health</a>
+      <a href="/nursing-practice/"><span aria-hidden="true">03</span>Nursing practice</a>
+      <a href="/clinical-research/"><span aria-hidden="true">04</span>Clinical research</a>
+      <a href="/blog/"><span aria-hidden="true">05</span>Articles</a>
+      <a href="/cv/" data-track="cv-footer"><span aria-hidden="true">06</span>CV</a>
     </nav>
 
     <div class="site-footer__contact">
-      <span class="site-footer__label">Contact</span>
+      <p class="site-footer__label">Correspondence</p>
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
       <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn</a>
       <span>{profile.contact.location}</span>
+      <a href="/hire-reeja/" data-track="hire-footer">Professional opportunities</a>
     </div>
   </div>
 
   <div class="container site-footer__legal">
-    <small>© {new Date().getFullYear()} {profile.name}</small>
-    <a href="#main-content">Back to top</a>
+    <small>© {year} {profile.name}. Professional information verified through the site’s evidence records.</small>
+    <a href="#main-content">Return to top</a>
   </div>
 </footer>
