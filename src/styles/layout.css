@@ -9,12 +9,22 @@
 }
 
 .section + .section {
-  border-top: 1px solid color-mix(in srgb, var(--line) 45%, transparent);
+  border-top: 1px solid var(--line);
 }
 
 .section-stack {
   display: grid;
   gap: var(--s4);
+}
+
+.reading-column {
+  width: min(var(--reading-max), 100%);
+}
+
+.editorial-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 40px);
 }
 
 .card-grid {
@@ -35,12 +45,17 @@
 }
 
 @media (max-width: 1024px) {
+  .editorial-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
   .card-grid--3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 768px) {
+  .editorial-grid,
   .card-grid--2,
   .card-grid--3 {
     grid-template-columns: 1fr;
