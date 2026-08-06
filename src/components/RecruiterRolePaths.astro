@@ -48,9 +48,9 @@ const pathways = [
 ];
 ---
 
-<section class="home-section" id="role-fit" aria-labelledby="role-fit-title">
+<section class="home-section home-section--role-fit" id="role-fit" aria-labelledby="role-fit-title">
   <div class="container">
-    <div class="home-section__topline">
+    <div class="home-section__topline" data-reveal>
       <div>
         <p class="home-kicker">Role fit</p>
         <h2 id="role-fit-title">Three ways Reeja can support your team.</h2>
@@ -58,18 +58,20 @@ const pathways = [
       <p class="home-section__summary">Each pathway maps documented experience to a specific hiring context without overstating scope or work authorisation.</p>
     </div>
 
-    <div class="home-role-grid">
+    <div class="home-role-grid" data-reveal-group>
       {pathways.map((pathway) => (
-        <article class="home-role-card">
-          <span class="home-role-card__number">{pathway.number}</span>
-          <p class="home-role-card__label">{pathway.label}</p>
+        <article class="home-role-card" data-reveal>
+          <div class="home-role-card__top">
+            <span class="home-role-card__number">{pathway.number}</span>
+            <p class="home-role-card__label">{pathway.label}</p>
+          </div>
           <h3>{pathway.title}</h3>
           <p class="home-role-card__summary">{pathway.summary}</p>
           <ul class="home-role-card__evidence">
             {pathway.evidence.map((item) => <li>{item}</li>)}
           </ul>
           <p class="home-role-card__scope"><strong>Scope</strong>{pathway.scope}</p>
-          <a class="home-text-link" href={pathway.href}>{pathway.cta} <span aria-hidden="true">-&gt;</span></a>
+          <a class="home-text-link" href={pathway.href}>{pathway.cta} <span aria-hidden="true">↗</span></a>
         </article>
       ))}
     </div>
