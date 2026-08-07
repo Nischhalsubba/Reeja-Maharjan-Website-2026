@@ -5,17 +5,58 @@ import { siteCopy } from './site-copy';
 
 export type * from './profile.raw';
 
-const currentExperience = sourceProfile.experience.map((item, index) =>
-  index === 0
+const experienceBullets: string[][] = [
+  [
+    'Supports the IISH MOM-HD maternal-health telemonitoring trial for pregnancies complicated by hypertension and/or diabetes.',
+    'Supports ANC participant screening, eligibility checks, consent workflows, and organised screening and follow-up records.',
+    'Educates participants and family members on home blood-pressure and blood-glucose monitoring, device use, mobile reporting, and adherence.',
+    'Reviews uploaded BP/BG readings, supports scheduled tele-follow-up, screens warning symptoms, and escalates concerns according to protocol.',
+    'Maintains study documentation and data-quality checks while supporting device logistics and coordination with obstetric, nursing, research, hospital, and technical teams.'
+  ],
+  [
+    'Supported maternal-newborn nursing care and practical counselling for patients and families in a teaching-hospital setting.',
+    'Maintained ward documentation and structured shift handover to support continuity of care.',
+    'Worked with nursing and multidisciplinary teams around monitoring, communication, follow-up, and appropriate escalation.'
+  ],
+  [
+    'Provided general-care nursing with Surgery and Gynaecology & Obstetrics exposure.',
+    'Monitored patients, documented care, supported escalation of clinical concerns, and coordinated with duty teams.',
+    'Provided patient and family education using clear, practical communication.'
+  ],
+  [
+    'Worked as a Nursing Officer with maternity-related responsibilities, including antenatal and postnatal nursing support.',
+    'Supported operation-theatre-related duties with attention to aseptic practice and organised workflow.',
+    'Maintained nursing documentation and supported day-to-day ward coordination.'
+  ]
+];
+
+const currentExperience = sourceProfile.experience.map((item, index) => ({
+  ...item,
+  ...(index === 0
     ? {
-        ...item,
         role: professionalFacts.currentRole,
         organization: `${professionalFacts.currentEmployer} - ${professionalFacts.currentProject}`,
         location: professionalFacts.currentLocation,
         period: professionalFacts.currentRolePeriod
       }
-    : item
-);
+    : {}),
+  bullets: experienceBullets[index] ?? item.bullets
+}));
+
+const credentialNotes = [
+  'Nepal Nursing Council Registered Nurse credential. The public portfolio shows a summary only; supporting verification can be shared privately with a legitimate employer when appropriate.',
+  'Active, unencumbered Texas RN single-state license. The portfolio separates licensure from work authorisation and employer credentialing; supporting verification can be shared privately when appropriate.',
+  'NCLEX-RN pathway status is represented through Reeja’s active Texas RN licensure rather than by publishing a separate exam-result document.',
+  'Structured Comprehensive Newborn Care Level II training relevant to newborn observation, family education, routine nursing support, and appropriate escalation within local clinical scope.',
+  'Hands-on CPR training participation supporting emergency-response preparedness within the requirements and protocols of the employing clinical setting.',
+  'Operation Theatre Techniques and Management training relevant to organised perioperative workflow and nursing support within assigned scope.',
+  'Delegate participation in a national cardiothoracic vascular nursing conference as part of ongoing professional learning.'
+];
+
+const currentCertifications = sourceProfile.certifications.map((item, index) => ({
+  ...item,
+  note: credentialNotes[index] ?? item.note
+}));
 
 export const profile: ProfileContent = {
   ...sourceProfile,
@@ -74,6 +115,7 @@ export const profile: ProfileContent = {
     title: 'Reeja’s professional credentials',
     summary: 'Public credential summaries are provided for recruiter review. Sensitive verification documents remain private and are available to legitimate employers when appropriate.'
   },
+  certifications: currentCertifications,
   skillsIntro: {
     id: 'skills',
     eyebrow: 'Skills',
