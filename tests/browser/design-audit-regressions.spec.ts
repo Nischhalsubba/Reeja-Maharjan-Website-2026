@@ -2,14 +2,6 @@ import { expect, test } from '@playwright/test';
 
 const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 
-function matrixTranslateX(transform: string) {
-  if (!transform || transform === 'none') return 0;
-  const match = transform.match(/^matrix\(([^)]+)\)$/);
-  if (!match) return 0;
-  const values = match[1].split(',').map((value) => Number(value.trim()));
-  return Number.isFinite(values[4]) ? values[4] : 0;
-}
-
 test('supporting-page hero rule clears the headline and metadata rows have real inset', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(`${origin}/hire-reeja/`, { waitUntil: 'networkidle' });
