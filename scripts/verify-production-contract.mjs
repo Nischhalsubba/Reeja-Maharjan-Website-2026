@@ -33,8 +33,13 @@ for (const [name, values] of Object.entries({
 }
 
 if (origin !== 'https://reejamaharjan.com.np') failures.push(`Default production origin is unexpected: ${origin}`);
-if (!requiredRoutes.includes('/') || !requiredRoutes.includes('/cv/') || !requiredRoutes.includes('/hire-reeja/')) {
-  failures.push('Required route inventory must cover homepage, CV, and recruiter journey.');
+if (
+  !requiredRoutes.includes('/') ||
+  !requiredRoutes.includes('/cv/') ||
+  !requiredRoutes.includes('/hire-reeja/') ||
+  !requiredRoutes.includes('/contact/')
+) {
+  failures.push('Required route inventory must cover homepage, CV, recruiter journey, and dedicated contact page.');
 }
 if (!retiredPaths.includes('/resume.pdf')) failures.push('Retired route inventory must contain /resume.pdf.');
 
