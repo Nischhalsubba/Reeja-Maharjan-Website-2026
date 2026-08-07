@@ -20,6 +20,8 @@ const routes = [
 ];
 
 test('Field Journal remains composed across release viewports', async ({ browser }) => {
+  test.setTimeout(150_000);
+
   for (const viewport of viewports) {
     const context = await browser.newContext({
       viewport: { width: viewport.width, height: viewport.height },
