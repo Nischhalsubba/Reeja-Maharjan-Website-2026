@@ -101,8 +101,9 @@ test('contact page exposes accessible fields and submits to Reeja email endpoint
   const submit = page.getByRole('button', { name: 'Send message' });
   await submit.click();
 
-  await expect(page.getByText('Message sent.')).toBeVisible();
-  await expect(page.getByText(/maharjanreeja88@gmail\.com/)).toBeVisible();
+  const success = page.locator('[data-form-success]');
+  await expect(success.getByText('Message sent.')).toBeVisible();
+  await expect(success.getByText(/maharjanreeja88@gmail\.com/)).toBeVisible();
   await expect(submit).toBeEnabled();
 });
 
