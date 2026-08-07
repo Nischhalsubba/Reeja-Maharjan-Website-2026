@@ -27,11 +27,10 @@ export const maxAttempts = positiveInteger('SMOKE_ATTEMPTS', 20);
 export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
-  'Clinical care,',
-  'recorded with',
-  'research discipline.',
-  'Discuss an opportunity',
-  'Read the CV'
+  'Reeja Maharjan',
+  'Clinical care and maternal-health research, with clear communication and dependable follow-up.',
+  'Contact Reeja',
+  'View CV'
 ];
 
 export const forbiddenHomepageText = [
@@ -40,7 +39,8 @@ export const forbiddenHomepageText = [
   'Available for work',
   'Immediate availability',
   'Lalitpur Metropolitan-21',
-  'Khokana, Lalitpur'
+  'Khokana, Lalitpur',
+  'Clinical care, recorded with research discipline.'
 ];
 
 export const requiredPublicFacts = [
@@ -51,6 +51,7 @@ export const requiredPublicFacts = [
 
 export const requiredRoutes = [
   '/',
+  '/contact/',
   '/cv/',
   '/hire-reeja/',
   '/blog/',
