@@ -132,6 +132,10 @@ test('contact page exposes accessible fields and submits to Reeja email endpoint
   await expect(form).toBeVisible();
   await expect(form).toHaveAttribute('action', 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com');
 
+  const honeypot = page.locator('.form-honeypot');
+  await expect(honeypot).toHaveCount(1);
+  await expect(honeypot).toBeHidden();
+
   await page.getByLabel('Name').fill('Reeja Recruiter');
   await page.getByLabel('Email').fill('recruiter@example.com');
   await page.getByLabel('Organisation / hospital').fill('Example Health Research');
