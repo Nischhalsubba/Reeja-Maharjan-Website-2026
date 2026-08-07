@@ -15,6 +15,7 @@ const routes = [
   { name: 'maternal-health', path: '/maternal-health/' },
   { name: 'nursing-practice', path: '/nursing-practice/' },
   { name: 'blog', path: '/blog/' },
+  { name: 'article', path: '/blog/essential-maternal-newborn-care-guide-2026/' },
   { name: 'cv', path: '/cv/' }
 ];
 
