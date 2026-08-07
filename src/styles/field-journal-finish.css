@@ -25,16 +25,39 @@
   cursor: pointer;
 }
 
+.field-journal .site-section--dark .site-page__split > div > p:not(.site-eyebrow) {
+  color: color-mix(in srgb, var(--fj-surface) 82%, transparent);
+}
+
+.field-journal .site-section--dark .site-button:not(.site-button--primary) {
+  border-color: color-mix(in srgb, var(--fj-surface) 78%, transparent);
+  background: transparent;
+  color: var(--fj-surface);
+}
+
+.field-journal .site-section--dark .site-button--primary {
+  border-color: var(--fj-surface);
+  background: var(--fj-surface);
+  color: var(--fj-indigo);
+}
+
 .field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a) {
   transition: color var(--fj-fast) var(--fj-ease), transform var(--fj-fast) var(--fj-ease), text-decoration-color var(--fj-fast) var(--fj-ease);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .field-journal .site-section--dark .site-button:hover,
-  .field-journal .site-section--dark .site-button:focus-visible {
+  .field-journal .site-section--dark .site-button:not(.site-button--primary):hover,
+  .field-journal .site-section--dark .site-button:not(.site-button--primary):focus-visible {
     border-color: var(--fj-surface);
     background: var(--fj-surface);
     color: var(--fj-indigo);
+  }
+
+  .field-journal .site-section--dark .site-button--primary:hover,
+  .field-journal .site-section--dark .site-button--primary:focus-visible {
+    border-color: var(--fj-brass);
+    background: var(--fj-brass);
+    color: var(--fj-ink);
   }
 
   .field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a):hover {
