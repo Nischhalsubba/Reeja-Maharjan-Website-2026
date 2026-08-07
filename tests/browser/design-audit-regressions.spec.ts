@@ -112,17 +112,30 @@ test('Field Journal palette and typography apply across the site', async ({ page
   }
 });
 
-test('contact page exposes accessible fields and submits to Reeja email endpoint', async ({ page }) => {
-  await page.route('https://formsubmit.co/ajax/maharjanreeja88@gmail.com', async (route) => {
-    expect(route.request().method()).toBe('POST');
-    const postData = route.request().postData() ?? '';
-    expect(postData).toContain('Reeja Recruiter');
-    expect(postData).toContain('recruiter@example.com');
-    expect(postData).toContain('Maternal health research opportunity');
+test('contact page submits through the provider POST flow and returns with success feedback', async ({ page }) => {
+  const providerEndpoint = 'https://formsubmit.co/maharjanreeja88@gmail.com';
+  const successUrl = `${origin}/contact/?sent=1#professional-contact-form`;
+
+  await page.route(providerEndpoint, async (route) => {
+    const request = route.request();
+    expect(request.method()).toBe('POST');
+
+    const postData = request.postData() ?? '';
+    const payload = new URLSearchParams(postData);
+    expect(payload.get('name')).toBe('Reeja Recruiter');
+    expect(payload.get('email')).toBe('recruiter@example.com');
+    expect(payload.get('organization')).toBe('Example Health Research');
+    expect(payload.get('role_type')).toBe('Research role');
+    expect(payload.get('location')).toBe('Kathmandu, Nepal');
+    expect(payload.get('message')).toContain('Maternal health research opportunity');
+    expect(payload.get('_next')).toBe('https://reejamaharjan.com.np/contact/?sent=1#professional-contact-form');
+    expect(payload.get('_url')).toBe('https://reejamaharjan.com.np/contact/');
+    expect(payload.get('_captcha')).toBeNull();
+
     await route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({ success: true })
+      status: 303,
+      headers: { location: successUrl },
+      body: ''
     });
   });
 
@@ -130,7 +143,8 @@ test('contact page exposes accessible fields and submits to Reeja email endpoint
 
   const form = page.getByRole('form', { name: /Share the opportunity details/i });
   await expect(form).toBeVisible();
-  await expect(form).toHaveAttribute('action', 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com');
+  await expect(form).toHaveAttribute('method', 'POST');
+  await expect(form).toHaveAttribute('action', providerEndpoint);
 
   const honeypot = page.locator('.form-honeypot');
   await expect(honeypot).toHaveCount(1);
@@ -163,10 +177,13 @@ test('contact page exposes accessible fields and submits to Reeja email endpoint
   await page.getByLabel('Message').fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
 
   const submit = page.getByRole('button', { name: 'Send message' });
-  await submit.click();
+  await Promise.all([
+    page.waitForURL((url) => url.pathname === '/contact/' && url.hash === '#professional-contact-form'),
+    submit.click()
+  ]);
 
   const success = page.locator('[data-form-success]');
-  await expect(success.getByText('Message sent.')).toBeVisible();
+  await expect(success.getByText('Message submitted.')).toBeVisible();
   await expect(success.getByText(/maharjanreeja88@gmail\.com/)).toBeVisible();
   await expect(submit).toBeEnabled();
 });
