@@ -18,7 +18,7 @@ const routes = [
   { name: 'cv', path: '/cv/' }
 ];
 
-test('Care Practice remains composed across release viewports', async ({ browser }) => {
+test('Field Journal remains composed across release viewports', async ({ browser }) => {
   for (const viewport of viewports) {
     const context = await browser.newContext({
       viewport: { width: viewport.width, height: viewport.height },
@@ -35,13 +35,17 @@ test('Care Practice remains composed across release viewports', async ({ browser
 
       const dimensions = await page.evaluate(() => ({
         clientWidth: document.documentElement.clientWidth,
-        scrollWidth: document.documentElement.scrollWidth
+        scrollWidth: document.documentElement.scrollWidth,
+        designSystem: document.body.dataset.designSystem,
+        background: getComputedStyle(document.body).backgroundColor
       }));
       expect(dimensions.scrollWidth, `${route.path} overflows at ${viewport.width}px`).toBeLessThanOrEqual(
         dimensions.clientWidth + 1
       );
+      expect(dimensions.designSystem).toBe('reeja-field-journal');
+      expect(dimensions.background).toBe('rgb(244, 239, 230)');
 
-      await expect(page.locator('body')).toHaveClass(/care-practice/);
+      await expect(page.locator('body')).toHaveClass(/field-journal/);
       await expect(page.locator('main')).toBeVisible();
       await page.screenshot({
         path: `test-results/visual/${viewport.name}/${route.name}.png`,
