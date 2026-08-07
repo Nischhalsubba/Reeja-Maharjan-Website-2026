@@ -47,7 +47,12 @@ export async function collectProductionFailures() {
 
   const article = await readHtml('/blog/essential-maternal-newborn-care-guide-2026/', failures);
   if (article) {
-    assertContainsAll(article, ['Last updated', 'Written by', 'No named clinical review is claimed'], 'Priority article', failures);
+    assertContainsAll(
+      article,
+      ['Last edited', 'Written by Reeja Maharjan', 'no named independent clinical reviewer is claimed'],
+      'Priority article',
+      failures
+    );
     if (article.includes('FAQPage')) failures.push('Priority article still emits FAQPage schema.');
   }
 
