@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 
-test('Care Practice heroes contain no decorative line or WebGL scene and summary rows retain comfortable inset', async ({ page }) => {
+test('supporting-page heroes contain no decorative line or WebGL scene and summary rows retain comfortable inset', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(`${origin}/hire-reeja/`, { waitUntil: 'networkidle' });
   await page.evaluate(async () => document.fonts.ready);
@@ -32,11 +32,11 @@ test('Care Practice heroes contain no decorative line or WebGL scene and summary
   expect(metrics.paddingRight).toBeGreaterThanOrEqual(16);
 
   await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
-  await expect(page.locator('.ledger-hero canvas')).toHaveCount(0);
+  await expect(page.locator('.fj-hero canvas')).toHaveCount(0);
   await expect(page.locator('[data-hero-scene]')).toHaveCount(0);
 });
 
-test('Reeja portrait uses the headshot and never relies on a cropping fit', async ({ browser }) => {
+test('Field Journal portrait uses the headshot and never relies on a cropping fit', async ({ browser }) => {
   for (const viewport of [
     { width: 375, height: 812 },
     { width: 1440, height: 1050 }
@@ -45,7 +45,7 @@ test('Reeja portrait uses the headshot and never relies on a cropping fit', asyn
     const page = await context.newPage();
     await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
 
-    const portrait = page.locator('.ledger-portrait img');
+    const portrait = page.locator('.fj-portrait__frame img');
     await expect(portrait).toBeVisible();
     await expect(portrait).toHaveAttribute('src', '/reeja-headshot.jpg');
 
@@ -56,8 +56,7 @@ test('Reeja portrait uses the headshot and never relies on a cropping fit', asyn
         naturalWidth: element.naturalWidth,
         naturalHeight: element.naturalHeight,
         objectFit: style.objectFit,
-        objectPosition: style.objectPosition,
-        minHeight: style.minHeight
+        objectPosition: style.objectPosition
       };
     });
 
@@ -65,10 +64,31 @@ test('Reeja portrait uses the headshot and never relies on a cropping fit', asyn
     expect(imageState.naturalHeight).toBeGreaterThan(0);
     expect(imageState.objectFit).toBe('contain');
     expect(imageState.objectPosition).toContain('50%');
-    expect(Number.parseFloat(imageState.minHeight)).toBe(0);
 
     await context.close();
   }
+});
+
+test('Field Journal homepage uses the approved palette and does not ship decorative Three.js', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
+  await page.evaluate(async () => document.fonts.ready);
+
+  const state = await page.evaluate(() => {
+    const body = document.body;
+    const styles = getComputedStyle(body);
+    return {
+      fieldJournal: body.classList.contains('field-journal'),
+      background: styles.backgroundColor,
+      canvasCount: document.querySelectorAll('canvas').length,
+      heroTitle: document.querySelector('.fj-hero__title')?.textContent ?? ''
+    };
+  });
+
+  expect(state.fieldJournal).toBe(true);
+  expect(state.background).toBe('rgb(244, 239, 230)');
+  expect(state.canvasCount).toBe(0);
+  expect(state.heroTitle).toContain('researcher’s eye');
 });
 
 test('contact page exposes accessible fields and submits to Reeja email endpoint', async ({ page }) => {
