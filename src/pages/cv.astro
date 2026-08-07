@@ -14,7 +14,7 @@ import '../styles/cv.css';
           <h1>{professionalFacts.name}</h1>
           <p class="site-page__lede">{professionalFacts.nepalLicense}, {professionalFacts.texasLicenseShort}, and maternal-health {professionalFacts.currentRole} based in {professionalFacts.currentLocation}.</p>
           <div class="site-actions">
-            <a class="site-button site-button--primary" href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja</a>
+            <a class="site-button site-button--primary" href="/contact/">Contact Reeja</a>
             <button class="site-button" type="button" onclick="window.print()">Print / Save PDF</button>
           </div>
         </div>
@@ -31,7 +31,7 @@ import '../styles/cv.css';
       <div class="container cv-profile-grid">
         <div>
           <p class="site-eyebrow">Profile</p>
-          <h2>Clinical care with research discipline.</h2>
+          <h2>Registered nurse with clinical and research experience.</h2>
         </div>
         <p class="cv-profile-copy">{profile.profileSummary}</p>
       </div>
@@ -137,8 +137,8 @@ import '../styles/cv.css';
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">Contact</p><h2>Discuss a nursing or research opportunity.</h2><p>Share the role, organisation, location, start date, and responsibilities.</p></div>
-        <div class="site-actions"><a class="site-button" href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja</a><a class="site-button" href="/hire-reeja/">Recruiter profile</a></div>
+        <div><p class="site-eyebrow">Contact</p><h2>Discuss a nursing or research opportunity.</h2><p>Share the role, organisation, location, expected timing, and responsibilities through the dedicated contact page.</p></div>
+        <div class="site-actions"><a class="site-button" href="/contact/">Contact Reeja</a><a class="site-button" href="/hire-reeja/">Recruiter profile</a></div>
       </div>
     </section>
   </div>
