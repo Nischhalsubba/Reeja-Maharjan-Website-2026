@@ -1,0 +1,227 @@
+/*
+  Care Ledger 1.0.1 visual-audit refinements.
+  These rules intentionally sit after the original Care Ledger layer so legacy
+  component chrome cannot leak back into the editorial system.
+*/
+
+.care-ledger {
+  --ledger-panel-pad-x: clamp(20px, 2.2vw, 34px);
+  --ledger-panel-pad-y: clamp(18px, 1.8vw, 28px);
+  --ledger-panel-pad-lg: clamp(26px, 3vw, 42px);
+  --ledger-rule-clearance: clamp(22px, 2.1vw, 30px);
+}
+
+/* Keep editorial rules near content without letting them collide with type. */
+.care-ledger .ledger-hero::before,
+.care-ledger .site-page__hero::before {
+  pointer-events: none;
+  opacity: 0.38;
+  transform: translateX(calc(-1 * var(--ledger-rule-clearance)));
+}
+
+.care-ledger .ledger-section__header,
+.care-ledger .site-section__head {
+  padding-top: clamp(24px, 2.4vw, 32px);
+}
+
+.care-ledger .cv-page .cv-profile-grid,
+.care-ledger .blog-index .blog-index__featured {
+  padding-top: clamp(24px, 2.4vw, 32px);
+}
+
+/* Supporting-page heroes were too tall and narrow, producing staircase headlines. */
+.care-ledger .site-page__hero {
+  padding-block: clamp(64px, 8vw, 112px);
+}
+
+.care-ledger .site-page__hero-grid {
+  align-items: center;
+}
+
+.care-ledger .site-page:not(.cv-page) .site-page__hero h1 {
+  max-width: 16ch;
+  font-size: clamp(3rem, 5.5vw, 6rem);
+  letter-spacing: -0.052em;
+  line-height: 0.95;
+}
+
+.care-ledger .blog-article-page .blog-article__intro h1 {
+  max-width: 16ch;
+  font-size: clamp(3rem, 5.5vw, 6rem);
+  letter-spacing: -0.052em;
+  line-height: 0.95;
+}
+
+.care-ledger .ledger-hero h1 {
+  max-width: 11.4ch;
+  font-size: clamp(3.3rem, 6vw, 6.5rem);
+  letter-spacing: -0.056em;
+  line-height: 0.94;
+}
+
+.care-ledger .ledger-hero__intro,
+.care-ledger .site-page__lede,
+.care-ledger .blog-article-page .blog-article__dek {
+  padding-left: clamp(22px, 2vw, 30px);
+}
+
+/* Explicit panel ownership prevents older card borders from surviving with zero inset. */
+.care-ledger .site-page__summary,
+.care-ledger .blog-article-page .blog-article__meta-panel {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: color-mix(in srgb, var(--surface) 92%, var(--bg));
+  box-shadow: none;
+}
+
+.care-ledger .site-page__summary > div,
+.care-ledger .blog-article-page .blog-article__meta-panel > div {
+  gap: clamp(18px, 2vw, 30px);
+  padding: var(--ledger-panel-pad-y) var(--ledger-panel-pad-x);
+}
+
+.care-ledger .site-page__summary dt,
+.care-ledger .blog-article-page .blog-article__meta-panel dt {
+  padding-top: 2px;
+  font-size: 0.62rem;
+  line-height: 1.45;
+}
+
+.care-ledger .site-page__summary dd,
+.care-ledger .blog-article-page .blog-article__meta-panel dd {
+  font-size: clamp(0.9rem, 1vw, 0.98rem);
+  line-height: 1.55;
+}
+
+.care-ledger .site-card {
+  gap: 18px;
+  padding: var(--ledger-panel-pad-lg);
+}
+
+.care-ledger .reading-index__entry {
+  padding: clamp(28px, 3.2vw, 44px);
+}
+
+.care-ledger .ledger-proof > div {
+  gap: 10px;
+  padding: 24px clamp(24px, 2.5vw, 34px);
+}
+
+.care-ledger .section-shell {
+  border: 1px solid var(--line-strong);
+  border-radius: 0;
+  background: var(--surface);
+  box-shadow: none;
+}
+
+.care-ledger .section-shell__head,
+.care-ledger .section-shell__body {
+  padding: var(--ledger-panel-pad-lg);
+}
+
+.care-ledger .section-shell__body {
+  border-top: 1px solid var(--line);
+}
+
+.care-ledger .blog-author-card,
+.care-ledger .blog-note-strong,
+.care-ledger .site-note {
+  padding: var(--ledger-panel-pad-lg);
+}
+
+/* Controls need a little more breathing room while retaining the rectangular grammar. */
+.care-ledger .ledger-button,
+.care-ledger .portfolio-button,
+.care-ledger .home-button,
+.care-ledger .site-button,
+.care-ledger .btn {
+  padding: 12px 20px;
+}
+
+/* The nav was visually under-scaled relative to the masthead. */
+.care-ledger .desktop-nav a {
+  padding-inline: 16px;
+  font-size: 0.78rem;
+}
+
+.care-ledger .desktop-nav a > span {
+  font-size: 0.6rem;
+}
+
+/* Portrait: show Reeja, not an art-directed crop of her clothing. */
+.care-ledger .ledger-portrait__frame {
+  aspect-ratio: 4 / 5;
+  display: grid;
+  place-items: center;
+  background: var(--surface-alt);
+}
+
+.care-ledger .ledger-portrait img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  max-height: none;
+  display: block;
+  object-fit: contain;
+  object-position: center center;
+  filter: none;
+}
+
+@media (max-width: 900px) {
+  .care-ledger .ledger-hero__scene {
+    opacity: 0.42;
+  }
+
+  .care-ledger .site-page__hero-grid {
+    align-items: start;
+  }
+}
+
+@media (max-width: 640px) {
+  .care-ledger {
+    --ledger-panel-pad-x: 20px;
+    --ledger-panel-pad-y: 18px;
+    --ledger-panel-pad-lg: 24px;
+  }
+
+  .care-ledger .ledger-hero__scene {
+    display: none;
+  }
+
+  .care-ledger .ledger-hero h1,
+  .care-ledger .site-page:not(.cv-page) .site-page__hero h1,
+  .care-ledger .blog-article-page .blog-article__intro h1 {
+    max-width: 100%;
+    font-size: clamp(2.7rem, 12vw, 4.15rem);
+    letter-spacing: -0.045em;
+    line-height: 0.97;
+  }
+
+  .care-ledger .ledger-portrait {
+    width: min(100%, 520px);
+    margin-inline: auto;
+  }
+
+  .care-ledger .site-page__summary > div,
+  .care-ledger .blog-article-page .blog-article__meta-panel > div {
+    gap: 7px;
+  }
+
+  .care-ledger .ledger-hero__actions,
+  .care-ledger .ledger-contact__actions,
+  .care-ledger .site-actions {
+    gap: 12px;
+  }
+}
+
+@media print {
+  .care-ledger .ledger-hero::before,
+  .care-ledger .site-page__hero::before {
+    transform: none;
+  }
+
+  .care-ledger .cv-page .site-page__summary > div {
+    padding: 7pt 0;
+  }
+}
