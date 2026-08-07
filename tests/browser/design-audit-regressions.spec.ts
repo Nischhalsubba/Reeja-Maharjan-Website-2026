@@ -134,7 +134,26 @@ test('contact page exposes accessible fields and submits to Reeja email endpoint
 
   const honeypot = page.locator('.form-honeypot');
   await expect(honeypot).toHaveCount(1);
-  await expect(honeypot).toBeHidden();
+  await expect(honeypot).toHaveAttribute('aria-hidden', 'true');
+  await expect(honeypot).toHaveAttribute('tabindex', '-1');
+  const honeypotState = await honeypot.evaluate((element) => {
+    const style = getComputedStyle(element);
+    const rect = element.getBoundingClientRect();
+    return {
+      opacity: style.opacity,
+      position: style.position,
+      width: rect.width,
+      height: rect.height,
+      pointerEvents: style.pointerEvents,
+      clipPath: style.clipPath
+    };
+  });
+  expect(honeypotState.opacity).toBe('0');
+  expect(honeypotState.position).toBe('absolute');
+  expect(honeypotState.width).toBeLessThanOrEqual(1);
+  expect(honeypotState.height).toBeLessThanOrEqual(1);
+  expect(honeypotState.pointerEvents).toBe('none');
+  expect(honeypotState.clipPath).not.toBe('none');
 
   await page.getByLabel('Name').fill('Reeja Recruiter');
   await page.getByLabel('Email').fill('recruiter@example.com');
