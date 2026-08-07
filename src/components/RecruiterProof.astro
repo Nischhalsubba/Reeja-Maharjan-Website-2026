@@ -7,22 +7,24 @@ const featuredWriting = [
 ];
 ---
 
-<section class="ledger-section care-section care-credentials" id="credentials" aria-labelledby="credentials-title">
+<section class="fj-section" id="credentials" aria-labelledby="credentials-title">
   <div class="container">
-    <header class="ledger-section__header care-section__header" data-motion-reveal>
-      <p class="ledger-kicker">Credentials</p>
-      <h2 id="credentials-title">Licensure and clinical training, presented for quick verification.</h2>
-      <p>Sensitive documents are not published publicly. Verification material can be shared privately with legitimate employers and recruiters.</p>
+    <header class="fj-section__head" data-fj-reveal>
+      <p class="fj-kicker">04 · Verification register</p>
+      <div>
+        <h2 id="credentials-title">Credentials presented like records, not badges.</h2>
+        <p>Sensitive documents stay private. The public portfolio names the credential and issuer; legitimate employers can request verification material directly.</p>
+      </div>
     </header>
 
-    <div class="credential-registry care-credentials__grid" data-motion-group>
+    <div class="fj-registry" data-fj-group>
       {profile.certifications.slice(0, 6).map((credential) => (
-        <article class="credential-registry__entry care-credentials__card" data-motion-reveal>
+        <article class="fj-registry__entry" data-fj-reveal>
           <div>
-            <p class="care-credentials__issuer">{credential.issuer}</p>
+            <p class="fj-registry__issuer">{credential.issuer}</p>
             <h3>{credential.title}</h3>
           </div>
-          <div class="care-credentials__meta">
+          <div class="fj-registry__meta">
             <p>{credential.date}</p>
             <span>{credential.credentialLabel ?? 'Verification available on request'}</span>
           </div>
@@ -32,25 +34,28 @@ const featuredWriting = [
   </div>
 </section>
 
-<section class="ledger-section care-section care-reading" id="writing" aria-labelledby="writing-title">
+<section class="fj-section fj-section--surface" id="writing" aria-labelledby="writing-title">
   <div class="container">
-    <header class="ledger-section__header ledger-section__header--split care-section__header care-section__header--split" data-motion-reveal>
+    <header class="fj-section__head" data-fj-reveal>
+      <p class="fj-kicker">05 · Reading notes</p>
       <div>
-        <p class="ledger-kicker">Selected writing</p>
-        <h2 id="writing-title">Practical nursing notes for real care decisions.</h2>
-        <p>Articles translate clinical learning into clear, accessible guidance while keeping scope and safety notes visible.</p>
+        <h2 id="writing-title">Writing that makes clinical reasoning easier to use.</h2>
+        <p>Selected articles translate nursing and maternal-health topics into clear, practical guidance while keeping scope and safety visible.</p>
       </div>
-      <a class="ledger-link care-link" href="/blog/">Browse all articles</a>
     </header>
 
-    <div class="reading-index care-reading__grid" data-motion-group>
-      {featuredWriting.map((article) => (
-        <a class="reading-index__entry care-reading__card" href={article.href} data-motion-reveal>
-          <p>{article.category}</p>
+    <div class="fj-reading" data-fj-group>
+      {featuredWriting.map((article, index) => (
+        <a class="fj-reading__entry" href={article.href} data-fj-reveal>
+          <p class="fj-reading__meta">0{index + 1}<br />{article.category}</p>
           <h3>{article.title}</h3>
-          <small>Read article</small>
+          <small>Open note</small>
         </a>
       ))}
+    </div>
+
+    <div class="fj-writing__footer" data-fj-reveal>
+      <a class="fj-link" href="/blog/">Browse the complete article library</a>
     </div>
   </div>
 </section>
