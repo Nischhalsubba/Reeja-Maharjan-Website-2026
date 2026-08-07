@@ -7,43 +7,48 @@ const featuredWriting = [
 ];
 ---
 
-<section class="ledger-section ledger-section--registry" id="credentials" aria-labelledby="credentials-title">
+<section class="ledger-section care-section care-credentials" id="credentials" aria-labelledby="credentials-title">
   <div class="container">
-    <header class="ledger-section__header" data-ledger-reveal>
-      <p class="ledger-kicker">Credential registry</p>
-      <h2 id="credentials-title">Licenses and clinical training, indexed.</h2>
-      <p>Verification documents are shared privately with legitimate employers and recruiters.</p>
+    <header class="ledger-section__header care-section__header" data-motion-reveal>
+      <p class="ledger-kicker">Credentials</p>
+      <h2 id="credentials-title">Licensure and clinical training, presented for quick verification.</h2>
+      <p>Sensitive documents are not published publicly. Verification material can be shared privately with legitimate employers and recruiters.</p>
     </header>
 
-    <div class="credential-registry" data-ledger-group>
-      {profile.certifications.slice(0, 6).map((credential, index) => (
-        <article class="credential-registry__entry" data-ledger-reveal>
-          <span class="credential-registry__number">{String(index + 1).padStart(2, '0')}</span>
-          <div><p>{credential.issuer}</p><h3>{credential.title}</h3></div>
-          <div><p>{credential.date}</p><span>{credential.credentialLabel ?? 'Verification available on request'}</span></div>
+    <div class="credential-registry care-credentials__grid" data-motion-group>
+      {profile.certifications.slice(0, 6).map((credential) => (
+        <article class="credential-registry__entry care-credentials__card" data-motion-reveal>
+          <div>
+            <p class="care-credentials__issuer">{credential.issuer}</p>
+            <h3>{credential.title}</h3>
+          </div>
+          <div class="care-credentials__meta">
+            <p>{credential.date}</p>
+            <span>{credential.credentialLabel ?? 'Verification available on request'}</span>
+          </div>
         </article>
       ))}
     </div>
   </div>
 </section>
 
-<section class="ledger-section ledger-section--reading" id="writing" aria-labelledby="writing-title">
+<section class="ledger-section care-section care-reading" id="writing" aria-labelledby="writing-title">
   <div class="container">
-    <header class="ledger-section__header ledger-section__header--split" data-ledger-reveal>
+    <header class="ledger-section__header ledger-section__header--split care-section__header care-section__header--split" data-motion-reveal>
       <div>
-        <p class="ledger-kicker">Selected writing / reading file</p>
-        <h2 id="writing-title">Practical nursing notes for real decisions.</h2>
+        <p class="ledger-kicker">Selected writing</p>
+        <h2 id="writing-title">Practical nursing notes for real care decisions.</h2>
+        <p>Articles translate clinical learning into clear, accessible guidance while keeping scope and safety notes visible.</p>
       </div>
-      <a class="ledger-link" href="/blog/">Open the article index</a>
+      <a class="ledger-link care-link" href="/blog/">Browse all articles</a>
     </header>
 
-    <div class="reading-index" data-ledger-group>
-      {featuredWriting.map((article, index) => (
-        <a class={`reading-index__entry ${index === 0 ? 'reading-index__entry--feature' : ''}`} href={article.href} data-ledger-reveal>
-          <span>{String(index + 1).padStart(2, '0')}</span>
+    <div class="reading-index care-reading__grid" data-motion-group>
+      {featuredWriting.map((article) => (
+        <a class="reading-index__entry care-reading__card" href={article.href} data-motion-reveal>
           <p>{article.category}</p>
           <h3>{article.title}</h3>
-          <small>Read guide</small>
+          <small>Read article</small>
         </a>
       ))}
     </div>
