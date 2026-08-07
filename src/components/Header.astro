@@ -47,14 +47,18 @@ const links = siteCopy.navigation;
     id="mobile-nav"
     role="dialog"
     aria-modal="true"
-    aria-label="Mobile navigation"
+    aria-labelledby="mobile-nav-title"
     aria-hidden="true"
   >
+    <span
+      id="mobile-nav-title"
+      style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0"
+    >Mobile navigation</span>
     <nav class="mobile-nav__panel" aria-label="Mobile navigation links">
       <div class="mobile-nav__head">
         <div>
           <span class="mobile-nav__eyebrow">{name}</span>
-          <strong id="mobile-nav-title">Explore Reeja’s portfolio</strong>
+          <strong>Explore Reeja’s portfolio</strong>
           <small>{siteCopy.siteDescriptor}</small>
         </div>
         <button class="mobile-nav__close" type="button" data-mobile-nav-close aria-label="Close menu">
