@@ -1,12 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RecruiterHomepage from '../components/RecruiterHomepage.astro';
-import { professionalFacts } from '../content/professional-facts';
+import { siteCopy } from '../content/site-copy';
 ---
 
-<BaseLayout
-  title={`${professionalFacts.name} | Registered Nurse and Research Assistant`}
-  description={`${professionalFacts.name} is a ${professionalFacts.nepalLicense}, ${professionalFacts.texasLicense}, and ${professionalFacts.currentRole} with hospital, maternal-health research, patient education, telemonitoring, and documentation experience.`}
->
+<BaseLayout title={siteCopy.home.title} description={siteCopy.home.description}>
   <RecruiterHomepage />
 </BaseLayout>

@@ -1,25 +1,20 @@
 ---
+import { siteCopy } from '../content/site-copy';
+
 type Props = { name: string };
 const { name } = Astro.props;
 const path = Astro.url.pathname;
 const current = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
-const links = [
-  { href: '/#experience', label: 'Experience' },
-  { href: '/maternal-health/', label: 'Maternal health' },
-  { href: '/nursing-practice/', label: 'Nursing practice' },
-  { href: '/clinical-research/', label: 'Research' },
-  { href: '/blog/', label: 'Articles' },
-  { href: '/cv/', label: 'CV' }
-];
+const links = siteCopy.navigation;
 ---
 
 <header class="site-header" aria-label="Primary navigation" data-site-header>
   <div class="container site-header__inner">
-    <a class="brand" href="/" aria-label="Reeja Maharjan homepage">
+    <a class="brand" href="/" aria-label={`${name} homepage`}>
       <span class="brand__mark" aria-hidden="true">RM</span>
       <span class="brand__text">
         <strong>{name}</strong>
-        <small>Registered Nurse · Research Assistant</small>
+        <small>{siteCopy.siteDescriptor}</small>
       </span>
     </a>
 
@@ -30,7 +25,7 @@ const links = [
         </a>
       ))}
       <a class="nav-cta" href="/contact/" aria-current={current('/contact/') ? 'page' : undefined} data-track="contact-nav">
-        Contact
+        Contact Reeja
       </a>
     </nav>
 
@@ -58,15 +53,15 @@ const links = [
     <nav class="mobile-nav__panel" aria-label="Mobile navigation links">
       <div class="mobile-nav__head">
         <div>
-          <span class="mobile-nav__eyebrow">Reeja Maharjan</span>
-          <strong id="mobile-nav-title">Mobile navigation</strong>
-          <small>Registered Nurse · Research Assistant</small>
+          <span class="mobile-nav__eyebrow">{name}</span>
+          <strong id="mobile-nav-title">Explore Reeja’s portfolio</strong>
+          <small>{siteCopy.siteDescriptor}</small>
         </div>
         <button class="mobile-nav__close" type="button" data-mobile-nav-close aria-label="Close menu">
           <span aria-hidden="true"></span>
         </button>
       </div>
-      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>About Reeja</a>
       {links.map((link) => (
         <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>
           {link.label}

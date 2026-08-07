@@ -1,26 +1,27 @@
 ---
 import { professionalFacts } from '../content/professional-facts';
+import { siteCopy } from '../content/site-copy';
+
+const copy = siteCopy.home.hero;
 ---
 
 <section class="fj-hero" id="home" aria-labelledby="home-title">
   <div class="container fj-hero__grid">
     <div class="fj-hero__content">
-      <p class="fj-kicker" data-fj-hero>Registered Nurse · Research Professional</p>
+      <p class="fj-kicker" data-fj-hero>{copy.kicker}</p>
 
       <h1 id="home-title" class="fj-hero__title" data-fj-hero>
-        Clinical care with a <em>researcher’s eye</em> for detail.
+        {copy.titleBefore} <em>{copy.titleEmphasis}</em> {copy.titleAfter}
       </h1>
 
-      <p class="fj-hero__intro" data-fj-hero>
-        Reeja Maharjan works across nursing practice, maternal-health research, participant follow-up, documentation, telemonitoring, and professional education. Her current work with {professionalFacts.currentEmployerShort} brings clinical judgement and careful research coordination into the same daily practice.
-      </p>
+      <p class="fj-hero__intro" data-fj-hero>{copy.intro}</p>
 
       <div class="fj-hero__actions" aria-label="Primary actions" data-fj-hero>
-        <a class="fj-button fj-button--primary" href="/contact/" data-track="home-contact">Contact Reeja</a>
-        <a class="fj-button" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
+        <a class="fj-button fj-button--primary" href="/contact/" data-track="home-contact">{copy.primaryCta}</a>
+        <a class="fj-button" href={professionalFacts.publicCvPath} data-track="home-cv">{copy.secondaryCta}</a>
       </div>
 
-      <div class="fj-hero__ribbon" aria-label="Professional credentials" data-fj-hero>
+      <div class="fj-hero__ribbon" aria-label="Reeja Maharjan professional credentials" data-fj-hero>
         <span>{professionalFacts.nepalLicenseShort}</span>
         <span>{professionalFacts.texasLicenseShort}</span>
         <span>{professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</span>
@@ -32,7 +33,7 @@ import { professionalFacts } from '../content/professional-facts';
       <div class="fj-portrait__frame">
         <img
           src="/reeja-headshot.jpg"
-          alt="Reeja Maharjan standing outdoors in Nepal"
+          alt="Reeja Maharjan, Registered Nurse and maternal-health Research Assistant, standing outdoors in Nepal"
           width="800"
           height="1000"
           sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 56vw, 410px"
@@ -41,10 +42,10 @@ import { professionalFacts } from '../content/professional-facts';
           decoding="async"
         />
       </div>
-      <span class="fj-portrait__tag" aria-hidden="true">Portrait · Field note 01</span>
-      <p class="fj-portrait__note" aria-hidden="true">Care is practical. Good research makes the reasoning visible.</p>
+      <span class="fj-portrait__tag" aria-hidden="true">{copy.portraitTag}</span>
+      <p class="fj-portrait__note" aria-hidden="true">{copy.portraitNote}</p>
       <figcaption>
-        {professionalFacts.currentRole} · {professionalFacts.currentEmployerShort}<br />{professionalFacts.currentLocation}
+        {professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}<br />{professionalFacts.currentLocation}
       </figcaption>
     </figure>
   </div>

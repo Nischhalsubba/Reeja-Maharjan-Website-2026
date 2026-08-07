@@ -2,24 +2,25 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProfessionalContactForm from '../components/ProfessionalContactForm.astro';
 import { professionalFacts } from '../content/professional-facts';
+import { siteCopy } from '../content/site-copy';
+
+const copy = siteCopy.contact;
 ---
 
-<BaseLayout
-  title={`Contact ${professionalFacts.name} | Nursing and Research Opportunities`}
-  description={`Contact ${professionalFacts.name} about nursing, maternal-health research, hospital, NGO, INGO, and health-programme opportunities.`}
->
+<BaseLayout title={copy.title} description={copy.description}>
   <div class="contact-page">
     <section class="contact-hero" aria-labelledby="contact-page-title">
       <div class="container contact-hero__grid">
         <div class="contact-hero__copy" data-motion-reveal>
-          <p class="site-eyebrow">Professional contact</p>
-          <h1 id="contact-page-title">Let’s discuss the role, project, or care setting.</h1>
-          <p>Reeja welcomes relevant nursing, maternal-health research, hospital, NGO, INGO, and care-coordination opportunities. A concise first message is enough to start.</p>
+          <p class="site-eyebrow">{copy.eyebrow}</p>
+          <h1 id="contact-page-title">{copy.heading}</h1>
+          <p>{copy.intro}</p>
         </div>
         <div class="contact-hero__details" data-motion-reveal>
-          <div><span>Email</span><a href={`mailto:${professionalFacts.professionalEmail}`}>{professionalFacts.professionalEmail}</a></div>
+          <div><span>Email Reeja</span><a href={`mailto:${professionalFacts.professionalEmail}`}>{professionalFacts.professionalEmail}</a></div>
           <div><span>Based in</span><strong>{professionalFacts.currentLocation}</strong></div>
-          <div><span>Current work</span><strong>{professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</strong></div>
+          <div><span>Current role</span><strong>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</strong></div>
+          <div><span>Current project</span><strong>{professionalFacts.currentProjectShort}</strong></div>
         </div>
       </div>
     </section>
@@ -30,28 +31,22 @@ import { professionalFacts } from '../content/professional-facts';
 
         <aside class="contact-sidebar" aria-label="Contact guidance" data-motion-reveal>
           <div class="contact-sidebar__block">
-            <p class="site-eyebrow">Helpful details</p>
-            <h2>What to include</h2>
-            <ul>
-              <li>Organisation or hospital</li>
-              <li>Role or project title</li>
-              <li>Location and working arrangement</li>
-              <li>Expected timing or contract period</li>
-              <li>Main responsibilities and next step</li>
-            </ul>
+            <p class="site-eyebrow">{copy.guidanceEyebrow}</p>
+            <h2>{copy.guidanceHeading}</h2>
+            <ul>{copy.guidanceItems.map((item) => <li>{item}</li>)}</ul>
           </div>
 
           <div class="contact-sidebar__block contact-sidebar__block--soft">
-            <p class="site-eyebrow">Professional records</p>
-            <h2>Need credentials first?</h2>
-            <p>The public CV summarises licensure, training, education, and experience. Sensitive verification documents are shared privately where appropriate.</p>
+            <p class="site-eyebrow">{copy.recordsEyebrow}</p>
+            <h2>{copy.recordsHeading}</h2>
+            <p>{copy.recordsText}</p>
             <a class="care-link" href={professionalFacts.publicCvPath}>View Reeja’s CV</a>
           </div>
 
           <div class="contact-sidebar__block">
-            <p class="site-eyebrow">Other channels</p>
-            <a class="contact-sidebar__social" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a class="contact-sidebar__social" href={`mailto:${professionalFacts.professionalEmail}`}>Direct email</a>
+            <p class="site-eyebrow">{copy.channelsEyebrow}</p>
+            <a class="contact-sidebar__social" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer">Reeja on LinkedIn</a>
+            <a class="contact-sidebar__social" href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja directly</a>
           </div>
         </aside>
       </div>

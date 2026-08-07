@@ -12,25 +12,25 @@ const { publishedAt, updatedAt, governance } = Astro.props;
 ---
 
 <section class="site-note" aria-labelledby="article-governance-title">
-  <p class="site-eyebrow">Editorial information</p>
-  <h2 id="article-governance-title">Who this article is for and how it is governed</h2>
+  <p class="site-eyebrow">About this article</p>
+  <h2 id="article-governance-title">Written by Reeja, with sources and review dates shown clearly</h2>
   <dl>
-    <div><dt>Written by</dt><dd><a href={editorialPolicy.authorProfileUrl}>{editorialPolicy.authorName}, {editorialPolicy.authorQualification}</a></dd></div>
-    <div><dt>Primary audience</dt><dd>{governance.audience}</dd></div>
-    <div><dt>User need</dt><dd>{governance.userNeed}</dd></div>
+    <div><dt>Author</dt><dd><a href={editorialPolicy.authorProfileUrl}>{editorialPolicy.authorName}, {editorialPolicy.authorQualification}</a></dd></div>
+    <div><dt>Written for</dt><dd>{governance.audience}</dd></div>
+    <div><dt>Reader goal</dt><dd>{governance.userNeed}</dd></div>
     <div><dt>Published</dt><dd>{formatEditorialDate(publishedAt)}</dd></div>
-    <div><dt>Last updated</dt><dd>{formatEditorialDate(updatedAt)}</dd></div>
-    <div><dt>Sources last checked</dt><dd>{formatEditorialDate(governance.sourcesAccessedAt)}</dd></div>
-    <div><dt>Review due</dt><dd>{formatEditorialDate(governance.reviewDueAt)}</dd></div>
+    <div><dt>Last edited</dt><dd>{formatEditorialDate(updatedAt)}</dd></div>
+    <div><dt>Sources checked</dt><dd>{formatEditorialDate(governance.sourcesAccessedAt)}</dd></div>
+    <div><dt>Next source review due</dt><dd>{formatEditorialDate(governance.reviewDueAt)}</dd></div>
     {governance.reviewer && (
       <div>
-        <dt>Clinically reviewed by</dt>
+        <dt>Clinical reviewer</dt>
         <dd>{governance.reviewer.name}, {governance.reviewer.qualification}, {governance.reviewer.role} · {formatEditorialDate(governance.reviewer.reviewedAt)}</dd>
       </div>
     )}
   </dl>
-  {!governance.reviewer && <p>No named clinical review is claimed for this article.</p>}
-  <p><strong>Nurse-led practice lens:</strong> {governance.practiceLens}</p>
+  {!governance.reviewer && <p><strong>Clinical review status:</strong> no named independent clinical reviewer is claimed for this article.</p>}
+  <p><strong>Reeja’s nursing lens:</strong> {governance.practiceLens}</p>
   <p>{editorialPolicy.safetyNote}</p>
-  <p>Corrections: <a href={`mailto:${editorialPolicy.correctionEmail}`}>{editorialPolicy.correctionEmail}</a></p>
+  <p>Questions or corrections: <a href={`mailto:${editorialPolicy.correctionEmail}`}>{editorialPolicy.correctionEmail}</a></p>
 </section>

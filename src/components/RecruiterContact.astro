@@ -1,17 +1,20 @@
 ---
 import { professionalFacts } from '../content/professional-facts';
+import { siteCopy } from '../content/site-copy';
+
+const copy = siteCopy.home.contact;
 ---
 
 <section class="fj-contact" id="contact" aria-labelledby="contact-title">
   <div class="container fj-contact__inner" data-fj-reveal>
     <div>
-      <p class="fj-kicker">06 · Open correspondence</p>
-      <h2 id="contact-title">A useful conversation starts with the work itself.</h2>
-      <p>Share the organisation, role, location, and what you need from a nurse or research professional. Reeja can provide private verification documents where appropriate.</p>
+      <p class="fj-kicker">{copy.kicker}</p>
+      <h2 id="contact-title">{copy.title}</h2>
+      <p>{copy.summary}</p>
     </div>
     <div class="fj-contact__actions">
-      <a class="fj-button fj-button--primary" href="/contact/" data-track="home-contact-final">Write to Reeja</a>
-      <a class="fj-link" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">LinkedIn profile</a>
+      <a class="fj-button fj-button--primary" href="/contact/" data-track="home-contact-final">{copy.primaryCta}</a>
+      <a class="fj-link" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="contact-linkedin">{copy.linkedinCta}</a>
       <span class="fj-contact__email">{professionalFacts.professionalEmail}</span>
     </div>
   </div>

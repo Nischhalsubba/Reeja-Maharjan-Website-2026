@@ -1,16 +1,19 @@
 ---
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
+import { siteCopy } from '../content/site-copy';
+
 const selectedExperience = profile.experience.slice(0, 3);
+const copy = siteCopy.home.experience;
 ---
 
 <section class="fj-section fj-section--indigo" id="experience" aria-labelledby="experience-title">
   <div class="container">
     <header class="fj-section__head" data-fj-reveal>
-      <p class="fj-kicker">03 · Practice log</p>
+      <p class="fj-kicker">{copy.kicker}</p>
       <div>
-        <h2 id="experience-title">A working record, not a wall of job cards.</h2>
-        <p>Recent roles show the continuity between bedside care, maternal-health research, documentation, and follow-up.</p>
+        <h2 id="experience-title">{copy.title}</h2>
+        <p>{copy.summary}</p>
       </div>
     </header>
 
@@ -32,7 +35,7 @@ const selectedExperience = profile.experience.slice(0, 3);
     </ol>
 
     <div style="margin-top: var(--fj-space-5)" data-fj-reveal>
-      <a class="fj-link" style="color: var(--fj-surface)" href={professionalFacts.publicCvPath}>Read the full chronology</a>
+      <a class="fj-link" style="color: var(--fj-surface)" href={professionalFacts.publicCvPath}>{copy.cta}</a>
     </div>
   </div>
 </section>

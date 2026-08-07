@@ -1,19 +1,18 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteCopy } from '../content/site-copy';
+
+const copy = siteCopy.notFound;
 ---
 
-<BaseLayout
-  title="Page Not Found | Reeja Maharjan"
-  description="The requested page could not be found."
-  robots="noindex, nofollow"
->
+<BaseLayout title={copy.title} description={copy.description} robots="noindex, nofollow">
   <div class="site-page">
     <section class="site-page__hero site-empty">
       <div class="container">
-        <p class="site-eyebrow">404</p>
-        <h1>Page not found.</h1>
-        <p class="site-page__lede">The page may have moved, changed, or never existed.</p>
-        <div class="site-actions"><a class="site-button site-button--primary" href="/">Return home</a><a class="site-button" href="/blog/">Browse articles</a></div>
+        <p class="site-eyebrow">{copy.eyebrow}</p>
+        <h1>{copy.heading}</h1>
+        <p class="site-page__lede">{copy.lede}</p>
+        <div class="site-actions"><a class="site-button site-button--primary" href="/">About Reeja</a><a class="site-button" href="/blog/">Read Reeja’s articles</a></div>
       </div>
     </section>
   </div>

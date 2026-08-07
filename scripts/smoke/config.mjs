@@ -28,11 +28,11 @@ export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
   'Reeja Maharjan',
-  'Clinical care with a',
-  'researcher’s eye',
-  'for detail.',
+  'Reeja Maharjan is a',
+  'Registered Nurse',
+  'working across clinical care and maternal-health research.',
   'Contact Reeja',
-  'View CV'
+  'View Reeja’s CV'
 ];
 
 export const forbiddenHomepageText = [
@@ -42,7 +42,9 @@ export const forbiddenHomepageText = [
   'Immediate availability',
   'Lalitpur Metropolitan-21',
   'Khokana, Lalitpur',
-  'Clinical care, recorded with research discipline.'
+  'Clinical care, recorded with research discipline.',
+  'Clinical care with a',
+  'researcher’s eye'
 ];
 
 export const requiredPublicFacts = [
@@ -56,6 +58,9 @@ export const requiredRoutes = [
   '/contact/',
   '/cv/',
   '/hire-reeja/',
+  '/clinical-research/',
+  '/maternal-health/',
+  '/nursing-practice/',
   '/blog/',
   '/blog/essential-maternal-newborn-care-guide-2026/'
 ];

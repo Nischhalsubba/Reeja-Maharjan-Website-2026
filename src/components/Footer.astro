@@ -1,5 +1,7 @@
 ---
 import type { ProfileContent } from '../content/profile';
+import { siteCopy } from '../content/site-copy';
+
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
 const year = new Date().getFullYear();
@@ -8,34 +10,35 @@ const year = new Date().getFullYear();
 <footer class="site-footer">
   <div class="container site-footer__masthead">
     <div>
-      <p class="site-footer__eyebrow">Registered Nurse · Maternal-health Research</p>
+      <p class="site-footer__eyebrow">{siteCopy.footer.eyebrow}</p>
       <h2>{profile.name}</h2>
     </div>
-    <p class="site-footer__statement">Clinical care, patient education, documentation, telemonitoring, and research coordination presented in a clear professional portfolio.</p>
+    <p class="site-footer__statement">{siteCopy.footer.statement}</p>
   </div>
 
   <div class="container site-footer__index">
     <nav aria-label="Professional pages" class="site-footer__links">
-      <p class="site-footer__label">Explore</p>
+      <p class="site-footer__label">{siteCopy.footer.exploreLabel}</p>
+      <a href="/">About Reeja</a>
       <a href="/#experience">Experience</a>
+      <a href="/clinical-research/">Clinical research</a>
       <a href="/maternal-health/">Maternal health</a>
       <a href="/nursing-practice/">Nursing practice</a>
-      <a href="/clinical-research/">Clinical research</a>
-      <a href="/blog/">Articles</a>
-      <a href="/cv/" data-track="cv-footer">CV</a>
+      <a href="/blog/">Writing</a>
+      <a href="/cv/" data-track="cv-footer">Reeja’s CV</a>
     </nav>
 
     <div class="site-footer__contact">
-      <p class="site-footer__label">Contact</p>
-      <a href="/contact/" data-track="contact-footer">Contact Reeja</a>
+      <p class="site-footer__label">{siteCopy.footer.contactLabel}</p>
+      <a href="/contact/" data-track="contact-footer">Send a professional inquiry</a>
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
-      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn</a>
+      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn profile</a>
       <span>{profile.contact.location}</span>
     </div>
   </div>
 
   <div class="container site-footer__legal">
-    <small>© {year} {profile.name}. Professional information is presented for recruiter and employer review.</small>
-    <a href="#main-content">Return to top</a>
+    <small>© {year} {profile.name}. {siteCopy.footer.legal}</small>
+    <a href="#main-content">Back to top</a>
   </div>
 </footer>

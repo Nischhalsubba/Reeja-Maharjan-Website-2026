@@ -2,109 +2,121 @@ import type { BlogPost } from './types';
 
 export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
   slug: 'from-nursing-student-to-registered-nurse-my-journey',
-  title: 'From Nursing Student to Registered Nurse: My Journey through TUTH, MMTH & Sindhuli Hospital',
+  title: 'Reeja Maharjan’s Nursing Journey: From B.Sc. Nursing to Hospital and Research Work',
   excerpt:
-    'A first-person style career story built from Reeja Maharjan’s nursing training, licensure, and hospital experience in Nepal.',
+    'Follow Reeja Maharjan’s professional path from B.Sc. Nursing and NNC registration through Sindhuli Hospital, MMTH, TUTH, Texas RN licensure, and maternal-health research with IISH.',
   metaDescription:
-    'Read Reeja Maharjan’s journey from nursing student to registered nurse through TUTH, MMTH, and Sindhuli Hospital in Nepal.',
+    'Read Reeja Maharjan’s nursing journey from B.Sc. Nursing and NNC registration to hospital roles at Sindhuli, MMTH and TUTH and maternal-health research with IISH.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-03-11',
+  updatedAt: '2026-08-07',
   readMinutes: 8,
-  tags: ['nursing career', 'registered nurse Nepal', 'TUTH', 'MMTH', 'Sindhuli Hospital'],
-  primaryKeyword: 'from nursing student to registered nurse',
+  tags: ['Reeja Maharjan', 'nursing career', 'registered nurse Nepal', 'hospital nursing'],
+  primaryKeyword: 'Reeja Maharjan nursing journey',
   supportingKeywords: [
-    'nursing journey Nepal',
-    'registered nurse career story',
+    'registered nurse Nepal career',
+    'B.Sc. Nursing Nepal',
     'TUTH nursing experience',
-    'MMTH nursing experience',
-    'Sindhuli Hospital nurse'
+    'Sindhuli Hospital nursing',
+    'maternal health research nurse Nepal'
   ],
   quickAnswer: [
-    'Reeja Maharjan’s nursing journey moved from formal education into RN registration and practical hospital service across Sindhuli Hospital, MMTH, and TUTH.',
-    'Her path reflects growth in maternal-newborn support, general care practice, documentation, counselling, and role readiness for broader healthcare settings.',
-    'It is also a useful roadmap for nursing students who want to see how education, licensure, training, and service experience fit together.'
+    'Reeja Maharjan completed B.Sc. Nursing, became a Nepal Nursing Council registered nurse, and built hospital experience at Sindhuli Hospital, Manmohan Memorial Medical College & Teaching Hospital, and Tribhuvan University Teaching Hospital.',
+    'Her later professional development includes an active Texas RN single-state license and clinical training in areas such as newborn care, operation-theatre practice, and CPR participation.',
+    'In 2026, Reeja moved into maternal-health implementation research with IISH, supporting the MOM-HD telemonitoring project in Biratnagar.'
   ],
   intro: [
-    'Every nursing career is built in stages. For Reeja Maharjan, the path included formal nursing education, RN registration, hospital experience, targeted training, and steady development in counselling and patient support.',
-    'This article organizes that journey into a practical career story that students, recruiters, and nursing peers can read quickly.',
-    'It shows how education, service, and clinical discipline shaped her current professional profile.'
+    'Reeja Maharjan’s career has developed through a series of connected steps rather than one sudden transition. Nursing education led to professional registration, hospital practice built clinical routines, targeted training strengthened specific areas, and research work added a new setting for patient and participant communication.',
+    'Her record includes regional and teaching-hospital experience as well as current maternal-health research support. Across those settings, the recurring work is practical: observation, documentation, education, handover, follow-up, and coordination.',
+    'This article presents that journey as a professional biography based on the career and credential information used throughout Reeja’s portfolio.'
   ],
   sections: [
     {
       id: 'education-foundation',
-      title: 'Building the education foundation',
+      title: 'B.Sc. Nursing as the professional foundation',
       paragraphs: [
-        'The journey began with academic progression through school-level science education and into B.Sc. Nursing. That progression created the technical base for clinical work, patient communication, and disciplined documentation.',
-        'Education matters because it shapes not only knowledge, but the habits of observation, accountability, and safe practice that follow a nurse into real settings.'
+        'Reeja completed B.Sc. Nursing through Manmohan Memorial Institute of Health Sciences / Tribhuvan University. The programme provided the academic and clinical foundation for professional nursing practice.',
+        'That foundation later connected with hospital work requiring observation, communication, documentation, patient education, and accountability within clinical teams.'
       ]
     },
     {
       id: 'becoming-rn',
-      title: 'Becoming a registered nurse',
+      title: 'Nepal Nursing Council registration',
       paragraphs: [
-        'RN registration is the point where education becomes regulated professional practice. It confirms that the nurse can enter the workforce with recognized standing and accountability.',
-        'For Reeja, RN registration also became the base for further skill-building through clinical training and hospital roles.'
+        'Reeja became a Registered Nurse with the Nepal Nursing Council in 2021. Registration established her professional standing for nursing practice in Nepal within the applicable regulatory and employer requirements.',
+        'She continued building her profile through hospital service and role-relevant clinical training rather than treating registration as the end of professional development.'
       ]
     },
     {
       id: 'sindhuli-stage',
-      title: 'Learning responsibility at Sindhuli Hospital',
+      title: 'Nursing Officer experience at Sindhuli Hospital',
       paragraphs: [
-        'Service at Sindhuli Hospital built practical confidence. This period involved maternity-related support, OT-linked responsibilities, daily coordination, and real exposure to how ward systems work under pressure.',
-        'Regional hospital work often builds discipline quickly because nurses must balance routine care with sudden change, teamwork, and resource awareness.'
+        'From December 2021 to December 2023, Reeja worked as a Nursing Officer at Sindhuli Hospital. Her documented responsibilities included maternity-related support, antenatal and postnatal routines, operation-theatre-related duties, documentation, and ward coordination.',
+        'This period provided sustained experience with the everyday discipline of hospital nursing: responding to changing needs while maintaining safe routines and clear records.'
       ]
     },
     {
       id: 'mmth-stage',
-      title: 'General care practice at MMTH',
+      title: 'General-care nursing at MMTH',
       paragraphs: [
-        'At MMTH, the role strengthened experience in general care nursing with Surgery and Gyn/Obs exposure. The work required monitoring, communication, patient education, and dependable coordination.',
-        'This phase helped sharpen general care practice while keeping counselling and patient support at the centre of daily nursing work.'
+        'Reeja worked at Manmohan Memorial Medical College & Teaching Hospital from February to August 2024 in general care, with Surgery and Gynaecology & Obstetrics exposure.',
+        'The role added experience in patient monitoring, escalation support, communication with duty teams, and education for patients and families.'
       ]
     },
     {
       id: 'tuth-stage',
-      title: 'Teaching-hospital exposure at TUTH',
+      title: 'Teaching-hospital experience at TUTH',
       paragraphs: [
-        'Work at TUTH added experience in a teaching-hospital environment. That setting supports closer attention to structured communication, documentation quality, and teamwork in a more complex system.',
-        'Recognition received during this period also reflects dependable service contribution, not only role occupancy.'
+        'From September 2024 to November 2025, Reeja worked as a Staff Nurse at Tribhuvan University Teaching Hospital. Her documented work included maternal-newborn care routines, counselling, ward documentation, and structured shift handover.',
+        'A teaching-hospital environment also reinforced the importance of communication across teams and records that support continuity from one shift to the next.'
+      ]
+    },
+    {
+      id: 'international-licensure',
+      title: 'Adding active Texas RN licensure',
+      paragraphs: [
+        'Reeja’s Texas RN single-state license was originally issued in September 2025 and is recorded as active and unencumbered in her professional facts. The portfolio presents this accurately as a licensure credential, separate from work authorisation, immigration status, and employer credentialing.',
+        'That distinction matters because international nursing readiness involves several independent requirements, not a single certificate.'
       ]
     },
     {
       id: 'where-next',
-      title: 'Where the journey is heading next',
+      title: 'Moving from hospital nursing into maternal-health research',
       paragraphs: [
-        'The next stage is broader role readiness: hospital roles, as well as NGO and INGO opportunities that value nursing discipline, counselling, education, documentation, and patient-centred communication.',
-        'That direction is consistent with the strengths built so far. The same habits that support good bedside care also support programme-based and community-linked nursing work.'
+        'In May 2026, Reeja began working as a Research Assistant with the Institute for Implementation Science and Health on the MOM-HD maternal-health telemonitoring trial in Biratnagar.',
+        'The role builds on familiar nursing strengths in a different workflow: participant education, home BP/BG monitoring support, tele-follow-up, documentation, data-quality checks, device coordination, and protocol-based escalation.'
       ]
     }
   ],
   faq: [
     {
-      question: 'What hospitals has Reeja Maharjan worked in?',
+      question: 'Where has Reeja Maharjan worked as a nurse?',
       answer:
         'Her documented hospital experience includes Sindhuli Hospital, Manmohan Memorial Medical College & Teaching Hospital, and Tribhuvan University Teaching Hospital.'
     },
     {
-      question: 'What kind of nursing experience does Reeja have?',
+      question: 'What is Reeja Maharjan doing now?',
       answer:
-        'Her experience includes maternal-newborn support, general care nursing, counselling, documentation, handover, and team coordination.'
+        'She is a Research Assistant with the Institute for Implementation Science and Health, supporting the MOM-HD maternal-health telemonitoring trial in Biratnagar, Nepal.'
     },
     {
-      question: 'Why is this journey relevant for nursing students?',
+      question: 'What nursing licences does Reeja Maharjan hold?',
       answer:
-        'It shows how education, licensure, practical hospital service, and targeted training build a stronger nursing profile over time.'
+        'Her professional profile lists Nepal Nursing Council RN registration and an active, unencumbered Texas RN single-state license.'
     },
     {
-      question: 'Is Reeja only interested in hospital roles?',
+      question: 'What kind of work connects Reeja’s hospital and research experience?',
       answer:
-        'No. Her profile is also moving toward NGO and INGO opportunities that value counselling, documentation, and coordinated care support.'
+        'Patient and participant education, documentation, monitoring, follow-up, handover or escalation, and coordination appear repeatedly across her clinical and research roles.'
     }
   ],
   sources: [
     {
-      label: 'Reeja Maharjan professional profile and credential record',
-      href: '/#experience'
+      label: 'Reeja Maharjan professional profile',
+      href: '/'
+    },
+    {
+      label: 'Reeja Maharjan professional CV',
+      href: '/cv/'
     },
     {
       label: 'Nepal Nursing Council official website',
@@ -117,11 +129,11 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
     'general-care-nursing-common-challenges'
   ],
   cta: {
-    title: 'Want to review Reeja’s full nursing profile?',
-    text: 'Explore verified experience, credentials, and contact options on the main portfolio page.',
-    label: 'View portfolio',
-    href: '/#home'
+    title: 'Review Reeja Maharjan’s complete professional profile',
+    text: 'See Reeja’s current research role, hospital experience, nursing credentials, clinical training, education, writing, and professional contact information.',
+    label: 'About Reeja Maharjan',
+    href: '/'
   },
   disclaimer:
-    'This article is a professional profile summary based on verified career and credential information. It is not a clinical guidance article.'
+    'This article is a professional biography based on the career and credential information presented in Reeja Maharjan’s approved portfolio. It is not clinical guidance.'
 };

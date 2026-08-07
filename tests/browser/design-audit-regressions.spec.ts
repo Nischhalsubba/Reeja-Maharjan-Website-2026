@@ -112,6 +112,41 @@ test('Field Journal palette and typography apply across the site', async ({ page
   }
 });
 
+test('primary pages keep Reeja as the subject in titles, descriptions and headings', async ({ page }) => {
+  const routes = [
+    '/',
+    '/hire-reeja/',
+    '/clinical-research/',
+    '/maternal-health/',
+    '/nursing-practice/',
+    '/contact/',
+    '/blog/',
+    '/cv/'
+  ];
+
+  for (const path of routes) {
+    await page.goto(`${origin}${path}`, { waitUntil: 'networkidle' });
+    const title = await page.title();
+    const description = await page.locator('meta[name="description"]').getAttribute('content');
+    const heading = await page.locator('main h1').first().innerText();
+
+    expect(title).toContain('Reeja Maharjan');
+    expect(description).toContain('Reeja');
+    expect(heading).toContain('Reeja');
+  }
+
+  await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
+  const nav = page.locator('.desktop-nav');
+  await expect(nav.getByRole('link', { name: 'Experience' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Research' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Maternal Health' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Nursing' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Writing' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'CV' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Contact Reeja' })).toBeVisible();
+  await expect(page.getByText('Clinical care with a', { exact: false })).toHaveCount(0);
+});
+
 test('contact page submits through the provider POST flow and returns with success feedback', async ({ page }) => {
   const providerEndpoint = 'https://formsubmit.co/maharjanreeja88@gmail.com';
   const successUrl = `${origin}/contact/?sent=1#professional-contact-form`;
@@ -141,7 +176,7 @@ test('contact page submits through the provider POST flow and returns with succe
 
   await page.goto(`${origin}/contact/`, { waitUntil: 'networkidle' });
 
-  const form = page.getByRole('form', { name: /Share the opportunity details/i });
+  const form = page.getByRole('form', { name: /Send a message to Reeja/i });
   await expect(form).toBeVisible();
   await expect(form).toHaveAttribute('method', 'POST');
   await expect(form).toHaveAttribute('action', providerEndpoint);
@@ -169,21 +204,21 @@ test('contact page submits through the provider POST flow and returns with succe
   expect(honeypotState.pointerEvents).toBe('none');
   expect(honeypotState.clipPath).not.toBe('none');
 
-  await page.getByLabel('Name').fill('Reeja Recruiter');
-  await page.getByLabel('Email').fill('recruiter@example.com');
+  await page.getByLabel('Your name').fill('Reeja Recruiter');
+  await page.getByLabel('Your email').fill('recruiter@example.com');
   await page.getByLabel('Organisation / hospital').fill('Example Health Research');
-  await page.getByLabel('Role / opportunity type').fill('Research role');
+  await page.getByLabel('Role / opportunity').fill('Research role');
   await page.getByLabel('Location').fill('Kathmandu, Nepal');
   await page.getByLabel('Message').fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
 
-  const submit = page.getByRole('button', { name: 'Send message' });
+  const submit = page.getByRole('button', { name: 'Send to Reeja' });
   await Promise.all([
     page.waitForURL((url) => url.pathname === '/contact/' && url.hash === '#professional-contact-form'),
     submit.click()
   ]);
 
   const success = page.locator('[data-form-success]');
-  await expect(success.getByText('Message submitted.')).toBeVisible();
+  await expect(success.getByText('Message submitted for delivery to Reeja.')).toBeVisible();
   await expect(success.getByText(/maharjanreeja88@gmail\.com/)).toBeVisible();
   await expect(submit).toBeEnabled();
 });
@@ -191,9 +226,9 @@ test('contact page submits through the provider POST flow and returns with succe
 test('contact form keeps invalid users at the field with clear feedback', async ({ page }) => {
   await page.goto(`${origin}/contact/`, { waitUntil: 'networkidle' });
 
-  await page.getByRole('button', { name: 'Send message' }).click();
+  await page.getByRole('button', { name: 'Send to Reeja' }).click();
 
-  const name = page.getByLabel('Name');
+  const name = page.getByLabel('Your name');
   await expect(name).toBeFocused();
   await expect(name).toHaveAttribute('aria-invalid', 'true');
   await expect(page.getByText('Please complete this field.').first()).toBeVisible();

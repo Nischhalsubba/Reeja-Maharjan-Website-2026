@@ -17,14 +17,14 @@ const governance = getBlogGovernance(post.slug);
 const articleUrl = new URL(`/blog/${post.slug}/`, Astro.site ?? Astro.url.origin).toString();
 const articleImagePath = `/og/articles/${post.slug}.svg`;
 const articleImage = new URL(articleImagePath, Astro.site ?? Astro.url.origin).toString();
-const authorUrl = new URL('/hire-reeja/', Astro.site ?? Astro.url.origin).toString();
+const authorUrl = new URL('/', Astro.site ?? Astro.url.origin).toString();
 const relatedPosts = post.relatedSlugs
   .map((relatedSlug) => blogPosts.find((candidate) => candidate.slug === relatedSlug))
   .filter(Boolean);
 const topicText = [post.primaryKeyword, ...post.supportingKeywords, ...post.tags].join(' ').toLowerCase();
 const topicHub = topicText.match(/maternal|newborn|postnatal|breastfeeding|pregnan|mother/)
-  ? { href: '/maternal-health/', label: 'Maternal health resources' }
-  : { href: '/nursing-practice/', label: 'Nursing practice resources' };
+  ? { href: '/maternal-health/', label: 'Reeja’s maternal-health resources' }
+  : { href: '/nursing-practice/', label: 'Reeja’s nursing-practice resources' };
 
 const articleSchema = {
   '@context': 'https://schema.org',
@@ -59,8 +59,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site ?? Astro.url.origin).toString() },
-    { '@type': 'ListItem', position: 2, name: 'Articles', item: new URL('/blog/', Astro.site ?? Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 1, name: 'Reeja Maharjan', item: new URL('/', Astro.site ?? Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Writing', item: new URL('/blog/', Astro.site ?? Astro.url.origin).toString() },
     { '@type': 'ListItem', position: 3, name: post.title, item: articleUrl }
   ]
 };
@@ -72,13 +72,14 @@ const breadcrumbSchema = {
       <header class="blog-article__header">
         <div class="blog-article__shell blog-article__intro">
           <div>
-            <a class="site-back" href="/blog/">Back to articles</a>
-            <p class="site-eyebrow">Nurse-led education</p>
+            <a class="site-back" href="/blog/">All articles by Reeja</a>
+            <p class="site-eyebrow">Written by Reeja Maharjan · Registered Nurse</p>
             <h1>{post.title}</h1>
             <p class="blog-article__dek">{post.excerpt}</p>
           </div>
 
           <dl class="blog-article__meta-panel">
+            <div><dt>Author</dt><dd>Reeja Maharjan, B.Sc. Nursing</dd></div>
             <div><dt>Published</dt><dd>{post.publishedAt}</dd></div>
             <div><dt>Updated</dt><dd>{post.updatedAt}</dd></div>
             <div><dt>Reading time</dt><dd>{post.readMinutes} min read</dd></div>
@@ -89,12 +90,12 @@ const breadcrumbSchema = {
 
       <div class="blog-article__shell blog-article__layout">
         <aside class="blog-toc" aria-labelledby="article-toc-title">
-          <p class="site-eyebrow">In this guide</p>
-          <h2 id="article-toc-title">Sections</h2>
+          <p class="site-eyebrow">On this page</p>
+          <h2 id="article-toc-title">Article sections</h2>
           <nav aria-label="Article sections">
             <a href="#key-points">Key points</a>
             {post.sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
-            <a href="#faq">Common questions</a>
+            <a href="#faq">Questions</a>
             <a href="#sources">Sources</a>
             <a href="#safety-note">Safety note</a>
           </nav>
@@ -119,14 +120,14 @@ const breadcrumbSchema = {
           ))}
 
           <section id="faq">
-            <p class="site-eyebrow">Frequently asked questions</p>
-            <h2>Common questions</h2>
+            <p class="site-eyebrow">Questions readers ask</p>
+            <h2>Common questions about this topic</h2>
             {post.faq.map((item) => <div><h3>{item.question}</h3><p>{item.answer}</p></div>)}
           </section>
 
           <section id="sources">
             <p class="site-eyebrow">Sources</p>
-            <h2>References and further reading</h2>
+            <h2>Sources used for this article</h2>
             <ul>{post.sources.map((source) => <li><a href={source.href} target="_blank" rel="noreferrer">{source.label}</a></li>)}</ul>
           </section>
 
@@ -136,16 +137,16 @@ const breadcrumbSchema = {
           </section>
 
           <section class="blog-author-card">
-            <p class="site-eyebrow">Author</p>
-            <h2>{professionalFacts.name}</h2>
-            <p>Registered Nurse with hospital and maternal-health research experience in patient education, documentation, telemonitoring, and care coordination.</p>
-            <p><a href="/hire-reeja/">View professional profile</a> · <a href={topicHub.href}>{topicHub.label}</a></p>
+            <p class="site-eyebrow">About the author</p>
+            <h2>Reeja Maharjan, B.Sc. Nursing</h2>
+            <p>Reeja is a Nepal Nursing Council licensed Registered Nurse, active Texas RN, and IISH maternal-health Research Assistant with hospital nursing experience in Nepal. Her professional work includes patient and participant education, documentation, telemonitoring support, follow-up, and care coordination.</p>
+            <p><a href="/">About Reeja</a> · <a href="/cv/">View Reeja’s CV</a> · <a href={topicHub.href}>{topicHub.label}</a></p>
           </section>
 
           {relatedPosts.length > 0 && (
             <section>
-              <p class="site-eyebrow">Read next</p>
-              <h2>Related articles</h2>
+              <p class="site-eyebrow">More from Reeja</p>
+              <h2>Related nursing and maternal-health articles</h2>
               <div class="blog-related-grid">
                 {relatedPosts.map((relatedPost) => relatedPost && (
                   <article class="blog-card"><h3>{relatedPost.title}</h3><p>{relatedPost.excerpt}</p><p><a href={`/blog/${relatedPost.slug}/`}>Read article</a></p></article>

@@ -2,84 +2,84 @@ import type { BlogPost } from './types';
 
 export const comprehensiveNewbornCareLevelIiWhatNursesLearn: BlogPost = {
   slug: 'comprehensive-newborn-care-level-ii-what-nurses-learn',
-  title: 'Comprehensive Newborn Care Level II: What Nurses Learn and Parents Should Know',
+  title: 'Comprehensive Newborn Care Level II: What the Training Means for Nurses and Families',
   excerpt:
-    'A clear explanation of Comprehensive Newborn Care Level II, what nurses learn in training, and how it improves support for newborns and families.',
+    'Reeja Maharjan explains what Comprehensive Newborn Care Level II training represents, how it supports nursing practice, and what families should still expect from clinical escalation and follow-up.',
   metaDescription:
-    'Understand Comprehensive Newborn Care Level II, what nurses learn, and what parents should know about safer newborn support and follow-up.',
+    'Registered Nurse Reeja Maharjan explains Comprehensive Newborn Care Level II training, newborn-care skills, family education, danger signs, and clinical limits.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-03-11',
+  updatedAt: '2026-08-07',
   readMinutes: 8,
   tags: ['CNC Level II', 'newborn care', 'nursing training', 'parent education'],
   primaryKeyword: 'Comprehensive Newborn Care Level II',
   supportingKeywords: [
     'newborn care training for nurses',
-    'what nurses learn in CNC Level II',
-    'newborn support for parents',
-    'breastfeeding and newborn monitoring',
-    'newborn danger signs'
+    'CNC Level II nursing',
+    'newborn danger signs education',
+    'newborn feeding support',
+    'newborn care for families'
   ],
   quickAnswer: [
-    'Comprehensive Newborn Care Level II is a practical clinical training that strengthens nursing capacity in newborn care, monitoring, counselling, and early problem recognition.',
-    'For parents, the value is simple: better trained nurses usually provide clearer feeding guidance, stronger danger-sign counselling, and safer early newborn support.',
-    'The training does not replace medical review, but it improves how nurses identify risk, support families, and respond within newborn care systems.'
+    'Comprehensive Newborn Care Level II is structured training intended to strengthen practical newborn-care knowledge, observation, counselling, early problem recognition, and appropriate referral or escalation.',
+    'For families, the value is better nursing support around feeding, warmth, hygiene, warning signs, and follow-up rather than a promise that every newborn problem can be managed by one clinician or one level of care.',
+    'Reeja Maharjan lists this training as part of her verified professional development and presents it within the limits of nursing scope, local protocols, and team-based care.'
   ],
   intro: [
-    'Families often hear the name of a training programme but do not know what it means in daily care. Comprehensive Newborn Care Level II is one of those credentials that matters because it reflects practical newborn-care training.',
-    'For nurses, the programme supports safer observation, counselling, early problem recognition, and more confident newborn-care communication.',
-    'This article explains why the credential matters and what parents can reasonably expect from nurses trained in this area.'
+    'A training certificate is most useful when people understand what it adds to practice. Comprehensive Newborn Care Level II is relevant because newborn care depends on careful observation, practical family education, and early recognition of problems that need escalation.',
+    'Reeja Maharjan completed Comprehensive Newborn Care Level II training and also has maternal-newborn nursing experience. This article explains the practical meaning of that training without treating a credential as a substitute for clinical scope or medical review.',
+    'Programme content and local responsibilities can vary, so nurses and families should follow the policies and care pathways of the facility where care is provided.'
   ],
   sections: [
     {
       id: 'what-it-is',
-      title: 'What Comprehensive Newborn Care Level II means',
+      title: 'What Comprehensive Newborn Care Level II is designed to support',
       paragraphs: [
-        'Comprehensive newborn training focuses on the early period when feeding, warmth, hygiene, monitoring, and timely escalation matter most. It prepares nurses to support newborns more consistently and communicate more clearly with families.',
-        'The exact operational details may vary by programme, but the clinical intent is the same: strengthen practical newborn care in real service settings.'
+        'Structured newborn-care training strengthens the nurse’s ability to provide routine support, recognise concerning changes, communicate with families, and use referral or escalation pathways appropriately.',
+        'The early newborn period requires particular attention to feeding, warmth, breathing, colour, activity, hygiene, and follow-up. Training gives nurses a more organised framework for observing and teaching around those priorities.'
       ]
     },
     {
       id: 'what-nurses-learn',
-      title: 'What nurses learn in newborn care training',
+      title: 'Practical capabilities strengthened by newborn-care training',
       paragraphs: [
-        'A strong newborn training programme supports more than theory. It helps nurses recognize danger signs, support feeding, observe newborn adaptation, document concerns, and communicate clearly with caregivers and teams.',
-        'This matters because families often need both reassurance and early warning. A trained nurse must know the difference.'
+        'Newborn-care preparation should connect knowledge to practice. Nurses need to observe a newborn, support feeding, recognise abnormal findings, communicate clearly with caregivers, document concerns, and know when routine nursing support is no longer enough.',
+        'The goal is safer, more consistent care within the nurse’s assigned role and the clinical system around them.'
       ],
       bullets: [
-        'Feeding support and breastfeeding counselling basics.',
-        'Warmth, hygiene, and routine newborn-care teaching.',
-        'Observation for poor feeding, breathing problems, jaundice, or lethargy.',
-        'Referral and escalation when a newborn needs more than routine support.'
+        'Breastfeeding and feeding support within the local care plan.',
+        'Warmth, hygiene, routine newborn care, and family education.',
+        'Observation for breathing difficulty, poor feeding, jaundice, temperature concerns, or lethargy.',
+        'Timely referral and escalation when the newborn needs further assessment or treatment.'
       ]
     },
     {
       id: 'why-parents-benefit',
-      title: 'Why parents benefit from this training',
+      title: 'How families benefit from better newborn-care education',
       paragraphs: [
-        'Parents benefit when nurses explain care in practical language. Instead of simply listing instructions, a trained nurse is more likely to teach feeding, warning signs, warmth, and follow-up in a clear and usable way.',
-        'The value is not just technical skill. It is the ability to translate that skill into safe home care.'
+        'Families often need nursing guidance that translates clinical priorities into actions they can understand at home. Clear teaching about feeding, warmth, cord care, warning signs, and follow-up can make discharge information easier to use.',
+        'The value of training is therefore not only technical. It also supports the nurse’s ability to explain what is normal, what is concerning, and when the family should seek help.'
       ]
     },
     {
       id: 'questions-parents-should-ask',
-      title: 'Questions parents should ask before discharge',
+      title: 'Questions families should ask before taking a newborn home',
       paragraphs: [
-        'Families often leave the facility with unanswered questions. A short list of key questions helps parents feel more prepared and helps the nurse cover the highest-priority teaching points.',
-        'If parents are not sure they understood the instructions, they should ask again before discharge.'
+        'Before discharge, families should know the feeding plan, warning signs, follow-up timing, and where to seek help. Asking these questions is useful even when the newborn appears well.',
+        'When an instruction is unclear, asking the nurse or clinician to explain it again is safer than guessing later at home.'
       ],
       bullets: [
-        'Is the baby feeding well and how often should feeds happen?',
-        'Which warning signs mean we should return immediately?',
-        'How should we care for the cord and keep the baby warm?',
-        'When is the next follow-up check?'
+        'How often should the baby feed, and what signs suggest feeding is not going well?',
+        'Which symptoms require urgent assessment?',
+        'What are the instructions for warmth, skin care, and cord care?',
+        'When and where is the next newborn follow-up?'
       ]
     },
     {
       id: 'what-training-does-not-mean',
-      title: 'What the credential does not mean',
+      title: 'What a newborn-care credential does not mean',
       paragraphs: [
-        'A newborn care credential is important, but it does not mean every newborn problem can be managed without medical review. Severe symptoms still need assessment by the right clinician and facility.',
-        'Parents should see this type of training as a sign of stronger nursing support, not as a reason to delay urgent care.'
+        'A training credential does not expand practice beyond local regulation, employer policy, clinical assignment, or the nurse’s authorised scope. It also does not remove the need for medical review when a newborn is unwell.',
+        'Families should understand the credential as evidence of additional nursing preparation, not as a reason to delay urgent assessment or referral.'
       ]
     }
   ],
@@ -87,22 +87,22 @@ export const comprehensiveNewbornCareLevelIiWhatNursesLearn: BlogPost = {
     {
       question: 'What is Comprehensive Newborn Care Level II?',
       answer:
-        'It is a structured newborn-care training that helps nurses strengthen practical support, danger-sign recognition, counselling, and referral readiness.'
+        'It is structured newborn-care training intended to strengthen practical nursing support, observation, family counselling, problem recognition, and referral or escalation readiness.'
     },
     {
-      question: 'Why does newborn-care training matter for parents?',
+      question: 'Why is newborn-care training useful for nurses?',
       answer:
-        'Because better trained nurses usually provide clearer education, earlier risk recognition, and more reliable support during the critical first days after birth.'
+        'It provides a more organised framework for routine newborn care, feeding support, education, observation, documentation, and recognition of changes that need further clinical review.'
     },
     {
-      question: 'Does newborn training replace doctor review?',
+      question: 'Does Comprehensive Newborn Care Level II replace medical assessment?',
       answer:
-        'No. It improves nursing support, but serious newborn symptoms still need timely medical assessment and escalation.'
+        'No. Training strengthens nursing support, but a newborn with concerning symptoms still needs assessment and treatment through the appropriate clinical pathway.'
     },
     {
-      question: 'What should parents ask before discharge?',
+      question: 'What should families understand before newborn discharge?',
       answer:
-        'Ask about feeding, danger signs, warmth, cord care, follow-up timing, and exactly where to go if the baby becomes unwell.'
+        'They should understand feeding, warmth and hygiene, warning signs, follow-up timing, and exactly where to seek help if the baby becomes unwell.'
     }
   ],
   sources: [
@@ -121,11 +121,11 @@ export const comprehensiveNewbornCareLevelIiWhatNursesLearn: BlogPost = {
     'top-10-postpartum-counselling-tips-new-nurses'
   ],
   cta: {
-    title: 'Need a nurse with verified newborn-care training?',
-    text: 'Reeja holds Comprehensive Newborn Care Level II training and brings practical maternal-newborn care support experience.',
-    label: 'View profile',
-    href: '/#certifications'
+    title: 'Review Reeja Maharjan’s newborn-care training and nursing background',
+    text: 'Reeja’s CV includes Comprehensive Newborn Care Level II training alongside hospital maternal-newborn experience and current maternal-health research work.',
+    label: 'View Reeja’s credentials',
+    href: '/cv/#credentials'
   },
   disclaimer:
-    'This article is educational only and does not replace newborn assessment by a qualified clinician.'
+    'This article is for general education and does not replace newborn assessment, local protocols, referral pathways, or medical care from the appropriate clinical team.'
 };

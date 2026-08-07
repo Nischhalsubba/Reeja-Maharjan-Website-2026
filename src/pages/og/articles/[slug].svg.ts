@@ -22,13 +22,13 @@ const wrapTitle = (title: string): string[] => {
 
 export const getStaticPaths = (() => blogPosts.map((post) => ({
   params: { slug: post.slug },
-  props: { title: post.title, category: post.tags[0] ?? 'Nurse-led education' }
+  props: { title: post.title, category: post.tags[0] ?? 'Nursing article' }
 }))) satisfies GetStaticPaths;
 
 export const GET: APIRoute = ({ props }) => {
   const { title, category } = props as { title: string; category: string };
   const lines = wrapTitle(title);
-  const titleMarkup = lines.map((line, index) => `<text x="96" y="${250 + index * 82}" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="#0a0a0a">${escapeXml(line)}</text>`).join('');
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="${escapeXml(title)}"><rect width="1200" height="630" fill="#f5f5f2"/><rect x="52" y="52" width="1096" height="526" fill="#ffffff" stroke="#0a0a0a" stroke-width="2"/><text x="96" y="130" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="3" fill="#555555">${escapeXml(category.toUpperCase())}</text>${titleMarkup}<line x1="96" y1="500" x2="1104" y2="500" stroke="#d0d0d0" stroke-width="2"/><text x="96" y="548" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#0a0a0a">REEJA MAHARJAN · REGISTERED NURSE</text></svg>`;
+  const titleMarkup = lines.map((line, index) => `<text x="96" y="${250 + index * 82}" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="#1C1917">${escapeXml(line)}</text>`).join('');
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="${escapeXml(title)} by Reeja Maharjan"><rect width="1200" height="630" fill="#F4EFE6"/><rect x="52" y="52" width="1096" height="526" fill="#FBF8F2" stroke="#1C1917" stroke-width="2"/><text x="96" y="130" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="3" fill="#8F3D32">${escapeXml(category.toUpperCase())}</text>${titleMarkup}<line x1="96" y1="500" x2="1104" y2="500" stroke="#C9B9A2" stroke-width="2"/><text x="96" y="548" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#263653">BY REEJA MAHARJAN · REGISTERED NURSE</text></svg>`;
   return new Response(svg, { headers: { 'Content-Type': 'image/svg+xml; charset=utf-8', 'Cache-Control': 'public, max-age=31536000, immutable' } });
 };

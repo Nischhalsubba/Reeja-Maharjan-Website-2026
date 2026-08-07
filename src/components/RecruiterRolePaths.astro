@@ -1,57 +1,17 @@
 ---
-const pathways = [
-  {
-    label: 'Maternal-health research',
-    title: 'Participant support with a clinical foundation.',
-    summary: 'Relevant to research teams that need thoughtful participant education, dependable follow-up, accurate records, and protocol-based coordination.',
-    evidence: [
-      'Participant screening and consent-workflow support',
-      'Home BP and blood-glucose monitoring education',
-      'Tele-follow-up, warning-sign screening, and escalation',
-      'Study documentation and data-quality checks'
-    ],
-    scope: 'Work is performed within the documented study role and clinical governance structure.',
-    href: '/clinical-research/',
-    cta: 'Read the research record'
-  },
-  {
-    label: 'Hospital nursing',
-    title: 'Safe care, clear handover, and patient communication.',
-    summary: 'Relevant to hospital roles requiring bedside care, monitoring, documentation, patient counselling, structured handover, and coordinated escalation.',
-    evidence: [
-      'Maternal-newborn and general ward nursing experience',
-      'Clinical observation, monitoring, and documentation',
-      'SBAR-style handover and multidisciplinary communication',
-      'Patient and family education'
-    ],
-    scope: 'Practice remains subject to employer credentialing, local regulation, orientation, and assigned clinical scope.',
-    href: '/nursing-practice/',
-    cta: 'Read the practice record'
-  },
-  {
-    label: 'Health programmes',
-    title: 'Follow-up and coordination for community-facing work.',
-    summary: 'Relevant to programmes that need beneficiary education, remote monitoring support, confidential records, device logistics, and communication across care teams.',
-    evidence: [
-      'Health education and adherence reinforcement',
-      'Remote follow-up and monitoring support',
-      'Device distribution and tracking workflows',
-      'Confidential documentation and team coordination'
-    ],
-    scope: 'International licensure is listed as a professional credential and does not represent work authorisation or independent programme authority.',
-    href: '/contact/',
-    cta: 'Discuss programme fit'
-  }
-];
+import { siteCopy } from '../content/site-copy';
+
+const copy = siteCopy.home.focus;
+const pathways = copy.areas;
 ---
 
 <section class="fj-section fj-section--surface" id="role-fit" aria-labelledby="role-fit-title">
   <div class="container">
     <header class="fj-section__head" data-fj-reveal>
-      <p class="fj-kicker">02 · Field notes</p>
+      <p class="fj-kicker">{copy.kicker}</p>
       <div>
-        <h2 id="role-fit-title">Where clinical practice and research meet.</h2>
-        <p>Three working contexts, recorded as evidence rather than packaged as marketing claims.</p>
+        <h2 id="role-fit-title">{copy.title}</h2>
+        <p>{copy.summary}</p>
       </div>
     </header>
 

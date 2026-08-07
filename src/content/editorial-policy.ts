@@ -10,10 +10,10 @@ export type ClinicalReviewer = {
 export const editorialPolicy = {
   authorName: professionalFacts.name,
   authorQualification: `${professionalFacts.credential}, RN`,
-  authorProfileUrl: '/hire-reeja/',
+  authorProfileUrl: '/',
   correctionEmail: professionalFacts.professionalEmail,
   reviewIntervalMonths: 12,
-  safetyNote: 'This article provides general education and does not replace individual assessment, diagnosis, or treatment. Seek urgent medical care for severe, sudden, or rapidly worsening symptoms.'
+  safetyNote: 'Reeja’s clinical articles are written for general education and do not replace individual assessment, diagnosis, treatment, local clinical policy, or emergency care. Seek qualified medical help for personal symptoms or urgent concerns.'
 } as const;
 
 export const formatEditorialDate = (value: string): string =>

@@ -1,7 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { blogPosts } from '../content/blog';
+import { siteCopy } from '../content/site-copy';
 
+const copy = siteCopy.nursing;
 const posts = blogPosts.filter((post) =>
   [post.primaryKeyword, ...post.supportingKeywords, ...post.tags]
     .join(' ')
@@ -10,22 +12,17 @@ const posts = blogPosts.filter((post) =>
 );
 ---
 
-<BaseLayout
-  title="Nursing Practice Guides | Documentation, SBAR and Careers"
-  description="Practical nursing guides on documentation, SBAR handover, confidentiality, clinical communication, licensure, and professional development."
->
+<BaseLayout title={copy.title} description={copy.description}>
   <div class="site-page">
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">Nursing practice</p>
-          <h1>Safer care starts with clear practice.</h1>
-          <p class="site-page__lede">Practical resources for nurses and students on documentation, SBAR handover, confidentiality, clinical communication, and career readiness.</p>
+          <p class="site-eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.heading}</h1>
+          <p class="site-page__lede">{copy.lede}</p>
         </div>
         <dl class="site-page__summary">
-          <div><dt>Communication</dt><dd>SBAR, shift handover, referrals, and escalation</dd></div>
-          <div><dt>Documentation</dt><dd>Accurate, timely, and defensible clinical records</dd></div>
-          <div><dt>Professional growth</dt><dd>Licensure, ethics, and career preparation</dd></div>
+          {copy.summary.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
         </dl>
       </div>
     </section>
@@ -33,16 +30,16 @@ const posts = blogPosts.filter((post) =>
     <section class="site-section">
       <div class="container">
         <div class="site-section__head">
-          <div><p class="site-eyebrow">Nursing resources</p><h2>Guides for clinical work and career growth.</h2></div>
-          <p>Focused on practical habits that improve communication, continuity of care, professional accountability, and patient safety.</p>
+          <div><p class="site-eyebrow">{copy.guidesEyebrow}</p><h2>{copy.guidesHeading}</h2></div>
+          <p>{copy.guidesSummary}</p>
         </div>
         <div class="site-grid">
           {posts.map((post) => (
             <article class="site-card">
-              <p class="site-eyebrow">{post.readMinutes} min read</p>
+              <p class="site-eyebrow">By Reeja Maharjan · {post.readMinutes} min read</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
-              <p><a href={`/blog/${post.slug}/`}>Read guide</a></p>
+              <p><a href={`/blog/${post.slug}/`}>Read Reeja’s article</a></p>
             </article>
           ))}
         </div>
@@ -51,8 +48,8 @@ const posts = blogPosts.filter((post) =>
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">Professional opportunities</p><h2>Planning a clinical, research, or health-programme role?</h2><p>Review Reeja's experience, credentials, and availability, then share the role details through the dedicated contact page.</p></div>
-        <div class="site-actions"><a class="site-button" href="/cv/">View CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
+        <div><p class="site-eyebrow">{copy.closingEyebrow}</p><h2>{copy.closingHeading}</h2><p>{copy.closingSummary}</p></div>
+        <div class="site-actions"><a class="site-button" href="/cv/">View Reeja’s CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
       </div>
     </section>
   </div>

@@ -2,141 +2,141 @@ import type { BlogPost } from './types';
 
 export const top10PostpartumCounsellingTipsNewNurses: BlogPost = {
   slug: 'top-10-postpartum-counselling-tips-new-nurses',
-  title: 'Top 10 Postpartum Counselling Tips Every New Nurse Should Know',
+  title: 'Postpartum Counselling for Nurses: 10 Practical Teaching Priorities',
   excerpt:
-    'A practical postpartum counselling guide for new nurses, covering communication, feeding support, warning signs, mental health, and follow-up.',
+    'Reeja Maharjan shares ten practical priorities for postpartum counselling, from feeding and warning signs to teach-back, family support, documentation, and escalation.',
   metaDescription:
-    'Learn 10 practical postpartum counselling tips every new nurse should know, from feeding support and warning signs to mental health and follow-up.',
+    'Registered Nurse Reeja Maharjan shares 10 practical postpartum counselling priorities for nurses, including feeding, warning signs, teach-back, and follow-up.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-03-11',
+  updatedAt: '2026-08-07',
   readMinutes: 9,
   tags: ['postpartum counselling', 'nursing tips', 'maternal health', 'patient education'],
-  primaryKeyword: 'postpartum counselling tips',
+  primaryKeyword: 'postpartum counselling for nurses',
   supportingKeywords: [
-    'postpartum counselling for nurses',
-    'new nurse counselling skills',
-    'maternal health education',
-    'postnatal teaching points',
-    'patient counselling after delivery'
+    'postpartum counselling tips',
+    'postnatal patient education',
+    'maternal health education for nurses',
+    'teach-back nursing',
+    'postnatal warning signs counselling'
   ],
   quickAnswer: [
-    'Good postpartum counselling is clear, calm, and practical. Nurses should explain feeding, hygiene, warning signs, emotional recovery, follow-up, and when urgent care is needed.',
-    'The best counselling is short, repeated, and adapted to what the mother and family can actually do at home.',
-    'New nurses do better when they use simple language, check understanding, and never assume families remember everything after delivery.'
+    'Effective postpartum counselling is short, practical, and prioritised around safety, feeding, maternal recovery, newborn care, warning signs, follow-up, and where to seek help.',
+    'Nurses should use plain language and teach-back rather than assuming that a tired mother or family member will remember a long discharge explanation.',
+    'Counselling should be documented, adapted to the family’s home context, and escalated to clinical review whenever symptoms need assessment rather than education.'
   ],
   intro: [
-    'Postpartum counselling is one of the most important nursing tasks after delivery. Families are tired, overwhelmed, and often trying to absorb instructions while caring for a newborn for the first time.',
-    'Strong counselling improves confidence, supports safer home care, and helps families seek help early when something is wrong.',
-    'These ten tips focus on what new nurses can do in real clinical settings to make discharge advice more useful and safer.'
+    'Postpartum education often happens at a difficult moment: the mother may be tired or in pain, family members may be distracted, and a newborn may need attention at the same time. A long speech is therefore a poor substitute for organised counselling.',
+    'Reeja Maharjan’s nursing experience has reinforced a simple principle: families need the most important information first, in language they can repeat back and use after they leave the facility.',
+    'These ten priorities offer a practical structure for nurses providing postnatal education. Local policy and the individual clinical plan should always guide the final advice.'
   ],
   sections: [
     {
       id: 'tip-1-start-with-priorities',
-      title: '1. Start with the few points that matter most',
+      title: '1. Lead with the information that affects safety',
       paragraphs: [
-        'Not every family can absorb a long discharge talk. Start with the points that directly affect safety: feeding, bleeding, fever, danger signs, follow-up, and where to get help.',
-        'Counselling should be structured. If you start with low-priority details, the family may miss the instructions that matter most.'
+        'Start with the few points a family must remember: feeding, maternal recovery, newborn care, warning signs, follow-up, medicines or care instructions, and where to seek help.',
+        'Lower-priority details can follow. When everything is presented as equally important, families may miss the information that needs action.'
       ]
     },
     {
       id: 'tip-2-use-simple-language',
-      title: '2. Use simple language and short sentences',
+      title: '2. Use plain language and concrete instructions',
       paragraphs: [
-        'Clinical accuracy matters, but complicated language reduces understanding. Use short sentences, common words, and concrete examples.',
-        'For example, instead of saying "observe postpartum complications," say "come back quickly if bleeding becomes heavy, you develop fever, or you feel faint."'
+        'Clinical terminology may be accurate but still fail as patient education. Use short sentences, familiar words, and examples that describe exactly what the family should watch for or do next.',
+        'For example, “seek help if bleeding becomes heavy or you feel faint” is more useful to a family than an unexplained instruction to “observe for postpartum complications.”'
       ]
     },
     {
       id: 'tip-3-check-understanding',
-      title: '3. Check understanding before discharge',
+      title: '3. Use teach-back before discharge',
       paragraphs: [
-        'Counselling is incomplete if the nurse talks but never confirms that the family understood. Ask them to repeat the key points in their own words.',
-        'This simple step often reveals confusion about feeding frequency, medicine timing, or danger signs.'
+        'Counselling is not complete when the nurse finishes speaking. Ask the mother or family member to explain the key instructions back in their own words.',
+        'Teach-back can reveal misunderstandings about feeding, medicines, warning signs, follow-up timing, or where to go if a problem appears.'
       ]
     },
     {
       id: 'tip-4-support-feeding-early',
-      title: '4. Give feeding support, not just feeding instructions',
+      title: '4. Pair feeding advice with practical feeding support',
       paragraphs: [
-        'WHO counselling guidance makes this clear: breastfeeding support works best when it includes positioning, attachment, and encouragement rather than one-way instruction.',
-        'A mother who is anxious or in pain may need practical coaching more than verbal advice.'
+        'Breastfeeding counselling should include practical help with positioning, attachment, feeding frequency, and signs that feeding is effective. Instruction without observation can leave a family unsure whether the plan is actually working.',
+        'When possible, observe a feed or arrange skilled support before discharge if the mother is in pain or the baby is feeding poorly.'
       ],
       bullets: [
-        'Observe at least one feed when possible.',
-        'Check latch and swallowing.',
-        'Address pain or poor attachment early.',
-        'Tell families when to seek help for feeding problems.'
+        'Observe positioning and attachment when the setting allows.',
+        'Ask about pain and watch for effective swallowing.',
+        'Explain when feeding problems need skilled review.',
+        'Avoid blame when feeding is difficult.'
       ]
     },
     {
       id: 'tip-5-include-mental-health',
-      title: '5. Include maternal emotional wellbeing in every counselling session',
+      title: '5. Include emotional wellbeing in postpartum teaching',
       paragraphs: [
-        'Postpartum counselling should not stop at physical recovery. Mothers may feel overwhelmed, low, fearful, or unsupported in the days after birth.',
-        'A nurse does not need to diagnose a mental health condition in every conversation, but should ask simple questions, listen without judgment, and explain when further support is needed.'
+        'Postpartum care includes mental and emotional wellbeing. Nurses can ask simple questions about mood, anxiety, sleep, coping, and support without turning every discharge conversation into a mental-health assessment.',
+        'The important step is to make help-seeking acceptable and explain which symptoms need further assessment or urgent escalation.'
       ]
     },
     {
       id: 'tip-6-prepare-for-home-reality',
-      title: '6. Counsel for the home reality, not the ideal setting',
+      title: '6. Make the plan realistic for the family’s home situation',
       paragraphs: [
-        'Advice should match the family context. If a household has limited space, low support, or transport barriers, instructions must be practical and realistic.',
-        'Families are more likely to follow a short workable plan than a long ideal plan they cannot sustain.'
+        'Advice is more useful when it reflects transport, family support, household responsibilities, access to follow-up, and other practical realities.',
+        'A short plan that a family can follow is safer than an idealised plan that cannot be sustained once they leave the facility.'
       ]
     },
     {
       id: 'tip-7-repeat-danger-signs',
-      title: '7. Repeat danger signs more than once',
+      title: '7. Repeat danger signs and the action they require',
       paragraphs: [
-        'Danger signs should be repeated during counselling because they are easy to forget when the mother is tired or distracted. Repeat them verbally, include them in written discharge instructions if available, and make sure one family member also understands them.',
-        'This is especially important for fever, heavy bleeding, severe headache, breathing problems, poor feeding, and seizures.'
+        'Warning signs are easy to forget, especially after a long admission or difficult delivery. Repeat the most important symptoms and connect each message to an action: who to call, where to go, and when not to wait.',
+        'Where written discharge information is available, make sure it supports rather than contradicts the verbal teaching.'
       ]
     },
     {
       id: 'tip-8-involve-family',
-      title: '8. Involve the family or caregiver',
+      title: '8. Include a trusted family member or caregiver when appropriate',
       paragraphs: [
-        'In many homes, another family member helps with transport, food, newborn care, and decisions. If possible, include that person in the teaching session.',
-        'This improves adherence and reduces the risk that key advice is lost after discharge.'
+        'Another person may help with transport, food, newborn care, medicines, or decisions after discharge. Including that person can make the plan easier to follow.',
+        'The mother’s privacy, preferences, and consent still matter. Family involvement should support care rather than override her voice.'
       ]
     },
     {
       id: 'tip-9-document-teaching',
-      title: '9. Document the teaching clearly',
+      title: '9. Document what was taught and what still needs follow-up',
       paragraphs: [
-        'Counselling is part of care, not an extra task. Document what was explained, what concerns were raised, and whether the family understood the plan.',
-        'Good documentation helps the next nurse continue the same message and supports continuity of care.'
+        'Patient education is part of clinical care. Record the important teaching provided, questions or concerns raised, and relevant follow-up or escalation.',
+        'Clear documentation helps the next clinician understand what the family has already been told and where additional support may be needed.'
       ]
     },
     {
       id: 'tip-10-know-when-to-escalate',
-      title: '10. Know when counselling is not enough',
+      title: '10. Recognise when counselling must stop and assessment must start',
       paragraphs: [
-        'Some situations need clinical review, not more explanation. If the mother has red-flag symptoms or the baby is not feeding, breathing well, or waking normally, escalate promptly.',
-        'Counselling is valuable, but it must never delay urgent assessment.'
+        'Education cannot replace clinical review. If the mother or newborn has a concerning symptom, the priority changes from teaching to timely assessment and escalation.',
+        'A good nurse knows both how to explain a care plan and when the situation has moved beyond routine counselling.'
       ]
     }
   ],
   faq: [
     {
-      question: 'What are the most important postpartum counselling points for new nurses?',
+      question: 'What should postpartum counselling cover first?',
       answer:
-        'The most important points are feeding support, maternal recovery, newborn danger signs, emotional wellbeing, hygiene, follow-up, and when to seek urgent care.'
+        'Start with feeding, maternal recovery, newborn care, danger signs, medicines or care instructions, follow-up, and exactly where to seek help.'
     },
     {
-      question: 'Why is postpartum counselling important?',
+      question: 'Why is teach-back useful in postnatal education?',
       answer:
-        'It helps families care for the mother and newborn safely at home, improves confidence, and reduces delayed response to serious symptoms.'
-    },
-    {
-      question: 'How can a new nurse improve counselling quickly?',
-      answer:
-        'Use simple language, focus on the top priorities, repeat danger signs, check understanding, and adapt the advice to the family context.'
+        'Teach-back shows whether the mother or family understood the plan and gives the nurse a chance to correct confusion before discharge.'
     },
     {
       question: 'Should postpartum counselling include mental health?',
       answer:
-        'Yes. Emotional recovery matters after delivery, and nurses should explain when sadness, fear, or inability to cope needs further support.'
+        'Yes. Emotional wellbeing is part of postnatal recovery, and persistent or severe distress should be linked to appropriate clinical support.'
+    },
+    {
+      question: 'When is counselling not enough?',
+      answer:
+        'When symptoms suggest that the mother or newborn needs clinical assessment, urgent review, or emergency care, education should not delay escalation.'
     }
   ],
   sources: [
@@ -159,11 +159,11 @@ export const top10PostpartumCounsellingTipsNewNurses: BlogPost = {
     'mastering-nursing-documentation-sbar-handover'
   ],
   cta: {
-    title: 'Looking for a nurse skilled in counselling and patient education?',
-    text: 'Reeja brings practical counselling, documentation, and maternal-newborn support experience from hospital settings in Nepal.',
-    label: 'Send Email',
-    href: '/#contact'
+    title: 'Learn more about Reeja’s patient-education experience',
+    text: 'Reeja’s hospital and research work includes patient and participant education, maternal-newborn support, documentation, monitoring guidance, and follow-up communication.',
+    label: 'About Reeja Maharjan',
+    href: '/'
   },
   disclaimer:
-    'This article is educational only and not personal medical advice. Clinical decisions should be made with a qualified clinician.'
+    'This article is for nursing education and does not replace local postnatal policy, an individual care plan, or assessment by the appropriate clinical team.'
 };

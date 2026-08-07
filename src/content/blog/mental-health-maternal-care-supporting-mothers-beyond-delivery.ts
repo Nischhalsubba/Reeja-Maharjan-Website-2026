@@ -2,107 +2,107 @@ import type { BlogPost } from './types';
 
 export const mentalHealthMaternalCareSupportingMothersBeyondDelivery: BlogPost = {
   slug: 'mental-health-maternal-care-supporting-mothers-beyond-delivery',
-  title: 'Mental Health & Maternal Care: Supporting Mothers Beyond Delivery',
+  title: 'Maternal Mental Health After Birth: How Nurses Can Support Mothers',
   excerpt:
-    'Why maternal mental health matters after childbirth, what nurses can do, and which warning signs should never be ignored.',
+    'Reeja Maharjan explains why emotional wellbeing belongs in postnatal care, how nurses can support mothers, and which warning signs need prompt clinical attention.',
   metaDescription:
-    'Learn how maternal mental health support fits into postpartum care, including nursing communication, warning signs, family support, and follow-up.',
+    'Registered Nurse Reeja Maharjan explains maternal mental health after birth, including nursing support, family communication, warning signs, and follow-up.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-03-11',
+  updatedAt: '2026-08-07',
   readMinutes: 9,
   tags: ['maternal mental health', 'postpartum support', 'nursing counselling', 'postnatal care'],
-  primaryKeyword: 'mental health and maternal care',
+  primaryKeyword: 'maternal mental health after birth',
   supportingKeywords: [
     'postpartum mental health support',
-    'maternal counselling after delivery',
     'nursing support for new mothers',
-    'perinatal mental health',
-    'postnatal emotional wellbeing'
+    'postnatal emotional wellbeing',
+    'maternal mental health warning signs',
+    'postpartum counselling'
   ],
   quickAnswer: [
-    'Maternal care should include emotional wellbeing, not only physical recovery. After delivery, mothers may need support with anxiety, exhaustion, low mood, bonding concerns, and practical coping.',
-    'Nurses help by listening carefully, normalizing help-seeking, involving family support, checking for warning signs, and making sure follow-up pathways are clear.',
-    'Persistent sadness, panic, hopelessness, inability to function, or thoughts of harm need urgent professional review.'
+    'Postnatal care should include emotional wellbeing as well as physical recovery. Mothers may experience anxiety, exhaustion, low mood, feeding stress, or difficulty coping after birth.',
+    'Nurses can help by asking simple questions, listening without judgement, checking practical support, documenting concerns, and connecting the mother with appropriate follow-up.',
+    'Severe confusion, loss of contact with reality, inability to function safely, or thoughts of self-harm or harm to the baby require urgent professional assessment.'
   ],
   intro: [
-    'Good maternal care continues beyond delivery. A mother may look physically stable while still feeling overwhelmed, frightened, or emotionally shut down.',
-    'That is why postpartum nursing support must include mental health awareness alongside feeding, bleeding, pain, and follow-up counselling.',
-    'This article outlines the nursing role in supporting mothers after delivery and the signs that require urgent escalation.'
+    'A mother can appear physically stable and still be struggling emotionally. Sleep disruption, pain, feeding difficulties, responsibility for a newborn, family expectations, and major hormonal and social changes can all shape the postnatal period.',
+    'Reeja Maharjan approaches maternal education as more than a checklist of physical symptoms. A useful nursing conversation also leaves room for mood, anxiety, coping, sleep, support, and safety.',
+    'This article describes the nursing role in recognising and responding to emotional distress after birth. It is not a diagnostic guide, and urgent symptoms require the appropriate mental-health or emergency pathway.'
   ],
   sections: [
     {
       id: 'why-mental-health-matters',
-      title: 'Why maternal mental health matters after birth',
+      title: 'Why emotional wellbeing belongs in postnatal care',
       paragraphs: [
-        'The postnatal period is a major transition. Physical recovery, sleep disruption, feeding pressure, family expectations, and worry about the baby can all affect emotional wellbeing.',
-        'WHO guidance emphasizes that postnatal care should support the mother as a whole person, including mental and social wellbeing, not only clinical recovery.'
+        'The postnatal period is a major physical and social transition. Recovery, sleep loss, feeding pressure, worry about the baby, and changes in family roles can all affect how a mother feels and functions.',
+        'Including emotional wellbeing in routine postnatal conversations makes it easier to identify when normal adjustment is becoming persistent or severe distress that needs additional support.'
       ]
     },
     {
       id: 'nursing-role',
-      title: 'What nurses can do in real settings',
+      title: 'What nurses can do during routine maternal care',
       paragraphs: [
-        'Nurses do not need to turn every conversation into a long counselling session. Often the most effective approach is to ask simple questions, create a respectful space, and notice when the mother is struggling.',
-        'The nurse can validate concerns, encourage support, repeat practical coping advice, and link the mother to the next appropriate level of care.'
+        'Nurses do not need to diagnose a mental-health condition to notice that a mother is struggling. Simple, respectful questions about mood, sleep, fear, support, and coping can open a useful conversation.',
+        'The nursing role includes listening, documenting relevant concerns, reducing stigma around help-seeking, and escalating according to local pathways when symptoms or safety concerns require more than routine support.'
       ],
       bullets: [
-        'Ask open, simple questions about mood, sleep, stress, and coping.',
-        'Listen without minimizing distress.',
-        'Include family support where appropriate.',
-        'Document concerns and escalate when needed.'
+        'Ask open questions about mood, sleep, worry, coping, and available support.',
+        'Listen without minimising or immediately trying to “fix” the emotion.',
+        'Include trusted family support when appropriate and with the mother’s preferences in mind.',
+        'Document concerns and arrange or escalate follow-up when needed.'
       ]
     },
     {
       id: 'supportive-counselling-points',
-      title: 'Supportive counselling points that help',
+      title: 'Postnatal counselling that supports emotional recovery',
       paragraphs: [
-        'Short counselling works best when it is concrete. Mothers often need permission to ask for help, rest when possible, and report symptoms they may think they should hide.',
-        'A nurse can reduce stigma by saying clearly that emotional strain after childbirth is important and deserves support.'
+        'Useful counselling is concrete. A mother may need permission to rest, ask others for practical help, discuss feeding difficulties without shame, and tell someone when distress is becoming difficult to manage.',
+        'A nurse can also make the follow-up pathway more usable by explaining who to contact, how soon to seek review, and which symptoms should not wait for a routine appointment.'
       ],
       bullets: [
-        'Explain that seeking help early is a strength, not a failure.',
-        'Encourage practical family support with rest, food, and baby care.',
-        'Reinforce feeding support, not blame, when feeding is difficult.',
-        'Give clear follow-up instructions if mood concerns continue or worsen.'
+        'Make help-seeking normal and specific rather than vague.',
+        'Encourage practical support with food, rest, household work, and newborn care.',
+        'Support feeding problems without blame or pressure.',
+        'Give a clear follow-up or escalation plan when emotional concerns are present.'
       ]
     },
     {
       id: 'warning-signs',
-      title: 'Warning signs that need urgent review',
+      title: 'Mental-health warning signs that need urgent review',
       paragraphs: [
-        'Some emotional symptoms need urgent attention. These include persistent hopelessness, severe anxiety, inability to sleep at all, confusion, loss of contact with reality, or thoughts of self-harm or harm to the baby.',
-        'In those situations, reassurance alone is not enough. The nurse should activate urgent review or emergency support based on local pathways.'
+        'Some symptoms require urgent assessment rather than reassurance alone. Severe confusion, loss of contact with reality, inability to function safely, extreme agitation, or thoughts of self-harm or harm to the baby are examples of serious warning signs.',
+        'When safety is in question, use the local urgent mental-health or emergency pathway. Do not leave a mother or family to manage a serious concern without clear professional support.'
       ]
     },
     {
       id: 'family-role',
-      title: 'Why family support matters',
+      title: 'How family members can support a mother after birth',
       paragraphs: [
-        'Family members often notice changes before the mother names them herself. Good maternal care includes telling families what symptoms should not be ignored.',
-        'Families can help by reducing pressure, sharing practical work, and encouraging timely review instead of telling the mother to simply endure it.'
+        'Family members may notice changes in sleep, behaviour, mood, or functioning before the mother feels able to describe them. They can help by listening, reducing practical pressure, and encouraging timely review rather than dismissing distress.',
+        'Support should still respect the mother’s dignity, preferences, and privacy. The goal is to make care easier to access, not to take control away from her.'
       ]
     }
   ],
   faq: [
     {
-      question: 'Why should maternal care include mental health support?',
+      question: 'Why should postnatal nursing include mental health?',
       answer:
-        'Because emotional wellbeing directly affects recovery, feeding, bonding, and the mother’s ability to cope safely after childbirth.'
+        'Emotional wellbeing affects recovery, feeding, relationships, sleep, safety, and a mother’s ability to cope after birth, so it belongs in whole-person postnatal care.'
     },
     {
-      question: 'What can nurses do for maternal mental health?',
+      question: 'What can a nurse do when a new mother seems overwhelmed?',
       answer:
-        'Nurses can ask simple questions, listen carefully, normalize support, involve family appropriately, document concerns, and escalate warning signs quickly.'
+        'Ask respectful questions, listen, check practical support and safety, document relevant concerns, and connect or escalate the mother to the appropriate level of care.'
     },
     {
-      question: 'What are urgent warning signs after childbirth?',
+      question: 'Which postpartum mental-health symptoms are urgent?',
       answer:
-        'Urgent signs include hopelessness, inability to function, confusion, severe anxiety, or thoughts of self-harm or harm to the baby.'
+        'Severe confusion, loss of contact with reality, inability to function safely, or thoughts of self-harm or harm to the baby need urgent professional assessment.'
     },
     {
-      question: 'Is postpartum emotional distress always temporary?',
+      question: 'Can family support replace professional mental-health care?',
       answer:
-        'Not always. Some symptoms improve with support, but persistent or severe symptoms should be reviewed by a qualified clinician.'
+        'No. Family support can be valuable, but persistent, severe, or safety-related symptoms still need assessment by an appropriate qualified professional.'
     }
   ],
   sources: [
@@ -121,11 +121,11 @@ export const mentalHealthMaternalCareSupportingMothersBeyondDelivery: BlogPost =
     'comprehensive-newborn-care-level-ii-what-nurses-learn'
   ],
   cta: {
-    title: 'Need a nurse with counselling and maternal-care strengths?',
-    text: 'Reeja’s experience includes patient counselling, maternal-newborn care support, and practical discharge communication.',
-    label: 'Contact Reeja',
-    href: '/#contact'
+    title: 'Explore Reeja Maharjan’s maternal-health profile',
+    text: 'Reeja’s professional background includes maternal-newborn hospital care, patient education, and current maternal-health research involving follow-up, monitoring support, and participant communication.',
+    label: 'About Reeja',
+    href: '/'
   },
   disclaimer:
-    'This article is educational only and does not replace mental health assessment or emergency care.'
+    'This article is for general education and does not replace mental-health assessment, diagnosis, treatment, or emergency care. Use local urgent-care services for immediate safety concerns.'
 };

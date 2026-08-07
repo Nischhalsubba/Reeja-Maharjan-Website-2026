@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { blogPosts } from '../../content/blog';
+import { siteCopy } from '../../content/site-copy';
 import '../../styles/blog.css';
 
+const copy = siteCopy.blog;
 const formatDate = (value: string) =>
   new Date(value).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 
@@ -12,19 +14,19 @@ const topicGroups = [
   {
     label: 'Maternal health',
     href: '/maternal-health/',
-    summary: 'Pregnancy, postnatal care, breastfeeding, newborn support, and warning signs.',
+    summary: 'Maternal recovery, newborn care, postpartum counselling, feeding support, and warning signs.',
     pattern: /maternal|newborn|postnatal|breastfeeding|pregnan|mother/i
   },
   {
     label: 'Nursing practice',
     href: '/nursing-practice/',
-    summary: 'Documentation, SBAR, confidentiality, clinical communication, and care continuity.',
+    summary: 'Documentation, SBAR handover, confidentiality, ward communication, and professional practice.',
     pattern: /nursing|documentation|sbar|handover|confidential|clinical communication/i
   },
   {
-    label: 'Career and digital health',
+    label: 'Research & digital health',
     href: '/clinical-research/',
-    summary: 'Licensure, telehealth, community nursing, research support, and programme readiness.',
+    summary: 'Telehealth, maternal-health research, licensure, community care, and professional development.',
     pattern: /career|license|licensure|telehealth|digital|research|community/i
   }
 ].map((topic) => ({
@@ -33,22 +35,19 @@ const topicGroups = [
 }));
 ---
 
-<BaseLayout
-  title="Nursing and Maternal Health Articles | Reeja Maharjan"
-  description="Nurse-led articles on maternal and newborn care, documentation, SBAR handover, confidentiality, telehealth, and nursing careers in Nepal."
->
+<BaseLayout title={copy.title} description={copy.description}>
   <div class="site-page blog-index">
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">Articles</p>
-          <h1>Practical nursing knowledge.</h1>
-          <p class="site-page__lede">Evidence-informed guides for patients, families, nurses, students, and healthcare teams, organised for safer reading and clearer next steps.</p>
+          <p class="site-eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.heading}</h1>
+          <p class="site-page__lede">{copy.lede}</p>
         </div>
         <dl class="site-page__summary">
-          <div><dt>Maternal health</dt><dd>Pregnancy, postnatal care, breastfeeding, and newborn support</dd></div>
-          <div><dt>Nursing practice</dt><dd>Documentation, SBAR, confidentiality, and communication</dd></div>
-          <div><dt>Professional growth</dt><dd>Licensure, careers, digital health, and research readiness</dd></div>
+          <div><dt>Maternal health</dt><dd>Maternal recovery, newborn care, postpartum counselling, and family education</dd></div>
+          <div><dt>Nursing practice</dt><dd>Documentation, handover, confidentiality, ward communication, and patient safety</dd></div>
+          <div><dt>Professional growth</dt><dd>Licensure, telehealth, community care, research support, and nursing careers in Nepal</dd></div>
         </dl>
       </div>
     </section>
@@ -56,23 +55,23 @@ const topicGroups = [
     <section class="site-section">
       <div class="container">
         <div class="site-section__head">
-          <div><p class="site-eyebrow">Reading hub</p><h2>Start with the most useful guide, then browse by topic.</h2></div>
-          <p>Each article keeps source links, review dates, and safety notes visible where clinical decisions are involved.</p>
+          <div><p class="site-eyebrow">{copy.hubEyebrow}</p><h2>{copy.hubHeading}</h2></div>
+          <p>{copy.hubSummary}</p>
         </div>
 
         <div class="blog-index__featured" data-ledger-group>
           {featuredPost && (
             <a class="blog-index__lead-card" href={`/blog/${featuredPost.slug}/`} data-ledger-reveal>
-              <p class="site-eyebrow">Featured guide</p>
+              <p class="site-eyebrow">Featured article by Reeja</p>
               <h3>{featuredPost.title}</h3>
               <p>{featuredPost.excerpt}</p>
-              <p class="blog-card__meta"><span>{formatDate(featuredPost.publishedAt)}</span><span>{featuredPost.readMinutes} min read</span></p>
+              <p class="blog-card__meta"><span>Updated {formatDate(featuredPost.updatedAt)}</span><span>{featuredPost.readMinutes} min read</span></p>
             </a>
           )}
 
           <aside class="blog-topic-panel" aria-labelledby="blog-topic-title" data-ledger-reveal>
-            <p class="site-eyebrow">Topics</p>
-            <h3 id="blog-topic-title">Find the right reading path.</h3>
+            <p class="site-eyebrow">Browse by topic</p>
+            <h3 id="blog-topic-title">Explore Reeja’s writing.</h3>
             {topicGroups.map((topic) => (
               <div class="blog-topic-panel__item">
                 <span class="blog-topic-panel__count">{String(topic.count).padStart(2, '0')}</span>
@@ -86,18 +85,19 @@ const topicGroups = [
         </div>
 
         <div class="site-section__head">
-          <div><p class="site-eyebrow">All articles</p><h2>Browse the full library.</h2></div>
+          <div><p class="site-eyebrow">{copy.allEyebrow}</p><h2>{copy.allHeading}</h2></div>
+          <p>Every article identifies Reeja as the author and keeps sources, update dates, audience, and safety information visible.</p>
         </div>
 
         <div class="blog-grid" data-ledger-group>
           {articleList.map((post) => (
             <article class="blog-card" data-ledger-reveal>
               <div>
-                <p class="site-eyebrow">{post.tags[0]}</p>
+                <p class="site-eyebrow">{post.tags[0]} · By Reeja Maharjan</p>
                 <h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3>
                 <p>{post.excerpt}</p>
               </div>
-              <p class="blog-card__meta"><span>{formatDate(post.publishedAt)}</span><span>{post.readMinutes} min read</span></p>
+              <p class="blog-card__meta"><span>Updated {formatDate(post.updatedAt)}</span><span>{post.readMinutes} min read</span></p>
             </article>
           ))}
         </div>

@@ -1,19 +1,24 @@
 ---
 import { profile } from '../content/profile';
+import { siteCopy } from '../content/site-copy';
+
 const featuredWriting = [
-  { category: 'Maternal care', title: 'Essential maternal and newborn care guide', href: '/blog/essential-maternal-newborn-care-guide-2026/' },
-  { category: 'Clinical practice', title: 'SBAR handover and nursing documentation', href: '/blog/mastering-nursing-documentation-sbar-handover/' },
-  { category: 'Digital health', title: 'Telehealth and community nursing in Nepal', href: '/blog/future-of-nursing-in-nepal-telehealth-community-care-post-covid/' }
+  { category: 'Maternal health', title: 'Maternal and newborn care after birth', href: '/blog/essential-maternal-newborn-care-guide-2026/' },
+  { category: 'Nursing practice', title: 'Nursing documentation and SBAR handover', href: '/blog/mastering-nursing-documentation-sbar-handover/' },
+  { category: 'Digital health', title: 'Nursing in Nepal, telehealth, and community care', href: '/blog/future-of-nursing-in-nepal-telehealth-community-care-post-covid/' }
 ];
+
+const credentialsCopy = siteCopy.home.credentials;
+const writingCopy = siteCopy.home.writing;
 ---
 
 <section class="fj-section" id="credentials" aria-labelledby="credentials-title">
   <div class="container">
     <header class="fj-section__head" data-fj-reveal>
-      <p class="fj-kicker">04 · Verification register</p>
+      <p class="fj-kicker">{credentialsCopy.kicker}</p>
       <div>
-        <h2 id="credentials-title">Credentials presented like records, not badges.</h2>
-        <p>Sensitive documents stay private. The public portfolio names the credential and issuer; legitimate employers can request verification material directly.</p>
+        <h2 id="credentials-title">{credentialsCopy.title}</h2>
+        <p>{credentialsCopy.summary}</p>
       </div>
     </header>
 
@@ -37,10 +42,10 @@ const featuredWriting = [
 <section class="fj-section fj-section--surface" id="writing" aria-labelledby="writing-title">
   <div class="container">
     <header class="fj-section__head" data-fj-reveal>
-      <p class="fj-kicker">05 · Reading notes</p>
+      <p class="fj-kicker">{writingCopy.kicker}</p>
       <div>
-        <h2 id="writing-title">Writing that makes clinical reasoning easier to use.</h2>
-        <p>Selected articles translate nursing and maternal-health topics into clear, practical guidance while keeping scope and safety visible.</p>
+        <h2 id="writing-title">{writingCopy.title}</h2>
+        <p>{writingCopy.summary}</p>
       </div>
     </header>
 
@@ -49,13 +54,13 @@ const featuredWriting = [
         <a class="fj-reading__entry" href={article.href} data-fj-reveal>
           <p class="fj-reading__meta">0{index + 1}<br />{article.category}</p>
           <h3>{article.title}</h3>
-          <small>Open note</small>
+          <small>Read article</small>
         </a>
       ))}
     </div>
 
     <div style="margin-top: var(--fj-space-5)" data-fj-reveal>
-      <a class="fj-link" href="/blog/">Browse the complete article library</a>
+      <a class="fj-link" href="/blog/">{writingCopy.cta}</a>
     </div>
   </div>
 </section>

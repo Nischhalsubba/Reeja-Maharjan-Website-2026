@@ -2,27 +2,30 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
+import { siteCopy } from '../content/site-copy';
 import '../styles/cv.css';
+
+const copy = siteCopy.cv;
 ---
 
-<BaseLayout title={`${professionalFacts.name} | Nursing CV`} description={profile.profileSummary}>
+<BaseLayout title={copy.title} description={copy.description}>
   <div class="site-page cv-page">
     <section class="site-page__hero cv-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">Professional CV</p>
-          <h1>{professionalFacts.name}</h1>
-          <p class="site-page__lede">{professionalFacts.nepalLicense}, {professionalFacts.texasLicenseShort}, and maternal-health {professionalFacts.currentRole} based in {professionalFacts.currentLocation}.</p>
+          <p class="site-eyebrow">{copy.eyebrow}</p>
+          <h1>{professionalFacts.name}, {professionalFacts.credential}</h1>
+          <p class="site-page__lede">{copy.lede}</p>
           <div class="site-actions">
             <a class="site-button site-button--primary" href="/contact/">Contact Reeja</a>
-            <button class="site-button" type="button" onclick="window.print()">Print / Save PDF</button>
+            <button class="site-button" type="button" onclick="window.print()">Print or save CV</button>
           </div>
         </div>
         <dl class="site-page__summary">
-          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}</dd></div>
-          <div><dt>Clinical background</dt><dd>TUTH, MMTH, and Sindhuli Hospital</dd></div>
-          <div><dt>Education</dt><dd>{professionalFacts.credential}</dd></div>
-          <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
+          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</dd></div>
+          <div><dt>Hospital experience</dt><dd>TUTH, MMTH, and Sindhuli Hospital</dd></div>
+          <div><dt>Licensure</dt><dd>{professionalFacts.nepalLicenseShort} · {professionalFacts.texasLicenseShort}</dd></div>
+          <div><dt>Based in</dt><dd>{professionalFacts.currentLocation}</dd></div>
         </dl>
       </div>
     </section>
@@ -30,8 +33,8 @@ import '../styles/cv.css';
     <section class="site-section">
       <div class="container cv-profile-grid">
         <div>
-          <p class="site-eyebrow">Profile</p>
-          <h2>Registered nurse with clinical and research experience.</h2>
+          <p class="site-eyebrow">{copy.profileEyebrow}</p>
+          <h2>{copy.profileHeading}</h2>
         </div>
         <p class="cv-profile-copy">{profile.profileSummary}</p>
       </div>
@@ -40,7 +43,7 @@ import '../styles/cv.css';
     <section class="site-section site-section--soft" id="experience">
       <div class="container">
         <div class="site-section__head">
-          <div><p class="site-eyebrow">Experience</p><h2>Clinical and research roles.</h2></div>
+          <div><p class="site-eyebrow">{copy.experienceEyebrow}</p><h2>{copy.experienceHeading}</h2></div>
         </div>
         <ol class="cv-experience">
           {profile.experience.map((item, index) => (
@@ -63,8 +66,8 @@ import '../styles/cv.css';
     <section class="site-section" id="credentials">
       <div class="container">
         <div class="site-section__head">
-          <div><p class="site-eyebrow">Credentials</p><h2>Licenses and clinical training.</h2></div>
-          <p>Verification documents are available privately to legitimate employers.</p>
+          <div><p class="site-eyebrow">{copy.credentialsEyebrow}</p><h2>{copy.credentialsHeading}</h2></div>
+          <p>{copy.credentialsSummary}</p>
         </div>
         <ol class="cv-credentials">
           {profile.certifications.map((item, index) => (
@@ -89,7 +92,7 @@ import '../styles/cv.css';
       <div class="container cv-columns">
         <section class="cv-panel" aria-labelledby="cv-education-title">
           <p class="site-eyebrow">Education</p>
-          <h2 id="cv-education-title">Academic background.</h2>
+          <h2 id="cv-education-title">{copy.educationHeading}</h2>
           <div class="cv-education">
             {profile.education.map((item) => (
               <article class="cv-education__item">
@@ -137,8 +140,8 @@ import '../styles/cv.css';
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">Contact</p><h2>Discuss a nursing or research opportunity.</h2><p>Share the role, organisation, location, expected timing, and responsibilities through the dedicated contact page.</p></div>
-        <div class="site-actions"><a class="site-button" href="/contact/">Contact Reeja</a><a class="site-button" href="/hire-reeja/">Recruiter profile</a></div>
+        <div><p class="site-eyebrow">{copy.closingEyebrow}</p><h2>{copy.closingHeading}</h2><p>{copy.closingSummary}</p></div>
+        <div class="site-actions"><a class="site-button" href="/contact/">Contact Reeja</a><a class="site-button" href="/hire-reeja/">Review Reeja’s professional profile</a></div>
       </div>
     </section>
   </div>

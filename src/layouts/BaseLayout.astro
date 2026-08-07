@@ -19,6 +19,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
+import { siteCopy } from '../content/site-copy';
 
 type Props = {
   title?: string;
@@ -28,17 +29,18 @@ type Props = {
 };
 
 const {
-  title = `${professionalFacts.name} | ${professionalFacts.primaryRole}`,
-  description = profile.hero.tagline,
+  title = siteCopy.defaultTitle,
+  description = siteCopy.defaultDescription,
   image = '/og-default.svg',
   robots = 'index, follow, max-image-preview:large'
 } = Astro.props;
 
-const isBlogPage = Astro.url.pathname.startsWith('/blog');
-const isOnePage = Astro.url.pathname === '/';
-const isProfilePage = isOnePage || Astro.url.pathname === '/hire-reeja/' || Astro.url.pathname === '/contact/';
-const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
+const pathname = Astro.url.pathname;
+const isArticlePage = pathname.startsWith('/blog/') && pathname !== '/blog/';
+const isProfilePage = pathname === '/' || pathname === '/hire-reeja/' || pathname === '/cv/';
+const canonicalUrl = new URL(pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
+const portraitUrl = new URL('/reeja-headshot.jpg', Astro.site ?? Astro.url.origin).toString();
 const sameAs = [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean);
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
 const searchConsoleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -48,8 +50,9 @@ const personSchema = {
   '@id': 'https://reejamaharjan.com.np/#person',
   name: professionalFacts.name,
   url: 'https://reejamaharjan.com.np/',
+  image: portraitUrl,
   jobTitle: professionalFacts.primaryRole,
-  description: profile.profileSummary,
+  description: siteCopy.profileSummary,
   email: professionalFacts.professionalEmail,
   address: {
     '@type': 'PostalAddress',
@@ -68,8 +71,8 @@ const graphSchema = {
       '@type': 'WebSite',
       '@id': 'https://reejamaharjan.com.np/#website',
       url: 'https://reejamaharjan.com.np/',
-      name: professionalFacts.name,
-      description: profile.hero.tagline,
+      name: siteCopy.websiteName,
+      description: siteCopy.defaultDescription,
       inLanguage: 'en',
       publisher: { '@id': 'https://reejamaharjan.com.np/#person' }
     },
@@ -81,7 +84,7 @@ const graphSchema = {
           url: canonicalUrl,
           name: title,
           description,
-          dateModified: professionalFacts.lastVerified,
+          dateModified: siteCopy.updatedAt,
           mainEntity: { '@id': 'https://reejamaharjan.com.np/#person' },
           isPartOf: { '@id': 'https://reejamaharjan.com.np/#website' }
         }]
@@ -96,7 +99,7 @@ const graphSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="design-system" content="Reeja Field Journal" />
-    <meta name="design-release" content="field-journal-site-2.0.0" />
+    <meta name="design-release" content="field-journal-site-2.1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -108,13 +111,13 @@ const graphSchema = {
       rel="stylesheet"
     />
 
-    <meta property="og:type" content={isBlogPage ? 'article' : 'profile'} />
+    <meta property="og:type" content={isArticlePage ? 'article' : isProfilePage ? 'profile' : 'website'} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImage} />
-    <meta property="og:image:alt" content={`${title} social preview`} />
-    <meta property="og:site_name" content={professionalFacts.name} />
+    <meta property="og:image:alt" content={`${title} — ${professionalFacts.name}`} />
+    <meta property="og:site_name" content={siteCopy.websiteName} />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -137,9 +140,9 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body class="field-journal" data-design-system="reeja-field-journal" data-design-version="2.0.0-site">
+  <body class="field-journal" data-design-system="reeja-field-journal" data-design-version="2.1.0-site">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
-    <a class="skip-link" href="#main-content">Skip to content</a>
+    <a class="skip-link" href="#main-content">Skip to Reeja’s profile</a>
     <Header name={professionalFacts.name} />
     <main id="main-content"><slot /></main>
     <Footer profile={profile} />

@@ -1,23 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { siteCopy } from '../content/site-copy';
+
+const copy = siteCopy.research;
 ---
 
-<BaseLayout
-  title="Clinical Research and Maternal Telemonitoring | Reeja Maharjan"
-  description="Reeja Maharjan's maternal-health research experience includes participant screening, BP/BG monitoring education, tele-follow-up, study documentation, and coordination."
->
+<BaseLayout title={copy.title} description={copy.description}>
   <div class="site-page">
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">Clinical research</p>
-          <h1>Nursing experience applied to maternal-health research.</h1>
-          <p class="site-page__lede">Reeja supports the IISH MOM-HD trial through participant screening, home BP/BG education, tele-follow-up, documentation, data review, and protocol-based coordination.</p>
+          <p class="site-eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.heading}</h1>
+          <p class="site-page__lede">{copy.lede}</p>
         </div>
         <dl class="site-page__summary">
-          <div><dt>Current role</dt><dd>Research Assistant, IISH MOM-HD</dd></div>
-          <div><dt>Study focus</dt><dd>Hypertension and diabetes in pregnancy</dd></div>
-          <div><dt>Location</dt><dd>Biratnagar, Nepal</dd></div>
+          {copy.summary.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
         </dl>
       </div>
     </section>
@@ -25,35 +23,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class="site-section">
       <div class="container">
         <div class="site-section__head">
-          <div><p class="site-eyebrow">Responsibilities</p><h2>Participant support, monitoring, and dependable records.</h2></div>
-          <p>Clinical understanding is paired with clear communication, careful documentation, and timely escalation to the appropriate team.</p>
+          <div><p class="site-eyebrow">{copy.responsibilitiesEyebrow}</p><h2>{copy.responsibilitiesHeading}</h2></div>
+          <p>{copy.responsibilitiesSummary}</p>
         </div>
         <div class="site-grid">
-          <article class="site-card"><h3>Participant screening</h3><p>ANC screening, eligibility workflow support, consent-process assistance, and organised records.</p></article>
-          <article class="site-card"><h3>Home monitoring education</h3><p>Teaching automatic BP measurement, glucometer use, safe recording, and mobile reporting.</p></article>
-          <article class="site-card"><h3>Tele-follow-up</h3><p>Reviewing readings, screening warning symptoms, reinforcing adherence, and escalating concerns.</p></article>
-          <article class="site-card"><h3>Data quality</h3><p>Reviewing digital records, supporting REDCap-style checks, and maintaining confidentiality.</p></article>
-          <article class="site-card"><h3>Device coordination</h3><p>Supporting device distribution, tracking, participant use, and return workflows.</p></article>
-          <article class="site-card"><h3>Team communication</h3><p>Coordinating with nurses, obstetricians, researchers, hospital staff, and technical teams.</p></article>
+          {copy.responsibilities.map(([title, description]) => (
+            <article class="site-card"><h3>{title}</h3><p>{description}</p></article>
+          ))}
         </div>
       </div>
     </section>
 
     <section class="site-section site-section--soft">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">Role relevance</p><h2>Useful across research, NGOs, INGOs, and health programmes.</h2><p>Best suited to work that needs participant communication, accurate records, monitoring support, and multidisciplinary coordination.</p></div>
+        <div><p class="site-eyebrow">{copy.relevanceEyebrow}</p><h2>{copy.relevanceHeading}</h2><p>{copy.relevanceSummary}</p></div>
         <dl class="site-page__summary">
-          <div><dt>Maternal health</dt><dd>HDP and GDM workflows</dd></div>
-          <div><dt>Digital health</dt><dd>Telemonitoring and mobile reporting</dd></div>
-          <div><dt>Implementation support</dt><dd>Follow-up, logistics, documentation, and coordination</dd></div>
+          <div><dt>Maternal health</dt><dd>HDP and GDM research workflows</dd></div>
+          <div><dt>Digital health</dt><dd>Home monitoring, tele-follow-up, and mobile reporting</dd></div>
+          <div><dt>Research support</dt><dd>Participant communication, records, logistics, and coordination</dd></div>
         </dl>
       </div>
     </section>
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">Professional opportunities</p><h2>Discuss a research or health-programme role.</h2><p>Share the organisation, project, location, contract period, and responsibilities through the dedicated contact form.</p></div>
-        <div class="site-actions"><a class="site-button" href="/cv/">View CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
+        <div><p class="site-eyebrow">{copy.closingEyebrow}</p><h2>{copy.closingHeading}</h2><p>{copy.closingSummary}</p></div>
+        <div class="site-actions"><a class="site-button" href="/cv/">View Reeja’s CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
       </div>
     </section>
   </div>

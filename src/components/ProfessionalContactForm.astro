@@ -14,32 +14,32 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
   aria-labelledby="contact-form-title"
 >
   <div class="professional-contact-form__heading">
-    <p class="site-eyebrow">Send a message</p>
-    <h2 id="contact-form-title">Share the opportunity details.</h2>
-    <p>Required fields are marked with an asterisk. Please do not include confidential patient information or private identity documents.</p>
+    <p class="site-eyebrow">Professional inquiry</p>
+    <h2 id="contact-form-title">Send a message to Reeja.</h2>
+    <p>Tell Reeja who you are, the organisation you represent, and the nursing, research, or health-programme opportunity you would like to discuss. Required fields are marked with an asterisk.</p>
   </div>
 
   <div class="professional-contact-form__grid">
     <div class="form-field">
-      <label for="contact-name">Name <span aria-hidden="true">*</span></label>
+      <label for="contact-name">Your name <span aria-hidden="true">*</span></label>
       <input id="contact-name" name="name" type="text" autocomplete="name" required minlength="2" aria-describedby="contact-name-error" />
       <p class="form-field__error" id="contact-name-error" data-error-for="contact-name" role="alert" hidden></p>
     </div>
 
     <div class="form-field">
-      <label for="contact-email">Email <span aria-hidden="true">*</span></label>
+      <label for="contact-email">Your email <span aria-hidden="true">*</span></label>
       <input id="contact-email" name="email" type="email" inputmode="email" autocomplete="email" required aria-describedby="contact-email-error" />
       <p class="form-field__error" id="contact-email-error" data-error-for="contact-email" role="alert" hidden></p>
     </div>
 
     <div class="form-field">
       <label for="contact-organisation">Organisation / hospital</label>
-      <input id="contact-organisation" name="organization" type="text" autocomplete="organization" />
+      <input id="contact-organisation" name="organization" type="text" autocomplete="organization" placeholder="Organisation, hospital, university, NGO, or INGO" />
     </div>
 
     <div class="form-field">
-      <label for="contact-role">Role / opportunity type</label>
-      <input id="contact-role" name="role_type" type="text" placeholder="Hospital role, research project, NGO programme…" />
+      <label for="contact-role">Role / opportunity</label>
+      <input id="contact-role" name="role_type" type="text" placeholder="Staff nurse role, research project, health programme…" />
     </div>
 
     <div class="form-field professional-contact-form__full">
@@ -56,14 +56,14 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
         required
         minlength="20"
         aria-describedby="contact-message-help contact-message-error"
-        placeholder="Briefly describe the role or project, responsibilities, expected timing, and the best next step."
+        placeholder="Include the role or project, main responsibilities, expected timing, and the preferred next step."
       ></textarea>
-      <p class="form-field__help" id="contact-message-help">A short, specific message is enough. Verification documents can be requested later.</p>
+      <p class="form-field__help" id="contact-message-help">Reeja does not need credential files in the first message. A concise description of the opportunity is enough.</p>
       <p class="form-field__error" id="contact-message-error" data-error-for="contact-message" role="alert" hidden></p>
     </div>
   </div>
 
-  <input type="hidden" name="_subject" value="New professional inquiry from reejamaharjan.com.np" />
+  <input type="hidden" name="_subject" value="Professional inquiry for Reeja Maharjan from reejamaharjan.com.np" />
   <input type="hidden" name="_template" value="table" />
   <input type="hidden" name="_captcha" value="false" />
   <input type="hidden" name="_next" value={contactReturnUrl} />
@@ -71,23 +71,23 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
   <div class="professional-contact-form__privacy">
-    <strong>Privacy note</strong>
-    <p>Do not send patient information, private health records, identity documents, license scans, transcripts, or other sensitive records through this public form.</p>
+    <strong>Privacy and safety</strong>
+    <p>Please do not send patient information, private health records, identity documents, license scans, transcripts, or other sensitive records through this public form.</p>
   </div>
 
   <div class="professional-contact-form__actions">
     <button class="care-button care-button--primary" type="submit" data-submit-button>
-      <span data-submit-label>Send message</span>
+      <span data-submit-label>Send to Reeja</span>
       <span class="form-spinner" aria-hidden="true" hidden data-submit-spinner></span>
     </button>
-    <a class="care-button care-button--secondary" href={directEmailHref} data-track="contact-email-fallback">Email directly</a>
+    <a class="care-button care-button--secondary" href={directEmailHref} data-track="contact-email-fallback">Email Reeja directly</a>
   </div>
 
   <div class="professional-contact-form__status" aria-live="polite" aria-atomic="true">
-    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Submitting your message…</p>
+    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Sending your message to Reeja…</p>
     <div class="form-status form-status--success" role="status" tabindex="-1" hidden data-form-success>
-      <strong>Message submitted.</strong>
-      <p>Your inquiry was accepted for delivery to {professionalFacts.professionalEmail}. Reeja can reply by email when appropriate.</p>
+      <strong>Message submitted for delivery to Reeja.</strong>
+      <p>Your inquiry was submitted to {professionalFacts.professionalEmail}. Reeja can reply by email when appropriate.</p>
     </div>
   </div>
 </form>
@@ -151,7 +151,7 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
       if (!submitButton) return;
       submitButton.disabled = submitting;
       submitButton.toggleAttribute('aria-busy', submitting);
-      if (submitLabel) submitLabel.textContent = submitting ? 'Submitting…' : 'Send message';
+      if (submitLabel) submitLabel.textContent = submitting ? 'Sending…' : 'Send to Reeja';
       if (submitSpinner) submitSpinner.hidden = !submitting;
     };
 

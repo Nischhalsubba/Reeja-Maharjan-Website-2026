@@ -2,108 +2,108 @@ import type { BlogPost } from './types';
 
 export const navigatingNurseLicensureContinuingEducationNepal: BlogPost = {
   slug: 'navigating-nurse-licensure-continuing-education-nepal',
-  title: 'Navigating Nurse Licensure and Continuing Education: A Step-by-Step Guide',
+  title: 'Nurse Licensure in Nepal: Registration, Renewal and Continuing Education',
   excerpt:
-    'A practical guide to nurse licensure, renewal, and continuing education planning, with a Nepal Nursing Council angle.',
+    'Reeja Maharjan shares a practical way to organise nurse registration, renewal dates, credential records, and continuing education, with the Nepal Nursing Council as the official source for current requirements.',
   metaDescription:
-    'Learn how to approach nurse licensure and continuing education with a practical guide to registration, renewal, and professional growth in Nepal.',
+    'Registered Nurse Reeja Maharjan explains nurse licensure in Nepal, including registration records, renewal planning, official NNC sources, and continuing education.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-03-11',
+  updatedAt: '2026-08-07',
   readMinutes: 8,
   tags: ['nurse licensure', 'continuing education', 'Nepal Nursing Council', 'career development'],
-  primaryKeyword: 'nurse licensure and continuing education',
+  primaryKeyword: 'nurse licensure in Nepal',
   supportingKeywords: [
-    'Nepal Nursing Council license renewal',
-    'registered nurse Nepal guide',
+    'Nepal Nursing Council registration',
+    'nursing license renewal Nepal',
+    'registered nurse Nepal',
     'nursing continuing education',
-    'RN registration Nepal',
-    'nursing professional development'
+    'nursing credential management'
   ],
   quickAnswer: [
-    'Nurse licensure and continuing education should be treated as an ongoing professional system, not a one-time exam step. Nurses need to track registration status, renewal timing, credential validity, and training records.',
-    'In Nepal, the Nepal Nursing Council is the key official body for registration, licensing exam processes, and licence renewal information.',
-    'A practical system includes keeping documents updated, planning renewals early, and choosing training that supports actual role goals.'
+    'Nurses should treat licensure as an ongoing professional responsibility: keep registration evidence organised, track renewal dates, and verify current requirements through the Nepal Nursing Council.',
+    'Continuing education is most useful when it strengthens the type of care or role a nurse actually performs or is preparing to perform.',
+    'Credentials should be presented accurately. A licence, training certificate, work-authorisation status, and employer credentialing decision are related professional matters but are not interchangeable.'
   ],
   intro: [
-    'Many nurses focus on registration first and professional development later. In reality, both should be planned together.',
-    'A current licence supports legal practice, while continuing education supports safer care, stronger confidence, and better career mobility.',
-    'This guide explains how nurses can approach licensure and learning in a more organized way.'
+    'Professional registration is not something to think about only when an employer asks for a document. Nurses benefit from keeping licensure, renewal dates, education records, and training evidence organised throughout their careers.',
+    'Reeja Maharjan maintains Nepal Nursing Council registration and also holds an active Texas RN single-state license. Her own profile separates those credentials from employment eligibility, work authorisation, and employer-specific credentialing rather than blending them into one claim.',
+    'This guide focuses on practical organisation for nurses in Nepal. Current regulatory requirements should always be checked directly through official Nepal Nursing Council information.'
   ],
   sections: [
     {
       id: 'why-licensure-matters',
-      title: 'Why licensure matters beyond compliance',
+      title: 'Why nursing registration matters professionally',
       paragraphs: [
-        'Licensure is not only an administrative requirement. It signals that the nurse has met regulatory standards to practice and be accountable within the system.',
-        'For employers, a valid licence is a baseline trust signal. For nurses, it protects professional standing and employability.'
+        'Professional registration provides a regulatory basis for practice within the relevant jurisdiction. It also gives employers a clear credential to verify when assessing professional standing.',
+        'For nurses, keeping registration information current reduces delays when applying for roles, responding to credential checks, or planning further education.'
       ]
     },
     {
       id: 'how-to-organize-documents',
-      title: 'Step 1: Keep your core documents organized',
+      title: 'Step 1: Organise the records that support your professional profile',
       paragraphs: [
-        'A practical licensing workflow starts with organized records. Nurses should keep degree certificates, transcripts, registration records, training certificates, and ID documents in one accessible system.',
-        'This makes applications, renewals, interviews, and employer verification much easier.'
+        'Keep education certificates, transcripts, registration records, training certificates, and identification documents in a secure, organised system. Public portfolios do not need to expose every document to the internet.',
+        'A useful approach is to keep a public summary for recruiters and a private verification folder for legitimate employer requests.'
       ]
     },
     {
       id: 'track-renewal',
-      title: 'Step 2: Track registration and renewal dates early',
+      title: 'Step 2: Track validity and renewal dates before they become urgent',
       paragraphs: [
-        'Many avoidable problems happen because nurses wait too long to check licence validity. Renewal planning should start early, not when a deadline is already urgent.',
-        'Using calendar reminders and a simple credential tracker reduces unnecessary stress.'
+        'Credential problems are easier to prevent than repair at the last minute. Record expiry or renewal dates and set reminders far enough in advance to check the current requirements.',
+        'The exact process can change, so a calendar reminder should prompt a fresh check of the official regulator rather than rely on an old screenshot or social-media post.'
       ]
     },
     {
       id: 'choose-education-with-purpose',
-      title: 'Step 3: Choose continuing education that matches your work',
+      title: 'Step 3: Choose continuing education for a reason',
       paragraphs: [
-        'The best training is not the longest list of certificates. It is the training that supports the real care environment you work in or want to move into.',
-        'For Reeja’s career path, training such as newborn care, OT readiness, CPR, counselling, documentation, and coordinated care support has direct relevance.'
+        'A long certificate list is not automatically a strong professional profile. Training has more value when a nurse can explain how it supports safer or more capable practice in a real role.',
+        'Reeja’s documented training includes Comprehensive Newborn Care Level II, Operation Theatre Techniques and Management, CPR participation, and other professional learning connected to her clinical background.'
       ],
       bullets: [
-        'Pick training that strengthens your daily practice.',
-        'Keep proof of completion and issue dates.',
-        'Review which certifications employers ask for most often.'
+        'Choose training relevant to current work or a realistic next role.',
+        'Keep issuer, completion date, and verification evidence together.',
+        'Review which credentials an employer or regulator actually requires rather than collecting certificates for appearance alone.'
       ]
     },
     {
       id: 'use-official-sources',
-      title: 'Step 4: Use official sources for licensure information',
+      title: 'Step 4: Use official Nepal Nursing Council sources',
       paragraphs: [
-        'Nurses should rely on the Nepal Nursing Council for official licensure, registration, exam, and renewal updates. Social media summaries are not enough when your registration status matters.',
-        'Always verify the latest process directly from the official site or official notices.'
+        'For registration, licensing examinations, renewal, and official notices in Nepal, nurses should verify information through the Nepal Nursing Council and its official application channels.',
+        'Informal summaries can be useful for orientation, but they should not be the final source for a deadline, fee, eligibility requirement, or application process.'
       ]
     },
     {
       id: 'build-career-value',
-      title: 'Step 5: Turn credentials into career value',
+      title: 'Step 5: Explain what each credential means for your work',
       paragraphs: [
-        'Licensure and continuing education matter most when they connect to real capability. Employers want to know what the credential allows you to do better, safer, or more consistently.',
-        'That means nurses should present training not as decoration, but as practical role readiness.'
+        'Employers need more than a list of acronyms. Present the credential accurately, name the issuing body, state its status when relevant, and connect training to practical experience without exaggerating scope.',
+        'That approach makes a professional profile easier to verify and less likely to confuse licensure, training, employment eligibility, and role-specific competence.'
       ]
     }
   ],
   faq: [
     {
-      question: 'Why is nurse licensure important?',
+      question: 'Where should nurses check licensure information in Nepal?',
       answer:
-        'It confirms that the nurse meets regulatory requirements to practice and gives employers confidence in professional eligibility.'
+        'Use the official Nepal Nursing Council website, application portal, and current official notices for registration, examination, and renewal requirements.'
     },
     {
-      question: 'Where should nurses in Nepal check registration and renewal information?',
+      question: 'How can nurses prepare for licence renewal?',
       answer:
-        'They should use the official Nepal Nursing Council website and official notices for the most reliable information.'
+        'Track the relevant date early, keep supporting records organised, and confirm the current process directly through the regulator before submitting anything.'
     },
     {
-      question: 'What counts as useful continuing education for nurses?',
+      question: 'What continuing education is most useful for a nurse?',
       answer:
-        'Training that strengthens practical care, documentation, emergency readiness, counselling, referral communication, and role-specific clinical skills is usually most useful.'
+        'Training is most useful when it supports the nurse’s actual practice or a realistic next role and can be connected to safer care, stronger communication, emergency readiness, or role-specific skills.'
     },
     {
-      question: 'How can nurses avoid last-minute renewal problems?',
+      question: 'Does holding a nursing licence automatically mean a nurse can work anywhere?',
       answer:
-        'Keep documents organized, set reminders well before deadlines, and verify official requirements directly with the regulatory body.'
+        'No. Licensure, work authorisation, immigration status, employer credentialing, local regulation, and assigned scope are separate requirements and should be represented separately.'
     }
   ],
   sources: [
@@ -126,11 +126,11 @@ export const navigatingNurseLicensureContinuingEducationNepal: BlogPost = {
     'mastering-nursing-documentation-sbar-handover'
   ],
   cta: {
-    title: 'Need a nurse with current registration and practical training?',
-    text: 'Reeja’s profile includes RN registration, newborn-care training, OT readiness training, CPR participation, and documented hospital experience.',
-    label: 'Review certifications',
-    href: '/#certifications'
+    title: 'Review Reeja Maharjan’s licenses and clinical training',
+    text: 'Reeja’s public CV summarises her NNC registration, active Texas RN license, nursing education, clinical training, hospital experience, and current maternal-health research role.',
+    label: 'View Reeja’s CV',
+    href: '/cv/#credentials'
   },
   disclaimer:
-    'This article is educational only. Always verify licensure and renewal requirements through the official Nepal Nursing Council channels.'
+    'This article is for general professional education. Registration, renewal, examination, and continuing-education requirements can change, so verify current requirements directly with the Nepal Nursing Council or other relevant regulator.'
 };
