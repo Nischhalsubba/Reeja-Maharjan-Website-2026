@@ -87,16 +87,16 @@ test('contact page exposes accessible fields and submits to Reeja email endpoint
 
   await page.goto(`${origin}/contact/`, { waitUntil: 'networkidle' });
 
-  const form = page.getByRole('form', { name: 'Share the opportunity details.' });
+  const form = page.getByRole('form', { name: /Share the opportunity details/i });
   await expect(form).toBeVisible();
   await expect(form).toHaveAttribute('action', 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com');
 
-  await page.getByLabel('Name *').fill('Reeja Recruiter');
-  await page.getByLabel('Email *').fill('recruiter@example.com');
+  await page.getByLabel('Name').fill('Reeja Recruiter');
+  await page.getByLabel('Email').fill('recruiter@example.com');
   await page.getByLabel('Organisation / hospital').fill('Example Health Research');
   await page.getByLabel('Role / opportunity type').fill('Research role');
   await page.getByLabel('Location').fill('Kathmandu, Nepal');
-  await page.getByLabel('Message *').fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
+  await page.getByLabel('Message').fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
 
   const submit = page.getByRole('button', { name: 'Send message' });
   await submit.click();
@@ -111,7 +111,7 @@ test('contact form keeps invalid users at the field with clear feedback', async 
 
   await page.getByRole('button', { name: 'Send message' }).click();
 
-  const name = page.getByLabel('Name *');
+  const name = page.getByLabel('Name');
   await expect(name).toBeFocused();
   await expect(name).toHaveAttribute('aria-invalid', 'true');
   await expect(page.getByText('Please complete this field.').first()).toBeVisible();
