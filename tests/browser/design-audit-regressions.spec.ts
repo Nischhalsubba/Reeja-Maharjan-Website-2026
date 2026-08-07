@@ -130,7 +130,7 @@ test('contact page submits through the provider POST flow and returns with succe
     expect(payload.get('message')).toContain('Maternal health research opportunity');
     expect(payload.get('_next')).toBe('https://reejamaharjan.com.np/contact/?sent=1#professional-contact-form');
     expect(payload.get('_url')).toBe('https://reejamaharjan.com.np/contact/');
-    expect(payload.get('_captcha')).toBeNull();
+    expect(payload.get('_captcha')).toBe('false');
 
     await route.fulfill({
       status: 303,
