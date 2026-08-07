@@ -1,0 +1,47 @@
+/* Final Care Practice audit corrections. Keep this file small and limited to post-implementation polish. */
+
+.care-practice :where(
+  .care-credentials__card,
+  .care-reading__card,
+  .site-card,
+  .contact-sidebar__block,
+  .contact-hero__details
+) {
+  transition:
+    border-color var(--cp-fast) ease-out,
+    box-shadow var(--cp-normal) var(--cp-ease),
+    background-color var(--cp-fast) ease-out;
+}
+
+.care-practice :where(
+  .site-footer__links a,
+  .site-footer__contact a,
+  .contact-sidebar__social
+) {
+  transition:
+    color var(--cp-fast) ease-out,
+    background-color var(--cp-fast) ease-out,
+    text-decoration-color var(--cp-fast) ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .care-practice .contact-sidebar__block:hover,
+  .care-practice .contact-hero__details:hover {
+    border-color: color-mix(in srgb, var(--cp-primary) 32%, var(--cp-line));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .care-practice :where(
+    .care-credentials__card,
+    .care-reading__card,
+    .site-card,
+    .contact-sidebar__block,
+    .contact-hero__details,
+    .site-footer__links a,
+    .site-footer__contact a,
+    .contact-sidebar__social
+  ) {
+    transition: none;
+  }
+}
