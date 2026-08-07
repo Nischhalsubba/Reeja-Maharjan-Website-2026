@@ -65,6 +65,7 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
 
   <input type="hidden" name="_subject" value="New professional inquiry from reejamaharjan.com.np" />
   <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_captcha" value="false" />
   <input type="hidden" name="_next" value={contactReturnUrl} />
   <input type="hidden" name="_url" value="https://reejamaharjan.com.np/contact/" />
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -83,7 +84,7 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
   </div>
 
   <div class="professional-contact-form__status" aria-live="polite" aria-atomic="true">
-    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Submitting your message securely…</p>
+    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Submitting your message…</p>
     <div class="form-status form-status--success" role="status" tabindex="-1" hidden data-form-success>
       <strong>Message submitted.</strong>
       <p>Your inquiry was accepted for delivery to {professionalFacts.professionalEmail}. Reeja can reply by email when appropriate.</p>
