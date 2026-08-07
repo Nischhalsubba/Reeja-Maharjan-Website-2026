@@ -3,6 +3,49 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const PAGE_HERO_SELECTOR = [
+  '.site-page__hero .site-eyebrow',
+  '.site-page__hero h1',
+  '.site-page__hero .site-page__lede',
+  '.site-page__hero .site-actions > *',
+  '.site-page__hero .site-page__summary',
+  '.contact-hero .site-eyebrow',
+  '.contact-hero h1',
+  '.contact-hero__copy > p:last-child',
+  '.contact-hero__details',
+  '.blog-article__header .site-back',
+  '.blog-article__header .site-eyebrow',
+  '.blog-article__header h1',
+  '.blog-article__header .blog-article__dek',
+  '.blog-article__header .blog-article__meta-panel'
+].join(',');
+
+const REVEAL_SELECTOR = [
+  '[data-fj-reveal]',
+  '[data-motion-reveal]',
+  '.site-section__head',
+  '.site-page__split',
+  '.professional-contact-form',
+  '.contact-sidebar__block',
+  '.cv-profile-grid',
+  '.cv-panel',
+  '.blog-index__lead-card',
+  '.blog-topic-panel',
+  '.blog-toc',
+  '.blog-article__body > section'
+].join(',');
+
+const GROUP_SELECTOR = [
+  '[data-fj-group]',
+  '[data-motion-group]',
+  '.site-grid',
+  '.site-list',
+  '.cv-experience',
+  '.cv-credentials',
+  '.blog-grid',
+  '.blog-related-grid'
+].join(',');
+
 export const initFieldJournalMotion = (): (() => void) => {
   if (!document.body.classList.contains('field-journal')) return () => undefined;
   if (document.documentElement.dataset.fieldJournalMotionInitialized === 'true') return () => undefined;
@@ -17,13 +60,17 @@ export const initFieldJournalMotion = (): (() => void) => {
       },
       ({ conditions }) => {
         const { reduceMotion, desktop } = conditions as { reduceMotion: boolean; desktop: boolean };
-        const heroItems = gsap.utils.toArray<HTMLElement>('[data-fj-hero]');
+        const homeHeroItems = gsap.utils.toArray<HTMLElement>('[data-fj-hero]');
+        const pageHeroItems = gsap.utils.toArray<HTMLElement>(PAGE_HERO_SELECTOR);
         const portrait = document.querySelector<HTMLElement>('[data-fj-portrait]');
-        const reveals = gsap.utils.toArray<HTMLElement>('[data-fj-reveal]');
-        const groups = gsap.utils.toArray<HTMLElement>('[data-fj-group]');
+        const reveals = gsap.utils.toArray<HTMLElement>(REVEAL_SELECTOR);
+        const groups = gsap.utils.toArray<HTMLElement>(GROUP_SELECTOR);
+        const groupedChildren = groups.flatMap((group) =>
+          Array.from(group.children).filter((child): child is HTMLElement => child instanceof HTMLElement)
+        );
 
         if (reduceMotion) {
-          gsap.set([...heroItems, portrait, ...reveals, ...groups.flatMap((group) => Array.from(group.children))], {
+          gsap.set([...homeHeroItems, ...pageHeroItems, portrait, ...reveals, ...groupedChildren], {
             autoAlpha: 1,
             x: 0,
             y: 0,
@@ -37,8 +84,9 @@ export const initFieldJournalMotion = (): (() => void) => {
           defaults: { ease: 'power3.out', overwrite: 'auto' }
         });
 
-        if (heroItems.length) {
-          heroTimeline.from(heroItems, {
+        const activeHeroItems = homeHeroItems.length ? homeHeroItems : pageHeroItems;
+        if (activeHeroItems.length) {
+          heroTimeline.from(activeHeroItems, {
             autoAlpha: 0,
             y: 18,
             duration: 0.62,
@@ -63,7 +111,13 @@ export const initFieldJournalMotion = (): (() => void) => {
         }
 
         reveals
-          .filter((element) => !element.closest('[data-fj-group]'))
+          .filter(
+            (element) =>
+              !element.closest(GROUP_SELECTOR) &&
+              !element.closest('.site-page__hero') &&
+              !element.closest('.contact-hero') &&
+              !element.closest('.blog-article__header')
+          )
           .forEach((element) => {
             gsap.from(element, {
               autoAlpha: 0,
