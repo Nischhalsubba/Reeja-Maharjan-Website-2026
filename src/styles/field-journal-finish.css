@@ -1,0 +1,53 @@
+/* Final Field Journal guardrails. Imported after all page styles. */
+
+.field-journal :where(.site-page__hero, .contact-hero, .blog-article__header)::before,
+.field-journal :where(.site-page__hero, .contact-hero, .blog-article__header)::after {
+  content: none !important;
+  display: none !important;
+}
+
+.field-journal :where(.site-button, .care-button, .fj-button) {
+  cursor: pointer;
+}
+
+.field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a) {
+  transition: color var(--fj-fast) var(--fj-ease), transform var(--fj-fast) var(--fj-ease), text-decoration-color var(--fj-fast) var(--fj-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .field-journal .site-section--dark .site-button:hover,
+  .field-journal .site-section--dark .site-button:focus-visible {
+    border-color: var(--fj-surface);
+    background: var(--fj-surface);
+    color: var(--fj-indigo);
+  }
+
+  .field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a):hover {
+    color: var(--fj-indigo);
+    text-decoration-color: var(--fj-madder);
+  }
+
+  .field-journal .blog-index__lead-card:hover h3,
+  .field-journal .blog-index__lead-card:focus-visible h3 {
+    color: var(--fj-indigo);
+  }
+}
+
+.field-journal .site-empty .container {
+  min-height: min(64vh, 620px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.field-journal .site-empty h1 {
+  max-width: 10ch;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a) {
+    transition-duration: .01ms !important;
+    transform: none !important;
+  }
+}
