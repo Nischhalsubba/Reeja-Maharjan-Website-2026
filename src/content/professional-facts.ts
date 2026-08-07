@@ -35,7 +35,7 @@ export const professionalFacts = {
   linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
   instagram: 'https://www.instagram.com/maharjan_reeja/',
   publicCvPath: '/cv/',
-  contactFormEndpoint: 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com',
+  contactFormEndpoint: 'https://formsubmit.co/maharjanreeja88@gmail.com',
 
   evidenceOwner: 'Reeja Maharjan',
   evidenceSource: 'Approved professional records and recruiter-facing profile review',
