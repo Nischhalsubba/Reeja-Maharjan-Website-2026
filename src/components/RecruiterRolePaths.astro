@@ -12,7 +12,7 @@ const pathways = [
     ],
     scope: 'Work is performed within the documented study role and clinical governance structure.',
     href: '/clinical-research/',
-    cta: 'Explore research experience'
+    cta: 'Read the research record'
   },
   {
     label: 'Hospital nursing',
@@ -26,7 +26,7 @@ const pathways = [
     ],
     scope: 'Practice remains subject to employer credentialing, local regulation, orientation, and assigned clinical scope.',
     href: '/nursing-practice/',
-    cta: 'Explore nursing practice'
+    cta: 'Read the practice record'
   },
   {
     label: 'Health programmes',
@@ -45,30 +45,31 @@ const pathways = [
 ];
 ---
 
-<section class="ledger-section care-section care-focus" id="role-fit" aria-labelledby="role-fit-title">
+<section class="fj-section fj-section--surface" id="role-fit" aria-labelledby="role-fit-title">
   <div class="container">
-    <header class="ledger-section__header care-section__header" data-motion-reveal>
-      <p class="ledger-kicker">Professional focus</p>
-      <h2 id="role-fit-title">Experience that connects clinical care, research, and patient support.</h2>
-      <p>Three practical areas where Reeja’s documented experience is most relevant to employers and project teams.</p>
+    <header class="fj-section__head" data-fj-reveal>
+      <p class="fj-kicker">02 · Field notes</p>
+      <div>
+        <h2 id="role-fit-title">Where clinical practice and research meet.</h2>
+        <p>Three working contexts, recorded as evidence rather than packaged as marketing claims.</p>
+      </div>
     </header>
 
-    <div class="case-file-list care-focus__grid" data-motion-group>
-      {pathways.map((pathway) => (
-        <article class="case-file care-focus__card" data-motion-reveal>
-          <div class="case-file__index care-focus__label">
-            <p>{pathway.label}</p>
-          </div>
-          <div class="case-file__statement care-focus__statement">
+    <div class="fj-notes" data-fj-group>
+      {pathways.map((pathway, index) => (
+        <article class="fj-note" data-fj-reveal>
+          <div class="fj-note__number">0{index + 1}<br />{pathway.label}</div>
+          <div>
             <h3>{pathway.title}</h3>
-            <p>{pathway.summary}</p>
           </div>
-          <div class="case-file__evidence care-focus__evidence">
-            <p class="case-file__label">Relevant experience</p>
+          <div class="fj-note__copy">
+            <p>{pathway.summary}</p>
             <ul>{pathway.evidence.map((item) => <li>{item}</li>)}</ul>
           </div>
-          <p class="case-file__scope care-focus__scope"><strong>Scope note</strong>{pathway.scope}</p>
-          <a class="ledger-link care-link" href={pathway.href}>{pathway.cta}</a>
+          <div class="fj-note__aside">
+            <span>{pathway.scope}</span>
+            <a class="fj-link" href={pathway.href}>{pathway.cta}</a>
+          </div>
         </article>
       ))}
     </div>
