@@ -12,8 +12,6 @@ import '../styles/components.css';
 import '../styles/pages.css';
 import '../styles/site-pages.css';
 import '../styles/shell.css';
-import '../styles/care-practice.css';
-import '../styles/care-practice-audit.css';
 import '../styles/field-journal-home.css';
 import '../styles/field-journal-pages.css';
 import Header from '../components/Header.astro';
@@ -138,11 +136,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body
-    class:list={['care-ledger', 'care-practice', 'field-journal']}
-    data-design-system="reeja-field-journal"
-    data-design-version="2.0.0-site"
-  >
+  <body class="field-journal" data-design-system="reeja-field-journal" data-design-version="2.0.0-site">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header name={professionalFacts.name} />
