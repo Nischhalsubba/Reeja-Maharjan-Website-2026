@@ -4,31 +4,31 @@ import { professionalFacts } from '../content/professional-facts';
 const selectedExperience = profile.experience.slice(0, 3);
 ---
 
-<section class="ledger-section ledger-section--experience" id="experience" aria-labelledby="experience-title">
+<section class="ledger-section care-section care-experience" id="experience" aria-labelledby="experience-title">
   <div class="container">
-    <header class="ledger-section__header ledger-section__header--split" data-ledger-reveal>
+    <header class="ledger-section__header ledger-section__header--split care-section__header care-section__header--split" data-motion-reveal>
       <div>
-        <p class="ledger-kicker">Selected experience / chronology</p>
-        <h2 id="experience-title">Care work across hospital and research settings.</h2>
+        <p class="ledger-kicker">Selected experience</p>
+        <h2 id="experience-title">Hospital nursing and maternal-health research experience.</h2>
+        <p>A concise view of recent roles. The full chronology, education, licenses, and training are available in the CV.</p>
       </div>
-      <a class="ledger-link" href={professionalFacts.publicCvPath}>Read the complete CV</a>
+      <a class="ledger-link care-link" href={professionalFacts.publicCvPath}>View full CV</a>
     </header>
 
-    <ol class="experience-ledger" data-ledger-group>
-      {selectedExperience.map((item, index) => (
-        <li class="experience-ledger__entry" data-ledger-reveal>
-          <div class="experience-ledger__folio">
-            <span>{String(index + 1).padStart(2, '0')}</span>
-            <time>{item.period}</time>
-          </div>
-          <div class="experience-ledger__role">
+    <ol class="experience-ledger care-experience__list" data-motion-group>
+      {selectedExperience.map((item) => (
+        <li class="experience-ledger__entry care-experience__item" data-motion-reveal>
+          <div class="experience-ledger__role care-experience__role">
             <p>{item.organization}</p>
             <h3>{item.role}</h3>
             <span>{item.location}</span>
           </div>
-          <div class="experience-ledger__record">
+          <div class="experience-ledger__record care-experience__summary">
             <p>{item.bullets[0]}</p>
-            {item.tags && <p class="experience-ledger__terms">{item.tags.slice(0, 4).join(' · ')}</p>}
+            {item.tags && <p class="experience-ledger__terms care-experience__terms">{item.tags.slice(0, 4).join(' · ')}</p>}
+          </div>
+          <div class="experience-ledger__folio care-experience__meta">
+            <time>{item.period}</time>
           </div>
         </li>
       ))}
