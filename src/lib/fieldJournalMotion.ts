@@ -25,7 +25,6 @@ const REVEAL_SELECTOR = [
   '[data-motion-reveal]',
   '.site-section__head',
   '.site-page__split',
-  '.professional-contact-form',
   '.contact-sidebar__block',
   '.cv-profile-grid',
   '.cv-panel',
@@ -71,7 +70,8 @@ export const initFieldJournalMotion = (): (() => void) => {
 
         if (reduceMotion) {
           gsap.set([...homeHeroItems, ...pageHeroItems, portrait, ...reveals, ...groupedChildren], {
-            autoAlpha: 1,
+            opacity: 1,
+            visibility: 'visible',
             x: 0,
             y: 0,
             rotation: 0,
@@ -120,11 +120,11 @@ export const initFieldJournalMotion = (): (() => void) => {
           )
           .forEach((element) => {
             gsap.from(element, {
-              autoAlpha: 0,
+              opacity: 0,
               y: 16,
               duration: 0.42,
               ease: 'power3.out',
-              clearProps: 'transform,opacity,visibility',
+              clearProps: 'transform,opacity',
               scrollTrigger: {
                 trigger: element,
                 start: 'top 88%',
@@ -138,12 +138,12 @@ export const initFieldJournalMotion = (): (() => void) => {
           if (!children.length) return;
 
           gsap.from(children, {
-            autoAlpha: 0,
+            opacity: 0,
             y: 16,
             duration: 0.42,
             stagger: 0.05,
             ease: 'power3.out',
-            clearProps: 'transform,opacity,visibility',
+            clearProps: 'transform,opacity',
             scrollTrigger: {
               trigger: group,
               start: 'top 86%',
