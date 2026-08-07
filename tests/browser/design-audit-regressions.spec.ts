@@ -77,8 +77,17 @@ test('Field Journal portrait uses the headshot and never relies on a cropping fi
   }
 });
 
-test('Field Journal palette and typography apply beyond the homepage', async ({ page }) => {
-  for (const path of ['/hire-reeja/', '/clinical-research/', '/maternal-health/', '/nursing-practice/', '/contact/', '/blog/', '/cv/']) {
+test('Field Journal palette and typography apply across the site', async ({ page }) => {
+  for (const path of [
+    '/hire-reeja/',
+    '/clinical-research/',
+    '/maternal-health/',
+    '/nursing-practice/',
+    '/contact/',
+    '/blog/',
+    '/blog/essential-maternal-newborn-care-guide-2026/',
+    '/cv/'
+  ]) {
     await page.setViewportSize({ width: 1440, height: 1000 });
     await page.goto(`${origin}${path}`, { waitUntil: 'networkidle' });
     await page.evaluate(async () => document.fonts.ready);
