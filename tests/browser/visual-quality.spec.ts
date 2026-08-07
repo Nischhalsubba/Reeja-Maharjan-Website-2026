@@ -16,11 +16,12 @@ const routes = [
   { name: 'nursing-practice', path: '/nursing-practice/' },
   { name: 'blog', path: '/blog/' },
   { name: 'article', path: '/blog/essential-maternal-newborn-care-guide-2026/' },
-  { name: 'cv', path: '/cv/' }
+  { name: 'cv', path: '/cv/' },
+  { name: 'not-found', path: '/field-journal-page-not-found/' }
 ];
 
 test('Field Journal remains composed across release viewports', async ({ browser }) => {
-  test.setTimeout(150_000);
+  test.setTimeout(180_000);
 
   for (const viewport of viewports) {
     const context = await browser.newContext({
