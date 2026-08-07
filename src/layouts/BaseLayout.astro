@@ -15,6 +15,7 @@ import '../styles/shell.css';
 import '../styles/care-practice.css';
 import '../styles/care-practice-audit.css';
 import '../styles/field-journal-home.css';
+import '../styles/field-journal-pages.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -95,20 +96,18 @@ const graphSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="design-system" content={isOnePage ? 'Reeja Field Journal' : 'Care Practice'} />
-    <meta name="design-release" content={isOnePage ? 'field-journal-home-1.0.0' : 'care-practice-2.0.0'} />
+    <meta name="design-system" content="Reeja Field Journal" />
+    <meta name="design-release" content="field-journal-site-2.0.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
 
-    {isOnePage && <link rel="preconnect" href="https://fonts.googleapis.com" />}
-    {isOnePage && <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />}
-    {isOnePage && (
-      <link
-        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Crimson+Pro:ital,wght@0,450;0,550;0,650;1,450;1,550&family=JetBrains+Mono:wght@400;500&display=swap"
-        rel="stylesheet"
-      />
-    )}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Crimson+Pro:ital,wght@0,450;0,550;0,650;1,450;1,550&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
 
     <meta property="og:type" content={isBlogPage ? 'article' : 'profile'} />
     <meta property="og:title" content={title} />
@@ -140,9 +139,9 @@ const graphSchema = {
     )}
   </head>
   <body
-    class:list={['care-ledger', 'care-practice', { 'field-journal': isOnePage }]}
-    data-design-system={isOnePage ? 'reeja-field-journal' : 'care-practice'}
-    data-design-version={isOnePage ? '1.0.0-home' : '2.0.0'}
+    class:list={['care-ledger', 'care-practice', 'field-journal']}
+    data-design-system="reeja-field-journal"
+    data-design-version="2.0.0-site"
   >
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
@@ -153,13 +152,11 @@ const graphSchema = {
     <script>
       import { initMotion } from '../lib/motion';
       import { initMobileNavA11y } from '../lib/mobileNavA11y';
-      import { initPortfolioMotion } from '../lib/portfolioMotion';
       import { initFieldJournalMotion } from '../lib/fieldJournalMotion';
 
       initMotion();
       initMobileNavA11y();
-      if (document.body.classList.contains('field-journal')) initFieldJournalMotion();
-      else initPortfolioMotion();
+      initFieldJournalMotion();
 
       document.querySelectorAll<HTMLElement>('[data-track]').forEach((element) => {
         element.addEventListener('click', () => {
