@@ -7,36 +7,35 @@ const year = new Date().getFullYear();
 
 <footer class="site-footer">
   <div class="container site-footer__masthead">
-    <p class="site-footer__folio">Field notes / {year}</p>
     <div>
-      <p class="site-footer__eyebrow">Registered Nurse · Maternal Health Research</p>
+      <p class="site-footer__eyebrow">Registered Nurse · Maternal-health Research</p>
       <h2>{profile.name}</h2>
     </div>
-    <p class="site-footer__statement">Clinical care, patient education, documentation, telemonitoring, and research coordination.</p>
+    <p class="site-footer__statement">Clinical care, patient education, documentation, telemonitoring, and research coordination presented in a clear professional portfolio.</p>
   </div>
 
   <div class="container site-footer__index">
     <nav aria-label="Professional pages" class="site-footer__links">
-      <p class="site-footer__label">Index</p>
-      <a href="/#experience"><span aria-hidden="true">01</span>Experience</a>
-      <a href="/maternal-health/"><span aria-hidden="true">02</span>Maternal health</a>
-      <a href="/nursing-practice/"><span aria-hidden="true">03</span>Nursing practice</a>
-      <a href="/clinical-research/"><span aria-hidden="true">04</span>Clinical research</a>
-      <a href="/blog/"><span aria-hidden="true">05</span>Articles</a>
-      <a href="/cv/" data-track="cv-footer"><span aria-hidden="true">06</span>CV</a>
+      <p class="site-footer__label">Explore</p>
+      <a href="/#experience">Experience</a>
+      <a href="/maternal-health/">Maternal health</a>
+      <a href="/nursing-practice/">Nursing practice</a>
+      <a href="/clinical-research/">Clinical research</a>
+      <a href="/blog/">Articles</a>
+      <a href="/cv/" data-track="cv-footer">CV</a>
     </nav>
 
     <div class="site-footer__contact">
-      <p class="site-footer__label">Correspondence</p>
+      <p class="site-footer__label">Contact</p>
+      <a href="/contact/" data-track="contact-footer">Contact Reeja</a>
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
       <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn</a>
       <span>{profile.contact.location}</span>
-      <a href="/hire-reeja/" data-track="hire-footer">Professional opportunities</a>
     </div>
   </div>
 
   <div class="container site-footer__legal">
-    <small>© {year} {profile.name}. Professional information verified through the site’s evidence records.</small>
+    <small>© {year} {profile.name}. Professional information is presented for recruiter and employer review.</small>
     <a href="#main-content">Return to top</a>
   </div>
 </footer>
