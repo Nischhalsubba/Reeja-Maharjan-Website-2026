@@ -28,7 +28,9 @@ export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
   'Reeja Maharjan',
-  'Clinical care and maternal-health research, with clear communication and dependable follow-up.',
+  'Clinical care with a',
+  'researcher’s eye',
+  'for detail.',
   'Contact Reeja',
   'View CV'
 ];
