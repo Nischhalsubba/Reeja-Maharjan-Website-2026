@@ -1,15 +1,26 @@
 ---
 import { profile } from '../content/profile';
-import { siteCopy } from '../content/site-copy';
+import { recruiterCopy } from '../content/recruiter-copy';
 
 const featuredWriting = [
   { category: 'Maternal health', title: 'Maternal and newborn care after birth', href: '/blog/essential-maternal-newborn-care-guide-2026/' },
-  { category: 'Nursing practice', title: 'Nursing documentation and SBAR handover', href: '/blog/mastering-nursing-documentation-sbar-handover/' },
-  { category: 'Digital health', title: 'Nursing in Nepal, telehealth, and community care', href: '/blog/future-of-nursing-in-nepal-telehealth-community-care-post-covid/' }
+  { category: 'Nursing practice', title: 'Nursing documentation and SBAR handover', href: '/blog/mastering-nursing-documentation-sbar-handover/' }
 ];
 
-const credentialsCopy = siteCopy.home.credentials;
-const writingCopy = siteCopy.home.writing;
+const credentialTitles = [
+  'Registered Nurse (RN), Nepal Nursing Council',
+  'Texas RN License - Active, Unencumbered',
+  'Comprehensive Newborn Care Level II',
+  'Operation Theatre Techniques and Management (OTTM)',
+  'CPR Training Participation'
+];
+const featuredCredentials = credentialTitles.flatMap((title) => {
+  const credential = profile.certifications.find((item) => item.title === title);
+  return credential ? [credential] : [];
+});
+
+const credentialsCopy = recruiterCopy.credentials;
+const writingCopy = recruiterCopy.writing;
 ---
 
 <section class="fj-section" id="credentials" aria-labelledby="credentials-title">
@@ -23,7 +34,7 @@ const writingCopy = siteCopy.home.writing;
     </header>
 
     <div class="fj-registry" data-fj-group>
-      {profile.certifications.slice(0, 6).map((credential) => (
+      {featuredCredentials.map((credential) => (
         <article class="fj-registry__entry" data-fj-reveal>
           <div>
             <p class="fj-registry__issuer">{credential.issuer}</p>

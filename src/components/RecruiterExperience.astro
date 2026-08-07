@@ -1,10 +1,10 @@
 ---
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
-import { siteCopy } from '../content/site-copy';
+import { recruiterCopy } from '../content/recruiter-copy';
 
 const selectedExperience = profile.experience.slice(0, 3);
-const copy = siteCopy.home.experience;
+const copy = recruiterCopy.experience;
 ---
 
 <section class="fj-section fj-section--indigo" id="experience" aria-labelledby="experience-title">
@@ -28,7 +28,7 @@ const copy = siteCopy.home.experience;
           </div>
           <div class="fj-log__copy">
             <p>{item.bullets[0]}</p>
-            {item.tags && <p class="fj-log__terms">{item.tags.slice(0, 4).join(' · ')}</p>}
+            {item.tags && <p class="fj-log__terms">{item.tags.slice(0, 3).join(' · ')}</p>}
           </div>
         </li>
       ))}

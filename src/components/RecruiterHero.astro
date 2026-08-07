@@ -1,8 +1,8 @@
 ---
 import { professionalFacts } from '../content/professional-facts';
-import { siteCopy } from '../content/site-copy';
+import { recruiterCopy } from '../content/recruiter-copy';
 
-const copy = siteCopy.home.hero;
+const copy = recruiterCopy.hero;
 ---
 
 <section class="fj-hero" id="home" aria-labelledby="home-title">
@@ -11,7 +11,7 @@ const copy = siteCopy.home.hero;
       <p class="fj-kicker" data-fj-hero>{copy.kicker}</p>
 
       <h1 id="home-title" class="fj-hero__title" data-fj-hero>
-        {copy.titleBefore} <em>{copy.titleEmphasis}</em> {copy.titleAfter}
+        {copy.titleBefore} <em>{copy.titleEmphasis}</em>{copy.titleAfter && ` ${copy.titleAfter}`}
       </h1>
 
       <p class="fj-hero__intro" data-fj-hero>{copy.intro}</p>
@@ -24,7 +24,7 @@ const copy = siteCopy.home.hero;
       <div class="fj-hero__ribbon" aria-label="Reeja Maharjan professional credentials" data-fj-hero>
         <span>{professionalFacts.nepalLicenseShort}</span>
         <span>{professionalFacts.texasLicenseShort}</span>
-        <span>{professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</span>
+        <span>Open to suitable opportunities</span>
       </div>
     </div>
 
@@ -43,7 +43,6 @@ const copy = siteCopy.home.hero;
         />
       </div>
       <span class="fj-portrait__tag" aria-hidden="true">{copy.portraitTag}</span>
-      <p class="fj-portrait__note" aria-hidden="true">{copy.portraitNote}</p>
       <figcaption>
         {professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}<br />{professionalFacts.currentLocation}
       </figcaption>

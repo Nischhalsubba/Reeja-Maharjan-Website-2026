@@ -27,12 +27,13 @@ export const maxAttempts = positiveInteger('SMOKE_ATTEMPTS', 20);
 export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
-  'Reeja Maharjan',
-  'Reeja Maharjan is a',
+  'Reeja Maharjan,',
   'Registered Nurse',
-  'working across clinical care and maternal-health research.',
-  'Contact Reeja',
-  'View Reeja’s CV'
+  'Hospital nursing and maternal-health research experience in Nepal',
+  'Discuss a role',
+  'View CV',
+  'Open to suitable opportunities',
+  'Hire Reeja'
 ];
 
 export const forbiddenHomepageText = [
@@ -44,7 +45,8 @@ export const forbiddenHomepageText = [
   'Khokana, Lalitpur',
   'Clinical care, recorded with research discipline.',
   'Clinical care with a',
-  'researcher’s eye'
+  'researcher’s eye',
+  'working across clinical care and maternal-health research.'
 ];
 
 export const requiredPublicFacts = [

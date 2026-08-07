@@ -1,7 +1,7 @@
 ---
-import { siteCopy } from '../content/site-copy';
+import { recruiterCopy } from '../content/recruiter-copy';
 
-const copy = siteCopy.home.focus;
+const copy = recruiterCopy.focus;
 const pathways = copy.areas;
 ---
 
@@ -24,10 +24,9 @@ const pathways = copy.areas;
           </div>
           <div class="fj-note__copy">
             <p>{pathway.summary}</p>
-            <ul>{pathway.evidence.map((item) => <li>{item}</li>)}</ul>
+            <ul>{pathway.evidence.slice(0, 2).map((item) => <li>{item}</li>)}</ul>
           </div>
           <div class="fj-note__aside">
-            <span>{pathway.scope}</span>
             <a class="fj-link" href={pathway.href}>{pathway.cta}</a>
           </div>
         </article>

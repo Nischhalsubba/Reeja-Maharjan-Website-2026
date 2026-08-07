@@ -9,7 +9,7 @@ const posts = blogPosts.filter((post) =>
     .join(' ')
     .toLowerCase()
     .match(/nursing|documentation|sbar|handover|confidential|licensure|student|general care/)
-);
+).slice(0, 3);
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -17,9 +17,9 @@ const posts = blogPosts.filter((post) =>
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">{copy.eyebrow}</p>
-          <h1>{copy.heading}</h1>
-          <p class="site-page__lede">{copy.lede}</p>
+          <p class="site-eyebrow">Nursing practice</p>
+          <h1>How Reeja Maharjan approaches nursing practice.</h1>
+          <p class="site-page__lede">Clear communication, accurate documentation, structured handover, monitoring, patient education, and timely escalation.</p>
         </div>
         <dl class="site-page__summary">
           {copy.summary.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
@@ -30,8 +30,8 @@ const posts = blogPosts.filter((post) =>
     <section class="site-section">
       <div class="container">
         <div class="site-section__head">
-          <div><p class="site-eyebrow">{copy.guidesEyebrow}</p><h2>{copy.guidesHeading}</h2></div>
-          <p>{copy.guidesSummary}</p>
+          <div><p class="site-eyebrow">Selected writing</p><h2>Nursing-practice articles.</h2></div>
+          <p>Three practical reads on communication, documentation, safety, and professional development.</p>
         </div>
         <div class="site-grid">
           {posts.map((post) => (
@@ -39,17 +39,18 @@ const posts = blogPosts.filter((post) =>
               <p class="site-eyebrow">By Reeja Maharjan · {post.readMinutes} min read</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
-              <p><a href={`/blog/${post.slug}/`}>Read Reeja’s article</a></p>
+              <p><a href={`/blog/${post.slug}/`}>Read article</a></p>
             </article>
           ))}
         </div>
+        <p><a href="/blog/">View all writing by Reeja</a></p>
       </div>
     </section>
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">{copy.closingEyebrow}</p><h2>{copy.closingHeading}</h2><p>{copy.closingSummary}</p></div>
-        <div class="site-actions"><a class="site-button" href="/cv/">View Reeja’s CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
+        <div><p class="site-eyebrow">Professional profile</p><h2>Review Reeja’s nursing experience.</h2><p>See her roles, credentials, training, and current research work.</p></div>
+        <div class="site-actions"><a class="site-button" href="/cv/">View CV</a><a class="site-button" href="/hire-reeja/">Hire Reeja</a></div>
       </div>
     </section>
   </div>

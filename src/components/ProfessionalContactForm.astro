@@ -16,7 +16,7 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
   <div class="professional-contact-form__heading">
     <p class="site-eyebrow">Professional inquiry</p>
     <h2 id="contact-form-title">Send a message to Reeja.</h2>
-    <p>Tell Reeja who you are, the organisation you represent, and the nursing, research, or health-programme opportunity you would like to discuss. Required fields are marked with an asterisk.</p>
+    <p>Share the opportunity and your contact details. Required fields are marked with an asterisk.</p>
   </div>
 
   <div class="professional-contact-form__grid">
@@ -56,9 +56,9 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
         required
         minlength="20"
         aria-describedby="contact-message-help contact-message-error"
-        placeholder="Include the role or project, main responsibilities, expected timing, and the preferred next step."
+        placeholder="Role or project, responsibilities, timing, and preferred next step."
       ></textarea>
-      <p class="form-field__help" id="contact-message-help">Reeja does not need credential files in the first message. A concise description of the opportunity is enough.</p>
+      <p class="form-field__help" id="contact-message-help">A short opportunity summary is enough.</p>
       <p class="form-field__error" id="contact-message-error" data-error-for="contact-message" role="alert" hidden></p>
     </div>
   </div>
@@ -71,8 +71,8 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
   <div class="professional-contact-form__privacy">
-    <strong>Privacy and safety</strong>
-    <p>Please do not send patient information, private health records, identity documents, license scans, transcripts, or other sensitive records through this public form.</p>
+    <strong>Privacy</strong>
+    <p>Do not send patient records, identity documents, license scans, or other sensitive files through this public form.</p>
   </div>
 
   <div class="professional-contact-form__actions">
@@ -80,14 +80,14 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
       <span data-submit-label>Send to Reeja</span>
       <span class="form-spinner" aria-hidden="true" hidden data-submit-spinner></span>
     </button>
-    <a class="care-button care-button--secondary" href={directEmailHref} data-track="contact-email-fallback">Email Reeja directly</a>
+    <a class="care-button care-button--secondary" href={directEmailHref} data-track="contact-email-fallback">Email Reeja</a>
   </div>
 
   <div class="professional-contact-form__status" aria-live="polite" aria-atomic="true">
-    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Sending your message to Reeja…</p>
+    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Sending…</p>
     <div class="form-status form-status--success" role="status" tabindex="-1" hidden data-form-success>
       <strong>Message submitted for delivery to Reeja.</strong>
-      <p>Your inquiry was submitted to {professionalFacts.professionalEmail}. Reeja can reply by email when appropriate.</p>
+      <p>Reeja can reply by email when appropriate.</p>
     </div>
   </div>
 </form>

@@ -1,8 +1,17 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { professionalFacts } from '../content/professional-facts';
 import { siteCopy } from '../content/site-copy';
 
 const copy = siteCopy.research;
+const responsibilities = [
+  ['Participant screening', 'ANC screening, eligibility, consent-workflow support, and study records.'],
+  ['Home monitoring', 'BP/BG device education and mobile reporting support.'],
+  ['Tele-follow-up', 'Reading review, warning-symptom screening, adherence, and protocol escalation.'],
+  ['Data quality', 'Digital records, confidentiality, and data-quality checks.'],
+  ['Device coordination', 'Distribution, use, tracking, and return workflows.'],
+  ['Team communication', 'Coordination with nurses, obstetricians, researchers, and technical teams.']
+];
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -10,12 +19,15 @@ const copy = siteCopy.research;
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">{copy.eyebrow}</p>
-          <h1>{copy.heading}</h1>
-          <p class="site-page__lede">{copy.lede}</p>
+          <p class="site-eyebrow">Maternal-health research</p>
+          <h1>Reeja Maharjan’s maternal-health research work.</h1>
+          <p class="site-page__lede">Participant screening, home BP/BG education, tele-follow-up, study records, data quality, and protocol-based coordination on IISH MOM-HD.</p>
         </div>
         <dl class="site-page__summary">
-          {copy.summary.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</dd></div>
+          <div><dt>Project</dt><dd>{professionalFacts.currentProjectShort}</dd></div>
+          <div><dt>Focus</dt><dd>Hypertension and diabetes in pregnancy</dd></div>
+          <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
         </dl>
       </div>
     </section>
@@ -23,11 +35,11 @@ const copy = siteCopy.research;
     <section class="site-section">
       <div class="container">
         <div class="site-section__head">
-          <div><p class="site-eyebrow">{copy.responsibilitiesEyebrow}</p><h2>{copy.responsibilitiesHeading}</h2></div>
-          <p>{copy.responsibilitiesSummary}</p>
+          <div><p class="site-eyebrow">Research responsibilities</p><h2>What Reeja supports.</h2></div>
+          <p>Participant support, monitoring, records, logistics, and escalation.</p>
         </div>
         <div class="site-grid">
-          {copy.responsibilities.map(([title, description]) => (
+          {responsibilities.map(([title, description]) => (
             <article class="site-card"><h3>{title}</h3><p>{description}</p></article>
           ))}
         </div>
@@ -36,19 +48,19 @@ const copy = siteCopy.research;
 
     <section class="site-section site-section--soft">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">{copy.relevanceEyebrow}</p><h2>{copy.relevanceHeading}</h2><p>{copy.relevanceSummary}</p></div>
+        <div><p class="site-eyebrow">Role relevance</p><h2>Useful experience for research and health programmes.</h2><p>Best matched to teams needing participant education, digital-health support, reliable follow-up, and coordination.</p></div>
         <dl class="site-page__summary">
           <div><dt>Maternal health</dt><dd>HDP and GDM research workflows</dd></div>
-          <div><dt>Digital health</dt><dd>Home monitoring, tele-follow-up, and mobile reporting</dd></div>
-          <div><dt>Research support</dt><dd>Participant communication, records, logistics, and coordination</dd></div>
+          <div><dt>Digital health</dt><dd>Home monitoring and tele-follow-up</dd></div>
+          <div><dt>Research support</dt><dd>Records, logistics, and participant communication</dd></div>
         </dl>
       </div>
     </section>
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">{copy.closingEyebrow}</p><h2>{copy.closingHeading}</h2><p>{copy.closingSummary}</p></div>
-        <div class="site-actions"><a class="site-button" href="/cv/">View Reeja’s CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
+        <div><p class="site-eyebrow">Work with Reeja</p><h2>Discuss a research or health-programme role.</h2><p>Share the role, programme, location, and timeline.</p></div>
+        <div class="site-actions"><a class="site-button" href="/cv/">View CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
       </div>
     </section>
   </div>

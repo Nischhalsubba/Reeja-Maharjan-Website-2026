@@ -139,12 +139,33 @@ test('primary pages keep Reeja as the subject in titles, descriptions and headin
   const nav = page.locator('.desktop-nav');
   await expect(nav.getByRole('link', { name: 'Experience' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Research' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Maternal Health' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Nursing' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'Writing' })).toBeVisible();
   await expect(nav.getByRole('link', { name: 'CV' })).toBeVisible();
-  await expect(nav.getByRole('link', { name: 'Contact Reeja' })).toBeVisible();
+  await expect(nav.getByRole('link', { name: 'Hire Reeja' })).toBeVisible();
   await expect(page.getByText('Clinical care with a', { exact: false })).toHaveCount(0);
+});
+
+test('homepage stays concise and recruiter-first', async ({ page }) => {
+  await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
+
+  const heroIntro = page.locator('.fj-hero__intro');
+  await expect(heroIntro).toBeVisible();
+  const heroText = (await heroIntro.innerText()).trim();
+  expect(heroText.length).toBeLessThan(190);
+
+  await expect(page.locator('.fj-note')).toHaveCount(3);
+  const notes = page.locator('.fj-note');
+  for (let index = 0; index < 3; index += 1) {
+    const note = notes.nth(index);
+    expect((await note.locator('.fj-note__copy').innerText()).trim().length).toBeLessThan(260);
+    expect(await note.locator('li').count()).toBeLessThanOrEqual(2);
+  }
+
+  await expect(page.locator('.fj-registry__entry')).toHaveCount(5);
+  await expect(page.locator('.fj-reading__entry')).toHaveCount(2);
+  await expect(page.getByRole('link', { name: 'Discuss a role' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Hire Reeja' })).toBeVisible();
 });
 
 test('contact page submits through the provider POST flow and returns with success feedback', async ({ page }) => {
@@ -219,7 +240,6 @@ test('contact page submits through the provider POST flow and returns with succe
 
   const success = page.locator('[data-form-success]');
   await expect(success.getByText('Message submitted for delivery to Reeja.')).toBeVisible();
-  await expect(success.getByText(/maharjanreeja88@gmail\.com/)).toBeVisible();
   await expect(submit).toBeEnabled();
 });
 

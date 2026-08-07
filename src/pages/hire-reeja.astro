@@ -2,9 +2,22 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
+import { recruiterCopy } from '../content/recruiter-copy';
 import { siteCopy } from '../content/site-copy';
 
-const copy = siteCopy.hire;
+const copy = recruiterCopy.hire;
+const roleAreas = recruiterCopy.focus.areas;
+const credentialTitles = [
+  'Registered Nurse (RN), Nepal Nursing Council',
+  'Texas RN License - Active, Unencumbered',
+  'Comprehensive Newborn Care Level II',
+  'Operation Theatre Techniques and Management (OTTM)',
+  'CPR Training Participation'
+];
+const featuredCredentials = credentialTitles.flatMap((title) => {
+  const credential = profile.certifications.find((item) => item.title === title);
+  return credential ? [credential] : [];
+});
 const hiringSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
@@ -22,7 +35,7 @@ const hiringSchema = {
 };
 ---
 
-<BaseLayout title={copy.title} description={copy.description}>
+<BaseLayout title={siteCopy.hire.title} description={siteCopy.hire.description}>
   <div class="site-page">
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
@@ -31,16 +44,16 @@ const hiringSchema = {
           <h1>{copy.heading}</h1>
           <p class="site-page__lede">{copy.lede}</p>
           <div class="site-actions">
-            <a class="site-button site-button--primary" href="/contact/" data-track="hire-contact">Contact Reeja</a>
-            <a class="site-button" href={professionalFacts.publicCvPath} data-track="hire-cv">View Reeja’s CV</a>
-            <a class="site-button" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn profile</a>
+            <a class="site-button site-button--primary" href="/contact/" data-track="hire-contact">Discuss an opportunity</a>
+            <a class="site-button" href={professionalFacts.publicCvPath} data-track="hire-cv">View CV</a>
+            <a class="site-button" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
           </div>
         </div>
         <dl class="site-page__summary">
           <div><dt>Nepal registration</dt><dd>{professionalFacts.nepalLicenseShort}</dd></div>
           <div><dt>Texas license</dt><dd>{professionalFacts.texasLicenseShort}</dd></div>
-          <div><dt>Current work</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</dd></div>
-          <div><dt>Based in</dt><dd>{professionalFacts.currentLocation}</dd></div>
+          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</dd></div>
+          <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
         </dl>
       </div>
     </section>
@@ -52,12 +65,12 @@ const hiringSchema = {
           <p>{copy.roleFitSummary}</p>
         </div>
         <div class="site-grid">
-          {siteCopy.home.focus.areas.map((item) => (
+          {roleAreas.map((item) => (
             <article class="site-card">
               <p class="site-eyebrow">{item.label}</p>
               <h3>{item.title}</h3>
               <p>{item.summary}</p>
-              <ul>{item.evidence.map((evidence) => <li>{evidence}</li>)}</ul>
+              <ul>{item.evidence.slice(0, 2).map((evidence) => <li>{evidence}</li>)}</ul>
               <p><a href={item.href}>{item.cta}</a></p>
             </article>
           ))}
@@ -90,8 +103,11 @@ const hiringSchema = {
           <p>{copy.credentialsSummary}</p>
         </div>
         <div class="site-grid">
-          {profile.certifications.slice(0, 6).map((item) => (
-            <article class="site-card"><h3>{item.title}</h3><p><strong>{item.issuer}</strong><br />{item.date}</p><p>{item.note}</p></article>
+          {featuredCredentials.map((item) => (
+            <article class="site-card">
+              <h3>{item.title}</h3>
+              <p><strong>{item.issuer}</strong><br />{item.date}</p>
+            </article>
           ))}
         </div>
       </div>
@@ -100,7 +116,7 @@ const hiringSchema = {
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
         <div><p class="site-eyebrow">{copy.closingEyebrow}</p><h2>{copy.closingHeading}</h2><p>{copy.closingSummary}</p></div>
-        <div class="site-actions"><a class="site-button" href="/contact/" data-track="hire-bottom-contact">Send Reeja a message</a><a class="site-button" href={professionalFacts.publicCvPath}>View Reeja’s CV</a></div>
+        <div class="site-actions"><a class="site-button" href="/contact/" data-track="hire-bottom-contact">Contact Reeja</a><a class="site-button" href={professionalFacts.publicCvPath}>View CV</a></div>
       </div>
     </section>
   </div>

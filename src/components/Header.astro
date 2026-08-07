@@ -5,7 +5,13 @@ type Props = { name: string };
 const { name } = Astro.props;
 const path = Astro.url.pathname;
 const current = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
-const links = siteCopy.navigation;
+const links = [
+  { href: '/#experience', label: 'Experience' },
+  { href: '/clinical-research/', label: 'Research' },
+  { href: '/nursing-practice/', label: 'Nursing' },
+  { href: '/blog/', label: 'Writing' },
+  { href: '/cv/', label: 'CV' }
+];
 ---
 
 <header class="site-header" aria-label="Primary navigation" data-site-header>
@@ -24,8 +30,8 @@ const links = siteCopy.navigation;
           {link.label}
         </a>
       ))}
-      <a class="nav-cta" href="/contact/" aria-current={current('/contact/') ? 'page' : undefined} data-track="contact-nav">
-        Contact Reeja
+      <a class="nav-cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-nav">
+        Hire Reeja
       </a>
     </nav>
 
@@ -58,7 +64,7 @@ const links = siteCopy.navigation;
       <div class="mobile-nav__head">
         <div>
           <span class="mobile-nav__eyebrow">{name}</span>
-          <strong>Explore Reeja’s portfolio</strong>
+          <strong>Professional profile</strong>
           <small>{siteCopy.siteDescriptor}</small>
         </div>
         <button class="mobile-nav__close" type="button" data-mobile-nav-close aria-label="Close menu">
@@ -71,8 +77,8 @@ const links = siteCopy.navigation;
           {link.label}
         </a>
       ))}
-      <a class="mobile-nav__cta" href="/contact/" aria-current={current('/contact/') ? 'page' : undefined} data-track="contact-mobile-nav">
-        Contact Reeja
+      <a class="mobile-nav__cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">
+        Hire Reeja
       </a>
     </nav>
   </div>
