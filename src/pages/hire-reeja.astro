@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
 
-const emailSubject = encodeURIComponent(`Nursing or Research Opportunity for ${professionalFacts.name}`);
 const hiringSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfilePage',
@@ -30,10 +29,10 @@ const hiringSchema = {
       <div class="container site-page__hero-grid">
         <div>
           <p class="site-eyebrow">Professional opportunities</p>
-          <h1>Discuss a nursing or research opportunity with {professionalFacts.name}.</h1>
-          <p class="site-page__lede">{professionalFacts.nepalLicense}, {professionalFacts.texasLicenseShort}, and {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort} {professionalFacts.currentRole} with hospital, maternal-health, documentation, and telemonitoring experience.</p>
+          <h1>Consider Reeja for nursing, research, or health-programme work.</h1>
+          <p class="site-page__lede">{professionalFacts.nepalLicense}, {professionalFacts.texasLicenseShort}, and current {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort} experience, with a background in hospital nursing, patient education, documentation, and telemonitoring.</p>
           <div class="site-actions">
-            <a class="site-button site-button--primary" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-email">Share opportunity details</a>
+            <a class="site-button site-button--primary" href="/contact/" data-track="hire-contact">Contact Reeja</a>
             <a class="site-button" href={professionalFacts.publicCvPath} data-track="hire-cv">View CV</a>
             <a class="site-button" href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer" data-track="hire-linkedin">LinkedIn</a>
           </div>
@@ -95,8 +94,8 @@ const hiringSchema = {
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
-        <div><p class="site-eyebrow">Contact</p><h2>Share the opportunity details.</h2><p>Include the organisation, location, start date, employment type, and responsibilities.</p></div>
-        <div class="site-actions"><a class="site-button" href={`mailto:${professionalFacts.professionalEmail}?subject=${emailSubject}`} data-track="hire-bottom-email">Share opportunity details</a><a class="site-button" href={professionalFacts.publicCvPath}>View CV</a></div>
+        <div><p class="site-eyebrow">Next step</p><h2>Share the opportunity details.</h2><p>The contact page collects the organisation, role, location, timing, and responsibilities in one clear message.</p></div>
+        <div class="site-actions"><a class="site-button" href="/contact/" data-track="hire-bottom-contact">Contact Reeja</a><a class="site-button" href={professionalFacts.publicCvPath}>View CV</a></div>
       </div>
     </section>
   </div>
