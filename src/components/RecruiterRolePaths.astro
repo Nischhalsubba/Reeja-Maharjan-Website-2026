@@ -1,25 +1,23 @@
 ---
 const pathways = [
   {
-    number: '01',
     label: 'Maternal-health research',
-    title: 'Participant support grounded in clinical understanding.',
-    summary: 'Relevant for research teams that need clear participant education, dependable follow-up, accurate records, and protocol-based escalation support.',
+    title: 'Participant support with a clinical foundation.',
+    summary: 'Relevant to research teams that need thoughtful participant education, dependable follow-up, accurate records, and protocol-based coordination.',
     evidence: [
       'Participant screening and consent-workflow support',
       'Home BP and blood-glucose monitoring education',
       'Tele-follow-up, warning-sign screening, and escalation',
       'Study documentation and data-quality checks'
     ],
-    scope: 'Supports protocol-led research activity within the documented study role and clinical governance structure.',
+    scope: 'Work is performed within the documented study role and clinical governance structure.',
     href: '/clinical-research/',
-    cta: 'Review research experience'
+    cta: 'Explore research experience'
   },
   {
-    number: '02',
     label: 'Hospital nursing',
-    title: 'Reliable ward practice and patient communication.',
-    summary: 'Relevant for hospital roles requiring safe bedside care, structured handover, patient counselling, monitoring, documentation, and coordinated escalation.',
+    title: 'Safe care, clear handover, and patient communication.',
+    summary: 'Relevant to hospital roles requiring bedside care, monitoring, documentation, patient counselling, structured handover, and coordinated escalation.',
     evidence: [
       'Maternal-newborn and general ward nursing experience',
       'Clinical observation, monitoring, and documentation',
@@ -28,51 +26,49 @@ const pathways = [
     ],
     scope: 'Practice remains subject to employer credentialing, local regulation, orientation, and assigned clinical scope.',
     href: '/nursing-practice/',
-    cta: 'Review nursing practice'
+    cta: 'Explore nursing practice'
   },
   {
-    number: '03',
-    label: 'NGO and health programmes',
-    title: 'Care communication, follow-up, and programme coordination.',
-    summary: 'Relevant for programmes that need beneficiary education, monitoring support, confidential records, device logistics, and coordination across clinical and programme teams.',
+    label: 'Health programmes',
+    title: 'Follow-up and coordination for community-facing work.',
+    summary: 'Relevant to programmes that need beneficiary education, remote monitoring support, confidential records, device logistics, and communication across care teams.',
     evidence: [
       'Health education and adherence reinforcement',
       'Remote follow-up and monitoring support',
       'Device distribution and tracking workflows',
       'Confidential documentation and team coordination'
     ],
-    scope: 'International licensing is listed as a credential only and does not represent work authorisation or independent programme authority.',
-    href: '/hire-reeja/',
+    scope: 'International licensure is listed as a professional credential and does not represent work authorisation or independent programme authority.',
+    href: '/contact/',
     cta: 'Discuss programme fit'
   }
 ];
 ---
 
-<section class="ledger-section ledger-section--cases" id="role-fit" aria-labelledby="role-fit-title">
+<section class="ledger-section care-section care-focus" id="role-fit" aria-labelledby="role-fit-title">
   <div class="container">
-    <header class="ledger-section__header" data-ledger-reveal>
-      <p class="ledger-kicker">Role fit / case files</p>
-      <h2 id="role-fit-title">Three working contexts, documented plainly.</h2>
-      <p>Each file maps recorded experience to a hiring context without overstating scope, authority, or work authorisation.</p>
+    <header class="ledger-section__header care-section__header" data-motion-reveal>
+      <p class="ledger-kicker">Professional focus</p>
+      <h2 id="role-fit-title">Experience that connects clinical care, research, and patient support.</h2>
+      <p>Three practical areas where Reeja’s documented experience is most relevant to employers and project teams.</p>
     </header>
 
-    <div class="case-file-list" data-ledger-group>
+    <div class="case-file-list care-focus__grid" data-motion-group>
       {pathways.map((pathway) => (
-        <article class="case-file" data-ledger-reveal>
-          <div class="case-file__index">
-            <span>{pathway.number}</span>
+        <article class="case-file care-focus__card" data-motion-reveal>
+          <div class="case-file__index care-focus__label">
             <p>{pathway.label}</p>
           </div>
-          <div class="case-file__statement">
+          <div class="case-file__statement care-focus__statement">
             <h3>{pathway.title}</h3>
             <p>{pathway.summary}</p>
-            <a class="ledger-link" href={pathway.href}>{pathway.cta}</a>
           </div>
-          <div class="case-file__evidence">
-            <p class="case-file__label">Evidence</p>
+          <div class="case-file__evidence care-focus__evidence">
+            <p class="case-file__label">Relevant experience</p>
             <ul>{pathway.evidence.map((item) => <li>{item}</li>)}</ul>
           </div>
-          <p class="case-file__scope"><strong>Scope note</strong>{pathway.scope}</p>
+          <p class="case-file__scope care-focus__scope"><strong>Scope note</strong>{pathway.scope}</p>
+          <a class="ledger-link care-link" href={pathway.href}>{pathway.cta}</a>
         </article>
       ))}
     </div>
