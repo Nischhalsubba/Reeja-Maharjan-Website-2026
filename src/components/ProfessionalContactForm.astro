@@ -2,6 +2,7 @@
 import { professionalFacts } from '../content/professional-facts';
 
 const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=${encodeURIComponent(`Professional opportunity for ${professionalFacts.name}`)}`;
+const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professional-contact-form';
 ---
 
 <form
@@ -10,9 +11,7 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
   method="POST"
   action={professionalFacts.contactFormEndpoint}
   data-contact-form
-  data-endpoint={professionalFacts.contactFormEndpoint}
   aria-labelledby="contact-form-title"
-  novalidate
 >
   <div class="professional-contact-form__heading">
     <p class="site-eyebrow">Send a message</p>
@@ -65,8 +64,8 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
   </div>
 
   <input type="hidden" name="_subject" value="New professional inquiry from reejamaharjan.com.np" />
-  <input type="hidden" name="_captcha" value="false" />
   <input type="hidden" name="_template" value="table" />
+  <input type="hidden" name="_next" value={contactReturnUrl} />
   <input type="hidden" name="_url" value="https://reejamaharjan.com.np/contact/" />
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
@@ -84,14 +83,10 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
   </div>
 
   <div class="professional-contact-form__status" aria-live="polite" aria-atomic="true">
-    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Sending your message…</p>
+    <p class="form-status form-status--loading" role="status" hidden data-form-loading>Submitting your message securely…</p>
     <div class="form-status form-status--success" role="status" tabindex="-1" hidden data-form-success>
-      <strong>Message sent.</strong>
-      <p>Your inquiry was submitted to {professionalFacts.professionalEmail}. Reeja can reply by email when appropriate.</p>
-    </div>
-    <div class="form-status form-status--error" role="alert" tabindex="-1" hidden data-form-error>
-      <strong>The message could not be sent.</strong>
-      <p>Please try again or use the direct email option. Your message has not been cleared from the form.</p>
+      <strong>Message submitted.</strong>
+      <p>Your inquiry was accepted for delivery to {professionalFacts.professionalEmail}. Reeja can reply by email when appropriate.</p>
     </div>
   </div>
 </form>
@@ -105,11 +100,6 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
     const submitSpinner = form.querySelector<HTMLElement>('[data-submit-spinner]');
     const loadingStatus = form.querySelector<HTMLElement>('[data-form-loading]');
     const successStatus = form.querySelector<HTMLElement>('[data-form-success]');
-    const errorStatus = form.querySelector<HTMLElement>('[data-form-error]');
-    const configuredEndpoint = form.dataset.endpoint;
-    const endpoint = import.meta.env.PUBLIC_FORMSPREE_ENDPOINT || configuredEndpoint || form.action;
-
-    form.action = endpoint;
 
     const fieldMessage = (field: HTMLInputElement | HTMLTextAreaElement): string => {
       if (field.validity.valueMissing) return 'Please complete this field.';
@@ -137,14 +127,15 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
     );
 
     validatedFields.forEach((field) => {
+      field.addEventListener('invalid', () => showFieldError(field));
       field.addEventListener('blur', () => showFieldError(field));
       field.addEventListener('input', () => {
         if (field.hasAttribute('aria-invalid')) showFieldError(field);
       });
     });
 
-    const setStatus = (state: 'idle' | 'loading' | 'success' | 'error') => {
-      [loadingStatus, successStatus, errorStatus].forEach((element) => {
+    const setStatus = (state: 'idle' | 'loading' | 'success') => {
+      [loadingStatus, successStatus].forEach((element) => {
         if (element) element.hidden = true;
       });
 
@@ -153,69 +144,50 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
         successStatus.hidden = false;
         successStatus.focus();
       }
-      if (state === 'error' && errorStatus) {
-        errorStatus.hidden = false;
-        errorStatus.focus();
-      }
     };
 
     const setSubmitting = (submitting: boolean) => {
       if (!submitButton) return;
       submitButton.disabled = submitting;
       submitButton.toggleAttribute('aria-busy', submitting);
-      if (submitLabel) submitLabel.textContent = submitting ? 'Sending…' : 'Send message';
+      if (submitLabel) submitLabel.textContent = submitting ? 'Submitting…' : 'Send message';
       if (submitSpinner) submitSpinner.hidden = !submitting;
     };
 
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
+    const showRedirectSuccess = () => {
+      const url = new URL(window.location.href);
+      if (url.searchParams.get('sent') !== '1') return;
+
+      form.reset();
+      validatedFields.forEach((field) => field.removeAttribute('aria-invalid'));
+      setStatus('success');
+
+      url.searchParams.delete('sent');
+      const cleanUrl = `${url.pathname}${url.search}${url.hash}`;
+      window.history.replaceState({}, '', cleanUrl);
+    };
+
+    form.addEventListener('submit', (event) => {
       setStatus('idle');
 
       const firstInvalid = validatedFields.find((field) => !showFieldError(field));
       if (firstInvalid) {
+        event.preventDefault();
         firstInvalid.focus();
         return;
       }
 
       const honeypot = form.elements.namedItem('_honey');
-      if (honeypot instanceof HTMLInputElement && honeypot.value) return;
+      if (honeypot instanceof HTMLInputElement && honeypot.value) {
+        event.preventDefault();
+        return;
+      }
 
       setSubmitting(true);
       setStatus('loading');
-
-      const controller = new AbortController();
-      const timeout = window.setTimeout(() => controller.abort(), 12000);
-
-      try {
-        const formData = new FormData(form);
-        const email = String(formData.get('email') ?? '');
-        const payload = Object.fromEntries(formData.entries());
-        payload._replyto = email;
-
-        const response = await fetch(form.action, {
-          method: 'POST',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(payload),
-          signal: controller.signal,
-          credentials: 'omit'
-        });
-
-        if (!response.ok) throw new Error(`Contact request failed with ${response.status}`);
-        const result = await response.json().catch(() => ({}));
-        if (String(result?.success ?? true).toLowerCase() === 'false') throw new Error('Contact provider rejected the message');
-
-        form.reset();
-        validatedFields.forEach((field) => field.removeAttribute('aria-invalid'));
-        setStatus('success');
-      } catch {
-        setStatus('error');
-      } finally {
-        window.clearTimeout(timeout);
-        setSubmitting(false);
-      }
     });
+
+    window.addEventListener('pageshow', () => setSubmitting(false));
+    showRedirectSuccess();
   }
 </script>
