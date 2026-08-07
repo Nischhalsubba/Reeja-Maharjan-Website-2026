@@ -2,61 +2,50 @@
 import { professionalFacts } from '../content/professional-facts';
 ---
 
-<section class="ledger-hero care-hero" id="home" aria-labelledby="home-title">
-  <div class="container ledger-hero__grid care-hero__grid">
-    <div class="ledger-hero__content care-hero__content">
-      <p class="ledger-kicker care-hero__kicker" data-hero-kicker>
-        Registered Nurse · Maternal-health Research Assistant
+<section class="fj-hero" id="home" aria-labelledby="home-title">
+  <div class="container fj-hero__grid">
+    <div class="fj-hero__content">
+      <p class="fj-kicker" data-fj-hero>Registered Nurse · Research Professional</p>
+
+      <h1 id="home-title" class="fj-hero__title" data-fj-hero>
+        Clinical care with a <em>researcher’s eye</em> for detail.
+      </h1>
+
+      <p class="fj-hero__intro" data-fj-hero>
+        Reeja Maharjan works across nursing practice, maternal-health research, participant follow-up, documentation, telemonitoring, and professional education. Her current work with {professionalFacts.currentEmployerShort} brings clinical judgement and careful research coordination into the same daily practice.
       </p>
 
-      <h1 id="home-title" class="care-hero__name" data-hero-name>{professionalFacts.name}</h1>
-
-      <p class="care-hero__statement" data-hero-statement>
-        Clinical care and maternal-health research, with clear communication and dependable follow-up.
-      </p>
-
-      <p class="ledger-hero__intro care-hero__intro" data-hero-copy>
-        {professionalFacts.nepalLicense}, {professionalFacts.texasLicense}, and current {professionalFacts.currentRole} experience with {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}. Her work includes participant education, BP/BG telemonitoring, documentation, follow-up, and care coordination.
-      </p>
-
-      <div class="ledger-hero__actions care-hero__actions" aria-label="Primary actions" data-hero-actions>
-        <a class="ledger-button ledger-button--ink care-button care-button--primary" href="/contact/" data-track="home-contact">
-          Contact Reeja
-        </a>
-        <a class="ledger-button care-button care-button--secondary" href={professionalFacts.publicCvPath} data-track="home-cv">
-          View CV
-        </a>
+      <div class="fj-hero__actions" aria-label="Primary actions" data-fj-hero>
+        <a class="fj-button fj-button--primary" href="/contact/" data-track="home-contact">Contact Reeja</a>
+        <a class="fj-button" href={professionalFacts.publicCvPath} data-track="home-cv">View CV</a>
       </div>
 
-      <p class="ledger-hero__status care-hero__status" data-hero-copy>
-        <span aria-hidden="true"></span>
-        {professionalFacts.publicStatus}
-      </p>
+      <div class="fj-hero__ribbon" aria-label="Professional credentials" data-fj-hero>
+        <span>{professionalFacts.nepalLicenseShort}</span>
+        <span>{professionalFacts.texasLicenseShort}</span>
+        <span>{professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</span>
+      </div>
     </div>
 
-    <figure class="ledger-portrait care-hero__portrait" data-hero-portrait>
-      <div class="ledger-portrait__frame care-hero__portrait-frame">
+    <figure class="fj-portrait" data-fj-portrait>
+      <div class="fj-portrait__paper" aria-hidden="true"></div>
+      <div class="fj-portrait__frame">
         <img
           src="/reeja-headshot.jpg"
           alt="Reeja Maharjan standing outdoors in Nepal"
           width="800"
           height="1000"
-          sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1024px) 46vw, 500px"
+          sizes="(max-width: 640px) calc(100vw - 48px), (max-width: 1024px) 56vw, 410px"
           loading="eager"
           fetchpriority="high"
           decoding="async"
         />
       </div>
-      <figcaption class="care-hero__portrait-caption">
-        {professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} · {professionalFacts.currentLocation}
+      <span class="fj-portrait__tag" aria-hidden="true">Portrait · Field note 01</span>
+      <p class="fj-portrait__note" aria-hidden="true">Care is practical. Good research makes the reasoning visible.</p>
+      <figcaption>
+        {professionalFacts.currentRole} · {professionalFacts.currentEmployerShort}<br />{professionalFacts.currentLocation}
       </figcaption>
     </figure>
-  </div>
-
-  <div class="container ledger-proof care-hero__proof" aria-label="Professional credibility" data-hero-proof>
-    <div><span>Registration</span><strong>{professionalFacts.nepalLicenseShort}</strong></div>
-    <div><span>International license</span><strong>{professionalFacts.texasLicenseShort}</strong></div>
-    <div><span>Current work</span><strong>{professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</strong></div>
-    <div><span>Based in</span><strong>{professionalFacts.currentLocation}</strong></div>
   </div>
 </section>
