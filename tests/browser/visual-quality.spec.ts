@@ -9,6 +9,7 @@ const viewports = [
 ];
 const routes = [
   { name: 'home', path: '/' },
+  { name: 'contact', path: '/contact/' },
   { name: 'hire', path: '/hire-reeja/' },
   { name: 'research', path: '/clinical-research/' },
   { name: 'maternal-health', path: '/maternal-health/' },
@@ -17,7 +18,7 @@ const routes = [
   { name: 'cv', path: '/cv/' }
 ];
 
-test('Care Ledger remains composed across release viewports', async ({ browser }) => {
+test('Care Practice remains composed across release viewports', async ({ browser }) => {
   for (const viewport of viewports) {
     const context = await browser.newContext({
       viewport: { width: viewport.width, height: viewport.height },
@@ -40,7 +41,7 @@ test('Care Ledger remains composed across release viewports', async ({ browser }
         dimensions.clientWidth + 1
       );
 
-      await expect(page.locator('body')).toHaveClass(/care-ledger/);
+      await expect(page.locator('body')).toHaveClass(/care-practice/);
       await expect(page.locator('main')).toBeVisible();
       await page.screenshot({
         path: `test-results/visual/${viewport.name}/${route.name}.png`,
