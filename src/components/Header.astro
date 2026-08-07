@@ -21,18 +21,17 @@ const links = [
       <span class="brand__mark" aria-hidden="true">RM</span>
       <span class="brand__text">
         <strong>{name}</strong>
-        <small>{professionalFacts.nepalLicenseShort} / {professionalFacts.currentEmployerShort} Research Assistant</small>
+        <small>Registered Nurse · Research Assistant</small>
       </span>
     </a>
 
     <nav class="desktop-nav" aria-label="Main navigation">
-      {links.map((link, index) => (
+      {links.map((link) => (
         <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>
-          <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           {link.label}
         </a>
       ))}
-      <a class="nav-cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-nav">
+      <a class="nav-cta" href="/contact/" aria-current={current('/contact/') ? 'page' : undefined} data-track="contact-nav">
         Contact
       </a>
     </nav>
@@ -45,7 +44,7 @@ const links = [
       aria-haspopup="dialog"
       aria-label="Menu"
     >
-      <span class="menu-toggle__label">Index</span>
+      <span class="menu-toggle__label">Menu</span>
       <span class="menu-toggle__icon" aria-hidden="true"><i></i><i></i></span>
     </button>
   </div>
@@ -61,23 +60,22 @@ const links = [
     <nav class="mobile-nav__panel" aria-label="Mobile navigation links">
       <div class="mobile-nav__head">
         <div>
-          <span class="mobile-nav__eyebrow">Contents</span>
+          <span class="mobile-nav__eyebrow">Reeja Maharjan</span>
           <strong id="mobile-nav-title">Mobile navigation</strong>
-          <small>Professional field notes</small>
+          <small>Registered Nurse · Research Assistant</small>
         </div>
         <button class="mobile-nav__close" type="button" data-mobile-nav-close aria-label="Close menu">
           <span aria-hidden="true"></span>
         </button>
       </div>
-      <a href="/" aria-current={path === '/' ? 'page' : undefined}><span aria-hidden="true">00</span>Home</a>
-      {links.map((link, index) => (
+      <a href="/" aria-current={path === '/' ? 'page' : undefined}>Home</a>
+      {links.map((link) => (
         <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>
-          <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
           {link.label}
         </a>
       ))}
-      <a class="mobile-nav__cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">
-        Discuss an opportunity
+      <a class="mobile-nav__cta" href="/contact/" aria-current={current('/contact/') ? 'page' : undefined} data-track="contact-mobile-nav">
+        Contact Reeja
       </a>
     </nav>
   </div>
