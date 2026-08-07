@@ -75,9 +75,9 @@ test('contact page exposes accessible fields and submits to Reeja email endpoint
   await page.route('https://formsubmit.co/ajax/maharjanreeja88@gmail.com', async (route) => {
     expect(route.request().method()).toBe('POST');
     const postData = route.request().postData() ?? '';
-    expect(postData).toContain('Reeja%20Recruiter');
-    expect(postData).toContain('recruiter%40example.com');
-    expect(postData).toContain('Maternal%20health%20research%20opportunity');
+    expect(postData).toContain('Reeja Recruiter');
+    expect(postData).toContain('recruiter@example.com');
+    expect(postData).toContain('Maternal health research opportunity');
     await route.fulfill({
       status: 200,
       contentType: 'application/json',
