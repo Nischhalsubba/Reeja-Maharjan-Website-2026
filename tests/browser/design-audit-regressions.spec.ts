@@ -165,7 +165,7 @@ test('homepage stays concise and recruiter-first', async ({ page }) => {
   await expect(page.locator('.fj-registry__entry')).toHaveCount(5);
   await expect(page.locator('.fj-reading__entry')).toHaveCount(2);
   await expect(page.getByRole('link', { name: 'Discuss a role' })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Hire Reeja' })).toBeVisible();
+  await expect(page.locator('.desktop-nav').getByRole('link', { name: 'Hire Reeja', exact: true })).toBeVisible();
 });
 
 test('contact page submits through the provider POST flow and returns with success feedback', async ({ page }) => {
