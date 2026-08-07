@@ -27,9 +27,9 @@ export const maxAttempts = positiveInteger('SMOKE_ATTEMPTS', 20);
 export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
-  'Clinical care with research discipline.',
+  'Clinical care, recorded with research discipline.',
   'Discuss an opportunity',
-  'View CV'
+  'Read the CV'
 ];
 
 export const forbiddenHomepageText = [
