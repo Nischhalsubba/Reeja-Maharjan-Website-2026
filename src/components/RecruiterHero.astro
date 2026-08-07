@@ -1,65 +1,62 @@
 ---
 import { professionalFacts } from '../content/professional-facts';
-import HeroSpatialScene from './HeroSpatialScene.astro';
 ---
 
-<section class="ledger-hero" id="home" aria-labelledby="home-title">
-  <div class="ledger-hero__scene" aria-hidden="true"><HeroSpatialScene /></div>
-
-  <div class="container ledger-hero__grid">
-    <aside class="ledger-hero__margin" aria-label="Profile index" data-ledger-stage>
-      <span>Profile / 01</span>
-      <span>Biratnagar, Nepal</span>
-      <span>Verified {professionalFacts.lastVerified}</span>
-    </aside>
-
-    <div class="ledger-hero__content">
-      <p class="ledger-kicker" data-ledger-stage>Registered Nurse · Maternal-health research</p>
-      <p class="ledger-hero__name" data-ledger-stage>{professionalFacts.name}, {professionalFacts.credential}</p>
-      <h1 id="home-title" data-ledger-title>
-        <span>Clinical care,</span>
-        <span>recorded with</span>
-        <span>research discipline.</span>
-      </h1>
-      <p class="ledger-hero__intro" data-ledger-stage>
-        {professionalFacts.nepalLicense} and {professionalFacts.texasLicense}, with hospital experience and current maternal-health research work involving participant education, BP/BG telemonitoring, documentation, and care coordination.
+<section class="ledger-hero care-hero" id="home" aria-labelledby="home-title">
+  <div class="container ledger-hero__grid care-hero__grid">
+    <div class="ledger-hero__content care-hero__content">
+      <p class="ledger-kicker care-hero__kicker" data-hero-kicker>
+        Registered Nurse · Maternal-health Research Assistant
       </p>
 
-      <div class="ledger-hero__actions" aria-label="Primary actions" data-ledger-stage>
-        <a class="ledger-button ledger-button--ink" href="/hire-reeja/" data-track="home-hire">Discuss an opportunity</a>
-        <a class="ledger-link" href={professionalFacts.publicCvPath} data-track="home-cv">Read the CV</a>
+      <h1 id="home-title" class="care-hero__name" data-hero-name>{professionalFacts.name}</h1>
+
+      <p class="care-hero__statement" data-hero-statement>
+        Clinical care and maternal-health research, with clear communication and dependable follow-up.
+      </p>
+
+      <p class="ledger-hero__intro care-hero__intro" data-hero-copy>
+        {professionalFacts.nepalLicense}, {professionalFacts.texasLicense}, and current {professionalFacts.currentRole} experience with {professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}. Her work includes participant education, BP/BG telemonitoring, documentation, follow-up, and care coordination.
+      </p>
+
+      <div class="ledger-hero__actions care-hero__actions" aria-label="Primary actions" data-hero-actions>
+        <a class="ledger-button ledger-button--ink care-button care-button--primary" href="/contact/" data-track="home-contact">
+          Contact Reeja
+        </a>
+        <a class="ledger-button care-button care-button--secondary" href={professionalFacts.publicCvPath} data-track="home-cv">
+          View CV
+        </a>
       </div>
 
-      <p class="ledger-hero__status" data-ledger-stage>
+      <p class="ledger-hero__status care-hero__status" data-hero-copy>
         <span aria-hidden="true"></span>
-        {professionalFacts.availability}
+        {professionalFacts.publicStatus}
       </p>
     </div>
 
-    <figure class="ledger-portrait" data-ledger-portrait>
-      <div class="ledger-portrait__frame">
+    <figure class="ledger-portrait care-hero__portrait" data-hero-portrait>
+      <div class="ledger-portrait__frame care-hero__portrait-frame">
         <img
           src="/reeja-headshot.jpg"
-          alt="Portrait of Reeja Maharjan"
+          alt="Reeja Maharjan standing outdoors in Nepal"
           width="800"
           height="1000"
-          sizes="(max-width: 640px) 100vw, (max-width: 900px) 88vw, 36vw"
+          sizes="(max-width: 720px) calc(100vw - 40px), (max-width: 1024px) 46vw, 500px"
           loading="eager"
           fetchpriority="high"
           decoding="async"
         />
       </div>
-      <figcaption>
-        <span>Fig. 01</span>
-        <span>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</span>
+      <figcaption class="care-hero__portrait-caption">
+        {professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} · {professionalFacts.currentLocation}
       </figcaption>
     </figure>
   </div>
 
-  <div class="container ledger-proof" aria-label="Professional credibility" data-ledger-proof>
+  <div class="container ledger-proof care-hero__proof" aria-label="Professional credibility" data-hero-proof>
     <div><span>Registration</span><strong>{professionalFacts.nepalLicenseShort}</strong></div>
     <div><span>International license</span><strong>{professionalFacts.texasLicenseShort}</strong></div>
-    <div><span>Current work</span><strong>{professionalFacts.currentEmployerShort} {professionalFacts.currentProjectShort}</strong></div>
-    <div><span>Clinical background</span><strong>Hospital nursing in Nepal</strong></div>
+    <div><span>Current work</span><strong>{professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</strong></div>
+    <div><span>Based in</span><strong>{professionalFacts.currentLocation}</strong></div>
   </div>
 </section>
