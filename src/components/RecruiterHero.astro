@@ -1,5 +1,4 @@
 ---
-import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
 import HeroSpatialScene from './HeroSpatialScene.astro';
 ---
@@ -40,10 +39,11 @@ import HeroSpatialScene from './HeroSpatialScene.astro';
     <figure class="ledger-portrait" data-ledger-portrait>
       <div class="ledger-portrait__frame">
         <img
-          src={profile.hero.portrait.src}
-          alt={profile.hero.portrait.alt}
-          width="760"
-          height="920"
+          src="/reeja-headshot.jpg"
+          alt="Portrait of Reeja Maharjan"
+          width="800"
+          height="1000"
+          sizes="(max-width: 640px) 100vw, (max-width: 900px) 88vw, 36vw"
           loading="eager"
           fetchpriority="high"
           decoding="async"
