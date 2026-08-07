@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 
-test('supporting-page heroes contain no decorative line or WebGL scene and summary rows retain comfortable inset', async ({ page }) => {
+test('Field Journal supporting-page heroes stay line-free, spacious and WebGL-free', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(`${origin}/hire-reeja/`, { waitUntil: 'networkidle' });
   await page.evaluate(async () => document.fonts.ready);
@@ -10,26 +10,34 @@ test('supporting-page heroes contain no decorative line or WebGL scene and summa
   const metrics = await page.evaluate(() => {
     const hero = document.querySelector<HTMLElement>('.site-page__hero');
     const firstRow = document.querySelector<HTMLElement>('.site-page__summary > div');
-    if (!hero || !firstRow) throw new Error('Expected hiring hero elements were not found.');
+    const firstCard = document.querySelector<HTMLElement>('.site-card');
+    if (!hero || !firstRow || !firstCard) throw new Error('Expected hiring page elements were not found.');
 
     const before = getComputedStyle(hero, '::before');
     const after = getComputedStyle(hero, '::after');
     const rowStyle = getComputedStyle(firstRow);
+    const cardStyle = getComputedStyle(firstCard);
 
     return {
       beforeDisplay: before.display,
       afterDisplay: after.display,
-      paddingLeft: Number.parseFloat(rowStyle.paddingLeft),
-      paddingRight: Number.parseFloat(rowStyle.paddingRight),
-      canvasCount: hero.querySelectorAll('canvas').length
+      rowPaddingTop: Number.parseFloat(rowStyle.paddingTop),
+      rowGap: Number.parseFloat(rowStyle.columnGap),
+      canvasCount: hero.querySelectorAll('canvas').length,
+      cardRadius: Number.parseFloat(cardStyle.borderTopLeftRadius),
+      cardShadow: cardStyle.boxShadow,
+      bodyDesign: document.body.dataset.designSystem
     };
   });
 
   expect(metrics.beforeDisplay).toBe('none');
   expect(metrics.afterDisplay).toBe('none');
   expect(metrics.canvasCount).toBe(0);
-  expect(metrics.paddingLeft).toBeGreaterThanOrEqual(16);
-  expect(metrics.paddingRight).toBeGreaterThanOrEqual(16);
+  expect(metrics.rowPaddingTop).toBeGreaterThanOrEqual(12);
+  expect(metrics.rowGap).toBeGreaterThanOrEqual(12);
+  expect(metrics.cardRadius).toBe(0);
+  expect(metrics.cardShadow).toBe('none');
+  expect(metrics.bodyDesign).toBe('reeja-field-journal');
 
   await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
   await expect(page.locator('.fj-hero canvas')).toHaveCount(0);
@@ -69,26 +77,30 @@ test('Field Journal portrait uses the headshot and never relies on a cropping fi
   }
 });
 
-test('Field Journal homepage uses the approved palette and does not ship decorative Three.js', async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
-  await page.evaluate(async () => document.fonts.ready);
+test('Field Journal palette and typography apply beyond the homepage', async ({ page }) => {
+  for (const path of ['/hire-reeja/', '/clinical-research/', '/maternal-health/', '/nursing-practice/', '/contact/', '/blog/', '/cv/']) {
+    await page.setViewportSize({ width: 1440, height: 1000 });
+    await page.goto(`${origin}${path}`, { waitUntil: 'networkidle' });
+    await page.evaluate(async () => document.fonts.ready);
 
-  const state = await page.evaluate(() => {
-    const body = document.body;
-    const styles = getComputedStyle(body);
-    return {
-      fieldJournal: body.classList.contains('field-journal'),
-      background: styles.backgroundColor,
-      canvasCount: document.querySelectorAll('canvas').length,
-      heroTitle: document.querySelector('.fj-hero__title')?.textContent ?? ''
-    };
-  });
+    const state = await page.evaluate(() => {
+      const body = document.body;
+      const heading = document.querySelector<HTMLElement>('main h1');
+      return {
+        fieldJournal: body.classList.contains('field-journal'),
+        background: getComputedStyle(body).backgroundColor,
+        bodyFont: getComputedStyle(body).fontFamily,
+        headingFont: heading ? getComputedStyle(heading).fontFamily : '',
+        canvasCount: document.querySelectorAll('canvas').length
+      };
+    });
 
-  expect(state.fieldJournal).toBe(true);
-  expect(state.background).toBe('rgb(244, 239, 230)');
-  expect(state.canvasCount).toBe(0);
-  expect(state.heroTitle).toContain('researcher’s eye');
+    expect(state.fieldJournal).toBe(true);
+    expect(state.background).toBe('rgb(244, 239, 230)');
+    expect(state.bodyFont).toContain('Atkinson Hyperlegible');
+    expect(state.headingFont).toContain('Crimson Pro');
+    expect(state.canvasCount).toBe(0);
+  }
 });
 
 test('contact page exposes accessible fields and submits to Reeja email endpoint', async ({ page }) => {
