@@ -14,6 +14,7 @@ import '../styles/site-pages.css';
 import '../styles/shell.css';
 import '../styles/care-ledger.css';
 import '../styles/care-ledger-refinements.css';
+import '../styles/care-practice.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -35,7 +36,7 @@ const {
 
 const isBlogPage = Astro.url.pathname.startsWith('/blog');
 const isOnePage = Astro.url.pathname === '/';
-const isProfilePage = isOnePage || Astro.url.pathname === '/hire-reeja/';
+const isProfilePage = isOnePage || Astro.url.pathname === '/hire-reeja/' || Astro.url.pathname === '/contact/';
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
 const sameAs = [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean);
@@ -94,8 +95,8 @@ const graphSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="design-system" content="Care Ledger" />
-    <meta name="design-release" content="care-ledger-1.0.1" />
+    <meta name="design-system" content="Care Practice" />
+    <meta name="design-release" content="care-practice-2.0.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -129,7 +130,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body class="care-ledger" data-design-system="care-ledger" data-design-version="1.0.1">
+  <body class="care-ledger care-practice" data-design-system="care-practice" data-design-version="2.0.0">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <Header name={professionalFacts.name} />
