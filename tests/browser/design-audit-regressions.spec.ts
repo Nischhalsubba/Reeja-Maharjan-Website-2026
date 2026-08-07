@@ -209,7 +209,7 @@ test('contact page submits through the provider POST flow and returns with succe
   await page.getByLabel('Organisation / hospital').fill('Example Health Research');
   await page.getByLabel('Role / opportunity').fill('Research role');
   await page.getByLabel('Location').fill('Kathmandu, Nepal');
-  await page.getByLabel('Message').fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
+  await page.getByRole('textbox', { name: 'Message', exact: true }).fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
 
   const submit = page.getByRole('button', { name: 'Send to Reeja' });
   await Promise.all([
