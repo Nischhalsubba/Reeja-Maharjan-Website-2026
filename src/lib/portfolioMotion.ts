@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const REVEAL_SELECTOR = [
-  '[data-ledger-reveal]',
+  '[data-motion-reveal]',
   '.site-section__head',
   '.site-card',
   '.site-list__item',
@@ -24,85 +24,86 @@ export const initPortfolioMotion = (): (() => void) => {
     media.add(
       {
         reduceMotion: '(prefers-reduced-motion: reduce)',
-        desktop: '(min-width: 900px)'
+        desktop: '(min-width: 920px)'
       },
       ({ conditions }) => {
         const { reduceMotion, desktop } = conditions as { reduceMotion: boolean; desktop: boolean };
-        const ledgerHero = document.querySelector<HTMLElement>('.ledger-hero');
-        const pageHero = document.querySelector<HTMLElement>('.site-page__hero');
+        const homeHero = document.querySelector<HTMLElement>('.care-hero');
+        const pageHero = document.querySelector<HTMLElement>('.site-page__hero, .contact-hero');
 
         if (reduceMotion) {
           gsap.set(
             [
-              '[data-ledger-stage]',
-              '[data-ledger-title] > span',
-              '[data-ledger-portrait]',
-              '[data-ledger-proof]',
+              '[data-hero-kicker]',
+              '[data-hero-name]',
+              '[data-hero-statement]',
+              '[data-hero-copy]',
+              '[data-hero-actions] > *',
+              '[data-hero-portrait]',
+              '[data-hero-proof] > *',
               REVEAL_SELECTOR,
-              '.site-page__summary'
+              '.site-page__summary',
+              '.contact-hero__details'
             ],
-            { autoAlpha: 1, x: 0, y: 0, clipPath: 'none', clearProps: 'transform,opacity,visibility,clip-path' }
+            { autoAlpha: 1, x: 0, y: 0, clearProps: 'transform,opacity,visibility' }
           );
-          document.querySelector<HTMLElement>('[data-hero-scene]')?.dispatchEvent(new CustomEvent('care-ledger:reveal-thread'));
           return undefined;
         }
 
-        if (ledgerHero) {
-          const stages = ledgerHero.querySelectorAll<HTMLElement>('[data-ledger-stage]');
-          const titleLines = ledgerHero.querySelectorAll<HTMLElement>('[data-ledger-title] > span');
-          const portrait = ledgerHero.querySelector<HTMLElement>('[data-ledger-portrait]');
-          const proof = ledgerHero.querySelector<HTMLElement>('[data-ledger-proof]');
-          const thread = ledgerHero.querySelector<HTMLElement>('[data-hero-scene]');
-
-          gsap.set(titleLines, { yPercent: 112 });
-          if (portrait) gsap.set(portrait, { autoAlpha: 0, clipPath: 'inset(0 0 100% 0)', y: 22 });
-          if (proof) gsap.set(proof.children, { autoAlpha: 0, y: 12 });
+        if (homeHero) {
+          const kicker = homeHero.querySelector<HTMLElement>('[data-hero-kicker]');
+          const name = homeHero.querySelector<HTMLElement>('[data-hero-name]');
+          const statement = homeHero.querySelector<HTMLElement>('[data-hero-statement]');
+          const copy = homeHero.querySelectorAll<HTMLElement>('[data-hero-copy]');
+          const actions = homeHero.querySelectorAll<HTMLElement>('[data-hero-actions] > *');
+          const portrait = homeHero.querySelector<HTMLElement>('[data-hero-portrait]');
+          const proof = homeHero.querySelectorAll<HTMLElement>('[data-hero-proof] > *');
 
           const heroTimeline = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
-          heroTimeline
-            .from(stages, { autoAlpha: 0, y: 14, duration: 0.34, stagger: 0.045 })
-            .to(titleLines, { yPercent: 0, duration: 0.58, stagger: 0.07, ease: 'power4.out' }, 0.12)
-            .to(
+          if (kicker) heroTimeline.from(kicker, { autoAlpha: 0, y: 10, duration: 0.3 });
+          if (name) heroTimeline.from(name, { autoAlpha: 0, y: 18, duration: 0.55 }, 0.06);
+          if (statement) heroTimeline.from(statement, { autoAlpha: 0, y: 14, duration: 0.44 }, 0.15);
+          if (copy.length) heroTimeline.from(copy, { autoAlpha: 0, y: 12, duration: 0.36, stagger: 0.04 }, 0.24);
+          if (actions.length) heroTimeline.from(actions, { autoAlpha: 0, y: 10, duration: 0.3, stagger: 0.04 }, 0.32);
+          if (portrait) {
+            heroTimeline.from(
               portrait,
-              {
-                autoAlpha: 1,
-                clipPath: 'inset(0 0 0% 0)',
-                y: 0,
-                duration: 0.66,
-                ease: 'power3.inOut',
-                clearProps: 'clip-path,transform,opacity,visibility'
-              },
-              0.2
-            )
-            .to(proof?.children ?? [], { autoAlpha: 1, y: 0, duration: 0.32, stagger: 0.04, clearProps: 'transform,opacity,visibility' }, 0.48)
-            .call(() => {
-              thread?.dispatchEvent(new CustomEvent('care-ledger:reveal-thread'));
-            }, [], 0.28);
+              { autoAlpha: 0, x: desktop ? 18 : 0, y: desktop ? 0 : 14, duration: 0.56, clearProps: 'transform,opacity,visibility' },
+              0.14
+            );
+          }
+          if (proof.length) {
+            heroTimeline.from(proof, { autoAlpha: 0, y: 10, duration: 0.3, stagger: 0.04, clearProps: 'transform,opacity,visibility' }, 0.42);
+          }
         } else if (pageHero) {
           const pageTimeline = gsap.timeline({ defaults: { ease: 'power3.out', overwrite: 'auto' } });
-          pageTimeline
-            .from(pageHero.querySelector('.site-eyebrow'), { autoAlpha: 0, y: 10, duration: 0.28 })
-            .from(pageHero.querySelector('h1'), { autoAlpha: 0, y: 28, duration: 0.58 }, 0.08)
-            .from(pageHero.querySelector('.site-page__lede'), { autoAlpha: 0, y: 16, duration: 0.38 }, 0.22)
-            .from(pageHero.querySelectorAll('.site-actions > *'), { autoAlpha: 0, y: 10, duration: 0.26, stagger: 0.04 }, 0.32)
-            .from(
-              pageHero.querySelector('.site-page__summary'),
-              { autoAlpha: 0, x: desktop ? 24 : 0, y: desktop ? 0 : 16, duration: 0.46 },
-              0.2
-            );
+          const eyebrow = pageHero.querySelector<HTMLElement>('.site-eyebrow');
+          const heading = pageHero.querySelector<HTMLElement>('h1');
+          const lede = pageHero.querySelector<HTMLElement>('.site-page__lede, .contact-hero__copy > p:last-child');
+          const actions = pageHero.querySelectorAll<HTMLElement>('.site-actions > *');
+          const summary = pageHero.querySelector<HTMLElement>('.site-page__summary, .contact-hero__details');
+
+          if (eyebrow) pageTimeline.from(eyebrow, { autoAlpha: 0, y: 8, duration: 0.28 });
+          if (heading) pageTimeline.from(heading, { autoAlpha: 0, y: 18, duration: 0.5 }, 0.06);
+          if (lede) pageTimeline.from(lede, { autoAlpha: 0, y: 12, duration: 0.36 }, 0.18);
+          if (actions.length) pageTimeline.from(actions, { autoAlpha: 0, y: 8, duration: 0.26, stagger: 0.04 }, 0.26);
+          if (summary) {
+            pageTimeline.from(summary, { autoAlpha: 0, x: desktop ? 18 : 0, y: desktop ? 0 : 12, duration: 0.4 }, 0.16);
+          }
         }
 
         const revealElements = gsap.utils.toArray<HTMLElement>(REVEAL_SELECTOR).filter(
           (element) =>
-            !element.closest('.ledger-hero') &&
+            !element.closest('.care-hero') &&
             !element.closest('.site-page__hero') &&
-            !element.closest('[data-ledger-group]')
+            !element.closest('.contact-hero') &&
+            !element.closest('[data-motion-group]')
         );
 
         revealElements.forEach((element) => {
           gsap.from(element, {
             autoAlpha: 0,
-            y: 18,
+            y: 14,
             duration: 0.38,
             ease: 'power3.out',
             clearProps: 'transform,opacity,visibility',
@@ -114,13 +115,14 @@ export const initPortfolioMotion = (): (() => void) => {
           });
         });
 
-        const groupedEntries = gsap.utils.toArray<HTMLElement>('[data-ledger-group]');
+        const groupedEntries = gsap.utils.toArray<HTMLElement>('[data-motion-group]');
         groupedEntries.forEach((group) => {
           const children = Array.from(group.children).filter((child): child is HTMLElement => child instanceof HTMLElement);
           if (!children.length) return;
+
           gsap.from(children, {
             autoAlpha: 0,
-            y: 16,
+            y: 14,
             duration: 0.36,
             stagger: 0.04,
             ease: 'power3.out',
