@@ -4,34 +4,35 @@ import { professionalFacts } from '../content/professional-facts';
 const selectedExperience = profile.experience.slice(0, 3);
 ---
 
-<section class="ledger-section care-section care-experience" id="experience" aria-labelledby="experience-title">
+<section class="fj-section fj-section--indigo" id="experience" aria-labelledby="experience-title">
   <div class="container">
-    <header class="ledger-section__header ledger-section__header--split care-section__header care-section__header--split" data-motion-reveal>
+    <header class="fj-section__head" data-fj-reveal>
+      <p class="fj-kicker">03 · Practice log</p>
       <div>
-        <p class="ledger-kicker">Selected experience</p>
-        <h2 id="experience-title">Hospital nursing and maternal-health research experience.</h2>
-        <p>A concise view of recent roles. The full chronology, education, licenses, and training are available in the CV.</p>
+        <h2 id="experience-title">A working record, not a wall of job cards.</h2>
+        <p>Recent roles show the continuity between bedside care, maternal-health research, documentation, and follow-up.</p>
       </div>
-      <a class="ledger-link care-link" href={professionalFacts.publicCvPath}>View full CV</a>
     </header>
 
-    <ol class="experience-ledger care-experience__list" data-motion-group>
+    <ol class="fj-log" data-fj-group>
       {selectedExperience.map((item) => (
-        <li class="experience-ledger__entry care-experience__item" data-motion-reveal>
-          <div class="experience-ledger__role care-experience__role">
+        <li class="fj-log__entry" data-fj-reveal>
+          <div class="fj-log__date"><time>{item.period}</time></div>
+          <div class="fj-log__role">
             <p>{item.organization}</p>
             <h3>{item.role}</h3>
             <span>{item.location}</span>
           </div>
-          <div class="experience-ledger__record care-experience__summary">
+          <div class="fj-log__copy">
             <p>{item.bullets[0]}</p>
-            {item.tags && <p class="experience-ledger__terms care-experience__terms">{item.tags.slice(0, 4).join(' · ')}</p>}
-          </div>
-          <div class="experience-ledger__folio care-experience__meta">
-            <time>{item.period}</time>
+            {item.tags && <p class="fj-log__terms">{item.tags.slice(0, 4).join(' · ')}</p>}
           </div>
         </li>
       ))}
     </ol>
+
+    <div style="margin-top: var(--fj-space-5)" data-fj-reveal>
+      <a class="fj-link" style="color: var(--fj-surface)" href={professionalFacts.publicCvPath}>Read the full chronology</a>
+    </div>
   </div>
 </section>
