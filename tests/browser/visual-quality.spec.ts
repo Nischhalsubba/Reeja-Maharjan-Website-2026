@@ -9,7 +9,10 @@ const viewports = [
 ];
 const routes = [
   { name: 'home', path: '/' },
+  { name: 'hire', path: '/hire-reeja/' },
   { name: 'research', path: '/clinical-research/' },
+  { name: 'maternal-health', path: '/maternal-health/' },
+  { name: 'nursing-practice', path: '/nursing-practice/' },
   { name: 'blog', path: '/blog/' },
   { name: 'cv', path: '/cv/' }
 ];
