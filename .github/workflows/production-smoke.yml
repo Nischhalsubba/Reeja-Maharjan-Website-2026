@@ -2,10 +2,8 @@ name: Production Smoke
 
 on:
   workflow_run:
-    workflows:
-      - Build Check
-    types:
-      - completed
+    workflows: [Build Check]
+    types: [completed]
   workflow_dispatch:
     inputs:
       origin:
@@ -53,148 +51,48 @@ jobs:
             echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
             echo "checkout=main" >> "$GITHUB_OUTPUT"
           fi
-
-      - name: Resolve verified release fingerprint
-        id: release
-        if: steps.target.outputs.sha != ''
-        env:
-          GH_TOKEN: ${{ github.token }}
-          BASE_SHA: ${{ steps.target.outputs.sha }}
-          API_ROOT: ${{ github.api_url }}
-          REPOSITORY: ${{ github.repository }}
-        shell: bash
-        run: |
-          EXPECTED_SHA="${BASE_SHA}"
-          MAIN_JSON=$(curl --fail-with-body --silent --show-error \
-            --header "Authorization: Bearer ${GH_TOKEN}" \
-            --header "Accept: application/vnd.github+json" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            "${API_ROOT}/repos/${REPOSITORY}/commits/main")
-          MAIN_SHA=$(jq -r '.sha' <<< "${MAIN_JSON}")
-
-          if [ -n "${MAIN_SHA}" ] && [ "${MAIN_SHA}" != "${BASE_SHA}" ]; then
-            COMPARE_JSON=$(curl --fail-with-body --silent --show-error \
-              --header "Authorization: Bearer ${GH_TOKEN}" \
-              --header "Accept: application/vnd.github+json" \
-              --header "X-GitHub-Api-Version: 2022-11-28" \
-              "${API_ROOT}/repos/${REPOSITORY}/compare/${BASE_SHA}...${MAIN_SHA}")
-            COMPARE_STATUS=$(jq -r '.status' <<< "${COMPARE_JSON}")
-            DISALLOWED_COUNT=$(jq '[.files[]?.filename | select(. != "README.md" and . != ".github/README_AUTOMATION_REPORT.md")] | length' <<< "${COMPARE_JSON}")
-
-            if [ "${COMPARE_STATUS}" = "ahead" ] && [ "${DISALLOWED_COUNT}" -eq 0 ]; then
-              EXPECTED_SHA="${MAIN_SHA}"
-              echo "Using documentation-only descendant ${MAIN_SHA} as the deployed fingerprint."
-            else
-              echo "Main moved beyond ${BASE_SHA} with non-documentation changes; retaining the tested commit as the required fingerprint."
-            fi
-          fi
-
-          echo "sha=${EXPECTED_SHA}" >> "$GITHUB_OUTPUT"
-
-      - name: Mark production smoke pending
-        if: steps.target.outputs.sha != ''
-        env:
-          GH_TOKEN: ${{ github.token }}
-          STATUS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/statuses/${{ steps.target.outputs.sha }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          curl --fail-with-body --silent --show-error \
-            --request POST \
-            --header "Authorization: Bearer ${GH_TOKEN}" \
-            --header "Accept: application/vnd.github+json" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            "${STATUS_URL}" \
-            --data "$(jq -nc --arg state pending --arg target_url "${RUN_URL}" --arg description 'Cloudflare deployment and live browser checks are running.' --arg context 'Production Smoke / live' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
-
       - name: Checkout exact release source
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.target.outputs.checkout }}
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
+          cache-dependency-path: site/package-lock.json
       - name: Install application dependencies
+        working-directory: site
         run: npm ci --no-audit --no-fund
-
       - name: Verify deployed domain and commit
         id: smoke_check
+        working-directory: site
         env:
           SITE_ORIGIN: ${{ steps.target.outputs.origin }}
-          EXPECTED_COMMIT: ${{ steps.release.outputs.sha || steps.target.outputs.sha }}
+          EXPECTED_COMMIT: ${{ steps.target.outputs.sha }}
           SMOKE_ATTEMPTS: '40'
           SMOKE_DELAY_MS: '30000'
           PRODUCTION_REPORT: production-smoke-report.json
         run: node scripts/smoke-production.mjs
-
       - name: Install browser test runner
         if: steps.smoke_check.outcome == 'success'
+        working-directory: site
         run: |
           npm install --no-save --no-package-lock @playwright/test@1.62.1
           npx playwright install --with-deps chromium
-
       - name: Run live browser quality suite
         if: steps.smoke_check.outcome == 'success'
-        id: browser_check
+        working-directory: site
         env:
           BROWSER_TEST_ORIGIN: ${{ steps.target.outputs.origin }}
         run: npx playwright test tests/browser --reporter=line
-
-      - name: Write release summary
-        if: always()
-        shell: bash
-        run: |
-          {
-            echo "## Cloudflare production verification"
-            echo ""
-            echo "- Origin: \`${{ steps.target.outputs.origin }}\`"
-            echo "- Tested code commit: \`${{ steps.target.outputs.sha || 'not specified' }}\`"
-            echo "- Accepted deployed fingerprint: \`${{ steps.release.outputs.sha || steps.target.outputs.sha || 'not specified' }}\`"
-            echo "- Smoke result: \`${{ steps.smoke_check.outcome }}\`"
-            echo "- Browser result: \`${{ steps.browser_check.outcome || 'not run' }}\`"
-          } >> "$GITHUB_STEP_SUMMARY"
-
       - name: Upload production evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cloudflare-production-evidence-${{ steps.target.outputs.sha || github.run_id }}
           path: |
-            production-smoke-report.json
-            test-results/
+            site/production-smoke-report.json
+            site/test-results/
           if-no-files-found: warn
           retention-days: 30
-
-      - name: Publish production smoke status
-        if: always() && steps.target.outputs.sha != ''
-        env:
-          GH_TOKEN: ${{ github.token }}
-          JOB_STATUS: ${{ job.status }}
-          STATUS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/statuses/${{ steps.target.outputs.sha }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          case "${JOB_STATUS}" in
-            success)
-              STATE=success
-              DESCRIPTION='Cloudflare deployment and live browser checks passed.'
-              ;;
-            cancelled)
-              STATE=error
-              DESCRIPTION='Production smoke verification was cancelled.'
-              ;;
-            *)
-              STATE=failure
-              DESCRIPTION='Production smoke verification failed. Open the run for diagnostics.'
-              ;;
-          esac
-
-          curl --fail-with-body --silent --show-error \
-            --request POST \
-            --header "Authorization: Bearer ${GH_TOKEN}" \
-            --header "Accept: application/vnd.github+json" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            "${STATUS_URL}" \
-            --data "$(jq -nc --arg state "${STATE}" --arg target_url "${RUN_URL}" --arg description "${DESCRIPTION}" --arg context 'Production Smoke / live' '{state:$state,target_url:$target_url,description:$description,context:$context}')"

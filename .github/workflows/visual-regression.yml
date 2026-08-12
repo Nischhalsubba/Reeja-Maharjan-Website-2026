@@ -3,8 +3,7 @@ name: Visual Regression
 on:
   pull_request:
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   compare-main:
@@ -16,70 +15,63 @@ jobs:
         with:
           ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.base.sha || github.event.before }}
           path: baseline
-
       - name: Checkout candidate
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
           path: candidate
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: npm
-          cache-dependency-path: |
-            baseline/package-lock.json
-            candidate/package-lock.json
-
+      - name: Resolve project roots
+        id: roots
+        shell: bash
+        run: |
+          if [ -f baseline/site/package.json ]; then BASE=baseline/site; else BASE=baseline; fi
+          if [ -f candidate/site/package.json ]; then CAND=candidate/site; else CAND=candidate; fi
+          echo "baseline=${BASE}" >> "$GITHUB_OUTPUT"
+          echo "candidate=${CAND}" >> "$GITHUB_OUTPUT"
       - name: Install baseline dependencies
-        working-directory: baseline
+        working-directory: ${{ steps.roots.outputs.baseline }}
         run: npm ci --no-audit --no-fund
-
       - name: Install candidate dependencies and browser
-        working-directory: candidate
+        working-directory: ${{ steps.roots.outputs.candidate }}
         run: |
           npm ci --no-audit --no-fund
           npm install --no-save --no-package-lock @playwright/test
           npx playwright install --with-deps chromium
-
       - name: Build baseline and candidate
+        shell: bash
         run: |
-          npm --prefix baseline run build
-          npm --prefix candidate run build
-
+          npm --prefix "${{ steps.roots.outputs.baseline }}" run build
+          npm --prefix "${{ steps.roots.outputs.candidate }}" run build
       - name: Start preview servers
+        shell: bash
         run: |
-          npm --prefix baseline run preview -- --host 127.0.0.1 --port 4321 > baseline-preview.log 2>&1 &
-          echo $! > baseline-preview.pid
-          npm --prefix candidate run preview -- --host 127.0.0.1 --port 4322 > candidate-preview.log 2>&1 &
-          echo $! > candidate-preview.pid
+          npm --prefix "${{ steps.roots.outputs.baseline }}" run preview -- --host 127.0.0.1 --port 4321 > baseline-preview.log 2>&1 &
+          npm --prefix "${{ steps.roots.outputs.candidate }}" run preview -- --host 127.0.0.1 --port 4322 > candidate-preview.log 2>&1 &
           for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4321/ > /dev/null && curl --fail --silent http://127.0.0.1:4322/ > /dev/null; then
-              exit 0
-            fi
+            if curl --fail --silent http://127.0.0.1:4321/ > /dev/null && curl --fail --silent http://127.0.0.1:4322/ > /dev/null; then exit 0; fi
             sleep 1
           done
           cat baseline-preview.log
           cat candidate-preview.log
           exit 1
-
       - name: Compare priority page screenshots
-        working-directory: candidate
+        working-directory: ${{ steps.roots.outputs.candidate }}
         env:
           BASELINE_ORIGIN: http://127.0.0.1:4321
           CANDIDATE_ORIGIN: http://127.0.0.1:4322
         run: node tests/visual/compare-main.mjs
-
       - name: Upload visual evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: visual-regression-evidence
-          path: candidate/test-results/visual-regression
+          path: ${{ steps.roots.outputs.candidate }}/test-results/visual-regression
           if-no-files-found: error
           retention-days: 14
-
       - name: Upload preview logs on failure
         if: failure()
         uses: actions/upload-artifact@v4

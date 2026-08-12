@@ -14,15 +14,16 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: site
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
       - name: Audit Cloudflare routing configuration
         id: audit
         continue-on-error: true
@@ -34,18 +35,14 @@ jobs:
           CLOUDFLARE_PAGES_PROJECT: reeja-maharjan-website-2026
           CLOUDFLARE_AUDIT_REPORT: cloudflare-account-audit.json
         run: node scripts/audit-cloudflare-account.mjs
-
       - name: Upload account audit evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: cloudflare-account-audit
-          path: cloudflare-account-audit.json
+          path: site/cloudflare-account-audit.json
           if-no-files-found: warn
           retention-days: 30
-
       - name: Fail when routing conflicts remain
         if: steps.audit.outcome != 'success'
-        run: |
-          echo 'Cloudflare account routing is not ready. Review the uploaded audit report.'
-          exit 1
+        run: exit 1

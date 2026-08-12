@@ -2,13 +2,12 @@ name: Browser Quality
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
   workflow_dispatch:
     inputs:
       origin:
-        description: Optional deployed origin, such as a Cloudflare Pages preview URL
+        description: Optional deployed origin
         required: false
         type: string
 
@@ -24,95 +23,43 @@ jobs:
   browser:
     runs-on: ubuntu-latest
     timeout-minutes: 22
+    defaults:
+      run:
+        working-directory: site
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Mark browser quality pending
-        env:
-          GH_TOKEN: ${{ github.token }}
-          STATUS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/statuses/${{ github.sha }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          curl --fail-with-body --silent --show-error \
-            --request POST \
-            --header "Authorization: Bearer ${GH_TOKEN}" \
-            --header "Accept: application/vnd.github+json" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            "${STATUS_URL}" \
-            --data "$(jq -nc --arg state pending --arg target_url "${RUN_URL}" --arg description 'Responsive browser and screenshot checks are running.' --arg context 'Browser Quality / visual' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
-
+          cache-dependency-path: site/package-lock.json
       - name: Install application dependencies
         run: npm ci --no-audit --no-fund
-
       - name: Install browser test runner
         run: |
           npm install --no-save --no-package-lock @playwright/test@1.62.1
           npx playwright install --with-deps chromium
-
       - name: Build site
         run: npm run build
-
       - name: Start preview server
         run: |
           npm run preview -- --host 127.0.0.1 --port 4321 > preview.log 2>&1 &
-          echo $! > preview.pid
-          for attempt in {1..30}; do
-            curl --fail --silent http://127.0.0.1:4321/ > /dev/null && exit 0
-            sleep 1
-          done
+          for attempt in {1..30}; do curl --fail --silent http://127.0.0.1:4321/ > /dev/null && exit 0; sleep 1; done
           cat preview.log
           exit 1
-
       - name: Run browser quality checks
         env:
           BROWSER_TEST_ORIGIN: ${{ inputs.origin || 'http://127.0.0.1:4321' }}
         run: npx playwright test tests/browser --reporter=line
-
       - name: Upload browser evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: browser-quality-evidence-${{ github.sha }}
           path: |
-            preview.log
-            test-results/
+            site/preview.log
+            site/test-results/
           if-no-files-found: warn
           retention-days: 30
-
-      - name: Publish browser quality status
-        if: always()
-        env:
-          GH_TOKEN: ${{ github.token }}
-          JOB_STATUS: ${{ job.status }}
-          STATUS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/statuses/${{ github.sha }}
-          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
-        run: |
-          case "${JOB_STATUS}" in
-            success)
-              STATE=success
-              DESCRIPTION='Responsive browser and screenshot checks passed.'
-              ;;
-            cancelled)
-              STATE=error
-              DESCRIPTION='Browser quality verification was cancelled.'
-              ;;
-            *)
-              STATE=failure
-              DESCRIPTION='Browser quality verification failed. Open the run for diagnostics.'
-              ;;
-          esac
-
-          curl --fail-with-body --silent --show-error \
-            --request POST \
-            --header "Authorization: Bearer ${GH_TOKEN}" \
-            --header "Accept: application/vnd.github+json" \
-            --header "X-GitHub-Api-Version: 2022-11-28" \
-            "${STATUS_URL}" \
-            --data "$(jq -nc --arg state "${STATE}" --arg target_url "${RUN_URL}" --arg description "${DESCRIPTION}" --arg context 'Browser Quality / visual' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
