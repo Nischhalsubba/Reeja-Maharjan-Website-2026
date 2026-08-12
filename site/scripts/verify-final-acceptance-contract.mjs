@@ -1,18 +1,29 @@
+/*
+ * Verifies the final acceptance contract for the portfolio workspace.
+ * Project files are read from site/, while GitHub workflow definitions remain
+ * at the repository-level .github directory required by GitHub Actions.
+ */
 import { readFile } from 'node:fs/promises';
 import process from 'node:process';
 
 const failures = [];
 
-async function read(relativePath) {
+/** Reads one file relative to the site workspace. */
+async function readProject(relativePath) {
   return readFile(new URL(`../${relativePath}`, import.meta.url), 'utf8');
 }
 
+/** Reads one repository-level file outside the site workspace. */
+async function readRepository(relativePath) {
+  return readFile(new URL(`../../${relativePath}`, import.meta.url), 'utf8');
+}
+
 const [header, mobileTest, accountAudit, accountWorkflow, evidence] = await Promise.all([
-  read('src/components/Header.astro'),
-  read('tests/browser/mobile-navigation.spec.mjs'),
-  read('scripts/audit-cloudflare-account.mjs'),
-  read('.github/workflows/cloudflare-account-audit.yml'),
-  read('docs/FINAL_ACCEPTANCE_EVIDENCE.md')
+  readProject('src/components/Header.astro'),
+  readProject('tests/browser/mobile-navigation.spec.mjs'),
+  readProject('scripts/audit-cloudflare-account.mjs'),
+  readRepository('.github/workflows/cloudflare-account-audit.yml'),
+  readProject('docs/FINAL_ACCEPTANCE_EVIDENCE.md')
 ]);
 
 const contracts = [
