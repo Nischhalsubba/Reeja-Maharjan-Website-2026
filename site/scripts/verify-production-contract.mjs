@@ -1,3 +1,7 @@
+/*
+ * Verifies the production release contract from the site workspace while
+ * reading GitHub workflow definitions from the repository-level .github folder.
+ */
 import { readFile } from 'node:fs/promises';
 import {
   forbiddenHomepageText,
@@ -11,6 +15,7 @@ import {
 
 const failures = [];
 
+/** Validates that a contract collection contains unique non-empty strings. */
 function requireUniqueNonEmptyStrings(name, values) {
   if (!Array.isArray(values) || values.length === 0) {
     failures.push(`${name} must be a non-empty array.`);
@@ -56,7 +61,10 @@ for (const header of [
   if (!requiredSecurityHeaders[header]) failures.push(`Security contract is missing ${header}.`);
 }
 
-const workflow = await readFile(new URL('../.github/workflows/production-smoke.yml', import.meta.url), 'utf8');
+const workflow = await readFile(
+  new URL('../../.github/workflows/production-smoke.yml', import.meta.url),
+  'utf8',
+);
 for (const fragment of [
   'workflow_run:',
   'github.event.workflow_run.head_sha',
