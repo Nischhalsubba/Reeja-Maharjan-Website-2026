@@ -34,27 +34,41 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 35
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Resolve deployed origin and expected commit
         id: target
         shell: bash
         run: |
+          set -euo pipefail
+
           if [ "${{ github.event_name }}" = "workflow_run" ]; then
-            echo "origin=https://reejamaharjan.com.np" >> "$GITHUB_OUTPUT"
-            echo "sha=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
-            echo "checkout=${{ github.event.workflow_run.head_sha }}" >> "$GITHUB_OUTPUT"
+            origin="https://reejamaharjan.com.np"
+            sha="${{ github.event.workflow_run.head_sha }}"
+            checkout="$sha"
           elif [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "origin=${{ inputs.origin }}" >> "$GITHUB_OUTPUT"
-            echo "sha=${{ inputs.expected_commit }}" >> "$GITHUB_OUTPUT"
-            echo "checkout=main" >> "$GITHUB_OUTPUT"
+            origin="${{ inputs.origin }}"
+            sha="${{ inputs.expected_commit }}"
+            checkout="main"
           else
-            echo "origin=https://reejamaharjan.com.np" >> "$GITHUB_OUTPUT"
-            echo "sha=${{ github.sha }}" >> "$GITHUB_OUTPUT"
-            echo "checkout=main" >> "$GITHUB_OUTPUT"
+            origin="https://reejamaharjan.com.np"
+            checkout="main"
+            sha="$(git log -1 --format=%H -- site)"
           fi
+
+          echo "origin=$origin" >> "$GITHUB_OUTPUT"
+          echo "sha=$sha" >> "$GITHUB_OUTPUT"
+          echo "checkout=$checkout" >> "$GITHUB_OUTPUT"
+
       - name: Checkout exact release source
+        if: steps.target.outputs.checkout != 'main'
         uses: actions/checkout@v4
         with:
           ref: ${{ steps.target.outputs.checkout }}
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
