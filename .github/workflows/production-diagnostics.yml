@@ -25,7 +25,6 @@ jobs:
         with:
           node-version: 22
       - name: Run production diagnostics
-        continue-on-error: true
         env:
           SITE_ORIGIN: https://reejamaharjan.com.np
           PAGES_ORIGIN: ${{ inputs.pages_origin }}
@@ -33,6 +32,7 @@ jobs:
           DIAGNOSTICS_REPORT: production-diagnostics.json
         run: node scripts/diagnose-production.mjs
       - name: Upload diagnostics report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: production-diagnostics
