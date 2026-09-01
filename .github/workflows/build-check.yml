@@ -85,7 +85,7 @@ jobs:
             echo "available=true" >> "$GITHUB_OUTPUT"
           else
             echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::Cloudflare deployment skipped because deploy credentials are not configured."
+            echo "::error::Production deployment requires CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID."\n            exit 1
           fi
       - name: Deploy verified main build to Cloudflare Pages
         if: steps.cloudflare.outputs.available == 'true'
