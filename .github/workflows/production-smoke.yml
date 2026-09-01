@@ -56,7 +56,7 @@ jobs:
           else
             origin="https://reejamaharjan.com.np"
             checkout="main"
-            sha="$(git log -1 --format=%H -- site)"
+            sha="${{ github.sha }}"
           fi
 
           echo "origin=$origin" >> "$GITHUB_OUTPUT"
