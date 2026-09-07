@@ -52,10 +52,12 @@ for (const [header, fragments] of Object.entries(requiredSecurityHeaders)) {
   requireUniqueNonEmptyStrings(`requiredSecurityHeaders.${header}`, fragments);
 }
 for (const header of [
+  'strict-transport-security',
   'content-security-policy',
   'x-content-type-options',
   'referrer-policy',
   'x-frame-options',
+  'x-permitted-cross-domain-policies',
   'permissions-policy'
 ]) {
   if (!requiredSecurityHeaders[header]) failures.push(`Security contract is missing ${header}.`);

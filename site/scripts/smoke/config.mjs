@@ -77,15 +77,19 @@ export const retiredPaths = [
 ];
 
 export const requiredSecurityHeaders = {
+  'strict-transport-security': ['max-age=31536000'],
   'content-security-policy': [
     "default-src 'self'",
+    "object-src 'none'",
     "frame-ancestors 'none'",
     "base-uri 'self'",
+    'upgrade-insecure-requests',
     'https://formsubmit.co',
     'https://www.googletagmanager.com'
   ],
   'x-content-type-options': ['nosniff'],
   'referrer-policy': ['strict-origin-when-cross-origin'],
   'x-frame-options': ['DENY'],
+  'x-permitted-cross-domain-policies': ['none'],
   'permissions-policy': ['camera=()', 'microphone=()', 'geolocation=()', 'payment=()']
 };

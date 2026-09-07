@@ -23,7 +23,15 @@ const { hero } = Astro.props;
       </div>
     </div>
     <div class="hero__media" data-reveal>
-      <img src={hero.portrait.src} alt={hero.portrait.alt} width="720" height="860" loading="eager" />
+      <img
+        src={hero.portrait.src}
+        alt={hero.portrait.alt}
+        width="720"
+        height="860"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
       <ul class="hero-meta">
         {hero.meta.map((item) => (
           <li>
