@@ -1,0 +1,33 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /site
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 8
+    groups:
+      astro-tooling:
+        patterns:
+          - "astro"
+          - "@astrojs/*"
+      browser-motion:
+        patterns:
+          - "@formkit/*"
+          - "@mojs/*"
+          - "@react-spring/*"
+          - "@rive-app/*"
+          - "animejs"
+          - "gsap"
+          - "lenis"
+          - "lottie-web"
+          - "motion"
+          - "popmotion"
+          - "split-type"
+          - "three"
+          - "velocity-animate"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 8
