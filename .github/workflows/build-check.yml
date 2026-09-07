@@ -23,7 +23,7 @@ jobs:
         working-directory: site
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Mark build check pending
         env:
           GH_TOKEN: ${{ github.token }}
@@ -32,7 +32,7 @@ jobs:
         run: |
           curl --fail-with-body --silent --show-error --request POST --header "Authorization: Bearer ${GH_TOKEN}" --header "Accept: application/vnd.github+json" --header "X-GitHub-Api-Version: 2022-11-28" "${STATUS_URL}" --data "$(jq -nc --arg state pending --arg target_url "${RUN_URL}" --arg description 'Full repository verification is running.' --arg context 'Build Check / verify' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: 22
           cache: npm
@@ -63,7 +63,7 @@ jobs:
           npm run check 2>&1 | tee typecheck.log
       - name: Upload type-check diagnostics
         if: failure() && steps.typecheck.outcome == 'failure'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: typecheck-diagnostics
           path: site/typecheck.log
@@ -89,7 +89,7 @@ jobs:
           fi
       - name: Deploy verified main build to Cloudflare Pages
         if: steps.cloudflare.outputs.available == 'true'
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
