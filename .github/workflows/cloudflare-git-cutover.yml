@@ -156,7 +156,7 @@ jobs:
                     preview_deployment_setting:"all",
                     pr_comments_enabled:true,
                     path_excludes:[],
-                    path_includes:[],
+                    path_includes:["*"],
                     preview_branch_excludes:[],
                     preview_branch_includes:[]
                   }
