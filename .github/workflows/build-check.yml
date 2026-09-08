@@ -8,7 +8,6 @@ on:
 permissions:
   contents: read
   statuses: write
-  deployments: write
 
 concurrency:
   group: build-check-${{ github.ref }}
@@ -73,41 +72,17 @@ jobs:
         run: npm run lint
       - name: Build
         run: npm run build
-      - name: Detect Cloudflare deploy credentials
-        id: cloudflare
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        shell: bash
-        run: |
-          if [ -n "${CLOUDFLARE_API_TOKEN}" ] && [ -n "${CLOUDFLARE_ACCOUNT_ID}" ]; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "::error::Production deployment requires CLOUDFLARE_API_TOKEN and CLOUDFLARE_ACCOUNT_ID."
-            exit 1
-          fi
-      - name: Deploy verified main build to Cloudflare Pages
-        if: steps.cloudflare.outputs.available == 'true'
-        uses: cloudflare/wrangler-action@9acf94ace14e7dc412b076f2c5c20b8ce93c79cd # v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy site/dist --project-name=reeja-maharjan-website-2026 --branch=main --commit-hash=${{ github.sha }} --commit-message="Care Ledger release ${{ github.sha }}"
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish build check status
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
           JOB_STATUS: ${{ job.status }}
-          DEPLOY_AVAILABLE: ${{ steps.cloudflare.outputs.available }}
           STATUS_URL: ${{ github.api_url }}/repos/${{ github.repository }}/statuses/${{ github.sha }}
           RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           case "${JOB_STATUS}" in
-            success) STATE=success; DESCRIPTION='Verification and build passed.' ;;
-            cancelled) STATE=error; DESCRIPTION='Repository verification or deployment was cancelled.' ;;
-            *) STATE=failure; DESCRIPTION='Verification, build, or configured deployment failed.' ;;
+            success) STATE=success; DESCRIPTION='Verification and build passed; production verification follows.' ;;
+            cancelled) STATE=error; DESCRIPTION='Repository verification was cancelled.' ;;
+            *) STATE=failure; DESCRIPTION='Repository verification or build failed.' ;;
           esac
           curl --fail-with-body --silent --show-error --request POST --header "Authorization: Bearer ${GH_TOKEN}" --header "Accept: application/vnd.github+json" --header "X-GitHub-Api-Version: 2022-11-28" "${STATUS_URL}" --data "$(jq -nc --arg state "${STATE}" --arg target_url "${RUN_URL}" --arg description "${DESCRIPTION}" --arg context 'Build Check / verify' '{state:$state,target_url:$target_url,description:$description,context:$context}')"

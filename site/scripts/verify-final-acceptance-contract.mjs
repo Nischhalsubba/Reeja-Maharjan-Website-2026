@@ -18,11 +18,11 @@ async function readRepository(relativePath) {
   return readFile(new URL(`../../${relativePath}`, import.meta.url), 'utf8');
 }
 
-const [header, mobileTest, accountAudit, accountWorkflow, evidence] = await Promise.all([
+const [header, mobileTest, buildCheck, productionSmoke, evidence] = await Promise.all([
   readProject('src/components/Header.astro'),
   readProject('tests/browser/mobile-navigation.spec.mjs'),
-  readProject('scripts/audit-cloudflare-account.mjs'),
-  readRepository('.github/workflows/cloudflare-account-audit.yml'),
+  readRepository('.github/workflows/build-check.yml'),
+  readRepository('.github/workflows/production-smoke.yml'),
   readProject('docs/FINAL_ACCEPTANCE_EVIDENCE.md')
 ]);
 
@@ -33,12 +33,13 @@ const contracts = [
   [header, 'aria-haspopup="dialog"', 'Menu trigger must announce that it opens a dialog.'],
   [mobileTest, "getByRole('dialog', { name: 'Mobile navigation', exact: true })", 'Browser coverage must query the accessible dialog with an exact name.'],
   [mobileTest, "toHaveAttribute('aria-modal', 'true')", 'Browser coverage must verify modal semantics.'],
-  [accountAudit, 'CLOUDFLARE_API_TOKEN', 'Cloudflare account audit must require scoped credentials.'],
-  [accountAudit, '/workers/routes', 'Cloudflare account audit must inspect Worker routes.'],
-  [accountAudit, '/dns_records?', 'Cloudflare account audit must inspect DNS records.'],
-  [accountAudit, '/pages/projects/', 'Cloudflare account audit must inspect the Pages project.'],
-  [accountWorkflow, '${{ secrets.CLOUDFLARE_API_TOKEN }}', 'Workflow must read the API token from GitHub Secrets.'],
-  [accountWorkflow, 'retention-days: 30', 'Account audit evidence must be retained for 30 days.'],
+  [buildCheck, 'npm run verify:final-acceptance', 'Build Check must enforce the final acceptance contract.'],
+  [buildCheck, "DESCRIPTION='Verification and build passed; production verification follows.'", 'Build Check must hand production acceptance to the production verifier.'],
+  [productionSmoke, 'workflows: [Build Check]', 'Production Smoke must follow a successful Build Check.'],
+  [productionSmoke, 'https://reejamaharjan.com.np', 'Production Smoke must target the canonical domain by default.'],
+  [productionSmoke, 'EXPECTED_COMMIT:', 'Production Smoke must verify the deployed commit fingerprint.'],
+  [productionSmoke, 'BROWSER_TEST_ORIGIN:', 'Production Smoke must run the live browser suite against production.'],
+  [productionSmoke, 'retention-days: 30', 'Production smoke evidence must be retained for 30 days.'],
   [evidence, '## RW-3: Cloudflare production integrity', 'Evidence record must cover RW-3.'],
   [evidence, '## RW-4: professional facts approval', 'Evidence record must cover RW-4.'],
   [evidence, '## RW-11: live screen-reader review', 'Evidence record must cover RW-11.'],
@@ -50,8 +51,14 @@ for (const [source, fragment, message] of contracts) {
   if (!source.includes(fragment)) failures.push(message);
 }
 
-if (accountAudit.includes('console.log(token)') || accountAudit.includes('authorization: token')) {
-  failures.push('Cloudflare audit must not expose its API token.');
+for (const obsoleteSecret of ['CLOUDFLARE_API_TOKEN', 'CLOUDFLARE_ACCOUNT_ID']) {
+  if (buildCheck.includes(obsoleteSecret)) {
+    failures.push(`Build Check must not depend on the obsolete ${obsoleteSecret} GitHub secret.`);
+  }
+}
+
+if (buildCheck.includes('cloudflare/wrangler-action@')) {
+  failures.push('Build Check must not perform a second direct-upload deployment outside Cloudflare Git integration.');
 }
 
 if (failures.length) {
