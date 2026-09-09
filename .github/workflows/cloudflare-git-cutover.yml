@@ -1,8 +1,7 @@
 name: Cloudflare Git Cutover
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -63,7 +62,7 @@ jobs:
 
       - name: Upload cutover evidence
         if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        uses: actions/upload-artifact@ea165f8d65b5e75b540449e92b4886f43607fa02 # v4
         with:
           name: cloudflare-git-cutover-evidence
           path: |
