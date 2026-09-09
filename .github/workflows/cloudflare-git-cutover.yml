@@ -47,11 +47,13 @@ jobs:
             "${STATUS_URL}" \
             --data "$(jq -nc --arg state pending --arg target_url "${RUN_URL}" --arg description 'Cloudflare Git-native production cutover is running.' --arg context 'Cloudflare Cutover' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
 
-      - name: Authorize Cloudflare and perform rollback-safe Git cutover
+      - name: Perform rollback-safe Cloudflare Git cutover
         id: cutover
         continue-on-error: true
         env:
           GH_TOKEN: ${{ github.token }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           OLD_PROJECT: reeja-maharjan-website-2026
           NEW_PROJECT: reeja-maharjan-website-2026-git
           REPO_OWNER: Nischhalsubba
