@@ -7,6 +7,8 @@ set -euo pipefail
 : "${GITHUB_SHA:?GITHUB_SHA is required}"
 : "${GITHUB_SERVER_URL:?GITHUB_SERVER_URL is required}"
 : "${GITHUB_RUN_ID:?GITHUB_RUN_ID is required}"
+: "${CLOUDFLARE_API_TOKEN:?CLOUDFLARE_API_TOKEN GitHub secret is required}"
+: "${CLOUDFLARE_ACCOUNT_ID:?CLOUDFLARE_ACCOUNT_ID GitHub secret is required}"
 : "${OLD_PROJECT:?OLD_PROJECT is required}"
 : "${NEW_PROJECT:?NEW_PROJECT is required}"
 : "${REPO_OWNER:?REPO_OWNER is required}"
@@ -17,6 +19,9 @@ set -euo pipefail
 
 RUN_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
 STATUS_URL="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}"
+CF_TOKEN="$CLOUDFLARE_API_TOKEN"
+ACCOUNT_ID="$CLOUDFLARE_ACCOUNT_ID"
+echo "::add-mask::${CF_TOKEN}"
 
 publish_status() {
   local state="$1"
@@ -36,10 +41,6 @@ publish_status() {
       --arg context "$context" \
       '{state:$state,target_url:$target_url,description:$description,context:$context}')" \
     >/dev/null
-}
-
-wrangler_cmd() {
-  npx --yes wrangler@4.119.0 "$@"
 }
 
 cf_call() {
@@ -70,78 +71,14 @@ api_errors() {
   jq -c '[.errors[]? | {code,message}]'
 }
 
-extract_device_code() {
-  node - "$1" <<'NODE'
-const fs = require('fs');
-const file = process.argv[2];
-let text = '';
-try { text = fs.readFileSync(file, 'utf8'); } catch { process.exit(0); }
-const clean = text.replace(/\x1b\[[0-?]*[ -/]*[@-~]/g, '');
-const match = clean.match(/and enter the code:\s+([A-Za-z0-9-]+)/i);
-if (match) process.stdout.write(match[1]);
-NODE
-}
-
-echo 'Starting Cloudflare OAuth device authorization.'
-DEVICE_LOG="$(mktemp)"
-wrangler_cmd login --device --browser=false > >(tee "$DEVICE_LOG") 2>&1 &
-LOGIN_PID=$!
-
-DEVICE_CODE=''
-for attempt in $(seq 1 90); do
-  DEVICE_CODE="$(extract_device_code "$DEVICE_LOG")"
-  if [ -n "$DEVICE_CODE" ]; then
-    break
-  fi
-  if ! kill -0 "$LOGIN_PID" 2>/dev/null; then
-    break
-  fi
-  sleep 1
-done
-
-if [ -z "$DEVICE_CODE" ]; then
-  wait "$LOGIN_PID" || true
-  echo 'Wrangler did not emit a Cloudflare device authorization code.'
+echo 'Validating one-time Cloudflare API credentials.'
+OLD_INFO="$(cf_call GET "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/pages/projects/${OLD_PROJECT}")"
+if ! printf '%s' "$OLD_INFO" | api_success; then
+  echo "Unable to access Cloudflare Pages project ${OLD_PROJECT} with the supplied account ID/token."
+  printf '%s' "$OLD_INFO" | api_errors
   exit 1
 fi
-
-DEVICE_URL="https://dash.cloudflare.com/oauth2/device?user_code=${DEVICE_CODE}"
-publish_status pending "$DEVICE_URL" "Approve Cloudflare code ${DEVICE_CODE} within 5 minutes." 'Cloudflare Device Authorization'
-echo "CLOUDFLARE_DEVICE_CODE=${DEVICE_CODE}"
-echo "CLOUDFLARE_DEVICE_URL=${DEVICE_URL}"
-
-if ! wait "$LOGIN_PID"; then
-  publish_status failure "$RUN_URL" 'Cloudflare device authorization was not completed.' 'Cloudflare Device Authorization'
-  exit 1
-fi
-publish_status success "$RUN_URL" 'Cloudflare device authorization approved.' 'Cloudflare Device Authorization'
-
-AUTH_JSON="$(wrangler_cmd auth token --json)"
-CF_TOKEN="$(printf '%s' "$AUTH_JSON" | node -e "let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const v=JSON.parse(s);if(!v.token)process.exit(1);process.stdout.write(v.token)})")"
-unset AUTH_JSON
-echo "::add-mask::${CF_TOKEN}"
-
-ACCOUNTS="$(cf_call GET 'https://api.cloudflare.com/client/v4/accounts')"
-if ! printf '%s' "$ACCOUNTS" | api_success; then
-  echo 'Unable to enumerate Cloudflare accounts.'
-  printf '%s' "$ACCOUNTS" | api_errors
-  exit 1
-fi
-
-ACCOUNT_ID=''
-while IFS= read -r candidate; do
-  [ -n "$candidate" ] || continue
-  probe="$(cf_call GET "https://api.cloudflare.com/client/v4/accounts/${candidate}/pages/projects/${OLD_PROJECT}")"
-  if printf '%s' "$probe" | api_success; then
-    ACCOUNT_ID="$candidate"
-    break
-  fi
-done < <(printf '%s' "$ACCOUNTS" | jq -r '.result[].id')
-
-if [ -z "$ACCOUNT_ID" ]; then
-  echo "Cloudflare Pages project ${OLD_PROJECT} was not found in the authorized accounts."
-  exit 1
-fi
+publish_status pending "$RUN_URL" 'Cloudflare credentials accepted; preparing Git Pages project.' 'Cloudflare Cutover'
 
 NEW_INFO="$(cf_call GET "https://api.cloudflare.com/client/v4/accounts/${ACCOUNT_ID}/pages/projects/${NEW_PROJECT}")"
 if printf '%s' "$NEW_INFO" | api_success; then
@@ -202,7 +139,7 @@ fi
 [ -n "$SUBDOMAIN" ] || { echo 'New Pages project did not return a pages.dev subdomain.'; exit 1; }
 
 echo "CLOUDFLARE_PROJECT_READY project=${NEW_PROJECT} origin=https://${SUBDOMAIN}"
-publish_status pending "$RUN_URL" "Cloudflare Git project ready; waiting for finalization commit." 'Cloudflare Cutover'
+publish_status pending "$RUN_URL" 'Cloudflare Git project ready; waiting for finalization commit.' 'Cloudflare Cutover'
 echo 'Waiting for the repository cleanup commit that removes the one-time cutover workflow and script.'
 
 TARGET_SHA=''
