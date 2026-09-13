@@ -58,7 +58,7 @@
     "velocity-animate": "^1.5.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.6",
+    "@astrojs/check": "^0.9.10",
     "@types/react-transition-group": "^4.4.12",
     "@types/three": "^0.183.0",
     "@types/velocity-animate": "^1.2.33",
