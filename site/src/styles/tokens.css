@@ -1,7 +1,19 @@
 :root {
-  /* Typography: clinical editorial system using local, privacy-safe fallbacks. */
-  --font-display: Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: Aptos, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Care is Personal v3: canonical identity. Legacy pages use semantic aliases below. */
+  --brand-blue: #3454f5;
+  --brand-blue-hover: #223fda;
+  --brand-lavender: #eef0ff;
+  --brand-ink: #10182f;
+  --brand-canvas: #f8f9fd;
+  --brand-coral: #ef7866; /* Large ornament and icon accents only. */
+  --brand-coral-ink: #a73e34; /* 6+:1 contrast on white for small labels. */
+  --brand-muted: #53617c;
+  --brand-line: #dce2ef;
+  --brand-focus: #ffb69b;
+
+  /* Primary UI typography, loaded locally with @fontsource. */
+  --font-display: "Public Sans", system-ui, sans-serif;
+  --font-sans: "Public Sans", system-ui, sans-serif;
   --w-regular: 400;
   --w-medium: 500;
   --w-semibold: 600;
@@ -25,24 +37,24 @@
   --reading-max: 45rem;
 
   /* Clinical editorial palette. Color supports hierarchy, never invented meaning. */
-  --bg: #f6f7f3;
+  --bg: #f8f9fd;
   --surface: #ffffff;
-  --surface-alt: #ecefe9;
-  --surface-strong: #dfeae5;
-  --text: #17211d;
-  --muted: #58625d;
-  --muted-strong: #3d4742;
-  --line: #cfd6d1;
-  --line-strong: #aebbb4;
-  --accent: #1f5b4f;
+  --surface-alt: #eef0ff;
+  --surface-strong: #e3e8ff;
+  --text: #10182f;
+  --muted: #53617c;
+  --muted-strong: #354464;
+  --line: #dce2ef;
+  --line-strong: #aeb9d3;
+  --accent: var(--brand-blue);
   --accent-text: #ffffff;
-  --accent-hover: #123d35;
-  --accent-soft: #dfeae5;
-  --signal: #a44b34;
-  --placeholder: #707a75;
-  --success: #1f5b4f;
-  --warning: #815b16;
-  --danger: #a13f35;
+  --accent-hover: var(--brand-blue-hover);
+  --accent-soft: var(--brand-lavender);
+  --signal: var(--brand-coral-ink);
+  --placeholder: #64708a;
+  --success: #206049;
+  --warning: #7d5418;
+  --danger: #a03535;
 
   /* Compatibility aliases retained while page modules are consolidated. */
   --clinical-blue: var(--accent);
@@ -93,7 +105,7 @@
   --stagger: 40ms;
 
   /* Focus. */
-  --focus-ring: 0 0 0 3px rgba(31, 91, 79, 0.28);
+  --focus-ring: 0 0 0 3px rgba(52, 84, 245, 0.24);
 
   /* Compatibility aliases used by existing components. */
   --h1: var(--h1-size);
