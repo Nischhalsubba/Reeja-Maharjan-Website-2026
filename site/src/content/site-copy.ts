@@ -143,7 +143,7 @@ export const siteCopy = {
     title: `${facts.name} | Maternal Health Research & Telemonitoring`,
     description: `${facts.name}'s maternal-health research experience includes ANC participant screening support, BP/BG monitoring education, tele-follow-up, study documentation, data-quality checks, and multidisciplinary coordination with IISH MOM-HD.`,
     eyebrow: 'Maternal-health research',
-    heading: `${facts.name}’s maternal-health research work with IISH.`,
+    heading: 'Maternal-health research, with people at its centre.',
     lede: `As a ${facts.currentRole} on the ${facts.currentProject} in ${facts.currentLocation}, Reeja supports participant screening, home BP/BG education, tele-follow-up, documentation, data review, device workflows, and protocol-based coordination.`,
     summary: [
       ['Current role', `${facts.currentRole}, ${facts.currentEmployerShort}`],
@@ -173,7 +173,7 @@ export const siteCopy = {
     title: `${facts.name} | Maternal Health Nursing & Newborn Care`,
     description: `Explore ${facts.name}'s maternal-health nursing and research focus, including maternal-newborn hospital experience, IISH MOM-HD telemonitoring work, patient education, and source-linked care articles.`,
     eyebrow: 'Maternal health',
-    heading: `Maternal health is central to ${facts.name}’s nursing and research work.`,
+    heading: 'Maternal & newborn health.',
     lede: 'Reeja’s background combines maternal-newborn hospital care with current maternal-health research, participant education, home monitoring support, tele-follow-up, and practical public education for families and nurses.',
     summary: [
       ['Clinical background', 'Maternal-newborn and general-care hospital nursing'],
@@ -191,7 +191,7 @@ export const siteCopy = {
     title: `${facts.name} | Nursing Practice, Documentation & Patient Education`,
     description: `Explore ${facts.name}'s nursing practice focus, including patient education, documentation, SBAR-style handover, confidentiality, clinical communication, maternal-newborn care, and professional development.`,
     eyebrow: 'Nursing practice',
-    heading: `How ${facts.name} approaches nursing practice.`,
+    heading: 'Nursing, centred on people.',
     lede: 'Reeja’s hospital and research work is grounded in clear patient communication, accurate documentation, structured handover, careful monitoring, timely escalation, and practical education for patients and families.',
     summary: [
       ['Patient communication', 'Education, counselling, handover, and escalation'],
@@ -246,7 +246,7 @@ export const siteCopy = {
     title: `Nursing & Maternal Health Articles by ${facts.name}`,
     description: `Read nursing and maternal-health articles by ${facts.name}, Registered Nurse and maternal-health Research Assistant in Nepal, covering maternal-newborn care, documentation, SBAR handover, confidentiality, telehealth, and nursing careers.`,
     eyebrow: 'Writing by Reeja Maharjan',
-    heading: `Nursing and maternal-health articles by ${facts.name}.`,
+    heading: 'Writing on nursing & maternal health.',
     lede: 'Reeja writes practical, source-linked articles for nurses, students, patients, and families. Each clinical article includes its audience, sources, update date, safety note, and review status.',
     hubEyebrow: 'Featured & topic guides',
     hubHeading: 'Start with a featured article or browse Reeja’s writing by topic.',
