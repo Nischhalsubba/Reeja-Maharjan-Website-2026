@@ -135,7 +135,7 @@
 .field-journal :where(.site-button,.care-button):hover{color:#fff;background:#2542d9;border-color:#2542d9}
 .field-journal :where(.site-button,.care-button):focus-visible,
 .field-journal :where(.cip-button,.cip-link,.cip-textlink,.nav-cta):focus-visible {
-  outline:3px solid #ff917d;outline-offset:4px;
+  outline:3px solid #223fda;outline-offset:4px;
 }
 .field-journal .site-section--dark .site-button,.field-journal .site-section--dark .site-button:not(.site-button--primary){background:#fff;color:#17244d;border-color:#fff}
 .field-journal .site-section--dark .site-button:hover{background:#d9ddff;color:#17244d}
@@ -226,7 +226,7 @@
 /* Always-accessible attribution, including decorative background photos. */
 .field-journal .cip-image-credits{padding:20px 0;border-top:1px solid rgba(218,224,255,.25);color:#ccd5f2;font-size:.75rem;line-height:1.8}
 .field-journal .cip-image-credits summary{display:list-item;width:fit-content;cursor:pointer;color:#e8edff;font-weight:700;list-style-position:inside}
-.field-journal .cip-image-credits summary:focus-visible{outline:2px solid #ff927a;outline-offset:4px}
+.field-journal .cip-image-credits summary:focus-visible{outline:3px solid #ffffff;outline-offset:4px}
 .field-journal .cip-image-credits p{max-width:900px;padding-top:9px;margin:0}
 .field-journal .cip-image-credits a{color:#bdc9ff;text-decoration:underline;text-underline-offset:3px}
 
@@ -256,7 +256,7 @@
 }
 @media(max-width:640px){
   .field-journal :where(.site-page__hero h1,.contact-hero h1,.blog-article__header h1){
-    font-size:clamp(2.25rem,9vw,3.35rem);
+    font-size:clamp(2.05rem,8.2vw,3.15rem);
     line-height:1.08;
   }
 }

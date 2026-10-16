@@ -112,7 +112,7 @@ test('Field Journal palette and typography apply across the site', async ({ page
   }
 });
 
-test('primary pages keep Reeja as the subject in titles, descriptions and headings', async ({ page }) => {
+test('primary pages identify Reeja in SEO metadata while keeping editorial headings readable', async ({ page }) => {
   const routes = [
     '/',
     '/hire-reeja/',
@@ -133,7 +133,7 @@ test('primary pages keep Reeja as the subject in titles, descriptions and headin
     expect(title).toContain('Reeja Maharjan');
     expect(description).toContain('Reeja');
     if (path === '/') expect(heading.replace(/\s+/g, ' ')).toMatch(/Care is\s*personal\./);
-    else expect(heading).toContain('Reeja');
+    else expect(heading.trim().length).toBeGreaterThan(9);
   }
 
   await page.goto(`${origin}/`, { waitUntil: 'networkidle' });

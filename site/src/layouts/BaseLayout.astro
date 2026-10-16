@@ -32,7 +32,7 @@ type Props = {
 const {
   title = siteCopy.defaultTitle,
   description = siteCopy.defaultDescription,
-  image = '/og-default.svg',
+  image = '/og-default.png',
   robots = 'index, follow, max-image-preview:large'
 } = Astro.props;
 
@@ -99,8 +99,8 @@ const graphSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="design-system" content="Reeja Field Journal" />
-    <meta name="design-release" content="care-personal-site-3.2.0" />
+    <meta name="design-system" content="Care is Personal" />
+    <meta name="design-release" content="care-personal-site-3.3.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -122,6 +122,7 @@ const graphSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(graphSchema)}></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
     {gaId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>}
     {gaId && (
@@ -134,7 +135,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body id="page-top" class="field-journal" data-design-system="reeja-field-journal" data-design-version="3.2.0-care-personal">
+  <body id="page-top" class="field-journal" data-design-system="reeja-field-journal" data-design-version="3.3.0-care-personal">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header name={professionalFacts.name} />

@@ -1,11 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-  <title id="title">Reeja Maharjan, Registered Nurse and Maternal Health Research Assistant</title>
-  <desc id="desc">Social preview for Reeja Maharjan's nursing and maternal-health research portfolio.</desc>
-  <rect width="1200" height="630" fill="#F4EFE6"/>
-  <rect x="56" y="56" width="1088" height="518" fill="#FBF8F2" stroke="#1C1917" stroke-width="2"/>
-  <text x="104" y="148" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="3" fill="#8F3D32">REGISTERED NURSE · MATERNAL HEALTH RESEARCH</text>
-  <text x="104" y="294" font-family="Arial, Helvetica, sans-serif" font-size="92" font-weight="700" letter-spacing="-5" fill="#1C1917">Reeja Maharjan</text>
-  <text x="104" y="382" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="400" letter-spacing="-1" fill="#263653">Nursing practice · Research · Writing</text>
-  <line x1="104" y1="456" x2="1096" y2="456" stroke="#C9B9A2" stroke-width="2"/>
-  <text x="104" y="518" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700" fill="#1C1917">reejamaharjan.com.np</text>
+  <title id="title">Reeja Maharjan · Care is personal</title>
+  <desc id="desc">Cobalt blue and lavender social card for Reeja Maharjan, registered nurse and maternal health research assistant.</desc>
+  <rect width="1200" height="630" fill="#F0F1FF"/>
+  <path d="M818 0h382v630H818z" fill="#DCE1FF"/>
+  <path d="M888 0h312v630H888z" fill="#3454F5"/>
+  <circle cx="1050" cy="420" r="275" fill="#6480FF" opacity=".72"/>
+  <circle cx="1140" cy="90" r="165" fill="#A9B7FF" opacity=".75"/>
+  <path d="M68 72h52" stroke="#EF7866" stroke-width="7"/>
+  <text x="68" y="60" font-size="34" fill="#10182F" font-family="Arial,Helvetica,sans-serif" font-weight="700" letter-spacing="-2">reeja<tspan fill="#3454F5">.</tspan></text>
+  <text x="70" y="178" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" letter-spacing="3" fill="#304176">REEJA MAHARJAN / REGISTERED NURSE</text>
+  <text x="62" y="316" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="94" letter-spacing="-6" fill="#10182F">Care is</text>
+  <text x="62" y="418" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="94" letter-spacing="-6" fill="#10182F">personal.</text>
+  <text x="70" y="483" font-family="Arial,Helvetica,sans-serif" font-size="27" fill="#53617C">Nursing practice. Maternal health research.</text>
+  <text x="70" y="523" font-family="Arial,Helvetica,sans-serif" font-size="27" fill="#53617C">People first.</text>
+  <text x="70" y="580" font-family="Arial,Helvetica,sans-serif" font-size="20" font-weight="700" letter-spacing="1" fill="#3454F5">reejamaharjan.com.np</text>
 </svg>
