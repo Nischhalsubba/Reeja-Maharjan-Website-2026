@@ -32,7 +32,7 @@ type Props = {
 const {
   title = siteCopy.defaultTitle,
   description = siteCopy.defaultDescription,
-  image = '/og-default.svg',
+  image = '/og-default.png',
   robots = 'index, follow, max-image-preview:large'
 } = Astro.props;
 
@@ -99,7 +99,7 @@ const graphSchema = {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="design-system" content="Reeja Field Journal" />
+    <meta name="design-system" content="Care is Personal" />
     <meta name="design-release" content="care-personal-site-3.2.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
