@@ -53,7 +53,7 @@ test('Field Journal portrait uses the headshot and never relies on a cropping fi
     const page = await context.newPage();
     await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
 
-    const portrait = page.locator('.fj-portrait__frame img');
+    const portrait = page.locator('.cip-hero__portrait img');
     await expect(portrait).toBeVisible();
     await expect(portrait).toHaveAttribute('src', '/reeja-headshot.jpg');
 
@@ -132,7 +132,8 @@ test('primary pages keep Reeja as the subject in titles, descriptions and headin
 
     expect(title).toContain('Reeja Maharjan');
     expect(description).toContain('Reeja');
-    expect(heading).toContain('Reeja');
+    if (path === '/') expect(heading).toBe('Care ispersonal.');
+    else expect(heading).toContain('Reeja');
   }
 
   await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
@@ -146,26 +147,18 @@ test('primary pages keep Reeja as the subject in titles, descriptions and headin
   await expect(page.getByText('Clinical care with a', { exact: false })).toHaveCount(0);
 });
 
-test('homepage stays concise and recruiter-first', async ({ page }) => {
+test('Care is Personal homepage preserves concise copy and working professional pathways', async ({ page }) => {
   await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
-
-  const heroIntro = page.locator('.fj-hero__intro');
+  await expect(page.getByRole('heading', { level: 1, name: /Care is\s*personal\./ })).toBeVisible();
+  const heroIntro = page.locator('.cip-hero__lead');
   await expect(heroIntro).toBeVisible();
-  const heroText = (await heroIntro.innerText()).trim();
-  expect(heroText.length).toBeLessThan(190);
-
-  await expect(page.locator('.fj-note')).toHaveCount(3);
-  const notes = page.locator('.fj-note');
-  for (let index = 0; index < 3; index += 1) {
-    const note = notes.nth(index);
-    expect((await note.locator('.fj-note__copy').innerText()).trim().length).toBeLessThan(260);
-    expect(await note.locator('li').count()).toBeLessThanOrEqual(2);
-  }
-
-  await expect(page.locator('.fj-registry__entry')).toHaveCount(5);
-  await expect(page.locator('.fj-reading__entry')).toHaveCount(2);
-  await expect(page.getByRole('link', { name: 'Discuss a role' })).toBeVisible();
-  await expect(page.locator('.desktop-nav').getByRole('link', { name: 'Hire Reeja', exact: true })).toBeVisible();
+  expect((await heroIntro.innerText()).trim().length).toBeLessThan(190);
+  await expect(page.locator('.cip-pathway')).toHaveCount(2);
+  await expect(page.locator('.cip-article')).toHaveCount(3);
+  await expect(page.locator('.cip-journey__item')).toHaveCount(4);
+  await expect(page.getByRole('link', { name: /Discover my story/ })).toHaveAttribute('href', '#about');
+  await expect(page.locator('.cip-contact').getByRole('link', { name: /Get in touch/ })).toHaveAttribute('href', '/contact/');
+  await expect(page.locator('.desktop-nav').getByRole('link', { name: 'Hire Reeja' })).toBeVisible();
 });
 
 test('contact page submits through the provider POST flow and returns with success feedback', async ({ page }) => {
