@@ -256,7 +256,7 @@
 }
 @media(max-width:640px){
   .field-journal :where(.site-page__hero h1,.contact-hero h1,.blog-article__header h1){
-    font-size:clamp(2.25rem,9vw,3.35rem);
+    font-size:clamp(2.05rem,8.2vw,3.15rem);
     line-height:1.08;
   }
 }
