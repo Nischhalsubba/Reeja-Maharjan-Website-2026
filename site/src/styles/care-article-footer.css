@@ -238,12 +238,12 @@
   line-height: 1.65;
   max-width: 28ch;
 }
-.field-journal .care-footer__location { color: #aab6d7; font-size: .8rem; }
+.field-journal .care-footer__location { color: #aab6d7; font-size: .87rem; }
 .field-journal .care-footer__column { min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:15px; }
 .field-journal .care-footer__column h3 {
   margin: 0 0 8px;
   font-family:"Public Sans",system-ui,sans-serif;
-  font-size: .7rem;
+  font-size: .78rem;
   line-height: 1.5;
   letter-spacing:.13em;
   font-weight:750;
@@ -253,8 +253,8 @@
 .field-journal .care-footer__column a {
   display:inline-block;
   text-decoration:none;
-  font-size:.85rem;
-  line-height:1.5;
+  font-size:.93rem;
+  line-height:1.6;
   color:#f2f4ff;
   overflow-wrap:anywhere;
 }
@@ -264,7 +264,7 @@
   color:var(--care-footer-secondary);
   padding-block:18px;
 }
-.field-journal .care-footer__credits summary { font-size:.72rem;font-weight:600;color:var(--care-footer-secondary); }
+.field-journal .care-footer__credits summary { font-size:.83rem;font-weight:600;color:var(--care-footer-secondary); }
 .field-journal .care-footer__bottom {
   display:flex;
   justify-content:space-between;
@@ -274,7 +274,7 @@
   row-gap:16px;
   padding-block:23px 31px;
   border-top:1px solid rgba(214,221,255,.17);
-  font-size:.72rem;
+  font-size:.82rem;
   color: #aab6d7;
 }
 .field-journal .care-footer__bottom a { color:#f5f6ff;text-decoration:none; }
