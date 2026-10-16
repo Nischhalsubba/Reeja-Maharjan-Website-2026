@@ -86,3 +86,29 @@ jobs:
             *) STATE=failure; DESCRIPTION='Repository verification or build failed.' ;;
           esac
           curl --fail-with-body --silent --show-error --request POST --header "Authorization: Bearer ${GH_TOKEN}" --header "Accept: application/vnd.github+json" --header "X-GitHub-Api-Version: 2022-11-28" "${STATUS_URL}" --data "$(jq -nc --arg state "${STATE}" --arg target_url "${RUN_URL}" --arg description "${DESCRIPTION}" --arg context 'Build Check / verify' '{state:$state,target_url:$target_url,description:$description,context:$context}')"
+
+  cloudflare-root-build:
+    name: Cloudflare repository-root build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Reproduce Cloudflare build command from repository root
+        run: npm run build
+      - name: Assert full deployable output at both paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in index.html 404.html _headers build.json contact/index.html cv/index.html clinical-research/index.html; do
+            test -s "dist/$file" || { echo "Missing dist/$file"; exit 1; }
+            test -s "site/dist/$file" || { echo "Missing site/dist/$file"; exit 1; }
+          done
+          diff -qr dist site/dist
+          node --input-type=module -e "import {readFileSync} from 'node:fs'; const f=JSON.parse(readFileSync('dist/build.json','utf8')); if (!f.commit || !f.branch) process.exit(1);"
