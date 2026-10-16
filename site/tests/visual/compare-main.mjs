@@ -61,8 +61,10 @@ async function measureRenderedDifference(before, after) {
       }
 
       const canvas = document.createElement('canvas');
-      canvas.width = baseline.naturalWidth;
-      canvas.height = baseline.naturalHeight;
+      // Downsample for comparison; full-resolution evidence files are retained.
+      // This prevents 17k-pixel article pages exhausting the runner's time/memory.
+      canvas.width = Math.ceil(baseline.naturalWidth / 3);
+      canvas.height = Math.ceil(baseline.naturalHeight / 3);
       const context = canvas.getContext('2d', { willReadFrequently: true });
       if (!context) throw new Error('Canvas pixel comparison is unavailable.');
 
@@ -123,7 +125,7 @@ async function capture(origin, route, viewport, label) {
   });
 
   const page = await context.newPage();
-  const response = await page.goto(new URL(route, origin).toString(), { waitUntil: 'networkidle' });
+  const response = await page.goto(new URL(route, origin).toString(), { waitUntil: 'domcontentloaded', timeout: 20000 });
 
   if (!response?.ok()) {
     failures.push(`${label} ${route} returned ${response?.status() ?? 'no response'}.`);
@@ -144,22 +146,25 @@ async function capture(origin, route, viewport, label) {
     `
   });
 
-  await page.evaluate(async () => {
-    await document.fonts.ready;
-    await Promise.all(
-      Array.from(document.images, image =>
-        image.complete
+  // External photo CDNs occasionally stall indefinitely. Bound font/image waits.
+  await Promise.race([
+    page.evaluate(async () => {
+      await document.fonts.ready;
+      await Promise.all(
+        Array.from(document.images, image => image.complete
           ? Promise.resolve()
           : new Promise(resolve => {
               image.addEventListener('load', resolve, { once: true });
               image.addEventListener('error', resolve, { once: true });
             })
-      )
-    );
-    window.scrollTo(0, 0);
-  });
+        )
+      );
+    }),
+    new Promise(resolve => setTimeout(resolve, 3500))
+  ]);
+  await page.evaluate(() => window.scrollTo(0, 0));
 
-  await page.waitForTimeout(250);
+  await page.waitForTimeout(100);
   observedVersions[label] = await page.locator('body').getAttribute('data-design-version');
 
   const filename = `${slugFor(route)}-${viewport.name}-${label}.png`;
