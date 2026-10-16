@@ -7,6 +7,7 @@ const failures = [];
 const articleFiles = (await readdir(blogDir)).filter((name) => name.endsWith('.ts') && !['index.ts', 'types.ts', 'governance.ts'].includes(name));
 const governanceSource = await readFile(new URL('../src/content/blog/governance.ts', import.meta.url), 'utf8');
 const routeSource = await readFile(new URL('../src/pages/blog/[slug].astro', import.meta.url), 'utf8');
+const socialGenerator = await readFile(new URL('../scripts/render-social-cards.mjs', import.meta.url), 'utf8');
 const previewSource = await readFile(new URL('../src/pages/og/articles/[slug].svg.ts', import.meta.url), 'utf8');
 
 for (const file of articleFiles) {
@@ -33,12 +34,14 @@ const forbiddenRouteFragments = ['FAQPage', 'Reviewed {updated}', 'Reviewed {pos
 for (const fragment of forbiddenRouteFragments) {
   if (routeSource.includes(fragment)) failures.push(`Article route contains forbidden fragment: ${fragment}`);
 }
-for (const required of ['getBlogGovernance', 'ArticleGovernance', '/og/articles/${post.slug}.svg', "'@type': 'BlogPosting'", "'@type': 'BreadcrumbList'"]) {
+for (const required of ['getBlogGovernance', 'ArticleGovernance', '/og/articles/${post.slug}.png', "'@type': 'BlogPosting'", "'@type': 'BreadcrumbList'"]) {
   if (!routeSource.includes(required)) failures.push(`Article route is missing required fragment: ${required}`);
 }
 for (const required of ['width="1200"', 'height="630"', 'getStaticPaths', 'image/svg+xml']) {
   if (!previewSource.includes(required)) failures.push(`Article preview generator is missing: ${required}`);
 }
+
+if (!socialGenerator.includes("sharp") || !socialGenerator.includes("og-default.svg")) failures.push('Raster social preview generator is required.');
 
 if (articleFiles.length !== 10) failures.push(`Expected 10 governed articles, found ${articleFiles.length}.`);
 
