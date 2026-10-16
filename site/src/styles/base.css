@@ -135,7 +135,7 @@ a {
 }
 
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid #223fda;
   outline-offset: 3px;
   box-shadow: var(--focus-ring);
 }
@@ -157,4 +157,12 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Strong two-tone keyboard focus on the dark brand surfaces. */
+:where(.cip-research,.cip-contact,.site-footer--care,.site-section--dark)
+ :where(a,button,input,textarea,select,[tabindex]):focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px #223fda;
 }
