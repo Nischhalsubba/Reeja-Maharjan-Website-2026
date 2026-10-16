@@ -307,3 +307,31 @@
 .field-journal .site-footer--care .care-footer__cta { color:#10182f; }
 .field-journal .site-footer--care .care-footer__cta:hover,
 .field-journal .site-footer--care .care-footer__cta:focus-visible { color:#10182f; }
+
+/* High-contrast footer CTA.
+ * Explicit link/pseudo-class selectors outrank legacy site-footer anchor
+ * rules that previously produced lavender text on a lavender background.
+ * Default: #fff on #3454f5 (5.63:1); hover: #fff on #223fda (7.52:1).
+ */
+.field-journal footer.site-footer--care a.care-footer__cta:link,
+.field-journal footer.site-footer--care a.care-footer__cta:visited {
+  color: #ffffff;
+  background-color: #3454f5;
+  border-color: #3454f5;
+}
+.field-journal footer.site-footer--care a.care-footer__cta:hover,
+.field-journal footer.site-footer--care a.care-footer__cta:active {
+  color: #ffffff;
+  background-color: #223fda;
+  border-color: #223fda;
+}
+.field-journal footer.site-footer--care a.care-footer__cta:focus-visible {
+  color: #ffffff;
+  background-color: #223fda;
+  border-color: #223fda;
+  outline: 3px solid #ffb69b;
+  outline-offset: 4px;
+}
+.field-journal footer.site-footer--care a.care-footer__cta > span {
+  color: inherit;
+}
