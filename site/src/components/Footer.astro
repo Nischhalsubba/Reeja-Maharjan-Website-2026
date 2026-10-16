@@ -7,39 +7,60 @@ const { profile } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
-<footer class="site-footer">
-  <div class="container site-footer__masthead">
-    <div>
-      <p class="site-footer__eyebrow">{siteCopy.footer.eyebrow}</p>
-      <h2>{profile.name}</h2>
+<footer class="site-footer site-footer--care" aria-label="Website footer">
+  <div class="container care-footer__invitation">
+    <div class="care-footer__intro">
+      <p class="care-footer__eyebrow"><span aria-hidden="true" class="care-footer__spark"></span> STAY CONNECTED</p>
+      <h2>Better care starts<br />with a <span>conversation.</span></h2>
     </div>
-    <p class="site-footer__statement">{siteCopy.footer.statement}</p>
+    <div class="care-footer__invite-actions">
+      <p>For thoughtful conversations about nursing, maternal health, research, or an opportunity to work together.</p>
+      <a class="care-footer__cta" href="/contact/" data-track="contact-footer">
+        Get in touch <span aria-hidden="true">↗</span>
+      </a>
+    </div>
   </div>
 
-  <div class="container site-footer__index">
-    <nav aria-label="Professional pages" class="site-footer__links">
-      <p class="site-footer__label">{siteCopy.footer.exploreLabel}</p>
+  <div class="container care-footer__main">
+    <div class="care-footer__identity">
+      <a class="care-footer__wordmark" href="/" aria-label="Reeja Maharjan — homepage">reeja<span aria-hidden="true">.</span></a>
+      <p>Registered nurse &amp; maternal-health research</p>
+      <span class="care-footer__location">{profile.contact.location}</span>
+    </div>
+
+    <nav class="care-footer__column" aria-label="Explore Reeja's website">
+      <h3>Explore</h3>
       <a href="/">About Reeja</a>
       <a href="/#experience">Experience</a>
+      <a href="/nursing-practice/">Nursing practice</a>
       <a href="/clinical-research/">Clinical research</a>
       <a href="/maternal-health/">Maternal health</a>
-      <a href="/nursing-practice/">Nursing practice</a>
-      <a href="/blog/">Writing</a>
-      <a href="/cv/" data-track="cv-footer">Reeja’s CV</a>
     </nav>
 
-    <div class="site-footer__contact">
-      <p class="site-footer__label">{siteCopy.footer.contactLabel}</p>
-      <a href="/contact/" data-track="contact-footer">Send a professional inquiry</a>
+    <nav class="care-footer__column" aria-label="Professional resources">
+      <h3>Resources</h3>
+      <a href="/blog/">Journal</a>
+      <a href="/cv/" data-track="cv-footer">Professional CV</a>
+      <a href="/hire-reeja/">For employers</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+
+    <div class="care-footer__column care-footer__reach">
+      <h3>Say hello</h3>
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
-      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">LinkedIn profile</a>
-      <span>{profile.contact.location}</span>
+      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
     </div>
   </div>
 
-  <details class="container cip-image-credits"><summary>Photography credits and usage</summary><p>Illustrative stock photographs only; no subjects are represented as Reeja, her patients, colleagues, or study participants. Free to use under the <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Unsplash License</a>.</p><p><a href="https://unsplash.com/photos/group-of-doctors-walking-on-hospital-hallway-Pd4lRfKo16U" target="_blank" rel="noopener noreferrer">Hospital team · Luis Melendez</a> · <a href="https://unsplash.com/photos/a-woman-sitting-at-a-desk-with-a-notebook-and-pen-PPRKVDy47TY" target="_blank" rel="noopener noreferrer">Writing · Fiona Murray-deGraaff</a> · <a href="https://unsplash.com/photos/a-view-of-a-city-with-mountains-in-the-background-j2ligTqDvNU" target="_blank" rel="noopener noreferrer">Nepal landscape · Michael Starkie</a>.</p></details>
-  <div class="container site-footer__legal">
+  <details class="container cip-image-credits care-footer__credits">
+    <summary>Photography credits and usage</summary>
+    <p>Illustrative stock photographs only; no subjects are represented as Reeja, her patients, colleagues, or study participants. Free to use under the <a href="https://unsplash.com/license" target="_blank" rel="noopener noreferrer">Unsplash License</a>.</p>
+    <p><a href="https://unsplash.com/photos/group-of-doctors-walking-on-hospital-hallway-Pd4lRfKo16U" target="_blank" rel="noopener noreferrer">Hospital team · Luis Melendez</a> · <a href="https://unsplash.com/photos/a-woman-sitting-at-a-desk-with-a-notebook-and-pen-PPRKVDy47TY" target="_blank" rel="noopener noreferrer">Writing · Fiona Murray-deGraaff</a> · <a href="https://unsplash.com/photos/a-view-of-a-city-with-mountains-in-the-background-j2ligTqDvNU" target="_blank" rel="noopener noreferrer">Nepal landscape · Michael Starkie</a>.</p>
+  </details>
+
+  <div class="container care-footer__bottom">
     <small>© {year} {profile.name}. {siteCopy.footer.legal}</small>
-    <a href="#main-content">Back to top</a>
+    <span>Made with care, in Nepal.</span>
+    <a href="#main-content">Back to top <span aria-hidden="true">↑</span></a>
   </div>
 </footer>
