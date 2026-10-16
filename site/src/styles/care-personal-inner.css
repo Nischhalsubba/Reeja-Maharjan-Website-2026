@@ -1,15 +1,15 @@
 /* Care is Personal · design language for every non-homepage route.
    Imported after legacy styles to keep CV print, forms, and mobile navigation functional. */
 .field-journal {
-  --fj-paper: #f8f9fd;
-  --fj-paper-deep: #eef0ff;
+  --fj-paper: var(--brand-canvas);
+  --fj-paper-deep: var(--brand-lavender);
   --fj-surface: #fff;
-  --fj-ink: #10182f;
+  --fj-ink: var(--brand-ink);
   --fj-graphite: #5c6881;
-  --fj-indigo: #3454f5;
-  --fj-madder: #df6255;
+  --fj-indigo: var(--brand-blue);
+  --fj-madder: var(--brand-coral-ink);
   --fj-brass: #b8c0ff;
-  --fj-line: #e1e6f1;
+  --fj-line: var(--brand-line);
   --fj-fast: .2s;
   --fj-radius-1: 3px;
   color: #10182f;
@@ -27,7 +27,7 @@
   text-wrap:balance;
 }
 .field-journal :where(p,li,dd,dt,button,a,input,textarea,select) {font-family:"Public Sans",system-ui,sans-serif}
-.field-journal .site-eyebrow {color:#df6255;letter-spacing:.14em;font:700 .7rem/1.6 "Public Sans",system-ui,sans-serif}
+.field-journal .site-eyebrow {color:var(--brand-coral-ink);letter-spacing:.14em;font:700 .7rem/1.6 "Public Sans",system-ui,sans-serif}
 .field-journal :where(.site-page__hero,.contact-hero,.blog-article__header) {
   position:relative;
   background:linear-gradient(120deg,#f0efff,#f9faff 58%,#edf0ff);
@@ -153,9 +153,6 @@
 .field-journal .desktop-nav .nav-cta{background:transparent;color:#3454f5;border:0;font-size:.85rem;font-family:"Public Sans",system-ui,sans-serif}
 .field-journal .desktop-nav .nav-cta:hover{background:#e8ebff;color:#2d43c9}
 .field-journal .mobile-nav{background:#f7f8ff}
-.field-journal .site-footer{background:#0b132a;color:#e9ecff;border-top:1px solid #334164}
-.field-journal .site-footer :is(h2,p,a,small,span){color:inherit}
-.field-journal .site-footer a:hover{color:#aeb8ff}
 .field-journal :where(.site-note,.blog-note-strong){background:#f2f4ff;border-left-color:#3454f5;border-color:#dce2ff;border-radius:2px}
 .field-journal :where(.blog-article__body,.blog-toc,.blog-article__layout,.blog-index,.cv-page,.contact-page){color:#10182f}
 .field-journal .blog-article__body h2,.field-journal .blog-article__body h3 {font-family:"Public Sans",system-ui,sans-serif;font-weight:750;letter-spacing:-.045em}
