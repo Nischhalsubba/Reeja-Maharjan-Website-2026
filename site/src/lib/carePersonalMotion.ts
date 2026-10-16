@@ -1,0 +1,111 @@
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
+/**
+ * A single lightweight motion layer shared by homepage and supporting pages.
+ * Content stays visible without JavaScript and for reduced-motion preferences.
+ * Existing Field Journal animation owns inner-page headings/cards; this module
+ * owns the new photographs, microinteractions and homepage-specific sections.
+ */
+export function initCarePersonalMotion(): () => void {
+  if (document.documentElement.dataset.carePersonalMotion === 'true') return () => {};
+  document.documentElement.dataset.carePersonalMotion = 'true';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pointerFine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduceMotion) {
+    return () => { delete document.documentElement.dataset.carePersonalMotion; };
+  }
+
+  const listeners: Array<() => void> = [];
+  const ctx = gsap.context(() => {
+    const hero = document.querySelector<HTMLElement>('.cip-hero');
+    if (hero) {
+      const elements = Array.from(hero.querySelectorAll<HTMLElement>(
+        '.cip-hero__copy .cip-eyebrow, .cip-hero h1, .cip-hero__lead, .cip-actions, .cip-hero__index, .cip-hero__portrait'
+      ));
+      gsap.from(elements, {
+        y: 24,
+        opacity: 0,
+        duration: 0.72,
+        ease: 'power3.out',
+        stagger: 0.095,
+        clearProps: 'all',
+      });
+    }
+
+    const reveals = gsap.utils.toArray<HTMLElement>(
+      '.cip-home .cip-about__grid > *, .cip-home .cip-sectionhead, .cip-home .cip-pathway, ' +
+      '.cip-home .cip-research__copy, .cip-home .cip-journey__item, .cip-home .cip-article, ' +
+      '.cip-home .cip-contact__grid > *, .cip-photo-band__caption'
+    );
+    reveals.forEach((element) => {
+      gsap.from(element, {
+        opacity: 0,
+        y: 24,
+        duration: .7,
+        ease: 'power2.out',
+        clearProps: 'opacity,transform',
+        scrollTrigger: {
+          trigger: element,
+          start: 'top 92%',
+          once: true,
+        }
+      });
+    });
+
+    // Small photo-motion accents. Never pin sections or hide meaningful text.
+    document.querySelectorAll<HTMLElement>('.cip-photo-band').forEach((container) => {
+      const image = container.querySelector<HTMLImageElement>('img');
+      if (!image) return;
+      gsap.fromTo(image,
+        { yPercent: -4, scale: 1.07 },
+        {
+          yPercent: 4,
+          scale: 1.07,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: container,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: .6,
+          }
+        }
+      );
+    });
+    if (!pointerFine) return;
+
+    const interactive = Array.from(document.querySelectorAll<HTMLElement>(
+      '.cip-button, .site-button, .care-button, .nav-cta, .cip-textlink, .cip-link, ' +
+      '.blog-card a, .contact-sidebar__social'
+    ));
+
+    interactive.forEach((element) => {
+      const onEnter = () => gsap.to(element, { y: -3, duration: .22, ease: 'power2.out', overwrite: true });
+      const onLeave = () => gsap.to(element, { y: 0, scale: 1, duration: .24, ease: 'power2.out', overwrite: true });
+      const onDown = () => gsap.to(element, { scale: .977, duration: .1, overwrite: true });
+      const onUp = () => gsap.to(element, { scale: 1, duration: .18, overwrite: true });
+      element.addEventListener('pointerenter', onEnter);
+      element.addEventListener('pointerleave', onLeave);
+      element.addEventListener('pointerdown', onDown);
+      element.addEventListener('pointerup', onUp);
+      listeners.push(() => {
+        element.removeEventListener('pointerenter', onEnter);
+        element.removeEventListener('pointerleave', onLeave);
+        element.removeEventListener('pointerdown', onDown);
+        element.removeEventListener('pointerup', onUp);
+      });
+    });
+  }, document.body);
+
+  const cleanup = () => {
+    listeners.forEach((dispose) => dispose());
+    ctx.revert();
+    delete document.documentElement.dataset.carePersonalMotion;
+  };
+  window.addEventListener('pagehide', cleanup, { once: true });
+  document.addEventListener('astro:before-swap', cleanup, { once: true });
+  return cleanup;
+}
