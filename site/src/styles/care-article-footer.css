@@ -302,3 +302,8 @@
 @media print {
   .site-footer--care {display:none!important}
 }
+
+/* Ensure CTA ink stays dark against the light button despite legacy footer link rules. */
+.field-journal .site-footer--care .care-footer__cta { color:#10182f; }
+.field-journal .site-footer--care .care-footer__cta:hover,
+.field-journal .site-footer--care .care-footer__cta:focus-visible { color:#10182f; }
