@@ -71,3 +71,24 @@ Use accurate personal-name, role, work, and portfolio terminology. Maintain uniq
 flowchart LR
     UPDATE["Content / UI update"] --> VERIFY["Verify personal / project details"] --> BUILD["Implement"] --> REVIEW["Responsive + accessibility review"] --> SEO["Metadata / links check"] --> PR["Pull request"]
 ```
+
+
+## Cloudflare Pages deployment (Astro lives in `site/`)
+
+The deployed Astro project is under `site/`, not the repository root. Prefer these **Cloudflare Pages > Settings > Builds & deployments** values:
+
+| Field | Value |
+|---|---|
+| Framework preset | Astro |
+| Production branch | `main` |
+| Root directory | `site` |
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node version | 22 |
+
+The Pages build command previously executed in the repository root, where the package lacked a `build` script. To support the existing Git connection while the dashboard root setting is unchanged, the **repository root now has an `npm run build` bridge**. It runs `npm ci` and `npm run build` inside `site/`, verifies the static output, and mirrors `site/dist/` into `dist/`. Both `site/dist` and `dist` are valid output paths when the Pages root is set to the repository root; `dist` is the correct path when the Pages root is `site`.
+
+For a local reproduction of Cloudflare's old root-directory setup, execute `npm run build` from the repository root. GitHub Actions `Build Check / Cloudflare repository-root build` runs this exact command and confirms that all deployable files exist in both output folders.
+
+Before declaring success, verify a Cloudflare Pages deployment reports **Success**, the deployed site returns all required pages (including `/build.json`), and the production fingerprint matches the desired `main` commit. GitHub Build Check success alone does **not** establish that Cloudflare deployed the site. After build success, review [Cloudflare Pages deployments](https://dash.cloudflare.com/) and GitHub Actions Production Smoke. Historical failed deployments stay in Cloudflare's history and do not need to be retroactively rewritten.
+

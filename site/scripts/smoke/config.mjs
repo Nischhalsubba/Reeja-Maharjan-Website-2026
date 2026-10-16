@@ -27,13 +27,18 @@ export const maxAttempts = positiveInteger('SMOKE_ATTEMPTS', 20);
 export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
-  'Reeja Maharjan,',
-  'Registered Nurse',
-  'Hospital nursing and maternal-health research experience in Nepal',
-  'Discuss a role',
+  'Care is',
+  'personal.',
+  'Discover my story',
   'View CV',
-  'Open to suitable opportunities',
-  'Hire Reeja'
+  'A career built',
+  'Clinical care',
+  'Maternal-health research',
+  'Beyond',
+  'the bedside.',
+  'Selected writing.',
+  'Let’s make',
+  'Get in touch'
 ];
 
 export const forbiddenHomepageText = [
