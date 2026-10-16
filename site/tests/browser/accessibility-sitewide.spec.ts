@@ -8,7 +8,11 @@ const routes = [
 ];
 
 const luminance = (rgb: string): number => {
-  const values = rgb.match(/[\d.]+/g)?.slice(0, 3).map(Number);
+  const hex = /^#([0-9a-f]{6})$/i.exec(rgb);
+  if (hex) {
+    rgb = 'rgb(' + [0, 2, 4].map((i) => parseInt(hex[1].slice(i, i + 2), 16)).join(', ') + ')';
+  }
+  const values = rgb.match(/[\\d.]+/g)?.slice(0, 3).map(Number);
   if (!values || values.length < 3) throw new Error('Non-RGB computed color: ' + rgb);
   const linear = values.map((value) => {
     const channel = value / 255;
@@ -35,6 +39,8 @@ test('all public routes have labelled controls, accessible images, valid landmar
         const visible = (el: Element) => {
           const style = getComputedStyle(el);
           const box = el.getBoundingClientRect();
+          const collapsedDetails = el.closest('details:not([open])');
+          if (collapsedDetails && !el.closest('summary')) return false;
           return style.visibility !== 'hidden' && style.display !== 'none' && box.width > 0 && box.height > 0
             && !el.closest('[inert], [aria-hidden="true"]');
         };
