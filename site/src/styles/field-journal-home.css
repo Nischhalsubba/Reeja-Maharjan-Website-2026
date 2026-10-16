@@ -704,42 +704,7 @@
   line-height: 1.5;
 }
 
-.field-journal .site-footer {
-  border-top: 1px solid var(--fj-ink);
-  background: var(--fj-ink);
-  color: var(--fj-surface);
-}
-
-.field-journal .site-footer :where(h2, a) {
-  color: var(--fj-surface);
-}
-
-.field-journal .site-footer__eyebrow,
-.field-journal .site-footer__label {
-  color: var(--fj-brass);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: .62rem;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-
-.field-journal .site-footer__statement,
-.field-journal .site-footer__contact span,
-.field-journal .site-footer__legal {
-  color: color-mix(in srgb, var(--fj-surface) 72%, transparent);
-}
-
-.field-journal .site-footer__links a,
-.field-journal .site-footer__contact a,
-.field-journal .site-footer__legal a {
-  transition: color var(--fj-fast) var(--fj-ease), transform var(--fj-fast) var(--fj-ease);
-}
-
-.field-journal .site-footer__links a:hover,
-.field-journal .site-footer__contact a:hover,
-.field-journal .site-footer__legal a:hover {
-  color: var(--fj-brass);
-}
+/* Previous footer theme removed; see care-article-footer.css. */
 
 @media (max-width: 1080px) {
   .field-journal .fj-hero__grid {
