@@ -101,37 +101,7 @@
   color: var(--text);
 }
 
-.site-footer {
-  border-top: 0;
-  background: var(--accent-hover);
-  color: var(--accent-text);
-}
-
-.site-footer h2,
-.site-footer h3,
-.site-footer strong {
-  color: var(--accent-text);
-}
-
-.site-footer p,
-.site-footer small,
-.site-footer__eyebrow {
-  color: #c8d7d1;
-}
-
-.site-footer a {
-  color: var(--accent-text);
-}
-
-.site-footer a:hover,
-.site-footer a:focus-visible {
-  color: #ffffff;
-  text-decoration-thickness: 0.12em;
-}
-
-.site-footer__legal {
-  border-top-color: rgba(255, 255, 255, 0.2);
-}
+/* The shared Care is Personal footer is authored in care-article-footer.css. */
 
 @media (max-width: 1080px) {
   .desktop-nav {
