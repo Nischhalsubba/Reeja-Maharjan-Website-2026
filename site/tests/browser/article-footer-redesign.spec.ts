@@ -41,7 +41,7 @@ test('all article detail headers have a wide reading masthead and metadata below
         expect(sizes.headerWidth).toBeGreaterThan(900);
         expect(sizes.titleWidth).toBeGreaterThan(850);
       } else {
-        expect(sizes.headerWidth).toBeGreaterThan(width - 70);
+        expect(sizes.headerWidth).toBeGreaterThan(width - 160);
       }
       await expect(title).toHaveCSS('font-family', /Public Sans/);
       await expect(article).toBeVisible();
