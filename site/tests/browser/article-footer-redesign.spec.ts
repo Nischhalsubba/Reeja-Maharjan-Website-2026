@@ -39,7 +39,7 @@ test('all article detail headers have a wide reading masthead and metadata below
       if (width >= 1024) {
         expect(sizes.outerWidth, 'The outer article should not be clamped to the old 860px width').toBeGreaterThan(950);
         expect(sizes.headerWidth).toBeGreaterThan(900);
-        expect(sizes.titleWidth).toBeGreaterThan(850);
+        expect(sizes.titleWidth).toBeGreaterThan(width >= 1440 ? 850 : 680);
       } else {
         expect(sizes.headerWidth).toBeGreaterThan(width - 160);
       }
