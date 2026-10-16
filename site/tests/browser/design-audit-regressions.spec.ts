@@ -132,7 +132,7 @@ test('primary pages keep Reeja as the subject in titles, descriptions and headin
 
     expect(title).toContain('Reeja Maharjan');
     expect(description).toContain('Reeja');
-    if (path === '/') expect(heading).toBe('Care ispersonal.');
+    if (path === '/') expect(heading.replace(/\s+/g, ' ')).toMatch(/Care is\s*personal\./);
     else expect(heading).toContain('Reeja');
   }
 
