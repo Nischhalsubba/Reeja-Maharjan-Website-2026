@@ -33,6 +33,7 @@ const hiringSchema = {
     sameAs: [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean)
   }
 };
+import EditorialPhoto from '../components/EditorialPhoto.astro';
 ---
 
 <BaseLayout title={siteCopy.hire.title} description={siteCopy.hire.description}>
@@ -57,6 +58,7 @@ const hiringSchema = {
         </dl>
       </div>
     </section>
+    <EditorialPhoto kind="clinical" label="Clinical experience and professional opportunities" />
 
     <section class="site-section">
       <div class="container">
