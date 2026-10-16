@@ -10,6 +10,7 @@ const posts = blogPosts.filter((post) =>
     .toLowerCase()
     .match(/maternal|newborn|postnatal|breastfeeding|pregnan|mother/)
 ).slice(0, 3);
+import EditorialPhoto from '../components/EditorialPhoto.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -26,6 +27,7 @@ const posts = blogPosts.filter((post) =>
         </dl>
       </div>
     </section>
+    <EditorialPhoto kind="nepal" label="Maternal health and community care in Nepal" />
 
     <section class="site-section">
       <div class="container">
