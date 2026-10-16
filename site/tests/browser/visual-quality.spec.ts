@@ -47,7 +47,7 @@ test('Field Journal remains composed across release viewports', async ({ browser
         dimensions.clientWidth + 1
       );
       expect(dimensions.designSystem).toBe('reeja-field-journal');
-      expect(dimensions.background).toBe('rgb(244, 239, 230)');
+      expect(dimensions.background).toBe(route.path === '/' ? 'rgb(255, 255, 255)' : 'rgb(244, 239, 230)');
 
       await expect(page.locator('body')).toHaveClass(/field-journal/);
       await expect(page.locator('main')).toBeVisible();

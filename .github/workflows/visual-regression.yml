@@ -34,7 +34,7 @@ jobs:
           echo "candidate=${CAND}" >> "$GITHUB_OUTPUT"
       - name: Install baseline dependencies
         working-directory: ${{ steps.roots.outputs.baseline }}
-        run: npm ci --no-audit --no-fund
+        run: npm ci --no-audit --no-fund --legacy-peer-deps
       - name: Install candidate dependencies and browser
         working-directory: ${{ steps.roots.outputs.candidate }}
         run: |
