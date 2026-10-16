@@ -15,7 +15,7 @@ test('all social previews serve actual generated PNG images and never stale SVG 
     const source = await og.getAttribute('content');
     expect(source, 'Open Graph must reference PNG social asset').toContain(prefix);
     expect(await twitter.getAttribute('content')).toContain(prefix);
-    const response = await request.get(source!);
+    const response = await request.get(new URL(prefix, origin).toString());
     expect(response.ok(), prefix).toBe(true);
     expect(response.headers()['content-type']).toMatch(/image\/png/);
     const data = await response.body();
