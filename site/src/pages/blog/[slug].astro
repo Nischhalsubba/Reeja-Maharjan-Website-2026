@@ -15,7 +15,7 @@ if (!post) return Astro.redirect('/404');
 
 const governance = getBlogGovernance(post.slug);
 const articleUrl = new URL(`/blog/${post.slug}/`, Astro.site ?? Astro.url.origin).toString();
-const articleImagePath = `/og/articles/${post.slug}.svg`;
+const articleImagePath = `/og/articles/${post.slug}.png`;
 const articleImage = new URL(articleImagePath, Astro.site ?? Astro.url.origin).toString();
 const authorUrl = new URL('/', Astro.site ?? Astro.url.origin).toString();
 const relatedPosts = post.relatedSlugs
