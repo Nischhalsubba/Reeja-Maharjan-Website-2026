@@ -41,7 +41,7 @@ const articles = [blogPosts.find(p => p.slug === 'essential-maternal-newborn-car
         <a class="cip-textlink" href="/cv/">Explore my professional journey <span aria-hidden="true">↗</span></a>
       </div>
       <div class="cip-about__detail">
-        <div class="cip-about__photo" aria-hidden="true"><span>CARE<br/>STARTS WITH<br/>LISTENING.</span></div>
+        <div class="cip-about__photo"><img src="https://images.unsplash.com/photo-1689023542311-36b129826c89?auto=format&fit=crop&w=1000&q=78" alt="Illustrative close-up of note-taking; not a photograph of Reeja" loading="lazy" decoding="async" width="900" height="700" /><span>CARE<br/>STARTS WITH<br/>LISTENING.</span></div>
         <div class="cip-about__note"><span class="cip-note-line" aria-hidden="true"></span><p>Every role has reinforced the same priorities: respect, clarity, and the people behind every record.</p></div>
       </div>
     </div>
@@ -56,14 +56,14 @@ const articles = [blogPosts.find(p => p.slug === 'essential-maternal-newborn-car
       <div class="cip-pathways__grid">
         <article class="cip-pathway">
           <span class="cip-pathway__number">01</span>
-          <div class="cip-pathway__image cip-pathway__image--care" aria-hidden="true"><span>CARE IN PRACTICE</span></div>
+          <div class="cip-pathway__image cip-pathway__image--care"><img src="https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=1000&q=78" alt="Illustrative image of a healthcare team walking through a hospital, not Reeja's colleagues" loading="lazy" decoding="async" width="1000" height="600" /><span>CARE IN PRACTICE</span></div>
           <h3>Clinical care</h3>
           <p>Experience across maternal-newborn and general hospital nursing, including patient education, monitoring, documentation, and structured handover.</p>
           <a class="cip-textlink" href="/nursing-practice/">Explore nursing practice <span aria-hidden="true">↗</span></a>
         </article>
         <article class="cip-pathway">
           <span class="cip-pathway__number">02</span>
-          <div class="cip-pathway__image cip-pathway__image--research" aria-hidden="true"><span>RESEARCH &amp; PEOPLE</span></div>
+          <div class="cip-pathway__image cip-pathway__image--research"><img src="https://images.unsplash.com/photo-1708970981023-b3f498ce17ce?auto=format&fit=crop&w=1000&q=78" alt="Illustrative landscape of Kathmandu, Nepal" loading="lazy" decoding="async" width="1000" height="600" /><span>RESEARCH &amp; PEOPLE</span></div>
           <h3>Maternal-health research</h3>
           <p>Supporting IISH MOM-HD research through participant education, home BP/BG monitoring support, tele-follow-up, and careful study documentation.</p>
           <a class="cip-textlink" href="/clinical-research/">Explore research work <span aria-hidden="true">↗</span></a>
@@ -117,7 +117,7 @@ const articles = [blogPosts.find(p => p.slug === 'essential-maternal-newborn-car
       <div class="cip-journal__grid">
         {articles.map((post, index) => (
           <article class="cip-article">
-            <div class={'cip-article__visual cip-article__visual--' + index} aria-hidden="true"><span>{index === 0 ? 'MATERNAL HEALTH' : index === 1 ? 'NURSING PRACTICE' : 'MY JOURNEY'}</span></div>
+            <div class={'cip-article__visual cip-article__visual--' + index}><img src={index === 0 ? 'https://images.unsplash.com/photo-1708970981023-b3f498ce17ce?auto=format&fit=crop&w=700&q=75' : index === 1 ? 'https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=700&q=75' : 'https://images.unsplash.com/photo-1689023542311-36b129826c89?auto=format&fit=crop&w=700&q=75'} alt={index === 0 ? 'Landscape of Kathmandu in Nepal' : index === 1 ? 'Healthcare professionals in a hospital hallway, illustrative photo' : 'Close-up of notes being written, illustrative photo'} loading="lazy" decoding="async" width="700" height="450" /><span>{index === 0 ? 'MATERNAL HEALTH' : index === 1 ? 'NURSING PRACTICE' : 'MY JOURNEY'}</span></div>
             <p class="cip-article__meta">{post.tags[0] ?? 'Nursing'} · {post.readMinutes} min read</p>
             <h3><a href={'/blog/' + post.slug + '/'}>{post.title}</a></h3>
             <p>{post.excerpt}</p>
