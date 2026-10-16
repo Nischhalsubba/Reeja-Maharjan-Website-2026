@@ -1,0 +1,143 @@
+---
+import { professionalFacts } from '../content/professional-facts';
+import { profile } from '../content/profile';
+import { blogPosts } from '../content/blog';
+
+const experience = profile.experience;
+const articles = [blogPosts.find(p => p.slug === 'essential-maternal-newborn-care-guide-2026'), blogPosts.find(p => p.slug === 'mastering-nursing-documentation-sbar-handover'), blogPosts.find(p => p.slug === 'from-nursing-student-to-registered-nurse-my-journey')].filter((post): post is (typeof blogPosts)[number] => Boolean(post));
+---
+<div class="cip-home">
+  <section class="cip-hero" id="home" aria-labelledby="cip-title">
+    <div class="cip-wrap cip-hero__grid">
+      <div class="cip-hero__copy">
+        <p class="cip-eyebrow">REEJA MAHARJAN <span aria-hidden="true">/</span> REGISTERED NURSE &amp; RESEARCH ASSISTANT</p>
+        <h1 id="cip-title">Care is<br/><span>personal.</span></h1>
+        <p class="cip-hero__lead">Nursing practice. Maternal-health research.<br/>People first.</p>
+        <div class="cip-actions">
+          <a class="cip-button cip-button--primary" href="#about" data-track="home-story">Discover my story <span aria-hidden="true">↗</span></a>
+          <a class="cip-link" href={professionalFacts.publicCvPath} data-track="home-cv">View CV <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="cip-hero__index" aria-label="Areas of practice">
+          <span>01 <strong>Clinical care</strong></span>
+          <span>02 <strong>Maternal health</strong></span>
+          <span>03 <strong>Research</strong></span>
+        </div>
+      </div>
+      <figure class="cip-hero__portrait">
+        <div class="cip-hero__portrait-accent" aria-hidden="true"></div>
+        <img src="/reeja-headshot.jpg" alt="Portrait of Reeja Maharjan" width="800" height="1000" loading="eager" fetchpriority="high" decoding="async" />
+        <figcaption>REEJA MAHARJAN<br/><span>{professionalFacts.currentLocation}</span></figcaption>
+      </figure>
+    </div>
+    <div class="cip-hero__watermark" aria-hidden="true">REEJA</div>
+  </section>
+
+  <section id="about" class="cip-about cip-section" aria-labelledby="cip-about-title">
+    <div class="cip-wrap cip-about__grid">
+      <div>
+        <p class="cip-eyebrow cip-eyebrow--coral"><span class="cip-dash" aria-hidden="true"></span> ABOUT ME</p>
+        <h2 id="cip-about-title">A career built<br/>around people.</h2>
+        <p>I’m Reeja, a registered nurse with experience in hospital care and maternal-health research in Nepal. Across clinical work and participant support, I focus on clear communication, careful documentation, and thoughtful follow-up.</p>
+        <a class="cip-textlink" href="/cv/">Explore my professional journey <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="cip-about__detail">
+        <div class="cip-about__photo" aria-hidden="true"><span>CARE<br/>STARTS WITH<br/>LISTENING.</span></div>
+        <div class="cip-about__note"><span class="cip-note-line" aria-hidden="true"></span><p>Every role has reinforced the same priorities: respect, clarity, and the people behind every record.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="practice" class="cip-section cip-pathways" aria-labelledby="cip-practice-title">
+    <div class="cip-wrap">
+      <div class="cip-sectionhead">
+        <div><p class="cip-eyebrow cip-eyebrow--coral">WHAT I DO</p><h2 id="cip-practice-title">Two sides of my practice.</h2></div>
+        <p>Clinical care and maternal-health research—different settings, shared commitment to people.</p>
+      </div>
+      <div class="cip-pathways__grid">
+        <article class="cip-pathway">
+          <span class="cip-pathway__number">01</span>
+          <div class="cip-pathway__image cip-pathway__image--care" aria-hidden="true"><span>CARE IN PRACTICE</span></div>
+          <h3>Clinical care</h3>
+          <p>Experience across maternal-newborn and general hospital nursing, including patient education, monitoring, documentation, and structured handover.</p>
+          <a class="cip-textlink" href="/nursing-practice/">Explore nursing practice <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="cip-pathway">
+          <span class="cip-pathway__number">02</span>
+          <div class="cip-pathway__image cip-pathway__image--research" aria-hidden="true"><span>RESEARCH &amp; PEOPLE</span></div>
+          <h3>Maternal-health research</h3>
+          <p>Supporting IISH MOM-HD research through participant education, home BP/BG monitoring support, tele-follow-up, and careful study documentation.</p>
+          <a class="cip-textlink" href="/clinical-research/">Explore research work <span aria-hidden="true">↗</span></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cip-research" id="research" aria-labelledby="cip-research-title">
+    <div class="cip-wrap cip-research__grid">
+      <div class="cip-research__copy">
+        <p class="cip-eyebrow">FEATURED FOCUS <span class="cip-dash" aria-hidden="true"></span></p>
+        <h2 id="cip-research-title">Beyond<br/><span>the bedside.</span></h2>
+        <p>At the Institute for Implementation Science and Health, my role on MOM-HD connects participant support, home monitoring, and careful follow-up in maternal-health research.</p>
+        <a class="cip-button cip-button--primary" href="/clinical-research/">Explore the research <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="cip-research__graphic" aria-hidden="true">
+        <div class="cip-research__orbit cip-research__orbit--one"></div>
+        <div class="cip-research__orbit cip-research__orbit--two"></div>
+        <div class="cip-research__label">PEOPLE<br/>RESEARCH<br/>BETTER CARE</div>
+        <span class="cip-research__plus">+</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="cip-section cip-journey" id="experience" aria-labelledby="cip-journey-title">
+    <div class="cip-wrap">
+      <div class="cip-sectionhead">
+        <div><p class="cip-eyebrow cip-eyebrow--coral">THE JOURNEY SO FAR</p><h2 id="cip-journey-title">Experience, in context.</h2></div>
+        <p>From hospital care to maternal-health research. The detailed chronology, dates, and responsibilities are available in my CV.</p>
+      </div>
+      <ol class="cip-journey__list">
+        {experience.map((item, index) => (
+          <li class="cip-journey__item">
+            <span class="cip-journey__index">{String(index + 1).padStart(2,'0')}</span>
+            <div class="cip-journey__role"><h3>{item.role}</h3><p>{item.organization}</p></div>
+            <div class="cip-journey__meta"><span>{item.period}</span><span>{item.location}</span></div>
+          </li>
+        ))}
+      </ol>
+      <a class="cip-textlink" href="/cv/">View full experience &amp; credentials <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="cip-section cip-journal" id="writing" aria-labelledby="cip-journal-title">
+    <div class="cip-wrap">
+      <div class="cip-sectionhead">
+        <div><p class="cip-eyebrow cip-eyebrow--coral">FROM THE JOURNAL</p><h2 id="cip-journal-title">Selected writing.</h2></div>
+        <p>Practical, source-linked writing on maternal health, nursing practice, and professional development.</p>
+      </div>
+      <div class="cip-journal__grid">
+        {articles.map((post, index) => (
+          <article class="cip-article">
+            <div class={'cip-article__visual cip-article__visual--' + index} aria-hidden="true"><span>{index === 0 ? 'MATERNAL HEALTH' : index === 1 ? 'NURSING PRACTICE' : 'MY JOURNEY'}</span></div>
+            <p class="cip-article__meta">{post.tags[0] ?? 'Nursing'} · {post.readMinutes} min read</p>
+            <h3><a href={'/blog/' + post.slug + '/'}>{post.title}</a></h3>
+            <p>{post.excerpt}</p>
+            <a class="cip-article__arrow" href={'/blog/' + post.slug + '/'} aria-label={'Read ' + post.title}>↗</a>
+          </article>
+        ))}
+      </div>
+      <a class="cip-textlink" href="/blog/">View all articles <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+
+  <section class="cip-contact" id="contact" aria-labelledby="cip-contact-title">
+    <div class="cip-wrap cip-contact__grid">
+      <div>
+        <p class="cip-eyebrow">LET'S CONNECT</p>
+        <h2 id="cip-contact-title">Let’s make<br/>care better.</h2>
+        <p>Open to professional inquiries and thoughtful conversations about nursing and maternal-health research.</p>
+        <a class="cip-button cip-button--light" href="/contact/" data-track="home-contact">Get in touch <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="cip-contact__side"><span>PEOPLE</span><span>OPPORTUNITIES</span><span>COLLABORATION</span><span>STRONGER COMMUNITIES</span></div>
+    </div>
+  </section>
+</div>
