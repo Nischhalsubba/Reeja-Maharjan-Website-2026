@@ -25,7 +25,7 @@ const articles = [blogPosts.find(p => p.slug === 'essential-maternal-newborn-car
       </div>
       <figure class="cip-hero__portrait">
         <div class="cip-hero__portrait-accent" aria-hidden="true"></div>
-        <img src="/reeja-headshot.jpg" alt="Portrait of Reeja Maharjan" width="800" height="1000" loading="eager" fetchpriority="high" decoding="async" />
+        <picture><source type="image/webp" srcset="/reeja-headshot-360.webp 360w, /reeja-headshot-720.webp 720w, /reeja-headshot-960.webp 960w" sizes="(max-width: 720px) 90vw, 490px" /><img src="/reeja-headshot.jpg" alt="Portrait of Reeja Maharjan" width="800" height="1000" loading="eager" fetchpriority="high" decoding="async" /></picture>
         <figcaption>REEJA MAHARJAN<br/><span>{professionalFacts.currentLocation}</span></figcaption>
       </figure>
     </div>
