@@ -39,7 +39,8 @@ export function initCarePersonalMotion(): () => void {
     const reveals = gsap.utils.toArray<HTMLElement>(
       '.cip-home .cip-about__grid > *, .cip-home .cip-sectionhead, .cip-home .cip-pathway, ' +
       '.cip-home .cip-research__copy, .cip-home .cip-journey__item, .cip-home .cip-article, ' +
-      '.cip-home .cip-contact__grid > *, .cip-photo-band__caption'
+      '.cip-home .cip-contact__grid > *, .cip-photo-band__caption, ' +
+      '.care-footer__intro, .care-footer__invite-actions'
     );
     reveals.forEach((element) => {
       gsap.from(element, {
@@ -79,7 +80,7 @@ export function initCarePersonalMotion(): () => void {
 
     const interactive = Array.from(document.querySelectorAll<HTMLElement>(
       '.cip-button, .site-button, .care-button, .nav-cta, .cip-textlink, .cip-link, ' +
-      '.blog-card a, .contact-sidebar__social'
+      '.blog-card a, .contact-sidebar__social, .care-footer__cta'
     ));
 
     interactive.forEach((element) => {
