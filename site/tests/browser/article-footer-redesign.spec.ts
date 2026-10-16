@@ -66,7 +66,7 @@ test('redesigned footer is consistent and accessible on homepage and article', a
       await expect(footer.getByRole('navigation', { name: "Explore Reeja's website" })).toBeVisible();
       await expect(footer.getByRole('navigation', { name: 'Professional resources' })).toBeVisible();
       await expect(footer.locator('.cip-image-credits')).toHaveCount(1);
-      await expect(footer.getByRole('link', { name: /Back to top/ })).toHaveAttribute('href', '#main-content');
+      await expect(footer.getByRole('link', { name: /Back to top/ })).toHaveAttribute('href', '#page-top');
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
       expect(overflow, `${path} footer overflow at ${width}px`).toBeLessThanOrEqual(1);
     }
