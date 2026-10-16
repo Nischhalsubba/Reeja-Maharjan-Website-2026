@@ -26,3 +26,16 @@ for (const file of source) {
   console.log('Social preview generated:', output.replace(dist, ''), result.size, 'bytes');
 }
 if (source.length < 2) throw new Error('Missing article social preview SVG sources');
+
+/* Responsive self-hosted WebP variants for the approved real portrait. */
+const portraitSource = resolve('public/reeja-headshot.jpg');
+for (const width of [360, 720, 960]) {
+  const output = join(dist, `reeja-headshot-${width}.webp`);
+  await sharp(portraitSource)
+    .rotate()
+    .resize({ width, withoutEnlargement: true })
+    .webp({ quality: 78, effort: 5 })
+    .toFile(output);
+  if ((await stat(output)).size < 1000) throw new Error('Invalid portrait variant ' + output);
+}
+console.log('Generated three responsive WebP portraits for the homepage.');
