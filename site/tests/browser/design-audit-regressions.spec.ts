@@ -105,9 +105,9 @@ test('Field Journal palette and typography apply across the site', async ({ page
     });
 
     expect(state.fieldJournal).toBe(true);
-    expect(state.background).toBe('rgb(244, 239, 230)');
-    expect(state.bodyFont).toContain('Atkinson Hyperlegible');
-    expect(state.headingFont).toContain('Crimson Pro');
+    expect(state.background).toBe('rgb(255, 255, 255)');
+    expect(state.bodyFont).toContain('Public Sans');
+    expect(state.headingFont).toContain('Public Sans');
     expect(state.canvasCount).toBe(0);
   }
 });
