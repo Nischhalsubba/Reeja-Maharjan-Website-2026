@@ -236,3 +236,30 @@
 /* Prevent a duplicate trailing period from the older homepage wordmark rule. */
 .field-journal:has(.cip-home) .brand__text strong::after{content:none}
 .field-journal .brand__text strong span{color:#ef7866}
+
+/* Final visual polish: quiet navigation and shorter editorial hero lines. */
+.field-journal .desktop-nav > a:not(.nav-cta)::before,
+.field-journal .desktop-nav > a:not(.nav-cta)::after{display:none;content:none}
+.field-journal .desktop-nav > a:not(.nav-cta){
+  padding:11px 12px;
+  color:#303b56;
+  font-size:.88rem;
+  letter-spacing:-.01em;
+}
+.field-journal .desktop-nav > a:not(.nav-cta)[aria-current="page"]{
+  color:#3454f5;
+  background:#eef0ff;
+  border-radius:3px;
+}
+.field-journal .desktop-nav .nav-cta{text-transform:none;font-weight:750}
+.field-journal :where(.site-page__hero h1,.contact-hero h1,.blog-article__header h1){
+  max-width:17ch;
+  font-size:clamp(2.65rem,4.45vw,4.75rem);
+  line-height:1.07;
+}
+@media(max-width:640px){
+  .field-journal :where(.site-page__hero h1,.contact-hero h1,.blog-article__header h1){
+    font-size:clamp(2.25rem,9vw,3.35rem);
+    line-height:1.08;
+  }
+}
