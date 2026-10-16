@@ -5,6 +5,7 @@ import { professionalFacts } from '../content/professional-facts';
 import { siteCopy } from '../content/site-copy';
 
 const copy = siteCopy.contact;
+import EditorialPhoto from '../components/EditorialPhoto.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -24,6 +25,7 @@ const copy = siteCopy.contact;
         </div>
       </div>
     </section>
+    <EditorialPhoto kind="writing" label="A thoughtful conversation starts here" />
 
     <section class="contact-section">
       <div class="container contact-layout">
