@@ -33,7 +33,7 @@
   --fj-max: 1320px;
   color: var(--fj-ink);
   background: var(--fj-paper);
-  font-family: "Atkinson Hyperlegible", "Public Sans", system-ui, sans-serif;
+  font-family: var(--font-sans);
 }
 
 .field-journal::before {
@@ -53,7 +53,7 @@
 }
 
 .field-journal :where(h1, h2, h3) {
-  font-family: "Crimson Pro", "Source Serif 4", Georgia, serif;
+  font-family: var(--font-display);
   color: var(--fj-ink);
   text-wrap: balance;
 }
@@ -105,7 +105,7 @@
   border-radius: 0;
   background: transparent;
   color: var(--fj-ink);
-  font-family: "Crimson Pro", "Source Serif 4", Georgia, serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   font-style: italic;
   font-weight: 550;
@@ -113,14 +113,14 @@
 }
 
 .field-journal .brand__text strong {
-  font-family: "Crimson Pro", "Source Serif 4", Georgia, serif;
+  font-family: var(--font-display);
   font-size: 1.08rem;
   font-weight: 550;
 }
 
 .field-journal .brand__text small {
   color: var(--fj-muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .62rem;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -137,7 +137,7 @@
   align-items: center;
   padding: 0 var(--fj-space-1);
   color: var(--fj-graphite);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .65rem;
   font-weight: 500;
   letter-spacing: .035em;
@@ -214,7 +214,7 @@
 .field-journal .fj-kicker {
   margin: 0;
   color: var(--fj-madder);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .68rem;
   font-weight: 500;
   letter-spacing: .12em;
@@ -335,7 +335,7 @@
   padding-top: var(--fj-space-3);
   border-top: 1px solid var(--fj-line);
   color: var(--fj-muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .64rem;
   letter-spacing: .07em;
   line-height: 1.5;
@@ -387,7 +387,7 @@
   padding: var(--fj-space-1) var(--fj-space-2);
   background: var(--fj-madder);
   color: var(--fj-surface);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .62rem;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -401,7 +401,7 @@
   max-width: 160px;
   margin: 0;
   color: var(--fj-madder);
-  font-family: "Crimson Pro", "Source Serif 4", Georgia, serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   font-style: italic;
   line-height: 1.25;
@@ -418,7 +418,7 @@
   border: 1px solid var(--fj-ink);
   background: var(--fj-surface);
   color: var(--fj-graphite);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .6rem;
   letter-spacing: .035em;
   line-height: 1.5;
@@ -494,7 +494,7 @@
 .field-journal .fj-registry__meta,
 .field-journal .fj-reading__meta {
   color: var(--fj-madder);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .64rem;
   letter-spacing: .07em;
   line-height: 1.55;
@@ -570,7 +570,7 @@
 .field-journal .fj-log__terms {
   margin-top: var(--fj-space-3) !important;
   color: var(--fj-brass) !important;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .62rem;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -639,7 +639,7 @@
 
 .field-journal .fj-reading__entry small {
   color: var(--fj-madder);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .62rem;
   letter-spacing: .06em;
   text-align: right;
@@ -699,47 +699,12 @@
 
 .field-journal .fj-contact__email {
   color: var(--fj-muted);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
   font-size: .68rem;
   line-height: 1.5;
 }
 
-.field-journal .site-footer {
-  border-top: 1px solid var(--fj-ink);
-  background: var(--fj-ink);
-  color: var(--fj-surface);
-}
-
-.field-journal .site-footer :where(h2, a) {
-  color: var(--fj-surface);
-}
-
-.field-journal .site-footer__eyebrow,
-.field-journal .site-footer__label {
-  color: var(--fj-brass);
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-size: .62rem;
-  letter-spacing: .07em;
-  text-transform: uppercase;
-}
-
-.field-journal .site-footer__statement,
-.field-journal .site-footer__contact span,
-.field-journal .site-footer__legal {
-  color: color-mix(in srgb, var(--fj-surface) 72%, transparent);
-}
-
-.field-journal .site-footer__links a,
-.field-journal .site-footer__contact a,
-.field-journal .site-footer__legal a {
-  transition: color var(--fj-fast) var(--fj-ease), transform var(--fj-fast) var(--fj-ease);
-}
-
-.field-journal .site-footer__links a:hover,
-.field-journal .site-footer__contact a:hover,
-.field-journal .site-footer__legal a:hover {
-  color: var(--fj-brass);
-}
+/* Previous footer theme removed; see care-article-footer.css. */
 
 @media (max-width: 1080px) {
   .field-journal .fj-hero__grid {

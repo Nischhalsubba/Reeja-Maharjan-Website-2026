@@ -20,7 +20,7 @@ const approvedReleaseChanges = [];
 const observedVersions = {};
 // An explicit approved release transition, not a blanket exemption.
 // Future changes within v3 continue to receive strict pixel comparison.
-const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal', '3.0.0-care-personal=>3.1.0-care-personal']);
+const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal', '3.0.0-care-personal=>3.1.0-care-personal', '3.1.0-care-personal=>3.2.0-care-personal']);
 const browser = await chromium.launch();
 await mkdir(outputDir, { recursive: true });
 
