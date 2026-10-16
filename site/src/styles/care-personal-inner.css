@@ -232,3 +232,7 @@
 .field-journal .cip-image-credits summary:focus-visible{outline:2px solid #ff927a;outline-offset:4px}
 .field-journal .cip-image-credits p{max-width:900px;padding-top:9px;margin:0}
 .field-journal .cip-image-credits a{color:#bdc9ff;text-decoration:underline;text-underline-offset:3px}
+
+/* Prevent a duplicate trailing period from the older homepage wordmark rule. */
+.field-journal:has(.cip-home) .brand__text strong::after{content:none}
+.field-journal .brand__text strong span{color:#ef7866}
