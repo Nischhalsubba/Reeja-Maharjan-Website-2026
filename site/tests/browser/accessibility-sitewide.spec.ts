@@ -106,7 +106,7 @@ test('keyboard skip navigation and focused controls stay visible', async ({ page
   for (const route of ['/', '/contact/', '/blog/mastering-nursing-documentation-sbar-handover/']) {
     await page.goto(origin + route, { waitUntil: 'domcontentloaded' });
     await page.keyboard.press('Tab');
-    const skip = page.getByRole('link', { name: /Skip to Reeja/i });
+    const skip = page.getByRole('link', { name: /Skip to main content/i });
     await expect(skip).toBeFocused();
     await expect(skip).toHaveAttribute('href', '#main-content');
     const style = await skip.evaluate((element) => {
