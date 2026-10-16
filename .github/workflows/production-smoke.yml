@@ -22,8 +22,11 @@ permissions:
   contents: read
   statuses: write
 
+# Scope cancellation to the triggering branch. A successful Build Check on a
+# pull-request branch may produce a skipped Production Smoke workflow; it must
+# never cancel the actual main production verification already running.
 concurrency:
-  group: production-verification-main
+  group: production-verification-${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_branch || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
