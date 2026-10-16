@@ -10,6 +10,7 @@ const posts = blogPosts.filter((post) =>
     .toLowerCase()
     .match(/nursing|documentation|sbar|handover|confidential|licensure|student|general care/)
 ).slice(0, 3);
+import EditorialPhoto from '../components/EditorialPhoto.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -26,6 +27,7 @@ const posts = blogPosts.filter((post) =>
         </dl>
       </div>
     </section>
+    <EditorialPhoto kind="clinical" label="Care, communication and clinical practice" />
 
     <section class="site-section">
       <div class="container">

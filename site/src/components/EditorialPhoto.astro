@@ -1,0 +1,48 @@
+---
+type PhotoKey = 'clinical' | 'research' | 'nepal' | 'writing' | 'portrait';
+type Props = { kind: PhotoKey; label?: string; compact?: boolean };
+const {kind, label, compact = false} = Astro.props;
+const images: Record<PhotoKey, {src:string; alt:string; photographer:string; credit:string}> = {
+  clinical: {
+    src: 'https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Healthcare professionals walking through a hospital hallway; illustrative image from Mexico',
+    photographer: 'Luis Melendez',
+    credit: 'https://unsplash.com/photos/group-of-doctors-walking-on-hospital-hallway-Pd4lRfKo16U'
+  },
+  research: {
+    src: 'https://images.unsplash.com/photo-1689023542311-36b129826c89?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Hands writing notes in a notebook; illustrative image, not Reeja or a study participant',
+    photographer: 'Fiona Murray-deGraaff',
+    credit: 'https://unsplash.com/photos/a-woman-sitting-at-a-desk-with-a-notebook-and-pen-PPRKVDy47TY'
+  },
+  nepal: {
+    src: 'https://images.unsplash.com/photo-1708970981023-b3f498ce17ce?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Landscape view over Kathmandu, Nepal, surrounded by hills',
+    photographer: 'Michael Starkie',
+    credit: 'https://unsplash.com/photos/a-view-of-a-city-with-mountains-in-the-background-j2ligTqDvNU'
+  },
+  writing: {
+    src: 'https://images.unsplash.com/photo-1689023542311-36b129826c89?auto=format&fit=crop&w=1600&q=80',
+    alt: 'Close-up of an individual writing notes; illustrative image',
+    photographer: 'Fiona Murray-deGraaff',
+    credit: 'https://unsplash.com/photos/a-woman-sitting-at-a-desk-with-a-notebook-and-pen-PPRKVDy47TY'
+  },
+  portrait: {
+    src: '/reeja-headshot.jpg',
+    alt: 'Portrait of Reeja Maharjan',
+    photographer: 'Reeja Maharjan',
+    credit: '/cv/'
+  }
+};
+const photo = images[kind];
+---
+<figure class:list={['cip-photo-band', compact && 'cip-photo-band--compact', 'cip-photo-band--' + kind]} data-cip-image>
+  <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" width="1600" height="900" />
+  <figcaption class="cip-photo-band__caption">
+    {label && <span class="cip-photo-band__label">{label}</span>}
+    <span class="cip-photo-band__credit">
+      {kind === 'portrait' ? 'Reeja Maharjan' : 'Illustrative photograph · '}
+      {kind !== 'portrait' && <a href={photo.credit} target="_blank" rel="noopener noreferrer">Photo: {photo.photographer} / Unsplash</a>}
+    </span>
+  </figcaption>
+</figure>

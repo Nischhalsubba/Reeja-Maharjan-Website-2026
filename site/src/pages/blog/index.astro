@@ -33,6 +33,7 @@ const topicGroups = [
   ...topic,
   count: blogPosts.filter((post) => [post.primaryKeyword, ...post.supportingKeywords, ...post.tags, post.title].join(' ').match(topic.pattern)).length
 }));
+import EditorialPhoto from '../../components/EditorialPhoto.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -51,6 +52,7 @@ const topicGroups = [
         </dl>
       </div>
     </section>
+    <EditorialPhoto kind="writing" label="Reflections on nursing and care" />
 
     <section class="site-section">
       <div class="container">

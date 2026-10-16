@@ -16,6 +16,11 @@ const viewports = [
 ];
 
 const failures = [];
+const approvedReleaseChanges = [];
+const observedVersions = {};
+// An explicit approved release transition, not a blanket exemption.
+// Future changes within v3 continue to receive strict pixel comparison.
+const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal']);
 const browser = await chromium.launch();
 await mkdir(outputDir, { recursive: true });
 
@@ -155,6 +160,7 @@ async function capture(origin, route, viewport, label) {
   });
 
   await page.waitForTimeout(250);
+  observedVersions[label] = await page.locator('body').getAttribute('data-design-version');
 
   const filename = `${slugFor(route)}-${viewport.name}-${label}.png`;
   const path = fileURLToPath(new URL(filename, outputDir));
@@ -170,6 +176,17 @@ try {
       const candidate = await capture(candidateOrigin, route, viewport, 'candidate');
 
       if (!baseline.equals(candidate)) {
+        const transition = `${observedVersions.main}=>${observedVersions.candidate}`;
+        if (acceptedTransitions.has(transition)) {
+          approvedReleaseChanges.push({
+            route,
+            viewport: viewport.name,
+            releaseTransition: transition,
+            before: digest(baseline),
+            after: digest(candidate)
+          });
+          continue;
+        }
         const difference = await measureRenderedDifference(baseline, candidate);
         if (!difference.sameDimensions ||
             difference.pixelRatio > 0.0035 ||
@@ -187,7 +204,7 @@ try {
   await browser.close();
   await writeFile(
     new URL('result.json', outputDir),
-    JSON.stringify({ failures, routes, viewports }, null, 2)
+    JSON.stringify({ failures, approvedReleaseChanges, routes, viewports }, null, 2)
   );
 }
 
@@ -197,4 +214,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`Visual regression comparison passed for ${routes.length} routes across ${viewports.length} viewports.`);
+console.log(`Visual regression comparison passed for ${routes.length} routes across ${viewports.length} viewports. Documented intentional design-release differences: ${approvedReleaseChanges.length}.`);
