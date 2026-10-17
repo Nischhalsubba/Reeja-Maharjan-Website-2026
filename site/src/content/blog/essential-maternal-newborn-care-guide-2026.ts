@@ -155,6 +155,7 @@ export const essentialMaternalNewbornCareGuide2026: BlogPost = {
     }
   ],
   relatedSlugs: [
+    'pre-eclampsia-pregnancy-warning-signs-monitoring-2026',
     'mental-health-maternal-care-supporting-mothers-beyond-delivery',
     'comprehensive-newborn-care-level-ii-what-nurses-learn',
     'top-10-postpartum-counselling-tips-new-nurses'
