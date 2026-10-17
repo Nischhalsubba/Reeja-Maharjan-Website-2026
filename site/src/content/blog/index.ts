@@ -1,4 +1,8 @@
 import type { BlogPost } from './types';
+import { preEclampsiaPregnancyWarningSignsMonitoring2026 } from './pre-eclampsia-pregnancy-warning-signs-monitoring-2026';
+import { gestationalDiabetesInPregnancy2026MonitoringCare } from './gestational-diabetes-in-pregnancy-2026-monitoring-care';
+import { postpartumHaemorrhage2026NursingRecognitionResponse } from './postpartum-haemorrhage-2026-nursing-recognition-response';
+import { nursingCareers2026WhoWorkforceReportNepal } from './nursing-careers-2026-who-workforce-report-nepal';
 import { essentialMaternalNewbornCareGuide2026 } from './essential-maternal-newborn-care-guide-2026';
 import { top10PostpartumCounsellingTipsNewNurses } from './top-10-postpartum-counselling-tips-new-nurses';
 import { masteringNursingDocumentationSbarHandover } from './mastering-nursing-documentation-sbar-handover';
@@ -13,6 +17,10 @@ import { fromNursingStudentToRegisteredNurseMyJourney } from './from-nursing-stu
 export type { BlogFaq, BlogPost, BlogSection, BlogSource } from './types';
 
 export const blogPosts: BlogPost[] = [
+  preEclampsiaPregnancyWarningSignsMonitoring2026,
+  gestationalDiabetesInPregnancy2026MonitoringCare,
+  postpartumHaemorrhage2026NursingRecognitionResponse,
+  nursingCareers2026WhoWorkforceReportNepal,
   essentialMaternalNewbornCareGuide2026,
   top10PostpartumCounsellingTipsNewNurses,
   masteringNursingDocumentationSbarHandover,

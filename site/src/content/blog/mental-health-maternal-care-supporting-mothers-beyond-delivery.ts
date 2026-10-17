@@ -116,6 +116,7 @@ export const mentalHealthMaternalCareSupportingMothersBeyondDelivery: BlogPost =
     }
   ],
   relatedSlugs: [
+    'gestational-diabetes-in-pregnancy-2026-monitoring-care',
     'essential-maternal-newborn-care-guide-2026',
     'top-10-postpartum-counselling-tips-new-nurses',
     'comprehensive-newborn-care-level-ii-what-nurses-learn'

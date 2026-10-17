@@ -88,7 +88,7 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
           </dl>
         </div>
       </header>
-    <EditorialPhoto kind="writing" label="From Reeja’s journal" />
+    <EditorialPhoto kind={post.heroPhotoKind ?? "writing"} label="From Reeja’s journal" />
 
       <div class="blog-article__shell blog-article__layout">
         <aside class="blog-toc" aria-labelledby="article-toc-title">

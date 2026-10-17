@@ -154,6 +154,7 @@ export const top10PostpartumCounsellingTipsNewNurses: BlogPost = {
     }
   ],
   relatedSlugs: [
+    'postpartum-haemorrhage-2026-nursing-recognition-response',
     'essential-maternal-newborn-care-guide-2026',
     'mental-health-maternal-care-supporting-mothers-beyond-delivery',
     'mastering-nursing-documentation-sbar-handover'
