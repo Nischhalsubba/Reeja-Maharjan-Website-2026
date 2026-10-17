@@ -111,6 +111,8 @@ export const futureOfNursingInNepalTelehealthCommunityCarePostCovid: BlogPost = 
     }
   ],
   relatedSlugs: [
+    'hpv-vaccine-nepal-2026-cervical-cancer-prevention',
+
     'nursing-careers-2026-who-workforce-report-nepal',
     'navigating-nurse-licensure-continuing-education-nepal',
     'safeguarding-confidentiality-healthcare-nurses-protect-patient-rights',
