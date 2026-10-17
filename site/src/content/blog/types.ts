@@ -24,6 +24,7 @@ export type BlogPost = {
   updatedAt: string;
   readMinutes: number;
   tags: string[];
+  heroPhotoKind?: 'clinical' | 'research' | 'nepal' | 'writing';
   primaryKeyword: string;
   supportingKeywords: string[];
   quickAnswer: string[];
