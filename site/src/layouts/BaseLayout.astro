@@ -10,12 +10,13 @@ import '../styles/components.css';
 import '../styles/pages.css';
 import '../styles/site-pages.css';
 import '../styles/shell.css';
-import '../styles/field-journal-home.css';
-import '../styles/field-journal-pages.css';
-import '../styles/field-journal-finish.css';
+import '../styles/care-shell.css';
+import '../styles/care-inner-layout.css';
+import '../styles/care-interaction-guards.css';
 import '../styles/care-is-personal.css';
 import '../styles/care-personal-inner.css';
 import '../styles/care-article-footer.css';
+import '../styles/care-editorial-v4.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -100,7 +101,7 @@ const graphSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="design-system" content="Care is Personal" />
-    <meta name="design-release" content="care-personal-site-3.3.0" />
+    <meta name="design-release" content="care-personal-site-4.0.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -135,7 +136,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body id="page-top" class="field-journal" data-design-system="reeja-field-journal" data-design-version="3.3.0-care-personal">
+  <body id="page-top" class="field-journal" data-design-system="care-is-personal" data-design-version="4.0.0-care-personal">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header name={professionalFacts.name} />
@@ -145,12 +146,12 @@ const graphSchema = {
     <script>
       import { initMotion } from '../lib/motion';
       import { initMobileNavA11y } from '../lib/mobileNavA11y';
-      import { initFieldJournalMotion } from '../lib/fieldJournalMotion';
+      import { initCareInnerMotion } from '../lib/careInnerMotion';
       import { initCarePersonalMotion } from '../lib/carePersonalMotion';
 
       initMotion();
       initMobileNavA11y();
-      initFieldJournalMotion();
+      initCareInnerMotion();
       initCarePersonalMotion();
 
       document.querySelectorAll<HTMLElement>('[data-track]').forEach((element) => {

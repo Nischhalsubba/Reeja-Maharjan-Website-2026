@@ -1,4 +1,4 @@
-/* Reeja Field Journal — supporting pages, contact, blog and CV. Scoped to body.field-journal. */
+/* Care is Personal · retained structural page layouts and form styles, restyled by care-editorial-v4.css. */
 
 .field-journal :where(.site-page, .contact-page, .blog-article-page, .cv-page) {
   background: var(--fj-paper);

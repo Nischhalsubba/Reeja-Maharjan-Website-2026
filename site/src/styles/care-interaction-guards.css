@@ -1,4 +1,4 @@
-/* Final Field Journal guardrails. Imported after all page styles. */
+/* Care is Personal interaction guardrails: functional forms, no historical theme ownership. */
 
 .field-journal :where(.site-page__hero, .contact-hero, .blog-article__header)::before,
 .field-journal :where(.site-page__hero, .contact-hero, .blog-article__header)::after {
@@ -55,8 +55,8 @@
 
   .field-journal .site-section--dark .site-button--primary:hover,
   .field-journal .site-section--dark .site-button--primary:focus-visible {
-    border-color: var(--fj-brass);
-    background: var(--fj-brass);
+    border-color: #b8bfff;
+    background: #b8bfff;
     color: var(--fj-ink);
   }
 

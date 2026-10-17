@@ -23,6 +23,17 @@ for (const retiredRoot of ['src-old-v55', 'src-legacy-v55']) {
 }
 
 const layoutSource = await read('src/layouts/BaseLayout.astro');
+for(const legacy of [
+  'src/styles/field-journal-home.css',
+  'src/styles/field-journal-pages.css',
+  'src/styles/field-journal-finish.css',
+  'src/lib/fieldJournalMotion.ts'
+]){
+  if(await exists(legacy)) failures.push(`Retired Field Journal source must not exist: ${legacy}`);
+}
+if(layoutSource.includes('field-journal-home.css') || layoutSource.includes('field-journal-pages.css') ||
+  layoutSource.includes('fieldJournalMotion')) failures.push('Layout still refers to a retired theme module.');
+
 const tokenSource = await read('src/styles/tokens.css');
 const baseSource = await read('src/styles/base.css');
 const shellSource = await read('src/styles/shell.css');
@@ -35,7 +46,11 @@ const expectedStyleImports = [
   '../styles/components.css',
   '../styles/pages.css',
   '../styles/site-pages.css',
-  '../styles/shell.css'
+  '../styles/shell.css',
+  '../styles/care-shell.css',
+  '../styles/care-inner-layout.css',
+  '../styles/care-interaction-guards.css',
+  '../styles/care-editorial-v4.css'
 ];
 
 for (const stylesheet of expectedStyleImports) {
