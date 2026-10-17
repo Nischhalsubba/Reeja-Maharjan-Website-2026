@@ -41,7 +41,7 @@ test('journal index includes all four October 2026 guides with working related l
     await expect(page.locator('a[href="/blog/' + slug + '/"]').first()).toBeVisible();
   }
   const articleLinks=await page.locator('.blog-index__lead-card, .blog-grid .blog-card').count();
-  expect(articleLinks).toBe(14);
+  expect(articleLinks).toBeGreaterThanOrEqual(17);
 });
 
 test('new social cards are generated as genuine PNGs',async({request})=>{

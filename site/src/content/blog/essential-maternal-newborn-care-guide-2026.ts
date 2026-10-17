@@ -155,6 +155,9 @@ export const essentialMaternalNewbornCareGuide2026: BlogPost = {
     }
   ],
   relatedSlugs: [
+    'kangaroo-mother-care-who-2025-guide-parents-nurses',
+    'postpartum-infection-warning-signs-nursing-guide-2026',
+
     'pre-eclampsia-pregnancy-warning-signs-monitoring-2026',
     'mental-health-maternal-care-supporting-mothers-beyond-delivery',
     'comprehensive-newborn-care-level-ii-what-nurses-learn',

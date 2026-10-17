@@ -13,6 +13,28 @@ const reviewDueAt = '2027-03-11';
 const sourcesAccessedAt = '2026-03-11';
 
 export const blogGovernance: Record<string, BlogGovernance> = {
+  'kangaroo-mother-care-who-2025-guide-parents-nurses': {
+    audience: 'Parents, neonatal nurses, maternity staff and nursing students',
+    userNeed: 'Understand WHO 2025 kangaroo mother care guidance, family participation, feeding support and safe home follow-up.',
+    practiceLens: 'Nursing education and safety escalation, without replacing individual neonatal treatment.',
+    sourcesAccessedAt: '2026-10-17',
+    reviewDueAt: '2027-04-17'
+  },
+  'hpv-vaccine-nepal-2026-cervical-cancer-prevention': {
+    audience: 'Nepalese parents, adolescent caregivers, students and community-health workers',
+    userNeed: 'Understand the documented Nepal HPV rollout and current need to verify eligibility with official local services.',
+    practiceLens: 'Accessible vaccine counselling without inventing current programme schedules or individual protection outcomes.',
+    sourcesAccessedAt: '2026-10-17',
+    reviewDueAt: '2027-04-17'
+  },
+  'postpartum-infection-warning-signs-nursing-guide-2026': {
+    audience: 'Postpartum families, maternity nurses and nursing students',
+    userNeed: 'Recognise warning signs of infection after birth and seek timely assessment.',
+    practiceLens: 'Clear danger-sign education, documentation, teach-back and escalation, not home diagnosis.',
+    sourcesAccessedAt: '2026-10-17',
+    reviewDueAt: '2027-04-17'
+  },
+
   'pre-eclampsia-pregnancy-warning-signs-monitoring-2026': {
     audience: 'Pregnant people, families, nurses and maternal-health staff',
     userNeed: 'Understand warning signs of pre-eclampsia, routine screening, urgent referral and the 2026 WHO hypertensive disorders roadmap.',

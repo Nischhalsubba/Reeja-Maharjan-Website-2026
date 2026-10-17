@@ -1,4 +1,8 @@
 import type { BlogPost } from './types';
+import { kangarooMotherCareWho2025GuideParentsNurses } from './kangaroo-mother-care-who-2025-guide-parents-nurses';
+import { hpvVaccineNepal2026CervicalCancerPrevention } from './hpv-vaccine-nepal-2026-cervical-cancer-prevention';
+import { postpartumInfectionWarningSignsNursingGuide2026 } from './postpartum-infection-warning-signs-nursing-guide-2026';
+
 import { preEclampsiaPregnancyWarningSignsMonitoring2026 } from './pre-eclampsia-pregnancy-warning-signs-monitoring-2026';
 import { gestationalDiabetesInPregnancy2026MonitoringCare } from './gestational-diabetes-in-pregnancy-2026-monitoring-care';
 import { postpartumHaemorrhage2026NursingRecognitionResponse } from './postpartum-haemorrhage-2026-nursing-recognition-response';
@@ -17,6 +21,9 @@ import { fromNursingStudentToRegisteredNurseMyJourney } from './from-nursing-stu
 export type { BlogFaq, BlogPost, BlogSection, BlogSource } from './types';
 
 export const blogPosts: BlogPost[] = [
+  kangarooMotherCareWho2025GuideParentsNurses,
+  hpvVaccineNepal2026CervicalCancerPrevention,
+  postpartumInfectionWarningSignsNursingGuide2026,
   preEclampsiaPregnancyWarningSignsMonitoring2026,
   gestationalDiabetesInPregnancy2026MonitoringCare,
   postpartumHaemorrhage2026NursingRecognitionResponse,
