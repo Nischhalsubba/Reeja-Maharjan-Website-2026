@@ -20,7 +20,7 @@ const routes = [
   { name: 'not-found', path: '/field-journal-page-not-found/' }
 ];
 
-test('Field Journal remains composed across release viewports', async ({ browser }) => {
+test('Care is Personal remains composed across release viewports', async ({ browser }) => {
   test.setTimeout(180_000);
 
   for (const viewport of viewports) {
@@ -46,7 +46,7 @@ test('Field Journal remains composed across release viewports', async ({ browser
       expect(dimensions.scrollWidth, `${route.path} overflows at ${viewport.width}px`).toBeLessThanOrEqual(
         dimensions.clientWidth + 1
       );
-      expect(dimensions.designSystem).toBe('reeja-field-journal');
+      expect(dimensions.designSystem).toBe('care-is-personal');
       expect(dimensions.background).toBe('rgb(255, 255, 255)');
 
       await expect(page.locator('body')).toHaveClass(/field-journal/);
