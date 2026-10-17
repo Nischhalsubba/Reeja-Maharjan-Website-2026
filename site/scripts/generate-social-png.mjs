@@ -1,9 +1,7 @@
 import { readdir, readFile, stat } from 'node:fs/promises';
-import { join, dirname } from 'node:path';
 import sharp from 'sharp';
 
 const dist = new URL('../dist/', import.meta.url);
-const root = new URL('../', import.meta.url);
 const articleDir = new URL('og/articles/', dist);
 
 async function rasterize(svgUrl, pngUrl) {
