@@ -12,14 +12,14 @@ const previewSource = await readFile(new URL('../src/pages/og/articles/[slug].sv
 
 for (const file of articleFiles) {
   const source = await readFile(new URL(file, blogDir), 'utf8');
-  const slug = source.match(/slug:\s*'([^']+)'/)?.[1];
+  const slug = source.match(/slug[\"']?\s*:\s*[\"']([^\"']+)[\"']/m)?.[1];
   if (!slug) {
     failures.push(`${file}: missing slug`);
     continue;
   }
   if (!governanceSource.includes(`'${slug}':`)) failures.push(`${file}: missing governance metadata for ${slug}`);
   for (const required of ['primaryKeyword:', 'sources:', 'relatedSlugs:', 'disclaimer:']) {
-    if (!source.includes(required)) failures.push(`${file}: missing ${required.replace(':', '')}`);
+    if (!source.includes(required) && !source.includes('"' + required.slice(0, -1) + '":')) failures.push(`${file}: missing ${required.replace(':', '')}`);
   }
 }
 
