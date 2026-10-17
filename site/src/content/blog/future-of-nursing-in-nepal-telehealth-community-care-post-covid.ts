@@ -111,6 +111,7 @@ export const futureOfNursingInNepalTelehealthCommunityCarePostCovid: BlogPost = 
     }
   ],
   relatedSlugs: [
+    'nursing-careers-2026-who-workforce-report-nepal',
     'navigating-nurse-licensure-continuing-education-nepal',
     'safeguarding-confidentiality-healthcare-nurses-protect-patient-rights',
     'from-nursing-student-to-registered-nurse-my-journey'
