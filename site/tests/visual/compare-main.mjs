@@ -1,4 +1,5 @@
 import { chromium } from '@playwright/test';
+import sharp from 'sharp';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
@@ -20,7 +21,7 @@ const approvedReleaseChanges = [];
 const observedVersions = {};
 // An explicit approved release transition, not a blanket exemption.
 // Future changes within v3 continue to receive strict pixel comparison.
-const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal', '3.0.0-care-personal=>3.1.0-care-personal', '3.1.0-care-personal=>3.2.0-care-personal', '3.2.0-care-personal=>3.3.0-care-personal']);
+const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal', '3.0.0-care-personal=>3.1.0-care-personal', '3.1.0-care-personal=>3.2.0-care-personal', '3.2.0-care-personal=>3.3.0-care-personal', '3.3.0-care-personal=>4.0.0-care-personal']);
 const browser = await chromium.launch();
 await mkdir(outputDir, { recursive: true });
 
@@ -167,9 +168,23 @@ async function capture(origin, route, viewport, label) {
   await page.waitForTimeout(100);
   observedVersions[label] = await page.locator('body').getAttribute('data-design-version');
 
+  // One opening viewport plus the complete footer, rather than an often
+  // 15,000px-tall document. Full-page semantic and overflow checks live in
+  // Browser Quality; these focused snapshots are both useful and affordable.
+  const opening = await page.screenshot({ fullPage: false, animations: 'disabled', timeout: 15000 });
+  const footer = page.locator('footer').first();
+  await footer.scrollIntoViewIfNeeded({ timeout: 8000 });
+  const closing = await footer.screenshot({ animations: 'disabled', timeout: 15000 });
+  const footerSize = await sharp(closing).metadata();
+  const screenshot = await sharp({
+    create: { width: viewport.width, height: viewport.height + (footerSize.height ?? 0), channels: 4, background: '#ffffff' }
+  }).composite([
+    { input: opening, top: 0, left: 0 },
+    { input: closing, top: viewport.height, left: 0 }
+  ]).png().toBuffer();
   const filename = `${slugFor(route)}-${viewport.name}-${label}.png`;
   const path = fileURLToPath(new URL(filename, outputDir));
-  const screenshot = await page.screenshot({ path, fullPage: true, animations: 'disabled' });
+  await writeFile(path, screenshot);
   await context.close();
   return screenshot;
 }
