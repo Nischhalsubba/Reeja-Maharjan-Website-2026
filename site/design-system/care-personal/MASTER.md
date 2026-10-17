@@ -61,7 +61,7 @@ All inner pages must use the typography rules owned by `src/styles/care-editoria
 - Footer/metadata/legal copy: minimum 0.8125rem (13px) and readable vertical spacing.
 - Blue or white 3px focus indicators depending on background; keep text contrast 4.5:1.
 - Semantic `data-design-system="care-is-personal"` and v4 `data-design-version` mark the active design.
-- OG cards: original SVG visual source, PNG output created by `scripts/generate-social-png.mjs` during Astro build; confirm `/og-default.png` and every article `/og/articles/<slug>.png`.
+- OG cards: original SVG visual source, PNG output created by `scripts/render-social-cards.mjs` during Astro build; confirm `/og-default.png` and every article `/og/articles/<slug>.png`.
 
 The retired `field-journal-home.css`, `field-journal-pages.css`, `field-journal-finish.css`, and `fieldJournalMotion.ts` have been removed. Do not reintroduce them.
 
