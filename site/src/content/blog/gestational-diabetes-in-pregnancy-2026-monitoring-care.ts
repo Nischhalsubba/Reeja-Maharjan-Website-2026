@@ -8,6 +8,7 @@ export const gestationalDiabetesInPregnancy2026MonitoringCare: BlogPost = {
   "publishedAt": "2026-10-17",
   "updatedAt": "2026-10-17",
   "readMinutes": 8,
+  "heroPhotoKind": "writing",
   "tags": [
     "maternal health",
     "gestational diabetes",
