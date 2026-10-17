@@ -222,3 +222,15 @@
   .field-journal .cv-page :where(h1,h2,h3,p,li){color:#10182f!important}
   .field-journal main :where(.site-page__hero,.site-section,.site-section--soft){background:#fff!important}
 }
+
+/* Higher-specificity component focus surfaces beat retired component selectors. */
+body.field-journal .desktop-nav a:focus-visible,
+body.field-journal main :where(a,button,input,textarea,select,summary):focus-visible {
+  outline:3px solid #1938ac;
+  outline-offset:4px;
+}
+body.field-journal .site-footer--care :where(a,button,summary):focus-visible,
+body.field-journal .site-section--dark :where(a,button):focus-visible {
+  outline:3px solid #ffffff;
+  outline-offset:4px;
+}
