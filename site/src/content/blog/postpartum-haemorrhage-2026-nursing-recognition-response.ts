@@ -8,6 +8,7 @@ export const postpartumHaemorrhage2026NursingRecognitionResponse: BlogPost = {
   "publishedAt": "2026-10-17",
   "updatedAt": "2026-10-17",
   "readMinutes": 8,
+  "heroPhotoKind": "clinical",
   "tags": [
     "maternal care",
     "postpartum haemorrhage",
