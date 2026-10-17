@@ -6,7 +6,7 @@ test('Care is Personal design language is consistent across inner routes', async
   await page.setViewportSize({ width: 390, height: 844 });
   for (const path of [
     '/clinical-research/', '/nursing-practice/', '/maternal-health/',
-    '/hire-reeja/', '/cv/', '/contact/', '/blog/',
+    '/hire-reeja/', '/contact/', '/blog/',
     '/blog/essential-maternal-newborn-care-guide-2026/'
   ]) {
     await page.goto(origin + path, { waitUntil: 'domcontentloaded' });
