@@ -13,6 +13,34 @@ const reviewDueAt = '2027-03-11';
 const sourcesAccessedAt = '2026-03-11';
 
 export const blogGovernance: Record<string, BlogGovernance> = {
+  'pre-eclampsia-pregnancy-warning-signs-monitoring-2026': {
+    audience: 'Pregnant people, families, nurses and maternal-health staff',
+    userNeed: 'Understand warning signs of pre-eclampsia, routine screening, urgent referral and the 2026 WHO hypertensive disorders roadmap.',
+    practiceLens: 'A safety-focused explanation of observation, documentation, clear communication and escalation rather than patient-specific diagnosis or medication advice.',
+    sourcesAccessedAt: '2026-10-17',
+    reviewDueAt: '2027-04-17'
+  },
+  'gestational-diabetes-in-pregnancy-2026-monitoring-care': {
+    audience: 'Pregnant people, families, nursing students and maternal-health teams',
+    userNeed: 'Understand the 2025 WHO diabetes-in-pregnancy guidance, what monitoring means and how to discuss care with clinicians.',
+    practiceLens: 'Emphasises personalised monitoring, teach-back, coordinated follow-up and local protocols without giving glucose targets or treatment prescriptions.',
+    sourcesAccessedAt: '2026-10-17',
+    reviewDueAt: '2027-04-17'
+  },
+  'postpartum-haemorrhage-2026-nursing-recognition-response': {
+    audience: 'Nurses, midwives, nursing students and families learning about maternal safety',
+    userNeed: 'Understand the updated PPH detection and response framework, multidisciplinary roles and urgent danger signs.',
+    practiceLens: 'Centres on reliable observations, prompt escalation and structured handover, never an unsupervised clinical procedure.',
+    sourcesAccessedAt: '2026-10-17',
+    reviewDueAt: '2027-04-17'
+  },
+  'nursing-careers-2026-who-workforce-report-nepal': {
+    audience: 'Nurses, nursing students and early-career clinicians in Nepal',
+    userNeed: 'Interpret WHO workforce evidence without confusing global trends with current Nepal job or licensing requirements.',
+    practiceLens: 'Highlights professional growth, documented competence, team support and verification through Nepal-specific official sources.',
+    sourcesAccessedAt: '2026-10-17',
+    reviewDueAt: '2027-04-17'
+  },
   'essential-maternal-newborn-care-guide-2026': {
     audience: 'Parents, caregivers, nurses, and people preparing for postnatal care',
     userNeed: 'Understand the practical priorities after birth and recognise maternal or newborn symptoms that need prompt assessment.',
