@@ -8,6 +8,7 @@ export const nursingCareers2026WhoWorkforceReportNepal: BlogPost = {
   "publishedAt": "2026-10-17",
   "updatedAt": "2026-10-17",
   "readMinutes": 8,
+  "heroPhotoKind": "nepal",
   "tags": [
     "nursing careers",
     "Nepal",
