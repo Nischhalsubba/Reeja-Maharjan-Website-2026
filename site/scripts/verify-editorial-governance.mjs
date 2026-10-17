@@ -43,7 +43,7 @@ for (const required of ['width="1200"', 'height="630"', 'getStaticPaths', 'image
 
 if (!socialGenerator.includes("sharp") || !socialGenerator.includes("og-default.svg")) failures.push('Raster social preview generator is required.');
 
-if (articleFiles.length !== 10) failures.push(`Expected 10 governed articles, found ${articleFiles.length}.`);
+if (articleFiles.length !== 14) failures.push(`Expected 14 governed articles, found ${articleFiles.length}.`);
 
 if (failures.length) {
   console.error('\nEditorial governance verification failed:\n');
