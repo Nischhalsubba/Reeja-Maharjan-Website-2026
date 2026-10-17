@@ -146,12 +146,12 @@ const graphSchema = {
     <script>
       import { initMotion } from '../lib/motion';
       import { initMobileNavA11y } from '../lib/mobileNavA11y';
-      import { initFieldJournalMotion } from '../lib/fieldJournalMotion';
+      import { initCareInnerMotion } from '../lib/careInnerMotion';
       import { initCarePersonalMotion } from '../lib/carePersonalMotion';
 
       initMotion();
       initMobileNavA11y();
-      initFieldJournalMotion();
+      initCareInnerMotion();
       initCarePersonalMotion();
 
       document.querySelectorAll<HTMLElement>('[data-track]').forEach((element) => {
