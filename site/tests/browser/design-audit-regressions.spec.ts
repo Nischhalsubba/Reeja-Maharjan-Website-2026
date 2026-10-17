@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 
-test('Field Journal supporting-page heroes stay line-free, spacious and WebGL-free', async ({ page }) => {
+test('Care is Personal supporting-page heroes stay line-free, spacious and WebGL-free', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(`${origin}/hire-reeja/`, { waitUntil: 'networkidle' });
   await page.evaluate(async () => document.fonts.ready);
@@ -35,16 +35,16 @@ test('Field Journal supporting-page heroes stay line-free, spacious and WebGL-fr
   expect(metrics.canvasCount).toBe(0);
   expect(metrics.rowPaddingTop).toBeGreaterThanOrEqual(12);
   expect(metrics.rowGap).toBeGreaterThanOrEqual(12);
-  expect(metrics.cardRadius).toBe(0);
+  expect(metrics.cardRadius).toBeLessThanOrEqual(3);
   expect(metrics.cardShadow).toBe('none');
-  expect(metrics.bodyDesign).toBe('reeja-field-journal');
+  expect(metrics.bodyDesign).toBe('care-is-personal');
 
   await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
   await expect(page.locator('.fj-hero canvas')).toHaveCount(0);
   await expect(page.locator('[data-hero-scene]')).toHaveCount(0);
 });
 
-test('Field Journal portrait uses the headshot and never relies on a cropping fit', async ({ browser }) => {
+test('Care is Personal portrait uses the headshot and never relies on a cropping fit', async ({ browser }) => {
   for (const viewport of [
     { width: 375, height: 812 },
     { width: 1440, height: 1050 }
@@ -77,7 +77,7 @@ test('Field Journal portrait uses the headshot and never relies on a cropping fi
   }
 });
 
-test('Field Journal palette and typography apply across the site', async ({ page }) => {
+test('Care is Personal palette and typography apply across the site', async ({ page }) => {
   for (const path of [
     '/hire-reeja/',
     '/clinical-research/',
@@ -179,7 +179,7 @@ test('contact page submits through the provider POST flow and returns with succe
     expect(payload.get('message')).toContain('Maternal health research opportunity');
     expect(payload.get('_next')).toBe('https://reejamaharjan.com.np/contact/?sent=1#professional-contact-form');
     expect(payload.get('_url')).toBe('https://reejamaharjan.com.np/contact/');
-    expect(payload.get('_captcha')).toBe('false');
+    expect(payload.has('_captcha')).toBe(false);
 
     await route.fulfill({
       status: 303,
