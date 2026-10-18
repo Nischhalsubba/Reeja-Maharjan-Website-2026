@@ -13,27 +13,27 @@
   --type-line: 1.68;
   --type-tight: 1.105;
 }
-.field-journal,
-.field-journal :where(input,textarea,select,button) {
+.care-personal-site,
+.care-personal-site :where(input,textarea,select,button) {
   font-family:var(--type-body);
 }
-.field-journal main :where(.site-page,.contact-page,.blog-index,.blog-article,.cv-page) {
+.care-personal-site main :where(.site-page,.contact-page,.blog-index,.blog-article,.cv-page) {
   color:var(--brand-ink);
   background:#fff;
 }
-.field-journal main :is(h1,h2,h3,h4) {
+.care-personal-site main :is(h1,h2,h3,h4) {
   font-family:var(--type-display);
   letter-spacing:-.045em;
   text-wrap:balance;
   overflow-wrap:normal;
   font-weight:750;
 }
-.field-journal main :where(.site-page__hero,.contact-hero,.blog-article__header) {
+.care-personal-site main :where(.site-page__hero,.contact-hero,.blog-article__header) {
   padding-block:clamp(72px,8vw,112px);
   background:linear-gradient(125deg,#f2f1ff 0%,#f9faff 64%,#eef1ff 100%);
   border-color:#e0e4f4;
 }
-.field-journal main :where(.site-page__hero,.contact-hero) :is(h1) {
+.care-personal-site main :where(.site-page__hero,.contact-hero) :is(h1) {
   font-size:var(--type-inner-hero);
   line-height:1.075;
   letter-spacing:-.062em;
@@ -41,103 +41,103 @@
   font-weight:780;
   margin-block:14px 25px;
 }
-.field-journal main :where(.site-page__lede,.contact-hero__copy>p:last-child,.blog-article__dek) {
+.care-personal-site main :where(.site-page__lede,.contact-hero__copy>p:last-child,.blog-article__dek) {
   font-size:var(--type-lead);
   color:var(--brand-muted);
   max-width:67ch;
   line-height:1.7;
 }
-.field-journal main :where(.site-eyebrow,.cip-eyebrow--coral,.cip-article__meta) {
+.care-personal-site main :where(.site-eyebrow,.cip-eyebrow--coral,.cip-article__meta) {
   font-family:var(--type-body);
   font-weight:750;
   font-size:.75rem;
   letter-spacing:.115em;
   color:var(--brand-coral-ink);
 }
-.field-journal main :where(.site-section,.contact-section) {
+.care-personal-site main :where(.site-section,.contact-section) {
   padding-block:clamp(76px,8vw,112px);
 }
-.field-journal main :where(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2) {
+.care-personal-site main :where(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2) {
   font-size:var(--type-section);
   line-height:var(--type-tight);
   letter-spacing:-.055em;
   max-width:21ch;
   font-weight:760;
 }
-.field-journal main :where(.site-section__head,.site-page__split,.contact-layout) {
+.care-personal-site main :where(.site-section__head,.site-page__split,.contact-layout) {
   gap:clamp(28px,4vw,72px);
 }
-.field-journal main :where(.site-section__head>p,.site-page__split>div>p:not(.site-eyebrow),.cv-profile-copy) {
+.care-personal-site main :where(.site-section__head>p,.site-page__split>div>p:not(.site-eyebrow),.cv-profile-copy) {
   max-width:67ch;
   font-size:var(--type-reading);
   line-height:var(--type-line);
   color:var(--brand-muted);
 }
-.field-journal main :where(.site-card h3,.site-list__item h3,.cv-experience__heading h3,.blog-index__lead-card h3,.blog-card h3,.blog-topic-panel h3) {
+.care-personal-site main :where(.site-card h3,.site-list__item h3,.cv-experience__heading h3,.blog-index__lead-card h3,.blog-card h3,.blog-topic-panel h3) {
   letter-spacing:-.035em;
   line-height:1.2;
   font-weight:730;
   overflow-wrap:break-word;
 }
-.field-journal main :where(.site-card p,.site-list__item p,.cv-experience__details,.cv-panel p,.blog-card p,.blog-topic-panel p) {
+.care-personal-site main :where(.site-card p,.site-list__item p,.cv-experience__details,.cv-panel p,.blog-card p,.blog-topic-panel p) {
   line-height:1.69;
   overflow-wrap:break-word;
 }
-.field-journal main :where(.site-card,.cv-panel,.blog-card,.contact-sidebar__block,.professional-contact-form) {
+.care-personal-site main :where(.site-card,.cv-panel,.blog-card,.contact-sidebar__block,.professional-contact-form) {
   border-radius:3px;
   box-shadow:none;
 }
-.field-journal .blog-article__header h1 {
+.care-personal-site .blog-article__header h1 {
   max-width:25ch;
   font-size:clamp(2.55rem,4.8vw,4.95rem);
   line-height:1.1;
   letter-spacing:-.06em;
   overflow-wrap:break-word;
 }
-.field-journal .blog-article__body {
+.care-personal-site .blog-article__body {
   font-family:var(--type-body);
   font-size:var(--type-reading);
   max-width:74ch;
 }
-.field-journal .blog-article__body :where(p,li) {
+.care-personal-site .blog-article__body :where(p,li) {
   line-height:1.78;
 }
-.field-journal .blog-article__body h2 {
+.care-personal-site .blog-article__body h2 {
   font-size:clamp(1.55rem,2.5vw,2.35rem);
   line-height:1.19;
   letter-spacing:-.045em;
   margin-top:clamp(38px,5vw,70px);
 }
-.field-journal .blog-article__body h3 {
+.care-personal-site .blog-article__body h3 {
   font-size:clamp(1.22rem,1.9vw,1.65rem);
   line-height:1.25;
   margin-top:34px;
 }
-.field-journal .blog-article__body :where(a) {
+.care-personal-site .blog-article__body :where(a) {
   text-underline-offset:4px;
   text-decoration-thickness:1px;
 }
-.field-journal .blog-toc {
+.care-personal-site .blog-toc {
   font-size:.91rem;
   line-height:1.6;
 }
-.field-journal .blog-toc a {
+.care-personal-site .blog-toc a {
   min-height:38px;
   align-content:center;
 }
-.field-journal .cv-profile-grid p,.field-journal .cv-experience__details li {
+.care-personal-site .cv-profile-grid p,.care-personal-site .cv-experience__details li {
   line-height:1.7;
 }
-.field-journal .site-section--dark :where(p,.site-eyebrow) {
+.care-personal-site .site-section--dark :where(p,.site-eyebrow) {
   color:#d4ddf5;
 }
-.field-journal .site-section--dark h2,.field-journal .site-section--dark h3 {
+.care-personal-site .site-section--dark h2,.care-personal-site .site-section--dark h3 {
   color:#fff;
 }
-.field-journal .site-header {
+.care-personal-site .site-header {
   box-shadow:none;
 }
-.field-journal .desktop-nav > a:not(.nav-cta) {
+.care-personal-site .desktop-nav > a:not(.nav-cta) {
   font-family:var(--type-body);
   font-size:.875rem;
   font-weight:600;
@@ -145,48 +145,48 @@
   letter-spacing:-.01em;
   text-transform:none;
 }
-.field-journal .desktop-nav > a:not(.nav-cta)::before,
-.field-journal .desktop-nav > a:not(.nav-cta)::after {content:none;display:none}
-.field-journal .mobile-nav__panel > a {
+.care-personal-site .desktop-nav > a:not(.nav-cta)::before,
+.care-personal-site .desktop-nav > a:not(.nav-cta)::after {content:none;display:none}
+.care-personal-site .mobile-nav__panel > a {
   font-family:var(--type-body);
   font-size:1rem;
   line-height:1.5;
 }
 /* Consistent perceptible keyboard focus, independent of old theme variables. */
-.field-journal :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible {
+.care-personal-site :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible {
   outline:3px solid #1938ac;
   outline-offset:4px;
 }
-.field-journal :where(.site-section--dark,.cip-research,.cip-contact,.site-footer--care) :where(a,button,summary,[tabindex]):focus-visible {
+.care-personal-site :where(.site-section--dark,.cip-research,.cip-contact,.site-footer--care) :where(a,button,summary,[tabindex]):focus-visible {
   outline:3px solid #fff;
   outline-offset:4px;
 }
-.field-journal .care-footer__bottom,
-.field-journal .care-footer__credits,
-.field-journal .care-footer__column h3,
-.field-journal .care-footer__location {
+.care-personal-site .care-footer__bottom,
+.care-personal-site .care-footer__credits,
+.care-personal-site .care-footer__column h3,
+.care-personal-site .care-footer__location {
   font-size: .8125rem;
   line-height:1.65;
 }
-.field-journal .care-footer__bottom :is(a,small,span),
-.field-journal .care-footer__credits :is(summary,a,p) {
+.care-personal-site .care-footer__bottom :is(a,small,span),
+.care-personal-site .care-footer__credits :is(summary,a,p) {
   font-size:inherit;
   line-height:inherit;
 }
-.field-journal .care-footer__column a {min-height:32px}
-.field-journal .care-footer__column {gap:14px}
+.care-personal-site .care-footer__column a {min-height:32px}
+.care-personal-site .care-footer__column {gap:14px}
 /* Larger screens retain editorial balance rather than the previous squeezed 2-column header. */
 @media(min-width:1100px){
-  .field-journal .site-page__hero-grid,.field-journal .contact-hero__grid {
+  .care-personal-site .site-page__hero-grid,.care-personal-site .contact-hero__grid {
     grid-template-columns:minmax(0,1.05fr) minmax(280px,.78fr);
     gap:clamp(48px,6vw,100px);
   }
 }
 @media(max-width:900px){
-  .field-journal main :where(.site-page__hero,.contact-hero){padding-block:70px}
-  .field-journal main :where(.site-page__hero-grid,.contact-hero__grid){grid-template-columns:1fr;min-height:0}
-  .field-journal .site-page__summary{max-width:100%}
-  .field-journal .site-section__head{display:grid;grid-template-columns:1fr}
+  .care-personal-site main :where(.site-page__hero,.contact-hero){padding-block:70px}
+  .care-personal-site main :where(.site-page__hero-grid,.contact-hero__grid){grid-template-columns:1fr;min-height:0}
+  .care-personal-site .site-page__summary{max-width:100%}
+  .care-personal-site .site-section__head{display:grid;grid-template-columns:1fr}
 }
 @media(max-width:640px){
   :root{
@@ -195,42 +195,42 @@
     --type-reading:1rem;
     --type-lead:1.035rem;
   }
-  .field-journal main :where(.site-page__hero,.contact-hero,.blog-article__header){padding-block:56px 62px}
-  .field-journal main :where(.site-page__hero,.contact-hero) h1 {
+  .care-personal-site main :where(.site-page__hero,.contact-hero,.blog-article__header){padding-block:56px 62px}
+  .care-personal-site main :where(.site-page__hero,.contact-hero) h1 {
     max-width:24ch;
     font-size:var(--type-inner-hero);
     line-height:1.12;
     letter-spacing:-.052em;
     overflow-wrap:break-word;
   }
-  .field-journal main :where(.site-section,.contact-section){padding-block:64px}
-  .field-journal .blog-article__header h1 {
+  .care-personal-site main :where(.site-section,.contact-section){padding-block:64px}
+  .care-personal-site .blog-article__header h1 {
     max-width:none;
     font-size:clamp(2.05rem,8.1vw,2.83rem);
     letter-spacing:-.048em;
     line-height:1.14;
   }
-  .field-journal .site-page__summary{gap:0}
-  .field-journal .care-footer__column a{min-height:36px}
-  .field-journal .care-footer__bottom{font-size:.8125rem}
-  .field-journal main :where(.site-card h3,.blog-card h3){font-size:clamp(1.25rem,5.4vw,1.65rem)}
+  .care-personal-site .site-page__summary{gap:0}
+  .care-personal-site .care-footer__column a{min-height:36px}
+  .care-personal-site .care-footer__bottom{font-size:.8125rem}
+  .care-personal-site main :where(.site-card h3,.blog-card h3){font-size:clamp(1.25rem,5.4vw,1.65rem)}
 }
 @media(prefers-reduced-motion:reduce){
-  .field-journal *{scroll-behavior:auto!important}
+  .care-personal-site *{scroll-behavior:auto!important}
 }
 @media print{
-  .field-journal .cv-page :where(h1,h2,h3,p,li){color:#10182f!important}
-  .field-journal main :where(.site-page__hero,.site-section,.site-section--soft){background:#fff!important}
+  .care-personal-site .cv-page :where(h1,h2,h3,p,li){color:#10182f!important}
+  .care-personal-site main :where(.site-page__hero,.site-section,.site-section--soft){background:#fff!important}
 }
 
 /* Higher-specificity component focus surfaces beat retired component selectors. */
-body.field-journal .desktop-nav a:focus-visible,
-body.field-journal main :where(a,button,input,textarea,select,summary):focus-visible {
+body.care-personal-site .desktop-nav a:focus-visible,
+body.care-personal-site main :where(a,button,input,textarea,select,summary):focus-visible {
   outline:3px solid #1938ac;
   outline-offset:4px;
 }
-body.field-journal .site-footer--care :where(a,button,summary):focus-visible,
-body.field-journal .site-section--dark :where(a,button):focus-visible {
+body.care-personal-site .site-footer--care :where(a,button,summary):focus-visible,
+body.care-personal-site .site-section--dark :where(a,button):focus-visible {
   outline:3px solid #ffffff;
   outline-offset:4px;
 }

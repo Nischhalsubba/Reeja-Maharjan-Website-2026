@@ -1,15 +1,4 @@
-/* Care is Personal: homepage-only visual language. Keep supporting pages intact. */
-.field-journal:has(.cip-home){--fj-ink:#10182f;--fj-graphite:#52607a;--fj-indigo:#3454f5;--fj-madder:#ef7866;--fj-paper:#f8f9fd;--fj-surface:#fff;--fj-line:#dbe0ee;background:#fff;color:#10182f;font-family:"Public Sans",system-ui,sans-serif}
-.field-journal:has(.cip-home)::before{display:none}
-.field-journal:has(.cip-home) :is(h1,h2,h3){font-family:"Public Sans",system-ui,sans-serif;letter-spacing:-.055em;color:inherit;text-wrap:balance}
-.field-journal:has(.cip-home) .site-header{background:rgba(250,250,255,.94);border-bottom:1px solid #e8e9f5;backdrop-filter:blur(14px)}
-.field-journal:has(.cip-home) .brand__mark,.field-journal:has(.cip-home) .brand__text small{display:none}
-.field-journal:has(.cip-home) .brand__text strong{font-family:"Public Sans",system-ui,sans-serif;font-size:1.32rem;letter-spacing:-.07em;font-weight:700}
-.field-journal:has(.cip-home) .brand__text strong::after{content:".";color:#ef7866}
-.field-journal:has(.cip-home) .desktop-nav>a:not(.nav-cta){font-family:inherit;text-transform:none;font-size:.82rem;letter-spacing:0}
-.field-journal:has(.cip-home) .desktop-nav>a:not(.nav-cta)::before{display:none}
-.field-journal:has(.cip-home) .desktop-nav .nav-cta{background:transparent;color:#3454f5;border:0;font-weight:700;text-transform:none;font-size:.82rem;letter-spacing:0}
-.field-journal:has(.cip-home) .desktop-nav .nav-cta:hover{background:#e6eaff;color:#3454f5}
+/* Care is Personal: homepage only. Site-wide shell and navigation belong to care-shell.css and shell.css. */
 .cip-home{--cip-blue:#3454f5;--cip-ink:#10182f;--cip-coral:#ef7866;--cip-subtle:#657189;--cip-line:#e4e8f1;font-family:"Public Sans",system-ui,sans-serif;color:var(--cip-ink);background:#fff;overflow:clip}
 .cip-home *{box-sizing:border-box}
 .cip-wrap{width:min(1200px,calc(100% - 80px));margin-inline:auto}

@@ -1,12 +1,12 @@
 /* Care is Personal interaction guardrails: functional forms, no historical theme ownership. */
 
-.field-journal :where(.site-page__hero, .contact-hero, .blog-article__header)::before,
-.field-journal :where(.site-page__hero, .contact-hero, .blog-article__header)::after {
+.care-personal-site :where(.site-page__hero, .contact-hero, .blog-article__header)::before,
+.care-personal-site :where(.site-page__hero, .contact-hero, .blog-article__header)::after {
   content: none !important;
   display: none !important;
 }
 
-.field-journal .form-honeypot {
+.care-personal-site .form-honeypot {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -21,57 +21,57 @@
   white-space: nowrap !important;
 }
 
-.field-journal :where(.site-button, .care-button, .fj-button) {
+.care-personal-site :where(.site-button, .care-button) {
   cursor: pointer;
 }
 
-.field-journal .site-section--dark .site-page__split > div > p:not(.site-eyebrow) {
-  color: color-mix(in srgb, var(--fj-surface) 82%, transparent);
+.care-personal-site .site-section--dark .site-page__split > div > p:not(.site-eyebrow) {
+  color: color-mix(in srgb, var(--care-surface) 82%, transparent);
 }
 
-.field-journal .site-section--dark .site-button:not(.site-button--primary) {
-  border-color: color-mix(in srgb, var(--fj-surface) 78%, transparent);
+.care-personal-site .site-section--dark .site-button:not(.site-button--primary) {
+  border-color: color-mix(in srgb, var(--care-surface) 78%, transparent);
   background: transparent;
-  color: var(--fj-surface);
+  color: var(--care-surface);
 }
 
-.field-journal .site-section--dark .site-button--primary {
-  border-color: var(--fj-surface);
-  background: var(--fj-surface);
-  color: var(--fj-indigo);
+.care-personal-site .site-section--dark .site-button--primary {
+  border-color: var(--care-surface);
+  background: var(--care-surface);
+  color: var(--care-indigo);
 }
 
-.field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a) {
-  transition: color var(--fj-fast) var(--fj-ease), transform var(--fj-fast) var(--fj-ease), text-decoration-color var(--fj-fast) var(--fj-ease);
+.care-personal-site :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a) {
+  transition: color var(--care-fast) var(--care-ease), transform var(--care-fast) var(--care-ease), text-decoration-color var(--care-fast) var(--care-ease);
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .field-journal .site-section--dark .site-button:not(.site-button--primary):hover,
-  .field-journal .site-section--dark .site-button:not(.site-button--primary):focus-visible {
-    border-color: var(--fj-surface);
-    background: var(--fj-surface);
-    color: var(--fj-indigo);
+  .care-personal-site .site-section--dark .site-button:not(.site-button--primary):hover,
+  .care-personal-site .site-section--dark .site-button:not(.site-button--primary):focus-visible {
+    border-color: var(--care-surface);
+    background: var(--care-surface);
+    color: var(--care-indigo);
   }
 
-  .field-journal .site-section--dark .site-button--primary:hover,
-  .field-journal .site-section--dark .site-button--primary:focus-visible {
+  .care-personal-site .site-section--dark .site-button--primary:hover,
+  .care-personal-site .site-section--dark .site-button--primary:focus-visible {
     border-color: #b8bfff;
     background: #b8bfff;
-    color: var(--fj-ink);
+    color: var(--care-ink);
   }
 
-  .field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a):hover {
-    color: var(--fj-indigo);
-    text-decoration-color: var(--fj-madder);
+  .care-personal-site :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a):hover {
+    color: var(--care-indigo);
+    text-decoration-color: var(--care-madder);
   }
 
-  .field-journal .blog-index__lead-card:hover h3,
-  .field-journal .blog-index__lead-card:focus-visible h3 {
-    color: var(--fj-indigo);
+  .care-personal-site .blog-index__lead-card:hover h3,
+  .care-personal-site .blog-index__lead-card:focus-visible h3 {
+    color: var(--care-indigo);
   }
 }
 
-.field-journal .site-empty .container {
+.care-personal-site .site-empty .container {
   min-height: min(64vh, 620px);
   display: flex;
   flex-direction: column;
@@ -79,12 +79,12 @@
   align-items: flex-start;
 }
 
-.field-journal .site-empty h1 {
+.care-personal-site .site-empty h1 {
   max-width: 10ch;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .field-journal :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a) {
+  .care-personal-site :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a) {
     transition-duration: .01ms !important;
     transform: none !important;
   }
