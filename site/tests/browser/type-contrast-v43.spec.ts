@@ -35,6 +35,12 @@ test('dark homepage research and contact headings are readable on every viewport
       const px = await element.evaluate(el => parseFloat(getComputedStyle(el).fontSize));
       expect(px, selector+' at '+width+'px').toBeGreaterThanOrEqual(14);
     }
+    for (const selector of ['.cip-sectionhead>p', '.cip-journey__role p', '.cip-article>p:not(.cip-article__meta)']) {
+      const el = page.locator(selector).first();
+      await expect(el).toBeVisible();
+      const px = await el.evaluate(node => parseFloat(getComputedStyle(node).fontSize));
+      expect(px, selector+' readable body copy at '+width+'px').toBeGreaterThanOrEqual(16);
+    }
   }
 });
 
