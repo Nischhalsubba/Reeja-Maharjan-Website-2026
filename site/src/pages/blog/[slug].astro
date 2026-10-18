@@ -4,7 +4,6 @@ import ArticleGovernance from '../../components/ArticleGovernance.astro';
 import { blogPosts, getBlogPost } from '../../content/blog';
 import { getBlogGovernance } from '../../content/blog/governance';
 import { professionalFacts } from '../../content/professional-facts';
-import '../../styles/blog.css';
 
 export const getStaticPaths = () =>
   blogPosts.map((post) => ({ params: { slug: post.slug } }));
