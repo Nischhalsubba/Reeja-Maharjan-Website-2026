@@ -146,7 +146,6 @@
 }
 .care-personal-site .site-header__inner {min-height:76px}
 .care-personal-site .brand{gap:0}
-.care-personal-site .brand__mark,.care-personal-site .brand__text small{display:none}
 .care-personal-site .brand__text strong{font:800 1.38rem/1 "Public Sans",system-ui,sans-serif;letter-spacing:-.075em}
 .care-personal-site .desktop-nav>a:not(.nav-cta){font-family:"Public Sans",system-ui,sans-serif;text-transform:none;letter-spacing:0;font-size:.82rem}
 .care-personal-site .desktop-nav .nav-cta{background:transparent;color:#3454f5;border:0;font-size:.85rem;font-family:"Public Sans",system-ui,sans-serif}
@@ -229,8 +228,6 @@
 .care-personal-site .cip-image-credits p{max-width:900px;padding-top:9px;margin:0}
 .care-personal-site .cip-image-credits a{color:#bdc9ff;text-decoration:underline;text-underline-offset:3px}
 
-/* Prevent a duplicate trailing period from the older homepage wordmark rule. */
-.care-personal-site:has(.cip-home) .brand__text strong::after{content:none}
 .care-personal-site .brand__text strong span{color:#ef7866}
 
 /* Final visual polish: quiet navigation and shorter editorial hero lines. */

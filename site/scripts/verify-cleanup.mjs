@@ -8,6 +8,11 @@ const retired = [
   'src/styles/home-recruiter.css',
   'src/styles/home-redesign.css',
   'src/styles/home-seo.css',
+  'src/styles/layout.css',
+  'src/styles/components.css',
+  'src/styles/pages.css',
+  'src/styles/blog.css',
+  'src/styles/cv.css',
   'src/styles/care-ledger.css',
   'src/styles/care-ledger-refinements.css',
   'src/styles/care-practice.css',
@@ -38,6 +43,7 @@ for (const library of ['gsap', 'sharp', '@fontsource/public-sans']) {
   if (!pkg.dependencies?.[library]) failures.push('Required rendering dependency missing: ' + library);
 }
 const layout = await readFile(new URL('../src/layouts/BaseLayout.astro', import.meta.url), 'utf8');
+if (!layout.includes('class="care-personal-site"')) failures.push('Old page root class reintroduced.');
 if (layout.includes('fonts.googleapis.com')) failures.push('External Google Fonts request reintroduced.');
 if (!layout.includes("image = '/og-default.png'")) failures.push('Default social card must use raster PNG.');
 const article = await readFile(new URL('../src/pages/blog/[slug].astro', import.meta.url), 'utf8');
