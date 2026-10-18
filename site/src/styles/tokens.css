@@ -1,12 +1,12 @@
 :root {
-  /* Care is Personal v3: canonical identity. Legacy pages use semantic aliases below. */
+  /* Care is Personal v4.3 — one source of truth for color and readable typography. */
   --brand-blue: #3454f5;
   --brand-blue-hover: #223fda;
   --brand-lavender: #eef0ff;
   --brand-ink: #10182f;
   --brand-canvas: #f8f9fd;
   --brand-coral: #ef7866; /* Large ornament and icon accents only. */
-  --brand-coral-ink: #a73e34; /* 6+:1 contrast on white for small labels. */
+  --brand-coral-ink: #a73e34; /* Reserved for rare deliberate accents; normal metadata uses cobalt. */
   --brand-muted: #53617c;
   --brand-line: #dce2ef;
   --brand-focus: #ffb69b;
@@ -33,13 +33,14 @@
   --body-lh: 1.68;
   --body-ls: -0.006em;
   --body-w: 400;
-  --small-size: 0.8125rem;
+  --small-size: 0.875rem;
   --reading-max: 45rem;
 
   /* Shared editorial typography for every route. */
   --type-display: var(--font-display);
   --type-body: var(--font-sans);
-  --type-caption: .8125rem;
+  --type-caption: .875rem; /* 14px minimum for captions, labels and metadata */
+  --type-ui: .9375rem; /* 15px navigation and control text */
   --type-reading: clamp(1rem, .15vw + .98rem, 1.07rem);
   --type-lead: clamp(1.025rem, .4vw + .98rem, 1.22rem);
   --type-section: clamp(2.1rem, 3.5vw, 3.55rem);

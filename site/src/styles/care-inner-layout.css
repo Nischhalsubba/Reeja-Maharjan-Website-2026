@@ -7,9 +7,9 @@
 
 .care-personal-site .site-eyebrow {
   margin: 0 0 var(--care-space-2);
-  color: var(--care-madder);
+  color: var(--care-accent);
   font-family: var(--font-sans);
-  font-size: .67rem;
+  font-size: var(--type-caption);
   font-weight: 500;
   letter-spacing: .12em;
   line-height: 1.5;
@@ -72,9 +72,9 @@
 }
 
 .care-personal-site :where(.site-page__summary dt, .contact-hero__details span, .blog-article__meta-panel dt) {
-  color: var(--care-madder);
+  color: var(--care-accent);
   font-family: var(--font-sans);
-  font-size: .64rem;
+  font-size: var(--type-caption);
   font-weight: 500;
   letter-spacing: .08em;
   line-height: 1.5;
@@ -84,7 +84,7 @@
 .care-personal-site :where(.site-page__summary dd, .contact-hero__details strong, .contact-hero__details a, .blog-article__meta-panel dd) {
   margin: 0;
   color: var(--care-ink);
-  font-size: .96rem;
+  font-size: 1rem;
   font-weight: 700;
   line-height: 1.5;
 }
@@ -234,9 +234,9 @@
   position: absolute;
   top: calc(var(--care-space-5) + 3px);
   left: var(--care-space-3);
-  color: var(--care-madder);
+  color: var(--care-accent);
   font-family: var(--font-sans);
-  font-size: .63rem;
+  font-size: var(--type-caption);
   letter-spacing: .08em;
 }
 
@@ -260,7 +260,7 @@
 .care-personal-site .site-card a {
   color: var(--care-indigo);
   font-weight: 700;
-  text-decoration-color: var(--care-madder);
+  text-decoration-color: var(--care-accent);
   text-underline-offset: 4px;
 }
 
@@ -296,7 +296,7 @@
 .care-personal-site .site-list__meta {
   color: var(--care-muted);
   font-family: var(--font-sans);
-  font-size: .68rem;
+  font-size: var(--type-caption);
   letter-spacing: .03em;
   line-height: 1.65;
   text-align: right;
@@ -346,10 +346,10 @@
   right: var(--care-space-4);
   transform: translateY(-50%);
   padding: 5px 10px;
-  background: var(--care-madder);
+  background: var(--care-accent);
   color: var(--care-surface);
   font-family: var(--font-sans);
-  font-size: .6rem;
+  font-size: var(--type-caption);
   letter-spacing: .08em;
   text-transform: uppercase;
 }
@@ -389,7 +389,7 @@
   margin-bottom: var(--care-space-1);
   color: var(--care-ink);
   font-family: var(--font-sans);
-  font-size: .7rem;
+  font-size: var(--type-caption);
   font-weight: 500;
   letter-spacing: .045em;
   text-transform: uppercase;
@@ -415,7 +415,7 @@
 }
 
 .care-personal-site :where(.form-field input, .form-field textarea)::placeholder {
-  color: color-mix(in srgb, var(--care-muted) 72%, transparent);
+  color: var(--brand-muted);
 }
 
 .care-personal-site :where(.form-field input, .form-field textarea):focus {
@@ -431,7 +431,7 @@
 
 .care-personal-site :where(.form-field__help, .form-field__error) {
   margin: var(--care-space-1) 0 0;
-  font-size: .82rem;
+  font-size: var(--type-caption);
   line-height: 1.45;
 }
 
@@ -441,13 +441,13 @@
 .care-personal-site .professional-contact-form__privacy {
   margin-top: var(--care-space-5);
   padding: var(--care-space-3) var(--care-space-4);
-  border-left: 3px solid var(--care-madder);
+  border-left: 3px solid var(--care-accent);
   background: var(--care-paper-deep);
 }
 
 .care-personal-site .professional-contact-form__privacy strong {
   font-family: var(--font-sans);
-  font-size: .68rem;
+  font-size: var(--type-caption);
   letter-spacing: .06em;
   text-transform: uppercase;
 }
@@ -489,7 +489,7 @@
 
 .care-personal-site .contact-sidebar__block--soft {
   padding: var(--care-space-4);
-  border-top: 3px solid var(--care-madder);
+  border-top: 3px solid var(--care-accent);
   background: var(--care-paper-deep);
 }
 
@@ -509,7 +509,7 @@
 .care-personal-site .site-back {
   color: var(--care-ink);
   font-weight: 700;
-  text-decoration-color: var(--care-madder);
+  text-decoration-color: var(--care-accent);
   text-underline-offset: 4px;
 }
 
@@ -572,9 +572,9 @@
 }
 
 .care-personal-site .blog-topic-panel__count {
-  color: var(--care-madder);
+  color: var(--care-accent);
   font-family: var(--font-sans);
-  font-size: .65rem;
+  font-size: var(--type-caption);
 }
 
 .care-personal-site .blog-topic-panel__item h4,
@@ -630,7 +630,7 @@
 .care-personal-site .blog-card h3 a,
 .care-personal-site .blog-card a {
   color: var(--care-ink);
-  text-decoration-color: var(--care-madder);
+  text-decoration-color: var(--care-accent);
   text-underline-offset: 4px;
 }
 
@@ -646,7 +646,7 @@
   margin: 0;
   color: var(--care-muted);
   font-family: var(--font-sans);
-  font-size: .65rem;
+  font-size: var(--type-caption);
   letter-spacing: .04em;
   text-transform: uppercase;
 }
@@ -696,7 +696,7 @@
   padding: 9px 0;
   border-top: 1px solid var(--care-line);
   color: var(--care-graphite);
-  font-size: .86rem;
+  font-size: var(--type-caption);
   line-height: 1.4;
   text-decoration: none;
   transition: color var(--care-fast) var(--care-ease), transform var(--care-fast) var(--care-ease);
@@ -741,14 +741,14 @@
 
 .care-personal-site .blog-article__body a {
   color: var(--care-indigo);
-  text-decoration-color: var(--care-madder);
+  text-decoration-color: var(--care-accent);
   text-underline-offset: 4px;
 }
 
 .care-personal-site :where(.site-note, .blog-note-strong, .blog-author-card) {
   padding: var(--care-space-4) var(--care-space-5);
   border: 0;
-  border-left: 3px solid var(--care-madder);
+  border-left: 3px solid var(--care-accent);
   border-radius: 0;
   background: var(--care-surface);
   box-shadow: none;
@@ -799,9 +799,9 @@
 }
 
 .care-personal-site :where(.cv-experience__index, .cv-credential__index) {
-  color: var(--care-madder);
+  color: var(--care-accent);
   font-family: var(--font-sans);
-  font-size: .66rem;
+  font-size: var(--type-caption);
   letter-spacing: .06em;
 }
 
@@ -818,7 +818,7 @@
   margin: 5px 0 0;
   color: var(--care-muted);
   font-family: var(--font-sans);
-  font-size: .67rem;
+  font-size: var(--type-caption);
   letter-spacing: .035em;
   text-transform: uppercase;
 }
@@ -839,7 +839,7 @@
   margin: 0;
   color: var(--care-muted);
   font-family: var(--font-sans);
-  font-size: .65rem;
+  font-size: var(--type-caption);
   line-height: 1.55;
   text-align: right;
   text-transform: uppercase;
@@ -920,9 +920,9 @@
 }
 
 .care-personal-site :where(.cv-language-list dt, .cv-detail-list dt) {
-  color: var(--care-madder);
+  color: var(--care-accent);
   font-family: var(--font-sans);
-  font-size: .66rem;
+  font-size: var(--type-caption);
   letter-spacing: .05em;
   text-transform: uppercase;
 }

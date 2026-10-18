@@ -29,7 +29,7 @@
 .site-eyebrow {
   color: var(--accent);
   font-family: var(--font-sans);
-  font-size: 0.76rem;
+  font-size: var(--type-caption);
   font-weight: var(--w-bold);
   letter-spacing: 0.14em;
   line-height: 1.2;
@@ -123,7 +123,7 @@
 .site-page__summary dt {
   color: var(--accent);
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: var(--type-caption);
   font-weight: var(--w-bold);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -159,7 +159,7 @@
 
 .site-section--dark .site-eyebrow,
 .site-section--dark p {
-  color: #c8d7d1;
+  color: #c0c9f3;
 }
 
 .site-section--dark .site-button {
@@ -230,7 +230,7 @@
   color: var(--accent);
   content: counter(evidence, decimal-leading-zero);
   font-family: var(--font-sans);
-  font-size: 0.72rem;
+  font-size: var(--type-caption);
   font-weight: var(--w-bold);
   letter-spacing: 0.12em;
 }
@@ -345,7 +345,7 @@
   margin-top: 24px;
   color: var(--muted);
   font-family: var(--font-sans);
-  font-size: 0.82rem;
+  font-size: var(--type-caption);
 }
 
 .site-article__body {
