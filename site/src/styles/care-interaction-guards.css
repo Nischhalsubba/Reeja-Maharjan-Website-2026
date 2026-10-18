@@ -62,7 +62,7 @@
 
   .care-personal-site :where(.site-back, .care-link, .contact-sidebar__social, .blog-topic-panel a, .blog-card a):hover {
     color: var(--care-indigo);
-    text-decoration-color: var(--care-madder);
+    text-decoration-color: var(--care-accent);
   }
 
   .care-personal-site .blog-index__lead-card:hover h3,

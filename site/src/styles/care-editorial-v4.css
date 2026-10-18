@@ -1,4 +1,4 @@
-/* Care is Personal 4.0 — one typographic voice for the complete public site.
+/* Care is Personal 4.3 — one typographic voice for the complete public site.
  * No Field Journal, serif, numbered-navigation or parchment visual rules.
  * Existing page structure remains accessible; inner-page art direction is independent.
  */
@@ -40,9 +40,9 @@
 .care-personal-site main :where(.site-eyebrow,.cip-eyebrow--coral,.cip-article__meta) {
   font-family:var(--type-body);
   font-weight:750;
-  font-size:.75rem;
+  font-size:var(--type-caption);
   letter-spacing:.115em;
-  color:var(--brand-coral-ink);
+  color:var(--brand-blue);
 }
 .care-personal-site main :where(.site-section,.contact-section) {
   padding-block:clamp(76px,8vw,112px);
@@ -108,7 +108,7 @@
   text-decoration-thickness:1px;
 }
 .care-personal-site .blog-toc {
-  font-size:.91rem;
+  font-size:1rem;
   line-height:1.6;
 }
 .care-personal-site .blog-toc a {
@@ -129,7 +129,7 @@
 }
 .care-personal-site .desktop-nav > a:not(.nav-cta) {
   font-family:var(--type-body);
-  font-size:.875rem;
+  font-size:var(--type-ui);
   font-weight:600;
   line-height:1.4;
   letter-spacing:-.01em;
@@ -155,7 +155,7 @@
 .care-personal-site .care-footer__credits,
 .care-personal-site .care-footer__column h3,
 .care-personal-site .care-footer__location {
-  font-size: .8125rem;
+  font-size:var(--type-caption);
   line-height:1.65;
 }
 .care-personal-site .care-footer__bottom :is(a,small,span),
@@ -202,7 +202,7 @@
   }
   .care-personal-site .site-page__summary{gap:0}
   .care-personal-site .care-footer__column a{min-height:36px}
-  .care-personal-site .care-footer__bottom{font-size:.8125rem}
+  .care-personal-site .care-footer__bottom{font-size:var(--type-caption)}
   .care-personal-site main :where(.site-card h3,.blog-card h3){font-size:clamp(1.25rem,5.4vw,1.65rem)}
 }
 @media(prefers-reduced-motion:reduce){
