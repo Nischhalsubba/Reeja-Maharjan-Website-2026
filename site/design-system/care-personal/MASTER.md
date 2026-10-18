@@ -1,6 +1,6 @@
-# Care is Personal — design system v4.0
+# Care is Personal — design system v4.2
 
-Applies to all public pages on reejamaharjan.com.np. This is a **working source-of-truth for new UI**, replacing the previous "Field Journal" and clinical-green visual palettes. Historical CSS modules remain only while their required structural layouts are migrated.
+Applies to all public pages on reejamaharjan.com.np. This is a **active source of truth**, replacing the retired Field Journal and Care Ledger CSS. No previous theme stylesheets are imported.
 
 ## Source ownership
 
@@ -8,16 +8,16 @@ Applies to all public pages on reejamaharjan.com.np. This is a **working source-
 |---|---|
 | Brand identity, semantic colors, type, spacing aliases, focus tokens | `src/styles/tokens.css` |
 | Element resets, default focus, reduced motion, skip link | `src/styles/base.css` |
-| Header and mobile dialog layout | `src/styles/components.css`, `src/styles/shell.css` |
+| Header and mobile dialog layout | `src/styles/shell.css`, `src/styles/care-shell.css` |
 | Current homepage design | `src/styles/care-is-personal.css` |
-| Current inner page templates | `src/styles/care-personal-inner.css` |
+| Inner-page structure, editorial typography, and design | `src/styles/care-inner-layout.css`, `src/styles/care-personal-inner.css`, `src/styles/care-editorial-v4.css` |
 | Article detail masthead and **all footer styles** | `src/styles/care-article-footer.css` |
 | GSAP homepage, image and microinteraction motion | `src/lib/carePersonalMotion.ts` |
-| GSAP legacy inner-page reveals | `src/lib/fieldJournalMotion.ts` (consolidation candidate) |
+| Inner-page reveals | `src/lib/careInnerMotion.ts` |
 | Static source contract | `scripts/verify-source-ownership.mjs` |
 | Rendered accessibility audit | `tests/browser/accessibility-sitewide.spec.ts` |
 
-Never reintroduce `.site-footer` appearance rules in `shell.css` or `field-journal-home.css`. Do not patch a contrast defect with a new generic global selector or additional `!important` overrides.
+Never reintroduce retired global stylesheets (`components.css`, `pages.css`, `layout.css`, `blog.css`, `cv.css`) or the `.field-journal` root class. Do not patch a contrast defect with a new generic global selector or additional `!important` overrides.
 
 ## Palette
 
@@ -63,7 +63,11 @@ All inner pages must use the typography rules owned by `src/styles/care-editoria
 - Semantic `data-design-system="care-is-personal"` and v4 `data-design-version` mark the active design.
 - OG cards: original SVG visual source, PNG output created by `scripts/render-social-cards.mjs` during Astro build; confirm `/og-default.png` and every article `/og/articles/<slug>.png`.
 
-The retired `field-journal-home.css`, `field-journal-pages.css`, `field-journal-finish.css`, and `fieldJournalMotion.ts` have been removed. Do not reintroduce them.
+The retired `field-journal-home.css`, `field-journal-pages.css`, `field-journal-finish.css`, `fieldJournalMotion.ts`, `components.css`, `pages.css`, `layout.css`, `blog.css`, and `cv.css` have been removed. Only print-specific CV rules remain in `care-cv-print.css`. Do not reintroduce them.
+
+## v4.2 legacy cleanup
+
+The 2026-10-18 cleanup removes five retired CSS bundles and moves CV print rules to `care-cv-print.css`. Header and mobile navigation now have one structural owner, the entire site uses the `care-personal-site` scope, and duplicated theme-level backgrounds no longer defeat the approved palette. The visual-difference comparator explicitly records the 4.1→4.2 transition and retains before/after screenshots; later changes in v4.2 are compared strictly again.
 
 ## Release checklist
 

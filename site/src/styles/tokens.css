@@ -36,6 +36,17 @@
   --small-size: 0.8125rem;
   --reading-max: 45rem;
 
+  /* Shared editorial typography for every route. */
+  --type-display: var(--font-display);
+  --type-body: var(--font-sans);
+  --type-caption: .8125rem;
+  --type-reading: clamp(1rem, .15vw + .98rem, 1.07rem);
+  --type-lead: clamp(1.025rem, .4vw + .98rem, 1.22rem);
+  --type-section: clamp(2.1rem, 3.5vw, 3.55rem);
+  --type-inner-hero: clamp(2.9rem, 4.5vw, 4.6rem);
+  --type-line: 1.68;
+  --type-tight: 1.105;
+
   /* Clinical editorial palette. Color supports hierarchy, never invented meaning. */
   --bg: #f8f9fd;
   --surface: #ffffff;
@@ -55,11 +66,6 @@
   --success: #206049;
   --warning: #7d5418;
   --danger: #a03535;
-
-  /* Compatibility aliases retained while page modules are consolidated. */
-  --clinical-blue: var(--accent);
-  --clinical-mint: var(--accent-soft);
-  --clinical-cream: var(--bg);
 
   /* Elevation: borders and tonal planes first; shadows only for overlays. */
   --shadow-1: 0 1px 0 rgba(23, 33, 29, 0.04);
@@ -107,12 +113,4 @@
   /* Focus. */
   --focus-ring: 0 0 0 3px rgba(52, 84, 245, 0.24);
 
-  /* Compatibility aliases used by existing components. */
-  --h1: var(--h1-size);
-  --h2: var(--h2-size);
-  --h3: clamp(1.15rem, 1.8vw, 1.5rem);
-  --p: var(--body-size);
-  --small: var(--small-size);
-  --r1: var(--r-btn);
-  --r2: var(--r-card);
 }

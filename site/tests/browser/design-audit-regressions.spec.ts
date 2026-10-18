@@ -96,7 +96,7 @@ test('Care is Personal palette and typography apply across the site', async ({ p
       const body = document.body;
       const heading = document.querySelector<HTMLElement>('main h1');
       return {
-        fieldJournal: body.classList.contains('field-journal'),
+        carePersonal: body.classList.contains('care-personal-site'),
         background: getComputedStyle(body).backgroundColor,
         bodyFont: getComputedStyle(body).fontFamily,
         headingFont: heading ? getComputedStyle(heading).fontFamily : '',
@@ -104,7 +104,7 @@ test('Care is Personal palette and typography apply across the site', async ({ p
       };
     });
 
-    expect(state.fieldJournal).toBe(true);
+    expect(state.carePersonal).toBe(true);
     expect(state.background).toBe('rgb(255, 255, 255)');
     expect(state.bodyFont).toContain('Public Sans');
     expect(state.headingFont).toContain('Public Sans');

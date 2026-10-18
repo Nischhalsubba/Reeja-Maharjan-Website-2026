@@ -1,3 +1,23 @@
+/* Current Care is Personal shell: the single owner of navigation structure. */
+.site-header {position:sticky;top:0;z-index:300}
+.site-header__inner {display:flex;align-items:center;justify-content:space-between;gap:var(--s2)}
+.brand {display:inline-flex;align-items:center;text-decoration:none;gap:var(--s2)}
+.brand__text {display:grid;line-height:1.2}
+.desktop-nav {display:flex;align-items:center}
+.desktop-nav a,.mobile-nav__panel a {padding:10px 12px;border:1px solid transparent;text-decoration:none;transition:color var(--dur-1) ease,background-color var(--dur-1) ease,border-color var(--dur-1) ease}
+.menu-toggle {display:none}
+.mobile-nav {position:fixed;top:72px;right:0;bottom:0;left:0;z-index:560;overflow-y:auto;opacity:0;pointer-events:none;display:none;transition:opacity var(--dur-1) ease}
+.mobile-nav.is-open,.mobile-nav[aria-hidden="false"] {display:flex;opacity:1;pointer-events:auto}
+.mobile-nav__panel {width:min(420px,100%);min-height:100%;margin-left:auto;padding:var(--s4);display:grid;align-content:start;gap:var(--s3);transform:translateX(16px);transition:transform var(--dur-2) var(--ease-out)}
+.mobile-nav.is-open .mobile-nav__panel,.mobile-nav[aria-hidden="false"] .mobile-nav__panel {transform:translateX(0)}
+.mobile-nav__close {justify-self:end;min-height:44px;padding:0 12px;border:1px solid var(--line);font-weight:var(--w-semibold)}
+.mobile-nav__panel > a {min-height:44px;display:flex;align-items:center}
+.mobile-nav__panel a[aria-current="page"] {border-color:var(--brand-line);background:var(--brand-lavender);color:var(--brand-blue-hover)}
+.form-status {font-size:var(--small-size);font-weight:var(--w-medium)}
+.form-status--success {color:var(--success)}
+.form-status--error {color:var(--danger)}
+.form-status[hidden] {display:none!important}
+
 .site-header {
   min-height: 72px;
   background: color-mix(in srgb, var(--surface) 92%, var(--bg));
@@ -14,26 +34,10 @@
   min-height: var(--touch-target);
 }
 
-.brand__mark {
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--accent);
-  border-radius: var(--r-btn);
-  background: var(--accent);
-  color: var(--accent-text);
-  font-family: var(--font-sans);
-  letter-spacing: 0.04em;
-}
-
 .brand__text strong {
   color: var(--text);
   font-size: 0.92rem;
   letter-spacing: -0.015em;
-}
-
-.brand__text small {
-  color: var(--muted);
-  font-size: 0.72rem;
 }
 
 .desktop-nav {
@@ -132,8 +136,3 @@
   }
 }
 
-@media (max-width: 560px) {
-  .brand__text small {
-    display: none;
-  }
-}

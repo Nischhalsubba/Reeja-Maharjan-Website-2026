@@ -42,14 +42,14 @@ const footerSource = await read('src/styles/care-article-footer.css');
 const expectedStyleImports = [
   '../styles/tokens.css',
   '../styles/base.css',
-  '../styles/layout.css',
-  '../styles/components.css',
-  '../styles/pages.css',
   '../styles/site-pages.css',
   '../styles/shell.css',
   '../styles/care-shell.css',
   '../styles/care-inner-layout.css',
   '../styles/care-interaction-guards.css',
+  '../styles/care-is-personal.css',
+  '../styles/care-personal-inner.css',
+  '../styles/care-article-footer.css',
   '../styles/care-editorial-v4.css'
 ];
 
@@ -58,6 +58,23 @@ for (const stylesheet of expectedStyleImports) {
   const occurrences = layoutSource.split(importStatement).length - 1;
   if (occurrences !== 1) {
     failures.push(`BaseLayout must import ${stylesheet} exactly once; found ${occurrences}.`);
+  }
+}
+
+if (!layoutSource.includes('class="care-personal-site"') || layoutSource.includes('field-journal')) {
+  failures.push('The active document must use the Care is Personal root scope only.');
+}
+for (const retiredStylesheet of ['layout.css','components.css','pages.css','blog.css','cv.css']) {
+  if (layoutSource.includes(`styles/${retiredStylesheet}`)) failures.push('Retired CSS imported globally: '+retiredStylesheet);
+}
+const cvPageSource = await read('src/pages/cv.astro');
+if (!cvPageSource.includes("import '../styles/care-cv-print.css'")) {
+  failures.push('The CV must import the dedicated print-only stylesheet.');
+}
+for (const stylesheet of ['care-shell.css','care-inner-layout.css','care-is-personal.css','care-personal-inner.css','care-article-footer.css','care-editorial-v4.css']) {
+  const source = await read(`src/styles/${stylesheet}`);
+  if (/field-journal|care-ledger|--fj-/i.test(source)) {
+    failures.push(`Obsolete theme scope/token found in active CSS: ${stylesheet}`);
   }
 }
 
