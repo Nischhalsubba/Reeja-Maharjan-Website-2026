@@ -202,7 +202,7 @@
   }
   .care-personal-site .site-page__summary{gap:0}
   .care-personal-site .care-footer__column a{min-height:36px}
-  .care-personal-site .care-footer__bottom{font-size:.8125rem}
+  .care-personal-site .care-footer__bottom{font-size:var(--type-caption)}
   .care-personal-site main :where(.site-card h3,.blog-card h3){font-size:clamp(1.25rem,5.4vw,1.65rem)}
 }
 @media(prefers-reduced-motion:reduce){
