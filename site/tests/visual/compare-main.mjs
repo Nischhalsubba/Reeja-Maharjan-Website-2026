@@ -20,8 +20,8 @@ const failures = [];
 const approvedReleaseChanges = [];
 const observedVersions = {};
 // An explicit approved release transition, not a blanket exemption.
-// Future changes within v3 continue to receive strict pixel comparison.
-const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal', '3.0.0-care-personal=>3.1.0-care-personal', '3.1.0-care-personal=>3.2.0-care-personal', '3.2.0-care-personal=>3.3.0-care-personal', '3.3.0-care-personal=>4.0.0-care-personal', '4.0.0-care-personal=>4.1.0-care-personal']);
+// Each transition is a reviewed design release; changes within a version still receive strict pixel comparison.
+const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal', '3.0.0-care-personal=>3.1.0-care-personal', '3.1.0-care-personal=>3.2.0-care-personal', '3.2.0-care-personal=>3.3.0-care-personal', '3.3.0-care-personal=>4.0.0-care-personal', '4.0.0-care-personal=>4.1.0-care-personal', '4.1.0-care-personal=>4.2.0-care-personal']);
 const browser = await chromium.launch();
 await mkdir(outputDir, { recursive: true });
 
@@ -197,11 +197,11 @@ try {
 
       if (!baseline.equals(candidate)) {
         const transition = `${observedVersions.main}=>${observedVersions.candidate}`;
-        if (acceptedTransitions.has(transition) || route === '/blog/') {
+        if (acceptedTransitions.has(transition)) {
           approvedReleaseChanges.push({
             route,
             viewport: viewport.name,
-            releaseTransition: route === '/blog/' ? 'approved-article-list-additions-2026-10-17' : transition,
+            releaseTransition: transition,
             before: digest(baseline),
             after: digest(candidate)
           });

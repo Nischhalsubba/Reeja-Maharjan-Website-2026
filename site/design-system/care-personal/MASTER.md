@@ -1,4 +1,4 @@
-# Care is Personal — design system v4.0
+# Care is Personal — design system v4.2
 
 Applies to all public pages on reejamaharjan.com.np. This is a **active source of truth**, replacing the retired Field Journal and Care Ledger CSS. No previous theme stylesheets are imported.
 
@@ -64,6 +64,10 @@ All inner pages must use the typography rules owned by `src/styles/care-editoria
 - OG cards: original SVG visual source, PNG output created by `scripts/render-social-cards.mjs` during Astro build; confirm `/og-default.png` and every article `/og/articles/<slug>.png`.
 
 The retired `field-journal-home.css`, `field-journal-pages.css`, `field-journal-finish.css`, `fieldJournalMotion.ts`, `components.css`, `pages.css`, `layout.css`, `blog.css`, and `cv.css` have been removed. Only print-specific CV rules remain in `care-cv-print.css`. Do not reintroduce them.
+
+## v4.2 legacy cleanup
+
+The 2026-10-18 cleanup removes five retired CSS bundles and moves CV print rules to `care-cv-print.css`. Header and mobile navigation now have one structural owner, the entire site uses the `care-personal-site` scope, and duplicated theme-level backgrounds no longer defeat the approved palette. The visual-difference comparator explicitly records the 4.1→4.2 transition and retains before/after screenshots; later changes in v4.2 are compared strictly again.
 
 ## Release checklist
 
