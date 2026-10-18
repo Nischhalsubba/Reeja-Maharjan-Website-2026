@@ -2,17 +2,7 @@
  * No Field Journal, serif, numbered-navigation or parchment visual rules.
  * Existing page structure remains accessible; inner-page art direction is independent.
  */
-:root {
-  --type-display: "Public Sans", system-ui, sans-serif;
-  --type-body: "Public Sans", system-ui, sans-serif;
-  --type-caption: .8125rem;
-  --type-reading: clamp(1rem, .15vw + .98rem, 1.07rem);
-  --type-lead: clamp(1.025rem, .4vw + .98rem, 1.22rem);
-  --type-section: clamp(2.1rem, 3.5vw, 3.55rem);
-  --type-inner-hero: clamp(2.9rem, 4.5vw, 4.6rem);
-  --type-line: 1.68;
-  --type-tight: 1.105;
-}
+/* Editorial variables live in tokens.css; media queries below adjust fluid sizes only. */
 .care-personal-site,
 .care-personal-site :where(input,textarea,select,button) {
   font-family:var(--type-body);

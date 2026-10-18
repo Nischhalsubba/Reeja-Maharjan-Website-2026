@@ -1,7 +1,7 @@
 /* Care is Personal — inner-page visual refinement. All brand tokens are owned by care-shell.css / tokens.css. */
 .care-personal-site :where(.site-page, .contact-page, .blog-article-page, .cv-page, .blog-index) {
   background:#fff;
-  color:#10182f;
+  color:var(--brand-ink);
 }
 .care-personal-site :is(h1,h2,h3,h4,.site-page__hero h1,.contact-hero h1,.blog-article__header h1,.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.blog-article__body h2,.contact-sidebar h2,.professional-contact-form h2,.blog-toc h2) {
   font-family:"Public Sans",system-ui,sans-serif;
@@ -30,7 +30,7 @@
   line-height:1.02;
   letter-spacing:-.075em;
   margin:12px 0 27px;
-  color:#10182f;
+  color:var(--brand-ink);
 }
 .care-personal-site :where(.site-page__lede,.contact-hero__copy>p:last-child,.blog-article__dek) {
   max-width:53ch;
@@ -40,7 +40,7 @@
 }
 .care-personal-site :where(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){
   border:0;
-  border-top:2px solid #3454f5;
+  border-top:2px solid var(--brand-blue);
   border-bottom:1px solid #cfd7ee;
   background:rgba(255,255,255,.42);
   box-shadow:none;
@@ -98,9 +98,9 @@
   border-radius:0;
 }
 .care-personal-site .site-card:nth-child(even){border-left:1px solid #e3e7f3}
-.care-personal-site .site-card::before{color:#3454f5;font:800 .74rem/1.5 "Public Sans",system-ui,sans-serif}
-.care-personal-site .site-card h3{font:750 clamp(1.45rem,2.3vw,2.05rem)/1.16 "Public Sans",system-ui,sans-serif;letter-spacing:-.05em;color:#10182f}
-.care-personal-site .site-card a,.care-personal-site .site-card a:visited{color:#3454f5;text-decoration-color:#3454f5}
+.care-personal-site .site-card::before{color:var(--brand-blue);font:800 .74rem/1.5 "Public Sans",system-ui,sans-serif}
+.care-personal-site .site-card h3{font:750 clamp(1.45rem,2.3vw,2.05rem)/1.16 "Public Sans",system-ui,sans-serif;letter-spacing:-.05em;color:var(--brand-ink)}
+.care-personal-site .site-card a,.care-personal-site .site-card a:visited{color:var(--brand-blue);text-decoration-color:var(--brand-blue)}
 .care-personal-site .site-list,.care-personal-site .cv-experience{border-top:1px solid #dfe4f1}
 .care-personal-site .site-list__item{border-color:#dfe4f1}
 .care-personal-site .site-list__item h3{font-size:1.5rem;font-weight:750;letter-spacing:-.04em}
@@ -113,12 +113,12 @@
   cursor:pointer;
   transition:background-color .2s,color .2s,border-color .2s;
 }
-.care-personal-site :where(.site-button,.care-button){border-color:#3454f5;color:#3454f5;background:transparent}
-.care-personal-site :where(.site-button--primary,.care-button--primary){background:#3454f5;color:#fff;border-color:#3454f5}
+.care-personal-site :where(.site-button,.care-button){border-color:var(--brand-blue);color:var(--brand-blue);background:transparent}
+.care-personal-site :where(.site-button--primary,.care-button--primary){background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
 .care-personal-site :where(.site-button,.care-button):hover{color:#fff;background:#2542d9;border-color:#2542d9}
 .care-personal-site :where(.site-button,.care-button):focus-visible,
 .care-personal-site :where(.cip-button,.cip-link,.cip-textlink,.nav-cta):focus-visible {
-  outline:3px solid #223fda;outline-offset:4px;
+  outline:3px solid var(--brand-blue-hover);outline-offset:4px;
 }
 .care-personal-site .site-section--dark .site-button,.care-personal-site .site-section--dark .site-button:not(.site-button--primary){background:#fff;color:#17244d;border-color:#fff}
 .care-personal-site .site-section--dark .site-button:hover{background:#d9ddff;color:#17244d}
@@ -132,11 +132,11 @@
 .care-personal-site .brand{gap:0}
 .care-personal-site .brand__text strong{font:800 1.38rem/1 "Public Sans",system-ui,sans-serif;letter-spacing:-.075em}
 .care-personal-site .desktop-nav>a:not(.nav-cta){font-family:"Public Sans",system-ui,sans-serif;text-transform:none;letter-spacing:0;font-size:.82rem}
-.care-personal-site .desktop-nav .nav-cta{background:transparent;color:#3454f5;border:0;font-size:.85rem;font-family:"Public Sans",system-ui,sans-serif}
+.care-personal-site .desktop-nav .nav-cta{background:transparent;color:var(--brand-blue);border:0;font-size:.85rem;font-family:"Public Sans",system-ui,sans-serif}
 .care-personal-site .desktop-nav .nav-cta:hover{background:#e8ebff;color:#2d43c9}
 .care-personal-site .mobile-nav{background:#f7f8ff}
-.care-personal-site :where(.site-note,.blog-note-strong){background:#f2f4ff;border-left-color:#3454f5;border-color:#dce2ff;border-radius:2px}
-.care-personal-site :where(.blog-article__body,.blog-toc,.blog-article__layout,.blog-index,.cv-page,.contact-page){color:#10182f}
+.care-personal-site :where(.site-note,.blog-note-strong){background:#f2f4ff;border-left-color:var(--brand-blue);border-color:#dce2ff;border-radius:2px}
+.care-personal-site :where(.blog-article__body,.blog-toc,.blog-article__layout,.blog-index,.cv-page,.contact-page){color:var(--brand-ink)}
 .care-personal-site .blog-article__body h2,.care-personal-site .blog-article__body h3 {font-family:"Public Sans",system-ui,sans-serif;font-weight:750;letter-spacing:-.045em}
 .care-personal-site :where(.blog-card h3,.blog-index__lead-card h3,.blog-topic-panel h3){font-family:"Public Sans",system-ui,sans-serif;font-weight:750;letter-spacing:-.045em}
 .care-personal-site .blog-index__lead-card{background:#f0f2ff;border-radius:3px}
@@ -145,7 +145,7 @@
 .care-personal-site .contact-hero,.care-personal-site .contact-section{border-color:#e2e6f2}
 .care-personal-site .contact-sidebar__block--soft{background:#f0f3ff;border-color:#dee5ff}
 .care-personal-site .professional-contact-form :where(input,textarea,select){border-color:#cbd4e9;background:#fff}
-.care-personal-site .professional-contact-form :where(input,textarea,select):focus-visible{outline:2px solid #3454f5;outline-offset:2px}
+.care-personal-site .professional-contact-form :where(input,textarea,select):focus-visible{outline:2px solid var(--brand-blue);outline-offset:2px}
 .care-personal-site .site-empty .container{min-height:min(60vh,600px)}
 /* Licensed editorial photo interludes: no images portrayed as actual clinical evidence. */
 .cip-photo-band{margin:0;position:relative;height:clamp(195px,28vw,355px);overflow:hidden;background:#cdd5f5}
@@ -201,7 +201,7 @@
   .cip-photo-band{display:none!important}
   .care-personal-site .cv-page{background:white;color:black}
   .care-personal-site :is(.site-page__hero,.site-section,.site-section--soft){background:#fff!important}
-  .care-personal-site .cv-page h1,.care-personal-site .cv-page h2,.care-personal-site .cv-page h3{color:#10182f!important}
+  .care-personal-site .cv-page h1,.care-personal-site .cv-page h2,.care-personal-site .cv-page h3{color:var(--brand-ink)!important}
 }
 @media(prefers-reduced-motion:reduce){.care-personal-site *{scroll-behavior:auto!important}}
 
@@ -224,8 +224,8 @@
   letter-spacing:-.01em;
 }
 .care-personal-site .desktop-nav > a:not(.nav-cta)[aria-current="page"]{
-  color:#3454f5;
-  background:#eef0ff;
+  color:var(--brand-blue);
+  background:var(--brand-lavender);
   border-radius:3px;
 }
 .care-personal-site .desktop-nav .nav-cta{text-transform:none;font-weight:750}

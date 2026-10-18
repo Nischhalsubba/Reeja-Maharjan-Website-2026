@@ -7,7 +7,7 @@
   --care-ink: var(--brand-ink);
   --care-graphite: var(--brand-muted);
   --care-muted: var(--brand-muted);
-  --care-madder: var(--brand-coral-ink);
+  --care-madder: var(--brand-coral-ink); /* Semantic accent for legacy structural hooks, not the retired palette. */
   --care-indigo: var(--brand-blue);
   --care-brass: #b8bfff;
   --care-line: var(--brand-line);

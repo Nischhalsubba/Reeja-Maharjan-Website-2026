@@ -30,7 +30,7 @@
 }
 .care-personal-site .blog-article__header .site-back {
   margin-bottom: clamp(26px, 4vw, 44px);
-  color: #3454f5;
+  color: var(--brand-blue);
   font-weight: 700;
   text-decoration: none;
   text-underline-offset: 5px;
@@ -81,7 +81,7 @@
   padding-left: 0;
 }
 .care-personal-site .blog-article__meta-panel dt {
-  color: #3454f5;
+  color: var(--brand-blue);
   font-size: .7rem;
   font-weight: 750;
   line-height: 1.45;
