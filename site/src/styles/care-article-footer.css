@@ -198,7 +198,7 @@
   gap: 32px;
   min-height: 52px;
   padding: 15px 20px;
-  color: #10182f;
+  color: var(--accent-text);
   background: var(--brand-blue);
   border: 1px solid var(--brand-blue);
   border-radius: 3px;
@@ -212,7 +212,7 @@
 .care-personal-site .care-footer__column a:focus-visible,
 .care-personal-site .care-footer__wordmark:focus-visible,
 .care-personal-site .care-footer__bottom a:focus-visible {
-  outline: 3px solid #ff907f;
+  outline: 3px solid var(--brand-focus);
   outline-offset: 5px;
 }
 .care-personal-site .care-footer__main {
@@ -320,7 +320,7 @@
   color: #ffffff;
   background-color: var(--brand-blue-hover);
   border-color: var(--brand-blue-hover);
-  outline: 3px solid #ffb69b;
+  outline: 3px solid var(--brand-focus);
   outline-offset: 4px;
 }
 .care-personal-site footer.site-footer--care a.care-footer__cta > span {

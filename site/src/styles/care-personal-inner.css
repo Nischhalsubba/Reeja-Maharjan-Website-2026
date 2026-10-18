@@ -1,20 +1,4 @@
-/* Care is Personal — inner-page visual refinement; site tokens and shell live elsewhere. */
-.care-personal-site {
-  --care-paper: var(--brand-canvas);
-  --care-paper-deep: var(--brand-lavender);
-  --care-surface: #fff;
-  --care-ink: var(--brand-ink);
-  --care-graphite: #5c6881;
-  --care-indigo: var(--brand-blue);
-  --care-madder: var(--brand-coral-ink);
-  --care-brass: #b8c0ff;
-  --care-line: var(--brand-line);
-  --care-fast: .2s;
-  --care-radius-1: 3px;
-  color: #10182f;
-  background: #fff;
-  font-family: "Public Sans",system-ui,sans-serif;
-}
+/* Care is Personal — inner-page visual refinement. All brand tokens are owned by care-shell.css / tokens.css. */
 .care-personal-site :where(.site-page, .contact-page, .blog-article-page, .cv-page, .blog-index) {
   background:#fff;
   color:#10182f;
@@ -120,7 +104,7 @@
 .care-personal-site .site-list,.care-personal-site .cv-experience{border-top:1px solid #dfe4f1}
 .care-personal-site .site-list__item{border-color:#dfe4f1}
 .care-personal-site .site-list__item h3{font-size:1.5rem;font-weight:750;letter-spacing:-.04em}
-.care-personal-site .site-list__meta{color:#54617e !important}
+.care-personal-site .site-list__meta{color:var(--brand-muted)}
 .care-personal-site :where(.site-button,.care-button,.cip-button){
   min-height:48px;
   border-radius:3px;
@@ -228,7 +212,7 @@
 .care-personal-site .cip-image-credits p{max-width:900px;padding-top:9px;margin:0}
 .care-personal-site .cip-image-credits a{color:#bdc9ff;text-decoration:underline;text-underline-offset:3px}
 
-.care-personal-site .brand__text strong span{color:#ef7866}
+.care-personal-site .brand__text strong span{color:var(--brand-coral)}
 
 /* Final visual polish: quiet navigation and shorter editorial hero lines. */
 .care-personal-site .desktop-nav > a:not(.nav-cta)::before,

@@ -8,7 +8,7 @@
 .care-personal-site .site-eyebrow {
   margin: 0 0 var(--care-space-2);
   color: var(--care-madder);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .67rem;
   font-weight: 500;
   letter-spacing: .12em;
@@ -73,7 +73,7 @@
 
 .care-personal-site :where(.site-page__summary dt, .contact-hero__details span, .blog-article__meta-panel dt) {
   color: var(--care-madder);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .64rem;
   font-weight: 500;
   letter-spacing: .08em;
@@ -235,7 +235,7 @@
   top: calc(var(--care-space-5) + 3px);
   left: var(--care-space-3);
   color: var(--care-madder);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .63rem;
   letter-spacing: .08em;
 }
@@ -294,11 +294,11 @@
 }
 
 .care-personal-site .site-list__meta {
-  color: var(--care-muted) !important;
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  color: var(--care-muted);
+  font-family: var(--font-sans);
   font-size: .68rem;
   letter-spacing: .03em;
-  line-height: 1.65 !important;
+  line-height: 1.65;
   text-align: right;
   text-transform: uppercase;
 }
@@ -348,7 +348,7 @@
   padding: 5px 10px;
   background: var(--care-madder);
   color: var(--care-surface);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .6rem;
   letter-spacing: .08em;
   text-transform: uppercase;
@@ -388,7 +388,7 @@
   display: block;
   margin-bottom: var(--care-space-1);
   color: var(--care-ink);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .7rem;
   font-weight: 500;
   letter-spacing: .045em;
@@ -446,7 +446,7 @@
 }
 
 .care-personal-site .professional-contact-form__privacy strong {
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .68rem;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -573,7 +573,7 @@
 
 .care-personal-site .blog-topic-panel__count {
   color: var(--care-madder);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .65rem;
 }
 
@@ -645,7 +645,7 @@
   gap: var(--care-space-3);
   margin: 0;
   color: var(--care-muted);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .65rem;
   letter-spacing: .04em;
   text-transform: uppercase;
@@ -746,12 +746,12 @@
 }
 
 .care-personal-site :where(.site-note, .blog-note-strong, .blog-author-card) {
-  padding: var(--care-space-4) var(--care-space-5) !important;
-  border: 0 !important;
-  border-left: 3px solid var(--care-madder) !important;
-  border-radius: 0 !important;
-  background: var(--care-surface) !important;
-  box-shadow: none !important;
+  padding: var(--care-space-4) var(--care-space-5);
+  border: 0;
+  border-left: 3px solid var(--care-madder);
+  border-radius: 0;
+  background: var(--care-surface);
+  box-shadow: none;
 }
 
 .care-personal-site .blog-related-grid {
@@ -800,7 +800,7 @@
 
 .care-personal-site :where(.cv-experience__index, .cv-credential__index) {
   color: var(--care-madder);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .66rem;
   letter-spacing: .06em;
 }
@@ -817,7 +817,7 @@
 .care-personal-site .cv-credential__issuer {
   margin: 5px 0 0;
   color: var(--care-muted);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .67rem;
   letter-spacing: .035em;
   text-transform: uppercase;
@@ -838,7 +838,7 @@
 .care-personal-site .cv-credential__verification {
   margin: 0;
   color: var(--care-muted);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .65rem;
   line-height: 1.55;
   text-align: right;
@@ -921,7 +921,7 @@
 
 .care-personal-site :where(.cv-language-list dt, .cv-detail-list dt) {
   color: var(--care-madder);
-  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-family: var(--font-sans);
   font-size: .66rem;
   letter-spacing: .05em;
   text-transform: uppercase;
