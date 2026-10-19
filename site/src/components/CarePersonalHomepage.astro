@@ -7,191 +7,181 @@ import { getBlogImage, getBlogImageSrcSet } from '../content/blog/imagery';
 const featuredSlugs = [
   'kangaroo-mother-care-who-2025-guide-parents-nurses',
   'gestational-diabetes-in-pregnancy-2026-monitoring-care',
-  'comprehensive-newborn-care-level-ii-what-nurses-learn'
+  'mastering-nursing-documentation-sbar-handover',
 ];
 const articles = featuredSlugs
   .map(slug => blogPosts.find(post => post.slug === slug))
   .filter((post): post is (typeof blogPosts)[number] => Boolean(post));
 
-const work = profile.experience;
-const experienceCards = [
-  { item: work[1], number: '01', image: 'https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=900&q=82', alt: 'Illustrative photograph of a hospital nursing team, not TUTH staff', credit: 'https://unsplash.com/photos/group-of-doctors-walking-on-hospital-hallway-Pd4lRfKo16U', photographer: 'Luis Melendez', tag: 'Maternal & newborn care' },
-  { item: work[2], number: '02', image: 'https://images.unsplash.com/photo-1689023542311-36b129826c89?auto=format&fit=crop&w=900&q=82', alt: 'Illustrative photograph of clinical documentation, not MMTH premises', credit: 'https://unsplash.com/photos/a-woman-sitting-at-a-desk-with-a-notebook-and-pen-PPRKVDy47TY', photographer: 'Fiona Murray-deGraaff', tag: 'General and surgical care' },
-  { item: work[0], number: '03', image: 'https://images.unsplash.com/photo-1623658045230-605cb00c80d6?auto=format&fit=crop&w=900&q=82', alt: 'Illustrative blood-pressure monitoring; not an IISH study participant', credit: 'https://unsplash.com/photos/a-person-with-a-blood-pressure-meter-on-a-table-J0benOYAPbw', photographer: 'Mufid Majnun', tag: 'Maternal-health research' },
-].filter((card): card is typeof card & {item: (typeof work)[number]} => Boolean(card.item));
-
-const benefits = [
-  { key: 'heart', label: 'Maternal &', line: 'newborn care' },
-  { key: 'book', label: 'Evidence-led', line: 'nursing practice' },
-  { key: 'graph', label: 'Research with', line: 'real-world purpose' },
-  { key: 'people', label: 'Patient education', line: '& support' },
-  { key: 'shield', label: 'Safer, healthier', line: 'communities' }
-] as const;
-
-const articleDate = (value:string) => new Date(value + 'T00:00:00Z').toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
+const experience = profile.experience;
+const timeline = experience.map((item, index) => ({
+  item,
+  number: String(index + 1).padStart(2,'0'),
+  category: index === 0 ? 'Research · maternal health' : index === 1 ? 'Maternal & newborn nursing' : index === 2 ? 'General ward nursing' : 'Maternity & theatre support',
+}));
+const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
+  .toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', timeZone:'UTC' });
 ---
-<div class="cip-home rv5-home">
-  <section class="cip-hero rv5-hero" id="home" aria-labelledby="cip-title">
-    <div class="rv5-hero__ambient" aria-hidden="true"></div>
-    <div class="cip-wrap rv5-hero__grid">
-      <div class="rv5-hero__copy">
-        <p class="cip-eyebrow rv5-eyebrow">NURSE <span aria-hidden="true">·</span> RESEARCHER <span aria-hidden="true">·</span> MATERNAL HEALTH</p>
+
+<div class="cip-home rv5-home rv6-home">
+  <section class="cip-hero rv5-hero rv6-hero" id="home" aria-labelledby="cip-title">
+    <div class="rv6-hero__ambient" aria-hidden="true"></div>
+    <div class="cip-wrap rv5-hero__grid rv6-hero__grid">
+      <div class="rv5-hero__copy rv6-hero__copy">
+        <p class="rv5-eyebrow rv6-eyebrow">REGISTERED NURSE <span aria-hidden="true">/</span> MATERNAL-HEALTH RESEARCH</p>
         <h1 id="cip-title">Care is<br /><span>personal.</span></h1>
-        <p class="cip-hero__lead">I'm Reeja Maharjan, a registered nurse and maternal-health research assistant. My work connects compassionate hospital care, patient education and research in Nepal.</p>
-        <div class="rv5-hero__actions">
-          <a class="rv5-button rv5-button--solid" href="#experience" data-track="home-experience">Learn about my work <span aria-hidden="true">↗</span></a>
-          <a class="rv5-button rv5-button--outline" href={facts.publicCvPath} data-track="home-cv">View my CV <span aria-hidden="true">↗</span></a>
+        <p class="rv6-hero__identity">Hello, I’m <strong>Reeja Maharjan.</strong></p>
+        <p class="cip-hero__lead">I bring bedside nursing, family education and maternal-health research together — with a focus on clear communication and respectful care.</p>
+        <div class="rv5-hero__actions rv6-hero__actions">
+          <a class="rv5-button rv5-button--solid" href="#experience" data-track="home-experience">Explore my work <span aria-hidden="true">↗</span></a>
+          <a class="rv5-button rv5-button--outline" href="/contact/" data-track="home-contact">Get in touch <span aria-hidden="true">↗</span></a>
         </div>
-        <dl class="rv5-hero__stats" aria-label="Professional overview">
-          <div><dt>Hospital settings</dt><dd><strong>3</strong><span>Clinical experience</span></dd></div>
-          <div><dt>Research project</dt><dd><strong>1</strong><span>Current MOM-HD role</span></dd></div>
-          <div><dt>Published guides</dt><dd><strong>{blogPosts.length}</strong><span>Articles & resources</span></dd></div>
-        </dl>
+        <div class="rv6-hero__secondary">
+          <span class="rv6-hero__place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 0 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg> Biratnagar, Nepal</span>
+          <a href={facts.publicCvPath} class="rv6-hero__cv">View professional CV <span aria-hidden="true">↗</span></a>
+        </div>
       </div>
-      <figure class="cip-hero__portrait rv5-hero__portrait">
+      <figure class="cip-hero__portrait rv5-hero__portrait rv6-hero__portrait">
         <div class="rv5-hero__portrait-backdrop" aria-hidden="true"></div>
         <picture>
-          <source type="image/webp" srcset="/reeja-headshot-360.webp 360w, /reeja-headshot-720.webp 720w, /reeja-headshot-960.webp 960w" sizes="(max-width: 720px) 92vw, 640px" />
-          <img src="/reeja-headshot.jpg" width="800" height="1000" alt="Portrait of Reeja Maharjan" fetchpriority="high" decoding="async" loading="eager" />
+          <source type="image/webp" srcset="/reeja-headshot-360.webp 360w, /reeja-headshot-720.webp 720w, /reeja-headshot-960.webp 960w" sizes="(max-width: 790px) 92vw, 550px" />
+          <img src="/reeja-headshot.jpg" alt="Reeja Maharjan, registered nurse and research assistant" width="800" height="1000" fetchpriority="high" loading="eager" decoding="async" />
         </picture>
-        <figcaption class="rv5-hero__portrait-note">
-          <span class="rv5-hero__note-icon" aria-hidden="true">♡</span>
-          <span>People first.<br />Evidence matters.</span>
-        </figcaption>
+        <figcaption class="rv6-hero__caption"><span class="rv6-hero__caption-mark" aria-hidden="true">+</span><span><strong>People first.</strong><small>Evidence-informed care.</small></span></figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="rv5-pillars" aria-label="What guides my work">
-    <div class="cip-wrap rv5-pillars__grid">
-      {benefits.map(benefit => (
-        <div class="rv5-pillar">
-          <span class="rv5-pillar__icon" aria-hidden="true">
-            {benefit.key === 'heart' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20.5 8.4c0 4.7-8.5 10.5-8.5 10.5S3.5 13.1 3.5 8.4a4.4 4.4 0 0 1 8.5-1.3 4.4 4.4 0 0 1 8.5 1.3Z"/></svg>}
-            {benefit.key === 'book' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20c-3.5-2-6-2-9-1V5c3-1 5.5-.7 9 1 3.5-1.7 6-2 9-1v14c-3-1-5.5-1-9 1Zm0-14v14"/></svg>}
-            {benefit.key === 'graph' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V13h4v7M10 20V9h4v11M16 20V4h4v16M3 20h18"/></svg>}
-            {benefit.key === 'people' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3"/><path d="M3 20v-2a6 6 0 0 1 12 0v2M18 11a3 3 0 0 0 0-6M18 15a5 5 0 0 1 3 5"/></svg>}
-            {benefit.key === 'shield' && <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3 4.5 6v5.5c0 4.4 3 7.5 7.5 9.5 4.5-2 7.5-5.1 7.5-9.5V6L12 3Z"/><path d="m9 12 2 2 4-4"/></svg>}
-          </span>
-          <p>{benefit.label}<br />{benefit.line}</p>
-        </div>
-      ))}
+  <section class="rv6-trust" aria-label="Professional background">
+    <div class="cip-wrap rv6-trust__grid">
+      <div><span class="rv6-trust__icon" aria-hidden="true">01</span><p><strong>Nepal Nursing Council</strong><span>Registered Nurse · credential summary</span></p></div>
+      <div><span class="rv6-trust__icon" aria-hidden="true">02</span><p><strong>B.Sc. Nursing</strong><span>Tribhuvan University affiliation</span></p></div>
+      <div><span class="rv6-trust__icon" aria-hidden="true">03</span><p><strong>IISH · MOM-HD</strong><span>Current maternal-health research role</span></p></div>
+      <a class="rv6-trust__link" href="/cv/" aria-label="View Reeja's credentials and experience">Credentials <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 
-  <section class="rv5-section rv5-career" id="experience" aria-labelledby="rv5-career-heading">
+  <section class="rv6-pillars rv5-section" id="practice" aria-labelledby="rv6-practice-heading">
     <div class="cip-wrap">
-      <div class="rv5-section-header rv5-section-header--split">
-        <div>
-          <p class="rv5-eyebrow">MY JOURNEY</p>
-          <h2 id="rv5-career-heading">Clinical experience<br />with a wider purpose.</h2>
-        </div>
-        <div class="rv5-section-header__aside">
-          <p>From hospital wards to maternal-health research, my work is grounded in commitment to safe, respectful and compassionate care.</p>
-          <a class="rv5-text-link" href="/cv/">View full experience <span aria-hidden="true">↗</span></a>
-        </div>
+      <div class="rv6-section-intro">
+        <p class="rv5-eyebrow">WHAT I DO</p>
+        <h2 id="rv6-practice-heading">Grounded in care.<br /><span>Driven by evidence.</span></h2>
+        <p>Two connected sides of my work — practical nursing support and research that helps families navigate maternal health.</p>
       </div>
-      <div class="rv5-career__grid">
-        {experienceCards.map(card => (
-          <article class="rv5-career-card">
-            <figure class="rv5-career-card__photo">
-              <img src={card.image} alt={card.alt} width="900" height="600" loading="lazy" decoding="async" />
-              <figcaption>Illustrative photo · <a href={card.credit} target="_blank" rel="noopener noreferrer">{card.photographer} / Unsplash</a></figcaption>
-            </figure>
-            <div class="rv5-career-card__content">
-              <p class="rv5-career-card__period">{card.item.period}</p>
-              <h3>{card.item.role}</h3>
-              <p class="rv5-career-card__org">{card.item.organization}</p>
-              <span class="rv5-career-card__tag">{card.tag}</span>
-              <p class="rv5-career-card__summary">{card.item.bullets[0]}</p>
-              <div class="rv5-career-card__location">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 0 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg>
-                {card.item.location}
-              </div>
-            </div>
-          </article>
-        ))}
+      <div class="rv6-pillars__grid">
+        <article class="rv6-pillar rv6-pillar--nursing">
+          <div class="rv6-pillar__symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M24 41s-17-10.1-17-22a9.5 9.5 0 0 1 17-5.4A9.5 9.5 0 0 1 41 19C41 30.9 24 41 24 41Z"/><path d="M11 24h8l4-7 5 13 3-6h7"/></svg></div>
+          <span class="rv6-pillar__index">01 / CLINICAL PRACTICE</span>
+          <h3>Care at the bedside.</h3>
+          <p>Maternal and newborn nursing, documentation, monitoring and practical counselling for patients and families.</p>
+          <a href="/nursing-practice/" class="rv5-text-link">Explore nursing practice <span aria-hidden="true">↗</span></a>
+        </article>
+        <article class="rv6-pillar rv6-pillar--research">
+          <div class="rv6-pillar__symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 41V28h7v13M20 41V19h7v22M32 41V9h7v32M6 41h36"/><path d="m9 16 12-7 6 4 12-9"/></svg></div>
+          <span class="rv6-pillar__index">02 / CLINICAL RESEARCH</span>
+          <h3>Research beyond the ward.</h3>
+          <p>Participant education, blood-pressure and glucose monitoring, tele-follow-up and careful study documentation.</p>
+          <a href="/clinical-research/" class="rv5-text-link">Explore research work <span aria-hidden="true">↗</span></a>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="rv5-focus" id="research" aria-labelledby="rv5-focus-heading">
-    <div class="rv5-focus__image">
-      <img src="https://images.unsplash.com/photo-1766299892744-a0b9d4e11707?auto=format&fit=crop&w=1200&q=82" alt="Illustrative photograph of a mother caring for a newborn; not Reeja or a research participant" width="1200" height="900" loading="lazy" decoding="async" />
-      <span class="rv5-focus__photo-credit">Illustrative photo · <a href="https://unsplash.com/photos/mother-holding-a-newborn-baby-while-breastfeeding-veQxbcl8vog" target="_blank" rel="noopener noreferrer">Brian Wangenheim / Unsplash</a></span>
+  <section class="rv5-section rv5-career rv6-career" id="experience" aria-labelledby="rv5-career-heading">
+    <div class="cip-wrap">
+      <div class="rv5-section-header rv5-section-header--split rv6-section-head">
+        <div><p class="rv5-eyebrow">THE JOURNEY SO FAR</p><h2 id="rv5-career-heading">Experience that<br />shapes my practice.</h2></div>
+        <div class="rv5-section-header__aside"><p>Hospital and research roles, shown in reverse chronological order. Each experience has helped shape a more thoughtful approach to care.</p><a class="rv5-text-link" href="/cv/">Read the complete CV <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <ol class="rv6-career__timeline">
+        {timeline.map(({item,number,category}) => (
+          <li class="rv5-career-card rv6-career__entry">
+            <div class="rv6-career__index" aria-hidden="true">{number}</div>
+            <div class="rv6-career__main"><span class="rv6-career__category">{category}</span><h3>{item.role}</h3><p class="rv6-career__org">{item.organization}</p><p class="rv6-career__summary">{item.bullets[0]}</p></div>
+            <div class="rv6-career__meta"><time>{item.period}</time><span>{item.location}</span></div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="rv5-focus rv6-focus" id="research" aria-labelledby="rv5-focus-heading">
+    <div class="rv5-focus__image rv6-focus__image">
+      <img src="https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?auto=format&fit=crop&w=1200&q=80" alt="Illustrative blood-pressure check, not a MOM-HD study participant" width="1200" height="900" loading="lazy" decoding="async" data-editorial-image />
+      <span class="rv5-focus__photo-credit">Illustrative photo · <a href="https://unsplash.com/photos/a-doctor-checking-the-blood-pressure-of-a-patient-XdErxxR6Xog" target="_blank" rel="noopener noreferrer">CDC / Unsplash</a></span>
+      <div class="rv6-focus__photo-fallback" aria-hidden="true"><svg viewBox="0 0 160 110" fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="40" width="124" height="47" rx="6"/><path d="M27 64h23l8-14 9 31 10-20 9 3h46"/><path d="M80 40V15"/></svg></div>
     </div>
     <div class="rv5-focus__content">
       <div class="rv5-focus__inner">
-        <p class="rv5-eyebrow">AREAS OF FOCUS</p>
-        <h2 id="rv5-focus-heading">People, research<br />and better care.</h2>
-        <p>I'm especially interested in maternal and newborn health, participant education and research that leads to practical improvements in community healthcare.</p>
+        <p class="rv5-eyebrow">CURRENT RESEARCH · IISH</p>
+        <h2 id="rv5-focus-heading">Turning information into better follow-up.</h2>
+        <p>As a Research Assistant on the MOM-HD maternal-health telemonitoring trial, I support the processes that connect participants, home readings and the wider clinical team.</p>
         <ul class="rv5-focus__bullets">
-          <li>Respectful, compassionate, evidence-informed care</li>
-          <li>Maternal and newborn health across the care continuum</li>
-          <li>Research, data quality and digital-health follow-up</li>
-          <li>Patient and family education in practical language</li>
+          <li>Participant screening, education and consent-workflow support</li>
+          <li>Home blood-pressure and blood-glucose monitoring guidance</li>
+          <li>Scheduled tele-follow-up and escalation within study protocols</li>
+          <li>Study documentation, device logistics and data-quality checks</li>
         </ul>
-        <a class="rv5-button rv5-button--solid" href="/clinical-research/">Explore my research <span aria-hidden="true">↗</span></a>
+        <p class="rv6-focus__disclaimer">Role description, not a claim about trial outcomes.</p>
+        <a class="rv5-button rv5-button--solid" href="/clinical-research/">Read about the research <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
 
-  <section class="rv5-section rv5-writing" id="writing" aria-labelledby="rv5-writing-heading">
+  <section class="rv5-section rv5-writing rv6-writing" id="writing" aria-labelledby="rv5-writing-heading">
     <div class="cip-wrap">
-      <div class="rv5-section-header rv5-section-header--inline">
-        <div>
-          <p class="rv5-eyebrow">FEATURED WRITING</p>
-          <h2 id="rv5-writing-heading">Stories and guides for healthier futures.</h2>
-          <p>Practical, source-linked writing about maternal health, nursing and research.</p>
-        </div>
-        <a class="rv5-text-link" href="/blog/">View all writing <span aria-hidden="true">↗</span></a>
+      <div class="rv5-section-header rv5-section-header--inline rv6-section-head">
+        <div><p class="rv5-eyebrow">FROM MY WRITING DESK</p><h2 id="rv5-writing-heading">Care, explained clearly.</h2><p>Source-linked articles for families, nurses and learners.</p></div>
+        <a class="rv5-text-link" href="/blog/">Explore all {blogPosts.length} guides <span aria-hidden="true">↗</span></a>
       </div>
       <div class="rv5-writing__grid">
-        {articles.map((post, index) => {
-          const image = getBlogImage(post.slug);
-          return (
-            <article class="rv5-writing-card">
-              <a href={'/blog/' + post.slug + '/'} class="rv5-writing-card__photo" aria-label={'Read '+ post.title}>
-                <img src={image.src} srcset={getBlogImageSrcSet(image)} sizes="(max-width: 700px) 100vw, (max-width: 1024px) 45vw, 250px" alt={image.alt} width="700" height="650" loading="lazy" decoding="async" />
+        {articles.map((post,index) => {
+          const image=getBlogImage(post.slug);
+          return <article class="rv5-writing-card rv6-writing__card">
+            <div class="rv6-writing__image">
+              <a href={'/blog/'+post.slug+'/'} class="rv5-writing-card__photo" aria-label={'Read '+post.title}>
+                <img src={image.src} srcset={getBlogImageSrcSet(image)} sizes="(max-width: 700px) 92vw, (max-width: 1000px) 45vw, 380px" alt={image.alt} width="700" height="475" loading="lazy" decoding="async" data-editorial-image />
+                <span class="rv6-writing__image-fallback" aria-hidden="true">{post.tags[0] ?? 'Nursing'}</span>
               </a>
-              <div class="rv5-writing-card__content">
-                <p class:list={["rv5-writing-card__category", "rv5-writing-card__category--" + index]}>{post.tags[0] ?? 'Nursing'}</p>
-                <h3><a href={'/blog/'+post.slug+'/'}>{post.title}</a></h3>
-                <p>{post.excerpt}</p>
-                <p class="rv5-writing-card__meta">{articleDate(post.updatedAt)} <span aria-hidden="true">·</span> {post.readMinutes} min read</p>
-              </div>
               <a class="rv5-writing-card__photo-credit" href={image.sourceUrl} target="_blank" rel="noopener noreferrer">Photo: {image.photographer} / Unsplash</a>
-            </article>
-          );
+            </div>
+            <div class="rv5-writing-card__content">
+              <p class:list={['rv5-writing-card__category','rv5-writing-card__category--'+index]}>{post.tags[0] ?? 'Nursing'}</p>
+              <h3><a href={'/blog/'+post.slug+'/'}>{post.title}</a></h3>
+              <p class="rv6-writing__summary">{post.excerpt}</p>
+              <p class="rv5-writing-card__meta">{dateLabel(post.updatedAt)} <span aria-hidden="true">·</span> {post.readMinutes} min read</p>
+            </div>
+          </article>;
         })}
       </div>
     </div>
   </section>
 
-  <section class="rv5-personal" id="about" aria-labelledby="rv5-personal-heading">
-    <div class="cip-wrap rv5-personal__grid">
+  <section class="rv5-personal rv6-personal" id="about" aria-labelledby="rv5-personal-heading">
+    <div class="cip-wrap rv5-personal__grid rv6-personal__grid">
       <div class="rv5-personal__copy">
-        <p class="rv5-eyebrow">A PERSONAL NOTE</p>
-        <h2 id="rv5-personal-heading">Stronger mothers,<br />brighter communities.</h2>
-        <p>Hospital nursing and maternal-health research have shown me the value of respectful communication, clear education and practical follow-up. My work connects individual care with healthier families and communities.</p>
-        <p class="rv5-personal__byline">Reeja Maharjan <span>Registered Nurse & Maternal-health Research Assistant</span></p>
+        <p class="rv5-eyebrow">A NOTE FROM REEJA</p>
+        <h2 id="rv5-personal-heading">Behind every reading, there’s a person.</h2>
+        <p>My experience in nursing and maternal-health research has strengthened my belief in listening carefully, communicating clearly and supporting families with respect.</p>
+        <p class="rv5-personal__byline">Reeja Maharjan <span>Registered Nurse · Research Assistant</span></p>
       </div>
-      <div class="rv5-personal__scene">
-        <img src="https://images.unsplash.com/photo-1708970981023-b3f498ce17ce?auto=format&fit=crop&w=1300&q=82" alt="Illustrative scenic view of Kathmandu and the Himalayan foothills" loading="eager" fetchpriority="low" decoding="async" width="1300" height="760" />
-        <div class="rv5-personal__float">Better maternal care.<br /><strong>Healthier communities.</strong></div>
-        <small>Illustrative landscape · <a href="https://unsplash.com/photos/a-view-of-a-city-with-mountains-in-the-background-j2ligTqDvNU" target="_blank" rel="noopener noreferrer">Michael Starkie / Unsplash</a></small>
+      <div class="rv6-personal__aside" aria-label="Professional location and contact">
+        <span class="rv6-personal__symbol" aria-hidden="true">R.</span>
+        <p class="rv6-personal__location">BASED IN BIRATNAGAR, NEPAL</p>
+        <p>Interested in nursing, maternal-health research or professional collaboration?</p>
+        <a class="rv5-button rv5-button--outline" href="/contact/">Contact Reeja <span aria-hidden="true">↗</span></a>
       </div>
-    </div>
-  </section>
-
-  <section class="rv5-updates" id="updates" aria-labelledby="rv5-updates-heading">
-    <div class="cip-wrap rv5-updates__grid">
-      <div>
-        <p class="rv5-eyebrow">STAY UPDATED</p>
-        <h2 id="rv5-updates-heading">New articles and insights.</h2>
-        <p>Explore the latest guides and reflections on nursing and maternal health.</p>
-      </div>
-      <a class="rv5-button rv5-button--solid" href="/blog/">Explore latest writing <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </div>
+
+<script>
+  // Visual fallback retains informative titles when optional third-party imagery fails.
+  document.querySelectorAll<HTMLImageElement>('[data-editorial-image]').forEach(img => {
+    const parent=img.parentElement;
+    if (!parent) return;
+    const mark=() => parent.classList.add('is-image-unavailable');
+    if (img.complete && img.naturalWidth === 0) mark();
+    img.addEventListener('error',mark,{once:true});
+  });
+</script>
