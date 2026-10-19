@@ -2,6 +2,22 @@
 export function initBlogScrollSpy(): void {
   const toc = document.querySelector<HTMLElement>('[data-blog-toc]');
   if (!toc) return;
+  const mobileToggle = toc.querySelector<HTMLButtonElement>('[data-blog-toc-toggle]');
+  const closeMobileToc = () => {
+    toc.dataset.expanded = 'false';
+    if (mobileToggle) {
+      mobileToggle.setAttribute('aria-expanded','false');
+      mobileToggle.innerHTML = 'Show article sections <span aria-hidden="true">⌄</span>';
+    }
+  };
+  mobileToggle?.addEventListener('click', () => {
+    const opening = mobileToggle.getAttribute('aria-expanded') !== 'true';
+    toc.dataset.expanded = String(opening);
+    mobileToggle.setAttribute('aria-expanded', String(opening));
+    mobileToggle.innerHTML = opening
+      ? 'Hide article sections <span aria-hidden="true">⌃</span>'
+      : 'Show article sections <span aria-hidden="true">⌄</span>';
+  });
   const links = Array.from(toc.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]'));
   const sections = links.map(link => ({ link, node: document.getElementById(link.hash.slice(1)) }))
     .filter((item): item is { link: HTMLAnchorElement; node: HTMLElement } => Boolean(item.node));
@@ -40,6 +56,7 @@ export function initBlogScrollSpy(): void {
   window.addEventListener('resize', request, { passive: true });
   window.addEventListener('hashchange', request);
   for (const { link } of sections) link.addEventListener('click', () => {
+    if (window.matchMedia('(max-width: 920px)').matches) closeMobileToc();
     current = '';
     requestAnimationFrame(request);
   });

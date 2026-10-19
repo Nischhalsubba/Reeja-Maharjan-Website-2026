@@ -221,6 +221,12 @@ body.care-personal-site .mobile-nav__cta {background:var(--brand-blue);color:#ff
   overflow-wrap:break-word;
 }
 .care-personal-site .blog-toc nav a:hover {background:#f3f5ff;color:var(--brand-blue);transform:none}
+.care-personal-site .blog-toc__toggle {
+  display:none;min-height:44px;width:100%;align-items:center;justify-content:space-between;gap:14px;
+  padding:10px 14px;margin-top:12px;
+  border:1px solid var(--brand-line);border-radius:4px;background:var(--brand-canvas);
+  color:var(--brand-blue);font-family:var(--font-sans);font-size:var(--type-ui);font-weight:750;cursor:pointer;
+}
 .care-personal-site .blog-toc nav a.is-active,
 .care-personal-site .blog-toc nav a[aria-current="location"] {
   background:var(--brand-lavender);
@@ -261,7 +267,9 @@ body.care-personal-site .mobile-nav__cta {background:var(--brand-blue);color:#ff
     position:relative;top:auto;max-height:none;overflow:visible;
     border-top:1px solid var(--brand-line);padding-top:22px;
   }
-  .care-personal-site .blog-toc nav {grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+  .care-personal-site .blog-toc__toggle {display:flex}
+  .care-personal-site .blog-toc nav {display:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px;margin-top:12px}
+  .care-personal-site .blog-toc[data-expanded="true"] nav {display:grid}
 }
 @media(max-width:600px) {
   .care-personal-site .blog-index__hero {padding-block:50px 54px}

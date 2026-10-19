@@ -62,6 +62,22 @@ test('mobile hamburger is a viewport dialog that opens closes and navigates',asy
   }
 });
 
+test('article sections can be expanded and collapsed on mobile',async({page})=>{
+  await page.setViewportSize({width:375,height:812});
+  await page.goto(origin+article,{waitUntil:'domcontentloaded'});
+  const toc=page.locator('[data-blog-toc]');
+  const menu=toc.locator('nav');
+  const button=toc.getByRole('button',{name:/Show article sections/});
+  await expect(button).toBeVisible();
+  await expect(menu).toBeHidden();
+  await button.click();
+  await expect(menu).toBeVisible();
+  await expect(button).toHaveAttribute('aria-expanded','true');
+  await menu.locator('a[href="#faq"]').click();
+  await expect(menu).toBeHidden();
+  await expect(button).toHaveAttribute('aria-expanded','false');
+});
+
 test('blog layout is balanced and not horizontally overflowing at five widths',async({browser})=>{
   for(const width of [320,390,768,1024,1440]){
     const ctx=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});

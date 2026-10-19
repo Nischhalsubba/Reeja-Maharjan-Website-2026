@@ -93,7 +93,8 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
         <aside class="blog-toc" aria-labelledby="article-toc-title" data-blog-toc>
           <p class="site-eyebrow">On this page</p>
           <h2 id="article-toc-title">Article sections</h2>
-          <nav aria-label="Article sections">
+          <button type="button" class="blog-toc__toggle" data-blog-toc-toggle aria-controls="article-toc-links" aria-expanded="false">Show article sections <span aria-hidden="true">⌄</span></button>
+          <nav id="article-toc-links" aria-label="Article sections">
             <a href="#key-points">Key points</a>
             {post.sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
             <a href="#faq">Questions</a>
