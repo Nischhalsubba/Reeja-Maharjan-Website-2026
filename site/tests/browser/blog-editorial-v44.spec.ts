@@ -39,7 +39,7 @@ test('mobile hamburger is a viewport dialog that opens closes and navigates',asy
     const ctx=await browser.newContext({viewport:{width,height:780},reducedMotion:'reduce'});
     const page=await ctx.newPage();
     await page.goto(origin+'/blog/',{waitUntil:'domcontentloaded'});
-    const button=page.getByRole('button',{name:'Menu'});
+    const button=page.getByRole('button',{name:'Menu',exact:true});
     await expect(button).toBeVisible();
     await button.click();
     const dialog=page.locator('#mobile-nav');

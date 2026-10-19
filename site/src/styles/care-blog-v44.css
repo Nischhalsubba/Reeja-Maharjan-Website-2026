@@ -113,6 +113,14 @@ body.care-personal-site .mobile-nav__cta {background:var(--brand-blue);color:#ff
 .care-personal-site .blog-index__hero-visual .cip-photo-band img {object-fit:cover;object-position:center}
 .care-personal-site .blog-index__hero-visual .cip-photo-band__caption {left:22px;right:22px;bottom:22px}
 .care-personal-site .blog-index__hero-visual .cip-photo-band__label {font-size:clamp(1.5rem,2.8vw,2.4rem);max-width:18ch}
+.care-personal-site .blog-index__hero-visual .cip-photo-band__credit {
+  position:absolute;top:14px;right:14px;bottom:auto;left:auto;
+  max-width:min(74%,290px);
+  padding:7px 10px;
+  background:rgba(12,20,42,.78);
+  border-radius:3px;
+  color:#fff;text-align:right;font-size:.75rem;line-height:1.4;
+}
 .care-personal-site .blog-index__hero-counter {
   position:absolute;right:-14px;bottom:0;
   display:flex;align-items:center;gap:17px;
