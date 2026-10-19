@@ -153,11 +153,11 @@ body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
   inset:0 auto 0 -4px;width:16%;
   background:linear-gradient(90deg,#f5f7ff 0%,rgba(245,247,255,0) 100%);
 }
-.care-personal-site .rv5-hero__portrait picture {display:block;width:min(100%,580px);position:relative;z-index:1}
+.care-personal-site .rv5-hero__portrait picture {display:block;width:min(100%,580px);position:relative;z-index:1;overflow:hidden;border-radius:17px 17px 0 0}
 .care-personal-site .rv5-hero__portrait img {
   width:100%;height:min(570px,44vw);min-height:500px;display:block;
   object-fit:contain;object-position:50% 100%;
-  background:transparent;filter:saturate(.93);
+  background:transparent;filter:saturate(.93);transform:scale(1.54);transform-origin:50% 69%;
 }
 .care-personal-site .rv5-hero__portrait-note {
   position:absolute;z-index:3;right:-4px;bottom:64px;
@@ -344,7 +344,9 @@ body.care-personal-site:has(.rv5-home) .care-footer__invitation {
   background:linear-gradient(107deg,#15264f,#1d3568 55%,#203e70);
   border-radius:14px;margin:36px auto 0;
 }
-body.care-personal-site:has(.rv5-home) .care-footer__intro h2 {font-size:clamp(1.75rem,2.8vw,2.65rem);line-height:1.14}
+body.care-personal-site:has(.rv5-home) .care-footer__intro h2 {font-size:clamp(1.75rem,2.8vw,2.65rem);line-height:1.14;color:#fff}
+body.care-personal-site:has(.rv5-home) .care-footer__eyebrow {color:#e3e9ff}
+body.care-personal-site:has(.rv5-home) .care-footer__invite-actions>p {color:#e1e8ff}
 body.care-personal-site:has(.rv5-home) .care-footer__intro h2 span {color:#c4c9ff}
 body.care-personal-site:has(.rv5-home) .care-footer__main,
 body.care-personal-site:has(.rv5-home) .care-footer__bottom,
