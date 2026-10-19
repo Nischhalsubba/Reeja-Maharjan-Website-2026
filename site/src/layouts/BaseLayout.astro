@@ -14,6 +14,7 @@ import '../styles/care-is-personal.css';
 import '../styles/care-personal-inner.css';
 import '../styles/care-article-footer.css';
 import '../styles/care-editorial-v4.css';
+import '../styles/care-blog-v44.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
@@ -98,7 +99,7 @@ const graphSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="design-system" content="Care is Personal" />
-    <meta name="design-release" content="care-personal-site-4.3.0" />
+    <meta name="design-release" content="care-personal-site-4.4.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
@@ -133,7 +134,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="4.3.0-care-personal">
+  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="4.4.0-care-personal">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header name={professionalFacts.name} />

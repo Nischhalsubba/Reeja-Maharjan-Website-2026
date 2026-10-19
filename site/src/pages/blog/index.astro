@@ -33,27 +33,31 @@ const topicGroups = [
   count: blogPosts.filter((post) => [post.primaryKeyword, ...post.supportingKeywords, ...post.tags, post.title].join(' ').match(topic.pattern)).length
 }));
 import EditorialPhoto from '../../components/EditorialPhoto.astro';
+import BlogPhoto from '../../components/BlogPhoto.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
   <div class="site-page blog-index">
-    <section class="site-page__hero">
-      <div class="container site-page__hero-grid">
-        <div>
+    <section class="site-page__hero blog-index__hero">
+      <div class="container site-page__hero-grid blog-index__hero-grid">
+        <div class="blog-index__hero-copy">
           <p class="site-eyebrow">{copy.eyebrow}</p>
           <h1>{copy.heading}</h1>
           <p class="site-page__lede">{copy.lede}</p>
+          <div class="blog-index__hero-actions">
+            <a class="site-button site-button--primary" href="#featured-writing">Explore featured writing <span aria-hidden="true">↗</span></a>
+            <a class="blog-index__hero-link" href="#all-writing">Browse every article <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="blog-index__hero-kicker">Maternal health <span aria-hidden="true">·</span> Nursing practice <span aria-hidden="true">·</span> Research</p>
         </div>
-        <dl class="site-page__summary">
-          <div><dt>Maternal health</dt><dd>Maternal recovery, newborn care, postpartum counselling, and family education</dd></div>
-          <div><dt>Nursing practice</dt><dd>Documentation, handover, confidentiality, ward communication, and patient safety</dd></div>
-          <div><dt>Professional growth</dt><dd>Licensure, telehealth, community care, research support, and nursing careers in Nepal</dd></div>
-        </dl>
+        <div class="blog-index__hero-visual">
+          <EditorialPhoto kind="writing" label="Stories grounded in care" compact />
+          <div class="blog-index__hero-counter"><strong>{blogPosts.length}</strong><span>Evidence-informed guides<br/>Written by Reeja</span></div>
+        </div>
       </div>
     </section>
-    <EditorialPhoto kind="writing" label="Reflections on nursing and care" />
 
-    <section class="site-section">
+    <section class="site-section blog-index__content" id="featured-writing">
       <div class="container">
         <div class="site-section__head">
           <div><p class="site-eyebrow">{copy.hubEyebrow}</p><h2>{copy.hubHeading}</h2></div>
@@ -62,12 +66,18 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
 
         <div class="blog-index__featured" data-ledger-group>
           {featuredPost && (
-            <a class="blog-index__lead-card" href={`/blog/${featuredPost.slug}/`} data-ledger-reveal>
-              <p class="site-eyebrow">Featured article by Reeja</p>
-              <h3>{featuredPost.title}</h3>
-              <p>{featuredPost.excerpt}</p>
-              <p class="blog-card__meta"><span>Updated {formatDate(featuredPost.updatedAt)}</span><span>{featuredPost.readMinutes} min read</span></p>
-            </a>
+            <article class="blog-index__lead-card" data-ledger-reveal>
+              <BlogPhoto slug={featuredPost.slug} variant="featured" />
+              <div class="blog-index__lead-content">
+                <p class="site-eyebrow">Featured article by Reeja</p>
+                <h3><a href={`/blog/${featuredPost.slug}/`}>{featuredPost.title}</a></h3>
+                <p>{featuredPost.excerpt}</p>
+                <div class="blog-index__lead-bottom">
+                  <p class="blog-card__meta"><span>Updated {formatDate(featuredPost.updatedAt)}</span><span>{featuredPost.readMinutes} min read</span></p>
+                  <a class="blog-index__read-link" href={`/blog/${featuredPost.slug}/`}>Read the article <span aria-hidden="true">↗</span></a>
+                </div>
+              </div>
+            </article>
           )}
 
           <aside class="blog-topic-panel" aria-labelledby="blog-topic-title" data-ledger-reveal>
@@ -85,7 +95,7 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
           </aside>
         </div>
 
-        <div class="site-section__head">
+        <div class="site-section__head" id="all-writing">
           <div><p class="site-eyebrow">{copy.allEyebrow}</p><h2>{copy.allHeading}</h2></div>
           <p>Every article identifies Reeja as the author and keeps sources, update dates, audience, and safety information visible.</p>
         </div>
@@ -93,7 +103,8 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
         <div class="blog-grid" data-ledger-group>
           {articleList.map((post) => (
             <article class="blog-card" data-ledger-reveal>
-              <div>
+              <BlogPhoto slug={post.slug} variant="card" />
+              <div class="blog-card__content">
                 <p class="site-eyebrow">{post.tags[0]} · By Reeja Maharjan</p>
                 <h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3>
                 <p>{post.excerpt}</p>
