@@ -155,7 +155,7 @@ const articleDate = (value:string) => new Date(value + 'T00:00:00Z').toLocaleDat
                 <img src={image.src} srcset={getBlogImageSrcSet(image)} sizes="(max-width: 700px) 100vw, (max-width: 1024px) 45vw, 250px" alt={image.alt} width="700" height="650" loading="lazy" decoding="async" />
               </a>
               <div class="rv5-writing-card__content">
-                <p class="rv5-writing-card__category rv5-writing-card__category--{index}">{post.tags[0] ?? 'Nursing'}</p>
+                <p class:list={["rv5-writing-card__category", "rv5-writing-card__category--" + index]}>{post.tags[0] ?? 'Nursing'}</p>
                 <h3><a href={'/blog/'+post.slug+'/'}>{post.title}</a></h3>
                 <p>{post.excerpt}</p>
                 <p class="rv5-writing-card__meta">{articleDate(post.updatedAt)} <span aria-hidden="true">·</span> {post.readMinutes} min read</p>

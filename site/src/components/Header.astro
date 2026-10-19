@@ -6,6 +6,7 @@ const { name } = Astro.props;
 const path = Astro.url.pathname;
 const current = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
 const links = [
+  { href: '/', label: 'Home' },
   { href: '/#experience', label: 'Experience' },
   { href: '/clinical-research/', label: 'Research' },
   { href: '/nursing-practice/', label: 'Nursing' },

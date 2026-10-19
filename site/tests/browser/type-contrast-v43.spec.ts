@@ -16,30 +16,25 @@ const contrast = (foreground: string, background: string) => {
   return (a+.05)/(b+.05);
 };
 
-test('dark homepage research and contact headings are readable on every viewport', async ({ page }) => {
+test('homepage v5 dark CTA has visible white heading, and real homepage text is legible', async ({ page }) => {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
-    await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
-    for (const check of [
-      { selector: '.cip-research h2', background: 'rgb(38, 61, 114)' },
-      { selector: '.cip-contact h2', background: 'rgb(26, 35, 66)' }
-    ]) {
-      const heading = page.locator(check.selector).first();
-      await expect(heading).toBeVisible();
-      const fg = await heading.evaluate(el => getComputedStyle(el).color);
-      expect(contrast(fg, check.background), check.selector+' at '+width+'px: '+fg).toBeGreaterThanOrEqual(4.5);
+    await page.goto(origin + '/', { waitUntil:'domcontentloaded' });
+    const heading = page.locator('footer.site-footer--care .care-footer__intro h2');
+    await expect(heading).toBeVisible();
+    const fg = await heading.evaluate(el=>getComputedStyle(el).color);
+    expect(contrast(fg,'rgb(21, 38, 79)'), 'Dark call-to-action heading').toBeGreaterThanOrEqual(4.5);
+    for (const selector of ['.rv5-eyebrow', '.rv5-pillar p', '.rv5-career-card__org', '.rv5-writing-card h3', '.rv5-updates p:not(.rv5-eyebrow)']) {
+      const element=page.locator(selector).first();
+      await expect(element).toBeVisible();
+      const px=await element.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+      expect(px, selector + ' at '+width+'px').toBeGreaterThanOrEqual(14);
     }
-    for (const selector of ['.cip-research__label', '.cip-contact__side', '.cip-hero__index span', '.care-footer__eyebrow']) {
+    for (const selector of ['.cip-hero__lead', '.rv5-section-header__aside p', '.rv5-focus__inner > p:not(.rv5-eyebrow)']) {
       const element = page.locator(selector).first();
       await expect(element).toBeVisible();
-      const px = await element.evaluate(el => parseFloat(getComputedStyle(el).fontSize));
-      expect(px, selector+' at '+width+'px').toBeGreaterThanOrEqual(14);
-    }
-    for (const selector of ['.cip-sectionhead>p', '.cip-journey__role p', '.cip-article>p:not(.cip-article__meta)']) {
-      const el = page.locator(selector).first();
-      await expect(el).toBeVisible();
-      const px = await el.evaluate(node => parseFloat(getComputedStyle(node).fontSize));
-      expect(px, selector+' readable body copy at '+width+'px').toBeGreaterThanOrEqual(16);
+      const px=await element.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
+      expect(px, selector + ' body copy').toBeGreaterThanOrEqual(16);
     }
   }
 });
