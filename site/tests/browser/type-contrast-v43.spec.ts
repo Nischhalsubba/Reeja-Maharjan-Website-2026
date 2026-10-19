@@ -24,7 +24,7 @@ test('homepage v6 dark CTA has visible white heading, and real homepage text is 
     await expect(heading).toBeVisible();
     const fg = await heading.evaluate(el=>getComputedStyle(el).color);
     expect(contrast(fg,'rgb(21, 38, 79)'), 'Dark call-to-action heading').toBeGreaterThanOrEqual(4.5);
-    for (const selector of ['.rv5-eyebrow', '.rv6-trust__grid p strong', '.rv6-pillar__index', '.rv6-career__org', '.rv5-writing-card h3', '.rv6-personal__location']) {
+    for (const selector of ['.rv5-eyebrow', '.rv6-trust__grid p strong', '.rv6-pillar__index', '.rv6-career__org', '.rv5-writing-card h3', '.rv7-personal__signoff small']) {
       const element=page.locator(selector).first();
       await expect(element).toBeVisible();
       const px=await element.evaluate(el=>parseFloat(getComputedStyle(el).fontSize));
