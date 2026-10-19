@@ -41,7 +41,8 @@ export const requiredHomepageText = [
   'Turning information into better follow-up.',
   'Care, explained clearly.',
   'Behind every reading',
-  'Contact Reeja'
+  'My professional journey',
+  'A moment beyond the ward'
 ];
 
 export const forbiddenHomepageText = [
