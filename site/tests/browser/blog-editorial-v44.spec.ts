@@ -67,7 +67,7 @@ test('article sections can be expanded and collapsed on mobile',async({page})=>{
   await page.goto(origin+article,{waitUntil:'domcontentloaded'});
   const toc=page.locator('[data-blog-toc]');
   const menu=toc.locator('nav');
-  const button=toc.getByRole('button',{name:/Show article sections/});
+  const button=toc.locator('[data-blog-toc-toggle]');
   await expect(button).toBeVisible();
   await expect(menu).toBeHidden();
   await button.click();
