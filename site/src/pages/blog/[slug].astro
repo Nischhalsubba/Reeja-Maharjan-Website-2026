@@ -63,7 +63,7 @@ const breadcrumbSchema = {
     { '@type': 'ListItem', position: 3, name: post.title, item: articleUrl }
   ]
 };
-import EditorialPhoto from '../../components/EditorialPhoto.astro';
+import BlogPhoto from '../../components/BlogPhoto.astro';
 ---
 
 <BaseLayout title={`${post.title} | Reeja Maharjan`} description={post.metaDescription} image={articleImagePath}>
@@ -87,13 +87,14 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
           </dl>
         </div>
       </header>
-    <EditorialPhoto kind={post.heroPhotoKind ?? "writing"} label="From Reeja’s journal" />
+    <div class="blog-article__media-shell"><BlogPhoto slug={post.slug} kind={post.heroPhotoKind ?? "writing"} variant="hero" /></div>
 
       <div class="blog-article__shell blog-article__layout">
-        <aside class="blog-toc" aria-labelledby="article-toc-title">
+        <aside class="blog-toc" aria-labelledby="article-toc-title" data-blog-toc>
           <p class="site-eyebrow">On this page</p>
           <h2 id="article-toc-title">Article sections</h2>
-          <nav aria-label="Article sections">
+          <button type="button" class="blog-toc__toggle" data-blog-toc-toggle aria-controls="article-toc-links" aria-expanded="false">Show article sections <span aria-hidden="true">⌄</span></button>
+          <nav id="article-toc-links" aria-label="Article sections">
             <a href="#key-points">Key points</a>
             {post.sections.map((section) => <a href={`#${section.id}`}>{section.title}</a>)}
             <a href="#faq">Questions</a>
@@ -150,7 +151,7 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
               <h2>Related nursing and maternal-health articles</h2>
               <div class="blog-related-grid">
                 {relatedPosts.map((relatedPost) => relatedPost && (
-                  <article class="blog-card"><h3>{relatedPost.title}</h3><p>{relatedPost.excerpt}</p><p><a href={`/blog/${relatedPost.slug}/`}>Read article</a></p></article>
+                  <article class="blog-card"><BlogPhoto slug={relatedPost.slug} variant="related" /><div class="blog-card__content"><h3><a href={`/blog/${relatedPost.slug}/`}>{relatedPost.title}</a></h3><p>{relatedPost.excerpt}</p><a class="blog-index__read-link" href={`/blog/${relatedPost.slug}/`}>Read article <span aria-hidden="true">↗</span></a></div></article>
                 ))}
               </div>
             </section>
@@ -162,4 +163,8 @@ import EditorialPhoto from '../../components/EditorialPhoto.astro';
 
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
+  <script>
+    import { initBlogScrollSpy } from "../../lib/blogScrollSpy";
+    initBlogScrollSpy();
+  </script>
 </BaseLayout>
