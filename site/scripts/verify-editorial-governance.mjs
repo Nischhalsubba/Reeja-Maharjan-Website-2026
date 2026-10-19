@@ -4,7 +4,7 @@ import process from 'node:process';
 const root = new URL('../', import.meta.url);
 const blogDir = new URL('../src/content/blog/', import.meta.url);
 const failures = [];
-const articleFiles = (await readdir(blogDir)).filter((name) => name.endsWith('.ts') && !['index.ts', 'types.ts', 'governance.ts'].includes(name));
+const articleFiles = (await readdir(blogDir)).filter((name) => name.endsWith('.ts') && !['index.ts', 'types.ts', 'governance.ts', 'imagery.ts'].includes(name));
 const governanceSource = await readFile(new URL('../src/content/blog/governance.ts', import.meta.url), 'utf8');
 const routeSource = await readFile(new URL('../src/pages/blog/[slug].astro', import.meta.url), 'utf8');
 const socialGenerator = await readFile(new URL('../scripts/render-social-cards.mjs', import.meta.url), 'utf8');
