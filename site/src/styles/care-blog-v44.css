@@ -1,0 +1,285 @@
+/* Care is Personal v4.4: owned editorial blog layout, photography, and readable navigation.
+   Imported after shared styles to avoid accumulating broad !important overrides. */
+
+/* The mobile dialog must sit outside the blurred sticky header in the DOM.
+   Otherwise fixed positioning is scoped to a transformed/filter containing block. */
+body.care-personal-site .mobile-nav {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  width: 100%;
+  height: 100dvh;
+  max-height: 100dvh;
+  z-index: 1000;
+  display: none;
+  padding: 0;
+  overflow: hidden;
+  background: rgba(16,24,47,.58);
+  backdrop-filter: blur(5px);
+}
+body.care-personal-site .mobile-nav.is-open,
+body.care-personal-site .mobile-nav[aria-hidden="false"] {display:flex;pointer-events:auto;opacity:1}
+body.care-personal-site .mobile-nav__panel {
+  width: min(420px,100%);
+  min-height: 100%;
+  height: 100%;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  margin-left: auto;
+  padding: max(24px,env(safe-area-inset-top)) 24px max(32px,env(safe-area-inset-bottom));
+  background: var(--brand-canvas);
+  border-left: 1px solid var(--brand-line);
+  border-radius: 0;
+  box-shadow: -16px 0 50px rgba(16,24,47,.18);
+}
+body.care-personal-site .mobile-nav__head {
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--brand-line);
+}
+body.care-personal-site .mobile-nav__head > div {display:grid;gap:6px}
+body.care-personal-site .mobile-nav__eyebrow {color:var(--brand-blue);font-size:var(--type-caption);font-weight:700}
+body.care-personal-site .mobile-nav__head strong {font-size:1.25rem;color:var(--brand-ink)}
+body.care-personal-site .mobile-nav__head small {font-size:var(--type-caption);color:var(--brand-muted)}
+body.care-personal-site .mobile-nav__close {
+  position:relative;
+  width:46px;
+  height:46px;
+  flex:0 0 46px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border-radius:6px;
+}
+body.care-personal-site .mobile-nav__close span::before,
+body.care-personal-site .mobile-nav__close span::after {
+  content:'';
+  position:absolute;
+  width:18px;
+  height:2px;
+  background:currentColor;
+  left:13px;
+  top:21px;
+}
+body.care-personal-site .mobile-nav__close span::before {transform:rotate(45deg)}
+body.care-personal-site .mobile-nav__close span::after {transform:rotate(-45deg)}
+body.care-personal-site .mobile-nav__panel > a {
+  min-height:50px;
+  display:flex;
+  align-items:center;
+  font-size:1rem;
+  font-weight:650;
+}
+body.care-personal-site .mobile-nav__cta {background:var(--brand-blue);color:#fff;border-radius:4px;justify-content:center}
+@media(min-width:1081px) {body.care-personal-site .mobile-nav {display:none}}
+
+/* Distinct, composed writing hero: editorial story + one intentional image + stats. */
+.care-personal-site .blog-index__hero {
+  overflow: clip;
+  padding-block:clamp(52px,6vw,95px);
+  background:linear-gradient(120deg,#f0f2ff 0%,#fbfbff 68%,#edf0ff 100%);
+}
+.care-personal-site .blog-index__hero-grid {
+  min-height:0;
+  display:grid;
+  grid-template-columns:minmax(0,1.07fr) minmax(0,.93fr);
+  gap:clamp(36px,5vw,80px);
+  align-items:center;
+}
+.care-personal-site .blog-index__hero-copy {min-width:0}
+.care-personal-site .blog-index__hero-copy h1 {
+  max-width:13ch;
+  font-size:clamp(3rem,5.6vw,5.6rem);
+  line-height:1.06;
+  letter-spacing:-.065em;
+  margin:16px 0 24px;
+}
+.care-personal-site .blog-index__hero-copy .site-page__lede {max-width:55ch;font-size:clamp(1.08rem,1.5vw,1.26rem)}
+.care-personal-site .blog-index__hero-actions {display:flex;flex-wrap:wrap;align-items:center;gap:24px;margin-top:32px}
+.care-personal-site .blog-index__hero-actions a {min-height:48px;display:inline-flex;align-items:center;gap:14px;text-decoration:none;font-size:var(--type-ui);font-weight:700}
+.care-personal-site .blog-index__hero-link {color:var(--brand-blue);text-underline-offset:4px}
+.care-personal-site .blog-index__hero-link:hover {text-decoration:underline}
+.care-personal-site .blog-index__hero-kicker {display:flex;flex-wrap:wrap;gap:12px;margin:34px 0 0;color:var(--brand-muted);font-size:var(--type-caption);font-weight:600}
+.care-personal-site .blog-index__hero-visual {min-width:0;position:relative;padding-bottom:30px}
+.care-personal-site .blog-index__hero-visual .cip-photo-band {
+  width:100%;height:clamp(300px,37vw,470px);
+  margin:0; border-radius:6px;overflow:hidden;
+  box-shadow:0 24px 55px rgba(30,40,90,.12);
+}
+.care-personal-site .blog-index__hero-visual .cip-photo-band img {object-fit:cover;object-position:center}
+.care-personal-site .blog-index__hero-visual .cip-photo-band__caption {left:22px;right:22px;bottom:22px}
+.care-personal-site .blog-index__hero-visual .cip-photo-band__label {font-size:clamp(1.5rem,2.8vw,2.4rem);max-width:18ch}
+.care-personal-site .blog-index__hero-counter {
+  position:absolute;right:-14px;bottom:0;
+  display:flex;align-items:center;gap:17px;
+  padding:17px 22px;background:var(--brand-blue);color:#fff;
+  border-radius:3px;box-shadow:0 12px 30px rgba(31,50,148,.2);
+}
+.care-personal-site .blog-index__hero-counter strong {font-size:2.2rem;line-height:1;font-weight:800}
+.care-personal-site .blog-index__hero-counter span {font-size:var(--type-caption);line-height:1.35;font-weight:600}
+.care-personal-site .blog-index__content {padding-block:clamp(64px,7vw,105px)}
+.care-personal-site .blog-index__content .site-section__head {margin-bottom:32px}
+.care-personal-site #all-writing {scroll-margin-top:100px;margin-top:clamp(56px,7vw,92px)}
+.care-personal-site #featured-writing {scroll-margin-top:80px}
+.care-personal-site .blog-index__featured {
+  grid-template-columns:minmax(0,1.3fr) minmax(270px,.7fr);
+  gap:clamp(24px,3.5vw,50px);
+  align-items:stretch;
+  margin-bottom:0;
+}
+.care-personal-site .blog-index__lead-card {
+  display:flex;flex-direction:column;gap:0;
+  min-width:0;margin:0;padding:0;
+  border:1px solid #dfe4f3;border-top:3px solid var(--brand-blue);
+  background:#f2f4ff;color:var(--brand-ink);border-radius:4px;
+}
+.care-personal-site .blog-index__lead-content {display:flex;flex:1;flex-direction:column;gap:14px;padding:26px 30px 30px}
+.care-personal-site .blog-index__lead-card h3 {
+  max-width:none;margin:0;font-size:clamp(1.9rem,3.1vw,3.1rem);
+  line-height:1.09;font-weight:800;letter-spacing:-.05em;overflow-wrap:break-word;
+}
+.care-personal-site .blog-index__lead-card h3 a {color:var(--brand-ink);text-decoration:none}
+.care-personal-site .blog-index__lead-card h3 a:hover {color:var(--brand-blue)}
+.care-personal-site .blog-index__lead-card .blog-index__lead-content > p:not(.site-eyebrow):not(.blog-card__meta) {font-size:1rem;color:var(--brand-muted);line-height:1.7}
+.care-personal-site .blog-index__lead-bottom {display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:auto;padding-top:18px}
+.care-personal-site .blog-index__read-link {display:inline-flex;align-items:center;gap:10px;width:fit-content;color:var(--brand-blue);font-size:var(--type-ui);font-weight:700;text-decoration:none}
+.care-personal-site .blog-index__read-link:hover {text-decoration:underline;text-underline-offset:4px}
+.care-personal-site .blog-topic-panel {padding:28px;border:1px solid var(--brand-line);border-top:3px solid var(--brand-ink);background:var(--brand-canvas)}
+.care-personal-site .blog-topic-panel > h3 {font-size:clamp(1.5rem,2vw,2rem);font-weight:780;line-height:1.2;margin:10px 0 24px}
+.care-personal-site .blog-topic-panel__item {grid-template-columns:36px 1fr;gap:14px;padding:19px 0}
+.care-personal-site .blog-topic-panel__item h4 a {font-size:1.07rem;font-weight:750}
+.care-personal-site .blog-topic-panel__item p {font-size:var(--type-caption);line-height:1.6}
+.care-personal-site .blog-grid {gap:0}
+.care-personal-site .blog-grid > .blog-card {padding:28px;gap:17px}
+.care-personal-site .blog-card {align-items:stretch;min-height:0}
+.care-personal-site .blog-card__content {display:flex;flex:1;flex-direction:column;gap:12px;min-width:0}
+.care-personal-site .blog-card__content h3 {margin:0;font-weight:760;line-height:1.18}
+.care-personal-site .blog-card__content p {font-size:1rem;line-height:1.65}
+.care-personal-site .blog-card__meta {gap:18px;margin-top:auto;padding-top:12px}
+.care-personal-site .blog-grid .blog-card__meta {border-top:1px solid var(--brand-line)}
+
+/* A topical image on every listing item and article, with visible source credit. */
+.care-personal-site .blog-photo {position:relative;min-width:0;margin:0;overflow:hidden;background:var(--brand-lavender);border-radius:3px}
+.care-personal-site .blog-photo img {display:block;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.89)}
+.care-personal-site .blog-photo--featured {height:clamp(220px,24vw,310px);border-radius:0}
+.care-personal-site .blog-photo--card {height:clamp(190px,21vw,240px)}
+.care-personal-site .blog-photo--related {height:175px;border-radius:3px 3px 0 0}
+.care-personal-site .blog-photo--hero {
+  width:100%;height:clamp(245px,35vw,420px);
+  margin:0;border-radius:5px;overflow:hidden;
+  box-shadow:none;background:var(--brand-lavender);
+}
+.care-personal-site .blog-photo__credit {
+  position:absolute;bottom:0;right:0;left:0;
+  display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px;
+  padding:18px 16px 11px;
+  font-size:.75rem;line-height:1.4;font-weight:650;
+  background:linear-gradient(transparent,rgba(10,18,42,.78));
+  color:#fff;text-align:right;
+}
+.care-personal-site .blog-photo__credit a {color:#fff;text-decoration:underline;text-underline-offset:3px}
+.care-personal-site .blog-article__media-shell {
+  width:min(1240px,calc(100% - 2 * clamp(20px,5vw,72px)));
+  margin:clamp(16px,2vw,32px) auto 0;
+}
+.care-personal-site .blog-article__header {padding-bottom:clamp(40px,5vw,66px)}
+.care-personal-site .blog-article__layout {
+  grid-template-columns:minmax(200px,240px) minmax(0,780px);
+  column-gap:clamp(32px,5vw,74px);
+  padding-block:clamp(55px,6vw,90px);
+}
+.care-personal-site .blog-toc {
+  top:100px;
+  max-height:calc(100dvh - 120px);
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  scrollbar-width:thin;
+  padding:22px 0 18px;
+  border-top:2px solid var(--brand-ink);
+}
+.care-personal-site .blog-toc h2 {font-size:1.4rem;margin:8px 0 18px}
+.care-personal-site .blog-toc nav {display:grid;gap:3px}
+.care-personal-site .blog-toc nav a {
+  padding:11px 12px;
+  border:0;border-left:3px solid transparent;
+  border-radius:0 3px 3px 0;
+  color:var(--brand-muted);
+  font-size:var(--type-caption);font-weight:550;line-height:1.45;
+  transition:background-color .16s ease,color .16s ease,border-color .16s ease;
+  overflow-wrap:break-word;
+}
+.care-personal-site .blog-toc nav a:hover {background:#f3f5ff;color:var(--brand-blue);transform:none}
+.care-personal-site .blog-toc nav a.is-active,
+.care-personal-site .blog-toc nav a[aria-current="location"] {
+  background:var(--brand-lavender);
+  border-left-color:var(--brand-blue);
+  color:#223fda;
+  font-weight:750;
+}
+.care-personal-site .blog-article__body > section[id] {scroll-margin-top:108px}
+.care-personal-site .blog-article__body > section,
+.care-personal-site .blog-author-card {margin-bottom:48px;padding-top:28px}
+.care-personal-site .blog-article__body > section:first-child {margin-bottom:36px}
+.care-personal-site .blog-article__body h2 {font-size:clamp(1.55rem,2.35vw,2.4rem);line-height:1.16;max-width:28ch}
+.care-personal-site .blog-article__body h3 {font-size:clamp(1.2rem,1.75vw,1.5rem)}
+.care-personal-site .blog-article__body :where(p,li) {font-size:var(--type-reading);line-height:1.75}
+.care-personal-site .article-governance {padding:26px 30px 28px;border:1px solid #dfe4f5;border-left:3px solid var(--brand-blue);background:#f5f6ff}
+.care-personal-site .blog-article__body .article-governance h2 {font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.24;margin:7px 0 19px;max-width:36ch}
+.care-personal-site .article-governance dl {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px;margin:0 0 20px}
+.care-personal-site .article-governance dl > div {padding:12px 0;border-top:1px solid #dce3f1;min-width:0}
+.care-personal-site .article-governance dt {font-size:var(--type-caption);font-weight:750;color:var(--brand-ink);margin-bottom:4px}
+.care-personal-site .article-governance dd {margin:0;font-size:var(--type-caption);line-height:1.55;color:var(--brand-muted);overflow-wrap:anywhere}
+.care-personal-site .article-governance > p:not(.site-eyebrow) {font-size:var(--type-caption);line-height:1.65;margin:11px 0 0;color:var(--brand-muted)}
+.care-personal-site .blog-related-grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;align-items:start;border-top:0}
+.care-personal-site .blog-related-grid > .blog-card {
+  padding:0;border:1px solid var(--brand-line);border-radius:4px;
+  display:flex;flex-direction:column;min-height:0;height:auto;justify-content:flex-start;
+}
+.care-personal-site .blog-related-grid .blog-card__content {padding:20px;gap:15px}
+.care-personal-site .blog-related-grid .blog-card h3 {font-size:1.28rem;line-height:1.28}
+.care-personal-site .blog-related-grid .blog-card__content > p {font-size:var(--type-caption);line-height:1.65;color:var(--brand-muted)}
+.care-personal-site .blog-related-grid .blog-card__content > a {margin-top:auto;padding-top:10px}
+@media(max-width:920px) {
+  .care-personal-site .blog-index__hero-grid {grid-template-columns:1fr;gap:30px}
+  .care-personal-site .blog-index__hero-copy h1 {max-width:17ch}
+  .care-personal-site .blog-index__hero-visual .cip-photo-band {height:clamp(280px,50vw,390px)}
+  .care-personal-site .blog-index__featured {grid-template-columns:1fr}
+  .care-personal-site .blog-article__layout {grid-template-columns:1fr}
+  .care-personal-site .blog-toc {
+    position:relative;top:auto;max-height:none;overflow:visible;
+    border-top:1px solid var(--brand-line);padding-top:22px;
+  }
+  .care-personal-site .blog-toc nav {grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}
+}
+@media(max-width:600px) {
+  .care-personal-site .blog-index__hero {padding-block:50px 54px}
+  .care-personal-site .blog-index__hero-copy h1 {font-size:clamp(2.5rem,10vw,3.6rem);max-width:16ch}
+  .care-personal-site .blog-index__hero-actions {gap:15px}
+  .care-personal-site .blog-index__hero-visual .cip-photo-band {height:270px}
+  .care-personal-site .blog-index__hero-counter {right:0;padding:12px 17px}
+  .care-personal-site .blog-index__hero-counter strong {font-size:1.9rem}
+  .care-personal-site .blog-index__lead-content {padding:21px}
+  .care-personal-site .blog-index__lead-card h3 {font-size:clamp(1.75rem,7vw,2.6rem)}
+  .care-personal-site .blog-topic-panel {padding:23px}
+  .care-personal-site .blog-grid > .blog-card {padding:22px 0}
+  .care-personal-site .blog-photo--card {height:210px}
+  .care-personal-site .blog-photo--featured {height:225px}
+  .care-personal-site .blog-article__media-shell {width:calc(100% - 40px);margin-top:20px}
+  .care-personal-site .blog-photo--hero {height:225px}
+  .care-personal-site .blog-toc nav {grid-template-columns:1fr}
+  .care-personal-site .blog-toc nav a {padding:10px 12px}
+  .care-personal-site .article-governance {padding:20px}
+  .care-personal-site .article-governance dl {grid-template-columns:1fr}
+  .care-personal-site .blog-related-grid {grid-template-columns:1fr;gap:20px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .care-personal-site .blog-toc nav a {transition:none}
+}
+@media print {
+  .care-personal-site .blog-toc {display:none}
+  .care-personal-site .blog-photo {break-inside:avoid}
+}
