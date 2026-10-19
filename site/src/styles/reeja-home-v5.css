@@ -136,7 +136,7 @@ body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
 .care-personal-site .rv5-hero__stats dd strong {
   color:#3154e8;font-size:2rem;font-weight:800;line-height:1.18;letter-spacing:-.04em;
 }
-.care-personal-site .rv5-hero__stats dd span {font-size:.8rem;color:#5e6b86;line-height:1.3}
+.care-personal-site .rv5-hero__stats dd span {font-size:.875rem;color:#5e6b86;line-height:1.3}
 .care-personal-site .rv5-hero__stats dt {position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
 .care-personal-site .rv5-hero__portrait {
   min-height:590px;margin:0;position:relative;
@@ -228,7 +228,7 @@ body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
 .care-personal-site .rv5-career-card__photo figcaption {
   position:absolute;inset:auto 0 0 auto;max-width:100%;
   padding:10px 12px 8px;background:linear-gradient(90deg,rgba(11,20,47,.8),rgba(11,20,47,.86));
-  color:#fff;font-size:.72rem;font-weight:600;text-align:right;
+  color:#fff;font-size:.875rem;font-weight:600;text-align:right;
 }
 .care-personal-site .rv5-career-card__photo a {color:#fff;text-decoration:underline}
 .care-personal-site .rv5-career-card__content {display:flex;flex:1;flex-direction:column;gap:9px;padding:24px}
@@ -237,12 +237,12 @@ body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
 .care-personal-site .rv5-career-card__org {color:#394867;font-weight:660;font-size:.95rem;line-height:1.5}
 .care-personal-site .rv5-career-card__tag {
   align-self:flex-start;padding:6px 11px;background:#edf0ff;border-radius:5px;
-  color:#3454dc;font-size:.775rem;font-weight:800;
+  color:#3454dc;font-size:.875rem;font-weight:800;
 }
 .care-personal-site .rv5-career-card__summary {
   margin-top:2px;flex:1;color:var(--rv5-body);font-size:.94rem;line-height:1.58;
 }
-.care-personal-site .rv5-career-card__location {display:flex;align-items:center;gap:6px;margin-top:7px;color:#6b7890;font-size:.82rem}
+.care-personal-site .rv5-career-card__location {display:flex;align-items:center;gap:6px;margin-top:7px;color:#6b7890;font-size:.875rem}
 .care-personal-site .rv5-career-card__location svg {color:#e36965;flex-shrink:0}
 
 /* Full-width focus section: large real editorial photo paired with content. */
@@ -286,14 +286,14 @@ body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
 .care-personal-site .rv5-writing-card__photo img {width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease}
 .care-personal-site .rv5-writing-card:hover .rv5-writing-card__photo img {transform:scale(1.035)}
 .care-personal-site .rv5-writing-card__content {display:flex;flex:1;flex-direction:column;gap:11px;padding:20px 22px 28px}
-.care-personal-site .rv5-writing-card__category {align-self:flex-start;max-width:100%;padding:4px 9px;background:#fce9eb;color:#ac3945;border-radius:5px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.035em}
+.care-personal-site .rv5-writing-card__category {align-self:flex-start;max-width:100%;padding:4px 9px;background:#fce9eb;color:#ac3945;border-radius:5px;font-size:.875rem;font-weight:800;text-transform:uppercase;letter-spacing:.035em}
 .care-personal-site .rv5-writing-card__category--1 {background:#eaf0ff;color:#2f54c8}
 .care-personal-site .rv5-writing-card__category--2 {background:#eeeaff;color:#6d47b0}
 .care-personal-site .rv5-writing-card h3 {font-size:clamp(1.1rem,1.55vw,1.32rem);line-height:1.25;letter-spacing:-.038em}
 .care-personal-site .rv5-writing-card h3 a {color:var(--rv5-ink);text-decoration:none}
 .care-personal-site .rv5-writing-card h3 a:hover {color:var(--rv5-blue)}
 .care-personal-site .rv5-writing-card__content>p:not(.rv5-writing-card__category):not(.rv5-writing-card__meta) {font-size:.9rem;line-height:1.6;color:var(--rv5-body)}
-.care-personal-site .rv5-writing-card__meta {margin-top:auto;padding-top:13px;color:#8190ab;font-size:.78rem;font-weight:600}
+.care-personal-site .rv5-writing-card__meta {margin-top:auto;padding-top:13px;color:#8190ab;font-size:.875rem;font-weight:600}
 .care-personal-site .rv5-writing-card__photo-credit {
   position:absolute;top:0;right:0;max-width:100%;
   background:rgba(16,24,47,.75);color:#fff;
@@ -332,7 +332,7 @@ body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
 /* Working updates action instead of an unconnected newsletter collection form. */
 .care-personal-site .rv5-updates {padding:42px 0;background:#fff;border-bottom:1px solid var(--rv5-line)}
 .care-personal-site .rv5-updates__grid {display:flex;align-items:center;justify-content:space-between;gap:40px}
-.care-personal-site .rv5-updates .rv5-eyebrow {font-size:.76rem;margin-bottom:6px}
+.care-personal-site .rv5-updates .rv5-eyebrow {font-size:.875rem;margin-bottom:6px}
 .care-personal-site .rv5-updates h2 {font-size:clamp(1.5rem,2.35vw,2.2rem)}
 .care-personal-site .rv5-updates p:not(.rv5-eyebrow) {margin-top:7px;color:var(--rv5-body);font-size:.9rem}
 
@@ -389,7 +389,7 @@ body.care-personal-site:has(.rv5-home) .care-footer__cta:hover {background:var(-
   .care-personal-site .rv5-hero__portrait img {height:450px}
   .care-personal-site .rv5-hero__portrait-backdrop {left:8%;right:7%;top:10px}
   .care-personal-site .rv5-pillars__grid {grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}
-  .care-personal-site .rv5-pillar p {font-size:.75rem}
+  .care-personal-site .rv5-pillar p {font-size:.875rem}
   .care-personal-site .rv5-section-header--split {align-items:start}
   .care-personal-site .rv5-section-header h2 {font-size:clamp(2.25rem,5vw,3.2rem)}
   .care-personal-site .rv5-career__grid {grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -408,21 +408,21 @@ body.care-personal-site:has(.rv5-home) .care-footer__cta:hover {background:var(-
   .care-personal-site .rv5-home .cip-wrap,
   body.care-personal-site:has(.rv5-home) .site-header__inner {width:calc(100% - 36px)}
   .care-personal-site .rv5-hero__copy {padding:49px 0 12px}
-  .care-personal-site .rv5-hero .rv5-eyebrow {font-size:.75rem;letter-spacing:.12em}
+  .care-personal-site .rv5-hero .rv5-eyebrow {font-size:.875rem;letter-spacing:.095em}
   .care-personal-site .rv5-hero h1 {font-size:clamp(3.5rem,14.7vw,5rem);line-height:.98}
   .care-personal-site .rv5-hero .cip-hero__lead {font-size:1rem;margin-top:20px}
   .care-personal-site .rv5-hero__actions {gap:10px}
   .care-personal-site .rv5-button {padding:11px 17px;gap:10px;font-size:.9rem}
   .care-personal-site .rv5-hero__stats {gap:7px;padding-top:20px;margin-top:22px}
   .care-personal-site .rv5-hero__stats dd strong {font-size:1.65rem}
-  .care-personal-site .rv5-hero__stats dd span {font-size:.71rem}
+  .care-personal-site .rv5-hero__stats dd span {font-size:.875rem}
   .care-personal-site .rv5-hero__portrait {min-height:375px;margin-top:16px}
   .care-personal-site .rv5-hero__portrait img {height:360px}
-  .care-personal-site .rv5-hero__portrait-note {right:0;bottom:24px;padding:12px;font-size:.78rem}
+  .care-personal-site .rv5-hero__portrait-note {right:0;bottom:24px;padding:12px;font-size:.875rem}
   .care-personal-site .rv5-hero__note-icon {width:32px;height:32px;flex-basis:32px}
   .care-personal-site .rv5-pillars {padding:21px 0}
   .care-personal-site .rv5-pillars__grid {grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}
-  .care-personal-site .rv5-pillar p {font-size:.78rem}
+  .care-personal-site .rv5-pillar p {font-size:.875rem}
   .care-personal-site .rv5-pillar__icon {width:46px;height:46px}
   .care-personal-site .rv5-section {padding:65px 0}
   .care-personal-site .rv5-section-header--split,
@@ -449,7 +449,7 @@ body.care-personal-site:has(.rv5-home) .care-footer__cta:hover {background:var(-
 }
 @media(max-width:365px) {
   .care-personal-site .rv5-hero h1 {font-size:3.24rem}
-  .care-personal-site .rv5-hero__stats dd span {font-size:.69rem}
+  .care-personal-site .rv5-hero__stats dd span {font-size:.875rem}
   .care-personal-site .rv5-hero__portrait-note {max-width:160px}
 }
 @media(prefers-reduced-motion:reduce) {
