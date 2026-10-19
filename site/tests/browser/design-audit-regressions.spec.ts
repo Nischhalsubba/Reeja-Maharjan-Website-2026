@@ -153,11 +153,11 @@ test('Care is Personal homepage preserves concise copy and working professional 
   const heroIntro = page.locator('.cip-hero__lead');
   await expect(heroIntro).toBeVisible();
   expect((await heroIntro.innerText()).trim().length).toBeLessThan(190);
-  await expect(page.locator('.cip-pathway')).toHaveCount(2);
-  await expect(page.locator('.cip-article')).toHaveCount(3);
-  await expect(page.locator('.cip-journey__item')).toHaveCount(4);
-  await expect(page.getByRole('link', { name: /Discover my story/ })).toHaveAttribute('href', '#about');
-  await expect(page.locator('.cip-contact').getByRole('link', { name: /Get in touch/ })).toHaveAttribute('href', '/contact/');
+  await expect(page.locator('.rv5-career-card')).toHaveCount(3);
+  await expect(page.locator('.rv5-writing-card')).toHaveCount(3);
+  await expect(page.locator('.rv5-hero__stats > div')).toHaveCount(3);
+  await expect(page.getByRole('link', { name: /Learn about my work/ })).toHaveAttribute('href', '#experience');
+  await expect(page.locator('footer.site-footer--care').getByRole('link', { name: /Get in touch/ })).toHaveAttribute('href', '/contact/');
   await expect(page.locator('.desktop-nav').getByRole('link', { name: 'Hire Reeja' })).toBeVisible();
 });
 
