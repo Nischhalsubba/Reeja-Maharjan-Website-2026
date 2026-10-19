@@ -1,0 +1,461 @@
+/* Reeja homepage v5: implementation of the approved editorial mockup.
+ * Scope all page rules to .rv5-home and maintain the real Astro DOM.
+ * All measurements use spacing tokens or fluid values; accessible copy remains real HTML.
+ */
+.care-personal-site .rv5-home {
+  --rv5-blue:var(--brand-blue);
+  --rv5-ink:#101832;
+  --rv5-body:#576684;
+  --rv5-line:#e1e7f5;
+  --rv5-tint:#f4f6ff;
+  --rv5-radius:10px;
+  width:100%;
+  overflow:clip;
+  background:#fff;
+  color:var(--rv5-ink);
+  font-family:"Public Sans",system-ui,sans-serif;
+}
+.care-personal-site .rv5-home * {box-sizing:border-box}
+.care-personal-site .rv5-home .cip-wrap {width:min(1240px,calc(100% - 88px))}
+.care-personal-site .rv5-home :is(h1,h2,h3,p,figure,dl,dd,dt,ul,ol) {margin:0}
+.care-personal-site .rv5-home :is(h1,h2,h3) {
+  font-family:"Public Sans",system-ui,sans-serif;
+  color:var(--rv5-ink);
+  font-weight:800;
+  letter-spacing:-.055em;
+  text-wrap:balance;
+}
+.care-personal-site .rv5-home p {font-size:1rem;line-height:1.67}
+.care-personal-site .rv5-eyebrow {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+  color:var(--rv5-blue);
+  font-family:"Public Sans",system-ui,sans-serif;
+  font-size:.875rem;
+  font-weight:800;
+  letter-spacing:.15em;
+  line-height:1.45;
+  text-transform:uppercase;
+}
+.care-personal-site .rv5-eyebrow::before {
+  content:"";display:block;flex:0 0 19px;width:19px;height:2px;
+  background:#ec746b;
+}
+.care-personal-site .rv5-button {
+  min-height:49px;max-width:100%;
+  display:inline-flex;align-items:center;justify-content:center;gap:18px;
+  padding:12px 22px;border-radius:7px;
+  font-family:"Public Sans",system-ui,sans-serif;
+  font-size:var(--type-ui);font-weight:750;line-height:1.4;
+  text-align:center;text-decoration:none;
+  transition:transform .16s ease,background-color .16s ease,box-shadow .16s ease;
+}
+.care-personal-site .rv5-button--solid {background:var(--rv5-blue);color:#fff;border:1px solid var(--rv5-blue);box-shadow:0 5px 13px rgba(52,84,245,.12)}
+.care-personal-site .rv5-button--solid:hover {background:var(--brand-blue-hover);color:#fff;transform:translateY(-2px);box-shadow:0 10px 21px rgba(52,84,245,.21)}
+.care-personal-site .rv5-button--outline {border:1.5px solid var(--rv5-blue);background:rgba(255,255,255,.85);color:#2443d3}
+.care-personal-site .rv5-button--outline:hover {background:#eaedff;transform:translateY(-2px)}
+.care-personal-site .rv5-text-link {
+  display:inline-flex;align-items:center;gap:12px;
+  color:#274ade;font-size:var(--type-ui);font-weight:760;
+  text-decoration:none;white-space:normal;
+}
+.care-personal-site .rv5-text-link:hover {text-decoration:underline;text-underline-offset:5px}
+.care-personal-site .rv5-home a:focus-visible {outline:3px solid #1938ac;outline-offset:4px;border-radius:4px}
+.care-personal-site .rv5-home [id] {scroll-margin-top:95px}
+
+/* Global chrome on homepage only; other pages retain v4 shell. */
+body.care-personal-site:has(.rv5-home) .site-header {
+  min-height:72px;
+  background:rgba(249,250,255,.96);
+  border-bottom:1px solid #e8ebf6;
+  box-shadow:0 1px 15px rgba(21,35,93,.035);
+}
+body.care-personal-site:has(.rv5-home) .site-header__inner {min-height:72px;width:min(1240px,calc(100% - 88px))}
+body.care-personal-site:has(.rv5-home) .desktop-nav {gap:7px}
+body.care-personal-site:has(.rv5-home) .desktop-nav>a:not(.nav-cta) {color:#54627e;font-size:.9375rem;font-weight:660}
+body.care-personal-site:has(.rv5-home) .desktop-nav>a[href="/"] {color:var(--brand-blue)}
+body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta {
+  background:var(--brand-blue);color:#fff;
+  min-height:43px;padding:8px 19px;border-radius:7px;
+}
+body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
+  background:var(--brand-blue-hover);color:#fff;
+}
+
+/* Hero — intentionally matches the approved half-portrait / half-copy composition. */
+.care-personal-site .rv5-hero {
+  position:relative;min-height:590px;
+  background:linear-gradient(114deg,#fcfcff 0%,#f7f8ff 42%,#ebf0ff 100%);
+  isolation:isolate;
+}
+.care-personal-site .rv5-hero__ambient {
+  position:absolute;z-index:0;inset:0 0 0 47%;
+  background:
+    radial-gradient(ellipse at 80% 16%,rgba(251,223,212,.54) 0,transparent 36%),
+    radial-gradient(ellipse at 76% 86%,rgba(116,155,240,.2) 0,transparent 52%);
+  pointer-events:none;
+}
+.care-personal-site .rv5-hero__grid {
+  display:grid;grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);
+  align-items:stretch;gap:clamp(34px,4.5vw,75px);min-height:590px;
+  position:relative;z-index:1;
+}
+.care-personal-site .rv5-hero__copy {
+  padding:clamp(52px,6vw,94px) 0 64px;
+  position:relative;z-index:2;
+}
+.care-personal-site .rv5-hero .rv5-eyebrow {font-size:.875rem;letter-spacing:.16em}
+.care-personal-site .rv5-hero .rv5-eyebrow::before {display:none}
+.care-personal-site .rv5-hero h1 {
+  max-width:8.2ch;
+  font-size:clamp(4.35rem,6.4vw,6.2rem);
+  line-height:.94;letter-spacing:-.076em;
+  margin:0;
+}
+.care-personal-site .rv5-hero h1 span {color:var(--rv5-blue)}
+.care-personal-site .rv5-hero .cip-hero__lead {
+  max-width:51ch;
+  margin-top:24px;
+  color:#4d5d7a;font-size:clamp(1.04rem,1.28vw,1.16rem);
+  line-height:1.71;
+}
+.care-personal-site .rv5-hero__actions {display:flex;flex-wrap:wrap;gap:13px;margin-top:27px}
+.care-personal-site .rv5-hero__stats {
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;
+  max-width:520px;padding:31px 0 0;margin-top:32px;
+  border-top:1px solid #dfe4f1;
+}
+.care-personal-site .rv5-hero__stats>div {min-width:0;padding-right:9px}
+.care-personal-site .rv5-hero__stats dt {
+  color:#62708e;font-size:.8125rem;line-height:1.35;
+  font-weight:660;order:2;
+}
+.care-personal-site .rv5-hero__stats dd {display:flex;flex-direction:column;gap:1px}
+.care-personal-site .rv5-hero__stats dd strong {
+  color:#3154e8;font-size:2rem;font-weight:800;line-height:1.18;letter-spacing:-.04em;
+}
+.care-personal-site .rv5-hero__stats dd span {font-size:.8rem;color:#5e6b86;line-height:1.3}
+.care-personal-site .rv5-hero__stats dt {position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+.care-personal-site .rv5-hero__portrait {
+  min-height:590px;margin:0;position:relative;
+  display:flex;align-items:end;justify-content:center;isolation:isolate;
+}
+.care-personal-site .rv5-hero__portrait-backdrop {
+  position:absolute;inset:39px -7% 0 -3%;z-index:-1;
+  background:linear-gradient(145deg,#e6ebff,#c4d1f1 80%,#a9b9e0);
+  border-radius:54% 54% 0 0 / 32% 32% 0 0;
+  box-shadow:inset 0 0 90px rgba(255,255,255,.55);
+}
+.care-personal-site .rv5-hero__portrait::before {
+  content:"";position:absolute;z-index:2;pointer-events:none;
+  inset:0 auto 0 -4px;width:16%;
+  background:linear-gradient(90deg,#f5f7ff 0%,rgba(245,247,255,0) 100%);
+}
+.care-personal-site .rv5-hero__portrait picture {display:block;width:min(100%,580px);position:relative;z-index:1}
+.care-personal-site .rv5-hero__portrait img {
+  width:100%;height:min(570px,44vw);min-height:500px;display:block;
+  object-fit:contain;object-position:50% 100%;
+  background:transparent;filter:saturate(.93);
+}
+.care-personal-site .rv5-hero__portrait-note {
+  position:absolute;z-index:3;right:-4px;bottom:64px;
+  display:flex;align-items:center;gap:14px;
+  max-width:232px;padding:18px;
+  border:1px solid rgba(220,224,244,.85);
+  border-radius:9px;background:rgba(255,255,255,.96);
+  box-shadow:0 18px 45px rgba(19,32,82,.14);
+  font-size:.88rem;font-weight:720;color:#253353;line-height:1.5;
+}
+.care-personal-site .rv5-hero__note-icon {
+  display:grid;place-items:center;flex:0 0 42px;width:42px;height:42px;
+  border-radius:50%;background:#ecedff;color:var(--rv5-blue);font-size:1.7rem;
+}
+
+/* Five benefits icon strip. */
+.care-personal-site .rv5-pillars {
+  padding:26px 0 27px;
+  border-bottom:1px solid var(--rv5-line);
+  background:linear-gradient(180deg,#fff 0%,#fafbff 100%);
+}
+.care-personal-site .rv5-pillars__grid {
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;
+  align-items:start;
+}
+.care-personal-site .rv5-pillar {display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.care-personal-site .rv5-pillar__icon {
+  width:52px;height:52px;display:grid;place-items:center;
+  border-radius:50%;background:#eef1ff;color:var(--rv5-blue);
+}
+.care-personal-site .rv5-pillar__icon svg {width:24px;height:24px}
+.care-personal-site .rv5-pillar p {color:#506080;font-size:.875rem;line-height:1.42;font-weight:650}
+
+/* Universal section hierarchy from mockup. */
+.care-personal-site .rv5-section {padding:clamp(70px,8vw,116px) 0}
+.care-personal-site .rv5-section-header {margin-bottom:34px}
+.care-personal-site .rv5-section-header--split,
+.care-personal-site .rv5-section-header--inline {display:flex;justify-content:space-between;align-items:end;gap:35px}
+.care-personal-site .rv5-section-header h2 {
+  font-size:clamp(2.25rem,3.9vw,3.9rem);line-height:1.08;max-width:18ch;
+}
+.care-personal-site .rv5-section-header__aside {max-width:415px}
+.care-personal-site .rv5-section-header__aside p,
+.care-personal-site .rv5-section-header--inline>div>p:last-child {font-size:1rem;color:var(--rv5-body)}
+.care-personal-site .rv5-section-header__aside a {margin-top:17px}
+.care-personal-site .rv5-section-header--inline {margin-bottom:26px}
+.care-personal-site .rv5-section-header--inline h2 {font-size:clamp(2.1rem,3.1vw,3rem);max-width:28ch}
+.care-personal-site .rv5-section-header--inline .rv5-eyebrow {margin-bottom:9px}
+.care-personal-site .rv5-section-header--inline>div>p:last-child {margin-top:11px}
+.care-personal-site .rv5-section-header--inline>a {align-self:center}
+
+/* Real career content (no made-up dates/achievements) on balanced image cards. */
+.care-personal-site .rv5-career {background:#fff}
+.care-personal-site .rv5-career__grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}
+.care-personal-site .rv5-career-card {
+  min-width:0;display:flex;flex-direction:column;overflow:hidden;
+  border:1px solid var(--rv5-line);border-radius:10px;background:#fff;
+  box-shadow:0 8px 26px rgba(24,38,94,.055);
+  transition:box-shadow .2s ease,transform .2s ease;
+}
+.care-personal-site .rv5-career-card:hover {box-shadow:0 17px 38px rgba(24,38,94,.12);transform:translateY(-3px)}
+.care-personal-site .rv5-career-card__photo {
+  height:184px;position:relative;overflow:hidden;background:#e9edfb;
+}
+.care-personal-site .rv5-career-card__photo img {
+  width:100%;height:100%;object-fit:cover;object-position:center;display:block;
+}
+.care-personal-site .rv5-career-card__photo figcaption {
+  position:absolute;inset:auto 0 0 auto;max-width:100%;
+  padding:10px 12px 8px;background:linear-gradient(90deg,rgba(11,20,47,.8),rgba(11,20,47,.86));
+  color:#fff;font-size:.72rem;font-weight:600;text-align:right;
+}
+.care-personal-site .rv5-career-card__photo a {color:#fff;text-decoration:underline}
+.care-personal-site .rv5-career-card__content {display:flex;flex:1;flex-direction:column;gap:9px;padding:24px}
+.care-personal-site .rv5-career-card__period {color:#6d7b9d;font-size:.875rem}
+.care-personal-site .rv5-career-card h3 {font-size:1.35rem;line-height:1.2;letter-spacing:-.038em}
+.care-personal-site .rv5-career-card__org {color:#394867;font-weight:660;font-size:.95rem;line-height:1.5}
+.care-personal-site .rv5-career-card__tag {
+  align-self:flex-start;padding:6px 11px;background:#edf0ff;border-radius:5px;
+  color:#3454dc;font-size:.775rem;font-weight:800;
+}
+.care-personal-site .rv5-career-card__summary {
+  margin-top:2px;flex:1;color:var(--rv5-body);font-size:.94rem;line-height:1.58;
+}
+.care-personal-site .rv5-career-card__location {display:flex;align-items:center;gap:6px;margin-top:7px;color:#6b7890;font-size:.82rem}
+.care-personal-site .rv5-career-card__location svg {color:#e36965;flex-shrink:0}
+
+/* Full-width focus section: large real editorial photo paired with content. */
+.care-personal-site .rv5-focus {
+  display:grid;grid-template-columns: minmax(0,1fr) minmax(0,1fr);
+  min-height:468px;background:linear-gradient(116deg,#f0f4ff 0%,#fafbff 100%);
+}
+.care-personal-site .rv5-focus__image {position:relative;min-height:468px;overflow:hidden;background:#d5e0f3}
+.care-personal-site .rv5-focus__image::after {
+  content:"";position:absolute;inset:45% 0 0;
+  background:linear-gradient(transparent,rgba(7,16,43,.6));pointer-events:none;
+}
+.care-personal-site .rv5-focus__image img {display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center}
+.care-personal-site .rv5-focus__photo-credit {
+  position:absolute;z-index:1;bottom:17px;left:22px;right:15px;
+  color:#fff;font-size:.78rem;font-weight:650;text-shadow:0 2px 10px rgba(0,0,0,.3);
+}
+.care-personal-site .rv5-focus__photo-credit a {color:#fff;text-decoration:underline;text-underline-offset:3px}
+.care-personal-site .rv5-focus__content {display:flex;align-items:center;justify-content:flex-start;padding:45px clamp(35px,6vw,105px)}
+.care-personal-site .rv5-focus__inner {max-width:480px}
+.care-personal-site .rv5-focus h2 {font-size:clamp(2.6rem,4vw,4rem);line-height:1.07;margin:0 0 20px}
+.care-personal-site .rv5-focus__inner>p:not(.rv5-eyebrow) {color:var(--rv5-body);font-size:1rem}
+.care-personal-site .rv5-focus__bullets {display:grid;gap:12px;margin:24px 0 28px;padding:0;list-style:none}
+.care-personal-site .rv5-focus__bullets li {display:flex;align-items:flex-start;gap:11px;color:#4e5d7c;font-size:.93rem;line-height:1.5}
+.care-personal-site .rv5-focus__bullets li::before {
+  content:"✓";display:grid;place-items:center;flex:0 0 18px;width:18px;height:18px;
+  border-radius:50%;background:var(--rv5-blue);color:#fff;font-size:.74rem;font-weight:800;
+}
+
+/* Fresh articles are sourced from actual published content and real credits. */
+.care-personal-site .rv5-writing {background:#fff}
+.care-personal-site .rv5-writing__grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.care-personal-site .rv5-writing-card {
+  min-width:0;position:relative;display:flex;flex-direction:column;
+  overflow:hidden;border:1px solid var(--rv5-line);border-radius:9px;
+  background:#fff;box-shadow:0 6px 24px rgba(24,38,94,.045);
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.care-personal-site .rv5-writing-card:hover {transform:translateY(-3px);box-shadow:0 15px 32px rgba(24,38,94,.11)}
+.care-personal-site .rv5-writing-card__photo {display:block;overflow:hidden;aspect-ratio:1.68;background:#e2e8fc}
+.care-personal-site .rv5-writing-card__photo img {width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease}
+.care-personal-site .rv5-writing-card:hover .rv5-writing-card__photo img {transform:scale(1.035)}
+.care-personal-site .rv5-writing-card__content {display:flex;flex:1;flex-direction:column;gap:11px;padding:20px 22px 28px}
+.care-personal-site .rv5-writing-card__category {align-self:flex-start;max-width:100%;padding:4px 9px;background:#fce9eb;color:#ac3945;border-radius:5px;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.035em}
+.care-personal-site .rv5-writing-card__category--1 {background:#eaf0ff;color:#2f54c8}
+.care-personal-site .rv5-writing-card__category--2 {background:#eeeaff;color:#6d47b0}
+.care-personal-site .rv5-writing-card h3 {font-size:clamp(1.1rem,1.55vw,1.32rem);line-height:1.25;letter-spacing:-.038em}
+.care-personal-site .rv5-writing-card h3 a {color:var(--rv5-ink);text-decoration:none}
+.care-personal-site .rv5-writing-card h3 a:hover {color:var(--rv5-blue)}
+.care-personal-site .rv5-writing-card__content>p:not(.rv5-writing-card__category):not(.rv5-writing-card__meta) {font-size:.9rem;line-height:1.6;color:var(--rv5-body)}
+.care-personal-site .rv5-writing-card__meta {margin-top:auto;padding-top:13px;color:#8190ab;font-size:.78rem;font-weight:600}
+.care-personal-site .rv5-writing-card__photo-credit {
+  position:absolute;top:0;right:0;max-width:100%;
+  background:rgba(16,24,47,.75);color:#fff;
+  padding:4px 8px;border-radius:0 0 0 5px;font-size:.68rem;
+  text-decoration:underline;text-underline-offset:2px;
+}
+
+/* Personal note + Nepali landscape; no fabricated quotations or credentials. */
+.care-personal-site .rv5-personal {
+  min-height:360px;position:relative;overflow:hidden;
+  background:linear-gradient(125deg,#f3f5ff,#eaf0ff);
+}
+.care-personal-site .rv5-personal__grid {display:grid;grid-template-columns:1fr 1fr;min-height:360px;align-items:stretch}
+.care-personal-site .rv5-personal__copy {padding:54px 40px 52px 0;position:relative;z-index:2}
+.care-personal-site .rv5-personal h2 {font-size:clamp(2.35rem,3.75vw,3.65rem);line-height:1.09;max-width:18ch;margin-bottom:16px}
+.care-personal-site .rv5-personal__copy>p:not(.rv5-eyebrow):not(.rv5-personal__byline) {color:#52617e;font-size:1rem;max-width:52ch}
+.care-personal-site .rv5-personal__byline {display:flex;flex-direction:column;gap:4px;margin-top:25px;font-family:Georgia,serif;font-size:1.16rem;font-style:italic;color:#2c457e}
+.care-personal-site .rv5-personal__byline span {font-family:"Public Sans",system-ui,sans-serif;font-size:.8rem;font-style:normal;color:#6c7b9a}
+.care-personal-site .rv5-personal__scene {
+  position:relative;align-self:stretch;margin-right:calc((min(1240px,100vw - 88px) - 100vw) / 2);
+  min-height:360px;overflow:hidden;
+  border-radius:110px 0 0 0;
+}
+.care-personal-site .rv5-personal__scene::before {content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,#eff3ff 0%,rgba(236,241,255,.65) 20%,rgba(236,241,255,0) 55%)}
+.care-personal-site .rv5-personal__scene>img {display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.care-personal-site .rv5-personal__float {
+  position:absolute;z-index:2;right:clamp(24px,4vw,70px);bottom:65px;
+  max-width:275px;padding:20px 22px;line-height:1.6;font-size:.92rem;
+  background:rgba(255,255,255,.96);box-shadow:0 10px 32px rgba(12,29,67,.13);
+  border-radius:8px;color:#2c3c61;
+}
+.care-personal-site .rv5-personal__float strong {color:var(--rv5-blue)}
+.care-personal-site .rv5-personal__scene small {position:absolute;z-index:2;bottom:10px;right:20px;color:#fff;font-size:.7rem;text-shadow:0 1px 5px #111}
+.care-personal-site .rv5-personal__scene small a {color:#fff}
+
+/* Working updates action instead of an unconnected newsletter collection form. */
+.care-personal-site .rv5-updates {padding:42px 0;background:#fff;border-bottom:1px solid var(--rv5-line)}
+.care-personal-site .rv5-updates__grid {display:flex;align-items:center;justify-content:space-between;gap:40px}
+.care-personal-site .rv5-updates .rv5-eyebrow {font-size:.76rem;margin-bottom:6px}
+.care-personal-site .rv5-updates h2 {font-size:clamp(1.5rem,2.35vw,2.2rem)}
+.care-personal-site .rv5-updates p:not(.rv5-eyebrow) {margin-top:7px;color:var(--rv5-body);font-size:.9rem}
+
+/* Same footer content and accessible navigation; light lower panel as in the mockup. */
+body.care-personal-site:has(.rv5-home) .site-footer--care {background:#fff;color:var(--rv5-ink)}
+body.care-personal-site:has(.rv5-home) .care-footer__invitation {
+  width:min(1240px,calc(100% - 88px));
+  max-width:none;padding:35px 45px;
+  background:linear-gradient(107deg,#15264f,#1d3568 55%,#203e70);
+  border-radius:14px;margin:36px auto 0;
+}
+body.care-personal-site:has(.rv5-home) .care-footer__intro h2 {font-size:clamp(1.75rem,2.8vw,2.65rem);line-height:1.14}
+body.care-personal-site:has(.rv5-home) .care-footer__intro h2 span {color:#c4c9ff}
+body.care-personal-site:has(.rv5-home) .care-footer__main,
+body.care-personal-site:has(.rv5-home) .care-footer__bottom,
+body.care-personal-site:has(.rv5-home) .care-footer__credits {color:var(--rv5-body)}
+body.care-personal-site:has(.rv5-home) .care-footer__main {padding-top:55px;padding-bottom:50px}
+body.care-personal-site:has(.rv5-home) .care-footer__column h3,
+body.care-personal-site:has(.rv5-home) .care-footer__identity a {color:var(--rv5-ink)}
+body.care-personal-site:has(.rv5-home) .care-footer__column a,
+body.care-personal-site:has(.rv5-home) .care-footer__bottom a {color:var(--rv5-body)}
+body.care-personal-site:has(.rv5-home) .care-footer__bottom {border-top:1px solid var(--rv5-line)}
+body.care-personal-site:has(.rv5-home) .care-footer__credits summary {color:var(--rv5-blue)}
+body.care-personal-site:has(.rv5-home) .care-footer__credits a {color:var(--rv5-blue)}
+body.care-personal-site:has(.rv5-home) .care-footer__cta {background:var(--rv5-blue);border-color:var(--rv5-blue);color:#fff}
+body.care-personal-site:has(.rv5-home) .care-footer__cta:hover {background:var(--brand-blue-hover);border-color:var(--brand-blue-hover);color:#fff}
+
+/* Responsive typography, image framing and stacking. */
+@media (max-width:1100px) {
+  .care-personal-site .rv5-home .cip-wrap,
+  body.care-personal-site:has(.rv5-home) .site-header__inner {width:calc(100% - 64px)}
+  .care-personal-site .rv5-hero__grid {gap:28px}
+  .care-personal-site .rv5-hero h1 {font-size:clamp(3.9rem,6.2vw,5.2rem)}
+  .care-personal-site .rv5-hero__portrait img {min-height:0;height:510px}
+  .care-personal-site .rv5-hero__portrait {min-height:530px}
+  .care-personal-site .rv5-career__grid {gap:15px}
+  .care-personal-site .rv5-career-card__content {padding:19px}
+  .care-personal-site .rv5-focus__content {padding:35px}
+  .care-personal-site .rv5-writing__grid {gap:15px}
+  .care-personal-site .rv5-writing-card__content {padding:17px}
+  body.care-personal-site:has(.rv5-home) .care-footer__invitation {width:calc(100% - 64px)}
+}
+@media (max-width:790px) {
+  .care-personal-site .rv5-home .cip-wrap,
+  body.care-personal-site:has(.rv5-home) .site-header__inner {width:calc(100% - 44px)}
+  .care-personal-site .rv5-hero__grid {min-height:0;grid-template-columns:1fr;gap:0}
+  .care-personal-site .rv5-hero__copy {padding:65px 0 12px}
+  .care-personal-site .rv5-hero h1 {font-size:clamp(3.7rem,10.5vw,5.8rem)}
+  .care-personal-site .rv5-hero .cip-hero__lead {max-width:54ch}
+  .care-personal-site .rv5-hero__portrait {min-height:470px}
+  .care-personal-site .rv5-hero__portrait picture {max-width:490px}
+  .care-personal-site .rv5-hero__portrait img {height:450px}
+  .care-personal-site .rv5-hero__portrait-backdrop {left:8%;right:7%;top:10px}
+  .care-personal-site .rv5-pillars__grid {grid-template-columns:repeat(5,minmax(0,1fr));gap:2px}
+  .care-personal-site .rv5-pillar p {font-size:.75rem}
+  .care-personal-site .rv5-section-header--split {align-items:start}
+  .care-personal-site .rv5-section-header h2 {font-size:clamp(2.25rem,5vw,3.2rem)}
+  .care-personal-site .rv5-career__grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .care-personal-site .rv5-focus {grid-template-columns:1fr}
+  .care-personal-site .rv5-focus__image {min-height:350px}
+  .care-personal-site .rv5-focus__content {padding:53px 32px}
+  .care-personal-site .rv5-focus__inner {max-width:650px}
+  .care-personal-site .rv5-writing__grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .care-personal-site .rv5-personal__grid {grid-template-columns:1fr}
+  .care-personal-site .rv5-personal__copy {padding:50px 0 45px}
+  .care-personal-site .rv5-personal__scene {margin:0 calc((44px - 100vw) / 2);height:290px;min-height:0;border-radius:0}
+  .care-personal-site .rv5-personal__scene::before {background:linear-gradient(90deg,#f1f4ff 0%,transparent 40%)}
+  body.care-personal-site:has(.rv5-home) .care-footer__invitation {width:calc(100% - 44px)}
+}
+@media (max-width:570px) {
+  .care-personal-site .rv5-home .cip-wrap,
+  body.care-personal-site:has(.rv5-home) .site-header__inner {width:calc(100% - 36px)}
+  .care-personal-site .rv5-hero__copy {padding:49px 0 12px}
+  .care-personal-site .rv5-hero .rv5-eyebrow {font-size:.75rem;letter-spacing:.12em}
+  .care-personal-site .rv5-hero h1 {font-size:clamp(3.5rem,14.7vw,5rem);line-height:.98}
+  .care-personal-site .rv5-hero .cip-hero__lead {font-size:1rem;margin-top:20px}
+  .care-personal-site .rv5-hero__actions {gap:10px}
+  .care-personal-site .rv5-button {padding:11px 17px;gap:10px;font-size:.9rem}
+  .care-personal-site .rv5-hero__stats {gap:7px;padding-top:20px;margin-top:22px}
+  .care-personal-site .rv5-hero__stats dd strong {font-size:1.65rem}
+  .care-personal-site .rv5-hero__stats dd span {font-size:.71rem}
+  .care-personal-site .rv5-hero__portrait {min-height:375px;margin-top:16px}
+  .care-personal-site .rv5-hero__portrait img {height:360px}
+  .care-personal-site .rv5-hero__portrait-note {right:0;bottom:24px;padding:12px;font-size:.78rem}
+  .care-personal-site .rv5-hero__note-icon {width:32px;height:32px;flex-basis:32px}
+  .care-personal-site .rv5-pillars {padding:21px 0}
+  .care-personal-site .rv5-pillars__grid {grid-template-columns:repeat(3,minmax(0,1fr));row-gap:22px}
+  .care-personal-site .rv5-pillar p {font-size:.78rem}
+  .care-personal-site .rv5-pillar__icon {width:46px;height:46px}
+  .care-personal-site .rv5-section {padding:65px 0}
+  .care-personal-site .rv5-section-header--split,
+  .care-personal-site .rv5-section-header--inline {display:block}
+  .care-personal-site .rv5-section-header h2 {font-size:clamp(2.15rem,8.8vw,3.15rem)}
+  .care-personal-site .rv5-section-header__aside {margin-top:15px}
+  .care-personal-site .rv5-section-header--inline>a {display:inline-flex;margin-top:18px}
+  .care-personal-site .rv5-career__grid,.care-personal-site .rv5-writing__grid {grid-template-columns:1fr;gap:18px}
+  .care-personal-site .rv5-career-card__photo {height:200px}
+  .care-personal-site .rv5-career-card__content {padding:22px}
+  .care-personal-site .rv5-focus__image {min-height:270px}
+  .care-personal-site .rv5-focus__content {padding:48px 23px}
+  .care-personal-site .rv5-focus h2 {font-size:clamp(2.45rem,10vw,3.4rem)}
+  .care-personal-site .rv5-writing-card__photo {aspect-ratio:1.8}
+  .care-personal-site .rv5-personal__copy {padding:42px 0}
+  .care-personal-site .rv5-personal h2 {font-size:clamp(2.25rem,9vw,3.15rem)}
+  .care-personal-site .rv5-personal__scene {margin:0 -18px;height:265px}
+  .care-personal-site .rv5-personal__float {right:15px;bottom:42px;padding:14px;font-size:.8rem}
+  .care-personal-site .rv5-updates__grid {display:block}
+  .care-personal-site .rv5-updates__grid>a {margin-top:17px}
+  body.care-personal-site:has(.rv5-home) .care-footer__invitation {
+    width:calc(100% - 36px);padding:30px 23px;border-radius:10px;
+  }
+}
+@media(max-width:365px) {
+  .care-personal-site .rv5-hero h1 {font-size:3.24rem}
+  .care-personal-site .rv5-hero__stats dd span {font-size:.69rem}
+  .care-personal-site .rv5-hero__portrait-note {max-width:160px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .care-personal-site .rv5-home a,
+  .care-personal-site .rv5-home article {transition:none}
+}
+@media print {
+  .care-personal-site .rv5-hero__portrait-note,
+  .care-personal-site .rv5-career-card__photo figcaption {display:none}
+  .care-personal-site .rv5-home {overflow:visible}
+}
