@@ -150,22 +150,97 @@
 .care-personal-site .rv6-writing__summary {font-size:.98rem!important;line-height:1.72!important;color:#566582!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
 .care-personal-site .rv6-writing .rv5-writing-card__meta {color:#4f5e7c;font-size:.875rem;line-height:1.5}
 
-/* Authentic personal note; remove generic unrelated stock landscape. */
-.care-personal-site .rv6-personal {min-height:auto;background:linear-gradient(114deg,#f1f4ff,#e8edff);padding:clamp(50px,6vw,90px) 0}
-.care-personal-site .rv6-personal__grid {display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.72fr);gap:clamp(30px,6vw,100px);min-height:0;align-items:center}
-.care-personal-site .rv6-personal .rv5-personal__copy {padding:0}
-.care-personal-site .rv6-personal h2 {font-size:clamp(2.25rem,4vw,3.75rem);line-height:1.08;max-width:18ch}
-.care-personal-site .rv6-personal .rv5-personal__byline span {font-size:.875rem}
-.care-personal-site .rv6-personal__aside {
-  align-self:stretch;display:flex;flex-direction:column;align-items:start;justify-content:center;gap:19px;
-  padding:clamp(25px,4vw,45px);background:#fff;border:1px solid #dbe2f5;
-  border-radius:11px;box-shadow:0 18px 36px rgba(26,40,94,.05);
+/* Personal editorial feature — an authentic photo and inviting contact journey. */
+.care-personal-site .rv7-personal {
+  min-height:0;
+  padding:clamp(64px,7vw,104px) 0;
+  background:linear-gradient(125deg,#f6f7ff 0%,#eef1ff 55%,#f6f3f2 100%);
 }
-.care-personal-site .rv6-personal__symbol {font-size:2.8rem;font-weight:800;letter-spacing:-.085em;line-height:1;color:var(--rv6-blue)}
-.care-personal-site .rv6-personal__location {color:#334dc7;font-size:.875rem;font-weight:800;letter-spacing:.095em}
-.care-personal-site .rv6-personal__aside>p:not(.rv6-personal__location) {font-size:1rem;color:#53617c}
-.care-personal-site .rv6-personal__aside a {margin-top:8px}
-
+.care-personal-site .rv7-personal__grid {
+  display:grid;
+  grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+  gap:clamp(35px,5.6vw,88px);
+  align-items:center;
+  min-height:0;
+}
+.care-personal-site .rv7-personal .rv7-personal__copy {padding:0;min-width:0}
+.care-personal-site .rv7-personal h2 {
+  max-width:18ch;
+  margin:0 0 22px;
+  font-size:clamp(2.55rem,4.1vw,4.05rem);
+  line-height:1.09;
+  letter-spacing:-.06em;
+}
+.care-personal-site .rv7-personal h2 span {color:#3350d6}
+.care-personal-site .rv7-personal__copy > p:not(.rv5-eyebrow) {
+  max-width:52ch;
+  font-size:1.045rem;
+  line-height:1.8;
+  color:#4c5c79;
+}
+.care-personal-site .rv7-personal__signoff {display:flex;align-items:center;gap:14px;margin-top:28px}
+.care-personal-site .rv7-personal__signoff-rule {
+  width:3px;height:45px;flex:0 0 3px;background:#4562e6;border-radius:2px;
+}
+.care-personal-site .rv7-personal__signoff strong {display:block;font-size:.975rem;color:#172546;line-height:1.4}
+.care-personal-site .rv7-personal__signoff small {display:block;font-size:.875rem;line-height:1.5;color:#64728d}
+.care-personal-site .rv7-personal__actions {display:flex;align-items:center;flex-wrap:wrap;gap:15px 24px;margin-top:30px}
+.care-personal-site .rv7-personal__photo {
+  position:relative;
+  display:block;
+  min-width:0;
+  margin:0;
+  overflow:hidden;
+  border-radius:12px;
+  aspect-ratio:1.37;
+  isolation:isolate;
+  background:linear-gradient(135deg,#d9d4d0,#d9e3f5);
+  box-shadow:0 22px 54px rgba(27,35,75,.12);
+}
+.care-personal-site .rv7-personal__photo::after {
+  content:"";position:absolute;inset:54% 0 0;z-index:1;
+  background:linear-gradient(180deg,rgba(12,22,42,0),rgba(12,22,42,.24));
+  pointer-events:none;
+}
+.care-personal-site .rv7-personal__photo img {
+  display:block;width:100%;height:100%;aspect-ratio:auto;
+  object-fit:cover;object-position:62% 50%;
+  filter:saturate(.97) contrast(1.025);
+}
+.care-personal-site .rv7-personal__photo figcaption {
+  position:absolute;z-index:2;bottom:20px;left:20px;
+  display:flex;align-items:center;gap:12px;
+  max-width:calc(100% - 40px);
+  padding:12px 17px 12px 12px;
+  border:1px solid rgba(255,255,255,.8);
+  border-radius:8px;
+  background:rgba(255,255,255,.95);
+  box-shadow:0 8px 24px rgba(8,18,37,.18);
+  color:#182647;
+  font-size:.9rem;line-height:1.45;font-weight:760;
+}
+.care-personal-site .rv7-personal__photo-mark {
+  display:grid;place-items:center;width:37px;height:37px;flex:0 0 37px;
+  background:#e8edff;border-radius:50%;
+  color:#3454d8;font-size:1rem;font-weight:850;letter-spacing:-.06em;
+}
+.care-personal-site .rv7-personal__photo figcaption small {
+  display:block;color:#566481;font-size:.875rem;font-weight:500;margin-top:2px;
+}
+@media(max-width:790px) {
+  .care-personal-site .rv7-personal__grid {grid-template-columns:1fr;gap:34px}
+  .care-personal-site .rv7-personal .rv7-personal__copy {padding:0}
+  .care-personal-site .rv7-personal__photo {aspect-ratio:1.55}
+}
+@media(max-width:600px) {
+  .care-personal-site .rv7-personal {padding:60px 0 65px}
+  .care-personal-site .rv7-personal h2 {font-size:clamp(2.3rem,9vw,3.1rem)}
+  .care-personal-site .rv7-personal__copy > p:not(.rv5-eyebrow) {font-size:1rem;line-height:1.74}
+  .care-personal-site .rv7-personal__photo {aspect-ratio:1.19;max-height:400px}
+  .care-personal-site .rv7-personal__photo img {object-position:70% 50%}
+  .care-personal-site .rv7-personal__photo figcaption {left:12px;bottom:12px;max-width:calc(100% - 24px);padding:10px 12px}
+  .care-personal-site .rv7-personal__actions {gap:16px}
+}
 /* A compact responsive journey, not a desktop layout simply stacked. */
 @media(max-width:1080px) {
   .care-personal-site .rv6-hero__grid {gap:20px}
@@ -199,7 +274,6 @@
   .care-personal-site .rv6-focus__image {min-height:325px}
   .care-personal-site .rv6-focus .rv5-focus__content {padding:48px var(--gutter)}
   .care-personal-site .rv6-writing .rv5-writing__grid {grid-template-columns:repeat(2,minmax(0,1fr))}
-  .care-personal-site .rv6-personal__grid {grid-template-columns:1fr}
 }
 @media(max-width:600px) {
   .care-personal-site .rv6-hero__copy {padding:53px 0 9px}
@@ -238,7 +312,6 @@
   .care-personal-site .rv6-writing .rv5-writing__grid {grid-template-columns:1fr;gap:18px}
   .care-personal-site .rv6-writing__image .rv5-writing-card__photo {aspect-ratio:1.85}
   .care-personal-site .rv6-writing__card .rv5-writing-card__content {padding:20px}
-  .care-personal-site .rv6-personal__aside {padding:25px}
 }
 @media(max-width:365px) {
   .care-personal-site .rv6-hero h1 {font-size:3.3rem}
