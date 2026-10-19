@@ -1,6 +1,7 @@
 ---
 import type { ProfileContent } from '../content/profile';
 import { siteCopy } from '../content/site-copy';
+import BrandIcon from './BrandIcon.astro';
 
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
@@ -16,7 +17,7 @@ const year = new Date().getFullYear();
     <div class="care-footer__invite-actions">
       <p>For thoughtful conversations about nursing, maternal health, research, or an opportunity to work together.</p>
       <a class="care-footer__cta" href="/contact/" data-track="contact-footer">
-        Get in touch <span aria-hidden="true">↗</span>
+        Get in touch <BrandIcon name="arrow-up-right" size={18} />
       </a>
     </div>
   </div>
@@ -48,7 +49,7 @@ const year = new Date().getFullYear();
     <div class="care-footer__column care-footer__reach">
       <h3>Say hello</h3>
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
-      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">Connect on LinkedIn <span aria-hidden="true">↗</span></a>
+      <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">Connect on LinkedIn <BrandIcon name="arrow-up-right" size={18} /></a>
     </div>
   </div>
 
@@ -61,6 +62,6 @@ const year = new Date().getFullYear();
   <div class="container care-footer__bottom">
     <small>© {year} {profile.name}. {siteCopy.footer.legal}</small>
     <span>Made with care, in Nepal.</span>
-    <a href="#page-top">Back to top <span aria-hidden="true">↑</span></a>
+    <a href="#page-top">Back to top <BrandIcon name="arrow-up" size={18} /></a>
   </div>
 </footer>

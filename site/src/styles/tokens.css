@@ -1,5 +1,5 @@
 :root {
-  /* Care is Personal v4.3 — one source of truth for color and readable typography. */
+  /* Care is Personal v7 — the only shared source of brand colors and spacing. */
   --brand-blue: #3454f5;
   --brand-blue-hover: #223fda;
   --brand-lavender: #eef0ff;
@@ -9,6 +9,8 @@
   --brand-coral-ink: #a73e34; /* Reserved for rare deliberate accents; normal metadata uses cobalt. */
   --brand-muted: #53617c;
   --brand-line: #dce2ef;
+  --brand-line-strong: #aeb9d3;
+  --brand-surface-strong: #e3e8ff;
   --brand-focus: #ffb69b;
 
   /* Primary UI typography, loaded locally with @fontsource. */

@@ -157,7 +157,7 @@
   right: -16%;
   top: -35%;
   border-radius: 50%;
-  background: radial-gradient(circle,#3440a6 0,rgba(52,64,166,.15) 48%,transparent 70%);
+  background: radial-gradient(circle,var(--brand-blue) 0,rgba(52,64,166,.15) 48%,transparent 70%);
   opacity: .45;
 }
 .care-personal-site .care-footer__intro, .care-personal-site .care-footer__invite-actions { position: relative; z-index: 1; min-width: 0; }
@@ -171,7 +171,7 @@
   letter-spacing: .14em;
   font-weight: 750;
 }
-.care-personal-site .care-footer__spark { width: 27px; height: 2px; background: #ff8d7e; }
+.care-personal-site .care-footer__spark { width: 27px; height: 2px; background: var(--brand-blue); }
 .care-personal-site .care-footer__intro h2 {
   margin: 0;
   font-family: "Public Sans",system-ui,sans-serif;
