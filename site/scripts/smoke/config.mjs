@@ -29,16 +29,19 @@ export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 export const requiredHomepageText = [
   'Care is',
   'personal.',
-  'Learn about my work',
-  'View my CV',
-  'Clinical experience',
+  'Explore my work',
+  'Get in touch',
+  'Nepal Nursing Council',
+  'B.Sc. Nursing',
+  'Grounded in care.',
+  'Care at the bedside.',
+  'Research beyond the ward.',
+  'Experience that',
   'Research Assistant',
-  'People, research',
-  'Stories and guides for healthier futures.',
-  'Stronger mothers,',
-  'New articles and insights.',
-  'Better care starts',
-  'Get in touch'
+  'Turning information into better follow-up.',
+  'Care, explained clearly.',
+  'Behind every reading',
+  'Contact Reeja'
 ];
 
 export const forbiddenHomepageText = [

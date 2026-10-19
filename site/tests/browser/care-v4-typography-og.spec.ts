@@ -27,7 +27,7 @@ test('all major templates use Care is Personal v4 without old theme, unreadable 
         };
       });
       expect(state.system).toBe('care-is-personal');
-      expect(state.version).toBe('5.0.0-care-personal');
+      expect(state.version).toBe('6.0.0-care-personal');
       expect(state.font).toContain('Public Sans');
       expect(state.overflow, `${path} horizontal overflow at ${width}px`).toBeLessThanOrEqual(1);
       expect(state.size, `${path} undersized page heading at ${width}px`).toBeGreaterThanOrEqual(width <= 390 ? 28 : 36);
