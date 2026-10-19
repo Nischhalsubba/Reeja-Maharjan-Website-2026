@@ -29,15 +29,15 @@ export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 export const requiredHomepageText = [
   'Care is',
   'personal.',
-  'Discover my story',
-  'View CV',
-  'A career built',
-  'Clinical care',
-  'Maternal-health research',
-  'Beyond',
-  'the bedside.',
-  'Selected writing.',
-  'Let’s make',
+  'Learn about my work',
+  'View my CV',
+  'Clinical experience',
+  'Research Assistant',
+  'People, research',
+  'Stories and guides for healthier futures.',
+  'Stronger mothers,',
+  'New articles and insights.',
+  'Better care starts',
   'Get in touch'
 ];
 
