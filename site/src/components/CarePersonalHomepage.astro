@@ -1,5 +1,6 @@
 ---
 import { professionalFacts as facts } from '../content/professional-facts';
+import BrandIcon from './BrandIcon.astro';
 import { profile } from '../content/profile';
 import { blogPosts } from '../content/blog';
 import { getBlogImage, getBlogImageSrcSet } from '../content/blog/imagery';
@@ -23,7 +24,7 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
   .toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric', timeZone:'UTC' });
 ---
 
-<div class="cip-home rv5-home rv6-home">
+<div class="cip-home rv5-home rv6-home rv7-home">
   <section class="cip-hero rv5-hero rv6-hero" id="home" aria-labelledby="cip-title">
     <div class="rv6-hero__ambient" aria-hidden="true"></div>
     <div class="cip-wrap rv5-hero__grid rv6-hero__grid">
@@ -33,12 +34,12 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
         <p class="rv6-hero__identity">Hello, I’m <strong>Reeja Maharjan.</strong></p>
         <p class="cip-hero__lead">I bring bedside nursing, family education and maternal-health research together — with a focus on clear communication and respectful care.</p>
         <div class="rv5-hero__actions rv6-hero__actions">
-          <a class="rv5-button rv5-button--solid" href="#experience" data-track="home-experience">Explore my work <span aria-hidden="true">↗</span></a>
-          <a class="rv5-button rv5-button--outline" href="/contact/" data-track="home-contact">Get in touch <span aria-hidden="true">↗</span></a>
+          <a class="rv5-button rv5-button--solid" href="#experience" data-track="home-experience">Explore my work <BrandIcon name="arrow-up-right" size={18} /></a>
+          <a class="rv5-button rv5-button--outline" href="/contact/" data-track="home-contact">Get in touch <BrandIcon name="arrow-up-right" size={18} /></a>
         </div>
         <div class="rv6-hero__secondary">
-          <span class="rv6-hero__place"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M12 21s7-6.1 7-11a7 7 0 0 0-14 0c0 4.9 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg> Biratnagar, Nepal</span>
-          <a href={facts.publicCvPath} class="rv6-hero__cv">View professional CV <span aria-hidden="true">↗</span></a>
+          <span class="rv6-hero__place"><BrandIcon name="map-pin" size={18} /> Biratnagar, Nepal</span>
+          <a href={facts.publicCvPath} class="rv6-hero__cv">View professional CV <BrandIcon name="arrow-up-right" size={18} /></a>
         </div>
       </div>
       <figure class="cip-hero__portrait rv5-hero__portrait rv6-hero__portrait">
@@ -47,17 +48,17 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
           <source type="image/webp" srcset="/reeja-headshot-360.webp 360w, /reeja-headshot-720.webp 720w, /reeja-headshot-960.webp 960w" sizes="(max-width: 790px) 92vw, 550px" />
           <img src="/reeja-headshot.jpg" alt="Reeja Maharjan, registered nurse and research assistant" width="800" height="1000" fetchpriority="high" loading="eager" decoding="async" />
         </picture>
-        <figcaption class="rv6-hero__caption"><span class="rv6-hero__caption-mark" aria-hidden="true">+</span><span><strong>People first.</strong><small>Evidence-informed care.</small></span></figcaption>
+        <figcaption class="rv6-hero__caption"><span class="rv6-hero__caption-mark"><BrandIcon name="heart-pulse" size={23} /></span><span><strong>People first.</strong><small>Evidence-informed care.</small></span></figcaption>
       </figure>
     </div>
   </section>
 
   <section class="rv6-trust" aria-label="Professional background">
     <div class="cip-wrap rv6-trust__grid">
-      <div><span class="rv6-trust__icon" aria-hidden="true">01</span><p><strong>Nepal Nursing Council</strong><span>Registered Nurse · credential summary</span></p></div>
-      <div><span class="rv6-trust__icon" aria-hidden="true">02</span><p><strong>B.Sc. Nursing</strong><span>Tribhuvan University affiliation</span></p></div>
-      <div><span class="rv6-trust__icon" aria-hidden="true">03</span><p><strong>IISH · MOM-HD</strong><span>Current maternal-health research role</span></p></div>
-      <a class="rv6-trust__link" href="/cv/" aria-label="View Reeja's credentials and experience">Credentials <span aria-hidden="true">↗</span></a>
+      <div><span class="rv6-trust__icon"><BrandIcon name="shield-check" size={24} /></span><p><strong>Nepal Nursing Council</strong><span>Registered Nurse · credential summary</span></p></div>
+      <div><span class="rv6-trust__icon"><BrandIcon name="graduation-cap" size={24} /></span><p><strong>B.Sc. Nursing</strong><span>Tribhuvan University affiliation</span></p></div>
+      <div><span class="rv6-trust__icon"><BrandIcon name="clipboard-check" size={24} /></span><p><strong>IISH · MOM-HD</strong><span>Current maternal-health research role</span></p></div>
+      <a class="rv6-trust__link" href="/cv/" aria-label="View Reeja's credentials and experience">Credentials <BrandIcon name="arrow-up-right" size={18} /></a>
     </div>
   </section>
 
@@ -70,18 +71,18 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
       </div>
       <div class="rv6-pillars__grid">
         <article class="rv6-pillar rv6-pillar--nursing">
-          <div class="rv6-pillar__symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M24 41s-17-10.1-17-22a9.5 9.5 0 0 1 17-5.4A9.5 9.5 0 0 1 41 19C41 30.9 24 41 24 41Z"/><path d="M11 24h8l4-7 5 13 3-6h7"/></svg></div>
+          <div class="rv6-pillar__symbol"><BrandIcon name="heart-pulse" size={28} /></div>
           <span class="rv6-pillar__index">01 / CLINICAL PRACTICE</span>
           <h3>Care at the bedside.</h3>
           <p>Maternal and newborn nursing, documentation, monitoring and practical counselling for patients and families.</p>
-          <a href="/nursing-practice/" class="rv5-text-link">Explore nursing practice <span aria-hidden="true">↗</span></a>
+          <a href="/nursing-practice/" class="rv5-text-link">Explore nursing practice <BrandIcon name="arrow-up-right" size={18} /></a>
         </article>
         <article class="rv6-pillar rv6-pillar--research">
-          <div class="rv6-pillar__symbol" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 41V28h7v13M20 41V19h7v22M32 41V9h7v32M6 41h36"/><path d="m9 16 12-7 6 4 12-9"/></svg></div>
+          <div class="rv6-pillar__symbol"><BrandIcon name="chart" size={28} /></div>
           <span class="rv6-pillar__index">02 / CLINICAL RESEARCH</span>
           <h3>Research beyond the ward.</h3>
           <p>Participant education, blood-pressure and glucose monitoring, tele-follow-up and careful study documentation.</p>
-          <a href="/clinical-research/" class="rv5-text-link">Explore research work <span aria-hidden="true">↗</span></a>
+          <a href="/clinical-research/" class="rv5-text-link">Explore research work <BrandIcon name="arrow-up-right" size={18} /></a>
         </article>
       </div>
     </div>
@@ -91,7 +92,7 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
     <div class="cip-wrap">
       <div class="rv5-section-header rv5-section-header--split rv6-section-head">
         <div><p class="rv5-eyebrow">THE JOURNEY SO FAR</p><h2 id="rv5-career-heading">Experience that<br />shapes my practice.</h2></div>
-        <div class="rv5-section-header__aside"><p>Hospital and research roles, shown in reverse chronological order. Each experience has helped shape a more thoughtful approach to care.</p><a class="rv5-text-link" href="/cv/">Read the complete CV <span aria-hidden="true">↗</span></a></div>
+        <div class="rv5-section-header__aside"><p>Hospital and research roles, shown in reverse chronological order. Each experience has helped shape a more thoughtful approach to care.</p><a class="rv5-text-link" href="/cv/">Read the complete CV <BrandIcon name="arrow-up-right" size={18} /></a></div>
       </div>
       <ol class="rv6-career__timeline">
         {timeline.map(({item,number,category}) => (
@@ -117,13 +118,13 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
         <h2 id="rv5-focus-heading">Turning information into better follow-up.</h2>
         <p>As a Research Assistant on the MOM-HD maternal-health telemonitoring trial, I support the processes that connect participants, home readings and the wider clinical team.</p>
         <ul class="rv5-focus__bullets">
-          <li>Participant screening, education and consent-workflow support</li>
-          <li>Home blood-pressure and blood-glucose monitoring guidance</li>
-          <li>Scheduled tele-follow-up and escalation within study protocols</li>
-          <li>Study documentation, device logistics and data-quality checks</li>
+          <li><BrandIcon name="check" size={17} /> <span>Participant screening, education and consent-workflow support</span></li>
+          <li><BrandIcon name="check" size={17} /> <span>Home blood-pressure and blood-glucose monitoring guidance</span></li>
+          <li><BrandIcon name="check" size={17} /> <span>Scheduled tele-follow-up and escalation within study protocols</span></li>
+          <li><BrandIcon name="check" size={17} /> <span>Study documentation, device logistics and data-quality checks</span></li>
         </ul>
         <p class="rv6-focus__disclaimer">Role description, not a claim about trial outcomes.</p>
-        <a class="rv5-button rv5-button--solid" href="/clinical-research/">Read about the research <span aria-hidden="true">↗</span></a>
+        <a class="rv5-button rv5-button--solid" href="/clinical-research/">Read about the research <BrandIcon name="arrow-up-right" size={18} /></a>
       </div>
     </div>
   </section>
@@ -132,7 +133,7 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
     <div class="cip-wrap">
       <div class="rv5-section-header rv5-section-header--inline rv6-section-head">
         <div><p class="rv5-eyebrow">FROM MY WRITING DESK</p><h2 id="rv5-writing-heading">Care, explained clearly.</h2><p>Source-linked articles for families, nurses and learners.</p></div>
-        <a class="rv5-text-link" href="/blog/">Explore all {blogPosts.length} guides <span aria-hidden="true">↗</span></a>
+        <a class="rv5-text-link" href="/blog/">Explore all {blogPosts.length} guides <BrandIcon name="arrow-up-right" size={18} /></a>
       </div>
       <div class="rv5-writing__grid">
         {articles.map((post,index) => {
@@ -168,8 +169,8 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
           <span><strong>Reeja Maharjan</strong><small>Registered Nurse · Research Assistant</small></span>
         </div>
         <div class="rv7-personal__actions">
-          <a class="rv5-button rv5-button--solid" href="/contact/">Get in touch <span aria-hidden="true">↗</span></a>
-          <a class="rv5-text-link" href="/cv/">My professional journey <span aria-hidden="true">↗</span></a>
+          <a class="rv5-button rv5-button--solid" href="/contact/">Get in touch <BrandIcon name="arrow-up-right" size={18} /></a>
+          <a class="rv5-text-link" href="/cv/">My professional journey <BrandIcon name="arrow-up-right" size={18} /></a>
         </div>
       </div>
       <figure class="rv7-personal__photo">
