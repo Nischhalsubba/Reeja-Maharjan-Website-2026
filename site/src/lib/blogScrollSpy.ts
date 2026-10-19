@@ -5,14 +5,15 @@ export function initBlogScrollSpy(): void {
   const links = Array.from(toc.querySelectorAll<HTMLAnchorElement>('nav a[href^="#"]'));
   const sections = links.map(link => ({ link, node: document.getElementById(link.hash.slice(1)) }))
     .filter((item): item is { link: HTMLAnchorElement; node: HTMLElement } => Boolean(item.node));
-  if (!sections.length) return;
+  const first = sections.at(0);
+  if (!first) return;
   let scheduled = false;
   let current = '';
   const update = () => {
     scheduled = false;
     // Use the position in the reading viewport, not the document's hash alone.
     const position = Math.min(Math.max(128, window.innerHeight * .24), 240);
-    let active = sections[0].node.id;
+    let active = first.node.id;
     for (const { node } of sections) {
       if (node.getBoundingClientRect().top <= position) active = node.id;
       else break;
