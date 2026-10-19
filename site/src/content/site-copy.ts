@@ -8,7 +8,7 @@ export const siteCopy = {
   siteDescriptor: 'Registered Nurse · Maternal Health Research',
   websiteName: 'Reeja Maharjan | Nursing & Maternal Health Research',
   defaultTitle: `${facts.name} | Registered Nurse & Maternal Health Research Assistant`,
-  defaultDescription: `Official professional portfolio of ${facts.name}, ${facts.credential}, ${facts.nepalLicense}, active Texas RN, and ${facts.currentEmployerShort} maternal-health ${facts.currentRole} in ${facts.currentLocation}.`,
+  defaultDescription: `Professional portfolio of ${facts.name}, ${facts.credential}, NNC licensed Registered Nurse and ${facts.currentEmployerShort} maternal-health ${facts.currentRole} in ${facts.currentLocation}.`,
   profileSummary: `${facts.name}, ${facts.credential}, is a ${facts.nepalLicense} with an ${facts.texasLicense}. Her experience includes hospital nursing at Tribhuvan University Teaching Hospital, Manmohan Memorial Medical College & Teaching Hospital, and Sindhuli Hospital, alongside current maternal-health research work with ${facts.currentEmployerShort} on the ${facts.currentProject}. Her work includes patient and participant education, BP/BG monitoring support, tele-follow-up, documentation, data-quality checks, handover, escalation support, and multidisciplinary coordination.`,
   seoTopics: [
     'Registered nursing',
@@ -34,7 +34,7 @@ export const siteCopy = {
   ],
   home: {
     title: `${facts.name} | Registered Nurse & Maternal Health Research Assistant`,
-    description: `${facts.name} is an NNC licensed Registered Nurse, active Texas RN, and IISH MOM-HD Research Assistant with hospital nursing, maternal-health research, patient education, telemonitoring, and documentation experience in Nepal.`,
+    description: `${facts.name} is an NNC licensed Registered Nurse and IISH MOM-HD Research Assistant with clinical nursing, maternal-health research, education and telemonitoring experience in Nepal.`,
     hero: {
       kicker: `${facts.name} · ${facts.credential}`,
       titleBefore: `${facts.name} is a`,

@@ -72,7 +72,6 @@ const links = [
           <span aria-hidden="true"></span>
         </button>
       </div>
-      <a href="/" aria-current={path === '/' ? 'page' : undefined}>About Reeja</a>
       {links.map((link) => (
         <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>
           {link.label}
