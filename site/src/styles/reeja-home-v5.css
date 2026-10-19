@@ -315,6 +315,7 @@ body.care-personal-site:has(.rv5-home) .desktop-nav .nav-cta:hover {
 .care-personal-site .rv5-personal__scene {
   position:relative;align-self:stretch;margin-right:calc((min(1240px,100vw - 88px) - 100vw) / 2);
   min-height:360px;overflow:hidden;
+  background:linear-gradient(125deg,#dae4f8 0%,#aec0e0 64%,#728bbd 100%);
   border-radius:110px 0 0 0;
 }
 .care-personal-site .rv5-personal__scene::before {content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(90deg,#eff3ff 0%,rgba(236,241,255,.65) 20%,rgba(236,241,255,0) 55%)}
