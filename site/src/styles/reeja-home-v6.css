@@ -53,7 +53,7 @@
   display:block;width:100%;max-width:570px;max-height:572px;margin:auto auto 0;overflow:hidden;
   border-radius:32% 28% 0 0/24% 22% 0 0;
 }
-.care-personal-site .rv6-hero__portrait img {width:100%;height:565px;min-height:0;object-fit:contain;object-position:50% 100%;transform:scale(1.56);transform-origin:50% 68%;filter:saturate(.94)}
+.care-personal-site .rv6-hero__portrait img {width:100%;height:565px;min-height:0;object-fit:contain;object-position:50% 100%;transform:scale(2.2);transform-origin:50% 68%;filter:saturate(.94)}
 .care-personal-site .rv6-hero__portrait::before {display:none}
 .care-personal-site .rv6-hero__caption {
   display:flex;align-items:center;gap:13px;position:absolute;z-index:4;right:-4%;bottom:43px;
@@ -125,6 +125,7 @@
 .care-personal-site .rv6-focus__photo-fallback svg {width:130px;height:95px;opacity:.5}
 .care-personal-site .rv6-focus__image img {object-fit:cover;z-index:1}
 .care-personal-site .rv6-focus__image.is-image-unavailable img {opacity:0}
+.care-personal-site .rv6-focus__image.is-fallback-loaded .rv5-focus__photo-credit {display:none}
 .care-personal-site .rv6-focus__image.is-image-unavailable .rv5-focus__photo-credit {display:none}
 .care-personal-site .rv6-focus h2 {font-size:clamp(2.35rem,3.65vw,3.6rem);margin-top:0;max-width:17ch}
 .care-personal-site .rv6-focus__disclaimer {font-size:.875rem!important;color:#687594!important;margin:1px 0 16px!important}
@@ -140,6 +141,7 @@
 .care-personal-site .rv6-writing__image img {position:relative;z-index:2}
 .care-personal-site .rv6-writing__image-fallback {position:absolute;inset:0;z-index:0;display:grid;place-items:center;color:#3048b2;font-size:1.12rem;font-weight:750;text-align:center;padding:20px}
 .care-personal-site .rv6-writing__image .is-image-unavailable img {opacity:0}
+.care-personal-site .rv6-writing__image .is-fallback-loaded+.rv5-writing-card__photo-credit {display:none}
 .care-personal-site .rv6-writing__image .is-image-unavailable+.rv5-writing-card__photo-credit {display:none}
 .care-personal-site .rv6-writing__image .rv5-writing-card__photo-credit {top:auto;bottom:0;font-size:.75rem;background:rgba(16,24,47,.86);z-index:3}
 .care-personal-site .rv6-writing__card .rv5-writing-card__content {padding:23px;gap:12px}

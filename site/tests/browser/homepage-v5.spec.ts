@@ -79,13 +79,14 @@ test('mobile menu and hero CTAs work without overlapping the page',async({page})
  await expect(page.locator('#experience')).toBeVisible();
 });
 
-test('third-party editorial images degrade gracefully without broken-image icon',async({page})=>{
+test('third-party editorial images use locally hosted clinical art when blocked',async({page})=>{
  await page.route('https://images.unsplash.com/**',route=>route.abort());
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
  const first=page.locator('[data-editorial-image]').first();
  await first.scrollIntoViewIfNeeded();
- await expect.poll(()=>first.evaluate(img=>(img.parentElement?.classList.contains('is-image-unavailable')))).toBe(true);
- await expect(page.locator('.rv6-focus__photo-fallback')).toHaveCount(1);
+ await expect.poll(()=>first.getAttribute('src')).toContain('/images/research-monitoring.svg');
+ await expect.poll(()=>first.evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+ await expect(page.locator('.rv6-focus__image')).toHaveClass(/is-fallback-loaded/);
  await expect(page.locator('.rv6-hero__portrait img')).toBeVisible();
 });
 

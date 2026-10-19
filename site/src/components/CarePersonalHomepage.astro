@@ -107,7 +107,7 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
 
   <section class="rv5-focus rv6-focus" id="research" aria-labelledby="rv5-focus-heading">
     <div class="rv5-focus__image rv6-focus__image">
-      <img src="https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?auto=format&fit=crop&w=1200&q=80" alt="Illustrative blood-pressure check, not a MOM-HD study participant" width="1200" height="900" loading="lazy" decoding="async" data-editorial-image />
+      <img src="https://images.unsplash.com/photo-1631815587646-b85a1bb027e1?auto=format&fit=crop&w=1200&q=80" alt="Illustrative blood-pressure check, not a MOM-HD study participant" width="1200" height="900" loading="lazy" decoding="async" data-editorial-image data-fallback-src="/images/research-monitoring.svg" />
       <span class="rv5-focus__photo-credit">Illustrative photo · <a href="https://unsplash.com/photos/a-doctor-checking-the-blood-pressure-of-a-patient-XdErxxR6Xog" target="_blank" rel="noopener noreferrer">CDC / Unsplash</a></span>
       <div class="rv6-focus__photo-fallback" aria-hidden="true"><svg viewBox="0 0 160 110" fill="none" stroke="currentColor" stroke-width="2"><rect x="18" y="40" width="124" height="47" rx="6"/><path d="M27 64h23l8-14 9 31 10-20 9 3h46"/><path d="M80 40V15"/></svg></div>
     </div>
@@ -140,7 +140,7 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
           return <article class="rv5-writing-card rv6-writing__card">
             <div class="rv6-writing__image">
               <a href={'/blog/'+post.slug+'/'} class="rv5-writing-card__photo" aria-label={'Read '+post.title}>
-                <img src={image.src} srcset={getBlogImageSrcSet(image)} sizes="(max-width: 700px) 92vw, (max-width: 1000px) 45vw, 380px" alt={image.alt} width="700" height="475" loading="lazy" decoding="async" data-editorial-image />
+                <img src={image.src} srcset={getBlogImageSrcSet(image)} sizes="(max-width: 700px) 92vw, (max-width: 1000px) 45vw, 380px" alt={image.alt} width="700" height="475" loading="lazy" decoding="async" data-editorial-image data-fallback-src={index === 0 ? "/images/newborn-care.svg" : index === 1 ? "/images/glucose-monitor.svg" : "/images/research-monitoring.svg"} />
                 <span class="rv6-writing__image-fallback" aria-hidden="true">{post.tags[0] ?? 'Nursing'}</span>
               </a>
               <a class="rv5-writing-card__photo-credit" href={image.sourceUrl} target="_blank" rel="noopener noreferrer">Photo: {image.photographer} / Unsplash</a>
@@ -176,12 +176,24 @@ const dateLabel = (value: string) => new Date(value + 'T00:00:00Z')
 </div>
 
 <script>
-  // Visual fallback retains informative titles when optional third-party imagery fails.
+  // Use locally hosted, credited-as-illustrative artwork if a remote photograph fails.
   document.querySelectorAll<HTMLImageElement>('[data-editorial-image]').forEach(img => {
-    const parent=img.parentElement;
-    if (!parent) return;
-    const mark=() => parent.classList.add('is-image-unavailable');
-    if (img.complete && img.naturalWidth === 0) mark();
-    img.addEventListener('error',mark,{once:true});
+    const container=img.parentElement;
+    if (!container) return;
+    const handleError=() => {
+      const localImage=img.dataset.fallbackSrc;
+      if (!localImage || img.dataset.fallbackAttempted === 'true') {
+        container.classList.add('is-image-unavailable');
+        return;
+      }
+      img.dataset.fallbackAttempted='true';
+      img.removeAttribute('srcset');
+      img.removeAttribute('sizes');
+      img.alt='Illustration: ' + img.alt;
+      img.src=localImage;
+      container.classList.add('is-fallback-loaded');
+    };
+    img.addEventListener('error',handleError);
+    if (img.complete && img.naturalWidth === 0) handleError();
   });
 </script>
