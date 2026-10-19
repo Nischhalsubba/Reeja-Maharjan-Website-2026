@@ -9,7 +9,9 @@ test('v6 homepage presents verified background, two pathways and complete work c
  await expect(page.locator('.rv6-pillar')).toHaveCount(2);
  await expect(page.locator('.rv6-career__timeline > li')).toHaveCount(4);
  await expect(page.locator('.rv5-writing-card')).toHaveCount(3);
- await expect(page.locator('.rv6-personal__aside')).toBeVisible();
+ await expect(page.locator('.rv7-personal__photo')).toBeVisible();
+ await expect(page.locator('.rv6-personal__aside')).toHaveCount(0);
+ await expect(page.locator('.rv7-personal__photo figcaption')).toContainText('Reeja’s personal collection');
  await expect(page.locator('.rv5-updates')).toHaveCount(0);
  await expect(page.locator('.rv6-career__timeline')).toContainText('Sindhuli Hospital');
  await expect(page.locator('.rv6-career__timeline')).toContainText('Institute for Implementation Science and Health');
@@ -24,7 +26,7 @@ test('v6 homepage presents verified background, two pathways and complete work c
   {name:/View professional CV/,href:'/cv/'},
   {name:/Explore nursing practice/,href:'/nursing-practice/'},
   {name:/Explore research work/,href:'/clinical-research/'},
-  {name:/Contact Reeja/,href:'/contact/'}
+  {name:/My professional journey/,href:'/cv/'}
  ]) await expect(page.getByRole('link',{name:link.name}).first()).toHaveAttribute('href',link.href);
 });
 
@@ -97,4 +99,27 @@ test('all article previews use different topical source images and retain source
  const srcs=await imgs.evaluateAll(nodes=>nodes.map(x=>x.getAttribute('src')));
  expect(new Set(srcs).size).toBe(3);
  await expect(page.locator('.rv6-writing__image .rv5-writing-card__photo-credit')).toHaveCount(3);
+});
+
+test('real lakeside photo loads and remains visible at mobile and desktop sizes', async({browser}) => {
+  for(const width of [320,390,768,1440]) {
+    const ctx=await browser.newContext({viewport:{width,height:850},reducedMotion:'reduce'});
+    const page=await ctx.newPage();
+    await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+    const personal=page.locator('.rv7-personal');
+    const image=personal.locator('img');
+    await personal.scrollIntoViewIfNeeded();
+    await expect(image).toHaveAttribute('src','/images/reeja-lakeside.webp');
+    await expect(image).toHaveAttribute('loading','lazy');
+    await expect.poll(()=>image.evaluate(el=>(el as HTMLImageElement).naturalWidth),{timeout:12000}).toBeGreaterThan(0);
+    await expect(image).toHaveCSS('object-fit','cover');
+    await expect(personal.getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
+    await expect(personal.getByRole('link',{name:/My professional journey/})).toHaveAttribute('href','/cv/');
+    const dimensions=await image.evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
+    expect(dimensions.width,'image width at '+width).toBeGreaterThan(220);
+    expect(dimensions.height,'image height at '+width).toBeGreaterThan(190);
+    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
+    expect(overflow,'overflow at '+width).toBeLessThanOrEqual(1);
+    await ctx.close();
+  }
 });
