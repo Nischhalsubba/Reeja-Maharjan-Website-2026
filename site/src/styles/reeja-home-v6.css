@@ -1,0 +1,252 @@
+/* v6 homepage — a single scoped layer for the approved reading and career journey.
+ * Does not replace styles on CV, articles or clinical research pages.
+ * Core tokens are shared from tokens.css. */
+.care-personal-site .rv6-home {
+  --rv6-blue:var(--brand-blue);
+  --rv6-ink:var(--brand-ink);
+  --rv6-muted:var(--brand-muted);
+  --rv6-line:var(--brand-line);
+  --rv6-lavender:var(--brand-lavender);
+  --rv6-page:#fbfcff;
+  color:var(--rv6-ink);
+  background:#fff;
+}
+.care-personal-site .rv6-home .cip-wrap {width:min(var(--container-max),calc(100% - 2 * var(--gutter)))}
+.care-personal-site .rv6-home h2 {letter-spacing:-.055em;line-height:1.1}
+.care-personal-site .rv6-home .rv5-eyebrow {font-size:.875rem;color:#2648d6;letter-spacing:.12em}
+.care-personal-site .rv6-home .rv5-eyebrow::before {background:#3454f5}
+.care-personal-site .rv6-home .rv5-button {min-height:48px;border-radius:6px}
+.care-personal-site .rv6-home .rv5-text-link {min-height:44px;align-items:center;color:#294ad5;gap:12px}
+.care-personal-site .rv6-home :is(a,button):focus-visible {
+  outline:3px solid #163eaa;outline-offset:4px;
+}
+.care-personal-site .rv6-home :is(h2,h3,p,li) {overflow-wrap:break-word}
+.care-personal-site .rv6-home [id] {scroll-margin-top:90px}
+
+/* Hero: restore human focus, concise intro and a two-action decision. */
+.care-personal-site .rv6-hero {
+  min-height:590px;
+  background:linear-gradient(120deg,#fff 0%,#f8f9ff 45%,#eaf0ff 100%);
+  overflow:hidden;
+}
+.care-personal-site .rv6-hero__ambient {
+  position:absolute;inset:0 0 0 50%;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 75% 18%,rgba(243,227,235,.75),transparent 46%),radial-gradient(ellipse at 73% 85%,rgba(114,146,240,.2),transparent 50%);
+}
+.care-personal-site .rv6-hero__grid {min-height:590px;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:clamp(25px,4vw,76px)}
+.care-personal-site .rv6-hero__copy {padding:88px 0 72px;min-width:0}
+.care-personal-site .rv6-hero .rv6-eyebrow {display:block;letter-spacing:.115em;font-size:.875rem}
+.care-personal-site .rv6-hero .rv6-eyebrow span {color:#7889c9;padding-inline:5px}
+.care-personal-site .rv6-hero h1 {font-size:clamp(4.1rem,6.5vw,6.4rem);max-width:none;line-height:.97;letter-spacing:-.078em}
+.care-personal-site .rv6-hero h1 span {color:var(--rv6-blue)}
+.care-personal-site .rv6-hero__identity {margin-top:25px!important;font-size:clamp(1.1rem,1.5vw,1.35rem)!important;line-height:1.38!important;color:#253650}
+.care-personal-site .rv6-hero__identity strong {color:var(--rv6-ink)}
+.care-personal-site .rv6-hero .cip-hero__lead {max-width:51ch;font-size:clamp(1.02rem,1.16vw,1.13rem);margin-top:11px;line-height:1.72;color:#53617c}
+.care-personal-site .rv6-hero__actions {margin-top:30px;gap:13px}
+.care-personal-site .rv6-hero__secondary {margin-top:27px;display:flex;flex-wrap:wrap;align-items:center;gap:15px 26px}
+.care-personal-site .rv6-hero__place {display:inline-flex;align-items:center;gap:9px;color:#5b6780;font-size:.9rem;line-height:1.4}
+.care-personal-site .rv6-hero__place svg {width:17px;height:17px;color:var(--rv6-blue)}
+.care-personal-site .rv6-hero__cv {color:#2949d1;font-weight:700;font-size:.9rem;line-height:1.5;text-decoration:underline;text-underline-offset:4px}
+.care-personal-site .rv6-hero__portrait {min-height:590px;margin:0;overflow:visible}
+.care-personal-site .rv6-hero__portrait .rv5-hero__portrait-backdrop {inset:53px -7% 0 -2%;background:linear-gradient(148deg,#e7ebff,#c8d6f2 75%,#a6bbe6);border-radius:56% 54% 0 0/42% 38% 0 0}
+.care-personal-site .rv6-hero__portrait picture {
+  display:block;width:100%;max-width:570px;max-height:572px;margin:auto auto 0;overflow:hidden;
+  border-radius:32% 28% 0 0/24% 22% 0 0;
+}
+.care-personal-site .rv6-hero__portrait img {width:100%;height:565px;min-height:0;object-fit:contain;object-position:50% 100%;transform:scale(1.56);transform-origin:50% 68%;filter:saturate(.94)}
+.care-personal-site .rv6-hero__portrait::before {display:none}
+.care-personal-site .rv6-hero__caption {
+  display:flex;align-items:center;gap:13px;position:absolute;z-index:4;right:-4%;bottom:43px;
+  padding:15px 19px;max-width:255px;border:1px solid #e2e6f4;border-radius:8px;
+  background:rgba(255,255,255,.97);box-shadow:0 18px 40px rgba(21,34,84,.14);
+}
+.care-personal-site .rv6-hero__caption-mark {width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:#e9edff;color:#2846d0;font-size:1.7rem}
+.care-personal-site .rv6-hero__caption strong {display:block;font-size:.99rem;color:var(--rv6-ink);font-weight:800}
+.care-personal-site .rv6-hero__caption small {display:block;font-size:.875rem;color:var(--rv6-muted)}
+
+/* Credential strip is evidence-based; not a claim of current US licence verification. */
+.care-personal-site .rv6-trust {background:#fff;border-bottom:1px solid var(--rv6-line);padding:19px 0}
+.care-personal-site .rv6-trust__grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:18px;align-items:center}
+.care-personal-site .rv6-trust__grid>div {display:flex;align-items:center;gap:13px;min-width:0;border-right:1px solid var(--rv6-line);padding:2px 8px 2px 0}
+.care-personal-site .rv6-trust__icon {flex:none;color:#3755d5;background:#f0f3ff;border:1px solid #e2e9ff;width:38px;height:38px;border-radius:7px;display:grid;place-items:center;font-size:.8rem;font-weight:800}
+.care-personal-site .rv6-trust__grid p {display:flex;flex-direction:column;gap:2px;font-size:.875rem;line-height:1.4;min-width:0}
+.care-personal-site .rv6-trust__grid p strong {font-size:.92rem;color:var(--rv6-ink);font-weight:760}
+.care-personal-site .rv6-trust__grid p span {color:#566581}
+.care-personal-site .rv6-trust__link {color:#2546d4;display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:.9rem;font-weight:750;text-decoration:none}
+.care-personal-site .rv6-trust__link:hover {text-decoration:underline;text-underline-offset:3px}
+
+/* Two clear pillars replace five overlapping abstract values. */
+.care-personal-site .rv6-pillars {background:#fff;padding:clamp(72px,8vw,120px) 0}
+.care-personal-site .rv6-section-intro {display:grid;grid-template-columns:1.15fr .85fr;gap:12px 70px;align-items:end;margin-bottom:36px}
+.care-personal-site .rv6-section-intro .rv5-eyebrow {grid-column:1/-1;margin-bottom:0}
+.care-personal-site .rv6-section-intro h2 {font-size:clamp(2.5rem,4.4vw,4.45rem);max-width:17ch}
+.care-personal-site .rv6-section-intro h2 span {color:#3855d5}
+.care-personal-site .rv6-section-intro>p:last-child {color:var(--rv6-muted);font-size:1.04rem;line-height:1.74;max-width:47ch;padding-bottom:5px}
+.care-personal-site .rv6-pillars__grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+.care-personal-site .rv6-pillar {
+  display:flex;flex-direction:column;align-items:flex-start;min-height:340px;
+  padding:34px clamp(26px,3vw,45px) 33px;
+  border:1px solid #dce3f3;border-radius:9px;
+  background:linear-gradient(145deg,#f8faff,#eef3ff);
+}
+.care-personal-site .rv6-pillar--research {background:linear-gradient(145deg,#f7f7ff,#eeefff)}
+.care-personal-site .rv6-pillar__symbol {width:57px;height:57px;display:grid;place-items:center;border:1px solid #d4defa;border-radius:12px;background:#fff;color:#3454f5}
+.care-personal-site .rv6-pillar__symbol svg {width:35px;height:35px}
+.care-personal-site .rv6-pillar__index {font-size:.875rem;font-weight:750;letter-spacing:.12em;color:#3454cf;margin-top:24px}
+.care-personal-site .rv6-pillar h3 {font-size:clamp(1.7rem,2.5vw,2.55rem);line-height:1.16;margin-top:8px;max-width:23ch}
+.care-personal-site .rv6-pillar>p {font-size:1rem;line-height:1.75;color:#53617c;max-width:55ch;margin:11px 0 24px}
+.care-personal-site .rv6-pillar>a {margin-top:auto}
+
+/* Entire professional timeline, not an arbitrary top three. */
+.care-personal-site .rv6-career {background:#f8faff}
+.care-personal-site .rv6-section-head {align-items:end;gap:60px}
+.care-personal-site .rv6-career__timeline {padding:0;margin:45px 0 0;list-style:none;border-top:1px solid #dce4f3}
+.care-personal-site .rv6-career__timeline li {
+  display:grid;grid-template-columns:73px minmax(0,1fr) minmax(165px,.34fr);
+  gap:18px 24px;align-items:start;
+  padding:29px 9px 31px;margin:0;background:transparent;
+  border:0;border-bottom:1px solid #dce4f3;border-radius:0;
+  box-shadow:none;transform:none;
+}
+.care-personal-site .rv6-career__timeline li:hover {background:#f0f4ff;transform:none;box-shadow:none}
+.care-personal-site .rv6-career__index {color:#3454f5;font-size:1.8rem;font-weight:800;letter-spacing:-.035em;line-height:1.1}
+.care-personal-site .rv6-career__main {min-width:0}
+.care-personal-site .rv6-career__category {color:#2e4bc3;font-size:.875rem;font-weight:760;text-transform:uppercase;letter-spacing:.09em}
+.care-personal-site .rv6-career__main h3 {margin:7px 0 4px;font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.23}
+.care-personal-site .rv6-career__org {color:#3a4b69;font-size:.99rem;line-height:1.55;font-weight:650}
+.care-personal-site .rv6-career__summary {margin-top:9px!important;max-width:69ch;font-size:.96rem;line-height:1.67;color:#576683}
+.care-personal-site .rv6-career__meta {display:flex;flex-direction:column;gap:7px;color:#556481;font-size:.875rem;line-height:1.5}
+.care-personal-site .rv6-career__meta time {color:#2f3e5d;font-weight:760}
+
+/* Grounded research feature; better cover and no unsupported outcomes. */
+.care-personal-site .rv6-focus {grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);background:linear-gradient(110deg,#edf2ff,#f8faff);min-height:510px}
+.care-personal-site .rv6-focus__image {min-height:510px;background:#cedafa;isolation:isolate}
+.care-personal-site .rv6-focus__photo-fallback {position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(145deg,#b6c5ea,#e5ebff);color:#3454f5;z-index:-1}
+.care-personal-site .rv6-focus__photo-fallback svg {width:130px;height:95px;opacity:.5}
+.care-personal-site .rv6-focus__image img {object-fit:cover;z-index:1}
+.care-personal-site .rv6-focus__image.is-image-unavailable img {opacity:0}
+.care-personal-site .rv6-focus__image.is-image-unavailable .rv5-focus__photo-credit {display:none}
+.care-personal-site .rv6-focus h2 {font-size:clamp(2.35rem,3.65vw,3.6rem);margin-top:0;max-width:17ch}
+.care-personal-site .rv6-focus__disclaimer {font-size:.875rem!important;color:#687594!important;margin:1px 0 16px!important}
+.care-personal-site .rv6-focus .rv5-focus__inner>p:not(.rv5-eyebrow):not(.rv6-focus__disclaimer) {font-size:1.02rem}
+.care-personal-site .rv6-focus .rv5-focus__bullets li {font-size:.96rem;line-height:1.65}
+
+/* Clear article titles, distinct images, and no credit overlay covering faces. */
+.care-personal-site .rv6-writing {padding:clamp(76px,8vw,112px) 0}
+.care-personal-site .rv6-writing .rv5-writing__grid {gap:23px}
+.care-personal-site .rv6-writing__card {border-radius:8px;border:1px solid #e0e6f4}
+.care-personal-site .rv6-writing__image {position:relative;overflow:hidden;background:#eef0ff;isolation:isolate}
+.care-personal-site .rv6-writing__image .rv5-writing-card__photo {aspect-ratio:1.53;position:relative;z-index:1}
+.care-personal-site .rv6-writing__image img {position:relative;z-index:2}
+.care-personal-site .rv6-writing__image-fallback {position:absolute;inset:0;z-index:0;display:grid;place-items:center;color:#3048b2;font-size:1.12rem;font-weight:750;text-align:center;padding:20px}
+.care-personal-site .rv6-writing__image .is-image-unavailable img {opacity:0}
+.care-personal-site .rv6-writing__image .is-image-unavailable+.rv5-writing-card__photo-credit {display:none}
+.care-personal-site .rv6-writing__image .rv5-writing-card__photo-credit {top:auto;bottom:0;font-size:.75rem;background:rgba(16,24,47,.86);z-index:3}
+.care-personal-site .rv6-writing__card .rv5-writing-card__content {padding:23px;gap:12px}
+.care-personal-site .rv6-writing__card h3 {font-size:clamp(1.3rem,1.7vw,1.54rem);line-height:1.25}
+.care-personal-site .rv6-writing__card .rv5-writing-card__category {background:#e8edff;color:#3048c0;border-radius:4px;font-size:.875rem}
+.care-personal-site .rv6-writing__summary {font-size:.98rem!important;line-height:1.72!important;color:#566582!important;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.care-personal-site .rv6-writing .rv5-writing-card__meta {color:#4f5e7c;font-size:.875rem;line-height:1.5}
+
+/* Authentic personal note; remove generic unrelated stock landscape. */
+.care-personal-site .rv6-personal {min-height:auto;background:linear-gradient(114deg,#f1f4ff,#e8edff);padding:clamp(50px,6vw,90px) 0}
+.care-personal-site .rv6-personal__grid {display:grid;grid-template-columns:minmax(0,1.1fr) minmax(280px,.72fr);gap:clamp(30px,6vw,100px);min-height:0;align-items:center}
+.care-personal-site .rv6-personal .rv5-personal__copy {padding:0}
+.care-personal-site .rv6-personal h2 {font-size:clamp(2.25rem,4vw,3.75rem);line-height:1.08;max-width:18ch}
+.care-personal-site .rv6-personal .rv5-personal__byline span {font-size:.875rem}
+.care-personal-site .rv6-personal__aside {
+  align-self:stretch;display:flex;flex-direction:column;align-items:start;justify-content:center;gap:19px;
+  padding:clamp(25px,4vw,45px);background:#fff;border:1px solid #dbe2f5;
+  border-radius:11px;box-shadow:0 18px 36px rgba(26,40,94,.05);
+}
+.care-personal-site .rv6-personal__symbol {font-size:2.8rem;font-weight:800;letter-spacing:-.085em;line-height:1;color:var(--rv6-blue)}
+.care-personal-site .rv6-personal__location {color:#334dc7;font-size:.875rem;font-weight:800;letter-spacing:.095em}
+.care-personal-site .rv6-personal__aside>p:not(.rv6-personal__location) {font-size:1rem;color:#53617c}
+.care-personal-site .rv6-personal__aside a {margin-top:8px}
+
+/* A compact responsive journey, not a desktop layout simply stacked. */
+@media(max-width:1080px) {
+  .care-personal-site .rv6-hero__grid {gap:20px}
+  .care-personal-site .rv6-hero__copy {padding-top:70px}
+  .care-personal-site .rv6-hero h1 {font-size:clamp(3.85rem,6.6vw,5.7rem)}
+  .care-personal-site .rv6-hero__portrait img {height:490px}
+  .care-personal-site .rv6-hero__portrait {min-height:540px}
+  .care-personal-site .rv6-trust__grid {grid-template-columns:repeat(3,minmax(0,1fr))}
+  .care-personal-site .rv6-trust__link {grid-column:1/-1;justify-content:flex-start}
+  .care-personal-site .rv6-section-intro {gap:20px}
+}
+@media(max-width:790px) {
+  .care-personal-site .rv6-hero__grid {grid-template-columns:1fr;gap:12px;min-height:0}
+  .care-personal-site .rv6-hero__copy {padding:66px 0 16px}
+  .care-personal-site .rv6-hero h1 {font-size:clamp(3.8rem,10.5vw,5.5rem)}
+  .care-personal-site .rv6-hero__portrait {min-height:430px}
+  .care-personal-site .rv6-hero__portrait img {height:425px}
+  .care-personal-site .rv6-hero__portrait picture {max-height:430px;max-width:480px}
+  .care-personal-site .rv6-hero__portrait .rv5-hero__portrait-backdrop {inset:4px 7% 0 7%}
+  .care-personal-site .rv6-hero__caption {bottom:24px;right:5%;max-width:232px}
+  .care-personal-site .rv6-trust__grid {grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+  .care-personal-site .rv6-trust__grid>div {border-right:0}
+  .care-personal-site .rv6-trust__link {grid-column:auto}
+  .care-personal-site .rv6-section-intro {grid-template-columns:1fr;gap:12px}
+  .care-personal-site .rv6-section-intro .rv5-eyebrow {grid-column:auto}
+  .care-personal-site .rv6-pillars__grid {gap:16px}
+  .care-personal-site .rv6-pillar {padding:25px;min-height:360px}
+  .care-personal-site .rv6-career__timeline li {grid-template-columns:55px 1fr;gap:10px 16px}
+  .care-personal-site .rv6-career__meta {grid-column:2;flex-direction:row;flex-wrap:wrap;gap:6px 14px;grid-row:2}
+  .care-personal-site .rv6-focus {grid-template-columns:1fr}
+  .care-personal-site .rv6-focus__image {min-height:325px}
+  .care-personal-site .rv6-focus .rv5-focus__content {padding:48px var(--gutter)}
+  .care-personal-site .rv6-writing .rv5-writing__grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+  .care-personal-site .rv6-personal__grid {grid-template-columns:1fr}
+}
+@media(max-width:600px) {
+  .care-personal-site .rv6-hero__copy {padding:53px 0 9px}
+  .care-personal-site .rv6-hero .rv6-eyebrow {font-size:.875rem;letter-spacing:.06em;line-height:1.7}
+  .care-personal-site .rv6-hero h1 {font-size:clamp(3.52rem,14vw,4.8rem)}
+  .care-personal-site .rv6-hero__identity {margin-top:21px!important}
+  .care-personal-site .rv6-hero__actions {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .care-personal-site .rv6-hero__actions a {min-width:0;white-space:normal;padding:11px 12px;gap:8px;font-size:.875rem}
+  .care-personal-site .rv6-hero__secondary {gap:10px 17px;margin-top:20px}
+  .care-personal-site .rv6-hero__portrait {min-height:350px;margin-top:16px}
+  .care-personal-site .rv6-hero__portrait img {height:350px}
+  .care-personal-site .rv6-hero__portrait picture {max-height:350px;max-width:390px}
+  .care-personal-site .rv6-hero__caption {padding:9px 11px;gap:8px;bottom:14px;right:0}
+  .care-personal-site .rv6-hero__caption-mark {width:30px;height:30px;font-size:1.3rem}
+  .care-personal-site .rv6-hero__caption strong {font-size:.875rem}
+  .care-personal-site .rv6-trust {padding:22px 0}
+  .care-personal-site .rv6-trust__grid {grid-template-columns:1fr;gap:14px}
+  .care-personal-site .rv6-trust__grid>div {border:0;border-bottom:1px solid #e8ebf5;padding-bottom:12px}
+  .care-personal-site .rv6-trust__grid p strong {font-size:.94rem}
+  .care-personal-site .rv6-pillars {padding:65px 0}
+  .care-personal-site .rv6-section-intro h2 {font-size:clamp(2.25rem,9.2vw,3.2rem)}
+  .care-personal-site .rv6-pillars__grid {grid-template-columns:1fr;gap:14px}
+  .care-personal-site .rv6-pillar {min-height:0;padding:24px}
+  .care-personal-site .rv6-pillar__symbol {width:49px;height:49px}
+  .care-personal-site .rv6-pillar__index {margin-top:17px}
+  .care-personal-site .rv6-pillar h3 {font-size:1.8rem}
+  .care-personal-site .rv6-pillar>p {margin:10px 0 20px}
+  .care-personal-site .rv6-career__timeline {margin-top:25px}
+  .care-personal-site .rv6-career__timeline li {grid-template-columns:42px 1fr;gap:7px 12px;padding:23px 2px}
+  .care-personal-site .rv6-career__index {font-size:1.3rem}
+  .care-personal-site .rv6-career__main h3 {font-size:1.38rem}
+  .care-personal-site .rv6-career__summary {display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+  .care-personal-site .rv6-focus__image {min-height:250px}
+  .care-personal-site .rv6-focus .rv5-focus__content {padding:40px var(--gutter)}
+  .care-personal-site .rv6-focus h2 {font-size:2.55rem}
+  .care-personal-site .rv6-writing .rv5-writing__grid {grid-template-columns:1fr;gap:18px}
+  .care-personal-site .rv6-writing__image .rv5-writing-card__photo {aspect-ratio:1.85}
+  .care-personal-site .rv6-writing__card .rv5-writing-card__content {padding:20px}
+  .care-personal-site .rv6-personal__aside {padding:25px}
+}
+@media(max-width:365px) {
+  .care-personal-site .rv6-hero h1 {font-size:3.3rem}
+  .care-personal-site .rv6-hero__caption {right:-4px;max-width:173px}
+  .care-personal-site .rv6-hero__actions a {font-size:.875rem;line-height:1.5}
+}
+@media(prefers-reduced-motion:reduce) {
+  .care-personal-site .rv6-home :is(a,article,img) {transition:none!important;animation:none!important}
+}
+@media print {
+  .care-personal-site .rv6-home {overflow:visible}
+  .care-personal-site .rv6-focus__image {break-inside:avoid}
+}
