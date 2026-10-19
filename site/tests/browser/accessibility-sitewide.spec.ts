@@ -90,8 +90,8 @@ test('canonical palette text remains readable over site backgrounds', async ({ p
     { route: '/blog/mastering-nursing-documentation-sbar-handover/', selector: '.blog-article__header .site-eyebrow', surface: '#f0efff' },
     { route: '/blog/', selector: '.site-eyebrow', surface: '#ffffff' },
     { route: '/cv/', selector: '.site-eyebrow', surface: '#ffffff' },
-    { route: '/', selector: '.care-footer__column a', surface: '#ffffff' },
-    { route: '/', selector: '.care-footer__eyebrow', surface: '#15264f' },
+    { route: '/', selector: '.care-footer__column a', surface: '#0b132a' },
+    { route: '/', selector: '.care-footer__eyebrow', surface: '#0b132a' },
   ];
   for (const check of checks) {
     await page.goto(origin + check.route, { waitUntil: 'domcontentloaded' });
