@@ -16,14 +16,14 @@ const contrast = (foreground: string, background: string) => {
   return (a+.05)/(b+.05);
 };
 
-test('homepage v6 dark CTA has visible white heading, and real homepage text is legible', async ({ page }) => {
+test('homepage v7 dark CTA has visible white heading, and real homepage text is legible', async ({ page }) => {
   for (const width of [320, 390, 768, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(origin + '/', { waitUntil:'domcontentloaded' });
     const heading = page.locator('footer.site-footer--care .care-footer__intro h2');
     await expect(heading).toBeVisible();
     const fg = await heading.evaluate(el=>getComputedStyle(el).color);
-    expect(contrast(fg,'rgb(21, 38, 79)'), 'Dark call-to-action heading').toBeGreaterThanOrEqual(4.5);
+    expect(contrast(fg,'rgb(11, 19, 42)'), 'Dark call-to-action heading').toBeGreaterThanOrEqual(4.5);
     for (const selector of ['.rv5-eyebrow', '.rv6-trust__grid p strong', '.rv6-pillar__index', '.rv6-career__org', '.rv5-writing-card h3', '.rv7-personal__signoff small']) {
       const element=page.locator(selector).first();
       await expect(element).toBeVisible();

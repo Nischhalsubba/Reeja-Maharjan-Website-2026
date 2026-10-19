@@ -33,7 +33,7 @@ test('footer CTA retains WCAG AA contrast in default hover and focus states', as
 
       const readColors = async () => cta.evaluate((element) => {
         const s = getComputedStyle(element);
-        const arrow = element.querySelector<HTMLElement>('span');
+        const arrow = element.querySelector<SVGElement>('svg.brand-icon');
         return {
           foreground: s.color,
           background: s.backgroundColor,

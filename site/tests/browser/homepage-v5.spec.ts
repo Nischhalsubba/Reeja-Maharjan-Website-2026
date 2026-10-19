@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 const origin=process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 
-test('v6 homepage presents verified background, two pathways and complete work chronology',async({page})=>{
+test('v7 homepage presents verified background, two pathways and complete work chronology',async({page})=>{
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
  await expect(page.locator('.rv6-home')).toBeVisible();
  await expect(page.locator('main h1')).toContainText(/Care is\s*personal\./);
@@ -121,5 +121,53 @@ test('real lakeside photo loads and remains visible at mobile and desktop sizes'
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
     expect(overflow,'overflow at '+width).toBeLessThanOrEqual(1);
     await ctx.close();
+  }
+});
+
+test('v7 iconography and brand rhythm share one reusable system',async({page})=>{
+  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+  const icons=page.locator('main .rv7-home svg.brand-icon');
+  expect(await icons.count()).toBeGreaterThanOrEqual(17);
+  const style=await icons.evaluateAll(nodes=>nodes.map(node=>({
+    width:node.getAttribute('width'),viewBox:node.getAttribute('viewBox'),
+    stroke:node.getAttribute('stroke'),strokeWidth:node.getAttribute('stroke-width'),
+    cap:node.getAttribute('stroke-linecap'),hidden:node.getAttribute('aria-hidden')
+  })));
+  for(const icon of style) {
+    expect(icon.viewBox).toBe('0 0 24 24');
+    expect(icon.stroke).toBe('currentColor');
+    expect(icon.strokeWidth).toBe('2');
+    expect(icon.cap).toBe('round');
+    expect(icon.hidden).toBe('true');
+  }
+  const palette=await page.evaluate(()=>{
+    const home=document.querySelector('.rv7-home')!;
+    const s=getComputedStyle(home);
+    const read=(name:string)=>s.getPropertyValue(name).trim();
+    const heading=getComputedStyle(document.querySelector('.rv6-hero h1 span')!);
+    return {blue:read('--h-blue'),shared:getComputedStyle(document.documentElement).getPropertyValue('--brand-blue').trim(),
+      ink:read('--h-ink'),display:heading.color,retired:[...document.styleSheets].filter(sheet=>/reeja-home-v(5|6)\.|care-is-personal\./.test(sheet.href||'')).length};
+  });
+  expect(palette.blue).toBe('#3454f5');
+  expect(palette.shared).toBe('#3454f5');
+  expect(palette.ink).toBe('#10182f');
+  expect(palette.display).toBe('rgb(52, 84, 245)');
+  expect(palette.retired).toBe(0);
+});
+
+test('v7 follows one section rhythm and consistent card padding across viewports',async({page})=>{
+  for(const width of [390,768,1440]) {
+    await page.setViewportSize({width,height:900});
+    await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+    const metrics=await page.evaluate(()=>{
+      const selectors=['.rv6-pillars','.rv6-career','.rv6-writing','.rv7-personal'];
+      const pad=selectors.map(q=>parseFloat(getComputedStyle(document.querySelector(q)!).paddingTop));
+      const cards=['.rv6-pillar','.rv5-writing-card__content'];
+      const cardPads=cards.map(q=>parseFloat(getComputedStyle(document.querySelector(q)!).paddingLeft));
+      return {pad,cardPads,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth};
+    });
+    expect(metrics.pad.every((value)=>Math.abs(value-metrics.pad[0])<1),JSON.stringify(metrics)).toBe(true);
+    expect(metrics.cardPads[0]).toBe(metrics.cardPads[1]);
+    expect(metrics.overflow).toBeLessThanOrEqual(1);
   }
 });
