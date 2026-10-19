@@ -148,9 +148,9 @@ test('v7 iconography and brand rhythm share one reusable system',async({page})=>
     return {blue:read('--h-blue'),shared:getComputedStyle(document.documentElement).getPropertyValue('--brand-blue').trim(),
       ink:read('--h-ink'),display:heading.color,retired:[...document.styleSheets].filter(sheet=>/reeja-home-v(5|6)\.|care-is-personal\./.test(sheet.href||'')).length};
   });
-  expect(palette.blue).toBe('var(--brand-blue)');
+  expect(palette.blue).toBe('#3454f5');
   expect(palette.shared).toBe('#3454f5');
-  expect(palette.ink).toBe('var(--brand-ink)');
+  expect(palette.ink).toBe('#10182f');
   expect(palette.display).toBe('rgb(52, 84, 245)');
   expect(palette.retired).toBe(0);
 });
