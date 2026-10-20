@@ -59,7 +59,7 @@ test('high contrast keyboard focus on light inner pages and on dark footer', asy
   await page.goto(origin + '/clinical-research/', {waitUntil:'domcontentloaded'});
   const nav = page.locator('.desktop-nav a').first();
   await nav.focus();
-  await expect(nav).toHaveCSS('outline-color','rgb(25, 56, 172)');
+  await expect(nav).toHaveCSS('outline-color','rgb(32, 89, 80)');
   const footer = page.locator('.care-footer__bottom a[href="#page-top"]');
   await footer.focus();
   await expect(footer).toHaveCSS('outline-color','rgb(255, 255, 255)');

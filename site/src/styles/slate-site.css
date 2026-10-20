@@ -100,7 +100,7 @@ body.care-personal-site:has(.slate-home) .desktop-nav .nav-cta:hover{background:
 .care-personal-site :is(.site-section,.blog-index__section,.contact-section){border-color:#DAE2E8}
 
 /* The deep teal issuer colour is legible over both white and seafoam-tinted CV surfaces. */
-.care-personal-site :is(.cv-credential__issuer,.cv-credential__verification){color:#205950!important}
+.care-personal-site :is(.cv-credential__issuer,.cv-credential__verification,.cv-experience__meta){color:#205950!important}
 .care-personal-site .blog-article__intro h1{width:100%;max-width:none!important}
 body.care-personal-site .site-footer--care .care-footer__cta,
 body.care-personal-site:has(.slate-home) .site-footer--care .care-footer__cta{
