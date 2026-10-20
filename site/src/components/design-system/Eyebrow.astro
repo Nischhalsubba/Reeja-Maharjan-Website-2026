@@ -1,0 +1,5 @@
+---
+type Props = { inverse?: boolean; className?: string };
+const { inverse = false, className } = Astro.props;
+---
+<p class:list={['site-eyebrow', 'ds-eyebrow', inverse && 'ds-eyebrow--inverse', className]}><slot /></p>
