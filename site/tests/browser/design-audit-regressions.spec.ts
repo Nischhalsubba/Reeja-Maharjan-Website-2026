@@ -44,10 +44,11 @@ test('Care is Personal supporting-page heroes stay line-free, spacious and WebGL
   await expect(page.locator('[data-hero-scene]')).toHaveCount(0);
 });
 
-test('Slate homepage uses Reeja’s real lakeside photograph without rendering a screenshot overlay', async ({page})=>{
+test('Editorial homepage uses Reeja’s real portrait without rendering a screenshot overlay', async ({page})=>{
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
  const img=page.locator('.slate-hero__photograph');await expect(img).toBeVisible();
- await expect(img).toHaveAttribute('src','/images/reeja-lakeside.webp');
+ await expect(img).toHaveAttribute('src','/reeja-headshot.jpg');
+ await expect(page.locator('.slate-about__portrait img')).toHaveAttribute('src','/images/reeja-lakeside.webp');
  await expect.poll(()=>img.evaluate(n=>(n as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
  await expect(page.locator('.slate-hero canvas')).toHaveCount(0);
 });
