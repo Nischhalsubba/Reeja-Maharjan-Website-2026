@@ -14,7 +14,7 @@ test('Slate homepage contains authentic hero, four focus areas, four career role
  await expect(page.locator('.slate-home')).not.toContainText('Texas RN Active');
  await expect(page.locator('.slate-credentials__list li')).toHaveCount(3);
  const img=page.locator('.slate-hero__photograph');
- await expect(img).toHaveAttribute('src','/images/reeja-lakeside.webp');
+ await expect(img).toHaveAttribute('src','/reeja-headshot.jpg');
  await expect.poll(()=>img.evaluate(x=>(x as HTMLImageElement).naturalWidth),{timeout:15000}).toBeGreaterThan(0);
 });
 test('Slate homepage resizes without horizontal overflow or hidden chapters',async({browser})=>{
@@ -30,7 +30,7 @@ test('Slate homepage resizes without horizontal overflow or hidden chapters',asy
   });
   expect(state.overflow,'horizontal overflow '+width).toBeLessThanOrEqual(1);
   expect(state.positions.every((p,i)=>i===0||p>state.positions[i-1])).toBe(true);
-  expect(state.hero).toBe('rgb(28, 44, 58)');
+  expect(state.hero).toBe('rgb(243, 241, 235)');
   await ctx.close();
  }
 });
