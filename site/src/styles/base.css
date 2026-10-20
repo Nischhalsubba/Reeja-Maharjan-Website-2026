@@ -135,7 +135,7 @@ a {
 }
 
 :where(a, button, input, textarea, select, [tabindex]):focus-visible {
-  outline: 3px solid #223fda;
+  outline: 3px solid #205950;
   outline-offset: 3px;
   box-shadow: var(--focus-ring);
 }
@@ -164,5 +164,5 @@ a {
  :where(a,button,input,textarea,select,[tabindex]):focus-visible {
   outline: 3px solid #ffffff;
   outline-offset: 3px;
-  box-shadow: 0 0 0 5px #223fda;
+  box-shadow: 0 0 0 5px #205950;
 }

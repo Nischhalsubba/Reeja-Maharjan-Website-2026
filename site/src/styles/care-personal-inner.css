@@ -13,9 +13,9 @@
 .care-personal-site .site-eyebrow {color:var(--brand-blue);letter-spacing:.14em;font:700 var(--type-caption)/1.6 "Public Sans",system-ui,sans-serif}
 .care-personal-site :where(.site-page__hero,.contact-hero,.blog-article__header) {
   position:relative;
-  background:linear-gradient(120deg,#f0efff,#f9faff 58%,#edf0ff);
+  background:linear-gradient(120deg,#EFF4F5,#F9FBFC 58%,#EAF0F5);
   padding-block:clamp(74px,8vw,125px);
-  border-bottom:1px solid #e0e5f6;
+  border-bottom:1px solid #DCE5EB;
 }
 .care-personal-site :where(.site-page__hero-grid,.contact-hero__grid,.blog-article__intro){
   min-height:360px;
@@ -34,25 +34,25 @@
 }
 .care-personal-site :where(.site-page__lede,.contact-hero__copy>p:last-child,.blog-article__dek) {
   max-width:53ch;
-  color:#56617c;
+  color:#536779;
   font-size:clamp(1.02rem,1.3vw,1.12rem);
   line-height:1.7;
 }
 .care-personal-site :where(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){
   border:0;
   border-top:2px solid var(--brand-blue);
-  border-bottom:1px solid #cfd7ee;
+  border-bottom:1px solid #C9D9DD;
   background:rgba(255,255,255,.42);
   box-shadow:none;
 }
 .care-personal-site :where(.site-page__summary,.contact-hero__details,.blog-article__meta-panel)>div {
   padding:15px 10px;
-  border-color:#d9dff1;
+  border-color:#D4E0E4;
   gap:18px;
   grid-template-columns:minmax(100px,.58fr) minmax(0,1.4fr);
 }
 .care-personal-site :where(.site-page__summary dt,.contact-hero__details span,.blog-article__meta-panel dt){
-  color:#3a53d5;
+  color:#2F7368;
   font:700 var(--type-caption)/1.6 "Public Sans",system-ui,sans-serif;
   letter-spacing:.09em;
 }
@@ -66,9 +66,9 @@
   background:#fff;
   border-color:#e5e8f3;
 }
-.care-personal-site .site-section--soft {background:#f5f6ff;background-image:none}
+.care-personal-site .site-section--soft {background:#F5F8FA;background-image:none}
 .care-personal-site .site-section--dark{
-  background:linear-gradient(123deg,#0b132a,#17274c 72%,#233b74);
+  background:linear-gradient(123deg,#101C29,#17274c 72%,#233b74);
   color:#fff;
   border-color:transparent;
 }
@@ -89,20 +89,20 @@
 .care-personal-site .site-section__head>p{color:#596683}
 .care-personal-site .site-page__split h2,.care-personal-site .cv-profile-grid h2 {font-size:clamp(2.25rem,4vw,3.55rem);line-height:1.1}
 .care-personal-site .site-page__split{align-items:center}
-.care-personal-site .site-grid{border-top:1px solid #e3e7f3;gap:0}
+.care-personal-site .site-grid{border-top:1px solid #E0E9ED;gap:0}
 .care-personal-site .site-card{
   background:transparent;
-  border-bottom:1px solid #e3e7f3;
+  border-bottom:1px solid #E0E9ED;
   color:#5d6982;
   padding-block:32px 40px;
   border-radius:0;
 }
-.care-personal-site .site-card:nth-child(even){border-left:1px solid #e3e7f3}
+.care-personal-site .site-card:nth-child(even){border-left:1px solid #E0E9ED}
 .care-personal-site .site-card::before{color:var(--brand-blue);font:800 var(--type-caption)/1.5 "Public Sans",system-ui,sans-serif}
 .care-personal-site .site-card h3{font:750 clamp(1.45rem,2.3vw,2.05rem)/1.16 "Public Sans",system-ui,sans-serif;letter-spacing:-.05em;color:var(--brand-ink)}
 .care-personal-site .site-card a,.care-personal-site .site-card a:visited{color:var(--brand-blue);text-decoration-color:var(--brand-blue)}
-.care-personal-site .site-list,.care-personal-site .cv-experience{border-top:1px solid #dfe4f1}
-.care-personal-site .site-list__item{border-color:#dfe4f1}
+.care-personal-site .site-list,.care-personal-site .cv-experience{border-top:1px solid #E0E7EB}
+.care-personal-site .site-list__item{border-color:#E0E7EB}
 .care-personal-site .site-list__item h3{font-size:1.5rem;font-weight:750;letter-spacing:-.04em}
 .care-personal-site .site-list__meta{color:var(--brand-muted)}
 .care-personal-site :where(.site-button,.care-button,.cip-button){
@@ -115,13 +115,13 @@
 }
 .care-personal-site :where(.site-button,.care-button){border-color:var(--brand-blue);color:var(--brand-blue);background:transparent}
 .care-personal-site :where(.site-button--primary,.care-button--primary){background:var(--brand-blue);color:#fff;border-color:var(--brand-blue)}
-.care-personal-site :where(.site-button,.care-button):hover{color:#fff;background:#2542d9;border-color:#2542d9}
+.care-personal-site :where(.site-button,.care-button):hover{color:#fff;background:#2F7368;border-color:#2F7368}
 .care-personal-site :where(.site-button,.care-button):focus-visible,
 .care-personal-site :where(.cip-button,.cip-link,.cip-textlink,.nav-cta):focus-visible {
   outline:3px solid var(--brand-blue-hover);outline-offset:4px;
 }
-.care-personal-site .site-section--dark .site-button,.care-personal-site .site-section--dark .site-button:not(.site-button--primary){background:#fff;color:#17244d;border-color:#fff}
-.care-personal-site .site-section--dark .site-button:hover{background:#d9ddff;color:#17244d}
+.care-personal-site .site-section--dark .site-button,.care-personal-site .site-section--dark .site-button:not(.site-button--primary){background:#fff;color:#1C2C3A;border-color:#fff}
+.care-personal-site .site-section--dark .site-button:hover{background:#d9ddff;color:#1C2C3A}
 .care-personal-site a:not(.site-button):not(.cip-button):not(.care-button):hover{ text-decoration-color:currentColor }
 .care-personal-site .site-header{
   background:rgba(249,250,255,.95);
@@ -134,11 +134,11 @@
 .care-personal-site .desktop-nav>a:not(.nav-cta){font-family:"Public Sans",system-ui,sans-serif;text-transform:none;letter-spacing:0;font-size: var(--type-caption)}
 .care-personal-site .desktop-nav .nav-cta{background:transparent;color:var(--brand-blue);border:0;font-size: var(--type-caption);font-family:"Public Sans",system-ui,sans-serif}
 .care-personal-site .desktop-nav .nav-cta:hover{background:#e8ebff;color:#2d43c9}
-.care-personal-site :where(.site-note,.blog-note-strong){background:#f2f4ff;border-left-color:var(--brand-blue);border-color:#dce2ff;border-radius:2px}
+.care-personal-site :where(.site-note,.blog-note-strong){background:#EEF4F6;border-left-color:var(--brand-blue);border-color:#dce2ff;border-radius:2px}
 .care-personal-site :where(.blog-article__body,.blog-toc,.blog-article__layout,.blog-index,.cv-page,.contact-page){color:var(--brand-ink)}
 .care-personal-site .blog-article__body h2,.care-personal-site .blog-article__body h3 {font-family:"Public Sans",system-ui,sans-serif;font-weight:750;letter-spacing:-.045em}
 .care-personal-site :where(.blog-card h3,.blog-index__lead-card h3,.blog-topic-panel h3){font-family:"Public Sans",system-ui,sans-serif;font-weight:750;letter-spacing:-.045em}
-.care-personal-site .blog-index__lead-card{background:#f0f2ff;border-radius:3px}
+.care-personal-site .blog-index__lead-card{background:#F0F5F7;border-radius:3px}
 .care-personal-site .blog-card{border-color:#e0e4f2}
 .care-personal-site .blog-topic-panel{background:#f8f9ff}
 .care-personal-site .contact-hero,.care-personal-site .contact-section{border-color:#e2e6f2}

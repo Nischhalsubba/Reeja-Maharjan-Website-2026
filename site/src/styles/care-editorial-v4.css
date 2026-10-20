@@ -20,8 +20,8 @@
 }
 .care-personal-site main :where(.site-page__hero,.contact-hero,.blog-article__header) {
   padding-block:clamp(72px,8vw,112px);
-  background:linear-gradient(125deg,#f2f1ff 0%,#f9faff 64%,#eef1ff 100%);
-  border-color:#e0e4f4;
+  background:linear-gradient(125deg,#F1F6F8 0%,#F9FBFC 64%,#EEF5F5 100%);
+  border-color:#DEE7EA;
 }
 .care-personal-site main :where(.site-page__hero,.contact-hero) :is(h1) {
   font-size:var(--type-inner-hero);
@@ -119,7 +119,7 @@
   line-height:1.7;
 }
 .care-personal-site .site-section--dark :where(p,.site-eyebrow) {
-  color:#d4ddf5;
+  color:#D3E2E4;
 }
 .care-personal-site .site-section--dark h2,.care-personal-site .site-section--dark h3 {
   color:#fff;
@@ -144,7 +144,7 @@
 }
 /* Consistent perceptible keyboard focus, independent of old theme variables. */
 .care-personal-site :where(a,button,input,textarea,select,summary,[tabindex]):focus-visible {
-  outline:3px solid #1938ac;
+  outline:3px solid #205950;
   outline-offset:4px;
 }
 .care-personal-site :where(.site-section--dark,.cip-research,.cip-contact,.site-footer--care) :where(a,button,summary,[tabindex]):focus-visible {
@@ -209,14 +209,14 @@
   .care-personal-site *{scroll-behavior:auto!important}
 }
 @media print{
-  .care-personal-site .cv-page :where(h1,h2,h3,p,li){color:#10182f!important}
+  .care-personal-site .cv-page :where(h1,h2,h3,p,li){color:#202D3D!important}
   .care-personal-site main :where(.site-page__hero,.site-section,.site-section--soft){background:#fff!important}
 }
 
 /* Higher-specificity component focus surfaces beat retired component selectors. */
 body.care-personal-site .desktop-nav a:focus-visible,
 body.care-personal-site main :where(a,button,input,textarea,select,summary):focus-visible {
-  outline:3px solid #1938ac;
+  outline:3px solid #205950;
   outline-offset:4px;
 }
 body.care-personal-site .site-footer--care :where(a,button,summary):focus-visible,
