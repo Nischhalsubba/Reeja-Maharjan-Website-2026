@@ -63,7 +63,8 @@ test('research visual is a scalable, accurate editorial asset, not a fictional d
   await expect(illustration).toHaveAttribute('width', '3840');
   await expect(illustration).toHaveAttribute('height', '2160');
   await expect(illustration).toHaveAttribute('alt', /without patient data/);
-  await expect.poll(async () => illustration.evaluate((el) => (el as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+  await illustration.scrollIntoViewIfNeeded();
+  await expect.poll(async () => illustration.evaluate((el) => (el as HTMLImageElement).naturalWidth), { timeout: 15_000 }).toBeGreaterThan(0);
 
   await page.goto(origin + '/clinical-research/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('.cip-photo-band--care-journey > img')).toHaveAttribute('src', '/images/mom-hd-care-journey.svg');
