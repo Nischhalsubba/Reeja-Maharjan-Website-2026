@@ -10,7 +10,7 @@
   --slate-ivory:#EAF0F5;
   --slate-paper:#FFFFFF;
   --slate-ink:#202D3D;
-  --slate-muted:#647587;
+  --slate-muted:#56697B;
   --slate-line:#DAE2E8;
   --slate-mint:#B2E9DB;
   --slate-teal:#2F7368;
@@ -110,7 +110,7 @@
 .care-personal-site .slate-home .slate-hero__content{position:relative;z-index:2;max-width:765px;margin:0 auto 0 0}
 .care-personal-site .slate-home .slate-hero .slate-eyebrow{color:var(--slate-mint)}
 .care-personal-site .slate-home .slate-hero h1{
-  margin:65px 0 20px;max-width:9ch;color:var(--slate-white);
+  margin:44px 0 20px;max-width:9ch;color:var(--slate-white);
   font-family:"Public Sans",system-ui,sans-serif;font-weight:800;
   font-size:clamp(4.85rem,8vw,9.2rem);line-height:.98;letter-spacing:-.09em;
 }
@@ -119,6 +119,7 @@
   max-width:440px;color:#E9F2F5;font-size:1.23rem;line-height:1.68;
   font-weight:400;
 }
+.care-personal-site .slate-home .slate-hero__lede strong{display:block;color:#fff;font-weight:750;margin-bottom:7px}
 .care-personal-site .slate-home .slate-hero .slate-actions{margin-top:29px}
 .care-personal-site .slate-home .slate-hero__bottom{
   display:flex;flex-wrap:wrap;gap:35px;margin-top:54px;padding-top:18px;
@@ -146,6 +147,19 @@
   display:inline-flex;align-items:center;gap:9px;min-height:44px;font-size:.85rem;font-weight:800;text-decoration:none;
 }
 .care-personal-site .slate-home .slate-thread__inner>a:hover{text-decoration:underline}
+
+/* Compact, factual credentials: separate from editorial navigation and no expiring-status claims. */
+.care-personal-site .slate-home .slate-credentials{background:#fff;border-bottom:1px solid var(--slate-line)}
+.care-personal-site .slate-home .slate-credentials__inner{display:grid;grid-template-columns:minmax(175px,.9fr) minmax(0,2.8fr) auto;align-items:center;gap:28px;padding-block:28px}
+.care-personal-site .slate-home .slate-credentials__intro h2{font:400 clamp(1.2rem,1.55vw,1.6rem)/1.18 Georgia,"Times New Roman",serif;margin-top:8px;letter-spacing:-.035em}
+.care-personal-site .slate-home .slate-credentials__intro .slate-eyebrow{font-size:.68rem;letter-spacing:.08em}
+.care-personal-site .slate-home .slate-credentials__list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px;list-style:none;padding:0;margin:0}
+.care-personal-site .slate-home .slate-credentials__list li{display:flex;flex-direction:column;min-width:0;gap:8px;border-left:1px solid var(--slate-line);padding-left:16px}
+.care-personal-site .slate-home .slate-credentials__list li span{font-size:.68rem;font-weight:800;letter-spacing:.1em;color:var(--slate-teal)}
+.care-personal-site .slate-home .slate-credentials__list li strong{font-size:.89rem;line-height:1.5;color:var(--slate-ink);font-weight:750}
+.care-personal-site .slate-home .slate-credentials__link{white-space:nowrap;font-size:.82rem}
+@media(max-width:1140px){.care-personal-site .slate-home .slate-credentials__inner{grid-template-columns:1fr;gap:19px}.care-personal-site .slate-home .slate-credentials__link{justify-self:start}}
+@media(max-width:560px){.care-personal-site .slate-home .slate-credentials__inner{padding-block:26px}.care-personal-site .slate-home .slate-credentials__list{grid-template-columns:1fr;gap:13px}.care-personal-site .slate-home .slate-credentials__list li{gap:3px}}
 
 /* Four carefully aligned editorial focus tiles, not random icon badges. */
 .care-personal-site .slate-home .slate-focus__grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
@@ -226,7 +240,7 @@
 }
 .care-personal-site .slate-home .slate-experience__item p{color:#3E5368;font-weight:700;font-size:.99rem;margin:10px 0 6px}
 .care-personal-site .slate-home .slate-experience__item small{color:var(--slate-muted);font-size:.86rem;line-height:1.5}
-.care-personal-site .slate-home .slate-experience__count{color:#9DADBC;font-size:1.75rem;letter-spacing:-.04em;text-align:right}
+.care-personal-site .slate-home .slate-experience__count{color:#596A7C;font-size:1.75rem;letter-spacing:-.04em;text-align:right}
 
 /* Research chapter and enumerated participation workflows. */
 .care-personal-site .slate-home .slate-research{padding:clamp(85px,9vw,140px) 0;background:var(--slate);color:var(--slate-white)}
