@@ -105,3 +105,21 @@ test('priority routes emit canonical, description, image, and Person schema', as
     expect(schema).toContain('"Person"');
   }
 });
+
+test('browse-by-topic opens topic-specific article archives instead of unrelated service pages', async ({ page }) => {
+  await page.goto(origin + '/blog/', { waitUntil: 'domcontentloaded' });
+  const expected = [
+    { label: 'Maternal health', slug: 'maternal-health' },
+    { label: 'Nursing practice', slug: 'nursing-practice' },
+    { label: 'Research & digital health', slug: 'research-and-digital-health' }
+  ];
+  for (const topic of expected) {
+    const href = '/blog/topics/' + topic.slug + '/';
+    await expect(page.locator('.blog-topic-panel a[href="' + href + '"]')).toBeVisible();
+    await page.goto(origin + href, { waitUntil: 'domcontentloaded' });
+    await expect(page.getByRole('heading', { level: 1 })).toContainText(topic.label);
+    await expect(page.locator('.blog-card').first()).toBeVisible();
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://reejamaharjan.com.np' + href);
+    await page.goto(origin + '/blog/', { waitUntil: 'domcontentloaded' });
+  }
+});
