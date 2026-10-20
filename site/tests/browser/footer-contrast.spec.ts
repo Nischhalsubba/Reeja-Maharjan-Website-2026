@@ -54,7 +54,7 @@ test('footer CTA retains WCAG AA contrast in default hover and focus states', as
         expect(state.arrowColor).toBe(state.foreground);
       }
       expect(states[0].background).toBe(route === '/' ? 'rgb(23, 25, 26)' : 'rgb(178, 233, 219)');
-      expect(states[1].background).toBe(route === '/' ? 'rgb(58, 65, 65)' : 'rgb(215, 247, 237)');
+      expect(states[1].background).toBe(route === '/' ? 'rgb(57, 64, 63)' : 'rgb(215, 247, 237)');
       expect(states[2].outline).not.toBe('none');
       await expect(cta).toHaveAttribute('href', '/contact/');
     }
