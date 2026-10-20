@@ -127,7 +127,7 @@ test('Slate homepage keeps real professional pathways and published article link
  await expect(page.locator('.slate-focus__card')).toHaveCount(4);
  await expect(page.locator('.slate-experience__item')).toHaveCount(4);
  await expect(page.locator('.slate-writing__card')).toHaveCount(3);
- await expect(page.getByRole('link',{name:/Explore my work/})).toHaveAttribute('href','#experience');
+ await expect(page.getByRole('link',{name:/Discuss an opportunity/})).toHaveAttribute('href','/contact/');
  await expect(page.locator('.desktop-nav').getByRole('link',{name:'Hire Reeja'})).toBeVisible();
 });
 
