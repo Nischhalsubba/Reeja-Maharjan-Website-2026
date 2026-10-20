@@ -60,3 +60,18 @@ Test current Chrome, Firefox and Safari, plus a real Android browser and iOS Saf
 ## Release decision
 
 Do not merge based on this report alone. Green CI, reviewed screenshot evidence, and current professional credential verification are required for final production acceptance.
+
+## Follow-up screenshot feedback: navigation, imagery and page parity
+
+Reference: user-provided screenshot of the featured-research section and navigation, 20 October 2026.
+
+- **Navigation:** desktop and mobile active/hover states now explicitly specify both text and fill colors. Active links use a translucent seafoam treatment on slate (not a pale gray pill with unreadable light text). Automated browser expectations cover active/hover states.
+- **Hero photograph:** repository's approved personal lakeside hero is **600 × 338px** (not 4K). The available headshot is **896 × 1200px**. Neither can produce genuine 3840 × 2160 detail. The homepage now supports `public/images/reeja-lakeside-4k.webp` as an optional original-photo asset, with actual dimension validation at build time and a responsive preload/srcset. Until the photographer's original is provided, the existing photo remains visible; do not claim the hero photograph is already 4K.
+- **Featured research graphic:** discarded the invented blue browser-dashboard artwork in favor of an original 3840 × 2160 scalable SVG showing BP/BG home-monitoring education and follow-up. All labels describe role responsibilities; no fake clinical results or patient data. The same asset appears on the research inner page.
+- **Inner-page identity:** homepage Slate & Seafoam opening-section grammar applied to recruiting, clinical research, nursing, maternal health, CV, contact, blog landing, and article pages: dark-slate gradient, white Georgia editorial headings, seafoam details, restrained proof panels, and accessible CTA colors.
+- **Visual evidence:** the browser-quality workflow exports screenshots at 390px and 1440px for homepage and representative inner pages plus the full research section. Review artifacts and compare with the uploaded screenshot before merge.
+- **Safety:** no personal photo was AI-substituted or incorrectly claimed to be a real 4K photo.
+
+### Outstanding visual acceptance checks
+
+The design changes intentionally modify screenshots relative to `main`; visual regression differences are expected and must be reviewed, not silently waived. Review photograph crop and editorial type at every target viewport. Verify the real source-photo resolution once supplied and check the final 4K export’s quality, license, file size, and metadata.
