@@ -1,14 +1,23 @@
 import { existsSync } from 'node:fs';
+import sharp from 'sharp';
+
+const originalFourK = new URL('../../public/images/reeja-lakeside-4k.webp', import.meta.url);
 
 /**
- * True high-resolution photographs must be sourced from Reeja's original
- * camera/export files. Never upsample the 600px website thumbnail as if it
- * contained 4K detail. Add a genuine >=3840px wide WebP export at
- * public/images/reeja-lakeside-4k.webp and rebuild to enable it.
+ * Original source photo must be supplied by the photographer. The site does
+ * not generate missing pixels by merely resizing its 600×338 thumbnail.
+ * If a replacement asset is provided, validate its actual encoded dimensions.
  */
-export const hasVerifiedHeroFourKAsset = existsSync(
-  new URL('../../public/images/reeja-lakeside-4k.webp', import.meta.url)
-);
+export const hasVerifiedHeroFourKAsset = existsSync(originalFourK);
+
+if (hasVerifiedHeroFourKAsset) {
+  const meta = await sharp(originalFourK).metadata();
+  if (!meta.width || !meta.height || meta.width < 3840 || meta.height < 2160) {
+    throw new Error(
+      `The new hero image is ${meta.width ?? '?'}×${meta.height ?? '?'}; a 4K hero requires at least 3840×2160 pixels. Provide the original high-resolution photograph.`
+    );
+  }
+}
 
 export const heroImageSrc = hasVerifiedHeroFourKAsset
   ? '/images/reeja-lakeside-4k.webp'
