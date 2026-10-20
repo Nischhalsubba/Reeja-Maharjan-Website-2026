@@ -151,3 +151,6 @@ body.care-personal-site:has(.slate-home) .care-footer__cta{
  .care-personal-site .site-header,.care-personal-site .site-header__inner{min-height:68px}
 }
 @media(prefers-reduced-motion:reduce){.care-personal-site :is(.site-header,.site-footer--care) *{animation:none!important;transition:none!important}}
+
+/* Readable article metadata on cool tinted editorial surfaces (WCAG AA). */
+.care-personal-site .blog-card__meta { color:#435366!important; }
