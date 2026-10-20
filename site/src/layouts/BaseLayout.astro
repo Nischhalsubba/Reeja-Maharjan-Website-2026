@@ -17,8 +17,9 @@ import '../styles/care-blog-v44.css';
 import '../styles/slate-home.css';
 import '../styles/slate-site.css';
 import '../styles/design-system.css';
+import '../styles/reeja-editorial-home.css';
 import Header from '../components/Header.astro';
-import { heroImageSrc, heroImageSrcSet, heroImageSizes } from '../lib/heroPhotography';
+
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
@@ -102,7 +103,7 @@ const graphSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="design-system" content="Slate & Seafoam" />
-    <meta name="design-release" content="reeja-design-system-1.0.0" />
+    <meta name="design-release" content="reeja-editorial-home-9.0.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="theme-color" content="#1C2C3A" />
@@ -125,7 +126,7 @@ const graphSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(graphSchema)}></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    {pathname === '/' && <link rel="preload" as="image" href={heroImageSrc} imagesrcset={heroImageSrcSet} imagesizes={heroImageSizes} fetchpriority="high" />}
+    {pathname === '/' && <link rel="preload" as="image" href="/reeja-headshot.jpg" fetchpriority="high" />}}
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
     {gaId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>}
@@ -139,7 +140,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="8.2.0-care-personal">
+  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="9.0.0-care-personal">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header name={professionalFacts.name} />
