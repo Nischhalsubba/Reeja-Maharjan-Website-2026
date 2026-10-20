@@ -1,5 +1,6 @@
 import { existsSync } from 'node:fs';
 import sharp from 'sharp';
+import { fileURLToPath } from 'node:url';
 
 const originalFourK = new URL('../../public/images/reeja-lakeside-4k.webp', import.meta.url);
 
@@ -11,7 +12,7 @@ const originalFourK = new URL('../../public/images/reeja-lakeside-4k.webp', impo
 export const hasVerifiedHeroFourKAsset = existsSync(originalFourK);
 
 if (hasVerifiedHeroFourKAsset) {
-  const meta = await sharp(originalFourK).metadata();
+  const meta = await sharp(fileURLToPath(originalFourK)).metadata();
   if (!meta.width || !meta.height || meta.width < 3840 || meta.height < 2160) {
     throw new Error(
       `The new hero image is ${meta.width ?? '?'}×${meta.height ?? '?'}; a 4K hero requires at least 3840×2160 pixels. Provide the original high-resolution photograph.`
