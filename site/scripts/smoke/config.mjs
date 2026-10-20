@@ -27,12 +27,12 @@ export const maxAttempts = positiveInteger('SMOKE_ATTEMPTS', 20);
 export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
-  'The person',
+  'person',
   'before the',
   'number.',
   'Explore my work',
   'My professional CV',
-  'Three threads',
+  'THREE THREADS.' ,
   'Nursing practice',
   'Maternal-health research',
   'Patient education',
