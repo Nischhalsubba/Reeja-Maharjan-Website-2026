@@ -34,8 +34,42 @@ body.care-personal-site:has(.slate-home) .site-header__inner{width:min(1276px,ca
 body.care-personal-site:has(.slate-home) .desktop-nav>a:not(.nav-cta){
   color:#D9E6E9;font-size:.94rem;font-weight:650;letter-spacing:.005em;
 }
-.care-personal-site .site-header .desktop-nav>a:hover,
-.care-personal-site .site-header .desktop-nav>a[aria-current="page"]{color:#B2E9DB}
+/* Desktop navigation uses explicit foreground AND background in every state.
+   The old inherited pale active fill caused near-white labels to disappear. */
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta){
+  border:1px solid transparent;
+  border-radius:4px;
+  background:transparent;
+  color:#D9E6E9;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease;
+}
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta):hover,
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta):focus-visible{
+  background:#304354;
+  color:#FFFFFF;
+  border-color:rgba(178,233,219,.28);
+}
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta)[aria-current="page"]{
+  background:rgba(178,233,219,.16);
+  color:#B2E9DB;
+  border-color:rgba(178,233,219,.45);
+  box-shadow:inset 0 -2px 0 #B2E9DB;
+}
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta)[aria-current="page"]:hover,
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta)[aria-current="page"]:focus-visible{
+  background:rgba(178,233,219,.26);
+  color:#FFFFFF;
+}
+body.care-personal-site .mobile-nav__panel > a:not(.mobile-nav__cta)[aria-current="page"]{
+  background:rgba(178,233,219,.13);
+  color:#B2E9DB;
+  border-color:rgba(178,233,219,.45);
+}
+body.care-personal-site .mobile-nav__panel > a:not(.mobile-nav__cta):hover,
+body.care-personal-site .mobile-nav__panel > a:not(.mobile-nav__cta):focus-visible{
+  background:#304354;
+  color:#FFFFFF;
+}
 .care-personal-site .site-header .desktop-nav .nav-cta,
 body.care-personal-site:has(.slate-home) .desktop-nav .nav-cta{
  min-height:44px;background:#B2E9DB;color:#101C29;border:1px solid #B2E9DB;
