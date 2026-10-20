@@ -194,6 +194,12 @@ body.care-personal-site:has(.slate-home) .care-footer__cta{
 /* Contact form helper text must reach AA on cloud-white and ivory surfaces. */
 .care-personal-site .form-field__help { color:#435366!important; }
 
+/* Mint italic accents mirror the homepage's editorial section headlines. */
+.care-personal-site main :is(.site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero,.cv-page__hero) h1 em{
+  color:#B2E9DB;
+  font-weight:400;
+  font-style:italic;
+}
 /* -----------------------------------------------------------------------
    Slate & Seafoam / editorial inner-page parity (2026-10-20)
    Shared grammar: dark slate opening chapters, seafoam accents, serif
