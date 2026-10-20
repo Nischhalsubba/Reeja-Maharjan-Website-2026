@@ -24,7 +24,7 @@ export function initCarePersonalMotion(): () => void {
     const hero = document.querySelector<HTMLElement>('.cip-hero');
     if (hero) {
       const elements = Array.from(hero.querySelectorAll<HTMLElement>(
-        '.cip-hero__copy .cip-eyebrow, .cip-hero h1, .cip-hero__lead, .cip-actions, .cip-hero__index, .cip-hero__portrait'
+        '.cip-hero__copy .cip-eyebrow, .cip-hero h1, .cip-hero__lead, .cip-actions, .cip-hero__index, .cip-hero__portrait, .slate-hero__content .slate-eyebrow, .slate-hero h1, .slate-hero__lede, .slate-hero .slate-actions, .slate-hero__bottom'
       ));
       gsap.from(elements, {
         y: 24,
@@ -40,7 +40,8 @@ export function initCarePersonalMotion(): () => void {
       '.cip-home .cip-about__grid > *, .cip-home .cip-sectionhead, .cip-home .cip-pathway, ' +
       '.cip-home .cip-research__copy, .cip-home .cip-journey__item, .cip-home .cip-article, ' +
       '.cip-home .cip-contact__grid > *, .cip-photo-band__caption, ' +
-      '.care-footer__intro, .care-footer__invite-actions'
+      '.care-footer__intro, .care-footer__invite-actions, ' +
+      '.slate-heading, .slate-focus__card, .slate-about__copy, .slate-experience__item, .slate-research__steps li, .slate-writing__card, .slate-contact__grid'
     );
     reveals.forEach((element) => {
       gsap.from(element, {
@@ -76,11 +77,21 @@ export function initCarePersonalMotion(): () => void {
         }
       );
     });
+    // Gentle photo parallax; disabled for reduced motion and coarse pointers.
+    const slatePhoto = document.querySelector<HTMLImageElement>('.slate-hero__photograph');
+    if (slatePhoto && window.matchMedia('(min-width: 790px)').matches) {
+      gsap.to(slatePhoto,{
+        yPercent:4,ease:'none',
+        scrollTrigger:{trigger:'.slate-hero',start:'top top',end:'bottom top',scrub:0.65}
+      });
+    }
+
     if (!pointerFine) return;
 
     const interactive = Array.from(document.querySelectorAll<HTMLElement>(
       '.cip-button, .site-button, .care-button, .nav-cta, .cip-textlink, .cip-link, ' +
-      '.blog-card a, .contact-sidebar__social, .care-footer__cta'
+      '.blog-card a, .contact-sidebar__social, .care-footer__cta, ' +
+      '.slate-button, .slate-link, .slate-writing__read'
     ));
 
     interactive.forEach((element) => {

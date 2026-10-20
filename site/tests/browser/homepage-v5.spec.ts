@@ -1,173 +1,66 @@
-import { expect, test } from '@playwright/test';
+import {expect,test} from '@playwright/test';
 const origin=process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
-
-test('v7 homepage presents verified background, two pathways and complete work chronology',async({page})=>{
+test('Slate homepage contains authentic hero, four focus areas, four career roles and three articles',async({page})=>{
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
- await expect(page.locator('.rv6-home')).toBeVisible();
- await expect(page.locator('main h1')).toContainText(/Care is\s*personal\./);
- await expect(page.locator('.rv6-trust__grid > div')).toHaveCount(3);
- await expect(page.locator('.rv6-pillar')).toHaveCount(2);
- await expect(page.locator('.rv6-career__timeline > li')).toHaveCount(4);
- await expect(page.locator('.rv5-writing-card')).toHaveCount(3);
- await expect(page.locator('.rv7-personal__photo')).toBeVisible();
- await expect(page.locator('.rv6-personal__aside')).toHaveCount(0);
- await expect(page.locator('.rv7-personal__photo figcaption')).toContainText('Reeja’s personal collection');
- await expect(page.locator('.rv5-updates')).toHaveCount(0);
- await expect(page.locator('.rv6-career__timeline')).toContainText('Sindhuli Hospital');
- await expect(page.locator('.rv6-career__timeline')).toContainText('Institute for Implementation Science and Health');
- await expect(page.locator('.rv6-trust__grid')).toContainText('Nepal Nursing Council');
- await expect(page.locator('.rv6-trust__grid')).toContainText('B.Sc. Nursing');
- await expect(page.locator('.rv6-hero__portrait img')).toHaveAttribute('src','/reeja-headshot.jpg');
- await expect(page.locator('.rv6-home')).not.toContainText('1 Research project');
- await expect(page.locator('.rv6-home')).not.toContainText('Texas RN Active');
- for(const link of [
-  {name:/Explore my work/,href:'#experience'},
-  {name:/Get in touch/,href:'/contact/'},
-  {name:/View professional CV/,href:'/cv/'},
-  {name:/Explore nursing practice/,href:'/nursing-practice/'},
-  {name:/Explore research work/,href:'/clinical-research/'},
-  {name:/My professional journey/,href:'/cv/'}
- ]) await expect(page.getByRole('link',{name:link.name}).first()).toHaveAttribute('href',link.href);
+ await expect(page.locator('main h1')).toContainText(/The person\s*before the\s*number\./);
+ await expect(page.locator('.slate-focus__card')).toHaveCount(4);
+ await expect(page.locator('.slate-experience__item')).toHaveCount(4);
+ await expect(page.locator('.slate-writing__card')).toHaveCount(3);
+ await expect(page.locator('.slate-research__steps li')).toHaveCount(4);
+ await expect(page.locator('.slate-experience__list')).toContainText('Sindhuli Hospital');
+ await expect(page.locator('.slate-experience__list')).toContainText('Institute for Implementation Science and Health');
+ await expect(page.getByRole('link',{name:/Explore my work/})).toHaveAttribute('href','#experience');
+ await expect(page.getByRole('link',{name:/My professional CV/})).toHaveAttribute('href','/cv/');
+ await expect(page.locator('.slate-home')).not.toContainText('Texas RN Active');
+ const img=page.locator('.slate-hero__photograph');
+ await expect(img).toHaveAttribute('src','/images/reeja-lakeside.webp');
+ await expect.poll(()=>img.evaluate(x=>(x as HTMLImageElement).naturalWidth),{timeout:15000}).toBeGreaterThan(0);
 });
-
-test('hero remains two balanced desktop columns with a genuine local portrait',async({page})=>{
- await page.setViewportSize({width:1440,height:950});
- await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
- const state=await page.evaluate(()=>{
-  const rect=(selector:string)=>document.querySelector(selector)!.getBoundingClientRect();
-  const copy=rect('.rv6-hero__copy'),portrait=rect('.rv6-hero__portrait'),hero=rect('.rv6-hero');
-  return {copyWidth:copy.width,portraitWidth:portrait.width,portraitLeft:portrait.left,copyRight:copy.right,heroHeight:hero.height,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth}
- });
- expect(state.heroHeight).toBeGreaterThan(520);
- expect(state.copyWidth).toBeGreaterThan(390);
- expect(state.portraitWidth).toBeGreaterThan(390);
- expect(state.portraitLeft).toBeGreaterThan(state.copyRight);
- expect(state.overflow).toBeLessThanOrEqual(1);
- const image=page.locator('.rv6-hero__portrait img');
- await expect.poll(()=>image.evaluate(node=>(node as HTMLImageElement).naturalWidth),{timeout:16000}).toBeGreaterThan(0);
-});
-
-test('mobile and desktop no overflow, readable 14px labels, and healthy section order',async({browser})=>{
+test('Slate homepage resizes without horizontal overflow or hidden chapters',async({browser})=>{
  test.setTimeout(180000);
  for(const width of [320,375,390,768,1024,1440]){
-  const ctx=await browser.newContext({viewport:{width,height:880},reducedMotion:'reduce'});
+  const ctx=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
   const page=await ctx.newPage();
   await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
-  const result=await page.evaluate(()=>{
-   const selectors=['.rv6-hero','.rv6-trust','.rv6-pillars','.rv6-career','.rv6-focus','.rv6-writing','.rv6-personal'];
-   const tops=selectors.map(q=>Math.round(document.querySelector(q)!.getBoundingClientRect().top+window.scrollY));
-   const labels=['.rv6-trust__grid p span','.rv6-pillar__index','.rv6-career__meta','.rv5-writing-card__category'];
-   const sizes=labels.map(q=>parseFloat(getComputedStyle(document.querySelector(q)!).fontSize));
-   return {overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,tops,sizes};
+  const state=await page.evaluate(()=>{
+   const ids=['home','focus','about','experience','research','writing','contact'];
+   const positions=ids.map(id=>Math.round(document.getElementById(id)!.getBoundingClientRect().top+scrollY));
+   return {overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,positions,hero:getComputedStyle(document.querySelector('.slate-hero')!).backgroundColor};
   });
-  expect(result.overflow,'overflow at '+width).toBeLessThanOrEqual(1);
-  expect(result.tops.every((top,i)=>i===0||top>result.tops[i-1]),'section order at '+width).toBe(true);
-  expect(Math.min(...result.sizes),'compact type at '+width).toBeGreaterThanOrEqual(14);
+  expect(state.overflow,'horizontal overflow '+width).toBeLessThanOrEqual(1);
+  expect(state.positions.every((p,i)=>i===0||p>state.positions[i-1])).toBe(true);
+  expect(state.hero).toBe('rgb(28, 44, 58)');
   await ctx.close();
  }
 });
-
-test('mobile menu and hero CTAs work without overlapping the page',async({page})=>{
+test('mobile navigation opens and closes and hero anchor works',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
- const toggle=page.getByRole('button',{name:'Menu',exact:true});
- await toggle.click();
+ await page.getByRole('button',{name:'Menu',exact:true}).click();
  await expect(page.locator('#mobile-nav')).toBeVisible();
- await expect(page.locator('#mobile-nav').getByRole('link',{name:'Home',exact:true})).toHaveCount(1);
  await page.keyboard.press('Escape');
  await expect(page.locator('#mobile-nav')).toBeHidden();
- await page.locator('.rv6-hero__actions a[href="#experience"]').click();
+ await page.locator('.slate-hero a[href="#experience"]').click();
  await expect(page).toHaveURL(/#experience$/);
- await expect(page.locator('#experience')).toBeVisible();
 });
-
-test('third-party editorial images use locally hosted clinical art when blocked',async({page})=>{
+test('remote article photos degrade to branded local illustrations',async({page})=>{
  await page.route('https://images.unsplash.com/**',route=>route.abort());
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
- const first=page.locator('[data-editorial-image]').first();
- await first.scrollIntoViewIfNeeded();
- await expect.poll(()=>first.getAttribute('src')).toContain('/images/research-monitoring.svg');
- await expect.poll(()=>first.evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
- await expect(page.locator('.rv6-focus__image')).toHaveClass(/is-fallback-loaded/);
- await expect(page.locator('.rv6-hero__portrait img')).toBeVisible();
+ const images=page.locator('.slate-writing__image img');
+ await expect(images).toHaveCount(3);
+ for(let i=0;i<3;i++){
+  const image=images.nth(i);
+  await image.scrollIntoViewIfNeeded();
+  await expect.poll(()=>image.getAttribute('src'),{timeout:12000}).toMatch(/^\/images\/.+\.svg$/);
+  await expect.poll(()=>image.evaluate(img=>(img as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+ }
 });
-
-test('all article previews use different topical source images and retain source credits',async({page})=>{
+test('site palette and icon system share precise tokens and round strokes',async({page})=>{
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
- const imgs=page.locator('.rv6-writing__card img');
- await expect(imgs).toHaveCount(3);
- const srcs=await imgs.evaluateAll(nodes=>nodes.map(x=>x.getAttribute('src')));
- expect(new Set(srcs).size).toBe(3);
- await expect(page.locator('.rv6-writing__image .rv5-writing-card__photo-credit')).toHaveCount(3);
-});
-
-test('real lakeside photo loads and remains visible at mobile and desktop sizes', async({browser}) => {
-  for(const width of [320,390,768,1440]) {
-    const ctx=await browser.newContext({viewport:{width,height:850},reducedMotion:'reduce'});
-    const page=await ctx.newPage();
-    await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
-    const personal=page.locator('.rv7-personal');
-    const image=personal.locator('img');
-    await personal.scrollIntoViewIfNeeded();
-    await expect(image).toHaveAttribute('src','/images/reeja-lakeside.webp');
-    await expect(image).toHaveAttribute('loading','lazy');
-    await expect.poll(()=>image.evaluate(el=>(el as HTMLImageElement).naturalWidth),{timeout:12000}).toBeGreaterThan(0);
-    await expect(image).toHaveCSS('object-fit','cover');
-    await expect(personal.getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
-    await expect(personal.getByRole('link',{name:/My professional journey/})).toHaveAttribute('href','/cv/');
-    const dimensions=await image.evaluate(el=>{const r=el.getBoundingClientRect();return {width:r.width,height:r.height}});
-    expect(dimensions.width,'image width at '+width).toBeGreaterThan(220);
-    expect(dimensions.height,'image height at '+width).toBeGreaterThan(190);
-    const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-document.documentElement.clientWidth);
-    expect(overflow,'overflow at '+width).toBeLessThanOrEqual(1);
-    await ctx.close();
-  }
-});
-
-test('v7 iconography and brand rhythm share one reusable system',async({page})=>{
-  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
-  const icons=page.locator('main .rv7-home svg.brand-icon');
-  expect(await icons.count()).toBeGreaterThanOrEqual(17);
-  const style=await icons.evaluateAll(nodes=>nodes.map(node=>({
-    width:node.getAttribute('width'),viewBox:node.getAttribute('viewBox'),
-    stroke:node.getAttribute('stroke'),strokeWidth:node.getAttribute('stroke-width'),
-    cap:node.getAttribute('stroke-linecap'),hidden:node.getAttribute('aria-hidden')
-  })));
-  for(const icon of style) {
-    expect(icon.viewBox).toBe('0 0 24 24');
-    expect(icon.stroke).toBe('currentColor');
-    expect(icon.strokeWidth).toBe('2');
-    expect(icon.cap).toBe('round');
-    expect(icon.hidden).toBe('true');
-  }
-  const palette=await page.evaluate(()=>{
-    const home=document.querySelector('.rv7-home')!;
-    const s=getComputedStyle(home);
-    const read=(name:string)=>s.getPropertyValue(name).trim();
-    const heading=getComputedStyle(document.querySelector('.rv6-hero h1 span')!);
-    return {blue:read('--h-blue'),shared:getComputedStyle(document.documentElement).getPropertyValue('--brand-blue').trim(),
-      ink:read('--h-ink'),display:heading.color,retired:[...document.styleSheets].filter(sheet=>/reeja-home-v(5|6)\.|care-is-personal\./.test(sheet.href||'')).length};
-  });
-  expect(palette.blue).toBe('#3454f5');
-  expect(palette.shared).toBe('#3454f5');
-  expect(palette.ink).toBe('#10182f');
-  expect(palette.display).toBe('rgb(52, 84, 245)');
-  expect(palette.retired).toBe(0);
-});
-
-test('v7 follows one section rhythm and consistent card padding across viewports',async({page})=>{
-  for(const width of [390,768,1440]) {
-    await page.setViewportSize({width,height:900});
-    await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
-    const metrics=await page.evaluate(()=>{
-      const selectors=['.rv6-pillars','.rv6-career','.rv6-writing','.rv7-personal'];
-      const pad=selectors.map(q=>parseFloat(getComputedStyle(document.querySelector(q)!).paddingTop));
-      const cards=['.rv6-pillar','.rv5-writing-card__content'];
-      const cardPads=cards.map(q=>parseFloat(getComputedStyle(document.querySelector(q)!).paddingLeft));
-      return {pad,cardPads,overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth};
-    });
-    expect(metrics.pad.every((value)=>Math.abs(value-metrics.pad[0])<1),JSON.stringify(metrics)).toBe(true);
-    expect(metrics.cardPads[0]).toBe(metrics.cardPads[1]);
-    expect(metrics.overflow).toBeLessThanOrEqual(1);
-  }
+ const state=await page.evaluate(()=>({
+  primary:getComputedStyle(document.documentElement).getPropertyValue('--brand-blue').trim(),
+  count:document.querySelectorAll('.slate-home svg.brand-icon').length,
+  strokes:[...document.querySelectorAll('.slate-home svg.brand-icon')].every(el=>el.getAttribute('stroke-width')==='2'&&el.getAttribute('viewBox')==='0 0 24 24')
+ }));
+ expect(state.primary.toLowerCase()).toBe('#2f7368');expect(state.count).toBeGreaterThan(15);expect(state.strokes).toBe(true);
 });

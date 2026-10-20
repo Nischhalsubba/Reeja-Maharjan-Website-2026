@@ -1,17 +1,17 @@
 :root {
-  /* Care is Personal v7 — the only shared source of brand colors and spacing. */
-  --brand-blue: #3454f5;
-  --brand-blue-hover: #223fda;
-  --brand-lavender: #eef0ff;
-  --brand-ink: #10182f;
-  --brand-canvas: #f8f9fd;
-  --brand-coral: #ef7866; /* Large ornament and icon accents only. */
-  --brand-coral-ink: #a73e34; /* Reserved for rare deliberate accents; normal metadata uses cobalt. */
-  --brand-muted: #53617c;
-  --brand-line: #dce2ef;
-  --brand-line-strong: #aeb9d3;
-  --brand-surface-strong: #e3e8ff;
-  --brand-focus: #ffb69b;
+  /* Slate & Seafoam v8 — shared brand colors, typography and spacing. */
+  --brand-blue: #2F7368;
+  --brand-blue-hover: #205950;
+  --brand-lavender: #EAF0F5;
+  --brand-ink: #202D3D;
+  --brand-canvas: #F5F8FA;
+  --brand-coral: #B2E9DB; /* Large ornament and icon accents only. */
+  --brand-coral-ink: #2C655D; /* Reserved for rare deliberate accents; normal metadata uses cobalt. */
+  --brand-muted: #647587;
+  --brand-line: #DAE2E8;
+  --brand-line-strong: #A4B5C1;
+  --brand-surface-strong: #DDEAE8;
+  --brand-focus: #246C60;
 
   /* Primary UI typography, loaded locally with @fontsource. */
   --font-display: "Public Sans", system-ui, sans-serif;
@@ -51,21 +51,21 @@
   --type-tight: 1.105;
 
   /* Clinical editorial palette. Color supports hierarchy, never invented meaning. */
-  --bg: #f8f9fd;
+  --bg: #F5F8FA;
   --surface: #ffffff;
-  --surface-alt: #eef0ff;
-  --surface-strong: #e3e8ff;
-  --text: #10182f;
-  --muted: #53617c;
-  --muted-strong: #354464;
-  --line: #dce2ef;
-  --line-strong: #aeb9d3;
+  --surface-alt: #EAF0F5;
+  --surface-strong: #DDEAE8;
+  --text: #202D3D;
+  --muted: #647587;
+  --muted-strong: #334D58;
+  --line: #DAE2E8;
+  --line-strong: #A4B5C1;
   --accent: var(--brand-blue);
   --accent-text: #ffffff;
   --accent-hover: var(--brand-blue-hover);
   --accent-soft: var(--brand-lavender);
   --signal: var(--brand-coral-ink);
-  --placeholder: #64708a;
+  --placeholder: #647587;
   --success: #206049;
   --warning: #7d5418;
   --danger: #a03535;
@@ -76,8 +76,8 @@
   --shadow-3: 0 22px 54px rgba(23, 33, 29, 0.12);
 
   /* Shape: precise and document-like rather than universally pill-shaped. */
-  --r-card: 8px;
-  --r-btn: 6px;
+  --r-card: 6px;
+  --r-btn: 4px;
   --r-pill: 999px;
 
   /* Layout. */
@@ -114,6 +114,6 @@
   --stagger: 40ms;
 
   /* Focus. */
-  --focus-ring: 0 0 0 3px rgba(52, 84, 245, 0.24);
+  --focus-ring: 0 0 0 3px rgba(47, 115, 104, 0.25);
 
 }

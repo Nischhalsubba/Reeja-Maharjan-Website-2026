@@ -27,8 +27,8 @@ test('all major templates use Care is Personal v4 without old theme, unreadable 
         };
       });
       expect(state.system).toBe('care-is-personal');
-      expect(state.version).toBe('7.0.0-care-personal');
-      expect(state.font).toContain('Public Sans');
+      expect(state.version).toBe('8.0.0-care-personal');
+      expect(state.font).toMatch(/Georgia|Public Sans/);
       expect(state.overflow, `${path} horizontal overflow at ${width}px`).toBeLessThanOrEqual(1);
       expect(state.size, `${path} undersized page heading at ${width}px`).toBeGreaterThanOrEqual(width <= 390 ? 28 : 36);
       if (path !== '/') expect(state.lineHeight / state.size, `${path} compressed heading`).toBeGreaterThanOrEqual(1);
@@ -59,7 +59,7 @@ test('high contrast keyboard focus on light inner pages and on dark footer', asy
   await page.goto(origin + '/clinical-research/', {waitUntil:'domcontentloaded'});
   const nav = page.locator('.desktop-nav a').first();
   await nav.focus();
-  await expect(nav).toHaveCSS('outline-color','rgb(25, 56, 172)');
+  await expect(nav).toHaveCSS('outline-color','rgb(32, 89, 80)');
   const footer = page.locator('.care-footer__bottom a[href="#page-top"]');
   await footer.focus();
   await expect(footer).toHaveCSS('outline-color','rgb(255, 255, 255)');

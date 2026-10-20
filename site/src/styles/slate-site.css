@@ -1,0 +1,159 @@
+/* Shared Slate & Seafoam identity — pages, navigation, forms, articles and footer.
+   Loaded LAST, so retired cobalt declarations cannot override the active brand. */
+.care-personal-site {
+ --care-paper:var(--brand-canvas);--care-paper-deep:var(--brand-lavender);
+ --care-surface:#fff;--care-ink:var(--brand-ink);--care-graphite:var(--brand-muted);
+ --care-muted:var(--brand-muted);--care-accent:var(--brand-blue);--care-indigo:var(--brand-blue);
+ --care-brass:#B2E9DB;--care-line:var(--brand-line);
+ --slate-nav:#1C2C3A;--slate-nav-deep:#101C29;--slate-seafoam:#B2E9DB;
+ --slate-heading:#202D3D;--slate-canvas:#F5F8FA;
+ background:#fff;color:var(--slate-heading);
+}
+.care-personal-site .site-header,
+body.care-personal-site:has(.slate-home) .site-header{
+  position:sticky;top:0;z-index:70;min-height:76px;
+  border-bottom:1px solid rgba(255,255,255,.16);
+  background:rgba(28,44,58,.975);box-shadow:none;
+  -webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);
+}
+.care-personal-site .site-header__inner,
+body.care-personal-site:has(.slate-home) .site-header__inner{width:min(1276px,calc(100% - 112px));min-height:76px}
+.care-personal-site .site-header .brand{color:#fff;gap:10px}
+.care-personal-site .site-header .brand__symbol{
+  display:grid;place-items:center;width:37px;height:37px;flex:none;
+  border:1px solid rgba(178,233,219,.75);border-radius:50%;color:#B2E9DB;
+}
+.care-personal-site .site-header .brand__symbol svg{display:block}
+.care-personal-site .site-header .brand__text strong,
+.care-personal-site .site-header .brand__text strong span{
+  color:#fff;font:500 1.75rem/1 Georgia,"Times New Roman",serif;letter-spacing:-.045em;
+}
+.care-personal-site .site-header .brand__text strong span{color:#B2E9DB}
+.care-personal-site .site-header .desktop-nav{gap:clamp(12px,1.7vw,28px)}
+.care-personal-site .site-header .desktop-nav>a,
+body.care-personal-site:has(.slate-home) .desktop-nav>a:not(.nav-cta){
+  color:#D9E6E9;font-size:.94rem;font-weight:650;letter-spacing:.005em;
+}
+.care-personal-site .site-header .desktop-nav>a:hover,
+.care-personal-site .site-header .desktop-nav>a[aria-current="page"]{color:#B2E9DB}
+.care-personal-site .site-header .desktop-nav .nav-cta,
+body.care-personal-site:has(.slate-home) .desktop-nav .nav-cta{
+ min-height:44px;background:#B2E9DB;color:#101C29;border:1px solid #B2E9DB;
+ border-radius:3px;padding-inline:19px;font-size:.86rem;font-weight:800;
+}
+.care-personal-site .site-header .desktop-nav .nav-cta:hover,
+body.care-personal-site:has(.slate-home) .desktop-nav .nav-cta:hover{background:#D7F7ED;color:#101C29}
+.care-personal-site .site-header .menu-toggle,
+.care-personal-site .site-header .mobile-nav__close{border-color:rgba(255,255,255,.34);background:rgba(255,255,255,.1);color:#fff}
+.care-personal-site .site-header .menu-toggle__label{color:#fff}
+.care-personal-site .site-header .menu-toggle__icon i{background:#fff}
+.care-personal-site .mobile-nav,
+.care-personal-site .mobile-nav__panel{
+  background:#1C2C3A;color:#EDF5F7;border-color:#304354;
+}
+.care-personal-site .mobile-nav__head,.care-personal-site .mobile-nav a{color:#E8F1F3}
+.care-personal-site .mobile-nav a[aria-current="page"]{color:#B2E9DB}
+.care-personal-site .mobile-nav__cta{background:#B2E9DB;color:#101C29!important}
+.care-personal-site :focus-visible{outline:3px solid #246C60;outline-offset:3px}
+.care-personal-site :is(.site-header,.mobile-nav,.site-footer--care) :focus-visible{outline-color:#B2E9DB}
+.care-personal-site .scroll-progress__bar{background:var(--brand-blue)}
+
+/* Inner-page narrative typography and canvas, without changing factual content. */
+.care-personal-site :is(.site-page,.contact-page,.blog-article-page,.cv-page,.blog-index){color:var(--brand-ink);background:#fff}
+.care-personal-site :is(.site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero,.cv-hero) {
+  background:linear-gradient(120deg,#F5F8FA,#EAF0F5 72%,#F8FAFC);
+  border-bottom:1px solid #DAE2E8;
+}
+.care-personal-site :is(.site-page__hero h1,.contact-hero h1,.blog-article__header h1,.blog-index__hero h1,.cv-hero h1,
+  .site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.blog-article__body h2,
+  .contact-sidebar h2,.professional-contact-form h2,.blog-toc h2) {
+  font-family:Georgia,"Times New Roman",serif;letter-spacing:-.045em;
+  font-weight:500;line-height:1.1;color:#202D3D;
+}
+.care-personal-site :is(.site-eyebrow,.blog-article__eyebrow,.cv-eyebrow) {color:#2F7368!important;letter-spacing:.11em}
+.care-personal-site :is(.site-section--soft,.contact-section--soft,.blog-index__topics) {
+ background:#F5F8FA!important;background-image:none!important;
+}
+.care-personal-site .site-section--dark{
+  background:linear-gradient(128deg,#101C29,#1C2C3A 72%,#304354)!important;color:#fff;
+}
+.care-personal-site .site-section--dark :is(h2,h3,p,li){color:#fff}
+.care-personal-site .site-section--dark .site-eyebrow{color:#B2E9DB!important}
+.care-personal-site :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){
+  background:rgba(255,255,255,.75);border-top-color:#2F7368;border-bottom-color:#DAE2E8;
+}
+.care-personal-site :is(.site-page__summary dt,.contact-hero__details span,.blog-article__meta-panel dt){color:#2F7368!important}
+.care-personal-site :is(.site-button,.care-button,.blog-index__cta,.contact-page button,.professional-contact-form button){
+  border-radius:4px;
+}
+.care-personal-site :is(.site-button--primary,.care-button--primary,.contact-page button[type="submit"],.professional-contact-form button[type="submit"]){
+  color:#fff!important;background:#2F7368!important;border-color:#2F7368!important;
+}
+.care-personal-site :is(.site-button--primary,.care-button--primary,.contact-page button[type="submit"],.professional-contact-form button[type="submit"]):hover{
+  background:#205950!important;border-color:#205950!important;
+}
+.care-personal-site :is(.blog-card,.site-card,.care-card){
+ border-color:#DAE2E8;border-radius:3px;
+}
+.care-personal-site :is(.blog-toc a[aria-current="location"],.blog-toc a.is-active){color:#2F7368;border-color:#2F7368}
+.care-personal-site :is(.blog-article__body,.site-page) a:not([class]):hover{text-decoration-thickness:2px}
+.care-personal-site :is(.site-section,.blog-index__section,.contact-section){border-color:#DAE2E8}
+
+/* The deep teal issuer colour is legible over both white and seafoam-tinted CV surfaces. */
+.care-personal-site :is(.cv-credential__issuer,.cv-credential__verification,.cv-experience__meta){color:#205950!important}
+.care-personal-site .blog-article__intro h1{width:100%;max-width:none!important}
+body.care-personal-site .site-footer--care .care-footer__cta,
+body.care-personal-site:has(.slate-home) .site-footer--care .care-footer__cta{
+  background:#B2E9DB!important;color:#101C29!important;border-color:#B2E9DB!important;
+}
+body.care-personal-site .site-footer--care .care-footer__cta:hover,
+body.care-personal-site .site-footer--care .care-footer__cta:focus-visible{
+  background:#D7F7ED!important;color:#101C29!important;border-color:#D7F7ED!important;
+}
+/* Footer: deep slate with mint CTA, consistent with the new hero. */
+.care-personal-site .site-footer--care,
+body.care-personal-site:has(.slate-home) .site-footer--care{
+  background:#101C29;color:#EDF3F4;
+}
+body.care-personal-site:has(.slate-home) .care-footer__invitation{display:none}
+.care-personal-site .care-footer__invitation{
+  background:linear-gradient(110deg,#1C2C3A,#304354)!important;
+  border:1px solid rgba(255,255,255,.18);border-radius:6px;
+}
+.care-personal-site .care-footer__intro h2{color:#fff;font-family:Georgia,"Times New Roman",serif;font-weight:500}
+.care-personal-site .care-footer__intro h2 span{color:#B2E9DB}
+.care-personal-site .care-footer__eyebrow{color:#B2E9DB}
+.care-personal-site .care-footer__invite-actions>p{color:#D6E6EA}
+.care-personal-site .care-footer__cta,
+body.care-personal-site:has(.slate-home) .care-footer__cta{
+  border-color:#B2E9DB;background:#B2E9DB;color:#101C29;
+}
+.care-personal-site .care-footer__cta:hover{background:#D7F7ED;color:#101C29}
+.care-personal-site .care-footer__main{padding-top:70px}
+.care-personal-site .care-footer__wordmark{font:500 2.55rem/1 Georgia,serif;color:#fff}
+.care-personal-site .care-footer__wordmark span{color:#B2E9DB}
+.care-personal-site .care-footer__identity p,
+.care-personal-site .care-footer__location,
+.care-personal-site .care-footer__column a,
+.care-personal-site .care-footer__bottom,
+.care-personal-site .care-footer__credits{color:#CFDEE4}
+.care-personal-site .care-footer__column h3{color:#fff}
+.care-personal-site .care-footer__column a:hover,
+.care-personal-site .care-footer__bottom a:hover,
+.care-personal-site .care-footer__credits a{color:#B2E9DB}
+.care-personal-site .care-footer__bottom{border-top-color:rgba(255,255,255,.22)}
+.care-personal-site .care-footer__credits summary{color:#B2E9DB}
+.care-personal-site .care-footer__credits{border-color:rgba(255,255,255,.2)}
+@media(max-width:1100px){.care-personal-site .site-header__inner,body.care-personal-site:has(.slate-home) .site-header__inner{width:calc(100% - 64px)}}
+@media(max-width:790px){.care-personal-site .site-header__inner,body.care-personal-site:has(.slate-home) .site-header__inner{width:calc(100% - 40px)}}
+@media(max-width:560px){
+ .care-personal-site .site-header__inner,body.care-personal-site:has(.slate-home) .site-header__inner{width:calc(100% - 36px)}
+ .care-personal-site .site-header,.care-personal-site .site-header__inner{min-height:68px}
+}
+@media(prefers-reduced-motion:reduce){.care-personal-site :is(.site-header,.site-footer--care) *{animation:none!important;transition:none!important}}
+
+/* Readable article metadata on cool tinted editorial surfaces (WCAG AA). */
+.care-personal-site .blog-card__meta { color:#435366!important; }
+
+/* Contact form helper text must reach AA on cloud-white and ivory surfaces. */
+.care-personal-site .form-field__help { color:#435366!important; }

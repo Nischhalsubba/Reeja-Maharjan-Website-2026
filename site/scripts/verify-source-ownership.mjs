@@ -50,7 +50,8 @@ const expectedStyleImports = [
   '../styles/care-personal-inner.css',
   '../styles/care-article-footer.css',
   '../styles/care-editorial-v4.css',
-  '../styles/reeja-home-v7.css'
+  '../styles/slate-home.css',
+  '../styles/slate-site.css'
 ];
 
 for (const stylesheet of expectedStyleImports) {
@@ -71,7 +72,7 @@ const cvPageSource = await read('src/pages/cv.astro');
 if (!cvPageSource.includes("import '../styles/care-cv-print.css'")) {
   failures.push('The CV must import the dedicated print-only stylesheet.');
 }
-for (const stylesheet of ['care-shell.css','care-inner-layout.css','reeja-home-v7.css','care-personal-inner.css','care-article-footer.css','care-editorial-v4.css']) {
+for (const stylesheet of ['care-shell.css','care-inner-layout.css','slate-home.css','slate-site.css','care-personal-inner.css','care-article-footer.css','care-editorial-v4.css']) {
   const source = await read(`src/styles/${stylesheet}`);
   if (/field-journal|care-ledger|--fj-/i.test(source)) {
     failures.push(`Obsolete theme scope/token found in active CSS: ${stylesheet}`);
