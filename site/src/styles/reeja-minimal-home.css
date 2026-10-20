@@ -262,3 +262,30 @@ body.care-personal-site:has(.rm-home) .care-footer__bottom{
   body.care-personal-site .rm-home .rm-contact{background:white!important;color:#111!important}
   body.care-personal-site .rm-home{overflow:visible}
 }
+
+/* Screenshot-reviewed home shell: the legacy seafoam navigation/credits must
+   not be reused as light text on off-white backgrounds. */
+body.care-personal-site:has(.rm-home) .site-header .menu-toggle{
+  background:#FFFFFF;border:1px solid #9BA19E;color:#17191A;
+}
+body.care-personal-site:has(.rm-home) .site-header .menu-toggle__label{
+  color:#17191A;
+}
+body.care-personal-site:has(.rm-home) .site-header .menu-toggle__icon i{
+  background:#17191A;
+}
+body.care-personal-site:has(.rm-home) .site-header .menu-toggle:hover,
+body.care-personal-site:has(.rm-home) .site-header .menu-toggle:focus-visible{
+  background:#ECEBE7;border-color:#313536;color:#17191A;
+}
+body.care-personal-site:has(.rm-home) .site-footer--care .care-footer__credits,
+body.care-personal-site:has(.rm-home) .site-footer--care .care-footer__credits summary,
+body.care-personal-site:has(.rm-home) .site-footer--care .care-footer__credits a{
+  color:#313B38;
+}
+body.care-personal-site:has(.rm-home) .site-footer--care .care-footer__credits{
+  border-color:#DEE1DD;
+}
+body.care-personal-site:has(.rm-home) .site-footer--care .care-footer__wordmark span{
+  color:#313536;
+}
