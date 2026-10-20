@@ -47,7 +47,7 @@ test('Care is Personal remains composed across release viewports', async ({ brow
         dimensions.clientWidth + 1
       );
       expect(dimensions.designSystem).toBe('care-is-personal');
-      expect(dimensions.background).toBe('rgb(255, 255, 255)');
+      expect(dimensions.background).toBe(route.path === '/' ? 'rgb(250, 250, 248)' : 'rgb(255, 255, 255)');
 
       await expect(page.locator('body')).toHaveClass(/care-personal-site/);
       await expect(page.locator('main')).toBeVisible();
