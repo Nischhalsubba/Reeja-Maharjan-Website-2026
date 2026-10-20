@@ -75,6 +75,9 @@ export const requiredRoutes = [
   '/maternal-health/',
   '/nursing-practice/',
   '/blog/',
+  '/blog/topics/maternal-health/',
+  '/blog/topics/nursing-practice/',
+  '/blog/topics/research-and-digital-health/',
   '/blog/essential-maternal-newborn-care-guide-2026/'
 ];
 
