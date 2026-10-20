@@ -154,3 +154,6 @@ body.care-personal-site:has(.slate-home) .care-footer__cta{
 
 /* Readable article metadata on cool tinted editorial surfaces (WCAG AA). */
 .care-personal-site .blog-card__meta { color:#435366!important; }
+
+/* Contact form helper text must reach AA on cloud-white and ivory surfaces. */
+.care-personal-site .form-field__help { color:#435366!important; }
