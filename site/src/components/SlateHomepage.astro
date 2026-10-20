@@ -4,6 +4,7 @@
  * Uses only verified site content and user-approved personal photography.
  */
 import BrandIcon from './BrandIcon.astro';
+import { heroImageSrc, heroImageSrcSet, heroImageSizes, hasVerifiedHeroFourKAsset } from '../lib/heroPhotography';
 import { professionalFacts as facts } from '../content/professional-facts';
 import { profile } from '../content/profile';
 import { blogPosts } from '../content/blog';
@@ -31,7 +32,7 @@ const formattedDate=(date:string)=>new Date(date+'T00:00:00Z').toLocaleDateStrin
 
 <div class="slate-home cip-home rv7-home" data-slate-home>
   <section class="slate-hero cip-hero rv7-hero" id="home" aria-labelledby="slate-hero-title">
-    <img class="slate-hero__photograph" src="/images/reeja-lakeside.webp" width="720" height="405" alt="Reeja on a lakeside balcony, holding a warm drink and looking across the hills" fetchpriority="high" loading="eager" decoding="async" />
+    <img class="slate-hero__photograph" src={heroImageSrc} srcset={heroImageSrcSet} sizes={heroImageSizes} width={hasVerifiedHeroFourKAsset ? 3840 : 600} height={hasVerifiedHeroFourKAsset ? 2160 : 338} alt="Reeja on a lakeside balcony, holding a warm drink and looking across the hills" fetchpriority="high" loading="eager" decoding="async" />
     <div class="slate-hero__wash" aria-hidden="true"></div>
     <div class="slate-hero__rings" aria-hidden="true"><span></span><span></span></div>
     <div class="slate-container slate-hero__layout">
