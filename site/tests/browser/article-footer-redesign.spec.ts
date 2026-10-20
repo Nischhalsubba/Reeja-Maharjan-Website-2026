@@ -62,7 +62,7 @@ test('redesigned footer is consistent and accessible on homepage and article', a
       const footer = page.locator('footer.site-footer--care');
       await expect(footer).toBeVisible();
       if(path==='/') await expect(page.locator('.slate-contact h2')).toBeVisible();
-      else await expect(footer.getByRole('heading',{name:/Better care starts/})).toBeVisible();
+      else await expect(footer.getByRole('heading',{name:/Write to Reeja/})).toBeVisible();
       if(path==='/') await expect(page.locator('.slate-contact').getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
       else await expect(footer.getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
       await expect(footer.getByRole('navigation', { name: "Explore Reeja's website" })).toBeVisible();
