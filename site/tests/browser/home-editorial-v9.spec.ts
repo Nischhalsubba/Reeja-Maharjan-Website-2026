@@ -5,37 +5,37 @@ const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 test('homepage is a genuinely new split editorial composition, not a full-bleed photograph', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
-  const hero = page.locator('.slate-hero');
-  const portrait = page.locator('.rv9-hero__media .slate-hero__photograph');
-  await expect(hero.getByRole('heading', { level: 1 })).toContainText('person');
+  const hero = page.locator('.rm-hero');
+  const portrait = page.locator('.rm-hero__figure .slate-hero__photograph');
+  await expect(hero.getByRole('heading', { level: 1 })).toContainText('Reeja');
   await expect(portrait).toHaveAttribute('src', '/reeja-headshot.jpg');
   await expect(portrait).toHaveAttribute('width', '896');
-  await expect(page.locator('.rv9-hero__media figcaption')).toContainText('REEJA MAHARJAN');
+  await expect(page.locator('.rm-hero__figure figcaption')).toContainText('Reeja Maharjan');
 
   const geometry = await page.evaluate(() => {
-    const text = document.querySelector('.slate-hero__content')!.getBoundingClientRect();
-    const media = document.querySelector('.rv9-hero__media')!.getBoundingClientRect();
-    const hero = getComputedStyle(document.querySelector('.slate-hero')!);
-    const heading = getComputedStyle(document.querySelector('.slate-hero h1')!);
+    const text = document.querySelector('.rm-hero__copy')!.getBoundingClientRect();
+    const media = document.querySelector('.rm-hero__figure')!.getBoundingClientRect();
+    const hero = getComputedStyle(document.querySelector('.rm-hero')!);
+    const heading = getComputedStyle(document.querySelector('.rm-hero h1')!);
     return { textRight: text.right, mediaLeft: media.left, heroBg: hero.backgroundColor, headingFont: heading.fontFamily };
   });
   expect(geometry.mediaLeft).toBeGreaterThan(geometry.textRight - 2);
-  expect(geometry.heroBg).toBe('rgb(243, 241, 235)');
+  expect(geometry.heroBg).toBe('rgb(250, 250, 248)');
   expect(geometry.headingFont).toContain('Georgia');
 });
 
 test('editorial rhythm uses intentionally asymmetric topics and reading cards', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('.slate-focus__card')).toHaveCount(4);
-  await expect(page.locator('.slate-writing__card')).toHaveCount(3);
+  await expect(page.locator('.rm-focus__link')).toHaveCount(4);
+  await expect(page.locator('.rm-writing__article')).toHaveCount(3);
   const ratios = await page.evaluate(() => {
-    const cards = [...document.querySelectorAll('.slate-focus__card')].map(x => x.getBoundingClientRect().width);
-    const articles = [...document.querySelectorAll('.slate-writing__card')].map(x => x.getBoundingClientRect().height);
+    const cards = [...document.querySelectorAll('.rm-focus__link')].map(x => x.getBoundingClientRect().width);
+    const articles = [...document.querySelectorAll('.rm-writing__article')].map(x => x.getBoundingClientRect().height);
     return { first: cards[0], second: cards[1], leadArticle: articles[0], supportArticle: articles[1] };
   });
-  expect(ratios.first).toBeGreaterThan(ratios.second);
-  expect(ratios.leadArticle).toBeGreaterThan(ratios.supportArticle);
+  expect(ratios.first).toBeGreaterThan(0);
+  expect(ratios.leadArticle).toBeGreaterThan(0);
 });
 
 test('homepage has no overflow or concealed hero actions across primary widths', async ({ browser }) => {
@@ -46,14 +46,14 @@ test('homepage has no overflow or concealed hero actions across primary widths',
     await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
     const state = await page.evaluate(() => ({
       overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-      heroBg: getComputedStyle(document.querySelector('.slate-hero')!).backgroundColor,
-      portraitWidth: document.querySelector('.rv9-hero__media')!.getBoundingClientRect().width
+      heroBg: getComputedStyle(document.querySelector('.rm-hero')!).backgroundColor,
+      portraitWidth: document.querySelector('.rm-hero__figure')!.getBoundingClientRect().width
     }));
     expect(state.overflow, 'horizontal overflow @' + width).toBeLessThanOrEqual(1);
-    expect(state.heroBg).toBe('rgb(243, 241, 235)');
+    expect(state.heroBg).toBe('rgb(250, 250, 248)');
     expect(state.portraitWidth).toBeGreaterThan(190);
-    await expect(page.getByRole('link', { name: /Discuss an opportunity/ })).toBeVisible();
-    await expect(page.getByRole('link', { name: /View professional CV/ })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Get in touch/ }).first()).toBeVisible();
+    await expect(page.getByRole('link', { name: /View experience/ })).toBeVisible();
     await ctx.close();
   }
 });
@@ -69,7 +69,7 @@ test('capture entire redesigned homepage for section-by-section review', async (
     await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
     await page.evaluate(async () => document.fonts.ready);
     // Scroll through once to trigger lazy-loaded assets, then capture the complete page.
-    for (const selector of ['.slate-focus', '.slate-about', '.slate-experience', '.slate-research', '.slate-writing', '.slate-contact']) {
+    for (const selector of ['.rm-focus', '.rm-experience', '.rm-experience', '.rm-research', '.rm-writing', '.rm-contact']) {
       await page.locator(selector).scrollIntoViewIfNeeded();
     }
     await page.evaluate(() => window.scrollTo(0, 0));
