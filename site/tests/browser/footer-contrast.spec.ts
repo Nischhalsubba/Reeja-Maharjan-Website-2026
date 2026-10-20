@@ -44,7 +44,7 @@ test('footer CTA retains WCAG AA contrast in default hover and focus states', as
 
       const states = [await readColors()];
       await cta.hover();
-      await expect(cta).toHaveCSS('background-color', route === '/' ? 'rgb(58, 65, 65)' : 'rgb(215, 247, 237)');
+      await expect(cta).toHaveCSS('background-color', route === '/' ? 'rgb(57, 64, 63)' : 'rgb(215, 247, 237)');
       states.push(await readColors());
       await cta.focus();
       states.push(await readColors());
