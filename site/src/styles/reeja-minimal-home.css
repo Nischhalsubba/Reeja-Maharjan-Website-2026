@@ -54,7 +54,7 @@ body.care-personal-site:has(.rm-home) .site-header .brand__text strong span{
 }
 body.care-personal-site:has(.rm-home) .site-header .desktop-nav>a:not(.nav-cta){
   background:transparent;color:var(--rm-charcoal);border:0;border-radius:0;
-  font-size:.81rem;font-weight:550;min-height:44px;
+  font-size:.9375rem;font-weight:550;min-height:44px;
   box-shadow:none;
 }
 body.care-personal-site:has(.rm-home) .site-header .desktop-nav>a:not(.nav-cta):hover,
@@ -124,7 +124,7 @@ body.care-personal-site .rm-experience__facts span{color:#545F5D;font-size:.67re
 body.care-personal-site .rm-experience__subheading{font:500 1.1rem "Public Sans",sans-serif!important;letter-spacing:0!important;margin:20px 0 9px!important}
 body.care-personal-site .rm-experience__roles{list-style:none;padding:0;margin:0 0 16px;border-top:1px solid var(--rm-line)}
 body.care-personal-site .rm-experience__roles li{display:grid;grid-template-columns:25px minmax(0,1fr) auto;gap:13px;align-items:start;padding:12px 0;border-bottom:1px solid var(--rm-line)}
-body.care-personal-site .rm-experience__roles .slate-experience__count{color:#737B79;font-family:var(--rm-serif);font-size:.96rem}
+body.care-personal-site .rm-experience__roles .slate-experience__count{color:#4D5653;font-family:var(--rm-serif);font-size:.96rem}
 body.care-personal-site .rm-experience__roles strong{display:block;font-size:.88rem;line-height:1.4}
 body.care-personal-site .rm-experience__roles small{display:block;color:#58615F;font-size:.78rem;line-height:1.42;margin-top:3px}
 body.care-personal-site .rm-role__period{font-size:.69rem;color:#5B6663;text-align:right;max-width:135px;line-height:1.4}
