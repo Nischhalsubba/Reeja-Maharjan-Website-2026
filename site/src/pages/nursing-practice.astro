@@ -11,6 +11,9 @@ const posts = blogPosts.filter((post) =>
     .match(/nursing|documentation|sbar|handover|confidential|licensure|student|general care/)
 ).slice(0, 3);
 import EditorialPhoto from '../components/EditorialPhoto.astro';
+import BrandAction from '../components/design-system/BrandAction.astro';
+import BrandCard from '../components/design-system/BrandCard.astro';
+import EvidenceList from '../components/design-system/EvidenceList.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -22,9 +25,7 @@ import EditorialPhoto from '../components/EditorialPhoto.astro';
           <h1>Nursing, <em>centred on people.</em></h1>
           <p class="site-page__lede">Clear communication, accurate documentation, structured handover, monitoring, patient education, and timely escalation.</p>
         </div>
-        <dl class="site-page__summary">
-          {copy.summary.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
-        </dl>
+        <EvidenceList items={copy.summary.map(([label, value]) => ({ label, value }))} />
       </div>
     </section>
     <EditorialPhoto kind="clinical" label="Care, communication and clinical practice" />
@@ -37,12 +38,12 @@ import EditorialPhoto from '../components/EditorialPhoto.astro';
         </div>
         <div class="site-grid">
           {posts.map((post) => (
-            <article class="site-card">
+            <BrandCard>
               <p class="site-eyebrow">By Reeja Maharjan · {post.readMinutes} min read</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
               <p><a href={`/blog/${post.slug}/`}>Read article</a></p>
-            </article>
+            </BrandCard>
           ))}
         </div>
         <p><a href="/blog/">View all writing by Reeja</a></p>
