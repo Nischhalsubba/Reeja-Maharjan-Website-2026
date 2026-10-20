@@ -7,7 +7,7 @@
   --brand-canvas: #F5F8FA;
   --brand-coral: #B2E9DB; /* Large ornament and icon accents only. */
   --brand-coral-ink: #2C655D; /* Reserved for rare deliberate accents; normal metadata uses cobalt. */
-  --brand-muted: #647587;
+  --brand-muted: #56697B;
   --brand-line: #DAE2E8;
   --brand-line-strong: #A4B5C1;
   --brand-surface-strong: #DDEAE8;
@@ -56,7 +56,7 @@
   --surface-alt: #EAF0F5;
   --surface-strong: #DDEAE8;
   --text: #202D3D;
-  --muted: #647587;
+  --muted: #56697B;
   --muted-strong: #334D58;
   --line: #DAE2E8;
   --line-strong: #A4B5C1;
@@ -65,7 +65,7 @@
   --accent-hover: var(--brand-blue-hover);
   --accent-soft: var(--brand-lavender);
   --signal: var(--brand-coral-ink);
-  --placeholder: #647587;
+  --placeholder: #56697B;
   --success: #206049;
   --warning: #7d5418;
   --danger: #a03535;
@@ -105,6 +105,7 @@
   --btn-pad-x: 20px;
   --btn-pad-y: 11px;
   --touch-target: 44px;
+  --site-header-height: 76px;
 
   /* Motion. */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
