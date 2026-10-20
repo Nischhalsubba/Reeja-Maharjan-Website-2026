@@ -9,9 +9,10 @@ test('Slate homepage contains authentic hero, four focus areas, four career role
  await expect(page.locator('.slate-research__steps li')).toHaveCount(4);
  await expect(page.locator('.slate-experience__list')).toContainText('Sindhuli Hospital');
  await expect(page.locator('.slate-experience__list')).toContainText('Institute for Implementation Science and Health');
- await expect(page.getByRole('link',{name:/Explore my work/})).toHaveAttribute('href','#experience');
- await expect(page.getByRole('link',{name:/My professional CV/})).toHaveAttribute('href','/cv/');
+ await expect(page.getByRole('link',{name:/Discuss an opportunity/})).toHaveAttribute('href','/contact/');
+ await expect(page.getByRole('link',{name:/View professional CV/})).toHaveAttribute('href','/cv/');
  await expect(page.locator('.slate-home')).not.toContainText('Texas RN Active');
+ await expect(page.locator('.slate-credentials__list li')).toHaveCount(3);
  const img=page.locator('.slate-hero__photograph');
  await expect(img).toHaveAttribute('src','/images/reeja-lakeside.webp');
  await expect.poll(()=>img.evaluate(x=>(x as HTMLImageElement).naturalWidth),{timeout:15000}).toBeGreaterThan(0);
@@ -40,8 +41,8 @@ test('mobile navigation opens and closes and hero anchor works',async({page})=>{
  await expect(page.locator('#mobile-nav')).toBeVisible();
  await page.keyboard.press('Escape');
  await expect(page.locator('#mobile-nav')).toBeHidden();
- await page.locator('.slate-hero a[href="#experience"]').click();
- await expect(page).toHaveURL(/#experience$/);
+ await page.locator('.slate-thread a[href="/nursing-practice/"]').click();
+ await expect(page).toHaveURL(/\/nursing-practice\/$);
 });
 test('remote article photos degrade to branded local illustrations',async({page})=>{
  await page.route('https://images.unsplash.com/**',route=>route.abort());
