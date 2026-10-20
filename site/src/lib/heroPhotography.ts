@@ -21,10 +21,13 @@ if (hasVerifiedHeroFourKAsset) {
 }
 
 export const heroImageSrc = hasVerifiedHeroFourKAsset
-  ? '/images/reeja-lakeside-4k.webp'
+  ? '/images/reeja-lakeside-1920.webp'
   : '/images/reeja-lakeside.webp';
 
 export const heroImageSrcSet = hasVerifiedHeroFourKAsset
-  ? '/images/reeja-lakeside.webp 600w, /images/reeja-lakeside-4k.webp 3840w'
+  ? [
+      '/images/reeja-lakeside.webp 600w',
+      ...[960, 1440, 1920, 2560, 3840].map(width => `/images/reeja-lakeside-${width}.webp ${width}w`)
+    ].join(', ')
   : undefined;
 export const heroImageSizes = '(max-width: 790px) 100vw, 79vw';
