@@ -1,0 +1,23 @@
+---
+/**
+ * Reeja Design System — action primitive.
+ * Use anchors for navigation, buttons for actions. Avoid nested click handlers.
+ */
+type Props = {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'text';
+  size?: 'default' | 'compact';
+  className?: string;
+  target?: '_blank' | '_self';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  ariaLabel?: string;
+  dataTrack?: string;
+};
+const { href, variant = 'secondary', size = 'default', className, target, type = 'button', disabled = false, ariaLabel, dataTrack } = Astro.props;
+const classes = ['site-button', 'ds-action', variant === 'primary' && 'site-button--primary', 'ds-action--' + variant, size === 'compact' && 'ds-action--compact', className];
+const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+---
+{href && !disabled
+  ? <a href={href} class:list={classes} target={target} rel={rel} aria-label={ariaLabel} data-track={dataTrack}><slot /></a>
+  : <button type={type} class:list={classes} disabled={disabled} aria-label={ariaLabel} data-track={dataTrack}><slot /></button>}
