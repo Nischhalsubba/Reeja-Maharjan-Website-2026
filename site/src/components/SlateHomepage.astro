@@ -1,10 +1,9 @@
 ---
 /**
- * Slate & Seafoam v8 — production rendering of the approved standalone concept.
+ * Reeja editorial v9 — art-directed homepage powered by Slate & Seafoam tokens.
  * Uses only verified site content and user-approved personal photography.
  */
 import BrandIcon from './BrandIcon.astro';
-import { heroImageSrc, heroImageSrcSet, heroImageSizes, hasVerifiedHeroFourKAsset } from '../lib/heroPhotography';
 import { professionalFacts as facts } from '../content/professional-facts';
 import { profile } from '../content/profile';
 import { blogPosts } from '../content/blog';
@@ -32,26 +31,31 @@ const formattedDate=(date:string)=>new Date(date+'T00:00:00Z').toLocaleDateStrin
 
 <div class="slate-home cip-home rv7-home" data-slate-home>
   <section class="slate-hero cip-hero rv7-hero" id="home" aria-labelledby="slate-hero-title">
-    <img class="slate-hero__photograph" src={heroImageSrc} srcset={heroImageSrcSet} sizes={heroImageSizes} width={hasVerifiedHeroFourKAsset ? 3840 : 600} height={hasVerifiedHeroFourKAsset ? 2160 : 338} alt="Reeja on a lakeside balcony, holding a warm drink and looking across the hills" fetchpriority="high" loading="eager" decoding="async" />
-    <div class="slate-hero__wash" aria-hidden="true"></div>
-    <div class="slate-hero__rings" aria-hidden="true"><span></span><span></span></div>
+    <div class="rv9-hero__rule" aria-hidden="true"></div>
     <div class="slate-container slate-hero__layout">
       <div class="slate-hero__content">
-        <p class="slate-eyebrow slate-eyebrow--light">REEJA MAHARJAN <span aria-hidden="true">/</span> NURSE &amp; RESEARCHER</p>
-        <h1 id="slate-hero-title">The <span>person</span><br />before the<br />number.</h1>
+        <p class="slate-eyebrow slate-eyebrow--light"><span class="rv9-hero__accent" aria-hidden="true">✳</span> REEJA MAHARJAN <span aria-hidden="true">/</span> NURSE &amp; RESEARCHER</p>
+        <h1 id="slate-hero-title">The <span>person</span><br />before the<br />number.</h1><span class="rv9-hero__margin-note">A PRACTICE OF PRESENCE<br />EST. IN CARE, GROWN THROUGH RESEARCH</span>
         <p class="slate-hero__lede"><strong>I'm Reeja Maharjan, a registered nurse and maternal-health research assistant.</strong> My work brings together compassionate hospital care, patient education and careful research documentation.</p>
         <div class="slate-actions">
           <a class="slate-button slate-button--mint" href="/contact/" data-track="home-contact">Discuss an opportunity <BrandIcon name="arrow-up-right" size={18}/></a>
           <a class="slate-link slate-link--light" href={facts.publicCvPath} data-track="home-cv">View professional CV <BrandIcon name="arrow-up-right" size={18}/></a>
         </div>
       </div>
+      <figure class="rv9-hero__media">
+        <div class="rv9-hero__photo-frame">
+          <img class="slate-hero__photograph" src="/reeja-headshot.jpg" width="896" height="1200" alt="Portrait of Reeja Maharjan, registered nurse and maternal-health research assistant" fetchpriority="high" loading="eager" decoding="async" />
+          <span class="rv9-hero__photo-index" aria-hidden="true">01 / HUMAN FIRST</span>
+        </div>
+        <figcaption><span>REEJA MAHARJAN</span><span>THE STORY BEHIND THE PRACTICE.</span></figcaption>
+      </figure>
       <div class="slate-hero__bottom">
         <span>REGISTERED NURSE · NNC</span>
         <span>RESEARCH ASSISTANT · IISH</span>
         <span>BIRATNAGAR, NEPAL</span>
       </div>
-      <span class="slate-hero__folio" aria-hidden="true">THE CARE INDEX / 001</span>
-      <span class="slate-hero__caption">BEYOND THE WARD <strong>PERSPECTIVE MATTERS.</strong></span>
+      <span class="slate-hero__folio" aria-hidden="true">AN EDITORIAL PROFILE <span>№ 001</span></span>
+      <span class="slate-hero__caption">CARE · RESEARCH · <strong>PEOPLE</strong></span>
     </div>
   </section>
 
@@ -109,7 +113,7 @@ const formattedDate=(date:string)=>new Date(date+'T00:00:00Z').toLocaleDateStrin
         <a href="/cv/" class="slate-link slate-link--light">Get to know my work <BrandIcon name="arrow-up-right" size={18}/></a>
       </div>
       <div class="slate-about__portrait">
-        <img src="/reeja-headshot.jpg" alt="Portrait of Reeja Maharjan" width="800" height="1000" loading="lazy" decoding="async"/>
+        <img src="/images/reeja-lakeside.webp" alt="Reeja by the lakeside, outside of her professional work" width="600" height="338" loading="lazy" decoding="async"/>
         <div class="slate-about__stamp">CARE IS <strong>PERSONAL.</strong></div>
       </div>
     </div>
