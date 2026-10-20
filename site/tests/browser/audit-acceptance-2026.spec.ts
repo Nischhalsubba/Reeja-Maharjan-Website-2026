@@ -30,7 +30,7 @@ test('brand muted text and timeline indices have AA contrast on light canvas', a
         const n = Number.parseInt(value.slice(1), 16);
         return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
       }
-      return (value.match(/[\\d.]+/g) ?? []).slice(0, 3).map(Number);
+      return (value.match(/[\d.]+/g) ?? []).slice(0, 3).map(Number);
     };
     const luminance = (value: string) =>
       rgb(value).map((c) => {
