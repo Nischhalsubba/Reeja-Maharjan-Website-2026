@@ -20,7 +20,7 @@ test('Slate hero and article typography meet minimum readable size',async({page}
  for(const width of [320,390,768,1440]){
   await page.setViewportSize({width,height:900});
   await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
-  for(const selector of ['.slate-hero__lede','.slate-heading>div:last-child>p','.slate-focus__card>p']){
+  for(const selector of ['.slate-hero__lede','.rm-experience__body .rm-body-copy','.rm-research__content .rm-body-copy']){
    const el=page.locator(selector).first();await expect(el).toBeVisible();
    expect(await el.evaluate(n=>parseFloat(getComputedStyle(n).fontSize))).toBeGreaterThanOrEqual(14);
   }
