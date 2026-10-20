@@ -5,19 +5,19 @@ const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 test('home page makes identity, credentials and professional contact discoverable', async ({ page }) => {
   await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
 
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('person');
-  await expect(page.locator('.slate-hero__lede')).toContainText('Reeja Maharjan');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Reeja');
   await expect(page.locator('.slate-hero__lede')).toContainText('registered nurse');
-  await expect(page.getByRole('link', { name: /Discuss an opportunity/ })).toHaveAttribute('href', '/contact/');
-  await expect(page.getByRole('link', { name: /View professional CV/ })).toHaveAttribute('href', '/cv/');
+  await expect(page.locator('.slate-hero__lede')).toContainText('registered nurse');
+  await expect(page.getByRole('link', { name: /Get in touch/ }).first()).toHaveAttribute('href', '/contact/');
+  await expect(page.getByRole('link', { name: /View experience/ })).toHaveAttribute('href', '#experience');
 
   const proof = page.locator('.slate-credentials');
-  await expect(proof.getByRole('heading', { name: 'Qualifications at a glance.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Clinical experience/ })).toBeVisible();
   await expect(proof.locator('li')).toHaveCount(3);
   await expect(proof).toContainText('NNC Licensed RN');
   await expect(proof).toContainText('B.Sc. Nursing');
   await expect(proof).toContainText('IISH');
-  await expect(proof.getByRole('link', { name: /Review credentials/ })).toHaveAttribute('href', '/cv/');
+  await expect(page.getByRole('link', { name: /Explore full professional CV/ })).toHaveAttribute('href', '/cv/');
 });
 
 test('brand muted text and timeline indices have AA contrast on light canvas', async ({ page }) => {
