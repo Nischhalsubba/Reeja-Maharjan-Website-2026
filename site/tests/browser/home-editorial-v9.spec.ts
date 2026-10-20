@@ -52,7 +52,7 @@ test('homepage has no overflow or concealed hero actions across primary widths',
     expect(state.overflow, 'horizontal overflow @' + width).toBeLessThanOrEqual(1);
     expect(state.heroBg).toBe('rgb(250, 250, 248)');
     expect(state.portraitWidth).toBeGreaterThan(190);
-    await expect(page.getByRole('link', { name: /Get in touch/ })).toBeVisible();
+    await expect(page.getByRole('link', { name: /Get in touch/ }).first()).toBeVisible();
     await expect(page.getByRole('link', { name: /View experience/ })).toBeVisible();
     await ctx.close();
   }
