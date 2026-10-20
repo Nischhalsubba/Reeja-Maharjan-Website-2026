@@ -58,9 +58,9 @@ test('palette studio changes real hero, research and footer colors with one sele
       const footer=document.querySelector('.palette-stage__footer')!;
       return {paper:style.getPropertyValue('--p-paper').trim(),ink:style.getPropertyValue('--p-ink').trim(),accent:style.getPropertyValue('--p-accent').trim(),footerBg:getComputedStyle(footer).backgroundColor,heroBg:getComputedStyle(hero).backgroundColor};
     });
-    expect(colors.paper).toBe(palette.paper);
-    expect(colors.ink).toBe(palette.ink);
-    expect(colors.accent).toBe(palette.accent);
+    expect(colors.paper.toUpperCase()).toBe(palette.paper);
+    expect(colors.ink.toUpperCase()).toBe(palette.ink);
+    expect(colors.accent.toUpperCase()).toBe(palette.accent);
     expect(ratio(palette.ink,palette.paper)).toBeGreaterThanOrEqual(4.5);
     expect(ratio(palette.accent,palette.paper)).toBeGreaterThanOrEqual(4.5);
     expect(ratio('#FFFFFF',palette.accent)).toBeGreaterThanOrEqual(4.5);
