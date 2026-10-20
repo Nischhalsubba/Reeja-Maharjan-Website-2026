@@ -13,8 +13,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "prebuild": "npm run verify:deployment && node scripts/generate-hero-variants.mjs",
-    "build": "node scripts/generate-build-fingerprint.mjs && astro build && node scripts/render-social-cards.mjs",
+    "prebuild": "npm run verify:deployment",
+    "build": "node scripts/generate-build-fingerprint.mjs && node scripts/generate-hero-variants.mjs && astro build && node scripts/render-social-cards.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint .",
