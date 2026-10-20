@@ -83,7 +83,7 @@ test('canonical palette text remains readable over site backgrounds', async ({ p
   const checks = [
     { route: '/', selector: '.slate-heading .slate-eyebrow', surface: '#F5F8FA' },
     { route: '/', selector: '.slate-writing__text h3 a', surface: '#ffffff' },
-    { route: '/', selector: '.slate-hero__lede', surface: '#1C2C3A' },
+    { route: '/', selector: '.slate-hero__lede', surface: '#F3F1EB' },
     { route: '/nursing-practice/', selector: '.site-page__hero .site-eyebrow', surface: '#1C2C3A' },
     { route: '/clinical-research/', selector: '.site-page__hero .site-eyebrow', surface: '#1C2C3A' },
     { route: '/contact/', selector: '.contact-hero .site-eyebrow', surface: '#1C2C3A' },
