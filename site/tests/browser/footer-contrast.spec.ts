@@ -27,7 +27,7 @@ test('footer CTA retains WCAG AA contrast in default hover and focus states', as
     const page = await context.newPage();
     for (const route of ['/', '/cv/', '/blog/mastering-nursing-documentation-sbar-handover/']) {
       await page.goto(`${origin}${route}`, { waitUntil: 'domcontentloaded' });
-      const cta = route==='/' ? page.locator('.slate-contact a.slate-button--mint') : page.locator('footer.site-footer--care a.care-footer__cta');
+      const cta = route==='/' ? page.locator('.rm-contact a.rm-button--primary') : page.locator('footer.site-footer--care a.care-footer__cta');
       await cta.scrollIntoViewIfNeeded();
       await expect(cta).toBeVisible();
 
@@ -44,7 +44,7 @@ test('footer CTA retains WCAG AA contrast in default hover and focus states', as
 
       const states = [await readColors()];
       await cta.hover();
-      await expect(cta).toHaveCSS('background-color', route === '/' ? 'rgb(178, 233, 219)' : 'rgb(215, 247, 237)');
+      await expect(cta).toHaveCSS('background-color', route === '/' ? 'rgb(58, 65, 65)' : 'rgb(215, 247, 237)');
       states.push(await readColors());
       await cta.focus();
       states.push(await readColors());
@@ -53,8 +53,8 @@ test('footer CTA retains WCAG AA contrast in default hover and focus states', as
         expect(contrast(state.foreground, state.background), `CTA contrast on ${route} at ${width}px`).toBeGreaterThanOrEqual(4.5);
         expect(state.arrowColor).toBe(state.foreground);
       }
-      expect(states[0].background).toBe(route === '/' ? 'rgb(28, 44, 58)' : 'rgb(178, 233, 219)');
-      expect(states[1].background).toBe(route === '/' ? 'rgb(178, 233, 219)' : 'rgb(215, 247, 237)');
+      expect(states[0].background).toBe(route === '/' ? 'rgb(23, 25, 26)' : 'rgb(178, 233, 219)');
+      expect(states[1].background).toBe(route === '/' ? 'rgb(58, 65, 65)' : 'rgb(215, 247, 237)');
       expect(states[2].outline).not.toBe('none');
       await expect(cta).toHaveAttribute('href', '/contact/');
     }
