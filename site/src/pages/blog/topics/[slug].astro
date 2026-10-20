@@ -32,6 +32,11 @@ const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US'
             <a class="site-button" href={topic.relatedHref}>{topic.relatedLabel}</a>
           </div>
         </div>
+        <dl class="site-page__summary" aria-label="Topic overview">
+          <div><dt>Articles</dt><dd>{posts.length} published guides</dd></div>
+          <div><dt>Topic</dt><dd>{topic.label}</dd></div>
+          <div><dt>Related work</dt><dd><a href={topic.relatedHref}>{topic.relatedLabel}</a></dd></div>
+        </dl>
       </div>
     </section>
 
