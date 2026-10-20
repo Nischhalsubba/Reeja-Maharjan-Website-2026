@@ -1,0 +1,187 @@
+---
+/**
+ * Reeja / Minimal Editorial 10
+ * The approved off-white/charcoal art direction uses real personal assets
+ * and sourced professional and editorial data. Never present illustrative
+ * clinical stock photography as Reeja or her actual patients.
+ */
+import BrandIcon from './BrandIcon.astro';
+import { professionalFacts as facts } from '../content/professional-facts';
+import { profile } from '../content/profile';
+import { blogPosts } from '../content/blog';
+import { getBlogImage, getBlogImageSrcSet } from '../content/blog/imagery';
+
+const focusAreas = [
+  { name: 'Maternal & newborn care', href: '/maternal-health/' },
+  { name: 'General nursing', href: '/nursing-practice/' },
+  { name: 'Maternal-health research', href: '/clinical-research/' },
+  { name: 'Patient education', href: '/nursing-practice/' }
+];
+const clinicalRoles = profile.experience.filter(item => !item.organization.includes('Implementation Science'));
+const articles = [
+  'kangaroo-mother-care-who-2025-guide-parents-nurses',
+  'mastering-nursing-documentation-sbar-handover',
+  'gestational-diabetes-in-pregnancy-2026-monitoring-care'
+].map(slug => blogPosts.find(post => post.slug === slug))
+  .filter((post): post is (typeof blogPosts)[number] => Boolean(post));
+const fullDate = (date: string) => new Date(date+'T00:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
+const nurseImage = getBlogImage('nursing-careers-2026-who-workforce-report-nepal');
+const monitoringImage = getBlogImage('pre-eclampsia-pregnancy-warning-signs-monitoring-2026');
+---
+
+<div class="rm-home" data-reeja-home="minimal-editorial-v10">
+  <section class="rm-hero slate-hero" id="home" aria-labelledby="rm-title">
+    <div class="rm-container rm-hero__grid">
+      <div class="rm-hero__copy slate-hero__content">
+        <p class="rm-eyebrow">REGISTERED NURSE &amp; RESEARCH ASSISTANT</p>
+        <h1 id="rm-title">Reeja<br /><span>Maharjan.</span></h1>
+        <p class="rm-hero__subtitle slate-hero__lede">A registered nurse working across maternal health, clinical nursing and research in Nepal.</p>
+        <div class="rm-hero__actions">
+          <a href="#experience" class="rm-button rm-button--primary" data-track="home-experience">View experience <BrandIcon name="arrow-right" size={17}/></a>
+          <a href="/contact/" class="rm-button rm-button--outline" data-track="home-contact">Get in touch</a>
+        </div>
+        <ul class="rm-hero__details" aria-label="Professional contact and location">
+          <li><BrandIcon name="map-pin" size={17}/>{facts.currentLocation}</li>
+          <li><BrandIcon name="mail" size={17}/><a href={`mailto:${facts.professionalEmail}`}>{facts.professionalEmail}</a></li>
+          <li><BrandIcon name="linkedin" size={17}/><a href={facts.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </div>
+      <figure class="rm-hero__figure rv9-hero__media">
+        <img class="rm-hero__portrait slate-hero__photograph" src="/reeja-headshot.jpg" width="896" height="1200" alt="Portrait of Reeja Maharjan" loading="eager" decoding="async" fetchpriority="high"/>
+        <figcaption>Reeja Maharjan <span>Clinical practice · Research</span></figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="rm-experience slate-experience" id="experience" aria-labelledby="rm-experience-title">
+    <div class="rm-container rm-experience__grid">
+      <figure class="rm-experience__photo">
+        <img src={nurseImage.src} srcset={getBlogImageSrcSet(nurseImage)} sizes="(max-width: 760px) 100vw, 34vw" width="700" height="860" alt={nurseImage.alt} loading="lazy" decoding="async"/>
+        <figcaption>Illustrative clinical photograph · Not Reeja or her patients</figcaption>
+      </figure>
+      <div class="rm-experience__body">
+        <p class="rm-eyebrow">PROFESSIONAL EXPERIENCE</p>
+        <h2 id="rm-experience-title">Clinical experience<br/>rooted in real care.</h2>
+        <p class="rm-body-copy">My hospital nursing experience includes maternal and newborn care, general wards, patient education, documentation and clinical handover.</p>
+        <div class="rm-experience__facts slate-credentials" aria-label="Professional qualifications">
+          <ul class="slate-credentials__list">
+            <li><strong>{facts.nepalLicenseShort}</strong><span>LICENSURE</span></li>
+            <li><strong>{facts.credential}</strong><span>EDUCATION</span></li>
+            <li><strong>{facts.currentEmployerShort}</strong><span>CURRENT RESEARCH</span></li>
+          </ul>
+        </div>
+        <h3 class="rm-experience__subheading">Professional record</h3>
+        <ol class="rm-experience__roles slate-experience__list">
+          {profile.experience.map((job, index) =>
+            <li class="slate-experience__item">
+              <span class="slate-experience__count" aria-hidden="true">{String(index+1).padStart(2,'0')}</span>
+              <div><strong>{job.role}</strong><small>{job.organization}</small></div>
+              <span class="rm-role__period">{job.period}</span>
+            </li>
+          )}
+        </ol>
+        <a href="/cv/" class="rm-inline-link">Explore full professional CV <BrandIcon name="arrow-up-right" size={17}/></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="rm-research slate-research" id="research" aria-labelledby="rm-research-title">
+    <div class="rm-container rm-research__grid">
+      <div class="rm-research__content">
+        <p class="rm-eyebrow">RESEARCH / IISH</p>
+        <h2 id="rm-research-title">Contributing to<br/>maternal health research.</h2>
+        <p class="rm-body-copy">I currently support the IISH MOM-HD maternal-health telemonitoring study, focusing on participant education, home-monitoring guidance, follow-up and accurate documentation.</p>
+        <a class="rm-button rm-button--primary" href="/clinical-research/">View research work <BrandIcon name="arrow-right" size={17}/></a>
+        <p class="rm-microcopy">These are research-support responsibilities; no study outcomes are claimed.</p>
+      </div>
+      <figure class="rm-research__photo">
+        <img src={monitoringImage.src} srcset={getBlogImageSrcSet(monitoringImage)} sizes="(max-width:760px) 100vw, 35vw" width="700" height="790" alt={monitoringImage.alt} loading="lazy" decoding="async"/>
+        <figcaption>Illustrative blood-pressure measurement</figcaption>
+      </figure>
+      <div class="rm-research__scope">
+        <p class="rm-eyebrow">RESEARCH FOCUS</p>
+        <h3>Diabetes and hypertension in pregnancy.</h3>
+        <p>Supporting research through participant communication, home monitoring, scheduled follow-up and study records.</p>
+        <ol class="slate-research__steps">
+          <li>Participant education</li><li>BP/BG monitoring support</li>
+          <li>Scheduled follow-up</li><li>Documentation and protocols</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="rm-focus" id="focus" aria-labelledby="rm-focus-title">
+    <div class="rm-container rm-focus__grid" id="about">
+      <div>
+        <p class="rm-eyebrow">AREAS OF PRACTICE</p>
+        <h2 id="rm-focus-title">Care, research<br/>and education.</h2>
+      </div>
+      <div class="rm-focus__items">
+        {focusAreas.map((area,index)=>
+          <a class="rm-focus__link slate-focus__card" href={area.href}>
+            <span>{String(index+1).padStart(2,'0')}</span>
+            <strong>{area.name}</strong>
+            <BrandIcon name="arrow-up-right" size={17}/>
+          </a>
+        )}
+      </div>
+    </div>
+    <div class="rm-container rm-focus__note slate-thread">
+      <p>Grounded in hospital practice, and strengthened through research and communication.</p>
+      <div class="slate-thread__inner">
+        <a href="/nursing-practice/">Nursing practice</a>
+        <a href="/clinical-research/">Maternal health research</a>
+        <a href="/maternal-health/">Patient education</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="rm-writing slate-writing" id="writing" aria-labelledby="rm-writing-title">
+    <div class="rm-container rm-writing__layout">
+      <div class="rm-writing__intro">
+        <p class="rm-eyebrow">FROM THE JOURNAL</p>
+        <h2 id="rm-writing-title">Notes from<br/>practice.</h2>
+        <p class="rm-body-copy">Source-linked writing on nursing, maternal health, research and everyday learning.</p>
+        <a class="rm-inline-link" href="/blog/">View all articles <BrandIcon name="arrow-up-right" size={17}/></a>
+      </div>
+      <div class="rm-writing__cards">
+        {articles.map((post,index)=>{
+          const image=getBlogImage(post.slug);
+          return <article class="rm-writing__article slate-writing__card">
+            <a class="rm-writing__image slate-writing__image" href={`/blog/${post.slug}/`} aria-label={`Read ${post.title}`}>
+              <img src={image.src} srcset={getBlogImageSrcSet(image)} sizes="(max-width:650px) 88vw, (max-width:1000px) 44vw, 24vw" width="700" height="500" alt={image.alt} loading="lazy" decoding="async" data-editorial-image data-fallback-src={index===0?'/images/newborn-care.svg':index===1?'/images/research-monitoring.svg':'/images/glucose-monitor.svg'}/>
+            </a>
+            <div class="rm-writing__card-body">
+              <p>{post.tags[0]||'Nursing'}</p>
+              <h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3>
+              <span>{fullDate(post.updatedAt)} · {post.readMinutes} MIN READ</span>
+            </div>
+          </article>
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="rm-contact slate-contact" id="contact" aria-labelledby="rm-contact-title">
+    <div class="rm-container rm-contact__inner">
+      <div><p class="rm-eyebrow">LET'S CONNECT</p><h2 id="rm-contact-title">Write to Reeja.</h2><p>For opportunities, collaborations or a conversation about nursing, research and community health.</p></div>
+      <a href="/contact/" class="rm-button rm-button--primary">Get in touch <BrandIcon name="arrow-right" size={17}/></a>
+    </div>
+  </section>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLImageElement>('.rm-home [data-editorial-image]').forEach(img=>{
+    const fallback=()=>{
+      const src=img.dataset.fallbackSrc;
+      if(!src||img.dataset.fallbackAttempted)return;
+      img.dataset.fallbackAttempted='true';
+      img.removeAttribute('srcset');
+      img.removeAttribute('sizes');
+      img.src=src;
+      img.alt='Illustrative editorial artwork for this article';
+    };
+    img.addEventListener('error',fallback,{once:true});
+    if(img.complete && img.naturalWidth===0)fallback();
+  });
+</script>
