@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { blogPosts } from '../../content/blog';
 import { siteCopy } from '../../content/site-copy';
+import { articleMatchesBlogTopic, blogTopics } from '../../content/blog/topics';
 
 const copy = siteCopy.blog;
 const formatDate = (value: string) =>
@@ -9,28 +10,10 @@ const formatDate = (value: string) =>
 
 const featuredPost = blogPosts[0];
 const articleList = featuredPost ? blogPosts.filter((post) => post.slug !== featuredPost.slug) : blogPosts;
-const topicGroups = [
-  {
-    label: 'Maternal health',
-    href: '/maternal-health/',
-    summary: 'Maternal recovery, newborn care, postpartum counselling, feeding support, and warning signs.',
-    pattern: /maternal|newborn|postnatal|breastfeeding|pregnan|mother/i
-  },
-  {
-    label: 'Nursing practice',
-    href: '/nursing-practice/',
-    summary: 'Documentation, SBAR handover, confidentiality, ward communication, and professional practice.',
-    pattern: /nursing|documentation|sbar|handover|confidential|clinical communication/i
-  },
-  {
-    label: 'Research & digital health',
-    href: '/clinical-research/',
-    summary: 'Telehealth, maternal-health research, licensure, community care, and professional development.',
-    pattern: /career|license|licensure|telehealth|digital|research|community/i
-  }
-].map((topic) => ({
+const topicGroups = blogTopics.map((topic) => ({
   ...topic,
-  count: blogPosts.filter((post) => [post.primaryKeyword, ...post.supportingKeywords, ...post.tags, post.title].join(' ').match(topic.pattern)).length
+  href: `/blog/topics/${topic.slug}/`,
+  count: blogPosts.filter((post) => articleMatchesBlogTopic(post, topic)).length
 }));
 import EditorialPhoto from '../../components/EditorialPhoto.astro';
 import BlogPhoto from '../../components/BlogPhoto.astro';
