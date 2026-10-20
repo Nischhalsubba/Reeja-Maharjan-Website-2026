@@ -671,6 +671,7 @@ body.care-personal-site .slate-home :is(.slate-hero,.slate-about,.slate-contact)
   body.care-personal-site .slate-home .slate-credentials__link{grid-column:2}
 }
 @media(max-width:900px){
+  body.care-personal-site .slate-home .rv9-hero__rule{display:none}
   body.care-personal-site .slate-home .slate-container{width:calc(100% - 48px)}
   body.care-personal-site .slate-home .slate-hero__layout{
     grid-template-columns:minmax(0,1.06fr) minmax(0,.95fr);
