@@ -22,7 +22,7 @@ test('Care is Personal design language is consistent across inner routes', async
       };
     });
     expect(metrics.bodyBackground).toBe('rgb(255, 255, 255)');
-    expect(metrics.headingFamily).toContain('Public Sans');
+    expect(metrics.headingFamily).toContain('Georgia');
     expect(metrics.overflow, `Overflow on ${path}`).toBeLessThanOrEqual(1);
     expect(metrics.photo, `Missing illustrative photo on ${path}`).toBe(true);
     await expect(page.locator('.cip-photo-band__credit')).toBeVisible();
@@ -48,7 +48,7 @@ test('Reduced motion does not conceal sections or interfere with links', async (
   const page = await context.newPage();
   await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
   await expect(page.getByRole('heading', { level: 1, name: /Care is\s*personal\./ })).toBeVisible();
-  const revealState = await page.locator('.rv5-personal__grid').evaluate((element) => getComputedStyle(element).visibility);
+  const revealState = await page.locator('.slate-about__layout').evaluate((element) => getComputedStyle(element).visibility);
   expect(revealState).not.toBe('hidden');
   await expect(page.getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '#experience');
   await context.close();

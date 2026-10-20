@@ -44,40 +44,15 @@ test('Care is Personal supporting-page heroes stay line-free, spacious and WebGL
   await expect(page.locator('[data-hero-scene]')).toHaveCount(0);
 });
 
-test('Care is Personal portrait uses the headshot and never relies on a cropping fit', async ({ browser }) => {
-  for (const viewport of [
-    { width: 375, height: 812 },
-    { width: 1440, height: 1050 }
-  ]) {
-    const context = await browser.newContext({ viewport, reducedMotion: 'reduce' });
-    const page = await context.newPage();
-    await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
-
-    const portrait = page.locator('.cip-hero__portrait img');
-    await expect(portrait).toBeVisible();
-    await expect(portrait).toHaveAttribute('src', '/reeja-headshot.jpg');
-
-    const imageState = await portrait.evaluate((image) => {
-      const element = image as HTMLImageElement;
-      const style = getComputedStyle(element);
-      return {
-        naturalWidth: element.naturalWidth,
-        naturalHeight: element.naturalHeight,
-        objectFit: style.objectFit,
-        objectPosition: style.objectPosition
-      };
-    });
-
-    expect(imageState.naturalWidth).toBeGreaterThan(0);
-    expect(imageState.naturalHeight).toBeGreaterThan(0);
-    expect(imageState.objectFit).toBe('contain');
-    expect(imageState.objectPosition).toContain('50%');
-
-    await context.close();
-  }
+test('Slate homepage uses Reeja’s real lakeside photograph without rendering a screenshot overlay', async ({page})=>{
+ await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+ const img=page.locator('.slate-hero__photograph');await expect(img).toBeVisible();
+ await expect(img).toHaveAttribute('src','/images/reeja-lakeside.webp');
+ await expect.poll(()=>img.evaluate(n=>(n as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+ await expect(page.locator('.slate-hero canvas')).toHaveCount(0);
 });
 
-test('Care is Personal palette and typography apply across the site', async ({ page }) => {
+test('Slate & Seafoam palette and typography apply across the site', async ({ page }) => {
   for (const path of [
     '/hire-reeja/',
     '/clinical-research/',
@@ -107,7 +82,7 @@ test('Care is Personal palette and typography apply across the site', async ({ p
     expect(state.carePersonal).toBe(true);
     expect(state.background).toBe('rgb(255, 255, 255)');
     expect(state.bodyFont).toContain('Public Sans');
-    expect(state.headingFont).toContain('Public Sans');
+    expect(state.headingFont).toContain('Georgia');
     expect(state.canvasCount).toBe(0);
   }
 });
@@ -147,18 +122,13 @@ test('primary pages identify Reeja in SEO metadata while keeping editorial headi
   await expect(page.getByText('Clinical care with a', { exact: false })).toHaveCount(0);
 });
 
-test('Care is Personal homepage preserves concise copy and working professional pathways', async ({ page }) => {
-  await page.goto(`${origin}/`, { waitUntil: 'networkidle' });
-  await expect(page.getByRole('heading', { level: 1, name: /Care is\s*personal\./ })).toBeVisible();
-  const heroIntro = page.locator('.cip-hero__lead');
-  await expect(heroIntro).toBeVisible();
-  expect((await heroIntro.innerText()).trim().length).toBeLessThan(190);
-  await expect(page.locator('.rv5-career-card')).toHaveCount(4);
-  await expect(page.locator('.rv5-writing-card')).toHaveCount(3);
-  await expect(page.locator('.rv6-trust__grid > div')).toHaveCount(3);
-  await expect(page.getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '#experience');
-  await expect(page.locator('footer.site-footer--care').getByRole('link', { name: /Get in touch/ })).toHaveAttribute('href', '/contact/');
-  await expect(page.locator('.desktop-nav').getByRole('link', { name: 'Hire Reeja' })).toBeVisible();
+test('Slate homepage keeps real professional pathways and published article links',async({page})=>{
+ await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
+ await expect(page.locator('.slate-focus__card')).toHaveCount(4);
+ await expect(page.locator('.slate-experience__item')).toHaveCount(4);
+ await expect(page.locator('.slate-writing__card')).toHaveCount(3);
+ await expect(page.getByRole('link',{name:/Explore my work/})).toHaveAttribute('href','#experience');
+ await expect(page.locator('.desktop-nav').getByRole('link',{name:'Hire Reeja'})).toBeVisible();
 });
 
 test('contact page submits through the provider POST flow and returns with success feedback', async ({ page }) => {

@@ -81,16 +81,16 @@ test('all public routes have labelled controls, accessible images, valid landmar
 test('canonical palette text remains readable over site backgrounds', async ({ page }) => {
   test.setTimeout(80_000);
   const checks = [
-    { route: '/', selector: '.rv5-eyebrow', surface: '#ffffff' },
-    { route: '/', selector: '.rv5-writing-card h3 a', surface: '#ffffff' },
-    { route: '/', selector: '.cip-hero__lead', surface: '#f0efff' },
-    { route: '/nursing-practice/', selector: '.site-eyebrow', surface: '#f0efff' },
+    { route: '/', selector: '.slate-heading .slate-eyebrow', surface: '#F5F8FA' },
+    { route: '/', selector: '.slate-writing__text h3 a', surface: '#ffffff' },
+    { route: '/', selector: '.slate-hero__lede', surface: '#1C2C3A' },
+    { route: '/nursing-practice/', selector: '.site-eyebrow', surface: '#EAF0F5' },
     { route: '/clinical-research/', selector: '.site-eyebrow', surface: '#f0efff' },
     { route: '/contact/', selector: '.contact-hero .site-eyebrow', surface: '#f0efff' },
     { route: '/blog/mastering-nursing-documentation-sbar-handover/', selector: '.blog-article__header .site-eyebrow', surface: '#f0efff' },
     { route: '/blog/', selector: '.site-eyebrow', surface: '#ffffff' },
     { route: '/cv/', selector: '.site-eyebrow', surface: '#ffffff' },
-    { route: '/', selector: '.care-footer__column a', surface: '#0b132a' },
+    { route: '/', selector: '.care-footer__column a', surface: '#101C29' },
     { route: '/', selector: '.care-footer__eyebrow', surface: '#0b132a' },
   ];
   for (const check of checks) {
