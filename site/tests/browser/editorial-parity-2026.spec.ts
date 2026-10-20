@@ -59,7 +59,7 @@ test('inner routes follow the shared slate/seafoam hero and editorial typography
 test('research visual is a scalable, accurate editorial asset, not a fictional dashboard', async ({ page }) => {
   await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
   const illustration = page.locator('.rm-research__photo > img');
-  await expect(illustration).toHaveAttribute('src', /images\\.unsplash\\.com/);
+  await expect(illustration).toHaveAttribute('src', /images\.unsplash\.com/);
   await expect(illustration).toHaveAttribute('width', '700');
   await expect(illustration).toHaveAttribute('height', '790');
   await expect(illustration).toHaveAttribute('alt', /Illustrative/);
