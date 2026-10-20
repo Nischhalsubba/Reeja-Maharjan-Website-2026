@@ -1,0 +1,12 @@
+---
+/** An editorial content surface; caller owns its headings, copy and links. */
+type Props = {
+  variant?: 'default' | 'soft' | 'outlined';
+  className?: string;
+  labelledBy?: string;
+};
+const { variant = 'default', className, labelledBy } = Astro.props;
+---
+<article class:list={['site-card', 'ds-card', 'ds-card--' + variant, className]} aria-labelledby={labelledBy}>
+  <slot />
+</article>

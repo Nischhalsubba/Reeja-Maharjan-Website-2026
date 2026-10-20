@@ -11,6 +11,9 @@ const posts = blogPosts.filter((post) =>
     .match(/maternal|newborn|postnatal|breastfeeding|pregnan|mother/)
 ).slice(0, 3);
 import EditorialPhoto from '../components/EditorialPhoto.astro';
+import BrandAction from '../components/design-system/BrandAction.astro';
+import BrandCard from '../components/design-system/BrandCard.astro';
+import EvidenceList from '../components/design-system/EvidenceList.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -22,9 +25,7 @@ import EditorialPhoto from '../components/EditorialPhoto.astro';
           <h1>Maternal &amp; <em>newborn health.</em></h1>
           <p class="site-page__lede">Maternal-newborn nursing experience combined with current research, monitoring support, follow-up, and patient education.</p>
         </div>
-        <dl class="site-page__summary">
-          {copy.summary.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
-        </dl>
+        <EvidenceList items={copy.summary.map(([label, value]) => ({ label, value }))} />
       </div>
     </section>
     <EditorialPhoto kind="nepal" label="Maternal health and community care in Nepal" />
@@ -37,12 +38,12 @@ import EditorialPhoto from '../components/EditorialPhoto.astro';
         </div>
         <div class="site-grid">
           {posts.map((post) => (
-            <article class="site-card">
+            <BrandCard>
               <p class="site-eyebrow">By Reeja Maharjan · {post.readMinutes} min read</p>
               <h3>{post.title}</h3>
               <p>{post.excerpt}</p>
               <p><a href={`/blog/${post.slug}/`}>Read article</a></p>
-            </article>
+            </BrandCard>
           ))}
         </div>
         <p><a href="/blog/">View all writing by Reeja</a></p>
@@ -52,7 +53,7 @@ import EditorialPhoto from '../components/EditorialPhoto.astro';
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
         <div><p class="site-eyebrow">Professional work</p><h2>Explore Reeja’s maternal-health research.</h2><p>Review her current research role, clinical background, and credentials.</p></div>
-        <div class="site-actions"><a class="site-button" href="/clinical-research/">Research experience</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
+        <div class="site-actions"><BrandAction href="/clinical-research/">Research experience</BrandAction><BrandAction href="/contact/">Contact Reeja</BrandAction></div>
       </div>
     </section>
   </div>

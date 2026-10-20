@@ -13,6 +13,10 @@ const responsibilities = [
   ['Team communication', 'Coordination with nurses, obstetricians, researchers, and technical teams.']
 ];
 import ResearchJourneyVisual from '../components/ResearchJourneyVisual.astro';
+import BrandAction from '../components/design-system/BrandAction.astro';
+import BrandCard from '../components/design-system/BrandCard.astro';
+import EvidenceList from '../components/design-system/EvidenceList.astro';
+import Eyebrow from '../components/design-system/Eyebrow.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -20,16 +24,16 @@ import ResearchJourneyVisual from '../components/ResearchJourneyVisual.astro';
     <section class="site-page__hero">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">Maternal-health research</p>
+          <Eyebrow inverse>Maternal-health research</Eyebrow>
           <h1>Maternal-health <em>research.</em></h1>
           <p class="site-page__lede">Participant screening, home BP/BG education, tele-follow-up, study records, data quality, and protocol-based coordination on IISH MOM-HD.</p>
         </div>
-        <dl class="site-page__summary">
-          <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</dd></div>
-          <div><dt>Project</dt><dd>{professionalFacts.currentProjectShort}</dd></div>
-          <div><dt>Focus</dt><dd>Hypertension and diabetes in pregnancy</dd></div>
-          <div><dt>Location</dt><dd>{professionalFacts.currentLocation}</dd></div>
-        </dl>
+        <EvidenceList items={[
+          { label: 'Current role', value: `${professionalFacts.currentRole}, ${professionalFacts.currentEmployerShort}` },
+          { label: 'Project', value: professionalFacts.currentProjectShort },
+          { label: 'Focus', value: 'Hypertension and diabetes in pregnancy' },
+          { label: 'Location', value: professionalFacts.currentLocation }
+        ]} />
       </div>
     </section>
     <ResearchJourneyVisual label="Education, monitoring and follow-up in maternal-health research" />
@@ -42,7 +46,7 @@ import ResearchJourneyVisual from '../components/ResearchJourneyVisual.astro';
         </div>
         <div class="site-grid">
           {responsibilities.map(([title, description]) => (
-            <article class="site-card"><h3>{title}</h3><p>{description}</p></article>
+            <BrandCard><h3>{title}</h3><p>{description}</p></BrandCard>
           ))}
         </div>
       </div>
@@ -51,18 +55,18 @@ import ResearchJourneyVisual from '../components/ResearchJourneyVisual.astro';
     <section class="site-section site-section--soft">
       <div class="container site-page__split">
         <div><p class="site-eyebrow">Role relevance</p><h2>Useful experience for research and health programmes.</h2><p>Best matched to teams needing participant education, digital-health support, reliable follow-up, and coordination.</p></div>
-        <dl class="site-page__summary">
-          <div><dt>Maternal health</dt><dd>HDP and GDM research workflows</dd></div>
-          <div><dt>Digital health</dt><dd>Home monitoring and tele-follow-up</dd></div>
-          <div><dt>Research support</dt><dd>Records, logistics, and participant communication</dd></div>
-        </dl>
+        <EvidenceList items={[
+          { label: 'Maternal health', value: 'HDP and GDM research workflows' },
+          { label: 'Digital health', value: 'Home monitoring and tele-follow-up' },
+          { label: 'Research support', value: 'Records, logistics, and participant communication' }
+        ]} />
       </div>
     </section>
 
     <section class="site-section site-section--dark">
       <div class="container site-page__split">
         <div><p class="site-eyebrow">Work with Reeja</p><h2>Discuss a research or health-programme role.</h2><p>Share the role, programme, location, and timeline.</p></div>
-        <div class="site-actions"><a class="site-button" href="/cv/">View CV</a><a class="site-button" href="/contact/">Contact Reeja</a></div>
+        <div class="site-actions"><BrandAction href="/cv/">View CV</BrandAction><BrandAction href="/contact/">Contact Reeja</BrandAction></div>
       </div>
     </section>
   </div>

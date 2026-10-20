@@ -1,0 +1,12 @@
+---
+/**
+ * Key/value evidence rather than decorative statistics.
+ * Use verified professional facts, never invented impact metrics.
+ */
+type EvidenceItem = { label: string; value: string };
+type Props = { items: EvidenceItem[]; className?: string };
+const { items, className } = Astro.props;
+---
+<dl class:list={['site-page__summary', 'ds-evidence', className]}>
+  {items.map(({ label, value }) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+</dl>
