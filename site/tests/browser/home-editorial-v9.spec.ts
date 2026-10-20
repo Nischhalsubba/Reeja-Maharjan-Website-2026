@@ -57,3 +57,28 @@ test('homepage has no overflow or concealed hero actions across primary widths',
     await ctx.close();
   }
 });
+
+test('capture entire redesigned homepage for section-by-section review', async ({ browser }) => {
+  test.setTimeout(110_000);
+  for (const { width, label } of [
+    { width: 390, label: 'mobile-390' },
+    { width: 1440, label: 'desktop-1440' }
+  ]) {
+    const context = await browser.newContext({ viewport: { width, height: 950 }, reducedMotion: 'reduce' });
+    const page = await context.newPage();
+    await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
+    await page.evaluate(async () => document.fonts.ready);
+    // Scroll through once to trigger lazy-loaded assets, then capture the complete page.
+    for (const selector of ['.slate-focus', '.slate-about', '.slate-experience', '.slate-research', '.slate-writing', '.slate-contact']) {
+      await page.locator(selector).scrollIntoViewIfNeeded();
+    }
+    await page.evaluate(() => window.scrollTo(0, 0));
+    await page.screenshot({
+      path: `test-results/screenshots/editorial-v9-full-${label}.png`,
+      fullPage: true,
+      animations: 'disabled',
+      timeout: 25000
+    });
+    await context.close();
+  }
+});
