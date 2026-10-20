@@ -12,16 +12,16 @@ test('active and hovered desktop navigation always have visible labels', async (
     color: getComputedStyle(el).color,
     background: getComputedStyle(el).backgroundColor
   }));
-  expect(active.color).toBe('rgb(178, 233, 219)');
+  expect(active.color).toBe('rgb(23, 25, 26)');
   expect(active.background).not.toBe('rgb(234, 240, 245)');
-  expect(active.background).not.toBe('rgb(255, 255, 255)');
+  expect(active.background).not.toBe('rgb(28, 44, 58)');
 
   await home.hover();
-  await expect.poll(() => home.evaluate(el => getComputedStyle(el).color)).toBe('rgb(255, 255, 255)');
+  await expect.poll(() => home.evaluate(el => getComputedStyle(el).color)).toBe('rgb(23, 25, 26)');
 
   const research = page.locator('.desktop-nav > a[href="/clinical-research/"]');
   await research.hover();
-  await expect.poll(() => research.evaluate(el => getComputedStyle(el).color)).toBe('rgb(255, 255, 255)');
+  await expect.poll(() => research.evaluate(el => getComputedStyle(el).color)).toBe('rgb(23, 25, 26)');
 
   await research.focus();
   await expect(research).toBeFocused();
@@ -58,11 +58,11 @@ test('inner routes follow the shared slate/seafoam hero and editorial typography
 
 test('research visual is a scalable, accurate editorial asset, not a fictional dashboard', async ({ page }) => {
   await page.goto(origin + '/', { waitUntil: 'domcontentloaded' });
-  const illustration = page.locator('.slate-research__visual > img');
-  await expect(illustration).toHaveAttribute('src', '/images/mom-hd-care-journey.svg');
-  await expect(illustration).toHaveAttribute('width', '3840');
-  await expect(illustration).toHaveAttribute('height', '2160');
-  await expect(illustration).toHaveAttribute('alt', /without patient data/);
+  const illustration = page.locator('.rm-research__photo > img');
+  await expect(illustration).toHaveAttribute('src', /images\\.unsplash\\.com/);
+  await expect(illustration).toHaveAttribute('width', '700');
+  await expect(illustration).toHaveAttribute('height', '790');
+  await expect(illustration).toHaveAttribute('alt', /Illustrative/);
   await illustration.scrollIntoViewIfNeeded();
   await expect.poll(async () => illustration.evaluate((el) => (el as HTMLImageElement).naturalWidth), { timeout: 15_000 }).toBeGreaterThan(0);
 
