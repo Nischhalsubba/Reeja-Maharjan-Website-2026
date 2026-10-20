@@ -34,7 +34,7 @@ test('Slate homepage resizes without horizontal overflow or hidden chapters',asy
   await ctx.close();
  }
 });
-test('mobile navigation opens and closes and hero anchor works',async({page})=>{
+test('mobile navigation opens, closes and topic navigation works',async({page})=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
  await page.getByRole('button',{name:'Menu',exact:true}).click();
@@ -42,7 +42,7 @@ test('mobile navigation opens and closes and hero anchor works',async({page})=>{
  await page.keyboard.press('Escape');
  await expect(page.locator('#mobile-nav')).toBeHidden();
  await page.locator('.slate-thread a[href="/nursing-practice/"]').click();
- await expect(page).toHaveURL(/\/nursing-practice\/$);
+ await expect(page).toHaveURL(/\/nursing-practice\/$/);
 });
 test('remote article photos degrade to branded local illustrations',async({page})=>{
  await page.route('https://images.unsplash.com/**',route=>route.abort());
