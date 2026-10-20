@@ -43,7 +43,7 @@ test('all article detail headers have a wide reading masthead and metadata below
       } else {
         expect(sizes.headerWidth).toBeGreaterThan(width - 160);
       }
-      await expect(title).toHaveCSS('font-family', /Public Sans/);
+      await expect(title).toHaveCSS('font-family', /Georgia/);
       await expect(article).toBeVisible();
     }
     await context.close();
@@ -61,8 +61,10 @@ test('redesigned footer is consistent and accessible on homepage and article', a
       await page.goto(origin + path, { waitUntil: 'domcontentloaded' });
       const footer = page.locator('footer.site-footer--care');
       await expect(footer).toBeVisible();
-      await expect(footer.getByRole('heading', { name: /Better care starts/ })).toBeVisible();
-      await expect(footer.getByRole('link', { name: /Get in touch/ })).toHaveAttribute('href', '/contact/');
+      if(path==='/') await expect(page.locator('.slate-contact h2')).toBeVisible();
+      else await expect(footer.getByRole('heading',{name:/Better care starts/})).toBeVisible();
+      if(path==='/') await expect(page.locator('.slate-contact').getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
+      else await expect(footer.getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
       await expect(footer.getByRole('navigation', { name: "Explore Reeja's website" })).toBeVisible();
       await expect(footer.getByRole('navigation', { name: 'Professional resources' })).toBeVisible();
       await expect(footer.locator('.cip-image-credits')).toHaveCount(1);

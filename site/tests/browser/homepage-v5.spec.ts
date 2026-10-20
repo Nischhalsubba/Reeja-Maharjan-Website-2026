@@ -62,5 +62,5 @@ test('site palette and icon system share precise tokens and round strokes',async
   count:document.querySelectorAll('.slate-home svg.brand-icon').length,
   strokes:[...document.querySelectorAll('.slate-home svg.brand-icon')].every(el=>el.getAttribute('stroke-width')==='2'&&el.getAttribute('viewBox')==='0 0 24 24')
  }));
- expect(state.primary).toBe('#2F7368');expect(state.count).toBeGreaterThan(15);expect(state.strokes).toBe(true);
+ expect(state.primary.toLowerCase()).toBe('#2f7368');expect(state.count).toBeGreaterThan(15);expect(state.strokes).toBe(true);
 });

@@ -32,7 +32,7 @@
 .care-personal-site .slate-home .brand-icon{display:inline-block;flex-shrink:0;vertical-align:middle}
 .care-personal-site .slate-home .slate-eyebrow{
   display:flex;align-items:center;gap:13px;
-  color:var(--slate-teal);font-size:12px;line-height:1.6;
+  color:var(--slate-teal);font-size:14px;line-height:1.6;
   letter-spacing:.13em;font-weight:800;text-transform:uppercase;
 }
 .care-personal-site .slate-home .slate-eyebrow::before{content:"";display:block;width:26px;height:1px;background:currentColor;flex:none}
@@ -141,7 +141,7 @@
 .care-personal-site .slate-home .slate-thread__inner{
   min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:18px;
 }
-.care-personal-site .slate-home .slate-thread__inner>span{font-size:.76rem;font-weight:800;letter-spacing:.09em}
+.care-personal-site .slate-home .slate-thread__inner>span{font-size:.875rem;font-weight:800;letter-spacing:.09em}
 .care-personal-site .slate-home .slate-thread__inner>a{
   display:inline-flex;align-items:center;gap:9px;min-height:44px;font-size:.85rem;font-weight:800;text-decoration:none;
 }
@@ -272,7 +272,7 @@
 .care-personal-site .slate-home .slate-writing__text h3{max-width:28ch;font-family:Georgia,serif;font-size:clamp(1.48rem,2vw,2rem);font-weight:400;letter-spacing:-.04em;line-height:1.15}
 .care-personal-site .slate-home .slate-writing__text h3 a{text-decoration:none;color:var(--slate-ink)}
 .care-personal-site .slate-home .slate-writing__text h3 a:hover{color:var(--slate-teal)}
-.care-personal-site .slate-home .slate-writing__text>span{margin-top:auto;color:var(--slate-muted);font-size:.77rem;font-weight:700;letter-spacing:.04em}
+.care-personal-site .slate-home .slate-writing__text>span{margin-top:auto;color:var(--slate-muted);font-size:.875rem;font-weight:700;letter-spacing:.04em}
 .care-personal-site .slate-home .slate-writing__read{
   position:absolute;right:22px;bottom:18px;display:grid;place-items:center;
   width:42px;height:42px;border-radius:50%;background:var(--slate-ivory);color:var(--slate-teal);

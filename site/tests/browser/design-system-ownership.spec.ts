@@ -34,7 +34,7 @@ test('Care is Personal owns the shell, color palette and type on every route', a
     expect(palette.bodyBackground, route).toBe('rgb(255, 255, 255)');
     expect(palette.bodyFont, route).toContain('Public Sans');
     expect(palette.headingFont, route).toMatch(/Georgia|Public Sans/);
-    expect(palette.primaryToken, route).toBe('#2F7368');
+    expect(palette.primaryToken.toLowerCase(), route).toBe('#2f7368');
     expect(palette.footerActionBackground, route).toBe('rgb(178, 233, 219)');
     expect(palette.footerActionColor, route).toBe('rgb(16, 28, 41)');
   }

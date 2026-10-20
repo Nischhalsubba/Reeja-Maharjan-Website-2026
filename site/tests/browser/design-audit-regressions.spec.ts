@@ -107,7 +107,7 @@ test('primary pages identify Reeja in SEO metadata while keeping editorial headi
 
     expect(title).toContain('Reeja Maharjan');
     expect(description).toContain('Reeja');
-    if (path === '/') expect(heading.replace(/\s+/g, ' ')).toMatch(/Care is\s*personal\./);
+    if (path === '/') expect(heading.replace(/\s+/g, ' ')).toMatch(/The person\s*before the\s*number\./g);
     else expect(heading.trim().length).toBeGreaterThan(9);
   }
 

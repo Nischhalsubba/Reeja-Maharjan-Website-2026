@@ -7,7 +7,7 @@
  --care-brass:#B2E9DB;--care-line:var(--brand-line);
  --slate-nav:#1C2C3A;--slate-nav-deep:#101C29;--slate-seafoam:#B2E9DB;
  --slate-heading:#202D3D;--slate-canvas:#F5F8FA;
- background:var(--slate-canvas);color:var(--slate-heading);
+ background:#fff;color:var(--slate-heading);
 }
 .care-personal-site .site-header,
 body.care-personal-site:has(.slate-home) .site-header{
@@ -32,7 +32,7 @@ body.care-personal-site:has(.slate-home) .site-header__inner{width:min(1276px,ca
 .care-personal-site .site-header .desktop-nav{gap:clamp(12px,1.7vw,28px)}
 .care-personal-site .site-header .desktop-nav>a,
 body.care-personal-site:has(.slate-home) .desktop-nav>a:not(.nav-cta){
-  color:#D9E6E9;font-size:.88rem;font-weight:650;letter-spacing:.005em;
+  color:#D9E6E9;font-size:.94rem;font-weight:650;letter-spacing:.005em;
 }
 .care-personal-site .site-header .desktop-nav>a:hover,
 .care-personal-site .site-header .desktop-nav>a[aria-current="page"]{color:#B2E9DB}
@@ -93,12 +93,14 @@ body.care-personal-site:has(.slate-home) .desktop-nav .nav-cta:hover{background:
   background:#205950!important;border-color:#205950!important;
 }
 .care-personal-site :is(.blog-card,.site-card,.care-card){
- border-color:#DAE2E8;border-radius:6px;
+ border-color:#DAE2E8;border-radius:3px;
 }
 .care-personal-site :is(.blog-toc a[aria-current="location"],.blog-toc a.is-active){color:#2F7368;border-color:#2F7368}
 .care-personal-site :is(.blog-article__body,.site-page) a:not([class]):hover{text-decoration-thickness:2px}
 .care-personal-site :is(.site-section,.blog-index__section,.contact-section){border-color:#DAE2E8}
 
+/* The deep teal issuer colour is legible over both white and seafoam-tinted CV surfaces. */
+.care-personal-site .cv-credential__issuer{color:#205950!important}
 /* Footer: deep slate with mint CTA, consistent with the new hero. */
 .care-personal-site .site-footer--care,
 body.care-personal-site:has(.slate-home) .site-footer--care{
