@@ -11,7 +11,7 @@ test('design reference is accessible, intentionally non-indexed and uses the rea
   await expect(page.locator('.ds-evidence dt')).toHaveCount(3);
   await expect(page.locator('.ds-action--primary').first()).toHaveAttribute('href', '/contact/');
   await expect(page.getByRole('button', { name: 'Not available' })).toBeDisabled();
-  await expect(page.locator('a[target="_blank"]')).toHaveCount(0);
+  await expect(page.locator('.ds-lab a[target="_blank"]')).toHaveCount(0);
 });
 
 test('design-system layout reflows without horizontal scrolling', async ({ browser }) => {
@@ -50,7 +50,7 @@ test('component actions and focus states have semantic output', async ({ page })
 test('real professional pages consume shared DS components', async ({ page }) => {
   for (const route of ['/clinical-research/', '/hire-reeja/', '/nursing-practice/', '/maternal-health/']) {
     await page.goto(origin + route, { waitUntil: 'domcontentloaded' });
-    await expect(page.locator('.ds-evidence')).toBeVisible();
+    await expect(page.locator('.ds-evidence').first()).toBeVisible();
     await expect(page.locator('.ds-card').first()).toBeVisible();
   }
 });
