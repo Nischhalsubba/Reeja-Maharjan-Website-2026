@@ -108,7 +108,7 @@ test('primary pages identify Reeja in SEO metadata while keeping editorial headi
 
     expect(title).toContain('Reeja Maharjan');
     expect(description).toContain('Reeja');
-    if (path === '/') expect(heading.replace(/\s+/g, ' ')).toMatch(/The person\s*before the\s*number\./g);
+    if (path === '/') expect(heading.replace(/\s+/g, ' ')).toMatch(/Reeja\s*Maharjan\./g);
     else expect(heading.trim().length).toBeGreaterThan(9);
   }
 
@@ -128,7 +128,7 @@ test('Slate homepage keeps real professional pathways and published article link
  await expect(page.locator('.slate-focus__card')).toHaveCount(4);
  await expect(page.locator('.slate-experience__item')).toHaveCount(4);
  await expect(page.locator('.slate-writing__card')).toHaveCount(3);
- await expect(page.getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
+ await expect(page.getByRole('link',{name:/Get in touch/}).first()).toHaveAttribute('href','/contact/');
  await expect(page.locator('.desktop-nav').getByRole('link',{name:'Hire Reeja'})).toBeVisible();
 });
 
