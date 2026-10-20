@@ -91,7 +91,7 @@ test('canonical palette text remains readable over site backgrounds', async ({ p
     { route: '/blog/', selector: '.site-eyebrow', surface: '#ffffff' },
     { route: '/cv/', selector: '.site-eyebrow', surface: '#ffffff' },
     { route: '/', selector: '.care-footer__column a', surface: '#101C29' },
-    { route: '/', selector: '.care-footer__eyebrow', surface: '#0b132a' },
+    { route: '/contact/', selector: '.care-footer__eyebrow', surface: '#101C29' },
   ];
   for (const check of checks) {
     await page.goto(origin + check.route, { waitUntil: 'domcontentloaded' });
