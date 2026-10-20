@@ -1,0 +1,105 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import '../../styles/palette-studio.css';
+
+const choices = [
+  { id: 'oxblood', name: 'Oxblood & Paper', description: 'Editorial, warm, quietly distinctive', colors: ['#F6F0E8','#28282D','#703F50','#E8DAD7','#D5BCAA'] },
+  { id: 'olive', name: 'Olive & Linen', description: 'Calm, grounded and natural', colors: ['#F4F2EA','#28302B','#4E6147','#DDE4D5','#C9BA9F'] },
+  { id: 'copper', name: 'Charcoal & Copper', description: 'Confident, contemporary, understated', colors: ['#F3EEE7','#282A2C','#82513B','#E9DFD3','#DBC29E'] },
+];
+---
+
+<BaseLayout
+  title="Reeja color palette studio | Three design directions"
+  description="Review three accessible color-palette directions using Reeja's real photography and editorial website content."
+  robots="noindex, follow"
+>
+  <section class="palette-studio" data-palette="oxblood" aria-labelledby="palette-studio-title">
+    <div class="palette-studio__wrap">
+      <header class="palette-studio__head">
+        <p class="palette-studio__eyebrow">Design exploration / Color study 01</p>
+        <h1 id="palette-studio-title">A new colour of care.</h1>
+        <p>Choose a palette to compare it across a real portfolio hero, professional story and footer. This is a preview; it does not change the production website's colors until one is selected.</p>
+      </header>
+      <div class="palette-studio__chooser" role="group" aria-label="Choose a website color palette">
+        {choices.map((choice,i) => (
+          <button
+            class="palette-studio__option"
+            type="button"
+            data-palette-option={choice.id}
+            aria-pressed={i === 0 ? 'true' : 'false'}
+            aria-controls="palette-stage"
+          >
+            <strong>{choice.name}</strong>
+            <span>{choice.description}</span>
+            <span class="palette-studio__colors" aria-label={`Palette swatches for ${choice.name}`}>
+              {choice.colors.map(color=><i style={`--swatch:${color}`} title={color} aria-hidden="true"></i>)}
+            </span>
+          </button>
+        ))}
+      </div>
+      <p class="palette-studio__meta" aria-live="polite">Previewing: <strong id="palette-choice-label">Oxblood &amp; Paper</strong>. Every proposed ink/accent-on-paper combination is checked for WCAG AA normal-text contrast.</p>
+    </div>
+
+    <div class="palette-studio__wrap">
+      <div class="palette-stage" id="palette-stage">
+        <div class="palette-stage__nav" aria-label="Illustrative navigation preview">
+          <span class="palette-stage__logo">reeja<span>.</span></span>
+          <div class="palette-stage__links" aria-hidden="true"><span>Experience</span><span>Research</span><span>Contact Reeja</span></div>
+        </div>
+        <section class="palette-stage__hero" aria-labelledby="palette-hero-title">
+          <div class="palette-stage__hero-copy">
+            <p class="palette-studio__eyebrow">Reeja Maharjan / Nursing &amp; maternal-health research</p>
+            <h2 id="palette-hero-title">Care starts with <em>listening.</em></h2>
+            <p>I'm Reeja, a registered nurse and maternal-health research assistant. My work connects clinical care, patient education and careful research documentation.</p>
+            <div class="palette-stage__actions">
+              <a class="palette-stage__action" href="/contact/">Get in touch ↗</a>
+              <a class="palette-stage__textlink" href="/cv/">Professional CV ↗</a>
+            </div>
+          </div>
+          <figure class="palette-stage__photo">
+            <img src="/reeja-headshot.jpg" width="896" height="1200" alt="Reeja Maharjan's professional portrait" loading="eager" decoding="async"/>
+            <figcaption>Reeja Maharjan — Registered Nurse</figcaption>
+          </figure>
+        </section>
+        <section class="palette-stage__work" aria-labelledby="palette-work-title">
+          <div><p class="palette-studio__eyebrow">Selected work / Maternal health</p><h3 id="palette-work-title">Research with a human purpose.</h3></div>
+          <div>
+            <p>My experience includes participant education, monitoring support, scheduled follow-up and study documentation. These are research responsibilities, not claims of clinical trial outcomes.</p>
+            <a href="/clinical-research/">Learn about my research ↗</a>
+          </div>
+        </section>
+        <section class="palette-stage__footer" aria-labelledby="palette-footer-title">
+          <div class="palette-stage__footer-grid">
+            <div><p class="palette-studio__eyebrow">Contact / Reeja Maharjan</p><h3 id="palette-footer-title">Write to Reeja.</h3></div>
+            <div>
+              <p>For nursing opportunities, maternal-health research or a conversation about working together.</p>
+              <a class="palette-stage__action" href="/contact/">Get in touch ↗</a>
+            </div>
+          </div>
+          <div class="palette-stage__footer-bottom"><span>reeja. · Biratnagar, Nepal</span><span>Personal nursing &amp; research portfolio</span></div>
+        </section>
+      </div>
+      <p class="palette-studio__note">This studio previews one color system across three connected sections. Final implementation would propagate the chosen semantic colors to navigation, pages, typography, forms, charts and states—with browser and contrast testing before merging.</p>
+    </div>
+  </section>
+
+  <script>
+    const studio = document.querySelector<HTMLElement>('.palette-studio[data-palette]');
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-palette-option]')];
+    const label = document.getElementById('palette-choice-label');
+    const names: Record<string, string> = {oxblood:'Oxblood & Paper',olive:'Olive & Linen',copper:'Charcoal & Copper'};
+    const apply = (choice: string) => {
+      if (!studio || !names[choice]) return;
+      studio.dataset.palette = choice;
+      buttons.forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.paletteOption===choice)));
+      if (label) label.textContent=names[choice];
+      const url = new URL(window.location.href);
+      url.searchParams.set('palette', choice);
+      window.history.replaceState(null,'',url);
+    };
+    buttons.forEach(button=>button.addEventListener('click',()=>apply(button.dataset.paletteOption||'oxblood')));
+    const incoming = new URL(window.location.href).searchParams.get('palette');
+    if(incoming && names[incoming])apply(incoming);
+  </script>
+</BaseLayout>
