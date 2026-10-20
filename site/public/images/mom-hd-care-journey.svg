@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">Maternal health research: monitoring and follow-up</title>
+<desc id="desc">Purpose-built editorial illustration of a blood pressure monitor, glucose meter, and a connected follow-up pathway. No actual patient readings or study outcomes are shown.</desc>
+<defs>
+ <linearGradient id="background" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#EFF8F5"/><stop offset=".58" stop-color="#DFEFE9"/><stop offset="1" stop-color="#C6E5DC"/></linearGradient>
+ <linearGradient id="device" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#EAF3F2"/></linearGradient>
+ <filter id="shadow" x="-20%" y="-30%" width="150%" height="170%"><feDropShadow dx="0" dy="22" stdDeviation="24" flood-color="#1C2C3A" flood-opacity=".12"/></filter>
+ <pattern id="grid" width="65" height="65" patternUnits="userSpaceOnUse"><path d="M65 0H0V65" fill="none" stroke="#2F7368" stroke-opacity=".08" stroke-width="1"/></pattern>
+</defs>
+<rect width="1600" height="900" fill="url(#background)"/>
+<rect width="1600" height="900" fill="url(#grid)"/>
+<circle cx="1270" cy="210" r="330" fill="#B2E9DB" opacity=".42"/>
+<circle cx="135" cy="800" r="260" fill="#B2E9DB" opacity=".32"/>
+<path d="M90 70h1420M90 830h1420" stroke="#28584F" stroke-opacity=".23" stroke-width="3"/>
+<text x="95" y="128" fill="#2F7368" font-family="Arial,sans-serif" font-size="25" font-weight="700" letter-spacing="6">MOM-HD  /  RESEARCH SUPPORT</text>
+<text x="95" y="198" fill="#1C2C3A" font-family="Georgia,serif" font-size="64">Care, beyond the clinic.</text>
+<text x="96" y="238" fill="#416A66" font-family="Arial,sans-serif" font-size="22">Education  /  Home monitoring  /  Follow-up</text>
+<!-- connected home-monitoring care pathway -->
+<path d="M280 695C398 695 440 725 565 716S822 632 962 661 1224 731 1386 675" stroke="#2F7368" stroke-width="6" stroke-linecap="round" stroke-dasharray="8 18" fill="none" opacity=".6"/>
+<circle cx="286" cy="695" r="18" fill="#2F7368"/><circle cx="961" cy="661" r="17" fill="#2F7368"/><circle cx="1386" cy="675" r="18" fill="#2F7368"/>
+<!-- blood pressure cuff and device -->
+<g filter="url(#shadow)">
+ <path d="M195 437C124 411 103 490 161 556C212 614 301 609 342 551L404 486" stroke="#304354" stroke-width="25" stroke-linecap="round" fill="none"/>
+ <path d="M196 418l-49 71c-13 20-8 46 13 58l100 60c21 12 47 6 59-15l47-76z" fill="#294F51" stroke="#1C2C3A" stroke-width="5"/>
+ <path d="M194 453l-20 36 107 64 21-36" stroke="#B2E9DB" stroke-width="8" fill="none"/>
+ <rect x="379" y="337" width="385" height="306" rx="40" fill="url(#device)" stroke="#84B5AA" stroke-width="6"/>
+ <rect x="425" y="392" width="292" height="146" rx="16" fill="#D7E7E3" stroke="#AACAC2" stroke-width="4"/>
+ <text x="454" y="447" fill="#2F7368" font-size="28" font-family="Arial,sans-serif" font-weight="700" letter-spacing="2">BLOOD PRESSURE</text>
+ <path d="M457 489h70l15-20 16 29 14-16h99" stroke="#2F7368" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+ <rect x="459" y="563" width="90" height="24" rx="12" fill="#B2E9DB"/>
+ <circle cx="658" cy="577" r="22" fill="#B2E9DB" stroke="#2F7368" stroke-width="5"/>
+</g>
+<!-- glucose meter -->
+<g filter="url(#shadow)">
+ <rect x="887" y="366" width="224" height="252" rx="45" fill="url(#device)" stroke="#84B5AA" stroke-width="6" transform="rotate(8 998 492)"/>
+ <rect x="923" y="406" width="153" height="101" rx="16" fill="#D6E8E3" stroke="#AACAC2" stroke-width="3" transform="rotate(8 999 456)"/>
+ <text x="944" y="464" fill="#2F7368" font-size="27" font-family="Arial,sans-serif" font-weight="700" transform="rotate(8 999 456)">GLUCOSE</text>
+ <circle cx="1000" cy="552" r="19" fill="#B2E9DB" stroke="#2F7368" stroke-width="5"/>
+ <path d="M1070 619l15 63h-130l9-70" fill="#F5FBF8" stroke="#84B5AA" stroke-width="5"/>
+</g>
+<!-- follow-up / care coordination communication card -->
+<g filter="url(#shadow)">
+ <rect x="1166" y="365" width="304" height="263" rx="28" fill="#1C2C3A"/>
+ <circle cx="1230" cy="425" r="32" fill="#B2E9DB"/>
+ <path d="M1217 423c4 14 15 25 29 29l13-13-12-10-9 8-14-14 8-9-10-11-13 13z" fill="#1C2C3A"/>
+ <text x="1195" y="502" font-family="Arial,sans-serif" font-size="29" font-weight="700" fill="#FFFFFF">TELE-FOLLOW-UP</text>
+ <path d="M1197 531h228M1197 561h155M1197 591h198" stroke="#A3CCC3" stroke-width="10" stroke-linecap="round" opacity=".8"/>
+</g>
+<g font-family="Arial,sans-serif" font-size="23" font-weight="700" fill="#1C2C3A">
+ <text x="116" y="785">01  Participant education</text>
+ <text x="600" y="785">02  Home BP/BG support</text>
+ <text x="1162" y="785">03  Scheduled follow-up</text>
+</g>
+<text x="1458" y="859" text-anchor="end" fill="#365E59" font-family="Arial,sans-serif" font-size="17" letter-spacing="1.2">ILLUSTRATIVE WORKFLOW · NO PATIENT DATA</text>
+</svg>
