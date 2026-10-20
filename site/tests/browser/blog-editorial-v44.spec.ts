@@ -45,11 +45,16 @@ test('mobile hamburger is a viewport dialog that opens closes and navigates',asy
     const dialog=page.locator('#mobile-nav');
     await expect(dialog).toBeVisible();
     await expect(button).toHaveAttribute('aria-expanded','true');
-    const box=await dialog.evaluate(node=>{const r=node.getBoundingClientRect();return {top:r.top,left:r.left,width:r.width,height:r.height,iw:innerWidth,ih:innerHeight}});
-    expect(box.top).toBe(0);
+    const box=await dialog.evaluate(node=>{
+      const r=node.getBoundingClientRect();
+      const header=document.querySelector<HTMLElement>('.site-header')?.getBoundingClientRect();
+      return {top:r.top,headerBottom:header?.bottom ?? -1,left:r.left,width:r.width,height:r.height,iw:innerWidth,ih:innerHeight};
+    });
+    // In release 8.1 the menu is a fixed viewport dialog directly below the sticky header.
+    expect(Math.abs(box.top-box.headerBottom), 'dialog must touch header').toBeLessThanOrEqual(2);
     expect(box.left).toBe(0);
     expect(box.width).toBe(box.iw);
-    expect(box.height).toBeGreaterThanOrEqual(box.ih-1);
+    expect(box.height).toBeGreaterThanOrEqual(box.ih-box.top-1);
     await page.keyboard.press('Escape');
     await expect(dialog).toBeHidden();
     await button.click();

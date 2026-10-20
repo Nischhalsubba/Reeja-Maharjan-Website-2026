@@ -4,6 +4,7 @@
  * Uses only verified site content and user-approved personal photography.
  */
 import BrandIcon from './BrandIcon.astro';
+import { heroImageSrc, heroImageSrcSet, heroImageSizes, hasVerifiedHeroFourKAsset } from '../lib/heroPhotography';
 import { professionalFacts as facts } from '../content/professional-facts';
 import { profile } from '../content/profile';
 import { blogPosts } from '../content/blog';
@@ -31,17 +32,17 @@ const formattedDate=(date:string)=>new Date(date+'T00:00:00Z').toLocaleDateStrin
 
 <div class="slate-home cip-home rv7-home" data-slate-home>
   <section class="slate-hero cip-hero rv7-hero" id="home" aria-labelledby="slate-hero-title">
-    <img class="slate-hero__photograph" src="/images/reeja-lakeside.webp" width="720" height="405" alt="Reeja on a lakeside balcony, holding a warm drink and looking across the hills" fetchpriority="high" loading="eager" decoding="async" />
+    <img class="slate-hero__photograph" src={heroImageSrc} srcset={heroImageSrcSet} sizes={heroImageSizes} width={hasVerifiedHeroFourKAsset ? 3840 : 600} height={hasVerifiedHeroFourKAsset ? 2160 : 338} alt="Reeja on a lakeside balcony, holding a warm drink and looking across the hills" fetchpriority="high" loading="eager" decoding="async" />
     <div class="slate-hero__wash" aria-hidden="true"></div>
     <div class="slate-hero__rings" aria-hidden="true"><span></span><span></span></div>
     <div class="slate-container slate-hero__layout">
       <div class="slate-hero__content">
         <p class="slate-eyebrow slate-eyebrow--light">REEJA MAHARJAN <span aria-hidden="true">/</span> NURSE &amp; RESEARCHER</p>
         <h1 id="slate-hero-title">The <span>person</span><br />before the<br />number.</h1>
-        <p class="slate-hero__lede">I work at the meeting point of nursing and maternal-health research—where listening closely matters as much as measuring carefully.</p>
+        <p class="slate-hero__lede"><strong>I'm Reeja Maharjan, a registered nurse and maternal-health research assistant.</strong> My work brings together compassionate hospital care, patient education and careful research documentation.</p>
         <div class="slate-actions">
-          <a class="slate-button slate-button--mint" href="#experience" data-track="home-experience">Explore my work <BrandIcon name="arrow-up-right" size={18}/></a>
-          <a class="slate-link slate-link--light" href={facts.publicCvPath}>My professional CV <BrandIcon name="arrow-up-right" size={18}/></a>
+          <a class="slate-button slate-button--mint" href="/contact/" data-track="home-contact">Discuss an opportunity <BrandIcon name="arrow-up-right" size={18}/></a>
+          <a class="slate-link slate-link--light" href={facts.publicCvPath} data-track="home-cv">View professional CV <BrandIcon name="arrow-up-right" size={18}/></a>
         </div>
       </div>
       <div class="slate-hero__bottom">
@@ -62,6 +63,21 @@ const formattedDate=(date:string)=>new Date(date+'T00:00:00Z').toLocaleDateStrin
       <a href="/maternal-health/"><BrandIcon name="arrow-right" size={17}/> Patient education</a>
     </div>
   </div>
+
+  <section class="slate-credentials" aria-labelledby="slate-credentials-title">
+    <div class="slate-container slate-credentials__inner">
+      <div class="slate-credentials__intro">
+        <p class="slate-eyebrow">PROFESSIONAL SNAPSHOT</p>
+        <h2 id="slate-credentials-title">Qualifications at a glance.</h2>
+      </div>
+      <ul class="slate-credentials__list">
+        <li><span>LICENSURE</span><strong>{facts.nepalLicenseShort}</strong></li>
+        <li><span>EDUCATION</span><strong>{facts.credential}</strong></li>
+        <li><span>CURRENT WORK</span><strong>{facts.currentRole} · {facts.currentEmployerShort}</strong></li>
+      </ul>
+      <a class="slate-link slate-credentials__link" href={facts.publicCvPath}>Review credentials <BrandIcon name="arrow-up-right" size={18}/></a>
+    </div>
+  </section>
 
   <section class="slate-section slate-focus rv6-pillars" id="focus" aria-labelledby="slate-focus-title">
     <div class="slate-container">
@@ -128,7 +144,7 @@ const formattedDate=(date:string)=>new Date(date+'T00:00:00Z').toLocaleDateStrin
         <p class="slate-research__note">Research role description; no clinical trial outcomes are implied.</p>
       </div>
       <div class="slate-research__visual">
-        <img src="/images/research-monitoring.svg" alt="Editorial illustration of remote blood-pressure and glucose monitoring" width="1200" height="800" loading="lazy" decoding="async"/>
+        <img src="/images/mom-hd-care-journey.svg" alt="Research-support illustration showing blood-pressure monitoring, glucose monitoring and scheduled follow-up, without patient data" width="3840" height="2160" loading="lazy" decoding="async"/>
         <span>MATERNAL HEALTH · REMOTE MONITORING</span>
       </div>
       <ol class="slate-research__steps">

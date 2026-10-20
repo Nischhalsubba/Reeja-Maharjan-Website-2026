@@ -17,6 +17,7 @@ import '../styles/care-blog-v44.css';
 import '../styles/slate-home.css';
 import '../styles/slate-site.css';
 import Header from '../components/Header.astro';
+import { heroImageSrc, heroImageSrcSet, heroImageSizes } from '../lib/heroPhotography';
 import Footer from '../components/Footer.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
@@ -123,6 +124,7 @@ const graphSchema = {
 
     <script type="application/ld+json" set:html={JSON.stringify(graphSchema)}></script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {pathname === '/' && <link rel="preload" as="image" href={heroImageSrc} imagesrcset={heroImageSrcSet} imagesizes={heroImageSizes} fetchpriority="high" />}
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
 
     {gaId && <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>}
@@ -136,7 +138,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="8.0.0-care-personal">
+  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="8.1.0-care-personal">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header name={professionalFacts.name} />

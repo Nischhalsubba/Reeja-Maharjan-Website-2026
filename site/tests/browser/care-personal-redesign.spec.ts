@@ -50,6 +50,6 @@ test('Reduced motion does not conceal sections or interfere with links', async (
   await expect(page.getByRole('heading', { level: 1, name: /The person\s*before the\s*number\./ })).toBeVisible();
   const revealState = await page.locator('.slate-about__layout').evaluate((element) => getComputedStyle(element).visibility);
   expect(revealState).not.toBe('hidden');
-  await expect(page.getByRole('link', { name: /Explore my work/ })).toHaveAttribute('href', '#experience');
+  await expect(page.getByRole('link', { name: /Discuss an opportunity/ })).toHaveAttribute('href', '/contact/');
   await context.close();
 });

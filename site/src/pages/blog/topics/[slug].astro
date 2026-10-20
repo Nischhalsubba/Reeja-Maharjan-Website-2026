@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogPhoto from '../../../components/BlogPhoto.astro';
+import { blogPosts } from '../../../content/blog';
+import { articleMatchesBlogTopic, blogTopics, type BlogTopic } from '../../../content/blog/topics';
+
+export function getStaticPaths() {
+  return blogTopics.map((topic) => ({ params: { slug: topic.slug }, props: { topic } }));
+}
+
+type Props = { topic: BlogTopic };
+const { topic } = Astro.props;
+const posts = blogPosts.filter((post) => articleMatchesBlogTopic(post, topic));
+const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US', {
+  year: 'numeric', month: 'short', day: 'numeric'
+});
+---
+
+<BaseLayout
+  title={`${topic.label} Articles | Reeja Maharjan`}
+  description={`${topic.summary} Read source-linked professional articles by Reeja Maharjan.`}
+>
+  <div class="site-page blog-index">
+    <section class="site-page__hero" aria-labelledby="topic-page-title">
+      <div class="container site-page__hero-grid">
+        <div>
+          <p class="site-eyebrow">Writing / {topic.label}</p>
+          <h1 id="topic-page-title">{topic.label} articles.</h1>
+          <p class="site-page__lede">{topic.summary} Browse related writing by Reeja Maharjan.</p>
+          <div class="site-actions">
+            <a class="site-button site-button--primary" href="/blog/">All articles</a>
+            <a class="site-button" href={topic.relatedHref}>{topic.relatedLabel}</a>
+          </div>
+        </div>
+        <dl class="site-page__summary" aria-label="Topic overview">
+          <div><dt>Articles</dt><dd>{posts.length} published guides</dd></div>
+          <div><dt>Topic</dt><dd>{topic.label}</dd></div>
+          <div><dt>Related work</dt><dd><a href={topic.relatedHref}>{topic.relatedLabel}</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="site-section blog-index__content" aria-labelledby="topic-articles-title">
+      <div class="container">
+        <div class="site-section__head">
+          <div>
+            <p class="site-eyebrow">{posts.length} related {posts.length === 1 ? 'article' : 'articles'}</p>
+            <h2 id="topic-articles-title">Explore this topic.</h2>
+          </div>
+          <p>Articles are educational and do not replace individual clinical assessment or professional care.</p>
+        </div>
+        {posts.length > 0 ? (
+          <div class="blog-grid">
+            {posts.map((post) => (
+              <article class="blog-card">
+                <BlogPhoto slug={post.slug} variant="card" />
+                <div class="blog-card__content">
+                  <p class="site-eyebrow">{post.tags[0]} · By Reeja Maharjan</p>
+                  <h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3>
+                  <p>{post.excerpt}</p>
+                </div>
+                <p class="blog-card__meta">
+                  <span>Updated {formatDate(post.updatedAt)}</span>
+                  <span>{post.readMinutes} min read</span>
+                </p>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p>No articles are listed in this topic yet. <a href="/blog/">Browse all writing</a>.</p>
+        )}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

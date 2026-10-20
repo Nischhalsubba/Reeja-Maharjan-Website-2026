@@ -49,11 +49,13 @@ test('CV, article, contact and navigation text remain legible without coral meta
         await expect(el, route+' '+selector).toBeVisible();
         const computed = await el.evaluate(node => ({
           color: getComputedStyle(node).color,
-          px: parseFloat(getComputedStyle(node).fontSize)
+          px: parseFloat(getComputedStyle(node).fontSize),
+          dark: Boolean(node.closest('.site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero,.cv-page__hero'))
         }));
         expect(computed.px, route+' '+selector+' at '+width+'px').toBeGreaterThanOrEqual(14);
-        // All tested metadata is on light page/hero surfaces.
-        expect(contrast(computed.color, 'rgb(234, 240, 245)'), route+' '+selector+' contrast').toBeGreaterThanOrEqual(4.5);
+        // The redesigned editorial heroes are deep slate, while article, CV and form details remain on light surfaces.
+        const surface = computed.dark ? 'rgb(28, 44, 58)' : 'rgb(234, 240, 245)';
+        expect(contrast(computed.color, surface), route+' '+selector+' contrast').toBeGreaterThanOrEqual(4.5);
       }
     }
     await page.goto(origin+'/', {waitUntil:'domcontentloaded'});

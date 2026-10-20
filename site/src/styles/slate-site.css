@@ -34,8 +34,42 @@ body.care-personal-site:has(.slate-home) .site-header__inner{width:min(1276px,ca
 body.care-personal-site:has(.slate-home) .desktop-nav>a:not(.nav-cta){
   color:#D9E6E9;font-size:.94rem;font-weight:650;letter-spacing:.005em;
 }
-.care-personal-site .site-header .desktop-nav>a:hover,
-.care-personal-site .site-header .desktop-nav>a[aria-current="page"]{color:#B2E9DB}
+/* Desktop navigation uses explicit foreground AND background in every state.
+   The old inherited pale active fill caused near-white labels to disappear. */
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta){
+  border:1px solid transparent;
+  border-radius:4px;
+  background:transparent;
+  color:#D9E6E9;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease;
+}
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta):hover,
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta):focus-visible{
+  background:#304354;
+  color:#FFFFFF;
+  border-color:rgba(178,233,219,.28);
+}
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta)[aria-current="page"]{
+  background:rgba(178,233,219,.16);
+  color:#B2E9DB;
+  border-color:rgba(178,233,219,.45);
+  box-shadow:inset 0 -2px 0 #B2E9DB;
+}
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta)[aria-current="page"]:hover,
+body.care-personal-site .site-header .desktop-nav > a:not(.nav-cta)[aria-current="page"]:focus-visible{
+  background:rgba(178,233,219,.26);
+  color:#FFFFFF;
+}
+body.care-personal-site .mobile-nav__panel > a:not(.mobile-nav__cta)[aria-current="page"]{
+  background:rgba(178,233,219,.13);
+  color:#B2E9DB;
+  border-color:rgba(178,233,219,.45);
+}
+body.care-personal-site .mobile-nav__panel > a:not(.mobile-nav__cta):hover,
+body.care-personal-site .mobile-nav__panel > a:not(.mobile-nav__cta):focus-visible{
+  background:#304354;
+  color:#FFFFFF;
+}
 .care-personal-site .site-header .desktop-nav .nav-cta,
 body.care-personal-site:has(.slate-home) .desktop-nav .nav-cta{
  min-height:44px;background:#B2E9DB;color:#101C29;border:1px solid #B2E9DB;
@@ -47,6 +81,7 @@ body.care-personal-site:has(.slate-home) .desktop-nav .nav-cta:hover{background:
 .care-personal-site .site-header .mobile-nav__close{border-color:rgba(255,255,255,.34);background:rgba(255,255,255,.1);color:#fff}
 .care-personal-site .site-header .menu-toggle__label{color:#fff}
 .care-personal-site .site-header .menu-toggle__icon i{background:#fff}
+.care-personal-site .mobile-nav{top:var(--site-header-height);bottom:0}
 .care-personal-site .mobile-nav,
 .care-personal-site .mobile-nav__panel{
   background:#1C2C3A;color:#EDF5F7;border-color:#304354;
@@ -147,6 +182,7 @@ body.care-personal-site:has(.slate-home) .care-footer__cta{
 @media(max-width:1100px){.care-personal-site .site-header__inner,body.care-personal-site:has(.slate-home) .site-header__inner{width:calc(100% - 64px)}}
 @media(max-width:790px){.care-personal-site .site-header__inner,body.care-personal-site:has(.slate-home) .site-header__inner{width:calc(100% - 40px)}}
 @media(max-width:560px){
+ :root{--site-header-height:68px}
  .care-personal-site .site-header__inner,body.care-personal-site:has(.slate-home) .site-header__inner{width:calc(100% - 36px)}
  .care-personal-site .site-header,.care-personal-site .site-header__inner{min-height:68px}
 }
@@ -157,3 +193,219 @@ body.care-personal-site:has(.slate-home) .care-footer__cta{
 
 /* Contact form helper text must reach AA on cloud-white and ivory surfaces. */
 .care-personal-site .form-field__help { color:#435366!important; }
+
+/* Mint italic accents mirror the homepage's editorial section headlines. */
+.care-personal-site main :is(.site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero,.cv-page__hero) h1 em{
+  color:#B2E9DB;
+  font-weight:400;
+  font-style:italic;
+}
+/* -----------------------------------------------------------------------
+   Slate & Seafoam / editorial inner-page parity (2026-10-20)
+   Shared grammar: dark slate opening chapters, seafoam accents, serif
+   display type, restrained surfaces, readable proof panels.
+   ----------------------------------------------------------------------- */
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+){
+  color:#F5F8FA;
+  background:
+    radial-gradient(circle at 82% 24%,rgba(178,233,219,.11),transparent 39%),
+    linear-gradient(122deg,#101C29 0%,#1C2C3A 63%,#304354 100%);
+  border-bottom:1px solid rgba(178,233,219,.28);
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(h1,.site-page__hero h1,.contact-hero h1){
+  color:#FFFFFF;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(3rem,5.4vw,6rem);
+  font-weight:400;
+  letter-spacing:-.058em;
+  line-height:1.04;
+  text-wrap:balance;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-eyebrow,.blog-article__eyebrow){
+  color:#B2E9DB!important;
+  font-weight:750;
+  letter-spacing:.11em;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-page__lede,.blog-article__dek,.contact-hero__copy>p:last-child){
+  color:#D7E6EA;
+  font-size:clamp(1rem,1.35vw,1.19rem);
+  line-height:1.77;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){
+  color:#EDF5F7;
+  background:rgba(8,20,28,.23);
+  border:1px solid rgba(178,233,219,.34);
+  border-radius:3px;
+  box-shadow:none;
+  padding:12px 22px;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel)>div{
+  border-top-color:rgba(225,245,240,.2);
+  padding-block:15px;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(dt,.contact-hero__details span){
+  color:#B2E9DB!important;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(dd,.contact-hero__details strong,.contact-hero__details a){
+  color:#FFFFFF;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-button--primary,.blog-index__hero-actions>.site-button--primary){
+  color:#101C29!important;
+  background:#B2E9DB!important;
+  border-color:#B2E9DB!important;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-button--primary,.blog-index__hero-actions>.site-button--primary):hover,
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-button--primary,.blog-index__hero-actions>.site-button--primary):focus-visible{
+  background:#D7F7ED!important;
+  color:#101C29!important;
+  border-color:#D7F7ED!important;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) .site-button:not(.site-button--primary){
+  color:#E9F6F2;
+  border-color:rgba(178,233,219,.67);
+  background:transparent;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) .site-button:not(.site-button--primary):hover,
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) .site-button:not(.site-button--primary):focus-visible{
+  background:rgba(178,233,219,.18);
+  color:#FFFFFF;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) :is(.site-back,.blog-index__hero-link,.blog-index__hero-kicker){
+  color:#D8EEE8;
+}
+.care-personal-site main :is(
+ .site-page__hero,.contact-hero,.blog-article__header,
+ .blog-index__hero,.cv-page__hero
+) a:focus-visible{
+  outline:3px solid #B2E9DB;
+  outline-offset:4px;
+}
+.care-personal-site main :where(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2,.blog-index__featured h3,.blog-card h3,.site-card h3){
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:500;
+  letter-spacing:-.04em;
+  line-height:1.12;
+}
+.care-personal-site main :is(.site-grid,.blog-grid) > :is(.site-card,.blog-card){
+  border-color:#DAE2E8;
+}
+.care-personal-site main .cip-photo-band{
+  width:min(1276px,calc(100% - 112px));
+  margin:30px auto 0;
+  border:1px solid #DAE2E8;
+  border-radius:3px;
+}
+.care-personal-site main .cip-photo-band--care-journey{
+  height:auto;
+  overflow:hidden;
+  background:#E6F3EE;
+}
+.care-personal-site main .cip-photo-band--care-journey:after{display:none}
+.care-personal-site main .cip-photo-band--care-journey>img{
+  display:block;
+  width:100%;
+  height:auto;
+  aspect-ratio:16/9;
+  object-fit:contain;
+  filter:none;
+}
+.care-personal-site main .cip-photo-band--care-journey>.cip-photo-band__caption{
+  position:static;
+  padding:16px clamp(18px,3vw,36px);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  background:#1C2C3A;
+  color:#EAF5F1;
+}
+.care-personal-site main .cip-photo-band--care-journey .cip-photo-band__label{
+  font:500 clamp(1.04rem,1.6vw,1.5rem)/1.25 Georgia,serif;
+}
+.care-personal-site main .cip-photo-band--care-journey .cip-photo-band__credit{
+  color:#C8E9E0;
+}
+.care-personal-site .slate-home .slate-research__visual>img{
+  object-fit:contain;
+  filter:none;
+  background:#DCEDE7;
+}
+@media(max-width:1100px){
+  .care-personal-site main .cip-photo-band{width:calc(100% - 64px)}
+}
+@media(max-width:790px){
+  .care-personal-site main .cip-photo-band{width:calc(100% - 40px);margin-top:22px}
+  .care-personal-site main :is(.site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero) h1{
+    font-size:clamp(2.6rem,8vw,4.8rem);
+  }
+}
+@media(max-width:560px){
+  .care-personal-site main .cip-photo-band{width:calc(100% - 36px);margin-top:18px}
+  .care-personal-site main :is(
+    .site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero,.cv-page__hero
+  ) h1{font-size:clamp(2.3rem,11vw,3.65rem);line-height:1.06}
+  .care-personal-site main :is(
+    .site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero,.cv-page__hero
+  ) :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){padding:6px 14px}
+  .care-personal-site main .cip-photo-band--care-journey>.cip-photo-band__caption{
+    display:block;
+    padding:13px 16px;
+  }
+  .care-personal-site main .cip-photo-band--care-journey .cip-photo-band__credit{
+    margin-top:7px;
+  }
+}
+@media print{
+  .care-personal-site main :is(.site-page__hero,.cv-page__hero,.blog-article__header){
+    color:#000!important;background:#fff!important;border-color:#ddd!important
+  }
+  .care-personal-site main :is(.site-page__hero,.cv-page__hero,.blog-article__header) :is(h1,.site-page__lede,.site-eyebrow,dt,dd){
+    color:#000!important;
+  }
+  .care-personal-site main .cip-photo-band--care-journey{display:none!important}
+}

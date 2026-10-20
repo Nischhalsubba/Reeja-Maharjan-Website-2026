@@ -18,6 +18,17 @@ export const initMobileNavA11y = (): void => {
   if (!toggle || !nav || !panel) return;
 
   let previousFocus: HTMLElement | null = null;
+  const siteHeader = document.querySelector<HTMLElement>('.site-header');
+
+  // A fixed dialog must align with the rendered sticky header, not an
+  // assumed token height (which differs after scrolling and on mobile).
+  const syncDialogTop = (): void => {
+    if (!siteHeader || !isOpen()) return;
+    const bottom = Math.max(0, Math.min(window.innerHeight, siteHeader.getBoundingClientRect().bottom));
+    nav.style.top = `${bottom}px`;
+  };
+  window.addEventListener('resize', syncDialogTop, { passive: true });
+  window.addEventListener('scroll', syncDialogTop, { passive: true });
 
   const isOpen = (): boolean => toggle.getAttribute('aria-expanded') === 'true';
 
@@ -48,9 +59,11 @@ export const initMobileNavA11y = (): void => {
 
       requestAnimationFrame(() => {
         if (isOpen()) {
+          syncDialogTop();
           setBackgroundInert(true);
           focusFirstControl();
         } else {
+          nav.style.removeProperty('top');
           setBackgroundInert(false);
           restoreFocus();
         }

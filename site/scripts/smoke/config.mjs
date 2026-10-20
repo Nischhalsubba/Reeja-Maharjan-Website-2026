@@ -30,8 +30,10 @@ export const requiredHomepageText = [
   'person',
   'before the',
   'number.',
-  'Explore my work',
-  'My professional CV',
+  'Discuss an opportunity',
+  'View professional CV',
+  'Qualifications at a glance.',
+  'NNC Licensed RN',
   'THREE THREADS.' ,
   'Nursing practice',
   'Maternal-health research',
@@ -73,6 +75,9 @@ export const requiredRoutes = [
   '/maternal-health/',
   '/nursing-practice/',
   '/blog/',
+  '/blog/topics/maternal-health/',
+  '/blog/topics/nursing-practice/',
+  '/blog/topics/research-and-digital-health/',
   '/blog/essential-maternal-newborn-care-guide-2026/'
 ];
 

@@ -1,0 +1,11 @@
+---
+type Props = { label?: string };
+const { label = 'Maternal-health monitoring and follow-up' } = Astro.props;
+---
+<figure class="cip-photo-band cip-photo-band--care-journey" aria-label={label}>
+  <img src="/images/mom-hd-care-journey.svg" alt="Illustrative blood-pressure and glucose monitoring devices connected to participant education and follow-up. No patient data or trial outcomes shown." width="3840" height="2160" loading="lazy" decoding="async" />
+  <figcaption class="cip-photo-band__caption">
+    <span class="cip-photo-band__label">{label}</span>
+    <span class="cip-photo-band__credit">Original editorial illustration · No patient data</span>
+  </figcaption>
+</figure>
