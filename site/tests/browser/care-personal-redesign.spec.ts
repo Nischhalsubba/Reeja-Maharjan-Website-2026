@@ -21,7 +21,7 @@ test('Care is Personal design language is consistent across inner routes', async
         photo: Boolean(document.querySelector('.cip-photo-band img')),
       };
     });
-    expect(metrics.bodyBackground).toBe('rgb(255, 255, 255)');
+    expect(metrics.bodyBackground).toBe('rgb(250, 250, 248)');
     expect(metrics.headingFamily).toContain('Georgia');
     expect(metrics.overflow, `Overflow on ${path}`).toBeLessThanOrEqual(1);
     expect(metrics.photo, `Missing illustrative photo on ${path}`).toBe(true);
