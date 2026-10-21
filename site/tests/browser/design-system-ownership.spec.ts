@@ -25,18 +25,20 @@ test('Care is Personal owns the shell, color palette and type on every route', a
         primaryToken: rootStyle.getPropertyValue('--brand-blue').trim(),
         footerActionBackground: footerStyle?.backgroundColor,
         footerActionColor: footerStyle?.color,
+        footerBackground: getComputedStyle(document.querySelector('.site-footer--care')!).backgroundColor,
+        invitationDisplay: getComputedStyle(document.querySelector('.care-footer__invitation')!).display,
         retiredElements: document.querySelectorAll('.field-journal, .care-ledger, .brand__mark').length
       };
     });
     expect(palette.className, route).toContain('care-personal-site');
     expect(palette.designSystem).toBe('care-is-personal');
     expect(palette.retiredElements, route).toBe(0);
-    expect(palette.bodyBackground, route).toBe(route === '/' ? 'rgb(250, 250, 248)' : 'rgb(255, 255, 255)');
+    expect(palette.bodyBackground, route).toBe('rgb(250, 250, 248)');
     expect(palette.bodyFont, route).toContain('Public Sans');
     expect(palette.headingFont, route).toMatch(/Georgia|Public Sans/);
-    expect(palette.primaryToken.toLowerCase(), route).toBe('#2f7368');
-    expect(palette.footerActionBackground, route).toBe('rgb(178, 233, 219)');
-    expect(palette.footerActionColor, route).toBe('rgb(16, 28, 41)');
+    expect(palette.primaryToken.toLowerCase(), route).toBe('#313536');
+    expect(palette.footerBackground, route).toBe('rgb(250, 250, 248)');
+    expect(palette.invitationDisplay, route).toBe('none');
   }
 });
 
