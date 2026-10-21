@@ -19,6 +19,7 @@ import '../styles/slate-site.css';
 import '../styles/design-system.css';
 import '../styles/reeja-editorial-home.css';
 import '../styles/reeja-minimal-home.css';
+import '../styles/reeja-sitewide-v11.css';
 import Header from '../components/Header.astro';
 
 import Footer from '../components/Footer.astro';
@@ -104,10 +105,10 @@ const graphSchema = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="design-system" content="Slate & Seafoam" />
-    <meta name="design-release" content="reeja-minimal-editorial-10.0.0" />
+    <meta name="design-release" content="reeja-sitewide-minimal-11.0.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="theme-color" content={pathname === '/' ? '#FAFAF8' : '#1C2C3A'} />
+    <meta name="theme-color" content="#FAFAF8" />
     <link rel="canonical" href={canonicalUrl} />
 
     <meta property="og:type" content={isArticlePage ? 'article' : isProfilePage ? 'profile' : 'website'} />
@@ -141,7 +142,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="10.0.0-care-personal">
+  <body id="page-top" class="care-personal-site" data-design-system="care-is-personal" data-design-version="11.0.0-care-personal">
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header name={professionalFacts.name} />
