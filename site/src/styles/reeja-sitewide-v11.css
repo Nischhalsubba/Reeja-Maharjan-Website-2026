@@ -510,3 +510,49 @@ body.care-personal-site .rm-home .rm-research,
 body.care-personal-site .rm-home .rm-writing{
   padding-block:clamp(73px,8vw,118px);
 }
+
+/* Screenshot corrections: legacy inverse-hero selectors still supplied mint
+   button fills and low-contrast metadata after the canvas became light. */
+body.care-personal-site main :is(
+  .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-page__summary dt,.contact-hero__details span,.blog-article__meta-panel dt){
+  color:#313936!important;font-size:.875rem;letter-spacing:.055em;
+}
+body.care-personal-site main :is(
+  .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-button--primary,.blog-index__hero-actions>.site-button--primary){
+  background:#17191A!important;color:#FFFFFF!important;border-color:#17191A!important;
+}
+body.care-personal-site main :is(
+  .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-button--primary,.blog-index__hero-actions>.site-button--primary):hover{
+  background:#39403F!important;color:#FFFFFF!important;border-color:#39403F!important;
+}
+/* Keep long evidence-based article titles spacious, not crammed into 21ch. */
+body.care-personal-site main .blog-article__header .blog-article__intro h1{
+  display:block;width:100%;max-width:none!important;line-height:1.07;
+}
+body.care-personal-site main .blog-index__hero h1{
+  line-height:1.055;
+}
+/* Clinical form spam-trap is intentionally 1px and non-interactive. Do not
+   give this hidden control the standard 48px input touch target. */
+body.care-personal-site main .professional-contact-form input.form-honeypot{
+  min-height:0!important;height:1px!important;width:1px!important;
+}
+/* Blog art direction: one documentary image and an accessible credit,
+   not an overprinted marketing slogan and colliding counter. */
+body.care-personal-site main .blog-index__hero-counter{display:none!important}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band__label{
+  display:none!important;
+}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band__caption{
+  display:flex;justify-content:flex-end;align-items:flex-end;
+  left:18px;right:18px;bottom:12px;
+}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band__credit{
+  color:#FFFFFF;font-size:.75rem;
+  background:rgba(23,25,26,.75);
+  padding:6px 9px;border-radius:2px;line-height:1.45;
+  max-width:42ch;
+}
