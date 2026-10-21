@@ -639,3 +639,24 @@ body.care-personal-site main .hire-story__copy .site-button{
    font-size:clamp(2.4rem,8vw,3.45rem);
  }
 }
+
+/* V12 layout contract: all route-specific containers use exactly the same
+   gutter. Older nested .container media rules used a different 16px inset. */
+body.care-personal-site{
+  --reeja-layout-width:calc(100% - 104px);
+}
+body.care-personal-site .site-header__inner,
+body.care-personal-site .site-footer--care :is(.care-footer__main,.care-footer__bottom,.care-footer__credits),
+body.care-personal-site main :is(.site-page,.cv-page,.contact-page,.blog-index) .container,
+body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid,.blog-article__intro,.blog-article__shell),
+body.care-personal-site main .site-page>.cip-photo-band{
+  width:min(1270px,var(--reeja-layout-width))!important;
+  max-width:1270px;
+  margin-inline:auto!important;
+}
+@media(max-width:1090px){
+  body.care-personal-site{--reeja-layout-width:calc(100% - 64px)}
+}
+@media(max-width:600px){
+  body.care-personal-site{--reeja-layout-width:calc(100% - 36px)}
+}
