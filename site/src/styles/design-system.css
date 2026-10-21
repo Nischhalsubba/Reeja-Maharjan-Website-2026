@@ -1,32 +1,32 @@
 /*
- * Reeja Design System v1.0 — the shared, accessible component contract.
- * Uses the existing Slate & Seafoam CSS source tokens; does not import
+ * Reeja Design System v11 — the shared accessible component contract.
+ * Uses the approved warm-neutral and charcoal role tokens; does not import
  * Webflow, NHS, Radix UI components, or third-party branding.
  */
 :root {
-  --ds-ink: #202D3D;
-  --ds-muted: #56697B;
+  --ds-ink: #17191A;
+  --ds-muted: #505957;
   --ds-ink-inverse: #FFFFFF;
-  --ds-muted-inverse: #D9E6E9;
-  --ds-slate-950: #101C29;
-  --ds-slate-900: #1C2C3A;
-  --ds-slate-800: #304354;
-  --ds-teal-700: #205950;
-  --ds-teal-600: #2F7368;
-  --ds-seafoam-300: #B2E9DB;
-  --ds-seafoam-100: #EAF0F5;
+  --ds-muted-inverse: #E6E8E5;
+  --ds-slate-950: #17191A;
+  --ds-slate-900: #313536;
+  --ds-slate-800: #505957;
+  --ds-teal-700: #202425;
+  --ds-teal-600: #313536;
+  --ds-seafoam-300: #D9DBD7;
+  --ds-seafoam-100: #ECEBE7;
   --ds-paper: #FFFFFF;
-  --ds-canvas: #F5F8FA;
-  --ds-border: #DAE2E8;
-  --ds-focus: #205950;
-  --ds-focus-inverse: #B2E9DB;
+  --ds-canvas: #FAFAF8;
+  --ds-border: #D9DBD7;
+  --ds-focus: #17191A;
+  --ds-focus-inverse: #17191A;
   --ds-status-success: #206049;
   --ds-status-warning: #7D5418;
   --ds-status-error: #A03535;
   --ds-font-body: "Public Sans",system-ui,sans-serif;
   --ds-font-editorial: Georgia,"Times New Roman",serif;
-  --ds-radius-action: 4px;
-  --ds-radius-surface: 6px;
+  --ds-radius-action: 2px;
+  --ds-radius-surface: 2px;
   --ds-target-min: 44px;
   --ds-motion-fast: 160ms;
   --ds-motion-standard: 260ms;
@@ -97,18 +97,18 @@
 .care-personal-site .ds-evidence {min-width:0}
 .care-personal-site .ds-evidence dd {overflow-wrap:anywhere}
 .care-personal-site .ds-eyebrow {letter-spacing:.11em;text-transform:uppercase;font-weight:750}
-.care-personal-site .ds-eyebrow--inverse {color:var(--ds-seafoam-300)!important}
+.care-personal-site .ds-eyebrow--inverse {color:var(--ds-ink)!important}
 .care-personal-site .site-section--dark .ds-action--secondary,
 .care-personal-site .site-section--dark .ds-action--text {
   background:transparent;
-  border-color:var(--ds-seafoam-300);
-  color:var(--ds-ink-inverse);
+  border-color:var(--ds-border);
+  color:var(--ds-ink);
 }
 .care-personal-site .site-section--dark .ds-action:hover,
 .care-personal-site .site-section--dark .ds-action:focus-visible {
-  background:var(--ds-seafoam-300);
-  border-color:var(--ds-seafoam-300);
-  color:var(--ds-slate-950);
+  background:var(--ds-seafoam-100);
+  border-color:var(--ds-ink);
+  color:var(--ds-ink);
 }
 .care-personal-site .site-section--dark .ds-action:focus-visible {
   outline-color:var(--ds-focus-inverse);
