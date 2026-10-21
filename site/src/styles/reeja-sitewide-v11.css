@@ -556,3 +556,14 @@ body.care-personal-site main .blog-index__hero-visual .cip-photo-band__credit{
   padding:6px 9px;border-radius:2px;line-height:1.45;
   max-width:42ch;
 }
+
+/* Section labels outside the hero had retained a legacy teal !important rule. */
+body.care-personal-site main :is(
+  .site-section,.contact-section,.blog-index__content,.blog-article__body,.cv-page
+) .site-eyebrow,
+body.care-personal-site main .site-section__head .site-eyebrow{
+  color:#313936!important;
+}
+body.care-personal-site main .ds-eyebrow:not(.ds-eyebrow--inverse){
+  color:#313936!important;
+}
