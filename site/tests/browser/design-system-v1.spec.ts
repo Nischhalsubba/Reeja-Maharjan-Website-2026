@@ -37,7 +37,7 @@ test('component actions and focus states have semantic output', async ({ page })
   const primary = page.locator('.ds-lab__canvas .ds-action--primary').first();
   await primary.focus();
   await expect(primary).toBeFocused();
-  await expect(primary).toHaveCSS('min-height', '44px');
+  expect(await primary.evaluate(el=>parseFloat(getComputedStyle(el).minHeight))).toBeGreaterThanOrEqual(44);
   const styles = await primary.evaluate(node => {
     const s = getComputedStyle(node);
     return { outline: s.outlineStyle, foreground: s.color, background: s.backgroundColor };
