@@ -1,0 +1,581 @@
+/*
+  REEJA / UNIFIED EDITORIAL 11
+  Site-wide design system using the user's approved neutral homepage (v10).
+  The old teal/slate styles remain behind this explicit last-loaded migration
+  layer while route-specific components are progressively consolidated.
+  Primary experience: natural paper, charcoal ink, real editorial photography.
+*/
+:root{
+  --reeja-page:#FAFAF8;
+  --reeja-paper:#F2F2EF;
+  --reeja-soft:#ECEBE7;
+  --reeja-white:#FFFFFF;
+  --reeja-ink:#17191A;
+  --reeja-body:#353D3B;
+  --reeja-muted:#4E5855;
+  --reeja-line:#D8DCD7;
+  --reeja-line-strong:#ADB6B0;
+  --reeja-serif:Georgia,"Times New Roman",serif;
+  --reeja-sans:"Public Sans",system-ui,-apple-system,sans-serif;
+  --reeja-container:1270px;
+  --reeja-gutter:clamp(18px,4vw,52px);
+  --reeja-space-section:clamp(64px,7vw,112px);
+  --reeja-space-hero:clamp(56px,6vw,92px);
+  --reeja-interactive:#202524;
+  --reeja-hover:#39403F;
+  --reeja-focus:#17191A;
+}
+body.care-personal-site{
+  --brand-blue:#303735;
+  --brand-blue-hover:#17191A;
+  --brand-lavender:#F2F2EF;
+  --brand-ink:#17191A;
+  --brand-canvas:#FAFAF8;
+  --brand-coral:#313536;
+  --brand-coral-ink:#313536;
+  --brand-muted:#4E5855;
+  --brand-line:#D8DCD7;
+  --brand-line-strong:#ADB6B0;
+  --brand-surface-strong:#ECEBE7;
+  --brand-focus:#17191A;
+  --care-paper:#FAFAF8;
+  --care-paper-deep:#F2F2EF;
+  --care-surface:#FFFFFF;
+  --care-ink:#17191A;
+  --care-graphite:#353D3B;
+  --care-muted:#4E5855;
+  --care-accent:#303735;
+  --care-indigo:#303735;
+  --care-brass:#313536;
+  --care-line:#D8DCD7;
+  background:var(--reeja-page);
+  color:var(--reeja-ink);
+  font-family:var(--reeja-sans);
+}
+/* A single optical gutter and content width across real public routes. */
+body.care-personal-site :where(.container,.site-header__inner,.site-footer--care>.container){
+  width:min(var(--reeja-container),calc(100% - 2 * var(--reeja-gutter)));
+  max-width:var(--reeja-container);
+  margin-inline:auto;
+}
+body.care-personal-site main :where(.site-page,.contact-page,.blog-index,.blog-article-page,.cv-page){
+  color:var(--reeja-ink);
+  background:var(--reeja-page);
+}
+body.care-personal-site main [id]{scroll-margin-top:94px}
+body.care-personal-site main :where(.site-page,.contact-page,.blog-index,.blog-article-page) :is(h1,h2,h3){
+  color:var(--reeja-ink);
+  text-wrap:balance;
+}
+body.care-personal-site main :is(.site-page,.contact-page,.blog-index,.blog-article-page) :is(h1,h2){
+  font-family:var(--reeja-serif);
+  font-weight:400;
+  letter-spacing:-.065em;
+}
+body.care-personal-site main :where(.site-page,.contact-page,.blog-index,.blog-article-page) em{
+  font-weight:inherit;
+  font-style:normal;
+  color:inherit;
+}
+body.care-personal-site main :where(.site-page,.contact-page,.blog-index,.blog-article-page) :is(p,li,dd){
+  overflow-wrap:break-word;
+}
+body.care-personal-site main :where(.site-page,.contact-page,.blog-index,.blog-article-page) p:not(.site-eyebrow):not(.blog-card__meta):not(.blog-article__meta){
+  color:var(--reeja-body);
+}
+body.care-personal-site main :where(.site-page,.contact-page,.blog-index,.blog-article-page) :is(a,button,input,textarea,select,summary):focus-visible,
+body.care-personal-site :is(.site-header,.site-footer--care,.mobile-nav) :is(a,button,summary):focus-visible{
+  outline:3px solid var(--reeja-focus);
+  outline-offset:4px;
+}
+body.care-personal-site .scroll-progress__bar{background:var(--reeja-ink)}
+/* Shared header for inner routes; v10 homepage uses compatible tokens. */
+body.care-personal-site .site-header{
+  min-height:72px!important;
+  background:rgba(250,250,248,.97)!important;
+  border-bottom:1px solid var(--reeja-line)!important;
+  box-shadow:none!important;
+  color:var(--reeja-ink);
+}
+body.care-personal-site .site-header__inner{min-height:72px}
+body.care-personal-site .site-header .brand{color:var(--reeja-ink)}
+body.care-personal-site .site-header .brand__symbol{
+  color:var(--reeja-ink);
+  border-color:#69716E;
+}
+body.care-personal-site .site-header .brand__text strong,
+body.care-personal-site .site-header .brand__text strong span{
+  color:var(--reeja-ink);
+  font-weight:400;
+}
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta){
+  color:var(--reeja-body)!important;
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  font-size:.9375rem!important;
+  font-weight:550;
+  min-height:44px;
+  text-decoration:none;
+}
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta):hover,
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta):focus-visible{
+  background:var(--reeja-soft)!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta)[aria-current="page"]{
+  background:transparent!important;
+  color:var(--reeja-ink)!important;
+  box-shadow:inset 0 -2px 0 var(--reeja-ink)!important;
+}
+body.care-personal-site .site-header .desktop-nav>a.nav-cta{
+  border:1px solid var(--reeja-ink)!important;
+  border-radius:2px!important;
+  background:var(--reeja-ink)!important;
+  color:#fff!important;
+  font-size:.875rem;
+}
+body.care-personal-site .site-header .desktop-nav>a.nav-cta:hover,
+body.care-personal-site .site-header .desktop-nav>a.nav-cta:focus-visible{
+  background:var(--reeja-hover)!important;
+  border-color:var(--reeja-hover)!important;
+  color:#fff!important;
+}
+body.care-personal-site .site-header .menu-toggle{
+  background:#fff!important;
+  color:var(--reeja-ink)!important;
+  border-color:var(--reeja-line-strong)!important;
+}
+body.care-personal-site .site-header .menu-toggle__label{color:var(--reeja-ink)!important}
+body.care-personal-site .site-header .menu-toggle__icon i{background:var(--reeja-ink)!important}
+/* Mobile sheet is the same neutral brand, not the retired slate overlay. */
+body.care-personal-site .mobile-nav__panel{
+  background:var(--reeja-page)!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site .mobile-nav__head,
+body.care-personal-site .mobile-nav__panel>a,
+body.care-personal-site .mobile-nav__head strong{color:var(--reeja-ink)!important}
+body.care-personal-site .mobile-nav__eyebrow,
+body.care-personal-site .mobile-nav__head small{color:var(--reeja-muted)!important}
+body.care-personal-site .mobile-nav__panel>a:not(.mobile-nav__cta)[aria-current="page"]{
+  background:var(--reeja-soft)!important;
+  color:var(--reeja-ink)!important;
+  border-color:var(--reeja-line-strong)!important;
+}
+body.care-personal-site .mobile-nav__panel>a:not(.mobile-nav__cta):hover,
+body.care-personal-site .mobile-nav__panel>a:not(.mobile-nav__cta):focus-visible{
+  background:#ECEBE7!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site .mobile-nav__panel .mobile-nav__cta{
+  background:var(--reeja-ink)!important;
+  color:#fff!important;
+  border-color:var(--reeja-ink)!important;
+}
+body.care-personal-site .mobile-nav__close{
+  background:#fff!important;
+  border-color:var(--reeja-line-strong)!important;
+  color:var(--reeja-ink)!important;
+}
+/* Every inner-page hero now follows the homepage's quiet two-column grid.
+   No fixed 470px height; responsive content controls its own size. */
+body.care-personal-site main :is(.site-page__hero,.contact-hero,.blog-article__header,.blog-index__hero,.cv-page__hero){
+  background:var(--reeja-page)!important;
+  background-image:none!important;
+  border-bottom:1px solid var(--reeja-line)!important;
+  color:var(--reeja-ink)!important;
+  padding:var(--reeja-space-hero) 0 clamp(48px,5vw,78px)!important;
+}
+body.care-personal-site main :where(.site-page__hero-grid,.contact-hero__grid,.blog-article__intro,.blog-index__hero-grid){
+  min-height:0!important;
+  gap:clamp(30px,5vw,82px)!important;
+  align-items:center!important;
+}
+body.care-personal-site main :is(.site-page__hero h1,.contact-hero h1,.blog-article__header h1,.blog-index__hero h1,.cv-page__hero h1){
+  color:var(--reeja-ink)!important;
+  font-family:var(--reeja-serif)!important;
+  font-size:clamp(3.35rem,5.7vw,6.7rem)!important;
+  line-height:1.02!important;
+  letter-spacing:-.075em!important;
+  font-weight:400!important;
+  max-width:15ch!important;
+  margin:clamp(14px,2vw,25px) 0 clamp(16px,2.7vw,30px)!important;
+  text-wrap:balance;
+}
+body.care-personal-site main .blog-article__header h1{
+  font-size:clamp(2.9rem,5vw,5.8rem)!important;
+  max-width:22ch!important;
+}
+body.care-personal-site main :is(.site-page__lede,.contact-hero__copy>p:last-child,.blog-article__dek,.blog-index__hero-copy .site-page__lede){
+  color:var(--reeja-body)!important;
+  font-size:clamp(1.03rem,1.25vw,1.18rem)!important;
+  line-height:1.73!important;
+  max-width:57ch!important;
+  margin:0!important;
+}
+body.care-personal-site main :is(.site-eyebrow,.blog-article__eyebrow,.cv-eyebrow){
+  color:var(--reeja-muted)!important;
+  font-size:.73rem!important;
+  font-weight:750!important;
+  letter-spacing:.125em!important;
+  text-transform:uppercase;
+}
+body.care-personal-site main :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){
+  background:transparent!important;
+  border:0!important;
+  border-top:1px solid var(--reeja-line-strong)!important;
+  border-radius:0!important;
+  padding:0!important;
+  color:var(--reeja-ink)!important;
+  min-width:0;
+  box-shadow:none!important;
+}
+body.care-personal-site main :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel)>div{
+  border-bottom:1px solid var(--reeja-line)!important;
+  padding:clamp(12px,1.35vw,20px) 0!important;
+  gap:clamp(10px,2vw,25px)!important;
+  background:transparent!important;
+}
+body.care-personal-site main :is(.site-page__summary dt,.contact-hero__details span,.blog-article__meta-panel dt){
+  color:var(--reeja-muted)!important;
+  letter-spacing:.06em;
+}
+body.care-personal-site main :is(.site-page__summary dd,.contact-hero__details strong,.contact-hero__details a,.blog-article__meta-panel dd){
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band{
+  border:0!important;border-radius:0!important;
+}
+body.care-personal-site main .blog-index__hero-counter{
+  background:var(--reeja-ink)!important;
+  color:#fff!important;
+  border:0!important;
+}
+/* Photography: contained, aligned with content; avoid arbitrary full-bleed bands
+   on content-first inner pages. Retain source credits and meaningful alt text. */
+body.care-personal-site main > :is(.site-page,.contact-page) > .cip-photo-band{
+  width:min(var(--reeja-container),calc(100% - 2 * var(--reeja-gutter)));
+  height:clamp(225px,26vw,340px);
+  margin:clamp(24px,4vw,46px) auto 0;
+  border-radius:0;
+  background:var(--reeja-soft);
+}
+body.care-personal-site main .cip-photo-band__caption{
+  left:clamp(18px,2.5vw,32px);
+  right:clamp(18px,2.5vw,32px);
+}
+/* Sections use one non-fluid rhythm and avoid tall empty spacer blocks. */
+body.care-personal-site main :is(.site-section,.contact-section,.blog-index__content){
+  padding-block:var(--reeja-space-section)!important;
+  background:var(--reeja-white)!important;
+  border-color:var(--reeja-line)!important;
+}
+body.care-personal-site main :is(.site-section--soft,.contact-section--soft,.blog-index__topics){
+  background:var(--reeja-paper)!important;
+  background-image:none!important;
+}
+body.care-personal-site main .site-section--dark{
+  background:var(--reeja-soft)!important;
+  background-image:none!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main .site-section--dark :is(h2,h3,p,li),
+body.care-personal-site main .site-section--dark .site-eyebrow{
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main :where(.site-section__head,.site-page__split,.cv-profile-grid,.contact-layout){
+  gap:clamp(25px,4.25vw,72px)!important;
+}
+body.care-personal-site main .site-section__head{
+  margin-bottom:clamp(26px,4vw,52px)!important;
+  align-items:end;
+}
+body.care-personal-site main :is(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2){
+  max-width:23ch;
+  font:400 clamp(2.4rem,4.1vw,4.8rem)/1.09 var(--reeja-serif)!important;
+  letter-spacing:-.06em!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main .site-section__head>p,
+body.care-personal-site main .site-section__head>div>p:not(.site-eyebrow){
+  color:var(--reeja-body)!important;
+  line-height:1.7;
+  max-width:54ch;
+}
+body.care-personal-site main :is(.site-grid,.blog-grid){
+  gap:clamp(16px,2vw,27px)!important;
+  border:0!important;
+}
+body.care-personal-site main .site-card{
+  border:1px solid var(--reeja-line)!important;
+  border-radius:0!important;
+  background:var(--reeja-page)!important;
+  padding:clamp(21px,2.7vw,37px)!important;
+  box-shadow:none!important;
+  color:var(--reeja-body)!important;
+}
+body.care-personal-site main .site-card::before{
+  color:var(--reeja-muted)!important;
+}
+body.care-personal-site main .site-card:nth-child(even){border-left:1px solid var(--reeja-line)!important}
+body.care-personal-site main .site-card h3{
+  font:400 clamp(1.55rem,2.05vw,2.25rem)/1.22 var(--reeja-serif)!important;
+  letter-spacing:-.042em!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main :is(.site-card,.blog-card,.blog-index__lead-card,.blog-topic-panel) a:not(.site-button){
+  color:var(--reeja-ink)!important;
+  text-decoration-color:var(--reeja-muted);
+  text-underline-offset:5px;
+}
+body.care-personal-site main .site-list__item,
+body.care-personal-site main .cv-experience__item,
+body.care-personal-site main .cv-credential{
+  border-color:var(--reeja-line)!important;
+}
+body.care-personal-site main :where(.site-list__item,.cv-experience__item,.cv-credential):is(:hover,:focus-within){
+  background:var(--reeja-page);
+}
+body.care-personal-site main :is(.cv-credential__issuer,.cv-credential__verification,.cv-experience__meta){
+  color:var(--reeja-body)!important;
+}
+/* CTA hierarchy: one charcoal primary, one neutral outline. */
+body.care-personal-site main :is(.site-button,.care-button,.cip-button,.blog-index__cta,.contact-page button,.professional-contact-form button){
+  border-radius:2px!important;
+  min-height:48px;
+  font-size:.9rem;
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease;
+}
+body.care-personal-site main :is(.site-button--primary,.care-button--primary,.contact-page button[type="submit"],.professional-contact-form button[type="submit"]){
+  background:var(--reeja-ink)!important;
+  border-color:var(--reeja-ink)!important;
+  color:#FFFFFF!important;
+}
+body.care-personal-site main :is(.site-button--primary,.care-button--primary,.contact-page button[type="submit"],.professional-contact-form button[type="submit"]):hover{
+  background:var(--reeja-hover)!important;
+  border-color:var(--reeja-hover)!important;
+  color:#FFFFFF!important;
+}
+body.care-personal-site main :is(.site-button,.care-button):not(.site-button--primary):not(.care-button--primary){
+  border-color:var(--reeja-line-strong)!important;
+  background:transparent!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main :is(.site-button,.care-button):not(.site-button--primary):not(.care-button--primary):hover{
+  background:#FFFFFF!important;
+  border-color:var(--reeja-ink)!important;
+}
+body.care-personal-site main .site-section--dark :is(.site-button,.care-button){
+  background:#FFFFFF!important;
+  color:var(--reeja-ink)!important;
+  border-color:var(--reeja-line-strong)!important;
+}
+/* Blog index / articles: magazine grid and excellent reading comfort. */
+body.care-personal-site main :is(.blog-index__lead-card,.blog-card,.blog-topic-panel,.blog-toc,.article-governance){
+  border-radius:0!important;
+  box-shadow:none!important;
+  border-color:var(--reeja-line)!important;
+  background:var(--reeja-white)!important;
+}
+body.care-personal-site main .blog-index__lead-card{
+  background:var(--reeja-paper)!important;
+}
+body.care-personal-site main .blog-topic-panel{
+  background:var(--reeja-page)!important;
+}
+body.care-personal-site main .blog-card__meta{
+  color:var(--reeja-muted)!important;
+}
+body.care-personal-site main :is(.blog-index__lead-card h3,.blog-card h3,.blog-topic-panel h3){
+  font:400 clamp(1.42rem,2.25vw,2.3rem)/1.18 var(--reeja-serif)!important;
+  letter-spacing:-.04em!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main .blog-article__body{
+  max-width:74ch;
+  color:var(--reeja-body);
+}
+body.care-personal-site main .blog-article__body :is(h2,h3){
+  color:var(--reeja-ink)!important;
+  font-family:var(--reeja-serif)!important;
+  letter-spacing:-.04em!important;
+  font-weight:400!important;
+}
+body.care-personal-site main .blog-article__body h2{
+  font-size:clamp(2rem,2.7vw,3.1rem)!important;
+  line-height:1.15;
+}
+body.care-personal-site main .blog-article__body h3{
+  font-size:clamp(1.5rem,2vw,2.15rem)!important;
+}
+body.care-personal-site main .blog-article__body :is(p,li){line-height:1.77!important}
+body.care-personal-site main .blog-article__body a,
+body.care-personal-site main .blog-toc a{color:var(--reeja-ink)!important}
+body.care-personal-site main .blog-toc a:is(:hover,[aria-current="location"],.is-active){
+  background:var(--reeja-paper)!important;
+  border-color:var(--reeja-line-strong)!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main .article-governance{
+  border-left:3px solid var(--reeja-ink)!important;
+  background:var(--reeja-paper)!important;
+}
+/* Contact: calm white form; one column of instructions, one of actions. */
+body.care-personal-site main .professional-contact-form,
+body.care-personal-site main .contact-sidebar__block{
+  border:1px solid var(--reeja-line)!important;
+  border-radius:0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+body.care-personal-site main .contact-sidebar__block--soft,
+body.care-personal-site main .professional-contact-form__privacy{
+  background:var(--reeja-paper)!important;
+  border-color:var(--reeja-line)!important;
+}
+body.care-personal-site main .professional-contact-form :is(input,textarea,select){
+  background:var(--reeja-page)!important;
+  border:1px solid var(--reeja-line-strong)!important;
+  border-radius:2px!important;
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site main .professional-contact-form :is(input,textarea,select):focus-visible{
+  background:#fff!important;
+  outline:3px solid var(--reeja-ink)!important;
+  outline-offset:2px;
+}
+body.care-personal-site main .contact-sidebar h2,
+body.care-personal-site main .professional-contact-form h2{
+  font-family:var(--reeja-serif)!important;
+  color:var(--reeja-ink)!important;
+  font-weight:400!important;
+}
+body.care-personal-site main .form-field__help{color:var(--reeja-muted)!important}
+/* Footer shares the homepage's off-white, quiet branding across every page. */
+body.care-personal-site .site-footer--care{
+  background:var(--reeja-page)!important;
+  color:var(--reeja-ink)!important;
+  border-top:1px solid var(--reeja-line)!important;
+}
+body.care-personal-site .care-footer__invitation{
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.78fr);
+  background:var(--reeja-soft)!important;
+  margin-top:clamp(27px,4vw,55px);
+  padding:clamp(38px,5vw,75px)!important;
+  border:0!important;
+  gap:clamp(25px,4vw,75px);
+  width:min(var(--reeja-container),calc(100% - 2 * var(--reeja-gutter)));
+}
+body.care-personal-site:has(.rm-home) .care-footer__invitation{
+  display:none!important;
+}
+body.care-personal-site .care-footer__intro h2,
+body.care-personal-site .care-footer__intro h2 span{
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site .care-footer__intro h2{
+  font-size:clamp(2.7rem,4.45vw,5rem)!important;
+}
+body.care-personal-site .care-footer__eyebrow{
+  color:var(--reeja-muted)!important;
+  margin-bottom:18px!important;
+}
+body.care-personal-site .care-footer__invite-actions{
+  border-left:1px solid var(--reeja-line-strong)!important;
+}
+body.care-personal-site .care-footer__invite-actions>p{
+  color:var(--reeja-body)!important;
+}
+body.care-personal-site .site-footer--care .care-footer__cta{
+  color:#FFFFFF!important;
+  background:var(--reeja-ink)!important;
+  border-color:var(--reeja-ink)!important;
+}
+body.care-personal-site .site-footer--care .care-footer__cta:is(:hover,:focus-visible){
+  color:#FFFFFF!important;
+  background:var(--reeja-hover)!important;
+  border-color:var(--reeja-hover)!important;
+}
+body.care-personal-site .care-footer__main{
+  padding-block:clamp(42px,5vw,72px)!important;
+}
+body.care-personal-site .site-footer--care :is(.care-footer__wordmark,.care-footer__wordmark span,.care-footer__identity p,.care-footer__location,.care-footer__column h3,.care-footer__column a,.care-footer__bottom,.care-footer__bottom a,.care-footer__bottom small,.care-footer__bottom span,.care-footer__credits,.care-footer__credits summary,.care-footer__credits a){
+  color:var(--reeja-ink)!important;
+}
+body.care-personal-site .care-footer__column h3{font-size:.75rem;letter-spacing:.11em}
+body.care-personal-site .care-footer__column a{
+  font-size:.91rem;line-height:1.42;
+}
+body.care-personal-site .care-footer__bottom,
+body.care-personal-site .care-footer__credits{border-color:var(--reeja-line)!important}
+body.care-personal-site .care-footer__credits a:hover,
+body.care-personal-site .care-footer__column a:hover{text-underline-offset:4px}
+@media(max-width:1080px){
+  body.care-personal-site .site-header__inner{
+    width:calc(100% - 2 * var(--reeja-gutter));
+  }
+}
+@media(max-width:900px){
+  body.care-personal-site main :where(.site-page__hero-grid,.contact-hero__grid,.blog-article__intro,.blog-index__hero-grid){
+    gap:clamp(20px,3vw,35px)!important;
+  }
+  body.care-personal-site main :is(.site-page__hero h1,.contact-hero h1,.blog-index__hero h1){
+    font-size:clamp(2.8rem,6.6vw,4.65rem)!important;
+  }
+  body.care-personal-site .care-footer__invitation{grid-template-columns:1fr}
+  body.care-personal-site .care-footer__invite-actions{
+    border-left:0!important;
+    border-top:1px solid var(--reeja-line-strong)!important;
+    padding:25px 0 0!important;
+  }
+}
+@media(max-width:640px){
+  body.care-personal-site{
+    --reeja-gutter:18px;
+    --reeja-space-section:clamp(54px,12vw,80px);
+    --reeja-space-hero:clamp(44px,9vw,70px);
+  }
+  body.care-personal-site .site-header__inner{min-height:68px}
+  body.care-personal-site .site-header{min-height:68px!important}
+  body.care-personal-site main :is(.site-page__hero h1,.contact-hero h1,.blog-index__hero h1,.cv-page__hero h1){
+    font-size:clamp(2.75rem,11vw,4.3rem)!important;
+    max-width:100%!important;
+  }
+  body.care-personal-site main .blog-article__header h1{
+    font-size:clamp(2.4rem,9vw,3.75rem)!important;
+    max-width:100%!important;
+  }
+  body.care-personal-site main :where(.site-page__hero-grid,.contact-hero__grid,.blog-article__intro,.blog-index__hero-grid){
+    min-height:0!important;
+    display:grid!important;
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  body.care-personal-site main :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){
+    margin-top:5px!important;
+    width:100%;
+  }
+  body.care-personal-site main > :is(.site-page,.contact-page) > .cip-photo-band{
+    height:clamp(190px,55vw,280px);
+    margin-top:22px;
+  }
+  body.care-personal-site main .site-card{padding:24px!important}
+  body.care-personal-site main .site-section__head{align-items:start}
+  body.care-personal-site .care-footer__invitation{
+    padding:35px 24px!important;
+  }
+  body.care-personal-site .care-footer__main{padding-block:45px!important}
+  body.care-personal-site .care-footer__intro h2{font-size:clamp(2.7rem,11vw,4rem)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.care-personal-site :is(.site-page,.contact-page,.blog-index,.blog-article-page) *{
+    scroll-behavior:auto!important;
+  }
+}
+@media print{
+  body.care-personal-site :is(.site-page__hero,.contact-hero,.blog-article__header,.site-section--dark){
+    background:#fff!important;color:#111!important;
+  }
+  body.care-personal-site .site-header,body.care-personal-site .site-footer--care{display:none!important}
+}
