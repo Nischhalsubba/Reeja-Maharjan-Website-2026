@@ -26,7 +26,7 @@ const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US'
         <div>
           <p class="site-eyebrow">Writing / {topic.label}</p>
           <h1 id="topic-page-title">{topic.label} articles.</h1>
-          <p class="site-page__lede">{topic.summary} Browse related writing by Reeja Maharjan.</p>
+          <p class="site-page__lede">{topic.summary} Read related, source-linked articles written by Reeja Maharjan.</p>
           <div class="site-actions">
             <a class="site-button site-button--primary" href="/blog/">All articles</a>
             <a class="site-button" href={topic.relatedHref}>{topic.relatedLabel}</a>
@@ -45,7 +45,7 @@ const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US'
         <div class="site-section__head">
           <div>
             <p class="site-eyebrow">{posts.length} related {posts.length === 1 ? 'article' : 'articles'}</p>
-            <h2 id="topic-articles-title">Explore this topic.</h2>
+            <h2 id="topic-articles-title">Articles about {topic.label.toLowerCase()}.</h2>
           </div>
           <p>Articles are educational and do not replace individual clinical assessment or professional care.</p>
         </div>
