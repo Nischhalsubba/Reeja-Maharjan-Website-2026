@@ -81,7 +81,7 @@ test('Slate & Seafoam palette and typography apply across the site', async ({ pa
     });
 
     expect(state.carePersonal).toBe(true);
-    expect(state.background).toBe('rgb(255, 255, 255)');
+    expect(state.background).toBe('rgb(250, 250, 248)');
     expect(state.bodyFont).toContain('Public Sans');
     expect(state.headingFont).toContain('Georgia');
     expect(state.canvasCount).toBe(0);

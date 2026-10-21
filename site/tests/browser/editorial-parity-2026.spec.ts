@@ -49,9 +49,9 @@ test('inner routes follow the shared slate/seafoam hero and editorial typography
         h1Font: h1 ? getComputedStyle(h1).fontFamily : 'missing'
       };
     });
-    expect(data.heroBackground, route).toContain('linear-gradient');
-    expect(data.heroBackground, route).toContain('16, 28, 41');
-    expect(data.h1Color, route).toBe('rgb(255, 255, 255)');
+    expect(data.heroBackground, route).toBe('none');
+    expect(data.h1Color, route).toBe('rgb(23, 25, 26)');
+    expect(data.h1Color, route).toBe('rgb(23, 25, 26)');
     expect(data.h1Font, route).toContain('Georgia');
   }
 });

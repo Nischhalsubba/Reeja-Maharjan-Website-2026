@@ -1,0 +1,574 @@
+/*
+ * REEJA / SYSTEM 11
+ * Single cross-site design foundation, following the approved home visual:
+ * white / off-white / stone / graphite, real photography, editorial hierarchy.
+ * Loaded last. Replace legacy visual ownership; preserve structural grids,
+ * content, semantic HTML, native controls, clinical safety and print layouts.
+ */
+:root{
+  --brand-blue:#313536;
+  --brand-blue-hover:#202425;
+  --brand-lavender:#ECEBE7;
+  --brand-ink:#17191A;
+  --brand-canvas:#FAFAF8;
+  --brand-coral:#555D59;
+  --brand-coral-ink:#313536;
+  --brand-muted:#505957;
+  --brand-line:#D9DBD7;
+  --brand-line-strong:#A9B0AC;
+  --brand-surface-strong:#F1F1EE;
+  --brand-focus:#17191A;
+  --bg:#FAFAF8;
+  --surface:#FFFFFF;
+  --surface-alt:#F1F1EE;
+  --surface-strong:#EAECE8;
+  --text:#17191A;
+  --muted:#505957;
+  --muted-strong:#313936;
+  --line:#D9DBD7;
+  --line-strong:#A9B0AC;
+  --accent:#313536;
+  --accent-text:#FFFFFF;
+  --accent-hover:#202425;
+  --accent-soft:#ECEBE7;
+  --signal:#313536;
+  --placeholder:#555E5B;
+  --focus-ring:0 0 0 3px rgba(23,25,26,.25);
+  --r-card:2px;
+  --r-btn:2px;
+  --container-max:1270px;
+  --gutter:clamp(18px,4vw,52px);
+}
+body.care-personal-site{
+  --care-paper:#FAFAF8;
+  --care-paper-deep:#ECEBE7;
+  --care-surface:#FFFFFF;
+  --care-ink:#17191A;
+  --care-graphite:#505957;
+  --care-muted:#505957;
+  --care-accent:#313536;
+  --care-indigo:#313536;
+  --care-brass:#313536;
+  --care-line:#D9DBD7;
+  --slate-nav:#FAFAF8;
+  --slate-nav-deep:#FFFFFF;
+  --slate-seafoam:#313536;
+  --slate-heading:#17191A;
+  --slate-canvas:#FAFAF8;
+  background:#FAFAF8;
+  color:#17191A;
+  font-size:16px;
+}
+body.care-personal-site *{box-sizing:border-box}
+body.care-personal-site :where(.container,.rm-container,.slate-container){
+  max-width:none;
+  width:min(1270px,calc(100% - 104px));
+  margin-inline:auto;
+}
+body.care-personal-site main{background:#FAFAF8}
+body.care-personal-site main :where([id]){scroll-margin-top:96px}
+body.care-personal-site main :where(h1,h2,h3,h4){font-family:Georgia,"Times New Roman",serif;letter-spacing:-.054em;font-weight:400;text-wrap:balance;color:#17191A}
+body.care-personal-site main :where(p,li,dd,dt){line-height:1.72}
+body.care-personal-site :is(a,button,input,textarea,select,summary):focus-visible{
+  outline:3px solid #17191A!important;outline-offset:4px;
+}
+body.care-personal-site :where(a):hover{text-underline-offset:5px}
+body.care-personal-site :where(.site-eyebrow,.blog-article__eyebrow,.cv-eyebrow,.cip-eyebrow,.blog-article__meta-panel dt){
+  color:#313936!important;
+  font-family:"Public Sans",system-ui,sans-serif;
+  font-weight:750;font-size:.875rem;letter-spacing:.085em;line-height:1.45;
+}
+body.care-personal-site main :where(.site-page,.contact-page,.cv-page,.blog-index,.blog-article,.blog-article-page){
+  background:#FAFAF8;color:#17191A;
+}
+/* Navigation / a true common shell, not home-only styles */
+body.care-personal-site .site-header{
+  background:rgba(250,250,248,.97);
+  color:#17191A;border-bottom:1px solid #D9DBD7;
+  box-shadow:none;min-height:72px;backdrop-filter:blur(16px);
+}
+body.care-personal-site .site-header__inner{min-height:72px;width:min(1270px,calc(100% - 104px))}
+body.care-personal-site .site-header .brand{color:#17191A}
+body.care-personal-site .site-header .brand__symbol{
+  color:#17191A;border:1px solid #59615D;background:transparent
+}
+body.care-personal-site .site-header .brand__text strong,
+body.care-personal-site .site-header .brand__text strong span{color:#17191A;font-weight:400}
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta){
+  color:#313936;background:transparent;border:0;border-radius:0;
+  font-size:.9375rem;font-weight:600;min-height:44px;box-shadow:none;
+  transition:background-color .17s ease,color .17s ease;
+}
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta):hover,
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta):focus-visible{
+  color:#17191A;background:#ECEBE7
+}
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta)[aria-current="page"]{
+  color:#17191A;background:transparent;box-shadow:inset 0 -2px 0 #17191A;
+}
+body.care-personal-site .site-header .desktop-nav>a:not(.nav-cta)[aria-current="page"]:hover{
+  color:#17191A;background:#ECEBE7
+}
+body.care-personal-site .site-header .desktop-nav .nav-cta{
+  color:#FFFFFF;background:#17191A;border:1px solid #17191A;
+  border-radius:2px;font-size:.9rem;min-height:44px
+}
+body.care-personal-site .site-header .desktop-nav .nav-cta:hover{
+  color:#fff;background:#39403F;border-color:#39403F
+}
+body.care-personal-site .site-header .menu-toggle{
+  color:#17191A;background:#FFFFFF;border:1px solid #9BA19E
+}
+body.care-personal-site .site-header .menu-toggle__label{color:#17191A}
+body.care-personal-site .site-header .menu-toggle__icon i{background:#17191A}
+body.care-personal-site .site-header .menu-toggle:hover,
+body.care-personal-site .site-header .menu-toggle:focus-visible{
+  color:#17191A;background:#ECEBE7;border-color:#17191A
+}
+body.care-personal-site .mobile-nav{top:72px}
+body.care-personal-site .mobile-nav__panel{
+  color:#17191A;background:#FAFAF8;border-left:1px solid #D9DBD7
+}
+body.care-personal-site .mobile-nav__head strong,
+body.care-personal-site .mobile-nav__head small,
+body.care-personal-site .mobile-nav__eyebrow{color:#313936}
+body.care-personal-site .mobile-nav__panel>a:not(.mobile-nav__cta){
+  color:#17191A;background:transparent;border-color:#D9DBD7
+}
+body.care-personal-site .mobile-nav__panel>a:not(.mobile-nav__cta)[aria-current="page"],
+body.care-personal-site .mobile-nav__panel>a:not(.mobile-nav__cta):hover{
+  color:#17191A;background:#ECEBE7;border-color:#9BA19E
+}
+body.care-personal-site .mobile-nav__panel .mobile-nav__cta{
+  color:#fff;background:#17191A;border-color:#17191A
+}
+body.care-personal-site .mobile-nav__close{
+  color:#17191A;background:#FFFFFF;border:1px solid #949B97
+}
+body.care-personal-site .mobile-nav__close span:before,
+body.care-personal-site .mobile-nav__close span:after{background:#17191A}
+/* Hero / same family as homepage, with measured vertical rhythm */
+body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header){
+  background:#FAFAF8!important;
+  background-image:none!important;
+  border-bottom:1px solid #D9DBD7;
+  color:#17191A;
+  padding-block:clamp(74px,8.5vw,125px) clamp(66px,7vw,100px);
+}
+body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header):before,
+body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header):after{
+  display:none!important;
+}
+body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid){
+  width:min(1270px,calc(100% - 104px));
+  min-height:0;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);
+  align-items:center;gap:clamp(36px,6vw,108px);
+}
+body.care-personal-site main :is(.site-page__hero,.contact-hero,.blog-index__hero,.cv-page__hero) h1,
+body.care-personal-site main .blog-article__header h1{
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(3.7rem,6.55vw,7rem);
+  font-weight:400;letter-spacing:-.072em;line-height:.99;
+  max-width:15ch;margin:clamp(19px,2.5vw,36px) 0 24px;
+  color:#17191A!important;
+}
+body.care-personal-site main :is(.site-page__hero,.contact-hero,.blog-index__hero,.cv-page__hero,.blog-article__header) h1 em{
+  color:#313536!important;font-style:normal!important;
+}
+body.care-personal-site main :is(.site-page__lede,.contact-hero__copy>p:last-child,.blog-article__dek){
+  max-width:59ch;color:#434B48!important;font-size:clamp(1.04rem,1.3vw,1.21rem);
+  line-height:1.72;
+}
+body.care-personal-site main :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel){
+  background:transparent!important;border:0;border-top:1px solid #AEB5B0;
+  border-bottom:1px solid #D9DBD7;border-radius:0;box-shadow:none;
+  padding:12px 0;margin:0;min-width:0
+}
+body.care-personal-site main :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel)>div{
+  border:0;border-bottom:1px solid #E2E4DF;
+  background:transparent;min-width:0;gap:clamp(10px,2vw,28px);
+  padding:13px 0;
+}
+body.care-personal-site main :is(.site-page__summary,.contact-hero__details,.blog-article__meta-panel)>div:last-child{
+  border-bottom:0
+}
+body.care-personal-site main :is(.site-page__summary dt,.contact-hero__details span,.blog-article__meta-panel dt){
+  color:#434C48!important;font-size:.875rem;letter-spacing:.055em;font-weight:750;
+}
+body.care-personal-site main :is(.site-page__summary dd,.contact-hero__details strong,.contact-hero__details a,.blog-article__meta-panel dd){
+  color:#17191A!important;font-size:.93rem;font-weight:600;line-height:1.5;
+}
+body.care-personal-site main :is(.site-actions,.blog-index__hero-actions){
+  display:flex;align-items:center;gap:12px;margin-top:clamp(23px,2.8vw,34px)
+}
+body.care-personal-site main :is(.site-button,.care-button,.blog-index__cta,.contact-page button[type="submit"],.professional-contact-form button[type="submit"]){
+  border:1px solid #949C97;border-radius:2px;background:transparent;color:#17191A;
+  min-height:49px;display:inline-flex;align-items:center;justify-content:center;
+  padding:11px 21px;transition:background-color .18s,color .18s,border-color .18s;
+  font:700 .9rem/1.4 "Public Sans",system-ui,sans-serif;box-shadow:none;transform:none
+}
+body.care-personal-site main :is(.site-button--primary,.care-button--primary,.contact-page button[type="submit"],.professional-contact-form button[type="submit"],.blog-index__hero-actions>.site-button--primary){
+  color:#fff!important;background:#17191A!important;border-color:#17191A!important
+}
+body.care-personal-site main :is(.site-button,.care-button,.contact-page button[type="submit"],.professional-contact-form button[type="submit"]):hover{
+  color:#17191A;background:#ECEBE7;border-color:#505957;transform:none
+}
+body.care-personal-site main :is(.site-button--primary,.care-button--primary,.contact-page button[type="submit"],.professional-contact-form button[type="submit"],.blog-index__hero-actions>.site-button--primary):hover{
+  color:#fff!important;background:#39403F!important;border-color:#39403F!important
+}
+body.care-personal-site main :is(.blog-index__hero-link,.blog-index__hero-kicker,.site-back){
+  color:#313936!important;
+}
+/* Content rhythm—same 1270px grid, smaller meaningful spaces */
+body.care-personal-site main :is(.site-section,.contact-section,.blog-index__content){
+  background:#FFFFFF;border-color:#D9DBD7;
+  padding-block:clamp(72px,8vw,116px);
+}
+body.care-personal-site main :is(.site-section--soft,.contact-section--soft,.blog-index__topics){
+  background:#F1F1EE!important
+}
+body.care-personal-site main .site-section--dark{
+  background:#ECEBE7!important;color:#17191A;
+  border-color:#D9DBD7;
+}
+body.care-personal-site main .site-section--dark :is(h2,h3,p,li){
+  color:#17191A!important;
+}
+body.care-personal-site main .site-section--dark .site-eyebrow{color:#313936!important}
+body.care-personal-site main :is(.site-section__head,.site-page__split,.contact-layout,.cv-profile-grid){
+  display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.8fr);
+  gap:clamp(26px,5vw,85px);align-items:start;
+}
+body.care-personal-site main .site-section__head{
+  margin-bottom:clamp(32px,4vw,62px);
+}
+body.care-personal-site main :is(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2){
+  font:400 clamp(2.75rem,4.4vw,5rem)/1.07 Georgia,"Times New Roman",serif;
+  letter-spacing:-.06em;max-width:19ch;color:#17191A;
+}
+body.care-personal-site main :is(.site-section__head>p,.site-page__split>div>p:not(.site-eyebrow),.cv-profile-copy){
+  color:#434B48;font-size:1.03rem;max-width:63ch;line-height:1.75;
+}
+body.care-personal-site main .site-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:0;border-top:1px solid #CED2CC;
+}
+body.care-personal-site main :is(.site-card,.care-card,.blog-card){
+  border:0;border-bottom:1px solid #D9DBD7;border-radius:0;
+  background:transparent;box-shadow:none;min-width:0
+}
+body.care-personal-site main .site-grid>.site-card{
+  padding:clamp(30px,4vw,54px) clamp(25px,4vw,58px) clamp(30px,4vw,54px) 0;
+  border-bottom:1px solid #D9DBD7;
+  counter-increment:none
+}
+body.care-personal-site main .site-grid>.site-card:nth-child(even){
+  padding-left:clamp(26px,4vw,58px);padding-right:0;
+  border-left:1px solid #D9DBD7;
+}
+body.care-personal-site main .site-card:before{color:#454E4A}
+body.care-personal-site main :is(.site-card h3,.site-list__item h3,.blog-card h3,.blog-index__lead-card h3,.cv-experience__heading h3,.cv-credential h3){
+  font-family:Georgia,"Times New Roman",serif;
+  font-weight:400;letter-spacing:-.048em;
+  font-size:clamp(1.55rem,2.05vw,2.65rem);line-height:1.14;
+  color:#17191A
+}
+body.care-personal-site main :is(.site-card p,.site-list__item p,.blog-card p,.cv-credential__note){
+  color:#47504D;line-height:1.68
+}
+body.care-personal-site main :is(.site-card a,.site-page a:not([class]),.blog-card a,.blog-article__body a){
+  color:#222928;text-underline-offset:5px
+}
+body.care-personal-site main :is(.site-card a,.site-page a:not([class])):hover{color:#000}
+/* Photos remain documentary, not faux dashboard */
+body.care-personal-site main .cip-photo-band{
+  width:min(1270px,calc(100% - 104px));max-width:none;margin:0 auto;
+  height:clamp(235px,28vw,415px);border:0;border-radius:0;background:#ECEBE7
+}
+body.care-personal-site main .cip-photo-band img{filter:saturate(.75);object-fit:cover}
+body.care-personal-site main .cip-photo-band--care-journey{height:auto;min-height:0}
+body.care-personal-site main .cip-photo-band--care-journey>img{object-fit:contain;max-height:470px}
+body.care-personal-site main .cip-photo-band__label{font-family:Georgia,"Times New Roman",serif;font-weight:400}
+body.care-personal-site main .cip-photo-band__credit{font-size:.78rem}
+/* CV: typography & document hierarchy without dashboard cards */
+body.care-personal-site main .cv-page .cv-experience,
+body.care-personal-site main .cv-page .cv-credentials,
+body.care-personal-site main .cv-page .cv-education{border-color:#BFC5BE}
+body.care-personal-site main .cv-page :is(.cv-experience__item,.cv-credential,.cv-education__item){
+  border-color:#D9DBD7;background:transparent
+}
+body.care-personal-site main .cv-page :is(.cv-credential__issuer,.cv-credential__verification,.cv-experience__meta){
+  color:#434B48!important
+}
+body.care-personal-site main .cv-page :is(.cv-panel,.cv-skill-group){border-color:#D9DBD7;background:transparent}
+/* Blog index: narrative feature, low-decoration topic navigation */
+body.care-personal-site main .blog-index__hero .blog-index__hero-copy h1{
+  font:400 clamp(3.7rem,6.5vw,7rem)/.99 Georgia,"Times New Roman",serif;color:#17191A
+}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band{
+  width:100%;margin:0;height:clamp(260px,30vw,445px)
+}
+body.care-personal-site main .blog-index__hero-counter{
+  color:#17191A;background:#ECEBE7;border-radius:0;border:0;box-shadow:none
+}
+body.care-personal-site main .blog-index__lead-card,
+body.care-personal-site main .blog-topic-panel{
+  color:#17191A;background:#F1F1EE;border:1px solid #D9DBD7;border-radius:0;
+  box-shadow:none
+}
+body.care-personal-site main .blog-index__lead-content{padding:clamp(23px,3.6vw,43px)}
+body.care-personal-site main .blog-index__lead-card h3{
+  font-size:clamp(1.95rem,3vw,3.65rem);
+}
+body.care-personal-site main .blog-topic-panel{border-top:1px solid #AEB5B0}
+body.care-personal-site main .blog-topic-panel h3{
+  font:400 clamp(1.85rem,2.7vw,3rem)/1.15 Georgia,"Times New Roman",serif
+}
+body.care-personal-site main .blog-index__lead-card h3 a,
+body.care-personal-site main .blog-index__read-link,
+body.care-personal-site main .blog-index__hero-link,
+body.care-personal-site main .blog-topic-panel a{
+  color:#17191A!important
+}
+body.care-personal-site main .blog-grid>.blog-card{padding:clamp(25px,3vw,42px);border-bottom:1px solid #D9DBD7}
+body.care-personal-site main .blog-photo{border-radius:0;background:#E8E9E5}
+/* Article: one readable editorial column, transparent metadata, quiet toc */
+body.care-personal-site main .blog-article__header{
+  padding-block:clamp(65px,8vw,110px) clamp(48px,6vw,82px)
+}
+body.care-personal-site main .blog-article__intro{
+  min-height:0;width:min(1270px,calc(100% - 104px));
+  margin-inline:auto;display:block
+}
+body.care-personal-site main .blog-article__header h1{
+  max-width:21ch!important;font-size:clamp(3.1rem,5.4vw,6rem);
+}
+body.care-personal-site main .blog-article__meta-panel{
+  margin-top:38px;border-top:1px solid #C5CAC4
+}
+body.care-personal-site main .blog-article__meta-panel>div{
+  border-color:#D9DBD7!important
+}
+body.care-personal-site main .blog-article__shell{
+  width:min(1270px,calc(100% - 104px));
+}
+body.care-personal-site main .blog-article__layout{
+  column-gap:clamp(45px,6vw,95px)
+}
+body.care-personal-site main .blog-toc{
+  background:#F1F1EE;border:1px solid #E1E3DF;border-radius:0
+}
+body.care-personal-site main .blog-toc nav a{
+  color:#313936;background:transparent;border-radius:0
+}
+body.care-personal-site main .blog-toc nav a:is(:hover,.is-active,[aria-current="location"]){
+  color:#17191A;background:#E1E3DF;border-color:#515C55;transform:none
+}
+body.care-personal-site main .blog-article__body :is(p,li){
+  color:#292F2D;font-size:clamp(1rem,1vw + .86rem,1.1rem);line-height:1.86
+}
+body.care-personal-site main .blog-article__body h2{
+  font:400 clamp(2rem,3vw,3.35rem)/1.17 Georgia,"Times New Roman",serif;
+  margin-block:clamp(38px,5vw,63px) 20px;color:#17191A
+}
+body.care-personal-site main .blog-article__body h3{
+  font:400 clamp(1.5rem,2vw,2.2rem)/1.2 Georgia,"Times New Roman",serif
+}
+body.care-personal-site main .blog-article__body :is(.blog-note-strong,.site-note){
+  background:#F1F1EE;border-color:#C8CDC7;border-left:3px solid #313536;border-radius:0
+}
+/* Contact: square, legible native form controls and aligned support information */
+body.care-personal-site main .contact-layout{
+  grid-template-columns:minmax(0,1.2fr) minmax(0,.65fr);
+  gap:clamp(30px,6vw,100px)
+}
+body.care-personal-site main :is(.contact-sidebar,.professional-contact-form,.contact-sidebar__block--soft){
+  color:#17191A;border-color:#D9DBD7;background:transparent;box-shadow:none
+}
+body.care-personal-site main .contact-sidebar__block--soft{background:#F1F1EE}
+body.care-personal-site main .professional-contact-form :is(input,textarea,select),
+body.care-personal-site main .contact-page :is(input,textarea,select){
+  background:#FFFFFF;color:#17191A;border:1px solid #929B94;border-radius:2px;min-height:48px
+}
+body.care-personal-site main .professional-contact-form :is(input,textarea,select):focus-visible{
+  border-color:#17191A
+}
+body.care-personal-site main :is(.form-field label,.form-field__help){
+  color:#313936!important
+}
+body.care-personal-site main :is(.form-message,.form-status){color:#17191A}
+/* One identical neutral footer on every route; do not repeat CTA blocks */
+body.care-personal-site .site-footer--care{
+  background:#FAFAF8;color:#242827;border-top:1px solid #D9DBD7
+}
+body.care-personal-site .site-footer--care .care-footer__invitation{display:none}
+body.care-personal-site .site-footer--care .care-footer__main{
+  width:min(1270px,calc(100% - 104px));padding-top:clamp(55px,6vw,85px)
+}
+body.care-personal-site .site-footer--care :is(.care-footer__wordmark,.care-footer__identity p,.care-footer__location,.care-footer__column h3,.care-footer__column a,.care-footer__bottom,.care-footer__bottom a,.care-footer__bottom small,.care-footer__bottom span,.care-footer__credits,.care-footer__credits summary,.care-footer__credits a){
+  color:#313936!important
+}
+body.care-personal-site .site-footer--care .care-footer__wordmark span{color:#313936}
+body.care-personal-site .site-footer--care :is(.care-footer__column,.care-footer__bottom,.care-footer__credits){
+  border-color:#D9DBD7
+}
+body.care-personal-site .site-footer--care :is(.care-footer__column a,.care-footer__bottom a):hover{
+  color:#17191A!important;text-decoration:underline
+}
+body.care-personal-site .site-footer--care .care-footer__bottom{width:min(1270px,calc(100% - 104px))}
+body.care-personal-site .site-footer--care .care-footer__credits{width:min(1270px,calc(100% - 104px))}
+@media(max-width:1090px){
+  body.care-personal-site :where(.container,.rm-container,.slate-container){width:calc(100% - 64px)}
+  body.care-personal-site .site-header__inner{width:calc(100% - 64px)}
+  body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid,.blog-article__intro,.blog-article__shell,.cip-photo-band){width:calc(100% - 64px)}
+  body.care-personal-site .site-footer--care :is(.care-footer__main,.care-footer__bottom,.care-footer__credits){width:calc(100% - 64px)}
+}
+@media(max-width:830px){
+  body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid,.site-page__split,.contact-layout,.cv-profile-grid,.site-section__head){
+    grid-template-columns:minmax(0,1fr);gap:clamp(22px,5vw,42px);min-height:0
+  }
+  body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header){padding-block:clamp(55px,8vw,80px)}
+  body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header) h1{
+    font-size:clamp(2.95rem,8vw,5.2rem)
+  }
+  body.care-personal-site main .site-section__head{margin-bottom:32px}
+  body.care-personal-site main .site-grid{grid-template-columns:minmax(0,1fr)}
+  body.care-personal-site main .site-grid>.site-card,
+  body.care-personal-site main .site-grid>.site-card:nth-child(even){
+    padding:28px 0;border-left:0;border-bottom:1px solid #D9DBD7
+  }
+  body.care-personal-site main .blog-article__layout{grid-template-columns:1fr}
+  body.care-personal-site main .blog-article__meta-panel{grid-template-columns:repeat(2,minmax(0,1fr))}
+  body.care-personal-site .mobile-nav{top:72px}
+}
+@media(max-width:600px){
+  body.care-personal-site :where(.container,.rm-container,.slate-container){width:calc(100% - 36px)}
+  body.care-personal-site .site-header__inner{width:calc(100% - 36px);min-height:68px}
+  body.care-personal-site .site-header{min-height:68px}
+  body.care-personal-site .mobile-nav{top:68px}
+  body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid,.blog-article__intro,.blog-article__shell,.cip-photo-band){width:calc(100% - 36px)}
+  body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header){
+    padding-block:47px 51px
+  }
+  body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header) h1{
+    font-size:clamp(2.75rem,10.2vw,4.2rem);line-height:1.04
+  }
+  body.care-personal-site main :is(.site-section,.contact-section,.blog-index__content){padding-block:62px}
+  body.care-personal-site main :is(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2){font-size:clamp(2.35rem,8vw,3.6rem)}
+  body.care-personal-site main .blog-article__header h1{font-size:clamp(2.55rem,9vw,3.9rem)}
+  body.care-personal-site main .blog-article__meta-panel{padding:10px 0;row-gap:9px}
+  body.care-personal-site main .blog-article__meta-panel>div{border-left:0!important;padding:8px 8px 8px 0!important}
+  body.care-personal-site main .cip-photo-band{height:240px;margin-top:16px}
+  body.care-personal-site .site-footer--care :is(.care-footer__main,.care-footer__bottom,.care-footer__credits){width:calc(100% - 36px)}
+}
+@media print{
+  body.care-personal-site main .cv-page :is(.site-page__hero,.site-section,.site-section--soft,.site-section--dark){
+    background:white!important
+  }
+  body.care-personal-site main .cv-page :is(h1,h2,h3,p,li,dt,dd){color:#111!important}
+  body.care-personal-site main .cv-page .site-button{display:none!important}
+}
+@media(prefers-reduced-motion:reduce){
+  body.care-personal-site :is(.site-header,.site-footer--care,.site-button,.care-button) *{transition:none!important;animation:none!important}
+}
+
+/* Enforce neutral foregrounds against legacy highly-specific inverse heroes. */
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-eyebrow,.blog-article__eyebrow,.blog-article__meta-panel dt){
+  color:#313936!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) .site-button:not(.site-button--primary){
+  color:#17191A!important;background:transparent!important;border-color:#949C97!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) .site-button:not(.site-button--primary):hover{
+  color:#17191A!important;background:#ECEBE7!important;border-color:#313536!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-back,.blog-index__hero-link,.blog-index__hero-kicker){
+  color:#313936!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-page__lede,.blog-article__dek,.contact-hero__copy>p:last-child){
+  color:#434B48!important;
+}
+/* The photographed homepage previously compressed details against its buttons.
+   Preserve a deliberate separate final information row. */
+body.care-personal-site .rm-home .rm-hero__actions + .rm-hero__details{
+  margin-top:clamp(26px,3.7vw,52px)!important;
+}
+body.care-personal-site .rm-home .rm-experience{
+  padding-block:clamp(68px,7.5vw,114px);
+}
+body.care-personal-site .rm-home .rm-research,
+body.care-personal-site .rm-home .rm-writing{
+  padding-block:clamp(73px,8vw,118px);
+}
+
+/* Screenshot corrections: legacy inverse-hero selectors still supplied mint
+   button fills and low-contrast metadata after the canvas became light. */
+body.care-personal-site main :is(
+  .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-page__summary dt,.contact-hero__details span,.blog-article__meta-panel dt){
+  color:#313936!important;font-size:.875rem;letter-spacing:.055em;
+}
+body.care-personal-site main :is(
+  .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-button--primary,.blog-index__hero-actions>.site-button--primary){
+  background:#17191A!important;color:#FFFFFF!important;border-color:#17191A!important;
+}
+body.care-personal-site main :is(
+  .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-button--primary,.blog-index__hero-actions>.site-button--primary):hover{
+  background:#39403F!important;color:#FFFFFF!important;border-color:#39403F!important;
+}
+/* Keep long evidence-based article titles spacious, not crammed into 21ch. */
+body.care-personal-site main .blog-article__header .blog-article__intro h1{
+  display:block;width:100%;max-width:none!important;line-height:1.07;
+}
+body.care-personal-site main .blog-index__hero h1{
+  line-height:1.055;
+}
+/* Clinical form spam-trap is intentionally 1px and non-interactive. Do not
+   give this hidden control the standard 48px input touch target. */
+body.care-personal-site main .professional-contact-form input.form-honeypot{
+  min-height:0!important;height:1px!important;width:1px!important;
+}
+/* Blog art direction: one documentary image and an accessible credit,
+   not an overprinted marketing slogan and colliding counter. */
+body.care-personal-site main .blog-index__hero-counter{display:none!important}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band__label{
+  display:none!important;
+}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band__caption{
+  display:flex;justify-content:flex-end;align-items:flex-end;
+  left:18px;right:18px;bottom:12px;
+}
+body.care-personal-site main .blog-index__hero-visual .cip-photo-band__credit{
+  color:#FFFFFF;font-size:.75rem;
+  background:rgba(23,25,26,.75);
+  padding:6px 9px;border-radius:2px;line-height:1.45;
+  max-width:42ch;
+}
+
+/* Section labels outside the hero had retained a legacy teal !important rule. */
+body.care-personal-site main :is(
+  .site-section,.contact-section,.blog-index__content,.blog-article__body,.cv-page
+) .site-eyebrow,
+body.care-personal-site main .site-section__head .site-eyebrow{
+  color:#313936!important;
+}
+body.care-personal-site main .ds-eyebrow:not(.ds-eyebrow--inverse){
+  color:#313936!important;
+}
+
+/* Optically balanced editorial journal heading; overrides legacy .99 setting. */
+body.care-personal-site main .blog-index__hero .blog-index__hero-copy h1{
+  line-height:1.055!important;
+}

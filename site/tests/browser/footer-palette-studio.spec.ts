@@ -15,28 +15,23 @@ const luminance = (hex: string) => {
 };
 const ratio=(a:string,b:string)=>{const v=[luminance(a),luminance(b)].sort((x,y)=>y-x);return (v[0]+.05)/(v[1]+.05)};
 
-test('footer CTA is part of the page footer rather than a borderless-content card', async ({ page }) => {
+test('site-wide neutral footer shares one aligned grid with no duplicate invitation', async ({ page }) => {
   for(const viewport of [375,768,1440]){
     await page.setViewportSize({width:viewport,height:900});
-    for(const route of ['/blog/','/cv/','/clinical-research/']){
+    for(const route of ['/', '/blog/','/cv/','/clinical-research/']){
       await page.goto(origin+route,{waitUntil:'domcontentloaded'});
-      const cta=page.locator('.care-footer__invitation');
-      await cta.scrollIntoViewIfNeeded();
-      await expect(cta).toBeVisible();
-      await expect(cta.getByRole('heading',{name:/Write to Reeja/})).toBeVisible();
-      await expect(cta.getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
-      const vals=await cta.evaluate(el=>{
-        const style=getComputedStyle(el);
-        const main=document.querySelector('.care-footer__main')!.getBoundingClientRect();
-        const invitation=el.getBoundingClientRect();
-        const heading=el.querySelector('h2')!.getBoundingClientRect();
-        return {borderLeft:style.borderLeftWidth,bg:style.backgroundImage,inset:heading.left-invitation.left,aligned:Math.abs(main.left-invitation.left),overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth};
-      });
-      expect(vals.borderLeft,route).toBe('0px');
-      expect(vals.bg,route).toBe('none');
-      expect(vals.inset,route).toBeGreaterThanOrEqual(0);
-      expect(vals.aligned,route).toBeLessThanOrEqual(1);
-      expect(vals.overflow,route+' at '+viewport).toBeLessThanOrEqual(1);
+      await expect(page.locator('.care-footer__invitation')).toBeHidden();
+      const footer=page.locator('.site-footer--care');
+      await expect(footer.getByRole('link',{name:/Back to top/})).toHaveAttribute('href','#page-top');
+      await expect(footer.getByRole('link',{name:/Reeja Maharjan — homepage/})).toHaveAttribute('href','/');
+      const values=await footer.evaluate(el=>({
+        bg:getComputedStyle(el).backgroundColor,
+        overflow:document.documentElement.scrollWidth-document.documentElement.clientWidth,
+        gridWidth:el.querySelector('.care-footer__main')!.getBoundingClientRect().width
+      }));
+      expect(values.bg).toBe('rgb(250, 250, 248)');
+      expect(values.overflow,route+' @ '+viewport).toBeLessThanOrEqual(1);
+      expect(values.gridWidth).toBeGreaterThan(270);
     }
   }
 });
@@ -95,11 +90,11 @@ test('capture palette samples at 1440px and mobile footer at 390px',async ({brow
   }
   await page.setViewportSize({width:390,height:844});
   await page.goto(origin+'/blog/',{waitUntil:'domcontentloaded'});
-  await page.locator('.care-footer__invitation').scrollIntoViewIfNeeded();
+  await page.locator('.care-footer__main').scrollIntoViewIfNeeded();
   await page.locator('footer.site-footer--care').screenshot({path:'test-results/screenshots/footer-fixed-mobile-390.png',animations:'disabled'});
   await page.setViewportSize({width:1440,height:900});
   await page.reload({waitUntil:'domcontentloaded'});
-  await page.locator('.care-footer__invitation').scrollIntoViewIfNeeded();
+  await page.locator('.care-footer__main').scrollIntoViewIfNeeded();
   await page.locator('footer.site-footer--care').screenshot({path:'test-results/screenshots/footer-fixed-desktop-1440.png',animations:'disabled'});
   await context.close();
 });

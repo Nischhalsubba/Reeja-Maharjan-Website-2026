@@ -50,3 +50,25 @@
 @media(max-width:960px){.ds-lab__swatches{grid-template-columns:repeat(3,minmax(0,1fr))}.ds-lab__grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.ds-lab__wrap{width:calc(100% - 36px)}.ds-lab__section-head{grid-template-columns:1fr;gap:14px}.ds-lab__type{grid-template-columns:1fr;gap:9px}.ds-lab__grid{grid-template-columns:1fr}.ds-lab__swatches{grid-template-columns:repeat(2,minmax(0,1fr))}.ds-lab__hero-content{padding:65px 0}.ds-lab__swatch-color{height:83px}}
 @media print{.ds-lab__hero{background:#fff!important;color:#000!important}.ds-lab__hero :is(h1,.ds-lab__eyebrow){color:#000!important}}
+
+/* v11: the internal reference uses the exact neutral editorial brand it documents. */
+body.care-personal-site .ds-lab{--lab-max:1270px;--lab-quiet:#505957;background:#FAFAF8;color:#17191A}
+body.care-personal-site .ds-lab__hero{
+  color:#17191A;background:#FAFAF8;border-bottom:1px solid #D9DBD7
+}
+body.care-personal-site .ds-lab__hero:before{display:none}
+body.care-personal-site .ds-lab__hero h1,
+body.care-personal-site .ds-lab__hero h1 em{color:#17191A}
+body.care-personal-site .ds-lab__eyebrow{color:#313936}
+body.care-personal-site .ds-lab__hero p:last-child{color:#434B48}
+body.care-personal-site .ds-lab__canvas--dark{
+  color:#17191A;background:#ECEBE7;border-color:#D9DBD7
+}
+body.care-personal-site .ds-lab__nav a{
+  color:#17191A;border-color:#D9DBD7;border-radius:2px
+}
+body.care-personal-site .ds-lab__nav a:hover{
+  background:#ECEBE7;border-color:#313536
+}
+body.care-personal-site .ds-lab__swatch,
+body.care-personal-site .ds-lab__canvas{border-radius:2px}
