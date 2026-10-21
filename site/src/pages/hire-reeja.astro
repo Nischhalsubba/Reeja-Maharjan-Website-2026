@@ -33,7 +33,6 @@ const hiringSchema = {
     sameAs: [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean)
   }
 };
-import EditorialPhoto from '../components/EditorialPhoto.astro';
 import BrandAction from '../components/design-system/BrandAction.astro';
 import BrandCard from '../components/design-system/BrandCard.astro';
 import EvidenceList from '../components/design-system/EvidenceList.astro';
@@ -61,7 +60,21 @@ import EvidenceList from '../components/design-system/EvidenceList.astro';
         ]} />
       </div>
     </section>
-    <EditorialPhoto kind="portrait" label="Reeja Maharjan · Registered Nurse and Research Assistant" />
+    <section class="hire-story" aria-labelledby="hire-story-title">
+      <div class="container hire-story__grid">
+        <figure class="hire-story__portrait">
+          <img src="/reeja-headshot.jpg" width="896" height="1200" alt="Reeja Maharjan standing in front of a historic building in Nepal" loading="lazy" decoding="async" />
+          <figcaption>Reeja Maharjan · Personal photograph</figcaption>
+        </figure>
+        <div class="hire-story__copy">
+          <p class="site-eyebrow">Professional background</p>
+          <h2 id="hire-story-title">Hospital nursing and maternal-health research.</h2>
+          <p>My experience includes maternal and newborn care, general nursing, patient education, clinical handover and research support for the IISH MOM-HD study.</p>
+          <p>For a hiring conversation, you can review my professional history and training before sharing details about the role or project.</p>
+          <a class="site-button site-button--primary" href="/cv/">Review professional CV</a>
+        </div>
+      </div>
+    </section>
 
     <section class="site-section">
       <div class="container">
