@@ -567,3 +567,8 @@ body.care-personal-site main .site-section__head .site-eyebrow{
 body.care-personal-site main .ds-eyebrow:not(.ds-eyebrow--inverse){
   color:#313936!important;
 }
+
+/* Optically balanced editorial journal heading; overrides legacy .99 setting. */
+body.care-personal-site main .blog-index__hero .blog-index__hero-copy h1{
+  line-height:1.055!important;
+}
