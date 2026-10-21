@@ -13,8 +13,8 @@ One restrained, personal design language for a real registered nurse and materna
 | Stone alternative | #ECEBE7 |
 | Soft alternate | #F1F1EE |
 | Ink | #17191A |
-| Action | #313536 |
-| Action hover | #202425 / #39403F |
+| Action | #17191A |
+| Action hover | #39403F |
 | Muted text | #505957 |
 | Fine border | #D9DBD7 |
 | Focus | #17191A |
