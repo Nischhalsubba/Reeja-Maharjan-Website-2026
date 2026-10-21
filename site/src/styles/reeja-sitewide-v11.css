@@ -471,3 +471,42 @@ body.care-personal-site .site-footer--care .care-footer__credits{width:min(1270p
 @media(prefers-reduced-motion:reduce){
   body.care-personal-site :is(.site-header,.site-footer--care,.site-button,.care-button) *{transition:none!important;animation:none!important}
 }
+
+/* Enforce neutral foregrounds against legacy highly-specific inverse heroes. */
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-eyebrow,.blog-article__eyebrow,.blog-article__meta-panel dt){
+  color:#313936!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) .site-button:not(.site-button--primary){
+  color:#17191A!important;background:transparent!important;border-color:#949C97!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) .site-button:not(.site-button--primary):hover{
+  color:#17191A!important;background:#ECEBE7!important;border-color:#313536!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-back,.blog-index__hero-link,.blog-index__hero-kicker){
+  color:#313936!important;
+}
+body.care-personal-site main :is(
+ .site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header
+) :is(.site-page__lede,.blog-article__dek,.contact-hero__copy>p:last-child){
+  color:#434B48!important;
+}
+/* The photographed homepage previously compressed details against its buttons.
+   Preserve a deliberate separate final information row. */
+body.care-personal-site .rm-home .rm-hero__actions + .rm-hero__details{
+  margin-top:clamp(26px,3.7vw,52px)!important;
+}
+body.care-personal-site .rm-home .rm-experience{
+  padding-block:clamp(68px,7.5vw,114px);
+}
+body.care-personal-site .rm-home .rm-research,
+body.care-personal-site .rm-home .rm-writing{
+  padding-block:clamp(73px,8vw,118px);
+}
