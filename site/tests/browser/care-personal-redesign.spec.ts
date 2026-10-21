@@ -18,14 +18,19 @@ test('Care is Personal design language is consistent across inner routes', async
         bodyBackground: getComputedStyle(document.body).backgroundColor,
         headingFamily: heading && getComputedStyle(heading).fontFamily,
         overflow: document.documentElement.scrollWidth - document.documentElement.clientWidth,
-        photo: Boolean(document.querySelector('.cip-photo-band img')),
+        photo: Boolean(document.querySelector('.cip-photo-band img, .hire-story__portrait img')),
       };
     });
     expect(metrics.bodyBackground).toBe('rgb(250, 250, 248)');
     expect(metrics.headingFamily).toContain('Georgia');
     expect(metrics.overflow, `Overflow on ${path}`).toBeLessThanOrEqual(1);
     expect(metrics.photo, `Missing illustrative photo on ${path}`).toBe(true);
-    await expect(page.locator('.cip-photo-band__credit')).toBeVisible();
+    if (path === '/hire-reeja/') {
+      await expect(page.locator('.hire-story__portrait img')).toHaveAttribute('src','/reeja-headshot.jpg');
+      await expect(page.locator('.hire-story__portrait figcaption')).toContainText('Personal photograph');
+    } else {
+      await expect(page.locator('.cip-photo-band__credit')).toBeVisible();
+    }
   }
 });
 

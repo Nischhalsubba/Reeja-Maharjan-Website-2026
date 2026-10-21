@@ -121,13 +121,13 @@ export const siteCopy = {
     }
   },
   hire: {
-    title: `Nursing & Research Opportunities | ${facts.name}`,
-    description: `Review ${facts.name}'s nursing experience, maternal-health research work, NNC registration, active Texas RN license, hospital background, and availability for suitable clinical and research roles.`,
+    title: `Hire ${facts.name} | Registered Nurse & Research Assistant`,
+    description: `Explore ${facts.name}'s hospital nursing experience, NNC registration, maternal-health research work with IISH, clinical training, and contact details for employers.`, 
     eyebrow: 'Professional profile',
     heading: `${facts.name} for nursing, maternal-health research, and health-programme roles.`,
     lede: `Reeja combines hospital nursing experience with current research support on the ${facts.currentEmployerShort} ${facts.currentProject}. Her strengths include patient and participant education, monitoring, documentation, tele-follow-up, handover, and coordinated escalation.`,
     roleFitEyebrow: 'Where Reeja fits',
-    roleFitHeading: 'Roles where Reeja’s experience is most relevant.',
+    roleFitHeading: 'Nursing and maternal-health roles aligned with my experience.',
     roleFitSummary: 'Her strongest fit is work that values patient safety, clear communication, accurate records, participant support, and dependable coordination.',
     experienceEyebrow: 'Experience',
     experienceHeading: 'Reeja’s clinical and research record.',
@@ -136,12 +136,12 @@ export const siteCopy = {
     credentialsHeading: 'Reeja’s licenses and clinical training.',
     credentialsSummary: 'Sensitive documents are not published publicly. Verification can be shared privately with legitimate employers after an appropriate first conversation.',
     closingEyebrow: 'Next step',
-    closingHeading: 'Have a role or project in mind for Reeja?',
+    closingHeading: 'Share your nursing or research opportunity.',
     closingSummary: 'Send the organisation, position or project, location, expected timing, and main responsibilities through the contact page.'
   },
   research: {
-    title: `Maternal Health Research & Telemonitoring | ${facts.name}`,
-    description: `${facts.name}'s maternal-health research experience includes ANC participant screening support, BP/BG monitoring education, tele-follow-up, study documentation, data-quality checks, and multidisciplinary coordination with IISH MOM-HD.`,
+    title: `MOM-HD Maternal Health Research | ${facts.name}`, 
+    description: `Learn how ${facts.name} supports the IISH MOM-HD maternal-health telemonitoring study in Nepal through participant education, BP/BG monitoring guidance, follow-up, and study records.`,
     eyebrow: 'Maternal-health research',
     heading: 'Maternal-health research, with people at its centre.',
     lede: `As a ${facts.currentRole} on the ${facts.currentProject} in ${facts.currentLocation}, Reeja supports participant screening, home BP/BG education, tele-follow-up, documentation, data review, device workflows, and protocol-based coordination.`,
@@ -152,7 +152,7 @@ export const siteCopy = {
       ['Location', facts.currentLocation]
     ],
     responsibilitiesEyebrow: 'Research responsibilities',
-    responsibilitiesHeading: 'How Reeja supports the MOM-HD research workflow.',
+    responsibilitiesHeading: 'Supporting the MOM-HD study, from education to follow-up.',
     responsibilitiesSummary: 'Her role connects participant communication with careful records, monitoring support, and timely escalation to the appropriate clinical or research team.',
     responsibilities: [
       ['Participant screening', 'Supports ANC participant screening, eligibility workflows, consent-process support, and organised study records.'],
@@ -171,7 +171,7 @@ export const siteCopy = {
   },
   maternalHealth: {
     title: `Maternal & Newborn Nursing in Nepal | ${facts.name}`,
-    description: `Explore ${facts.name}'s maternal-health nursing and research focus, including maternal-newborn hospital experience, IISH MOM-HD telemonitoring work, patient education, and source-linked care articles.`,
+    description: `Explore ${facts.name}'s maternal and newborn nursing background in Nepal, with hospital experience, pregnancy telemonitoring research support, and evidence-informed articles.`,
     eyebrow: 'Maternal health',
     heading: 'Maternal & newborn health.',
     lede: 'Reeja’s background combines maternal-newborn hospital care with current maternal-health research, participant education, home monitoring support, tele-follow-up, and practical public education for families and nurses.',
@@ -181,15 +181,15 @@ export const siteCopy = {
       ['Education focus', 'Postnatal care, newborn support, feeding, warning signs, and follow-up']
     ],
     guidesEyebrow: 'Articles by Reeja',
-    guidesHeading: 'Maternal-health and newborn-care articles.',
+    guidesHeading: 'Practical articles on pregnancy, postnatal care and newborn health.',
     guidesSummary: 'These articles are written for general education, cite external sources, show editorial review information, and keep medical-safety boundaries visible.',
     closingEyebrow: 'Reeja’s professional work',
     closingHeading: 'Explore Reeja’s maternal-health research experience.',
     closingSummary: 'Review her current IISH MOM-HD work, hospital nursing background, licenses, and contact information.'
   },
   nursing: {
-    title: `Clinical Nursing, Documentation & Patient Education | ${facts.name}`,
-    description: `Explore ${facts.name}'s nursing practice focus, including patient education, documentation, SBAR-style handover, confidentiality, clinical communication, maternal-newborn care, and professional development.`,
+    title: `Hospital Nursing & Patient Education | ${facts.name}`, 
+    description: `Read about ${facts.name}'s clinical nursing experience in Nepal: general and maternal-newborn wards, patient education, documentation, handover, and nursing-practice guides.`, 
     eyebrow: 'Nursing practice',
     heading: 'Nursing, centred on people.',
     lede: 'Reeja’s hospital and research work is grounded in clear patient communication, accurate documentation, structured handover, careful monitoring, timely escalation, and practical education for patients and families.',
@@ -199,15 +199,15 @@ export const siteCopy = {
       ['Professional development', 'Licensure, clinical training, ethics, and continuing learning']
     ],
     guidesEyebrow: 'Articles by Reeja',
-    guidesHeading: 'Nursing-practice articles and career notes.',
+    guidesHeading: 'Nursing guides on clinical documentation, communication and safety.',
     guidesSummary: 'Reeja’s writing focuses on practical habits that support patient safety, continuity of care, professional accountability, and clearer clinical communication.',
     closingEyebrow: 'Professional profile',
     closingHeading: 'Review Reeja’s nursing experience and credentials.',
     closingSummary: 'See her hospital roles, current research work, licenses, clinical training, and availability for suitable nursing and health-programme opportunities.'
   },
   contact: {
-    title: `Contact ${facts.name} | Nursing & Maternal Health Research`,
-    description: `Contact ${facts.name} about hospital nursing, maternal-health research, clinical research, NGO/INGO health programmes, patient education, telemonitoring, or care-coordination opportunities.`,
+    title: `Contact ${facts.name} | Nursing & Research Opportunities`,
+    description: `Contact ${facts.name}, registered nurse and maternal-health research assistant in Biratnagar, about nursing roles, research collaboration, or health-programme opportunities.`, 
     eyebrow: 'Contact Reeja',
     heading: `Contact ${facts.name} about nursing or maternal-health research work.`,
     intro: 'A clear first message is enough. Share the organisation, role or project, location, expected timing, and the main responsibilities so Reeja can understand the opportunity before any private documents are exchanged.',
@@ -226,8 +226,8 @@ export const siteCopy = {
     channelsEyebrow: 'Other ways to reach Reeja'
   },
   cv: {
-    title: `${facts.name} CV | Nursing & Maternal Health Research`,
-    description: `Professional CV of ${facts.name}, ${facts.credential}, NNC licensed Registered Nurse, active Texas RN, and IISH maternal-health Research Assistant with hospital nursing and telemonitoring experience.`,
+    title: `${facts.name} CV | Registered Nurse & Research Assistant`,
+    description: `Review the professional CV of ${facts.name}: B.Sc. Nursing, NNC registration, Texas RN licensure, hospital nursing experience, and IISH MOM-HD research support.`,
     eyebrow: `${facts.name} · Professional CV`,
     lede: `${facts.name}, ${facts.credential}, is a ${facts.nepalLicense} with an ${facts.texasLicense} and current maternal-health research experience with ${facts.currentEmployerShort} in ${facts.currentLocation}.`,
     profileEyebrow: 'Professional profile',
@@ -243,16 +243,16 @@ export const siteCopy = {
     closingSummary: 'Send the role, organisation, location, expected timing, and responsibilities through the contact page.'
   },
   blog: {
-    title: `Nursing & Maternal Health Journal | ${facts.name}`,
-    description: `Read nursing and maternal-health articles by ${facts.name}, Registered Nurse and maternal-health Research Assistant in Nepal, covering maternal-newborn care, documentation, SBAR handover, confidentiality, telehealth, and nursing careers.`,
+    title: `Nursing & Maternal Health Articles | ${facts.name}`,
+    description: `Read nursing and maternal-health articles by ${facts.name} on pregnancy, newborn care, nursing documentation, SBAR handover, clinical communication, and research in Nepal.`,
     eyebrow: 'Writing by Reeja Maharjan',
-    heading: 'Nursing & maternal health journal.',
+    heading: 'Nursing and maternal-health articles.',
     lede: 'Reeja writes practical, source-linked articles for nurses, students, patients, and families. Each clinical article includes its audience, sources, update date, safety note, and review status.',
     hubEyebrow: 'Featured & topic guides',
-    hubHeading: 'Practical writing on care, research and nursing.',
+    hubHeading: 'Nursing guidance, maternal health and research notes.',
     hubSummary: 'Explore evidence-informed guides organised by maternal health, nursing practice, and digital-health research. Each article links to its sources and explains its clinical scope.',
     allEyebrow: 'All writing',
-    allHeading: 'All articles by Reeja.'
+    allHeading: 'Browse all nursing and maternal-health articles.'
   },
   footer: {
     eyebrow: 'Reeja Maharjan · Registered Nurse',
