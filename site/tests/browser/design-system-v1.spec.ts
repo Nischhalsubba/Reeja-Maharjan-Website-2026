@@ -44,7 +44,7 @@ test('component actions and focus states have semantic output', async ({ page })
   });
   expect(styles.outline).not.toBe('none');
   expect(styles.foreground).toBe('rgb(255, 255, 255)');
-  expect(styles.background).toBe('rgb(49, 53, 54)');
+  expect(styles.background).toBe('rgb(23, 25, 26)');
 });
 
 test('real professional pages consume shared DS components', async ({ page }) => {
