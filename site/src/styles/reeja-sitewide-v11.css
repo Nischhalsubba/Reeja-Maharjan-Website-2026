@@ -1,5 +1,5 @@
 /*
- * REEJA / SYSTEM 11
+ * REEJA / SYSTEM 12 (evolving the shared v11 foundation)
  * Single cross-site design foundation, following the approved home visual:
  * white / off-white / stone / graphite, real photography, editorial hierarchy.
  * Loaded last. Replace legacy visual ownership; preserve structural grids,
@@ -147,13 +147,13 @@ body.care-personal-site .mobile-nav__close{
 }
 body.care-personal-site .mobile-nav__close span:before,
 body.care-personal-site .mobile-nav__close span:after{background:#17191A}
-/* Hero / same family as homepage, with measured vertical rhythm */
+/* Hero / same family as homepage, with measured shared vertical rhythm (v12) */
 body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header){
   background:#FAFAF8!important;
   background-image:none!important;
   border-bottom:1px solid #D9DBD7;
   color:#17191A;
-  padding-block:clamp(74px,8.5vw,125px) clamp(66px,7vw,100px);
+  padding-block:clamp(55px,6vw,88px) clamp(48px,5vw,72px);
 }
 body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header):before,
 body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header):after{
@@ -162,12 +162,12 @@ body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.
 body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid){
   width:min(1270px,calc(100% - 104px));
   min-height:0;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(0,.82fr);
-  align-items:center;gap:clamp(36px,6vw,108px);
+  align-items:center;gap:clamp(28px,4.7vw,76px);
 }
 body.care-personal-site main :is(.site-page__hero,.contact-hero,.blog-index__hero,.cv-page__hero) h1,
 body.care-personal-site main .blog-article__header h1{
   font-family:Georgia,"Times New Roman",serif;
-  font-size:clamp(3.7rem,6.55vw,7rem);
+  font-size:clamp(3.4rem,5.7vw,6.3rem);
   font-weight:400;letter-spacing:-.072em;line-height:.99;
   max-width:15ch;margin:clamp(19px,2.5vw,36px) 0 24px;
   color:#17191A!important;
@@ -222,7 +222,7 @@ body.care-personal-site main :is(.blog-index__hero-link,.blog-index__hero-kicker
 /* Content rhythm—same 1270px grid, smaller meaningful spaces */
 body.care-personal-site main :is(.site-section,.contact-section,.blog-index__content){
   background:#FFFFFF;border-color:#D9DBD7;
-  padding-block:clamp(72px,8vw,116px);
+  padding-block:clamp(64px,7vw,104px);
 }
 body.care-personal-site main :is(.site-section--soft,.contact-section--soft,.blog-index__topics){
   background:#F1F1EE!important
@@ -237,13 +237,13 @@ body.care-personal-site main .site-section--dark :is(h2,h3,p,li){
 body.care-personal-site main .site-section--dark .site-eyebrow{color:#313936!important}
 body.care-personal-site main :is(.site-section__head,.site-page__split,.contact-layout,.cv-profile-grid){
   display:grid;grid-template-columns:minmax(0,1.04fr) minmax(0,.8fr);
-  gap:clamp(26px,5vw,85px);align-items:start;
+  gap:clamp(26px,4.25vw,68px);align-items:start;
 }
 body.care-personal-site main .site-section__head{
-  margin-bottom:clamp(32px,4vw,62px);
+  margin-bottom:clamp(27px,3.4vw,47px);
 }
 body.care-personal-site main :is(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2){
-  font:400 clamp(2.75rem,4.4vw,5rem)/1.07 Georgia,"Times New Roman",serif;
+  font:400 clamp(2.35rem,3.75vw,4.4rem)/1.09 Georgia,"Times New Roman",serif;
   letter-spacing:-.06em;max-width:19ch;color:#17191A;
 }
 body.care-personal-site main :is(.site-section__head>p,.site-page__split>div>p:not(.site-eyebrow),.cv-profile-copy){
@@ -258,12 +258,12 @@ body.care-personal-site main :is(.site-card,.care-card,.blog-card){
   background:transparent;box-shadow:none;min-width:0
 }
 body.care-personal-site main .site-grid>.site-card{
-  padding:clamp(30px,4vw,54px) clamp(25px,4vw,58px) clamp(30px,4vw,54px) 0;
+  padding:clamp(22px,3vw,40px) clamp(20px,3vw,44px) clamp(22px,3vw,40px) 0;
   border-bottom:1px solid #D9DBD7;
   counter-increment:none
 }
 body.care-personal-site main .site-grid>.site-card:nth-child(even){
-  padding-left:clamp(26px,4vw,58px);padding-right:0;
+  padding-left:clamp(22px,3vw,44px);padding-right:0;
   border-left:1px solid #D9DBD7;
 }
 body.care-personal-site main .site-card:before{color:#454E4A}
@@ -283,13 +283,13 @@ body.care-personal-site main :is(.site-card a,.site-page a:not([class])):hover{c
 /* Photos remain documentary, not faux dashboard */
 body.care-personal-site main .cip-photo-band{
   width:min(1270px,calc(100% - 104px));max-width:none;margin:0 auto;
-  height:clamp(235px,28vw,415px);border:0;border-radius:0;background:#ECEBE7
+  height:clamp(225px,26vw,345px);border:0;border-radius:0;background:#ECEBE7
 }
 body.care-personal-site main .cip-photo-band img{filter:saturate(.75);object-fit:cover}
 body.care-personal-site main .cip-photo-band--care-journey{height:auto;min-height:0}
 body.care-personal-site main .cip-photo-band--care-journey>img{object-fit:contain;max-height:470px}
 body.care-personal-site main .cip-photo-band__label{font-family:Georgia,"Times New Roman",serif;font-weight:400}
-body.care-personal-site main .cip-photo-band__credit{font-size:.78rem}
+body.care-personal-site main .cip-photo-band__credit{font-size:.875rem}
 /* CV: typography & document hierarchy without dashboard cards */
 body.care-personal-site main .cv-page .cv-experience,
 body.care-personal-site main .cv-page .cv-credentials,
@@ -334,7 +334,7 @@ body.care-personal-site main .blog-grid>.blog-card{padding:clamp(25px,3vw,42px);
 body.care-personal-site main .blog-photo{border-radius:0;background:#E8E9E5}
 /* Article: one readable editorial column, transparent metadata, quiet toc */
 body.care-personal-site main .blog-article__header{
-  padding-block:clamp(65px,8vw,110px) clamp(48px,6vw,82px)
+  padding-block:clamp(55px,6vw,88px) clamp(43px,5vw,72px)
 }
 body.care-personal-site main .blog-article__intro{
   min-height:0;width:min(1270px,calc(100% - 104px));
@@ -344,7 +344,7 @@ body.care-personal-site main .blog-article__header h1{
   max-width:21ch!important;font-size:clamp(3.1rem,5.4vw,6rem);
 }
 body.care-personal-site main .blog-article__meta-panel{
-  margin-top:38px;border-top:1px solid #C5CAC4
+  margin-top:28px;border-top:1px solid #C5CAC4
 }
 body.care-personal-site main .blog-article__meta-panel>div{
   border-color:#D9DBD7!important
@@ -353,7 +353,7 @@ body.care-personal-site main .blog-article__shell{
   width:min(1270px,calc(100% - 104px));
 }
 body.care-personal-site main .blog-article__layout{
-  column-gap:clamp(45px,6vw,95px)
+  column-gap:clamp(36px,5vw,80px)
 }
 body.care-personal-site main .blog-toc{
   background:#F1F1EE;border:1px solid #E1E3DF;border-radius:0
@@ -369,7 +369,7 @@ body.care-personal-site main .blog-article__body :is(p,li){
 }
 body.care-personal-site main .blog-article__body h2{
   font:400 clamp(2rem,3vw,3.35rem)/1.17 Georgia,"Times New Roman",serif;
-  margin-block:clamp(38px,5vw,63px) 20px;color:#17191A
+  margin-block:clamp(32px,4vw,52px) 18px;color:#17191A
 }
 body.care-personal-site main .blog-article__body h3{
   font:400 clamp(1.5rem,2vw,2.2rem)/1.2 Georgia,"Times New Roman",serif
@@ -403,7 +403,7 @@ body.care-personal-site .site-footer--care{
 }
 body.care-personal-site .site-footer--care .care-footer__invitation{display:none}
 body.care-personal-site .site-footer--care .care-footer__main{
-  width:min(1270px,calc(100% - 104px));padding-top:clamp(55px,6vw,85px)
+  width:min(1270px,calc(100% - 104px));padding-top:clamp(48px,5vw,72px)
 }
 body.care-personal-site .site-footer--care :is(.care-footer__wordmark,.care-footer__identity p,.care-footer__location,.care-footer__column h3,.care-footer__column a,.care-footer__bottom,.care-footer__bottom a,.care-footer__bottom small,.care-footer__bottom span,.care-footer__credits,.care-footer__credits summary,.care-footer__credits a){
   color:#313936!important
@@ -427,7 +427,7 @@ body.care-personal-site .site-footer--care .care-footer__credits{width:min(1270p
   body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid,.site-page__split,.contact-layout,.cv-profile-grid,.site-section__head){
     grid-template-columns:minmax(0,1fr);gap:clamp(22px,5vw,42px);min-height:0
   }
-  body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header){padding-block:clamp(55px,8vw,80px)}
+  body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header){padding-block:clamp(48px,7vw,70px)}
   body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header) h1{
     font-size:clamp(2.95rem,8vw,5.2rem)
   }
@@ -448,17 +448,17 @@ body.care-personal-site .site-footer--care .care-footer__credits{width:min(1270p
   body.care-personal-site .mobile-nav{top:68px}
   body.care-personal-site main :is(.site-page__hero-grid,.contact-hero__grid,.blog-index__hero-grid,.blog-article__intro,.blog-article__shell,.cip-photo-band){width:calc(100% - 36px)}
   body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header){
-    padding-block:47px 51px
+    padding-block:43px 48px
   }
   body.care-personal-site main :is(.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header) h1{
     font-size:clamp(2.75rem,10.2vw,4.2rem);line-height:1.04
   }
-  body.care-personal-site main :is(.site-section,.contact-section,.blog-index__content){padding-block:62px}
-  body.care-personal-site main :is(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2){font-size:clamp(2.35rem,8vw,3.6rem)}
+  body.care-personal-site main :is(.site-section,.contact-section,.blog-index__content){padding-block:56px}
+  body.care-personal-site main :is(.site-section__head h2,.site-page__split h2,.cv-profile-grid h2,.contact-sidebar h2,.professional-contact-form h2){font-size:clamp(2.25rem,7.6vw,3.4rem)}
   body.care-personal-site main .blog-article__header h1{font-size:clamp(2.55rem,9vw,3.9rem)}
   body.care-personal-site main .blog-article__meta-panel{padding:10px 0;row-gap:9px}
   body.care-personal-site main .blog-article__meta-panel>div{border-left:0!important;padding:8px 8px 8px 0!important}
-  body.care-personal-site main .cip-photo-band{height:240px;margin-top:16px}
+  body.care-personal-site main .cip-photo-band{height:225px;margin-top:15px}
   body.care-personal-site .site-footer--care :is(.care-footer__main,.care-footer__bottom,.care-footer__credits){width:calc(100% - 36px)}
 }
 @media print{
@@ -504,11 +504,11 @@ body.care-personal-site .rm-home .rm-hero__actions + .rm-hero__details{
   margin-top:clamp(26px,3.7vw,52px)!important;
 }
 body.care-personal-site .rm-home .rm-experience{
-  padding-block:clamp(68px,7.5vw,114px);
+  padding-block:clamp(65px,7vw,105px);
 }
 body.care-personal-site .rm-home .rm-research,
 body.care-personal-site .rm-home .rm-writing{
-  padding-block:clamp(73px,8vw,118px);
+  padding-block:clamp(68px,7vw,108px);
 }
 
 /* Screenshot corrections: legacy inverse-hero selectors still supplied mint
