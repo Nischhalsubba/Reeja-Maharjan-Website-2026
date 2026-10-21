@@ -17,48 +17,39 @@ function contrast(a: string, b: string): number {
   return (bright + 0.05) / (dark + 0.05);
 }
 
-test('footer CTA retains WCAG AA contrast in default hover and focus states', async ({ browser }) => {
-  test.setTimeout(90_000);
-  for (const width of [375, 1440]) {
-    const context = await browser.newContext({
-      viewport: { width, height: 900 },
-      reducedMotion: 'reduce'
-    });
-    const page = await context.newPage();
-    for (const route of ['/', '/cv/', '/blog/mastering-nursing-documentation-sbar-handover/']) {
-      await page.goto(`${origin}${route}`, { waitUntil: 'domcontentloaded' });
-      const cta = route==='/' ? page.locator('.rm-contact a.rm-button--primary') : page.locator('footer.site-footer--care a.care-footer__cta');
-      await cta.scrollIntoViewIfNeeded();
-      await expect(cta).toBeVisible();
-
-      const readColors = async () => cta.evaluate((element) => {
-        const s = getComputedStyle(element);
-        const arrow = element.querySelector<SVGElement>('svg.brand-icon');
-        return {
-          foreground: s.color,
-          background: s.backgroundColor,
-          arrowColor: arrow ? getComputedStyle(arrow).color : '',
-          outline: s.outlineStyle
-        };
-      });
-
-      const states = [await readColors()];
-      await cta.hover();
-      await expect(cta).toHaveCSS('background-color', route === '/' ? 'rgb(57, 64, 63)' : 'rgb(215, 247, 237)');
-      states.push(await readColors());
-      await cta.focus();
-      states.push(await readColors());
-
-      for (const state of states) {
-        expect(contrast(state.foreground, state.background), `CTA contrast on ${route} at ${width}px`).toBeGreaterThanOrEqual(4.5);
-        expect(state.arrowColor).toBe(state.foreground);
+test('shared navigation, home CTA and footer links keep legible monochrome states', async ({ browser }) => {
+  test.setTimeout(100_000);
+  for(const width of [375,1440]){
+    const ctx=await browser.newContext({viewport:{width,height:900},reducedMotion:'reduce'});
+    const page=await ctx.newPage();
+    for(const route of ['/','/cv/','/blog/mastering-nursing-documentation-sbar-handover/']){
+      await page.goto(origin+route,{waitUntil:'domcontentloaded'});
+      const footer=page.locator('.care-footer__column a').first();
+      await footer.scrollIntoViewIfNeeded();
+      const footerColors=await footer.evaluate(el=>({fg:getComputedStyle(el).color,bg:getComputedStyle(el.closest('footer')!).backgroundColor}));
+      expect(contrast(footerColors.fg,footerColors.bg),'footer contrast '+route+' @ '+width).toBeGreaterThanOrEqual(4.5);
+      if(width===1440){
+        const nav=page.locator('.desktop-nav .nav-cta');
+        await expect(nav).toBeVisible();
+        const values=await nav.evaluate(el=>({fg:getComputedStyle(el).color,bg:getComputedStyle(el).backgroundColor}));
+        expect(contrast(values.fg,values.bg)).toBeGreaterThanOrEqual(4.5);
+        await nav.focus();await expect(nav).toBeFocused();
+        expect(await nav.evaluate(el=>getComputedStyle(el).outlineStyle)).not.toBe('none');
       }
-      expect(states[0].background).toBe(route === '/' ? 'rgb(23, 25, 26)' : 'rgb(178, 233, 219)');
-      expect(states[1].background).toBe(route === '/' ? 'rgb(57, 64, 63)' : 'rgb(215, 247, 237)');
-      expect(states[2].outline).not.toBe('none');
-      await expect(cta).toHaveAttribute('href', '/contact/');
+      if(route==='/'){
+        const cta=page.locator('.rm-contact a.rm-button--primary');
+        await expect(cta).toBeVisible();
+        await expect(cta).toHaveAttribute('href','/contact/');
+        const read=async()=>cta.evaluate(el=>({fg:getComputedStyle(el).color,bg:getComputedStyle(el).backgroundColor}));
+        let vals=await read();
+        expect(contrast(vals.fg,vals.bg)).toBeGreaterThanOrEqual(4.5);
+        await cta.hover(); vals=await read();
+        expect(contrast(vals.fg,vals.bg)).toBeGreaterThanOrEqual(4.5);
+        await cta.focus();
+        expect(await cta.evaluate(el=>getComputedStyle(el).outlineStyle)).not.toBe('none');
+      }
     }
-    await context.close();
+    await ctx.close();
   }
 });
 
