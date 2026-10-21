@@ -28,8 +28,8 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
           <h1>{copy.heading}</h1>
           <p class="site-page__lede">{copy.lede}</p>
           <div class="blog-index__hero-actions">
-            <a class="site-button site-button--primary" href="#featured-writing">Explore featured writing <span aria-hidden="true">↗</span></a>
-            <a class="blog-index__hero-link" href="#all-writing">Browse every article <span aria-hidden="true">↓</span></a>
+            <a class="site-button site-button--primary" href="#featured-writing">Read featured article <span aria-hidden="true">↗</span></a>
+            <a class="blog-index__hero-link" href="#all-writing">View all articles <span aria-hidden="true">↓</span></a>
           </div>
           <p class="blog-index__hero-kicker">Maternal health <span aria-hidden="true">·</span> Nursing practice <span aria-hidden="true">·</span> Research</p>
         </div>
@@ -52,7 +52,7 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
             <article class="blog-index__lead-card" data-ledger-reveal>
               <BlogPhoto slug={featuredPost.slug} variant="featured" />
               <div class="blog-index__lead-content">
-                <p class="site-eyebrow">Featured article by Reeja</p>
+                <p class="site-eyebrow">Featured nursing and maternal-health article</p>
                 <h3><a href={`/blog/${featuredPost.slug}/`}>{featuredPost.title}</a></h3>
                 <p>{featuredPost.excerpt}</p>
                 <div class="blog-index__lead-bottom">
