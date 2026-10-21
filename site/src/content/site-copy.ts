@@ -33,7 +33,7 @@ export const siteCopy = {
     { href: '/cv/', label: 'CV' }
   ],
   home: {
-    title: `${facts.name} | Registered Nurse & Maternal Health Research Assistant`,
+    title: `${facts.name} | Registered Nurse & Maternal Health Research, Nepal`,
     description: `${facts.name} is an NNC licensed Registered Nurse and IISH MOM-HD Research Assistant with clinical nursing, maternal-health research, education and telemonitoring experience in Nepal.`,
     hero: {
       kicker: `${facts.name} · ${facts.credential}`,
@@ -121,7 +121,7 @@ export const siteCopy = {
     }
   },
   hire: {
-    title: `${facts.name} | Nursing & Maternal Health Research Profile`,
+    title: `Nursing & Research Opportunities | ${facts.name}`,
     description: `Review ${facts.name}'s nursing experience, maternal-health research work, NNC registration, active Texas RN license, hospital background, and availability for suitable clinical and research roles.`,
     eyebrow: 'Professional profile',
     heading: `${facts.name} for nursing, maternal-health research, and health-programme roles.`,
@@ -140,7 +140,7 @@ export const siteCopy = {
     closingSummary: 'Send the organisation, position or project, location, expected timing, and main responsibilities through the contact page.'
   },
   research: {
-    title: `${facts.name} | Maternal Health Research & Telemonitoring`,
+    title: `Maternal Health Research & Telemonitoring | ${facts.name}`,
     description: `${facts.name}'s maternal-health research experience includes ANC participant screening support, BP/BG monitoring education, tele-follow-up, study documentation, data-quality checks, and multidisciplinary coordination with IISH MOM-HD.`,
     eyebrow: 'Maternal-health research',
     heading: 'Maternal-health research, with people at its centre.',
@@ -170,7 +170,7 @@ export const siteCopy = {
     closingSummary: 'Share the organisation, study or programme, location, expected contract period, responsibilities, and preferred next step.'
   },
   maternalHealth: {
-    title: `${facts.name} | Maternal Health Nursing & Newborn Care`,
+    title: `Maternal & Newborn Nursing in Nepal | ${facts.name}`,
     description: `Explore ${facts.name}'s maternal-health nursing and research focus, including maternal-newborn hospital experience, IISH MOM-HD telemonitoring work, patient education, and source-linked care articles.`,
     eyebrow: 'Maternal health',
     heading: 'Maternal & newborn health.',
@@ -188,7 +188,7 @@ export const siteCopy = {
     closingSummary: 'Review her current IISH MOM-HD work, hospital nursing background, licenses, and contact information.'
   },
   nursing: {
-    title: `${facts.name} | Nursing Practice, Documentation & Patient Education`,
+    title: `Clinical Nursing, Documentation & Patient Education | ${facts.name}`,
     description: `Explore ${facts.name}'s nursing practice focus, including patient education, documentation, SBAR-style handover, confidentiality, clinical communication, maternal-newborn care, and professional development.`,
     eyebrow: 'Nursing practice',
     heading: 'Nursing, centred on people.',
@@ -206,7 +206,7 @@ export const siteCopy = {
     closingSummary: 'See her hospital roles, current research work, licenses, clinical training, and availability for suitable nursing and health-programme opportunities.'
   },
   contact: {
-    title: `Contact ${facts.name} | Nursing & Research Opportunities`,
+    title: `Contact ${facts.name} | Nursing & Maternal Health Research`,
     description: `Contact ${facts.name} about hospital nursing, maternal-health research, clinical research, NGO/INGO health programmes, patient education, telemonitoring, or care-coordination opportunities.`,
     eyebrow: 'Contact Reeja',
     heading: `Contact ${facts.name} about nursing or maternal-health research work.`,
@@ -226,7 +226,7 @@ export const siteCopy = {
     channelsEyebrow: 'Other ways to reach Reeja'
   },
   cv: {
-    title: `${facts.name} CV | Registered Nurse & Research Assistant`,
+    title: `${facts.name} CV | Nursing & Maternal Health Research`,
     description: `Professional CV of ${facts.name}, ${facts.credential}, NNC licensed Registered Nurse, active Texas RN, and IISH maternal-health Research Assistant with hospital nursing and telemonitoring experience.`,
     eyebrow: `${facts.name} · Professional CV`,
     lede: `${facts.name}, ${facts.credential}, is a ${facts.nepalLicense} with an ${facts.texasLicense} and current maternal-health research experience with ${facts.currentEmployerShort} in ${facts.currentLocation}.`,
@@ -243,14 +243,14 @@ export const siteCopy = {
     closingSummary: 'Send the role, organisation, location, expected timing, and responsibilities through the contact page.'
   },
   blog: {
-    title: `Nursing & Maternal Health Articles by ${facts.name}`,
+    title: `Nursing & Maternal Health Journal | ${facts.name}`,
     description: `Read nursing and maternal-health articles by ${facts.name}, Registered Nurse and maternal-health Research Assistant in Nepal, covering maternal-newborn care, documentation, SBAR handover, confidentiality, telehealth, and nursing careers.`,
     eyebrow: 'Writing by Reeja Maharjan',
-    heading: 'Writing on nursing & maternal health.',
+    heading: 'Nursing & maternal health journal.',
     lede: 'Reeja writes practical, source-linked articles for nurses, students, patients, and families. Each clinical article includes its audience, sources, update date, safety note, and review status.',
     hubEyebrow: 'Featured & topic guides',
-    hubHeading: 'Start with a featured article or browse Reeja’s writing by topic.',
-    hubSummary: 'The library is organised around maternal health, nursing practice, and research or digital-health topics rather than publishing unrelated search-driven content.',
+    hubHeading: 'Practical writing on care, research and nursing.',
+    hubSummary: 'Explore evidence-informed guides organised by maternal health, nursing practice, and digital-health research. Each article links to its sources and explains its clinical scope.',
     allEyebrow: 'All writing',
     allHeading: 'All articles by Reeja.'
   },
