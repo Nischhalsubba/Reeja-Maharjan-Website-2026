@@ -61,10 +61,14 @@ test('redesigned footer is consistent and accessible on homepage and article', a
       await page.goto(origin + path, { waitUntil: 'domcontentloaded' });
       const footer = page.locator('footer.site-footer--care');
       await expect(footer).toBeVisible();
-      if(path==='/') await expect(page.locator('.slate-contact h2')).toBeVisible();
-      else await expect(footer.getByRole('heading',{name:/Write to Reeja/})).toBeVisible();
-      if(path==='/') await expect(page.locator('.slate-contact').getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
-      else await expect(footer.getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
+      // The shared footer is intentionally identical on every route;
+      // the former duplicate footer invitation is retired.
+      await expect(footer.locator('.care-footer__invitation')).toBeHidden();
+      if(path==='/') {
+        await expect(page.locator('.slate-contact h2')).toBeVisible();
+        await expect(page.locator('.slate-contact').getByRole('link',{name:/Get in touch/})).toHaveAttribute('href','/contact/');
+      }
+      await expect(footer.getByRole('link',{name:'Contact',exact:true})).toHaveAttribute('href','/contact/');
       await expect(footer.getByRole('navigation', { name: "Explore Reeja's website" })).toBeVisible();
       await expect(footer.getByRole('navigation', { name: 'Professional resources' })).toBeVisible();
       await expect(footer.locator('.cip-image-credits')).toHaveCount(1);
