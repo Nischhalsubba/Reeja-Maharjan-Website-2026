@@ -7,16 +7,16 @@ import EvidenceList from '../../components/design-system/EvidenceList.astro';
 import Eyebrow from '../../components/design-system/Eyebrow.astro';
 
 const swatches = [
-  { name: 'Slate 950', hex: '#101C29', token: '--ds-slate-950' },
-  { name: 'Slate 900', hex: '#1C2C3A', token: '--ds-slate-900' },
-  { name: 'Slate 800', hex: '#304354', token: '--ds-slate-800' },
-  { name: 'Teal 600', hex: '#2F7368', token: '--ds-teal-600' },
-  { name: 'Seafoam 300', hex: '#B2E9DB', token: '--ds-seafoam-300' },
-  { name: 'Seafoam 100', hex: '#EAF0F5', token: '--ds-seafoam-100' },
-  { name: 'Canvas', hex: '#F5F8FA', token: '--ds-canvas' },
-  { name: 'Ink', hex: '#202D3D', token: '--ds-ink' },
-  { name: 'Muted', hex: '#56697B', token: '--ds-muted' },
-  { name: 'Border', hex: '#DAE2E8', token: '--ds-border' },
+  { name: 'Ink', hex: '#17191A', token: '--ds-ink' },
+  { name: 'Graphite', hex: '#313536', token: '--ds-slate-900' },
+  { name: 'Muted', hex: '#505957', token: '--ds-muted' },
+  { name: 'Canvas', hex: '#FAFAF8', token: '--ds-canvas' },
+  { name: 'Stone', hex: '#ECEBE7', token: '--ds-seafoam-100' },
+  { name: 'Border', hex: '#D9DBD7', token: '--ds-border' },
+  { name: 'Paper', hex: '#FFFFFF', token: '--ds-paper' },
+  { name: 'Soft graphite', hex: '#505957', token: '--ds-slate-800' },
+  { name: 'Action', hex: '#313536', token: '--ds-teal-600' },
+  { name: 'Action hover', hex: '#202425', token: '--ds-teal-700' },
   { name: 'Success text', hex: '#206049', token: '--ds-status-success' },
   { name: 'Error text', hex: '#A03535', token: '--ds-status-error' }
 ];
@@ -32,14 +32,14 @@ const proofExamples = [
 ---
 
 <BaseLayout
-  title="Reeja Design System v1.0 | Brand foundations & components"
-  description="The documented Slate & Seafoam design system for Reeja Maharjan's professional nursing and research website."
+  title="Reeja Design System v11 | Neutral editorial foundations"
+  description="The neutral editorial design system for Reeja Maharjan's professional nursing and maternal-health research website."
   robots="noindex, follow"
 >
   <div class="ds-lab">
     <header class="ds-lab__hero">
       <div class="ds-lab__wrap ds-lab__hero-content">
-        <p class="ds-lab__eyebrow">REEJA DESIGN SYSTEM / VERSION 1.0.0</p>
+        <p class="ds-lab__eyebrow">REEJA DESIGN SYSTEM / VERSION 11.0.0</p>
         <h1>Care is <em>personal.</em> Design should be, too.</h1>
         <p>A living reference for the typography, color, components and interaction rules behind Reeja Maharjan's nursing and research portfolio. Built as native Astro components.</p>
       </div>
@@ -53,7 +53,7 @@ const proofExamples = [
       <section id="colors" class="ds-lab__section" aria-labelledby="ds-colors-title">
         <div class="ds-lab__section-head">
           <h2 id="ds-colors-title">Color with <em>intent.</em></h2>
-          <p>Slate provides composure; seafoam adds warmth. Teal is the interactive accent. No arbitrary status colors or pale text on light surfaces.</p>
+          <p>Off-white and graphite carry the brand. Stone provides subtle section distinction; dark charcoal defines actions. Color never replaces content hierarchy or accessible contrast.</p>
         </div>
         <div class="ds-lab__swatches">
           {swatches.map(color => (
@@ -73,7 +73,7 @@ const proofExamples = [
           <h2 id="ds-type-title">A quiet, editorial <em>voice.</em></h2>
           <p>Use Georgia for expressive, human headlines and self-hosted Public Sans for body copy, metadata and controls. No additional font dependencies.</p>
         </div>
-        <div class="ds-lab__type"><span>Display / Georgia</span><p class="ds-lab__type-display">The person before the number.</p></div>
+        <div class="ds-lab__type"><span>Display / Georgia</span><p class="ds-lab__type-display">Reeja Maharjan. Registered Nurse.</p></div>
         <div class="ds-lab__type"><span>Section / Georgia</span><p class="ds-lab__type-heading">Experience, evidence and empathy.</p></div>
         <div class="ds-lab__type"><span>Body / Public Sans</span><p class="ds-lab__type-body">Clinical nursing and maternal-health research call for clarity, accurate information and genuine human connection. Design should support these goals without unnecessary decoration.</p></div>
         <div class="ds-lab__type"><span>Eyebrow / Public Sans</span><Eyebrow>Research, education and practice</Eyebrow></div>
@@ -94,7 +94,7 @@ const proofExamples = [
           </div>
         </div>
         <div class="ds-lab__canvas ds-lab__canvas--dark site-section--dark">
-          <h3>Buttons on dark editorial surfaces</h3>
+          <h3>Actions within a neutral section</h3>
           <div class="ds-lab__actions">
             <BrandAction href="/contact/">Contact Reeja</BrandAction>
             <BrandAction variant="text" href="/cv/">View credentials</BrandAction>
@@ -166,7 +166,7 @@ const proofExamples = [
       </section>
 
       <footer class="ds-lab__footer">
-        <span>Reeja Design System · v1.0.0 · Internal design reference</span>
+        <span>Reeja Design System · v11.0.0 · Internal design reference</span>
         <a href="/">Return to portfolio ↗</a>
       </footer>
     </div>
