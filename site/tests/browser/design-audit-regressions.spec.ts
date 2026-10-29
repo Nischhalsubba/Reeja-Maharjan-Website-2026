@@ -44,12 +44,16 @@ test('Care is Personal supporting-page heroes stay line-free, spacious and WebGL
   await expect(page.locator('[data-hero-scene]')).toHaveCount(0);
 });
 
-test('Editorial homepage uses Reeja’s real portrait without rendering a screenshot overlay', async ({page})=>{
+test('Homepage keeps Reeja’s real hero photo and loads the labelled clinical portrait illustration', async ({page})=>{
  await page.goto(origin+'/',{waitUntil:'domcontentloaded'});
  const img=page.locator('.slate-hero__photograph');await expect(img).toBeVisible();
  await expect(img).toHaveAttribute('src','/reeja-headshot.jpg');
- await expect(page.locator('.rm-experience__photo img')).toHaveAttribute('alt', /Illustrative/);
  await expect.poll(()=>img.evaluate(n=>(n as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
+ const clinicalPortrait=page.locator('.rm-experience__photo img');
+ await expect(clinicalPortrait).toHaveAttribute('src','/images/reeja-clinical-portrait.webp');
+ await expect(clinicalPortrait).toHaveAttribute('alt',/AI-generated portrait illustration of Reeja Maharjan/);
+ await clinicalPortrait.scrollIntoViewIfNeeded();
+ await expect.poll(()=>clinicalPortrait.evaluate(n=>(n as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
  await expect(page.locator('.slate-hero canvas')).toHaveCount(0);
 });
 
