@@ -39,7 +39,7 @@ export const requiredHomepageText = [
   'Institute for Implementation Science and Health',
   'Contributing to',
   'maternal health research',
-  'Maternal & newborn care',
+  'maternal and newborn care',
   'Nursing practice',
   'View all articles',
   'Notes from',

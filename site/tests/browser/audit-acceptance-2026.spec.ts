@@ -9,7 +9,7 @@ test('home page makes identity, credentials and professional contact discoverabl
   await expect(page.locator('.slate-hero__lede')).toContainText('registered nurse');
   await expect(page.locator('.slate-hero__lede')).toContainText('registered nurse');
   await expect(page.getByRole('link', { name: /Get in touch/ }).first()).toHaveAttribute('href', '/contact/');
-  await expect(page.getByRole('link', { name: /View experience/ })).toHaveAttribute('href', '#experience');
+  await expect(page.getByRole('link', { name: /View CV/ }).first()).toHaveAttribute('href', '/cv/');
 
   const proof = page.locator('.slate-credentials');
   await expect(page.getByRole('heading', { name: /Clinical experience/ })).toBeVisible();
