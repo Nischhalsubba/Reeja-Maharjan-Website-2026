@@ -693,3 +693,44 @@ body.care-personal-site main .research-reading__meta{
 @media(max-width:760px){
   body.care-personal-site main .research-reading__item{grid-template-columns:1fr;gap:8px;padding:22px 0}
 }
+
+/* CV type contract: one editorial display face, one legible body face. 
+ * Scope overrides to the CV so blog and research heading systems are preserved. */
+@media screen {
+  body.care-personal-site main .cv-page{
+    --cv-display:Georgia,"Times New Roman",serif;
+    --cv-text:"Public Sans",system-ui,sans-serif;
+    font-family:var(--cv-text);
+  }
+  body.care-personal-site main .cv-page :is(h1,h2){
+    font-family:var(--cv-display);
+    font-weight:400;
+    letter-spacing:-.045em;
+  }
+  body.care-personal-site main .cv-page :is(h3,h4){
+    font-family:var(--cv-text);
+    font-weight:700;
+    letter-spacing:-.02em;
+  }
+  body.care-personal-site main .cv-page :is(p,li,span,small,dt,dd,a,button,input,textarea,select){
+    font-family:var(--cv-text);
+  }
+  body.care-personal-site main .cv-page :is(.cv-experience__index,.cv-credential__index,.cv-experience__meta,.cv-credential__date){
+    font-family:var(--cv-text);
+    font-variant-numeric:tabular-nums;
+  }
+  body.care-personal-site main .cv-page :is(.cv-experience__details,.cv-credential__note,.cv-profile-copy){
+    line-height:1.7;
+  }
+}
+
+/* Cross-document transitions without client-side routing: ordinary links, forms,
+ * focus behavior and analytics continue working on a full document navigation. */
+@view-transition { navigation: auto; }
+@keyframes reeja-enter { from { opacity:.65; } to { opacity:1; } }
+@keyframes reeja-leave { from { opacity:1; } to { opacity:.78; } }
+::view-transition-old(root){animation:115ms ease-in both reeja-leave}
+::view-transition-new(root){animation:190ms cubic-bezier(.16,1,.3,1) both reeja-enter}
+@media(prefers-reduced-motion:reduce){
+  ::view-transition-old(root),::view-transition-new(root){animation:none!important}
+}

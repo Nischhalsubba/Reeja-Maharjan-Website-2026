@@ -41,7 +41,8 @@ export function initCarePersonalMotion(): () => void {
       '.cip-home .cip-research__copy, .cip-home .cip-journey__item, .cip-home .cip-article, ' +
       '.cip-home .cip-contact__grid > *, .cip-photo-band__caption, ' +
       '.care-footer__intro, .care-footer__invite-actions, ' +
-      '.slate-heading, .slate-focus__card, .slate-about__copy, .slate-experience__item, .slate-research__steps li, .slate-writing__card, .slate-contact__grid'
+      '.slate-heading, .slate-focus__card, .slate-about__copy, .slate-experience__item, .slate-research__steps li, .slate-writing__card, .slate-contact__grid, ' +
+      '.rm-experience__body, .rm-research__content, .rm-focus__grid > *, .rm-writing__article, .rm-contact__inner'
     );
     reveals.forEach((element) => {
       gsap.from(element, {
@@ -91,7 +92,9 @@ export function initCarePersonalMotion(): () => void {
     const interactive = Array.from(document.querySelectorAll<HTMLElement>(
       '.cip-button, .site-button, .care-button, .nav-cta, .cip-textlink, .cip-link, ' +
       '.blog-card a, .contact-sidebar__social, .care-footer__cta, ' +
-      '.slate-button, .slate-link, .slate-writing__read'
+      '.slate-button, .slate-link, .slate-writing__read, ' +
+      '.rm-button, .rm-inline-link, .rm-focus__link, .rm-writing__card-body a, ' +
+      '.desktop-nav a, .mobile-nav__panel a, .professional-contact-form button'
     ));
 
     interactive.forEach((element) => {
@@ -103,11 +106,28 @@ export function initCarePersonalMotion(): () => void {
       element.addEventListener('pointerleave', onLeave);
       element.addEventListener('pointerdown', onDown);
       element.addEventListener('pointerup', onUp);
+      element.addEventListener('pointercancel', onUp);
       listeners.push(() => {
         element.removeEventListener('pointerenter', onEnter);
         element.removeEventListener('pointerleave', onLeave);
         element.removeEventListener('pointerdown', onDown);
         element.removeEventListener('pointerup', onUp);
+        element.removeEventListener('pointercancel', onUp);
+      });
+    });
+
+    // Focus feedback for enquiry fields, while preserving the CSS focus outline.
+    document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
+      '.professional-contact-form input:not([type="hidden"]):not(.form-honeypot), ' +
+      '.professional-contact-form textarea, .professional-contact-form select'
+    ).forEach((field) => {
+      const onFocus = () => gsap.to(field, { borderColor:'#39403F', duration:.2, ease:'power2.out', overwrite:true });
+      const onBlur = () => gsap.to(field, { clearProps:'borderColor', duration:.16, overwrite:true });
+      field.addEventListener('focus',onFocus);
+      field.addEventListener('blur',onBlur);
+      listeners.push(() => {
+        field.removeEventListener('focus',onFocus);
+        field.removeEventListener('blur',onBlur);
       });
     });
   }, document.body);
