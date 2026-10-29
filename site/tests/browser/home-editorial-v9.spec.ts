@@ -10,7 +10,8 @@ test('homepage is a genuinely new split editorial composition, not a full-bleed 
   await expect(hero.getByRole('heading', { level: 1 })).toContainText('Reeja');
   await expect(portrait).toHaveAttribute('src', '/reeja-headshot.jpg');
   await expect(portrait).toHaveAttribute('width', '896');
-  await expect(page.locator('.rm-hero__figure figcaption')).toContainText('Reeja Maharjan');
+  await expect(page.locator('.rm-hero__figure figcaption')).toHaveCount(0);
+  await expect(portrait).toHaveAttribute('alt', 'Portrait of Reeja Maharjan');
 
   const geometry = await page.evaluate(() => {
     const text = document.querySelector('.rm-hero__copy')!.getBoundingClientRect();
