@@ -78,14 +78,7 @@ export function initCarePersonalMotion(): () => void {
         }
       );
     });
-    // Gentle photo parallax; disabled for reduced motion and coarse pointers.
-    const slatePhoto = document.querySelector<HTMLImageElement>('.slate-hero__photograph');
-    if (slatePhoto && pointerFine && window.matchMedia('(min-width: 790px)').matches) {
-      gsap.to(slatePhoto,{
-        yPercent:4,ease:'none',
-        scrollTrigger:{trigger:'.slate-hero',start:'top top',end:'bottom top',scrub:0.65}
-      });
-    }
+    // Keep hero photography fixed in its frame: parallax exposed a background seam on scroll.
 
     if (pointerFine) {
     const interactive = Array.from(document.querySelectorAll<HTMLElement>(
