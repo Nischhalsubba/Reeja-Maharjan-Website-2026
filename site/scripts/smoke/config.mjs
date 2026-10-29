@@ -27,24 +27,24 @@ export const maxAttempts = positiveInteger('SMOKE_ATTEMPTS', 20);
 export const retryDelayMs = positiveInteger('SMOKE_DELAY_MS', 30000);
 
 export const requiredHomepageText = [
-  'person',
-  'before the',
-  'number.',
-  'Discuss an opportunity',
-  'View professional CV',
-  'Qualifications at a glance.',
+  'Reeja',
+  'Maharjan.',
+  'REGISTERED NURSE',
+  'View CV',
+  'Get in touch',
+  'PROFESSIONAL EXPERIENCE',
+  'Clinical experience',
   'NNC Licensed RN',
-  'THREE THREADS.' ,
-  'Nursing practice',
-  'Maternal-health research',
-  'Patient education',
-  'Community wellbeing',
-  'Experience',
   'Research Assistant',
   'Institute for Implementation Science and Health',
-  'Maternal health for',
-  'Notes on care',
-  'Get in touch'
+  'Contributing to',
+  'maternal health research',
+  'Maternal & newborn care',
+  'Nursing practice',
+  'View all articles',
+  'Notes from',
+  'Care, research',
+  'Professional record'
 ];
 
 export const forbiddenHomepageText = [

@@ -36,7 +36,7 @@ const monitoringImage = getBlogImage('pre-eclampsia-pregnancy-warning-signs-moni
         <h1 id="rm-title">Reeja<br /><span>Maharjan.</span></h1>
         <p class="rm-hero__subtitle slate-hero__lede">A registered nurse working across maternal health, clinical nursing and research in Nepal.</p>
         <div class="rm-hero__actions">
-          <a href="#experience" class="rm-button rm-button--primary" data-track="home-experience">View experience <BrandIcon name="arrow-right" size={17}/></a>
+          <a href="/cv/" class="rm-button rm-button--primary" data-track="home-cv">View CV <BrandIcon name="arrow-right" size={17}/></a>
           <a href="/contact/" class="rm-button rm-button--outline" data-track="home-contact">Get in touch</a>
         </div>
         <ul class="rm-hero__details" aria-label="Professional contact and location">
@@ -73,7 +73,7 @@ const monitoringImage = getBlogImage('pre-eclampsia-pregnancy-warning-signs-moni
           {profile.experience.map((job, index) =>
             <li class="slate-experience__item">
               <span class="slate-experience__count" aria-hidden="true">{String(index+1).padStart(2,'0')}</span>
-              <div><strong>{job.role}</strong><small>{job.organization}</small></div>
+              <div class="rm-role__details"><strong>{job.role}</strong><small>{job.organization}</small><p class="rm-role__summary">{job.bullets[0]}</p></div>
               <span class="rm-role__period">{job.period}</span>
             </li>
           )}

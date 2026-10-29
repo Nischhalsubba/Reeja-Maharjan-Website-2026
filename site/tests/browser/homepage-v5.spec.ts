@@ -11,7 +11,7 @@ test('approved minimal homepage shows authentic identity, verified work and publ
  await expect(page.locator('.slate-research__steps li')).toHaveCount(4);
  await expect(page.locator('.slate-experience__list')).toContainText('Sindhuli Hospital');
  await expect(page.locator('.slate-experience__list')).toContainText('Institute for Implementation Science and Health');
- await expect(page.getByRole('link',{name:/View experience/})).toHaveAttribute('href','#experience');
+ await expect(page.getByRole('link',{name:/View CV/}).first()).toHaveAttribute('href','/cv/');
  await expect(page.getByRole('link',{name:/Get in touch/}).first()).toHaveAttribute('href','/contact/');
  await expect(page.locator('.rm-home')).not.toContainText('Texas RN Active');
  await expect(page.locator('.slate-credentials__list li')).toHaveCount(3);

@@ -110,7 +110,6 @@ body.care-personal-site .rm-experience{padding:clamp(70px,8.3vw,120px) 0;border-
 body.care-personal-site .rm-experience__grid{display:grid;grid-template-columns:minmax(0,.76fr) minmax(0,1.44fr);gap:clamp(35px,5vw,83px);align-items:start}
 body.care-personal-site .rm-experience__photo{min-width:0}
 body.care-personal-site .rm-experience__photo img{display:block;width:100%;aspect-ratio:281/592;object-fit:cover;object-position:center;filter:none}
-body.care-personal-site .rm-experience__photo figcaption,
 body.care-personal-site .rm-research__photo figcaption{margin-top:11px;color:#5B6562;font-size:.72rem;line-height:1.4}
 body.care-personal-site .rm-experience__body{padding-top:9px;min-width:0}
 body.care-personal-site .rm-experience h2{font-size:clamp(2.9rem,4.4vw,5rem);line-height:1.06;max-width:15ch;margin:20px 0}
@@ -123,11 +122,13 @@ body.care-personal-site .rm-experience__facts strong{font-size:.92rem;font-weigh
 body.care-personal-site .rm-experience__facts span{color:#545F5D;font-size:.67rem;font-weight:750;letter-spacing:.07em}
 body.care-personal-site .rm-experience__subheading{font:500 1.1rem "Public Sans",sans-serif!important;letter-spacing:0!important;margin:20px 0 9px!important}
 body.care-personal-site .rm-experience__roles{list-style:none;padding:0;margin:0 0 16px;border-top:1px solid var(--rm-line)}
-body.care-personal-site .rm-experience__roles li{display:grid;grid-template-columns:25px minmax(0,1fr) auto;gap:13px;align-items:start;padding:12px 0;border-bottom:1px solid var(--rm-line)}
+body.care-personal-site .rm-experience__roles li{display:grid;grid-template-columns:25px minmax(0,1fr) minmax(120px,170px);gap:13px;align-items:start;padding:18px 0;border-bottom:1px solid var(--rm-line)}
 body.care-personal-site .rm-experience__roles .slate-experience__count{color:#4D5653;font-family:var(--rm-serif);font-size:.96rem}
 body.care-personal-site .rm-experience__roles strong{display:block;font-size:.88rem;line-height:1.4}
 body.care-personal-site .rm-experience__roles small{display:block;color:#58615F;font-size:.78rem;line-height:1.42;margin-top:3px}
-body.care-personal-site .rm-role__period{font-size:.69rem;color:#5B6663;text-align:right;max-width:135px;line-height:1.4}
+body.care-personal-site .rm-role__details{min-width:0}
+body.care-personal-site .rm-role__summary{margin-top:7px!important;max-width:60ch;color:#495550;font-size:.8rem;line-height:1.55}
+body.care-personal-site .rm-role__period{font-size:.8rem;font-weight:600;color:#3D4743;text-align:right;max-width:170px;line-height:1.5;font-variant-numeric:tabular-nums}
 /* research journal-like three-column composition */
 body.care-personal-site .rm-research{padding:clamp(75px,8.5vw,135px) 0;background:var(--rm-paper);border-bottom:1px solid var(--rm-line)}
 body.care-personal-site .rm-research__grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.93fr) minmax(0,.7fr);gap:clamp(20px,3.2vw,51px);align-items:center}
@@ -226,6 +227,8 @@ body.care-personal-site:has(.rm-home) .care-footer__bottom{
   body.care-personal-site .rm-experience__grid{grid-template-columns:1fr;gap:30px}
   body.care-personal-site .rm-experience__photo{width:min(100%,520px)}
   body.care-personal-site .rm-experience__photo img{aspect-ratio:4/5;object-position:50% 12%}
+  body.care-personal-site .rm-experience__roles li{grid-template-columns:24px minmax(0,1fr);gap:8px 12px}
+  body.care-personal-site .rm-role__period{grid-column:2;grid-row:auto;text-align:left;max-width:none}
   body.care-personal-site .rm-research__grid{grid-template-columns:1fr}
   body.care-personal-site .rm-research__photo{max-width:600px}
   body.care-personal-site .rm-research__photo img{aspect-ratio:1.8}
@@ -244,6 +247,8 @@ body.care-personal-site:has(.rm-home) .care-footer__bottom{
   body.care-personal-site .rm-eyebrow{font-size:.64rem;letter-spacing:.12em}
   body.care-personal-site .rm-hero h1{font-size:clamp(3.7rem,13vw,5rem)}
   body.care-personal-site .rm-hero__details{display:grid;gap:12px}
+  body.care-personal-site .rm-hero__actions{width:100%;flex-direction:column;align-items:stretch}
+  body.care-personal-site .rm-hero__actions .rm-button{width:100%}
   body.care-personal-site .rm-experience__facts ul{grid-template-columns:1fr;gap:12px}
   body.care-personal-site .rm-experience__facts li{padding:0 0 9px;border-right:0;border-bottom:1px solid var(--rm-line)}
   body.care-personal-site .rm-experience__facts li:last-child{border-bottom:0}

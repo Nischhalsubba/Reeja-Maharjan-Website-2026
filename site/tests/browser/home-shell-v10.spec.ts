@@ -31,6 +31,6 @@ test('the real portrait and minimally styled pages remain navigable',async({page
  await expect(page.locator('.rm-experience__roles li')).toHaveCount(4);
  await expect(page.locator('.rm-research__scope li')).toHaveCount(4);
  await expect(page.locator('.rm-writing__cards article')).toHaveCount(3);
- await expect(page.getByRole('link',{name:/View experience/})).toHaveAttribute('href','#experience');
+ await expect(page.getByRole('link',{name:/View CV/}).first()).toHaveAttribute('href','/cv/');
  await expect(page.locator('.rm-contact a')).toHaveAttribute('href','/contact/');
 });
