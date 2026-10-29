@@ -734,3 +734,13 @@ body.care-personal-site main .research-reading__meta{
 @media(prefers-reduced-motion:reduce){
   ::view-transition-old(root),::view-transition-new(root){animation:none!important}
 }
+
+/* Input affordances stay perceptible when GSAP is disabled or reduce motion is set. */
+body.care-personal-site main .professional-contact-form :is(input,textarea,select):not(.form-honeypot){
+  transition:border-color 180ms ease,background-color 180ms ease;
+}
+@media(hover:hover){
+  body.care-personal-site main .professional-contact-form :is(input,textarea,select):not(.form-honeypot):hover{
+    border-color:#69746F;
+  }
+}

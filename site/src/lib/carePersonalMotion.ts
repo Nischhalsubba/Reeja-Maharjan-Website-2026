@@ -87,8 +87,7 @@ export function initCarePersonalMotion(): () => void {
       });
     }
 
-    if (!pointerFine) return;
-
+    if (pointerFine) {
     const interactive = Array.from(document.querySelectorAll<HTMLElement>(
       '.cip-button, .site-button, .care-button, .nav-cta, .cip-textlink, .cip-link, ' +
       '.blog-card a, .contact-sidebar__social, .care-footer__cta, ' +
@@ -115,6 +114,7 @@ export function initCarePersonalMotion(): () => void {
         element.removeEventListener('pointercancel', onUp);
       });
     });
+    }
 
     // Focus feedback for enquiry fields, while preserving the CSS focus outline.
     document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>(
@@ -123,11 +123,16 @@ export function initCarePersonalMotion(): () => void {
     ).forEach((field) => {
       const onFocus = () => gsap.to(field, { borderColor:'#39403F', duration:.2, ease:'power2.out', overwrite:true });
       const onBlur = () => gsap.to(field, { clearProps:'borderColor', duration:.16, overwrite:true });
+      const onEnter = () => { if (document.activeElement !== field) gsap.to(field,{ borderColor:'#69746F',duration:.16,overwrite:true }); };
+      const onLeave = () => { if (document.activeElement !== field) gsap.to(field,{ clearProps:'borderColor',duration:.16,overwrite:true }); };
       field.addEventListener('focus',onFocus);
       field.addEventListener('blur',onBlur);
+      if(pointerFine){field.addEventListener('pointerenter',onEnter);field.addEventListener('pointerleave',onLeave);}
       listeners.push(() => {
         field.removeEventListener('focus',onFocus);
         field.removeEventListener('blur',onBlur);
+        field.removeEventListener('pointerenter',onEnter);
+        field.removeEventListener('pointerleave',onLeave);
       });
     });
   }, document.body);
