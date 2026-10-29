@@ -663,3 +663,33 @@ body.care-personal-site main .site-page>.cip-photo-band{
 
 /* The new portrait section inherits the same charcoal eyebrow as every other page. */
 body.care-personal-site main .hire-story .site-eyebrow{color:#313936!important}
+
+/* Research reading connects the actual clinical-research scope to published guides.
+ * Extends the single v11/v12 editorial layer; no new palette or override file. */
+body.care-personal-site main .research-reading__list{
+  padding:0;margin:26px 0 0;list-style:none;border-top:1px solid var(--ds-border);
+}
+body.care-personal-site main .research-reading__item{
+  display:grid;grid-template-columns:minmax(0,1fr) max-content;gap:20px;
+  align-items:start;padding:24px 0;border-bottom:1px solid var(--ds-border);
+}
+body.care-personal-site main .research-reading__item h3{
+  max-width:58ch;margin:0;font:400 clamp(1.3rem,2.2vw,1.8rem)/1.24 var(--ds-font-editorial);
+  letter-spacing:-.025em;color:var(--ds-ink);
+}
+body.care-personal-site main .research-reading__item h3 a{
+  color:inherit;text-decoration:none;text-underline-offset:5px;
+}
+body.care-personal-site main .research-reading__item h3 a:hover,
+body.care-personal-site main .research-reading__item h3 a:focus-visible{
+  text-decoration:underline;
+}
+body.care-personal-site main .research-reading__item p{
+  max-width:70ch;margin:10px 0 0;color:var(--ds-muted);line-height:1.7;
+}
+body.care-personal-site main .research-reading__meta{
+  color:var(--ds-muted);font-size:.825rem;white-space:nowrap;font-variant-numeric:tabular-nums;
+}
+@media(max-width:760px){
+  body.care-personal-site main .research-reading__item{grid-template-columns:1fr;gap:8px;padding:22px 0}
+}

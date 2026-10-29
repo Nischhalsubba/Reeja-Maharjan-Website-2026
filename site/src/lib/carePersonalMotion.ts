@@ -21,10 +21,10 @@ export function initCarePersonalMotion(): () => void {
 
   const listeners: Array<() => void> = [];
   const ctx = gsap.context(() => {
-    const hero = document.querySelector<HTMLElement>('.cip-hero');
+    const hero = document.querySelector<HTMLElement>('.cip-hero, .rm-hero');
     if (hero) {
       const elements = Array.from(hero.querySelectorAll<HTMLElement>(
-        '.cip-hero__copy .cip-eyebrow, .cip-hero h1, .cip-hero__lead, .cip-actions, .cip-hero__index, .cip-hero__portrait, .slate-hero__content .slate-eyebrow, .slate-hero h1, .slate-hero__lede, .slate-hero .slate-actions, .slate-hero__bottom'
+        '.cip-hero__copy .cip-eyebrow, .cip-hero h1, .cip-hero__lead, .cip-actions, .cip-hero__index, .cip-hero__portrait, .slate-hero__content .slate-eyebrow, .slate-hero h1, .slate-hero__lede, .slate-hero .slate-actions, .slate-hero__bottom, .rm-hero .rm-eyebrow, .rm-hero__actions'
       ));
       gsap.from(elements, {
         y: 24,
@@ -79,7 +79,7 @@ export function initCarePersonalMotion(): () => void {
     });
     // Gentle photo parallax; disabled for reduced motion and coarse pointers.
     const slatePhoto = document.querySelector<HTMLImageElement>('.slate-hero__photograph');
-    if (slatePhoto && window.matchMedia('(min-width: 790px)').matches) {
+    if (slatePhoto && pointerFine && window.matchMedia('(min-width: 790px)').matches) {
       gsap.to(slatePhoto,{
         yPercent:4,ease:'none',
         scrollTrigger:{trigger:'.slate-hero',start:'top top',end:'bottom top',scrub:0.65}

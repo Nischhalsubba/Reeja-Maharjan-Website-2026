@@ -2,8 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { professionalFacts } from '../content/professional-facts';
 import { siteCopy } from '../content/site-copy';
+import { getBlogPost } from '../content/blog';
 
 const copy = siteCopy.research;
+const relatedArticles = [
+  'pre-eclampsia-pregnancy-warning-signs-monitoring-2026',
+  'gestational-diabetes-in-pregnancy-2026-monitoring-care'
+].map((slug) => getBlogPost(slug)).filter((post): post is NonNullable<typeof post> => Boolean(post));
 const responsibilities = [
   ['Participant screening', 'ANC screening, eligibility, consent-workflow support, and study records.'],
   ['Home monitoring', 'BP/BG device education and mobile reporting support.'],
@@ -60,6 +65,26 @@ import Eyebrow from '../components/design-system/Eyebrow.astro';
           { label: 'Digital health', value: 'Home monitoring and tele-follow-up' },
           { label: 'Research support', value: 'Records, logistics, and participant communication' }
         ]} />
+      </div>
+    </section>
+
+    <section class="site-section research-reading" aria-labelledby="research-reading-title">
+      <div class="container">
+        <div class="site-section__head">
+          <div><p class="site-eyebrow">Related reading</p><h2 id="research-reading-title">Understand pregnancy monitoring.</h2></div>
+          <p>Evidence-linked educational writing about blood-pressure and blood-glucose monitoring in pregnancy. These articles do not report MOM-HD trial outcomes.</p>
+        </div>
+        <ul class="research-reading__list">
+          {relatedArticles.map((post) => (
+            <li class="research-reading__item">
+              <div>
+                <h3><a href={`/blog/${post.slug}/`}>{post.title}</a></h3>
+                <p>{post.excerpt}</p>
+              </div>
+              <span class="research-reading__meta">{post.readMinutes} min read</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
 
