@@ -109,7 +109,7 @@ body.care-personal-site .rm-hero__figure figcaption span{opacity:.88}
 body.care-personal-site .rm-experience{padding:clamp(70px,8.3vw,120px) 0;border-bottom:1px solid var(--rm-line);background:#fff}
 body.care-personal-site .rm-experience__grid{display:grid;grid-template-columns:minmax(0,.76fr) minmax(0,1.44fr);gap:clamp(35px,5vw,83px);align-items:start}
 body.care-personal-site .rm-experience__photo{min-width:0}
-body.care-personal-site .rm-experience__photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 43%;filter:saturate(.65)}
+body.care-personal-site .rm-experience__photo img{display:block;width:100%;aspect-ratio:281/592;object-fit:cover;object-position:center;filter:none}
 body.care-personal-site .rm-experience__photo figcaption,
 body.care-personal-site .rm-research__photo figcaption{margin-top:11px;color:#5B6562;font-size:.72rem;line-height:1.4}
 body.care-personal-site .rm-experience__body{padding-top:9px;min-width:0}
@@ -225,7 +225,7 @@ body.care-personal-site:has(.rm-home) .care-footer__bottom{
   body.care-personal-site .rm-hero__portrait{min-height:0;height:auto;max-height:600px;aspect-ratio:5/4;object-position:50% 29%}
   body.care-personal-site .rm-experience__grid{grid-template-columns:1fr;gap:30px}
   body.care-personal-site .rm-experience__photo{width:min(100%,520px)}
-  body.care-personal-site .rm-experience__photo img{aspect-ratio:1.65}
+  body.care-personal-site .rm-experience__photo img{aspect-ratio:4/5;object-position:50% 12%}
   body.care-personal-site .rm-research__grid{grid-template-columns:1fr}
   body.care-personal-site .rm-research__photo{max-width:600px}
   body.care-personal-site .rm-research__photo img{aspect-ratio:1.8}

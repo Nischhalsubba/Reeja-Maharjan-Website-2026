@@ -25,7 +25,6 @@ const articles = [
 ].map(slug => blogPosts.find(post => post.slug === slug))
   .filter((post): post is (typeof blogPosts)[number] => Boolean(post));
 const fullDate = (date: string) => new Date(date+'T00:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'});
-const nurseImage = getBlogImage('nursing-careers-2026-who-workforce-report-nepal');
 const monitoringImage = getBlogImage('pre-eclampsia-pregnancy-warning-signs-monitoring-2026');
 ---
 
@@ -56,8 +55,8 @@ const monitoringImage = getBlogImage('pre-eclampsia-pregnancy-warning-signs-moni
   <section class="rm-experience slate-experience" id="experience" aria-labelledby="rm-experience-title">
     <div class="rm-container rm-experience__grid">
       <figure class="rm-experience__photo">
-        <img src={nurseImage.src} srcset={getBlogImageSrcSet(nurseImage)} sizes="(max-width: 760px) 100vw, 34vw" width="700" height="860" alt={nurseImage.alt} loading="lazy" decoding="async" data-editorial-image data-fallback-src="/images/newborn-care.svg"/>
-        <figcaption>Illustrative clinical photograph · Not Reeja or her patients</figcaption>
+        <img src="/images/reeja-clinical-portrait.webp" width="281" height="592" alt="AI-generated portrait illustration of Reeja Maharjan wearing green nursing scrubs and a stethoscope" loading="lazy" decoding="async" />
+        <figcaption>AI-generated portrait illustration of Reeja Maharjan</figcaption>
       </figure>
       <div class="rm-experience__body">
         <p class="rm-eyebrow">PROFESSIONAL EXPERIENCE</p>
