@@ -744,3 +744,111 @@ body.care-personal-site main .professional-contact-form :is(input,textarea,selec
     border-color:#69746F;
   }
 }
+
+
+/* 2026 / One arrow motion grammar across every action-button variant.
+ * The mask itself moves inside a 24px paint box. It never enters the label area,
+ * never shifts the label, and remains a right-pointing arrow on all variants.
+ * Non-action controls (menu toggle, close, scroll-top) keep their own semantics. */
+body.care-personal-site :is(
+  .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+  .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+) {
+  gap: 12px;
+  align-items: center;
+}
+
+body.care-personal-site :is(
+  .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+  .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+) > svg.brand-icon {
+  display: none;
+}
+
+body.care-personal-site :is(
+  .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+  .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+)::after {
+  content: "";
+  display: block;
+  flex: 0 0 24px;
+  width: 24px;
+  height: 20px;
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='m12 5 7 7-7 7'/%3E%3C/svg%3E");
+  -webkit-mask-size: 18px 18px;
+  mask-size: 18px 18px;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  pointer-events: none;
+}
+
+@keyframes reeja-action-arrow-cycle {
+  0%, 8% {
+    -webkit-mask-position: 50% 50%;
+    mask-position: 50% 50%;
+  }
+  42% {
+    -webkit-mask-position: calc(50% + 32px) 50%;
+    mask-position: calc(50% + 32px) 50%;
+  }
+  43% {
+    -webkit-mask-position: calc(50% - 32px) 50%;
+    mask-position: calc(50% - 32px) 50%;
+  }
+  85%, 100% {
+    -webkit-mask-position: 50% 50%;
+    mask-position: 50% 50%;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.care-personal-site :is(
+    .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+    .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+  ):not(:disabled):hover::after {
+    animation: reeja-action-arrow-cycle 570ms cubic-bezier(.22,1,.36,1) both;
+  }
+}
+body.care-personal-site :is(
+  .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+  .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+):not(:disabled):focus-visible::after {
+  animation: reeja-action-arrow-cycle 570ms cubic-bezier(.22,1,.36,1) both;
+}
+body.care-personal-site :is(
+  .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+  .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+):disabled::after {
+  opacity: .45;
+}
+
+/* Real design attribution, visibly readable and still distinct from UI actions. */
+body.care-personal-site .site-footer--care .reeja-design-credit a {
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+body.care-personal-site .site-footer--care .reeja-design-credit a:hover,
+body.care-personal-site .site-footer--care .reeja-design-credit a:focus-visible {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.care-personal-site :is(
+    .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+    .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+  )::after {
+    animation: none !important;
+    -webkit-mask-position: center !important;
+    mask-position: center !important;
+  }
+}
+@media print {
+  body.care-personal-site :is(
+    .rm-button, .site-button, .care-button, .nav-cta, .mobile-nav__cta,
+    .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
+  )::after { display:none; }
+}
