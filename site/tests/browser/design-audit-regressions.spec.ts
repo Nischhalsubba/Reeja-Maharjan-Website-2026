@@ -50,7 +50,9 @@ test('Homepage keeps Reeja’s real hero photo and loads the labelled clinical p
  await expect(img).toHaveAttribute('src','/reeja-headshot.jpg');
  await expect.poll(()=>img.evaluate(n=>(n as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
  const clinicalPortrait=page.locator('.rm-experience__photo img');
- await expect(clinicalPortrait).toHaveAttribute('src','/images/reeja-clinical-portrait.webp');
+ await expect(clinicalPortrait).toHaveAttribute('src','/images/reeja-clinical-portrait-2026.jpg');
+ await expect(clinicalPortrait).toHaveAttribute('width','800');
+ await expect(clinicalPortrait).toHaveAttribute('height','1600');
  await expect(clinicalPortrait).toHaveAttribute('alt',/Illustrated portrait of Reeja Maharjan/);
  await expect(page.locator('.rm-experience__photo figcaption')).toHaveCount(0);
  await clinicalPortrait.scrollIntoViewIfNeeded();
