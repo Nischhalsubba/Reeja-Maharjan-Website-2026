@@ -1,20 +1,25 @@
-# SEO implementation tracker
+# Reeja website SEO delivery ledger
 
-Audit baseline: 2026-10-31. Source branch: `main`, pre-change commit `5a7aee067e060dc47cf61c488746f9bfa613bb62`.
-Website: https://reejamaharjan.com.np/
+Audit initiated 2026-10-31. Repository: `Nischhalsubba/Reeja-Maharjan-Website-2026`. Source baseline `db5ec7745`, subsequent implementation commits documented in `IMPLEMENTATION_LOG.md`.
 
-## Verified source-code findings
-- **SEO-000 — Complete:** Examined Astro configuration, global layout, robots.txt, professional-facts source, expiry controls, and public page routes.
-- **SEO-001 — Partial:** Static routes inventoried in `URL_INVENTORY.md`; all blog slug instances and deployed URL coverage require a generated build/sitemap validation.
-- **SEO-101 — Implemented, CI pending:** Exclude intentional `noindex` design-system and palette demo routes, and the custom 404 from generated sitemap.
-- **SEO-102 — Existing:** Shared layout renders title, description, canonical, Open Graph, Twitter, and robots metadata. Individual titles, duplicate detection and rendered-page validation remain pending.
-- **SEO-103 — Existing:** Global Person/WebSite/ProfilePage JSON-LD and article JSON-LD exist. Rich-results validation pending.
-- **SEO-301 — Blocked by verification:** Source labels Texas RN license as active but lists an expiry date of 2026-10-31; verify renewal through the licensing authority and owner before claims are updated. IISH contract currently states 2026-11-30; recheck at expiry.
-- **SEO-401/402 — Partial:** Hero preload and lazy-loading practices exist; performance must be measured, not inferred.
-- **SEO-502 — Blocked:** Google Search Console property/indexing and real-user search metrics cannot be confirmed from this repository.
+## Ground-truth rules
+- An Astro build or passing source tests do **not** establish search indexing, rankings, real-user Core Web Vitals or Search Console access.
+- Source-verified: 8 primary content routes, 17 governed articles and 3 generated topic archives, plus internal design labs and a custom 404. Routes must be validated against generated output.
+- Source-verified: global canonical, title, description, social meta and Person/WebSite schema; article BlogPosting/BreadcrumbList; sitemap/robots integration.
+- No Google Search Console property data, Google indexing confirmations, CrUX measurements or live site HTTP audits have been authorized/retrieved.
+- Clinical facts are safety-sensitive: Texas RN record expires 2026-10-31 and is NOT independently verified as renewed. Public copy uses neutral verification-pending wording.
+- Current visual authority: Neutral Editorial v11/v12; older cobalt/green references are historical and must not be mixed into SEO tasks.
 
-## Verification and release
-Confirm CI result; verify built `sitemap-index.xml` and child sitemaps contain neither design-lab URLs nor 404; check that canonical public routes remain. Check live Cloudflare build fingerprint before claiming deployment. Search Console and Lighthouse/CrUX require authorized access or separately captured evidence.
+## Execution record
+- `db5ec7745`: sitemap exclusions and initial docs.
+- `06bae93d`: removed unverified "active Texas RN" public assertions, preserved original dates, updated two editorial pages.
+- `71822e77`: post-build SEO contract and metadata/sitemap validator, plus OG asset exclusion.
+- Future commits: use `IMPLEMENTATION_LOG.md` and GitHub Actions to confirm status.
 
-## Scope and safety
-Preserve Neutral Editorial v11/v12, actual professional facts, all user-approved images, GSAP motion, accessibility, and existing routes. Avoid automatically extending professional-license expiry dates or inventing clinical claims.
+## Release gates
+Build Check; Browser Quality; Visual Regression; Production Smoke. A successful CI run is not proof of Search Console indexing or CrUX performance.
+
+## Priorities
+P0: regulator evidence and credential status. P1: SEO route/template correctness, metadata and broken links. P2: source-led content relevance, internal linking and performance improvement after measurement. P3: external search discovery requiring owner authorization.
+
+This directory records evidence and blocked work, not a declaration of complete indexing.

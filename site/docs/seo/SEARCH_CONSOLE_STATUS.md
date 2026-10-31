@@ -1,17 +1,13 @@
-# Search Console and performance evidence
+# Search Console / indexing — permission-dependent
 
-As of 2026-10-31, there is no verified Google Search Console account data in the audited repository. Do not represent crawlability or a successful build as proof that pages are indexed.
+Status as of 2026-10-31: **No connected authorized Google Search Console property data confirmed.** Source-level sitemap and robots checks do not prove Google has indexed a URL.
 
-## Required owner-authorized checks
-1. Verify the domain/property in Google Search Console.
-2. Check Pages indexing report and sampled URL inspections.
-3. Confirm `https://reejamaharjan.com.np/sitemap-index.xml` is submitted and processed.
-4. Export real query, impression, click, and CTR data by page.
-5. Review Core Web Vitals and PageSpeed Insights separately for mobile and desktop.
-6. Report actual measurement dates, URL scope and methodology.
+Owner actions:
+1. Open https://search.google.com/search-console and choose the verified domain property for `reejamaharjan.com.np` (or complete ownership verification).
+2. Inspect `Pages` indexing coverage and sampled `URL inspection` results.
+3. Submit or check `https://reejamaharjan.com.np/sitemap-index.xml` in Sitemaps; do not assume submission has occurred.
+4. Export last 28/90 days of impressions, clicks, CTR and query/page breakdown.
+5. Check manual actions, security issues and Core Web Vitals.
+6. Reconcile selected canonical/alternate canonical and indexed/excluded pages with actual sitemap.
 
-## Known source-only observations
-- `site/public/robots.txt` advertises the sitemap index.
-- `@astrojs/sitemap` builds sitemap files.
-- Source metadata and JSON-LD exist.
-- No verified Lighthouse, CrUX, ranking, indexing or traffic figures were available.
+Until authorized evidence is supplied, label indexing, rankings and performance as **unverified**.
