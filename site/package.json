@@ -14,7 +14,7 @@
   "scripts": {
     "dev": "astro dev",
     "prebuild": "npm run verify:deployment",
-    "build": "node scripts/generate-build-fingerprint.mjs && node scripts/generate-hero-variants.mjs && astro build && node scripts/render-social-cards.mjs",
+    "build": "node scripts/generate-build-fingerprint.mjs && node scripts/generate-hero-variants.mjs && astro build && node scripts/render-social-cards.mjs && npm run verify:seo-output",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "eslint .",
@@ -30,7 +30,8 @@
     "verify:source": "node scripts/verify-source-ownership.mjs",
     "verify": "npm run verify:deployment && npm run verify:production-contract && npm run verify:final-acceptance && npm run verify:facts && npm run verify:expiry && npm run verify:editorial && npm run verify:a11y && npm run verify:source && npm run verify:cleanup && npm run verify:design-system && npm run check && npm run lint && npm run build",
     "verify:cleanup": "node scripts/verify-cleanup.mjs",
-    "verify:design-system": "node scripts/verify-design-system.mjs"
+    "verify:design-system": "node scripts/verify-design-system.mjs",
+    "verify:seo-output": "node scripts/verify-seo-output.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
