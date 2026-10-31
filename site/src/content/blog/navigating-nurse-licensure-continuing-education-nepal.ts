@@ -109,15 +109,15 @@ export const navigatingNurseLicensureContinuingEducationNepal: BlogPost = {
   sources: [
     {
       label: 'Nepal Nursing Council official website',
-      href: 'https://www.nnc.org.np/'
+      href: 'https://nnc.org.np/'
     },
     {
       label: 'Nepal Nursing Council application portal',
       href: 'https://application.nnc.org.np/'
     },
     {
-      label: 'Nepal Nursing Council licensure guideline document',
-      href: 'https://www.nnc.org.np/uploads/Guideline/1769770059755_Guideline-for-NLEM-2020.pdf'
+      label: 'Nepal Nursing Council official guidelines (including NLEM 2020)',
+      href: 'https://nnc.org.np/page/guidelines'
     }
   ],
   relatedSlugs: [
