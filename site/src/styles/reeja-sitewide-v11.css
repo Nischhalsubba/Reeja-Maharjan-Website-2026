@@ -852,3 +852,82 @@ body.care-personal-site .site-footer--care .reeja-design-credit a:focus-visible 
     .care-footer__cta, .blog-index__cta, .cip-button, .slate-button, .ds-action
   )::after { display:none; }
 }
+
+/* ARTICLE TYPOGRAPHY / SPACING (Neutral Editorial 12.1)
+ * Two approved families: Georgia for editorial headings, locally-loaded
+ * Public Sans for navigation, controls, metadata and reading text.
+ * This final stylesheet owns blog typography over retired design layers. */
+body.care-personal-site main .blog-article-page .blog-article__body,
+body.care-personal-site main .blog-article-page .blog-article__body :is(p,li,dt,dd,a,span,small,button),
+body.care-personal-site main .blog-article-page .blog-toc {
+  font-family: "Public Sans", system-ui, sans-serif;
+}
+body.care-personal-site main .blog-article-page .blog-article__body :is(h2,h3),
+body.care-personal-site main .blog-article-page .blog-article__header h1 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+}
+
+/* Align navigation heading and each nav link's text to the same inset. */
+body.care-personal-site main .blog-article__layout .blog-toc {
+  padding: 22px 16px 18px;
+  border: 1px solid #D9DBD7;
+  background: #F1F1EE;
+}
+body.care-personal-site main .blog-article__layout .blog-toc > .site-eyebrow {
+  margin: 0 0 9px;
+  font-family: "Public Sans", system-ui, sans-serif;
+  line-height: 1.4;
+  letter-spacing: .085em;
+}
+body.care-personal-site main .blog-article__layout .blog-toc h2 {
+  max-width: none;
+  margin: 0 0 14px;
+  font: 600 1.0625rem/1.4 "Public Sans", system-ui, sans-serif;
+  letter-spacing: -.015em;
+  text-wrap: wrap;
+}
+body.care-personal-site main .blog-article__layout .blog-toc nav {
+  margin-inline: -16px;
+  gap: 0;
+}
+body.care-personal-site main .blog-article__layout .blog-toc nav a {
+  display: block;
+  min-height: 40px;
+  padding: 10px 16px;
+  border: 0;
+  border-left: 2px solid transparent;
+  border-radius: 0;
+  font: 600 .875rem/1.45 "Public Sans", system-ui, sans-serif;
+  overflow-wrap: break-word;
+  text-decoration: none;
+}
+body.care-personal-site main .blog-article__layout .blog-toc nav a:is(:hover,.is-active,[aria-current="location"]) {
+  border-left-color: #515C55;
+  background: #E1E3DF;
+  color: #17191A;
+}
+
+/* Earlier .site-article__body section adds bottom border and later
+ * .blog-article__body > section adds top border, giving two lines.
+ * Keep only the next section's top border, with one consistent gap. */
+body.care-personal-site main .blog-article__body section {
+  border-bottom: 0;
+}
+body.care-personal-site main .blog-article__body > section {
+  margin-bottom: clamp(32px, 3.6vw, 48px);
+  padding-top: clamp(23px, 2.4vw, 30px);
+  padding-bottom: 0;
+  border-top: 1px solid #D9DBD7;
+}
+body.care-personal-site main .blog-article__body > section > h2 { margin-top: 0; }
+body.care-personal-site main .blog-article__body > section > .site-eyebrow + h2 { margin-top: 14px; }
+body.care-personal-site main .blog-article__body > section > .site-eyebrow { margin-top: 0; }
+
+@media (max-width: 920px) {
+  body.care-personal-site main .blog-article__layout .blog-toc {
+    padding: 20px 16px;
+    max-height: none;
+    overflow: visible;
+  }
+}

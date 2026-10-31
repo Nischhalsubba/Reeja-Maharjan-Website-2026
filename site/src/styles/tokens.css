@@ -14,7 +14,7 @@
   --brand-focus: #246C60;
 
   /* Primary UI typography, loaded locally with @fontsource. */
-  --font-display: "Public Sans", system-ui, sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
   --font-sans: "Public Sans", system-ui, sans-serif;
   --w-regular: 400;
   --w-medium: 500;
