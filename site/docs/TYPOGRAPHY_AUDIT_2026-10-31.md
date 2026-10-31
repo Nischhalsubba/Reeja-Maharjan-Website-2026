@@ -21,3 +21,6 @@ The problem was *conflicting role assignment*, not evidence of another remotely 
 
 ## Open structural debt
 The site still imports older CSS generations; this change avoids deleting styles that may power live page variants. A separate measured dependency audit and before/after visual regression are necessary before removing historic CSS. No additional font family/package was introduced. This analysis describes fonts requested by active CSS, not a device-level guarantee that Georgia is installed on every operating system.
+
+## Self-contained SVG and social-image exception
+A second source scan also found hard-coded Arial/Helvetica stacks in the OG SVG templates (`site/public/og-default.svg`, `site/src/pages/og/articles/[slug].svg.ts`) and the MOM-HD illustrated diagram. These are **standalone SVG/image assets**, not additional webfont downloads on the web pages. Their declared stacks now prefer Public Sans with system sans fallbacks. Because SVGs served as images and Sharp-rendered PNGs do not inherit the page's loaded CSS, they may still render using the fallback font where Public Sans is not installed; the browser UI itself remains the verified two-family system.
