@@ -39,3 +39,13 @@ The typed article modules contain `title`, `slug`, published/updated dates, prim
 - Country-specific practice/licensing guidance must not be inferred from international guidance alone.
 
 Status: structurally audited; **external medical source verification and clinician signoff pending**.
+
+## External reference sample (2026-10-31)
+Independent web retrieval confirmed representative sources:
+- WHO's diabetes-during-pregnancy guidance `https://www.who.int/publications/i/item/9789240117044`
+- WHO's kangaroo mother care guide `https://www.who.int/publications/i/item/9789240115910`
+- WHO's postpartum-haemorrhage recommendations `https://www.who.int/publications/i/item/9789240115637`
+- UNICEF Nepal HPV program `https://www.unicef.org/nepal/stories/protecting-girls-against-cancer`
+- CDC maternal warning signs `https://www.cdc.gov/hearher/maternal-warning-signs/`
+- Nepal Nursing Council `https://nnc.org.np/` and `https://nnc.org.np/page/guidelines`.
+The outdated `www.nnc.org.np` host gave retrieval errors; the nursing licensure article now points to the verified official website and guidelines index. Not all linked articles or changing medical recommendations were independently checked. Clinical editorial signoff remains a separate owner/professional step.

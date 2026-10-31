@@ -23,3 +23,9 @@ Build Check; Browser Quality; Visual Regression; Production Smoke. A successful 
 P0: regulator evidence and credential status. P1: SEO route/template correctness, metadata and broken links. P2: source-led content relevance, internal linking and performance improvement after measurement. P3: external search discovery requiring owner authorization.
 
 This directory records evidence and blocked work, not a declaration of complete indexing.
+
+## Extended implementation (2026-10-31)
+- `56fd8074`: contextual article-to-topic links, visible topic breadcrumb links and BreadcrumbList data; deduplicated recruiter ProfilePage schema.
+- `d059aabf`: replaced inaccessible `www.nnc.org.np` links in licensure article with confirmed official `https://nnc.org.np/` and guideline index.
+- `b3cc650f`, `3583d98e`: browser-lab FCP/LCP/CLS collection (mobile/desktop, home/CV/blog), explicitly not CrUX.
+- Verified GitHub Build Check at `56fd8074`: 31 HTML pages, 28 sitemap URLs, **0 SEO errors and 0 warnings**. Later CI/deployment must be checked independently.

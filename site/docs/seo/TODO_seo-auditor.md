@@ -24,3 +24,9 @@ Statuses: Verified / Implemented—CI pending / Pending—external access / Pend
 | SEO-503 Analytics | P2 | Source reviewed | Optional GA event tracking, consent/privacy review pending |
 | SEO-601 Test automation | P1 | Implemented—CI pending | `verify-seo-output.mjs`, CI Build/Browser/Visual |
 | SEO-701 Release acceptance | P1 | Pending—production verification | Confirm latest SHA Cloudflare Smoke and live responses |
+
+## CI evidence
+- Latest completed post-build audit: **31 pages, 28 sitemap URLs, 0 errors, 0 warnings** (Build Check at `56fd8074`).
+- Recheck latest `main` Browser Quality, Visual Regression and Cloudflare Production Smoke after the final commits.
+- New lab perf test added; numbers require a completed run and should not be described as CrUX.
+- Search Console indexing, real-user INP and regulated-license renewal remain externally blocked, not "complete".
