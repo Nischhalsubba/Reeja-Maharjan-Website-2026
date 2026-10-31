@@ -8,7 +8,7 @@ export const navigatingNurseLicensureContinuingEducationNepal: BlogPost = {
   metaDescription:
     'Registered Nurse Reeja Maharjan explains nurse licensure in Nepal, including registration records, renewal planning, official NNC sources, and continuing education.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-08-07',
+  updatedAt: '2026-10-31',
   readMinutes: 8,
   tags: ['nurse licensure', 'continuing education', 'Nepal Nursing Council', 'career development'],
   primaryKeyword: 'nurse licensure in Nepal',
@@ -26,7 +26,7 @@ export const navigatingNurseLicensureContinuingEducationNepal: BlogPost = {
   ],
   intro: [
     'Professional registration is not something to think about only when an employer asks for a document. Nurses benefit from keeping licensure, renewal dates, education records, and training evidence organised throughout their careers.',
-    'Reeja Maharjan maintains Nepal Nursing Council registration and also holds an active Texas RN single-state license. Her own profile separates those credentials from employment eligibility, work authorisation, and employer-specific credentialing rather than blending them into one claim.',
+    'Reeja Maharjan maintains Nepal Nursing Council registration and has a Texas RN license originally issued in September 2025, with recorded expiry October 31, 2026. Her current Texas renewal status requires official verification. Licensure, work authorisation and employer credentialing are separate.',
     'This guide focuses on practical organisation for nurses in Nepal. Current regulatory requirements should always be checked directly through official Nepal Nursing Council information.'
   ],
   sections: [
@@ -127,7 +127,7 @@ export const navigatingNurseLicensureContinuingEducationNepal: BlogPost = {
   ],
   cta: {
     title: 'Review Reeja Maharjan’s licenses and clinical training',
-    text: 'Reeja’s public CV summarises her NNC registration, active Texas RN license, nursing education, clinical training, hospital experience, and current maternal-health research role.',
+    text: 'Reeja’s public CV summarises her NNC registration, prior Texas RN licensure (renewal status verification pending), nursing education, clinical training, hospital experience and maternal-health research role.',
     label: 'View Reeja’s CV',
     href: '/cv/#credentials'
   },

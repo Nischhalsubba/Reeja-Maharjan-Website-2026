@@ -27,7 +27,14 @@ for (const field of fields) {
   }
 
   const daysRemaining = Math.ceil((expiry.getTime() - today.getTime()) / 86_400_000);
-  if (daysRemaining < 0) {
+  if (daysRemaining < 0 && field.key === 'texasLicenseExpiry') {
+    // An expired record cannot independently prove active or renewed licensure.
+    // Keep the historical date, warn, and ensure public canonical facts make no active claim.
+    warnings.push(`${field.label}: recorded expiration passed ${Math.abs(daysRemaining)} day(s) ago; renewal requires verification`);
+    if (/texasLicenseShort:\s*'Texas RN Active'|texasLicense:\s*'Active, unencumbered/i.test(source)) {
+      failures.push('Unverified Texas RN active-status claim remains in canonical facts.');
+    }
+  } else if (daysRemaining < 0) {
     failures.push(`${field.label}: expired ${Math.abs(daysRemaining)} day(s) ago`);
   } else if (daysRemaining <= warningWindowDays) {
     warnings.push(`${field.label}: expires in ${daysRemaining} day(s)`);

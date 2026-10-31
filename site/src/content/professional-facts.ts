@@ -2,7 +2,7 @@ export const professionalFacts = {
   name: 'Reeja Maharjan',
   credential: 'B.Sc. Nursing',
   primaryRole: 'Registered Nurse and Maternal Health Research Assistant',
-  publicRoleLabel: 'NNC Licensed Registered Nurse, Texas RN, and Research Assistant',
+  publicRoleLabel: 'NNC Licensed Registered Nurse and Maternal Health Research Assistant',
 
   currentRole: 'Research Assistant',
   currentEmployer: 'Institute for Implementation Science and Health (IISH)',
@@ -19,11 +19,11 @@ export const professionalFacts = {
 
   nepalLicense: 'Nepal Nursing Council licensed Registered Nurse',
   nepalLicenseShort: 'NNC Licensed RN',
-  texasLicense: 'Active, unencumbered Texas RN single-state license',
-  texasLicenseShort: 'Texas RN Active',
+  texasLicense: 'Texas RN single-state license issued September 8, 2025; recorded expiry October 31, 2026; current renewal status requires verification',
+  texasLicenseShort: 'Texas RN (status verification pending)',
   texasLicenseIssued: '2025-09-08',
   texasLicenseExpiry: '2026-10-31',
-  nclexWording: 'NCLEX-RN pathway completed through active Texas RN licensure',
+  nclexWording: 'NCLEX-RN pathway documented through the original Texas RN licensure; current license status requires verification',
 
   availability:
     'Open to discussing suitable nursing, maternal-health research, hospital, NGO, INGO, and care-coordination opportunities',

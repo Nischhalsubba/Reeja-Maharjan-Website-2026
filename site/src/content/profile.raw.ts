@@ -150,11 +150,11 @@ export const profile: ProfileContent = {
     title: 'Registered Nurse and Maternal Health Research Assistant',
     role: 'Reeja Maharjan | NNC Licensed RN | Texas RN | IISH Research Assistant',
     tagline:
-      'NNC-licensed nurse and Texas RN now serving as a Research Assistant with IISH on the MOM-HD maternal health telemonitoring trial, combining hospital nursing, BP/BG monitoring, participant education, data quality, and safe clinical coordination.',
+      'NNC-licensed nurse with prior Texas RN licensure now serving as a Research Assistant with IISH on the MOM-HD maternal health telemonitoring trial, combining hospital nursing, BP/BG monitoring, participant education, data quality, and safe clinical coordination.',
     proof: [
       'IISH MOM-HD Research Assistant',
       'NNC Licensed RN',
-      'Texas RN Active',
+      'Texas RN status verification pending',
       'NCLEX-RN Cleared',
       'BP/BG Telemonitoring',
       'REDCap Data Quality',
@@ -177,7 +177,7 @@ export const profile: ProfileContent = {
     summary: 'Recruiter-ready summary of clinical scope, current research role, verified license status, and role fit.'
   },
   profileSummary:
-    'NNC-licensed Registered Nurse and Texas RN with verified hospital experience across TUTH, MMTH, and Sindhuli Hospital, now working as a Research Assistant with the Institute for Implementation Science and Health (IISH) on the MOM-HD maternal health telemonitoring trial in Biratnagar. Brings practical strength in maternal-newborn support, ANC screening, HDP/GDM study workflows, BP/BG monitoring, participant counselling, tele-follow-up, REDCap-style data quality, documentation, safe handover, escalation coordination, and ethical participant communication.',
+    'NNC-licensed Registered Nurse with prior Texas RN licensure and verified hospital experience across TUTH, MMTH, and Sindhuli Hospital, now working as a Research Assistant with the Institute for Implementation Science and Health (IISH) on the MOM-HD maternal health telemonitoring trial in Biratnagar. Brings practical strength in maternal-newborn support, ANC screening, HDP/GDM study workflows, BP/BG monitoring, participant counselling, tele-follow-up, REDCap-style data quality, documentation, safe handover, escalation coordination, and ethical participant communication.',
   roleFitIntro: {
     id: 'role-fit',
     eyebrow: 'Role Fit',
@@ -209,8 +209,8 @@ export const profile: ProfileContent = {
     },
     {
       title: 'International Nursing Readiness',
-      summary: 'Texas RN license status supports international nursing credibility and NCLEX-RN pathway readiness.',
-      evidence: ['Texas RN active and unencumbered', 'Single-state license status', 'English clinical communication']
+      summary: 'Original Texas RN licensure documents the NCLEX-RN pathway but does not establish current work authorisation or renewed license status.',
+      evidence: ['Texas RN original issue documented; renewal status unverified', 'Single-state license status', 'English clinical communication']
     }
   ],
   competenciesIntro: {
@@ -333,19 +333,19 @@ export const profile: ProfileContent = {
       credentialLabel: 'Verification available on request'
     },
     {
-      title: 'Texas RN License - Active, Unencumbered',
+      title: 'Texas RN License — Status Verification Pending',
       issuer: 'Texas Board of Nursing / Nursys QuickConfirm',
       date: 'Original issue Sep 8, 2025; expires Oct 31, 2026',
       note:
-        'Active, unencumbered Texas RN single-state license. Public summary only; full Nursys QuickConfirm verification can be shared on request.',
+        'Texas RN single-state license originally issued September 2025; recorded expiry October 31, 2026. Current renewal status requires official verification. Supporting records are shared privately when appropriate.',
       credentialLabel: 'Nursys verification available on request'
     },
     {
       title: 'NCLEX-RN Cleared',
       issuer: 'NCLEX-RN pathway / Texas RN licensure',
-      date: 'Texas RN license active from Sep 8, 2025',
+      date: 'Original Texas RN license issue: Sep 8, 2025',
       note:
-        'Listed as NCLEX-RN cleared based on active Texas RN licensure. This is intentionally framed as credential status, not a public exam-result document.',
+        'NCLEX-RN pathway referenced through original Texas RN licensure; this does not establish current license status or replace official verification.',
       credentialLabel: 'Status supported by Texas RN verification'
     },
     {
@@ -524,7 +524,7 @@ export const profile: ProfileContent = {
       title: 'Texas RN License Verification',
       category: 'International License',
       description:
-        'Nursys QuickConfirm summary confirms active, unencumbered Texas RN single-state license. Full verification report available on request.',
+        'Previous Texas RN licensure is recorded; current status must be checked through the Texas Board of Nursing or Nursys. Full verification is available privately on request where appropriate.',
       actionLabel: 'Available on request'
     },
     {

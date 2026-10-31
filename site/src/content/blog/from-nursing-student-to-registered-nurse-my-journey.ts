@@ -8,7 +8,7 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
   metaDescription:
     'Read Reeja Maharjan’s nursing journey from B.Sc. Nursing and NNC registration to hospital roles at Sindhuli, MMTH and TUTH and maternal-health research with IISH.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-08-07',
+  updatedAt: '2026-10-31',
   readMinutes: 8,
   tags: ['Reeja Maharjan', 'nursing career', 'registered nurse Nepal', 'hospital nursing'],
   primaryKeyword: 'Reeja Maharjan nursing journey',
@@ -21,7 +21,7 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
   ],
   quickAnswer: [
     'Reeja Maharjan completed B.Sc. Nursing, became a Nepal Nursing Council registered nurse, and built hospital experience at Sindhuli Hospital, Manmohan Memorial Medical College & Teaching Hospital, and Tribhuvan University Teaching Hospital.',
-    'Her later professional development includes an active Texas RN single-state license and clinical training in areas such as newborn care, operation-theatre practice, and CPR participation.',
+    'Her later professional development includes Texas RN licensure originally issued in September 2025 (recorded expiry October 2026; renewal status requires verification) and clinical training in newborn care, operation-theatre practice and CPR participation.',
     'In 2026, Reeja moved into maternal-health implementation research with IISH, supporting the MOM-HD telemonitoring project in Biratnagar.'
   ],
   intro: [
@@ -72,9 +72,9 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
     },
     {
       id: 'international-licensure',
-      title: 'Adding active Texas RN licensure',
+      title: 'Texas RN licensure and independent verification',
       paragraphs: [
-        'Reeja’s Texas RN single-state license was originally issued in September 2025 and is recorded as active and unencumbered in her professional facts. The portfolio presents this accurately as a licensure credential, separate from work authorisation, immigration status, and employer credentialing.',
+        'Reeja’s Texas RN single-state license was originally issued in September 2025, with a recorded expiry date of October 31, 2026. Current status and renewal require verification through the Texas Board of Nursing. Licensure is separate from work authorisation, immigration status and employer credentialing.',
         'That distinction matters because international nursing readiness involves several independent requirements, not a single certificate.'
       ]
     },
@@ -101,7 +101,7 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
     {
       question: 'What nursing licences does Reeja Maharjan hold?',
       answer:
-        'Her professional profile lists Nepal Nursing Council RN registration and an active, unencumbered Texas RN single-state license.'
+        'Her professional profile lists Nepal Nursing Council RN registration and Texas RN licensure originally issued in 2025; the currently valid Texas RN status must be verified with the regulator.'
     },
     {
       question: 'What kind of work connects Reeja’s hospital and research experience?',

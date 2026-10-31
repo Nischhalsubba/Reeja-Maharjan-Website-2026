@@ -256,7 +256,7 @@ export const siteCopy = {
   },
   footer: {
     eyebrow: 'Reeja Maharjan · Registered Nurse',
-    statement: `${facts.name} is a ${facts.credential} graduate, ${facts.nepalLicense}, active Texas RN, and maternal-health ${facts.currentRole} with ${facts.currentEmployerShort} in ${facts.currentLocation}.`,
+    statement: `${facts.name} is a ${facts.credential} graduate, ${facts.nepalLicense}, Texas RN license holder (renewal verification pending), and maternal-health ${facts.currentRole} with ${facts.currentEmployerShort} in ${facts.currentLocation}.`,
     exploreLabel: 'Explore Reeja’s work',
     contactLabel: 'Contact Reeja',
     legal: 'Professional portfolio for nursing, maternal-health research, and health-programme opportunities.'

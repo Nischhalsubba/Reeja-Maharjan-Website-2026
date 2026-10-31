@@ -45,8 +45,8 @@ const currentExperience = sourceProfile.experience.map((item, index) => ({
 
 const credentialNotes = [
   'Nepal Nursing Council Registered Nurse credential. The public portfolio shows a summary only; supporting verification can be shared privately with a legitimate employer when appropriate.',
-  'Active, unencumbered Texas RN single-state license. The portfolio separates licensure from work authorisation and employer credentialing; supporting verification can be shared privately when appropriate.',
-  'NCLEX-RN pathway status is represented through Reeja’s active Texas RN licensure rather than by publishing a separate exam-result document.',
+  'Texas RN license originally issued September 2025; recorded expiry October 31, 2026. Renewal and current practice status require official verification; licensure, work authorisation and employer credentialing remain separate.',
+  'NCLEX-RN pathway documented through original Texas RN licensure, without publishing exam-result documents or assuming current licensing status.',
   'Structured Comprehensive Newborn Care Level II training relevant to newborn observation, family education, routine nursing support, and appropriate escalation within local clinical scope.',
   'Hands-on CPR training participation supporting emergency-response preparedness within the requirements and protocols of the employing clinical setting.',
   'Operation Theatre Techniques and Management training relevant to organised perioperative workflow and nursing support within assigned scope.',
