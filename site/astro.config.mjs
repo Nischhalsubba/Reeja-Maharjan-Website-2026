@@ -10,5 +10,13 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()]
   },
-  integrations: [sitemap()]
+  integrations: [sitemap({
+    // A sitemap is a list of canonical URLs intended for indexing. Internal
+    // design previews and the custom 404 page are deliberately excluded.
+    filter: (page) => ![
+      '/404/',
+      '/design-system/',
+      '/palette-studio/'
+    ].includes(new URL(page).pathname)
+  })]
 });
