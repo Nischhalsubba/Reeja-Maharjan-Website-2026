@@ -11,6 +11,16 @@ export function getStaticPaths() {
 type Props = { topic: BlogTopic };
 const { topic } = Astro.props;
 const posts = blogPosts.filter((post) => articleMatchesBlogTopic(post, topic));
+const topicUrl = new URL(`/blog/topics/${topic.slug}/`, Astro.site ?? Astro.url.origin).toString();
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Reeja Maharjan', item: new URL('/', Astro.site ?? Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 2, name: 'Writing', item: new URL('/blog/', Astro.site ?? Astro.url.origin).toString() },
+    { '@type': 'ListItem', position: 3, name: topic.label, item: topicUrl }
+  ]
+};
 const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US', {
   year: 'numeric', month: 'short', day: 'numeric'
 });
@@ -24,7 +34,7 @@ const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US'
     <section class="site-page__hero" aria-labelledby="topic-page-title">
       <div class="container site-page__hero-grid">
         <div>
-          <p class="site-eyebrow">Writing / {topic.label}</p>
+          <p class="site-eyebrow"><a href="/blog/">Writing</a> / {topic.label}</p>
           <h1 id="topic-page-title">{topic.label} articles.</h1>
           <p class="site-page__lede">{topic.summary} Read related, source-linked articles written by Reeja Maharjan.</p>
           <div class="site-actions">
@@ -72,4 +82,5 @@ const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US'
       </div>
     </section>
   </div>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)}></script>
 </BaseLayout>

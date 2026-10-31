@@ -18,21 +18,6 @@ const featuredCredentials = credentialTitles.flatMap((title) => {
   const credential = profile.certifications.find((item) => item.title === title);
   return credential ? [credential] : [];
 });
-const hiringSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  dateModified: siteCopy.updatedAt,
-  mainEntity: {
-    '@type': 'Person',
-    '@id': 'https://reejamaharjan.com.np/#person',
-    name: professionalFacts.name,
-    jobTitle: professionalFacts.primaryRole,
-    description: siteCopy.profileSummary,
-    email: professionalFacts.professionalEmail,
-    url: 'https://reejamaharjan.com.np/',
-    sameAs: [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean)
-  }
-};
 import BrandAction from '../components/design-system/BrandAction.astro';
 import BrandCard from '../components/design-system/BrandCard.astro';
 import EvidenceList from '../components/design-system/EvidenceList.astro';
@@ -138,5 +123,4 @@ import EvidenceList from '../components/design-system/EvidenceList.astro';
       </div>
     </section>
   </div>
-  <script type="application/ld+json" set:html={JSON.stringify(hiringSchema)}></script>
 </BaseLayout>

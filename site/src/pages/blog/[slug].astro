@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArticleGovernance from '../../components/ArticleGovernance.astro';
 import { blogPosts, getBlogPost } from '../../content/blog';
 import { getBlogGovernance } from '../../content/blog/governance';
+import { articleMatchesBlogTopic, blogTopics } from '../../content/blog/topics';
 import { professionalFacts } from '../../content/professional-facts';
 
 export const getStaticPaths = () =>
@@ -20,6 +21,7 @@ const authorUrl = new URL('/', Astro.site ?? Astro.url.origin).toString();
 const relatedPosts = post.relatedSlugs
   .map((relatedSlug) => blogPosts.find((candidate) => candidate.slug === relatedSlug))
   .filter(Boolean);
+const topicArchive = blogTopics.find((topic) => articleMatchesBlogTopic(post, topic));
 const topicText = [post.primaryKeyword, ...post.supportingKeywords, ...post.tags].join(' ').toLowerCase();
 const topicHub = topicText.match(/maternal|newborn|postnatal|breastfeeding|pregnan|mother/)
   ? { href: '/maternal-health/', label: 'Reeja’s maternal-health resources' }
@@ -142,7 +144,7 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
             <p class="site-eyebrow">About the author</p>
             <h2>Reeja Maharjan, B.Sc. Nursing</h2>
             <p>Reeja is a Nepal Nursing Council licensed Registered Nurse with prior Texas RN licensure (renewal status pending verification) and IISH maternal-health Research Assistant with hospital nursing experience in Nepal. Her professional work includes patient and participant education, documentation, telemonitoring support, follow-up, and care coordination.</p>
-            <p><a href="/">About Reeja</a> · <a href="/cv/">View Reeja’s CV</a> · <a href={topicHub.href}>{topicHub.label}</a></p>
+            <p><a href="/">About Reeja</a> · <a href="/cv/">View Reeja’s CV</a> · <a href={topicHub.href}>{topicHub.label}</a>{topicArchive && <> · <a href={`/blog/topics/${topicArchive.slug}/`}>More {topicArchive.label.toLowerCase()} articles</a></>}</p>
           </section>
 
           {relatedPosts.length > 0 && (
