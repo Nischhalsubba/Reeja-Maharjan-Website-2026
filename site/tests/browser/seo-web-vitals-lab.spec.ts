@@ -16,8 +16,7 @@ test('collect desktop and mobile laboratory paint and layout stability diagnosti
       deviceScaleFactor: width === 390 ? 2 : 1
     });
     const page = await context.newPage();
-    for (const route of ['/', '/cv/', '/blog/']) {
-      await page.addInitScript(() => {
+    await page.addInitScript(() => {
         const global = window as typeof window & {
           __seoDiagnostic?: { lcp: number | null; cls: number };
         };
@@ -36,7 +35,8 @@ test('collect desktop and mobile laboratory paint and layout stability diagnosti
             }
           }).observe({ type: 'layout-shift', buffered: true });
         } catch { /* Unsupported browser metric */ }
-      });
+    });
+    for (const route of ['/', '/cv/', '/blog/']) {
       await page.goto(origin + route, { waitUntil: 'load' });
       await page.waitForTimeout(350);
       const data = await page.evaluate(() => {
