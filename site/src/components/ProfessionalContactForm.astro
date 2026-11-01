@@ -2,7 +2,6 @@
 import { professionalFacts } from '../content/professional-facts';
 
 const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=${encodeURIComponent(`Professional opportunity for ${professionalFacts.name}`)}`;
-const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professional-contact-form';
 ---
 
 <form
@@ -65,13 +64,13 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
 
   <input type="hidden" name="_subject" value="Professional inquiry for Reeja Maharjan from reejamaharjan.com.np" />
   <input type="hidden" name="_template" value="table" />
-  <input type="hidden" name="_next" value={contactReturnUrl} />
+  <input type="hidden" name="_captcha" value="false" />
   <input type="hidden" name="_url" value="https://reejamaharjan.com.np/contact/" />
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
   <div class="professional-contact-form__privacy">
     <strong>Privacy</strong>
-    <p>This message is processed by <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>, an external delivery service. Its automated spam check may ask you to complete a verification step. Please do not share patient records, identity documents, license scans, or other sensitive information.</p>
+    <p>This message is processed by <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>, an external delivery service. Messages are sent securely through its form API without leaving this page. Delivery is subject to its spam protections and service limits. Please do not share patient records, identity documents, license scans, or other sensitive information.</p>
   </div>
 
   <div class="professional-contact-form__actions">
@@ -85,10 +84,15 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
   <div class="professional-contact-form__status" aria-live="polite" aria-atomic="true">
     <p class="form-status form-status--loading" role="status" hidden data-form-loading>Sending…</p>
     <div class="form-status form-status--success" role="status" tabindex="-1" hidden data-form-success>
-      <strong>Message submitted for delivery to Reeja.</strong>
-      <p>Reeja can reply by email when appropriate.</p>
+      <strong>Your message was accepted for delivery.</strong>
+      <p>Reeja can reply by email when appropriate. Please don't resend unless you need to add information.</p>
+    </div>
+    <div class="form-status form-status--error" role="alert" tabindex="-1" hidden data-form-error>
+      <strong>We couldn't submit your message.</strong>
+      <p>Please try again, or use <a href={directEmailHref}>Email Reeja</a> to contact her directly. Your details are still in the form.</p>
     </div>
   </div>
+  <noscript><p class="form-status">JavaScript is required to send this form without leaving the website. You can instead use <a href={directEmailHref}>Email Reeja</a>.</p></noscript>
 </form>
 
 <script>
@@ -100,23 +104,25 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
     const submitSpinner = form.querySelector<HTMLElement>('[data-submit-spinner]');
     const loadingStatus = form.querySelector<HTMLElement>('[data-form-loading]');
     const successStatus = form.querySelector<HTMLElement>('[data-form-success]');
+    const errorStatus = form.querySelector<HTMLElement>('[data-form-error]');
+    let submitting = false;
 
     const fieldMessage = (field: HTMLInputElement | HTMLTextAreaElement): string => {
       if (field.validity.valueMissing) return 'Please complete this field.';
       if (field.validity.typeMismatch && field.type === 'email') return 'Enter a valid email address.';
       if (field.validity.tooShort) {
-        const minimum = field.minLength;
-        return minimum > 0 ? `Please enter at least ${minimum} characters.` : 'Please add a little more detail.';
+        return 'Please enter at least ' + field.minLength + ' characters.';
       }
       return 'Please check this field.';
     };
 
     const showFieldError = (field: HTMLInputElement | HTMLTextAreaElement): boolean => {
-      const error = form.querySelector<HTMLElement>(`[data-error-for="${field.id}"]`);
-      if (!error) return field.validity.valid;
+      const error = form.querySelector<HTMLElement>('[data-error-for="' + field.id + '"]');
       const valid = field.validity.valid;
-      error.hidden = valid;
-      error.textContent = valid ? '' : fieldMessage(field);
+      if (error) {
+        error.hidden = valid;
+        error.textContent = valid ? '' : fieldMessage(field);
+      }
       if (valid) field.removeAttribute('aria-invalid');
       else field.setAttribute('aria-invalid', 'true');
       return valid;
@@ -134,60 +140,81 @@ const contactReturnUrl = 'https://reejamaharjan.com.np/contact/?sent=1#professio
       });
     });
 
-    const setStatus = (state: 'idle' | 'loading' | 'success') => {
-      [loadingStatus, successStatus].forEach((element) => {
+    const setStatus = (state: 'idle' | 'loading' | 'success' | 'error') => {
+      [loadingStatus, successStatus, errorStatus].forEach((element) => {
         if (element) element.hidden = true;
       });
-
       if (state === 'loading' && loadingStatus) loadingStatus.hidden = false;
       if (state === 'success' && successStatus) {
         successStatus.hidden = false;
         successStatus.focus();
       }
+      if (state === 'error' && errorStatus) {
+        errorStatus.hidden = false;
+        errorStatus.focus();
+      }
     };
 
-    const setSubmitting = (submitting: boolean) => {
+    const setSubmitting = (active: boolean) => {
+      submitting = active;
       if (!submitButton) return;
-      submitButton.disabled = submitting;
-      submitButton.toggleAttribute('aria-busy', submitting);
-      if (submitLabel) submitLabel.textContent = submitting ? 'Sending…' : 'Send to Reeja';
-      if (submitSpinner) submitSpinner.hidden = !submitting;
+      submitButton.disabled = active;
+      submitButton.toggleAttribute('aria-busy', active);
+      if (submitLabel) submitLabel.textContent = active ? 'Sending…' : 'Send to Reeja';
+      if (submitSpinner) submitSpinner.hidden = !active;
     };
 
-    const showRedirectSuccess = () => {
-      const url = new URL(window.location.href);
-      if (url.searchParams.get('sent') !== '1') return;
-
-      form.reset();
-      validatedFields.forEach((field) => field.removeAttribute('aria-invalid'));
-      setStatus('success');
-
-      url.searchParams.delete('sent');
-      const cleanUrl = `${url.pathname}${url.search}${url.hash}`;
-      window.history.replaceState({}, '', cleanUrl);
-    };
-
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
+      // Never navigate to the third-party CAPTCHA or thank-you page.
+      event.preventDefault();
+      if (submitting) return;
       setStatus('idle');
 
       const firstInvalid = validatedFields.find((field) => !showFieldError(field));
       if (firstInvalid) {
-        event.preventDefault();
         firstInvalid.focus();
         return;
       }
-
       const honeypot = form.elements.namedItem('_honey');
       if (honeypot instanceof HTMLInputElement && honeypot.value) {
-        event.preventDefault();
+        setStatus('error');
         return;
       }
 
+      const payload = Object.fromEntries(new FormData(form).entries());
+      // The provider documents a dedicated JSON AJAX endpoint and _captcha=false.
+      // Retain the honeypot and never mistake its JSON string "false" for success.
+      delete payload._next;
+      const endpoint = new URL(form.action);
+      endpoint.pathname = '/ajax' + endpoint.pathname;
       setSubmitting(true);
       setStatus('loading');
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 15000);
+      try {
+        const response = await fetch(endpoint.toString(), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload),
+          signal: controller.signal
+        });
+        if (!response.ok) throw new Error('Form service unavailable');
+        const result: unknown = await response.json();
+        const confirmed = typeof result === 'object' && result !== null &&
+          'success' in result && (result.success === true || result.success === 'true');
+        if (!confirmed) throw new Error('Provider did not confirm submission');
+        form.reset();
+        validatedFields.forEach((field) => field.removeAttribute('aria-invalid'));
+        setStatus('success');
+      } catch {
+        // Keep entered data for a retry or the direct-email fallback.
+        setStatus('error');
+      } finally {
+        window.clearTimeout(timeout);
+        setSubmitting(false);
+      }
     });
 
     window.addEventListener('pageshow', () => setSubmitting(false));
-    showRedirectSuccess();
   }
 </script>

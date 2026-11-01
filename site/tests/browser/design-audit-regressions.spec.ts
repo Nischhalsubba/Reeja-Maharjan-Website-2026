@@ -139,79 +139,64 @@ test('Slate homepage keeps real professional pathways and published article link
  await expect(page.locator('.desktop-nav').getByRole('link',{name:'Hire Reeja'})).toBeVisible();
 });
 
-test('contact page submits through the provider POST flow and returns with success feedback', async ({ page }) => {
-  const providerEndpoint = 'https://formsubmit.co/maharjanreeja88@gmail.com';
-  const successUrl = `${origin}/contact/?sent=1#professional-contact-form`;
-
-  await page.route(providerEndpoint, async (route) => {
+test('contact form confirms JSON delivery inline without leaving the website', async ({ page }) => {
+  const endpoint = 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com';
+  let requests = 0;
+  await page.route(endpoint, async (route) => {
+    requests++;
     const request = route.request();
     expect(request.method()).toBe('POST');
-
-    const postData = request.postData() ?? '';
-    const payload = new URLSearchParams(postData);
-    expect(payload.get('name')).toBe('Reeja Recruiter');
-    expect(payload.get('email')).toBe('recruiter@example.com');
-    expect(payload.get('organization')).toBe('Example Health Research');
-    expect(payload.get('role_type')).toBe('Research role');
-    expect(payload.get('location')).toBe('Kathmandu, Nepal');
-    expect(payload.get('message')).toContain('Maternal health research opportunity');
-    expect(payload.get('_next')).toBe('https://reejamaharjan.com.np/contact/?sent=1#professional-contact-form');
-    expect(payload.get('_url')).toBe('https://reejamaharjan.com.np/contact/');
-    expect(payload.has('_captcha')).toBe(false);
-
-    await route.fulfill({
-      status: 303,
-      headers: { location: successUrl },
-      body: ''
-    });
+    const payload = request.postDataJSON();
+    expect(payload.name).toBe('Reeja Recruiter');
+    expect(payload.email).toBe('recruiter@example.com');
+    expect(payload.organization).toBe('Example Health Research');
+    expect(payload.role_type).toBe('Research role');
+    expect(payload.location).toBe('Kathmandu, Nepal');
+    expect(payload.message).toContain('Maternal health research opportunity');
+    expect(payload._captcha).toBe('false');
+    expect(payload._url).toBe('https://reejamaharjan.com.np/contact/');
+    expect(payload._next).toBeUndefined();
+    await route.fulfill({ status: 200, contentType: 'application/json', headers: {
+      'access-control-allow-origin': '*'
+    }, body: JSON.stringify({success:'true',message:'Email sent'}) });
   });
 
-  await page.goto(`${origin}/contact/`, { waitUntil: 'networkidle' });
-
-  const form = page.getByRole('form', { name: /Send a message to Reeja/i });
-  await expect(form).toBeVisible();
-  await expect(form).toHaveAttribute('method', 'POST');
-  await expect(form).toHaveAttribute('action', providerEndpoint);
-
-  const honeypot = page.locator('.form-honeypot');
-  await expect(honeypot).toHaveCount(1);
-  await expect(honeypot).toHaveAttribute('aria-hidden', 'true');
-  await expect(honeypot).toHaveAttribute('tabindex', '-1');
-  const honeypotState = await honeypot.evaluate((element) => {
-    const style = getComputedStyle(element);
-    const rect = element.getBoundingClientRect();
-    return {
-      opacity: style.opacity,
-      position: style.position,
-      width: rect.width,
-      height: rect.height,
-      pointerEvents: style.pointerEvents,
-      clipPath: style.clipPath
-    };
-  });
-  expect(honeypotState.opacity).toBe('0');
-  expect(honeypotState.position).toBe('absolute');
-  expect(honeypotState.width).toBeLessThanOrEqual(1);
-  expect(honeypotState.height).toBeLessThanOrEqual(1);
-  expect(honeypotState.pointerEvents).toBe('none');
-  expect(honeypotState.clipPath).not.toBe('none');
-
+  await page.goto(origin + '/contact/', {waitUntil:'domcontentloaded'});
+  const form = page.getByRole('form', {name:/Send a message to Reeja/i});
+  await expect(form).toHaveAttribute('method','POST');
+  await expect(form).toHaveAttribute('action','https://formsubmit.co/maharjanreeja88@gmail.com');
+  await expect(page.locator('input[name="_captcha"]')).toHaveValue('false');
+  const honey = page.locator('.form-honeypot');
+  await expect(honey).toHaveAttribute('aria-hidden','true');
+  await expect(honey).toHaveAttribute('tabindex','-1');
   await page.getByLabel('Your name').fill('Reeja Recruiter');
   await page.getByLabel('Your email').fill('recruiter@example.com');
   await page.getByLabel('Organisation / hospital').fill('Example Health Research');
   await page.getByLabel('Role / opportunity').fill('Research role');
   await page.getByLabel('Location').fill('Kathmandu, Nepal');
-  await page.getByRole('textbox', { name: 'Message', exact: true }).fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
+  await page.getByRole('textbox',{name:'Message',exact:true}).fill('Maternal health research opportunity with participant follow-up and care coordination responsibilities.');
+  await page.getByRole('button',{name:'Send to Reeja'}).click();
+  await expect(page.locator('[data-form-success]')).toBeVisible();
+  await expect(page.getByRole('button',{name:'Send to Reeja'})).toBeEnabled();
+  expect(new URL(page.url()).pathname).toBe('/contact/');
+  expect(requests).toBe(1);
+});
 
-  const submit = page.getByRole('button', { name: 'Send to Reeja' });
-  await Promise.all([
-    page.waitForURL((url) => url.pathname === '/contact/' && url.hash === '#professional-contact-form'),
-    submit.click()
-  ]);
-
-  const success = page.locator('[data-form-success]');
-  await expect(success.getByText('Message submitted for delivery to Reeja.')).toBeVisible();
-  await expect(submit).toBeEnabled();
+test('contact form retains input when provider rejects AJAX and never claims delivery', async ({page}) => {
+  await page.route('https://formsubmit.co/ajax/*',route=>route.fulfill({
+    status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},
+    body:JSON.stringify({success:'false',message:'Provider requires activation'})
+  }));
+  await page.goto(origin+'/contact/',{waitUntil:'domcontentloaded'});
+  await page.getByLabel('Your name').fill('Reeja Recruiter');
+  await page.getByLabel('Your email').fill('recruiter@example.com');
+  await page.getByRole('textbox',{name:'Message',exact:true}).fill('A longer professional message about a clinical research opportunity with our hospital.');
+  await page.getByRole('button',{name:'Send to Reeja'}).click();
+  await expect(page.locator('[data-form-error]')).toBeVisible();
+  await expect(page.locator('[data-form-success]')).toBeHidden();
+  await expect(page.getByLabel('Your email')).toHaveValue('recruiter@example.com');
+  await expect(page.locator('[data-form-error] a')).toHaveAttribute('href',/^mailto:/);
+  expect(new URL(page.url()).pathname).toBe('/contact/');
 });
 
 test('contact form keeps invalid users at the field with clear feedback', async ({ page }) => {
