@@ -56,7 +56,7 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
                 <h3><a href={`/blog/${featuredPost.slug}/`}>{featuredPost.title}</a></h3>
                 <p>{featuredPost.excerpt}</p>
                 <div class="blog-index__lead-bottom">
-                  <p class="blog-card__meta"><span>Updated {formatDate(featuredPost.updatedAt)}</span><span>{featuredPost.readMinutes} min read</span></p>
+                  <p class="blog-card__meta"><span>Updated <time datetime={featuredPost.updatedAt}>{formatDate(featuredPost.updatedAt)}</time></span><span>{featuredPost.readMinutes} min read</span></p>
                   <a class="blog-index__read-link" href={`/blog/${featuredPost.slug}/`}>Read the article <span aria-hidden="true">↗</span></a>
                 </div>
               </div>

@@ -70,7 +70,7 @@ const formatDate = (value: string) => new Date(value).toLocaleDateString('en-US'
                   <p>{post.excerpt}</p>
                 </div>
                 <p class="blog-card__meta">
-                  <span>Updated {formatDate(post.updatedAt)}</span>
+                  <span>Updated <time datetime={post.updatedAt}>{formatDate(post.updatedAt)}</time></span>
                   <span>{post.readMinutes} min read</span>
                 </p>
               </article>

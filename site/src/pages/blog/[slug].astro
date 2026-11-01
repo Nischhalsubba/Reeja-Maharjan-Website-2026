@@ -53,7 +53,10 @@ const articleSchema = {
     sameAs: [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean)
   },
   publisher: { '@id': 'https://reejamaharjan.com.np/#person' },
-  keywords: [post.primaryKeyword, ...post.supportingKeywords]
+  keywords: [post.primaryKeyword, ...post.supportingKeywords],
+  articleSection: post.tags[0] ?? 'Nursing',
+  citation: post.sources.map((source) => source.href),
+  isPartOf: { '@id': 'https://reejamaharjan.com.np/#website' }
 };
 
 const breadcrumbSchema = {
@@ -68,7 +71,7 @@ const breadcrumbSchema = {
 import BlogPhoto from '../../components/BlogPhoto.astro';
 ---
 
-<BaseLayout title={`${post.title} | Reeja Maharjan`} description={post.metaDescription} image={articleImagePath}>
+<BaseLayout title={`${post.title} | Reeja Maharjan`} description={post.metaDescription} image={articleImagePath} publishedAt={post.publishedAt} modifiedAt={post.updatedAt}>
   <div class="site-page blog-article-page">
     <article class="site-article blog-article">
       <header class="blog-article__header">
@@ -82,8 +85,8 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
 
           <dl class="blog-article__meta-panel">
             <div><dt>Author</dt><dd>Reeja Maharjan, B.Sc. Nursing</dd></div>
-            <div><dt>Published</dt><dd>{post.publishedAt}</dd></div>
-            <div><dt>Updated</dt><dd>{post.updatedAt}</dd></div>
+            <div><dt>Published</dt><dd><time datetime={post.publishedAt}>{post.publishedAt}</time></dd></div>
+            <div><dt>Updated</dt><dd><time datetime={post.updatedAt}>{post.updatedAt}</time></dd></div>
             <div><dt>Reading time</dt><dd>{post.readMinutes} min read</dd></div>
             <div><dt>Primary topic</dt><dd>{post.primaryKeyword}</dd></div>
           </dl>

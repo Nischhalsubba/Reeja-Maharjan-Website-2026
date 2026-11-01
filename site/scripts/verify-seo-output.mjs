@@ -51,6 +51,10 @@ for(const file of files){
  const robots=attr(byAttr(html,'meta','name','robots'),'content').toLowerCase();
  const canonical=attr(byAttr(html,'link','rel','canonical'),'href');
  const social=attr(byAttr(html,'meta','property','og:image'),'content');
+ const socialWidth=attr(byAttr(html,'meta','property','og:image:width'),'content');
+ const socialHeight=attr(byAttr(html,'meta','property','og:image:height'),'content');
+ const twitterAlt=attr(byAttr(html,'meta','name','twitter:image:alt'),'content');
+ const isArticle=urlPath.startsWith('/blog/')&&!urlPath.startsWith('/blog/topics/')&&urlPath!=='/blog/';
  const headings=[...html.matchAll(/<h1\b[^>]*>/gi)].length;
  const schema=[];
  for(const match of html.matchAll(/<script\b[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi)){
@@ -65,11 +69,21 @@ for(const file of files){
  if(shouldIndex&&robots.includes('noindex'))errors.push(urlPath+': unexpected noindex');
  if(!shouldIndex&&!robots.includes('noindex'))errors.push(urlPath+': internal page missing noindex');
  if(shouldIndex&&!social)errors.push(urlPath+': no OG image');
+ if(shouldIndex&&(socialWidth!=='1200'||socialHeight!=='630'||!twitterAlt))errors.push(urlPath+': missing social image dimensions or accessible alt');
+ if(isArticle){
+  const type=attr(byAttr(html,'meta','property','og:type'),'content');
+  const pub=attr(byAttr(html,'meta','property','article:published_time'),'content');
+  const mod=attr(byAttr(html,'meta','property','article:modified_time'),'content');
+  if(type!=='article')errors.push(urlPath+': article lacks OG article type');
+  if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(pub)||!/^\\d{4}-\\d{2}-\\d{2}$/.test(mod))errors.push(urlPath+': missing article published/modified date');
+  if(pub&&mod&&mod<pub)errors.push(urlPath+': updated date precedes publication date');
+ }
  if(shouldIndex&&!schema.length)errors.push(urlPath+': no structured data');
  if(shouldIndex&&title){
   if(titleSeen.has(title))errors.push(urlPath+': duplicate title with '+titleSeen.get(title));
   titleSeen.set(title,urlPath);
  }
+ if(urlPath.startsWith('/blog/topics/')&&attr(byAttr(html,'meta','property','og:type'),'content')==='article')errors.push(urlPath+': topic archive incorrectly declares itself as article');
  const imageTags=tags(html,'img');
  for(const img of imageTags){
   if(!/\balt\s*=/.test(img))errors.push(urlPath+': img missing alt attribute');
