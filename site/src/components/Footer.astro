@@ -2,6 +2,7 @@
 import type { ProfileContent } from '../content/profile';
 import { siteCopy } from '../content/site-copy';
 import BrandIcon from './BrandIcon.astro';
+import ReejaBrandMark from './ReejaBrandMark.astro';
 
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
@@ -24,7 +25,7 @@ const year = new Date().getFullYear();
 
   <div class="container care-footer__main">
     <div class="care-footer__identity">
-      <a class="care-footer__wordmark" href="/" aria-label="Reeja Maharjan — homepage">reeja<span aria-hidden="true">.</span></a>
+      <a class="care-footer__wordmark" href="/" aria-label="Reeja Maharjan — homepage"><ReejaBrandMark /></a>
       <p>Registered nurse &amp; maternal-health research</p>
       <span class="care-footer__location">{profile.contact.location}</span>
     </div>

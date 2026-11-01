@@ -7,6 +7,9 @@ const photo = getBlogImage(slug);
 <figure class:list={['blog-photo', `blog-photo--${variant}`, variant==='hero' && 'cip-photo-band', variant==='hero' && kind && `cip-photo-band--${kind}`]}>
   <img src={photo.src} srcset={getBlogImageSrcSet(photo)} sizes={variant==='hero' ? '(max-width: 900px) 100vw, 1180px' : '(max-width: 700px) 100vw, (max-width: 1200px) 50vw, 700px'} alt={photo.alt} loading={variant==='hero' ? 'eager' : 'lazy'} fetchpriority={variant==='hero' ? 'high' : 'auto'} decoding="async" width="1400" height="900" />
   <figcaption class:list={['blog-photo__credit', variant==='hero' && 'cip-photo-band__credit']}>
-    Illustrative photo · <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer">{photo.photographer} / Unsplash</a>
+    <details class="blog-photo__credit-disclosure">
+      <summary aria-label="Show photo credit">Photo credit</summary>
+      <span class="blog-photo__credit-details">Illustrative photo · <a href={photo.sourceUrl} target="_blank" rel="noopener noreferrer">{photo.photographer} / Unsplash</a></span>
+    </details>
   </figcaption>
 </figure>

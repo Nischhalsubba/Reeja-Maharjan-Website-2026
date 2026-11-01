@@ -931,3 +931,237 @@ body.care-personal-site main .blog-article__body > section > .site-eyebrow { mar
     overflow: visible;
   }
 }
+
+/* POLISH / 2026-11-01 — source-led component corrections.
+   Loaded last, scoped to existing components, respects reduced motion. */
+
+/* Shared mark in header and footer: exactly the same SVG and wordmark markup. */
+body.care-personal-site .site-footer--care .care-footer__wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: max-content;
+  max-width: 100%;
+  color: #17191A;
+  text-decoration: none;
+  letter-spacing: normal;
+}
+body.care-personal-site .site-footer--care .care-footer__wordmark .brand__symbol {
+  display: grid;
+  place-items: center;
+  width: 37px;
+  height: 37px;
+  flex: none;
+  border: 1px solid #59615D;
+  border-radius: 50%;
+  color: #17191A;
+}
+body.care-personal-site .site-footer--care .care-footer__wordmark .brand__symbol svg {
+  display: block;
+}
+body.care-personal-site .site-footer--care .care-footer__wordmark .brand__text strong,
+body.care-personal-site .site-footer--care .care-footer__wordmark .brand__text strong span {
+  color: #17191A;
+  font: 500 1.75rem/1 Georgia, "Times New Roman", serif;
+  letter-spacing: -.045em;
+}
+body.care-personal-site .site-footer--care .care-footer__wordmark:hover .brand__text strong {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Editorial key-points and clinical safety notes need the same inset on
+   all four sides; old section padding removed the left/right whitespace. */
+body.care-personal-site main .blog-article__body > section.blog-note-strong {
+  padding: 22px 26px 24px;
+  border: 1px solid #D9DBD7;
+  border-radius: 0;
+  background: #F1F1EE;
+}
+body.care-personal-site main .blog-article__body > section.blog-note-strong > .site-eyebrow {
+  margin: 0 0 12px;
+  color: #313936;
+}
+body.care-personal-site main .blog-article__body > section.blog-note-strong :is(ul,ol) {
+  margin: 0;
+  padding-left: 22px;
+}
+body.care-personal-site main .blog-article__body > section.blog-note-strong li {
+  padding-left: 2px;
+  margin: 0 0 8px;
+}
+body.care-personal-site main .blog-article__body > section.blog-note-strong li:last-child {
+  margin-bottom: 0;
+}
+body.care-personal-site main .blog-article__body > section.blog-note-strong > p:last-child {
+  margin-bottom: 0;
+}
+
+/* One restrained card motion across index and related-card variants.
+   Keep content readable and focus affordance equally clear via keyboard. */
+body.care-personal-site main .blog-card {
+  transition: transform 260ms cubic-bezier(.22,1,.36,1), box-shadow 260ms ease, border-color 220ms ease, background-color 220ms ease;
+}
+body.care-personal-site main .blog-card .blog-photo img {
+  transition: transform 480ms cubic-bezier(.22,1,.36,1);
+}
+@media (hover: hover) and (pointer: fine) {
+  body.care-personal-site main .blog-related-grid > .blog-card:hover,
+  body.care-personal-site main .blog-grid > .blog-card:hover,
+  body.care-personal-site main .blog-index__featured .blog-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 26px rgba(23,25,26,.09);
+    background: #FFFFFF;
+  }
+  body.care-personal-site main .blog-card:hover .blog-photo img {
+    transform: scale(1.035);
+  }
+}
+body.care-personal-site main .blog-card:focus-within {
+  border-color: #707A74;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 1px #707A74;
+}
+body.care-personal-site main .blog-card:focus-within .blog-photo img {
+  transform: scale(1.025);
+}
+
+/* A compact accessible photo-credit disclosure replaces full-width white
+   attribution over imagery. The linked credit stays available on demand. */
+body.care-personal-site main .blog-photo .blog-photo__credit {
+  position: absolute;
+  inset: auto 10px 10px auto;
+  display: block;
+  padding: 0;
+  max-width: calc(100% - 20px);
+  width: max-content;
+  background: none;
+  color: #FFFFFF;
+  font-size: .6875rem;
+  text-align: right;
+  overflow: visible;
+  z-index: 2;
+}
+body.care-personal-site main .blog-photo__credit-disclosure {
+  position: relative;
+  display: block;
+}
+body.care-personal-site main .blog-photo__credit-disclosure summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  padding: 6px 11px;
+  background: rgba(23,25,26,.88);
+  color: #FFFFFF;
+  font: 600 .6875rem/1.4 "Public Sans", system-ui, sans-serif;
+  cursor: pointer;
+  list-style: none;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 2px;
+}
+body.care-personal-site main .blog-photo__credit-disclosure summary::-webkit-details-marker { display: none; }
+body.care-personal-site main .blog-photo__credit-disclosure summary::marker { content: ""; }
+body.care-personal-site main .blog-photo__credit-disclosure summary:hover,
+body.care-personal-site main .blog-photo__credit-disclosure[open] summary { background: #17191A; }
+body.care-personal-site main .blog-photo__credit-disclosure summary:focus-visible {
+  outline: 3px solid #FFFFFF;
+  outline-offset: 3px;
+}
+body.care-personal-site main .blog-photo__credit-details {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  right: 0;
+  display: block;
+  width: max-content;
+  max-width: min(260px, 76vw);
+  padding: 11px 13px;
+  background: #17191A;
+  color: #FFFFFF;
+  text-align: left;
+  font: 500 .75rem/1.5 "Public Sans", system-ui, sans-serif;
+  box-shadow: 0 6px 16px rgba(23,25,26,.22);
+}
+body.care-personal-site main .blog-photo__credit-details a {
+  color: #FFFFFF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Two-column related layout: when odd, make the last story useful at full
+   reading width instead of leaving a blank cell beside it. */
+body.care-personal-site main .blog-related-grid {
+  gap: 24px;
+  align-items: stretch;
+}
+body.care-personal-site main .blog-related-grid > .blog-card {
+  min-width: 0;
+  border: 1px solid #D9DBD7;
+}
+body.care-personal-site main .blog-related-grid > .blog-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: minmax(0, .86fr) minmax(0, 1.14fr);
+}
+body.care-personal-site main .blog-related-grid > .blog-card:last-child:nth-child(odd) .blog-photo {
+  height: 100%;
+  min-height: 208px;
+  border-radius: 0;
+}
+body.care-personal-site main .blog-related-grid .blog-card__content {
+  padding: 24px;
+  gap: 14px;
+}
+body.care-personal-site main .blog-related-grid .blog-card__content > a {
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+/* Home experience CTA becomes an actual action-button, separated cleanly from
+   the last employment row. Shared arrow-motion remains inside the icon slot. */
+body.care-personal-site main .rm-experience__body .rm-experience__cv-link {
+  margin-top: 16px;
+  padding: 12px 20px;
+  gap: 12px;
+  max-width: 100%;
+  min-height: 48px;
+  white-space: normal;
+  text-align: left;
+  text-decoration: none;
+  font-size: .875rem;
+}
+body.care-personal-site main .rm-experience__body .rm-experience__cv-link:hover {
+  text-decoration: none;
+}
+
+/* No 3px form top band or floating numbered tag. Form has equal-width
+   framing and belongs to the same neutral editorial hierarchy. */
+body.care-personal-site main .professional-contact-form {
+  border: 1px solid #D9DBD7;
+  border-top-width: 1px;
+  border-radius: 0;
+}
+body.care-personal-site main .professional-contact-form::before {
+  content: none;
+  display: none;
+}
+
+@media (max-width: 780px) {
+  body.care-personal-site main .blog-related-grid { grid-template-columns: minmax(0,1fr); }
+  body.care-personal-site main .blog-related-grid > .blog-card:last-child:nth-child(odd) {
+    grid-column: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  body.care-personal-site main .blog-related-grid > .blog-card:last-child:nth-child(odd) .blog-photo {
+    height: 210px;
+    min-height: 0;
+  }
+}
+@media (max-width: 600px) {
+  body.care-personal-site main .blog-article__body > section.blog-note-strong { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body.care-personal-site main .blog-card,
+  body.care-personal-site main .blog-card .blog-photo img { transition: none !important; transform: none !important; }
+}
