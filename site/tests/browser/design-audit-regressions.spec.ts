@@ -145,6 +145,10 @@ test('contact form confirms JSON delivery inline without leaving the website', a
   await page.route(endpoint, async (route) => {
     requests++;
     const request = route.request();
+    if (request.method() === 'OPTIONS') {
+      await route.fulfill({status:204,headers:{'access-control-allow-origin':'*','access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, accept'}});
+      return;
+    }
     expect(request.method()).toBe('POST');
     const payload = request.postDataJSON();
     expect(payload.name).toBe('Reeja Recruiter');
@@ -183,7 +187,9 @@ test('contact form confirms JSON delivery inline without leaving the website', a
 });
 
 test('contact form retains input when provider rejects AJAX and never claims delivery', async ({page}) => {
-  await page.route('https://formsubmit.co/ajax/*',route=>route.fulfill({
+  await page.route('https://formsubmit.co/ajax/*',route=>route.request().method() === 'OPTIONS'
+    ? route.fulfill({status:204,headers:{'access-control-allow-origin':'*','access-control-allow-methods':'POST, OPTIONS','access-control-allow-headers':'content-type, accept'}})
+    : route.fulfill({
     status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},
     body:JSON.stringify({success:'false',message:'Provider requires activation'})
   }));

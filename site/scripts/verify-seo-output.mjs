@@ -75,7 +75,7 @@ for(const file of files){
   const pub=attr(byAttr(html,'meta','property','article:published_time'),'content');
   const mod=attr(byAttr(html,'meta','property','article:modified_time'),'content');
   if(type!=='article')errors.push(urlPath+': article lacks OG article type');
-  if(!/^\\d{4}-\\d{2}-\\d{2}$/.test(pub)||!/^\\d{4}-\\d{2}-\\d{2}$/.test(mod))errors.push(urlPath+': missing article published/modified date');
+  if(!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(pub)||!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(mod))errors.push(urlPath+': missing article published/modified date');
   if(pub&&mod&&mod<pub)errors.push(urlPath+': updated date precedes publication date');
  }
  if(shouldIndex&&!schema.length)errors.push(urlPath+': no structured data');
