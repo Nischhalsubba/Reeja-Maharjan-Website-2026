@@ -54,6 +54,8 @@ jobs:
         run: npm run verify:a11y
       - name: Verify source and style ownership
         run: npm run verify:source
+      - name: Verify Neutral Editorial design system
+        run: npm run verify:design-system
       - name: Type check
         id: typecheck
         shell: bash

@@ -1,3 +1,5 @@
+> ARCHIVED (v1). This is not the current brand. Use [Neutral Editorial v11](../reeja-v11/README.md) and its CSS token contract for current work. This v1 export remains as historical evidence only.
+
 # Reeja Design System · v1.0.0
 
 A **brand-owned**, lightweight design system for Reeja Maharjan's Astro portfolio, nursing experience, maternal-health research, articles and professional-contact journeys.

@@ -1,4 +1,4 @@
-> **Historical reference (archived).** This v4.3 document predates the active Slate & Seafoam brand and contains obsolete cobalt and coral tokens. Do not use it as a source of truth for new work. The current implementation is [Reeja Design System v1.0](../reeja-v1/README.md), the token contract is [tokens.json](../reeja-v1/tokens.json), and the living route is `/design-system/`.\n\n---\n\n# Care is Personal — design system v4.3
+> **Historical reference (archived).** This v4.3 document predates the active Slate & Seafoam brand and contains obsolete cobalt and coral tokens. Do not use it as a source of truth for new work. The current implementation is [Reeja Neutral Editorial v11](../reeja-v11/README.md) with the active CSS contract in `src/styles/design-system.css` and the final sitewide stylesheet. The v1 Figma export is archived.\n\n---\n\n# Care is Personal — design system v4.3
 
 Applies to all public pages on reejamaharjan.com.np. This is a **active source of truth**, replacing the retired Field Journal and Care Ledger CSS. No previous theme stylesheets are imported.
 
