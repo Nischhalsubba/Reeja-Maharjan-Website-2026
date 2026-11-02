@@ -10,7 +10,17 @@ const fail = (status, message) => Response.json(
   { success: false, message },
   { status, headers: { 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' } }
 );
-const clean = (value, max = 250) => typeof value === 'string' ? value.trim().slice(0, max) : '';
+const cleanLine = (value) => typeof value === 'string'
+  ? value.trim().replace(/[\u0000-\u001f\u007f]/g, ' ')
+  : '';
+const cleanMessage = (value) => typeof value === 'string'
+  ? value.trim().replace(/\r\n?/g, '\n').replace(/[\u0000-\u0009\u000b-\u001f\u007f]/g, ' ')
+  : '';
+const tooLong = (payload, key, limit, required = false) => {
+  const value = payload[key];
+  return (required && typeof value !== 'string') ||
+    (value !== undefined && (typeof value !== 'string' || value.trim().length > limit));
+};
 const validEmail = (email) => email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 export async function onRequestPost({ request, env }) {
@@ -37,17 +47,27 @@ export async function onRequestPost({ request, env }) {
     return fail(400, 'Invalid message.');
   }
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return fail(400, 'Invalid message.');
-  if (clean(payload._honey)) return fail(400, 'Unable to send this message.');
-  const name = clean(payload.name, 120);
-  const email = clean(payload.email, 254);
-  const message = clean(payload.message, messageLimit);
-  const organization = clean(payload.organization, 160);
-  const role = clean(payload.role_type, 160);
-  const location = clean(payload.location, 160);
+  if (cleanLine(payload._honey)) return fail(400, 'Unable to send this message.');
+  // Reject excessive input: never silently truncate a recruiter's inquiry or sender details.
+  if (tooLong(payload, 'name', 120, true) ||
+      tooLong(payload, 'email', 254, true) ||
+      tooLong(payload, 'message', messageLimit, true) ||
+      tooLong(payload, 'organization', 160) ||
+      tooLong(payload, 'role_type', 160) ||
+      tooLong(payload, 'location', 160)) {
+    return fail(422, 'A field is too long or has an invalid type. Please shorten it.');
+  }
+  const name = cleanLine(payload.name);
+  const email = cleanLine(payload.email);
+  const message = cleanMessage(payload.message);
+  const organization = cleanLine(payload.organization);
+  const role = cleanLine(payload.role_type);
+  const location = cleanLine(payload.location);
   if (name.length < 2 || !validEmail(email) || message.length < 20 || message.length > messageLimit) {
     return fail(422, 'Please check your name, email and message length.');
   }
-  const token = clean(payload['cf-turnstile-response'], 2049);
+  const token = typeof payload['cf-turnstile-response'] === 'string'
+    ? payload['cf-turnstile-response'].trim() : '';
   if (!token || token.length > 2048) return fail(422, 'Please complete the verification and retry.');
   let verified;
   try {

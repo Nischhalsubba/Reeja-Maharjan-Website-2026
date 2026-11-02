@@ -124,6 +124,52 @@ test('success follows verified Turnstile and actual email-provider acceptance', 
   });
 });
 
+test('reject oversized message without truncating or contacting providers', async () => {
+  const { mock, calls } = setupFetch();
+  await withFetch(mock, async () => {
+    const res = await onRequestPost({ request: req({ ...payload, message: 'X'.repeat(5001) }), env });
+    assert.equal(res.status, 422);
+    assert.equal(calls.length, 0);
+  });
+});
+
+test('reject oversized optional fields and invalid types before verification', async () => {
+  const cases = [
+    { ...payload, organization: 'A'.repeat(161) },
+    { ...payload, location: { city: 'Kathmandu' } },
+    { ...payload, name: 'A'.repeat(121) },
+    { ...payload, 'cf-turnstile-response': 'T'.repeat(2049) }
+  ];
+  for (const candidate of cases) {
+    const { mock, calls } = setupFetch();
+    await withFetch(mock, async () => {
+      const res = await onRequestPost({ request: req(candidate), env });
+      assert.equal(res.status, 422);
+      assert.equal(calls.length, 0);
+    });
+  }
+});
+
+test('strip header-style line breaks from contact metadata without changing message paragraph breaks', async () => {
+  const { mock, calls } = setupFetch();
+  await withFetch(mock, async () => {
+    const res = await onRequestPost({
+      request: req({
+        ...payload,
+        name: 'Example Recruiter\nInjected: Test',
+        organization: 'Example Health\r\nExtra: Hidden',
+        message: 'A professional inquiry about the opportunity.\nSecond paragraph with details.'
+      }),
+      env
+    });
+    assert.equal(res.status, 200);
+    const sent = JSON.parse(calls[1].options.body);
+    assert.match(sent.text, /Name: Example Recruiter Injected: Test/);
+    assert.match(sent.text, /Organization: Example Health  Extra: Hidden/);
+    assert.match(sent.text, /details/);
+  });
+});
+
 test('GET endpoint never sends or exposes private configuration', async () => {
   const response = onRequestGet();
   assert.equal(response.status, 405);
