@@ -1,0 +1,67 @@
+name: Dependency Security
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/package.json'
+      - 'site/package-lock.json'
+      - 'site/scripts/summarize-npm-audit.mjs'
+      - '.github/workflows/dependency-security.yml'
+  pull_request:
+    paths:
+      - 'site/package.json'
+      - 'site/package-lock.json'
+      - 'site/scripts/summarize-npm-audit.mjs'
+      - '.github/workflows/dependency-security.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '22 3 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dependency-security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: site/package-lock.json
+      - name: Install locked dependencies
+        run: npm ci --no-fund --no-audit
+      - name: Collect npm advisories
+        shell: bash
+        run: |
+          set +e
+          npm audit --json > npm-audit.json
+          code=$?
+          set -e
+          echo "npm audit exit $code; parser will distinguish advisories from fetch errors."
+          test -s npm-audit.json
+      - name: Summarize advisories and gate high or critical
+        run: node scripts/summarize-npm-audit.mjs npm-audit.json
+      - name: Upload security evidence
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dependency-security-${{ github.sha }}
+          path: |
+            site/npm-audit.json
+            site/npm-security-summary.json
+            site/npm-security-summary.md
+          if-no-files-found: warn
+          retention-days: 30
