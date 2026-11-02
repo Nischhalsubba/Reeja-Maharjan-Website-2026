@@ -80,6 +80,8 @@ jobs:
           path: |
             site/dist/seo-audit.json
             site/dist/asset-integrity.json
+            site/reports/article-integrity.json
+            site/reports/article-integrity.md
           if-no-files-found: error
           retention-days: 14
       - name: Publish build check status
