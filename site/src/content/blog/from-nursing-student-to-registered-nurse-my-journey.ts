@@ -8,7 +8,7 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
   metaDescription:
     'Read Reeja Maharjan’s nursing journey from B.Sc. Nursing and NNC registration to hospital roles at Sindhuli, MMTH and TUTH and maternal-health research with IISH.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-10-31',
+  updatedAt: '2026-11-02',
   readMinutes: 8,
   tags: ['Reeja Maharjan', 'nursing career', 'registered nurse Nepal', 'hospital nursing'],
   primaryKeyword: 'Reeja Maharjan nursing journey',
@@ -120,7 +120,7 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
     },
     {
       label: 'Nepal Nursing Council official website',
-      href: 'https://www.nnc.org.np/'
+      href: 'https://nnc.org.np/'
     }
   ],
   relatedSlugs: [
