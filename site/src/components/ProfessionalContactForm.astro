@@ -2,13 +2,15 @@
 import { professionalFacts } from '../content/professional-facts';
 
 const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=${encodeURIComponent(`Professional opportunity for ${professionalFacts.name}`)}`;
+const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? '';
 ---
 
 <form
   class="professional-contact-form"
   id="professional-contact-form"
   method="POST"
-  action={professionalFacts.contactFormEndpoint}
+  action={turnstileSitekey ? '/api/contact' : professionalFacts.contactFormEndpoint}
+  data-secure={turnstileSitekey ? 'true' : 'false'}
   data-contact-form
   aria-labelledby="contact-form-title"
 >
@@ -64,13 +66,24 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
 
   <input type="hidden" name="_subject" value="Professional inquiry for Reeja Maharjan from reejamaharjan.com.np" />
   <input type="hidden" name="_template" value="table" />
-  <input type="hidden" name="_captcha" value="false" />
+  {!turnstileSitekey && <input type="hidden" name="_captcha" value="false" />}
   <input type="hidden" name="_url" value="https://reejamaharjan.com.np/contact/" />
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
+  {turnstileSitekey && (
+    <div class="professional-contact-form__full" data-contact-verification>
+      <p class="form-field__help">Spam protection</p>
+      <div class="cf-turnstile" data-sitekey={turnstileSitekey} data-action="professional_contact"></div>
+      <p class="form-field__help">Please complete verification before sending your message.</p>
+    </div>
+  )}
   <div class="professional-contact-form__privacy">
     <strong>Privacy</strong>
-    <p>This message is processed by <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>, an external delivery service. Messages are sent securely through its form API without leaving this page. Delivery is subject to its spam protections and service limits. Please do not share patient records, identity documents, license scans, or other sensitive information.</p>
+    {turnstileSitekey ? (
+      <p>This inquiry is checked by Cloudflare Turnstile and submitted to an email delivery provider. An accepted submission is not a guarantee of inbox receipt. Do not send patient records, identity documents, licence scans or sensitive health information.</p>
+    ) : (
+      <p>This message is processed by <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>, an external delivery service. Messages are sent through its form API without leaving this page. Delivery is subject to spam protections and service limits. Please do not share patient records, identity documents, licence scans or other sensitive information.</p>
+    )}
   </div>
 
   <div class="professional-contact-form__actions">
@@ -95,6 +108,8 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
   <noscript><p class="form-status">JavaScript is required to send this form without leaving the website. You can instead use <a href={directEmailHref}>Email Reeja</a>.</p></noscript>
 </form>
 
+{turnstileSitekey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+
 <script>
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
 
@@ -106,6 +121,10 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
     const successStatus = form.querySelector<HTMLElement>('[data-form-success]');
     const errorStatus = form.querySelector<HTMLElement>('[data-form-error]');
     let submitting = false;
+    const secureMode = form.dataset.secure === 'true';
+    const resetChallenge = () => {
+      if (secureMode) (window as Window & { turnstile?: { reset: () => void } }).turnstile?.reset();
+    };
 
     const fieldMessage = (field: HTMLInputElement | HTMLTextAreaElement): string => {
       if (field.validity.valueMissing) return 'Please complete this field.';
@@ -186,7 +205,14 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
       // Retain the honeypot and never mistake its JSON string "false" for success.
       delete payload._next;
       const endpoint = new URL(form.action);
-      endpoint.pathname = '/ajax' + endpoint.pathname;
+      if (secureMode) {
+        if (!payload['cf-turnstile-response']) {
+          setStatus('error');
+          return;
+        }
+      } else {
+        endpoint.pathname = '/ajax' + endpoint.pathname;
+      }
       setSubmitting(true);
       setStatus('loading');
       const controller = new AbortController();
@@ -206,9 +232,11 @@ const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=$
         form.reset();
         validatedFields.forEach((field) => field.removeAttribute('aria-invalid'));
         setStatus('success');
+        resetChallenge();
       } catch {
         // Keep entered data for a retry or the direct-email fallback.
         setStatus('error');
+        resetChallenge();
       } finally {
         window.clearTimeout(timeout);
         setSubmitting(false);

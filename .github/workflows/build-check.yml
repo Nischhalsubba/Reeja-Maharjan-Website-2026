@@ -52,6 +52,8 @@ jobs:
         run: npm run verify:editorial
       - name: Verify accessibility contract
         run: npm run verify:a11y
+      - name: Test protected contact handler
+        run: npm run verify:contact-handler
       - name: Verify source and style ownership
         run: npm run verify:source
       - name: Verify Neutral Editorial design system
