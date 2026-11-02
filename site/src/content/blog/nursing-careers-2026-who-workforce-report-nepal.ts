@@ -6,7 +6,7 @@ export const nursingCareers2026WhoWorkforceReportNepal: BlogPost = {
   "excerpt": "What WHO’s 2025 nursing workforce findings mean for education, safe workplaces, professional growth and thinking clearly about nursing careers in Nepal.",
   "metaDescription": "Explore WHO’s 2025 nursing workforce report, nursing career development, workforce gaps and practical considerations for nurses in Nepal in 2026.",
   "publishedAt": "2026-10-17",
-  "updatedAt": "2026-10-17",
+  "updatedAt": "2026-11-02",
   "readMinutes": 8,
   "heroPhotoKind": "nepal",
   "tags": [
@@ -135,7 +135,7 @@ export const nursingCareers2026WhoWorkforceReportNepal: BlogPost = {
   "sources": [
     {
       "label": "WHO: State of the World’s Nursing 2025",
-      "href": "https://www.who.int/publications/b/78362"
+      "href": "https://www.who.int/publications/i/item/9789240110236"
     },
     {
       "label": "WHO: Nursing workforce grows, but inequities threaten global health goals (May 2025)",
