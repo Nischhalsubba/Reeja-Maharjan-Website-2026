@@ -156,9 +156,9 @@ test('strip header-style line breaks from contact metadata without changing mess
     const res = await onRequestPost({
       request: req({
         ...payload,
-        name: 'Example Recruiter\\nInjected: Test',
-        organization: 'Example Health\\r\\nExtra: Hidden',
-        message: 'A professional inquiry about the opportunity.\\nSecond paragraph with details.'
+        name: 'Example Recruiter\nInjected: Test',
+        organization: 'Example Health\r\nExtra: Hidden',
+        message: 'A professional inquiry about the opportunity.\nSecond paragraph with details.'
       }),
       env
     });
