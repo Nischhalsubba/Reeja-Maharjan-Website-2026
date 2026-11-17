@@ -50,12 +50,16 @@ flowchart TD
 
 ## Getting started
 
+The Astro portfolio application is maintained in [`site/`](./site), while the root `package.json` contains the Cloudflare Pages build wrapper. Use Node.js 22.x and npm 10 or 11:
+
 ```bash
 git clone https://github.com/Nischhalsubba/Reeja-Maharjan-Website-2026.git
-cd Reeja-Maharjan-Website-2026
+cd Reeja-Maharjan-Website-2026/site
+npm ci
+npm run dev
 ```
 
-Use the repository manifests and lockfiles to determine supported setup and development commands.
+From `site/`, run `npm run check`, `npm run lint`, or `npm run verify` for the full validation suite. A production `npm run build` is also available at repository root for Cloudflare Pages packaging. See the [site README](./site/README.md) for implementation and publishing guidance.
 
 ## Design & accessibility
 
