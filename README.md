@@ -96,3 +96,6 @@ For a local reproduction of Cloudflare's old root-directory setup, execute `npm 
 
 Before declaring success, verify a Cloudflare Pages deployment reports **Success**, the deployed site returns all required pages (including `/build.json`), and the production fingerprint matches the desired `main` commit. GitHub Build Check success alone does **not** establish that Cloudflare deployed the site. After build success, review [Cloudflare Pages deployments](https://dash.cloudflare.com/) and GitHub Actions Production Smoke. Historical failed deployments stay in Cloudflare's history and do not need to be retroactively rewritten.
 
+## Maintainer review checklist
+
+Before changing critical product behavior or public claims, use the [Professional claims review](docs/PROFESSIONAL_CLAIMS_REVIEW.md) to record evidence, verification and rollback expectations.
