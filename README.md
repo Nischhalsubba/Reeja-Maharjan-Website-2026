@@ -99,3 +99,7 @@ Before declaring success, verify a Cloudflare Pages deployment reports **Success
 ## Maintainer review checklist
 
 Before changing critical product behavior or public claims, use the [Professional claims review](docs/PROFESSIONAL_CLAIMS_REVIEW.md) to record evidence, verification and rollback expectations.
+
+## Owner review checklist
+
+Use [formalize professional claims, privacy and portfolio release review](./docs/PROFESSIONAL_CLAIMS_AND_PRIVACY_RELEASE.md) for accurate public content, release evidence, manual acceptance and rollback decisions.
