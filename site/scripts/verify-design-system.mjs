@@ -1,12 +1,12 @@
 /**
- * Validate CURRENT Cinematic Nursing v13 design contracts.
+ * Validate the unified Reeja Cinematic Nursing v14 design contracts.
  * Archived v1 Figma tokens are not current visual authority.
  */
 import { readFile } from 'node:fs/promises';
 const load=async p=>readFile(new URL('../'+p,import.meta.url),'utf8');
-const css=await load('src/styles/design-system.css');
+const css=await load('src/styles/reeja-cinematic.css');
 const layout=await load('src/layouts/BaseLayout.astro');
-const finalCss=await load('src/styles/cinematic-refinements.css');
+const finalCss=await load('src/styles/reeja-cinematic.css');
 const docs=await load('design-system/reeja-v13/README.md');
 const errors=[];
 function variable(key) {
@@ -28,9 +28,9 @@ for(const [key,expected] of Object.entries(canonical)){
 if(!variable('--ds-font-body').includes('Public Sans'))errors.push('Body font must prefer Public Sans');
 if(!variable('--ds-font-editorial').includes('Arial'))errors.push('Display font must prefer Arial');
 if(!docs.includes('#FAF8E9')||!docs.includes('#FFDF00')||!docs.includes('Cinematic Nursing'))errors.push('Canonical design documentation missing');
-if(layout.split("import '../styles/design-system.css';").length!==2)errors.push('DS stylesheet must be imported once');
-if(layout.indexOf("import '../styles/design-system.css';")>layout.indexOf("import '../styles/cinematic-refinements.css';"))errors.push('Final cinematic stylesheet must follow DS aliases');
-if(!finalCss.includes('reeja-cinematic'))errors.push('Final cinematic styles missing');
+if(layout.split("import '../styles/reeja-cinematic.css';").length!==2)errors.push('Canonical Reeja stylesheet must be imported exactly once');
+if(layout.includes("import '../styles/design-system.css';")||layout.includes("import '../styles/cinematic-refinements.css';"))errors.push('Legacy stylesheet imports remain in BaseLayout');
+if(!finalCss.includes('REEJA CINEMATIC NURSING'))errors.push('Canonical cinematic nursing styles missing');
 for(const p of ['clinical-research.astro','hire-reeja.astro','maternal-health.astro','nursing-practice.astro']){
  if(!(await load('src/pages/'+p)).includes('components/design-system/'))errors.push(p+': DS components not reused');
 }
@@ -47,5 +47,5 @@ for(const [fg,bg,label] of [
 ]){
  const ratio=contrast(fg,bg);if(!(ratio>=4.5))errors.push(label+' contrast '+ratio.toFixed(2)+' below AA');
 }
-if(errors.length){console.error('Cinematic Nursing v13 validation failed:\n'+errors.map(e=>'- '+e).join('\n'));process.exitCode=1;}
-else console.log('Cinematic Nursing v13 verified: '+Object.keys(canonical).length+' role tokens, shared typography, 4 consuming routes and AA contrast pairs.');
+if(errors.length){console.error('Cinematic Nursing v14 validation failed:\n'+errors.map(e=>'- '+e).join('\n'));process.exitCode=1;}
+else console.log('Cinematic Nursing v14 verified: '+Object.keys(canonical).length+' role tokens, shared typography, 4 consuming routes and AA contrast pairs.');
