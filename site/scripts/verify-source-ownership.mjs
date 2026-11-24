@@ -9,7 +9,8 @@ const exists = async (path) => { try { await access(new URL(path, root)); return
 const layout = await read('src/layouts/BaseLayout.astro');
 const canonical = await read('src/styles/reeja-cinematic.css');
 const styles = (await readdir(new URL('src/styles/', root))).filter((name) => name.endsWith('.css'));
-if (styles.length !== 1 || styles[0] !== 'reeja-cinematic.css') failures.push('Exactly one global stylesheet must remain: reeja-cinematic.css.');
+const extraStyles = styles.filter((name) => name !== 'reeja-cinematic.css');
+if (extraStyles.length) failures.push('Legacy stylesheet files remain: ' + extraStyles.join(', '));
 if (layout.split("import '../styles/reeja-cinematic.css';").length !== 2) failures.push('BaseLayout must import the canonical stylesheet exactly once.');
 if (/import ['"][^'"]+\.css['"]/.test(layout.replace("import '../styles/reeja-cinematic.css';", ''))) failures.push('Unexpected stylesheet import remains in BaseLayout.');
 if (layout.includes('styles/design-system.css') || layout.includes('styles/cinematic-refinements.css')) failures.push('Legacy stylesheet reference remains in BaseLayout.');
