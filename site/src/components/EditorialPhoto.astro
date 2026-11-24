@@ -1,32 +1,20 @@
 ---
-type PhotoKey = 'clinical' | 'research' | 'nepal' | 'writing' | 'portrait';
+import { getBlogImage } from '../content/blog/imagery';
+type PhotoKey = 'clinical' | 'research' | 'nepal' | 'writing' | 'portrait' | 'maternal';
 type Props = { kind: PhotoKey; label?: string; compact?: boolean };
 const {kind, label, compact = false} = Astro.props;
+const curated = (slug: string) => { const photo = getBlogImage(slug); return { src: photo.src, alt: photo.alt, photographer: photo.photographer, credit: photo.sourceUrl }; };
 const images: Record<PhotoKey, {src:string; alt:string; photographer:string; credit:string}> = {
-  clinical: {
-    src: 'https://images.unsplash.com/photo-1516841273335-e39b37888115?auto=format&fit=crop&w=1600&q=80',
-    alt: 'Healthcare professionals walking through a hospital hallway; illustrative image from Mexico',
-    photographer: 'Luis Melendez',
-    credit: 'https://unsplash.com/photos/group-of-doctors-walking-on-hospital-hallway-Pd4lRfKo16U'
-  },
-  research: {
-    src: 'https://images.unsplash.com/photo-1623658045230-605cb00c80d6?auto=format&fit=crop&w=1600&q=80',
-    alt: 'Illustrative photograph of a blood-pressure monitor being used; not an IISH study participant',
-    photographer: 'Mufid Majnun',
-    credit: 'https://unsplash.com/photos/a-person-with-a-blood-pressure-meter-on-a-table-J0benOYAPbw'
-  },
+  clinical: curated('mastering-nursing-documentation-sbar-handover'),
+  research: curated('future-of-nursing-in-nepal-telehealth-community-care-post-covid'),
+  maternal: curated('essential-maternal-newborn-care-guide-2026'),
   nepal: {
     src: 'https://images.unsplash.com/photo-1708970981023-b3f498ce17ce?auto=format&fit=crop&w=1600&q=80',
     alt: 'Landscape view over Kathmandu, Nepal, surrounded by hills',
     photographer: 'Michael Starkie',
     credit: 'https://unsplash.com/photos/a-view-of-a-city-with-mountains-in-the-background-j2ligTqDvNU'
   },
-  writing: {
-    src: 'https://images.unsplash.com/photo-1689023542311-36b129826c89?auto=format&fit=crop&w=1600&q=80',
-    alt: 'Close-up of an individual writing notes; illustrative image',
-    photographer: 'Fiona Murray-deGraaff',
-    credit: 'https://unsplash.com/photos/a-woman-sitting-at-a-desk-with-a-notebook-and-pen-PPRKVDy47TY'
-  },
+  writing: curated('clinical-research-nursing-nepal-guide'),
   portrait: {
     src: '/reeja-headshot.jpg',
     alt: 'Portrait of Reeja Maharjan',

@@ -60,7 +60,7 @@ export function initCinematicMotion(): void {
     heading.classList.add('reference-scan');
     const scan = document.createElement('span'); scan.className = 'reference-scan-bar'; scan.setAttribute('aria-hidden','true'); heading.append(scan);
     const timeline = gsap.timeline({ scrollTrigger: { trigger: heading, start: 'top 89%', once: true }});
-    timeline.fromTo(heading, { clipPath: 'inset(0 100% 0 0)' }, { clipPath: 'inset(0 0% 0 0)', duration: .68, ease: 'power3.inOut', clearProps: 'clipPath' }, 0);
+    timeline.fromTo(heading, { y: 8 }, { y: 0, duration: .68, ease: 'power3.out', clearProps: 'transform' }, 0);
     timeline.fromTo(scan, { left: '0%', opacity: 1 }, { left: '100%', opacity: 0, duration: .68, ease: 'power3.inOut' }, 0);
   });
   // Reveal the introduction word-by-word against the yellow chapter.
@@ -127,12 +127,12 @@ export function initCinematicMotion(): void {
 
   // Site-wide motion: inner-page reveals, staggered groups and restrained parallax.
   const revealTargets = gsap.utils.toArray<HTMLElement>(
-    '.inner-page .site-section__head > *, .inner-page .blog-card, .inner-page .blog-index__lead-card, .inner-page .blog-topic-panel, .inner-page .cv-experience__item, .inner-page .cv-credential, .reference-timeline > li, .inner-page .site-card'
+    '.inner-page .blog-card, .inner-page .blog-index__lead-card, .inner-page .blog-topic-panel, .inner-page .cv-experience__item, .inner-page .cv-credential, .reference-timeline > li, .inner-page .site-card'
   );
   revealTargets.forEach((element) => {
     if (element.closest('.hero-track')) return;
     gsap.fromTo(element,
-      { opacity: .35, y: 28 },
+      { opacity: 1, y: 12 },
       { autoAlpha: 1, y: 0, duration: 0.72, ease: 'power3.out',
         clearProps: 'opacity,visibility,transform',
         scrollTrigger: { trigger: element, start: 'top 91%', once: true }
