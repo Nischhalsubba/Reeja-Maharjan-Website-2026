@@ -67,8 +67,8 @@ test('research visual is a scalable, accurate editorial asset, not a fictional d
   await expect.poll(async () => illustration.evaluate((el) => (el as HTMLImageElement).naturalWidth), { timeout: 15_000 }).toBeGreaterThan(0);
 
   await page.goto(origin + '/clinical-research/', { waitUntil: 'domcontentloaded' });
-  await expect(page.locator('.cip-photo-band--care-journey > img')).toHaveAttribute('src', '/images/mom-hd-care-journey.svg');
-  await expect(page.locator('.cip-photo-band--care-journey .cip-photo-band__credit')).toContainText('No patient data');
+  await expect(page.locator('.cip-photo-band--research > img')).toHaveAttribute('src', /images\.unsplash\.com/);
+  await expect(page.locator('.cip-photo-band--research .cip-photo-band__credit')).toContainText('Illustrative photograph');
 });
 
 test('site remains horizontally scroll-free across editorial routes at narrow widths', async ({ page }) => {

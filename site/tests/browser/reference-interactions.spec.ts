@@ -49,3 +49,25 @@ test('visual regression: fixed contrast, bounded experience navigation and usabl
   await page.goto(`${origin}/contact/`);
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
 });
+
+test('editorial assets and card indices use the cinematic layout without obstructing text', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto(`${origin}/about/`);
+  await expect(page.locator('.reference-about-portrait img')).toHaveCSS('mask-image', /reeja-portrait-mask\.svg/);
+  await expect(page.locator('.reference-practice-card img')).toHaveCount(3);
+  for (const route of ['/clinical-research/', '/maternal-health/', '/nursing-practice/', '/hire-reeja/']) {
+    await page.goto(origin + route);
+    const cards = page.locator('.site-grid > .site-card');
+    for (const card of await cards.all()) {
+      expect(await card.evaluate(el => getComputedStyle(el, '::before').position)).toBe('static');
+    }
+    if (route !== '/hire-reeja/') {
+      const photo = page.locator('.site-page > .cip-photo-band img');
+      await expect(photo).not.toHaveAttribute('src', /mom-hd-care-journey\.svg/);
+      expect((await photo.boundingBox())!.width).toBeGreaterThan(1380);
+    }
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${origin}/about/`);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
+});
