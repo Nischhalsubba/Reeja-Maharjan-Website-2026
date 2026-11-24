@@ -68,4 +68,48 @@ export function initCinematicMotion(): void {
   gsap.utils.toArray<HTMLElement>('.cinematic-home .card-media img').forEach(el => {
     gsap.fromTo(el, { scale: 1.04, yPercent: -1.5 }, { scale: 1.04, yPercent: 1.5, ease: 'none', scrollTrigger: { trigger: el.closest('.card-media'), start: 'top bottom', end: 'bottom top', scrub: true } });
   });
+
+  // Site-wide motion: inner-page reveals, staggered groups and restrained parallax.
+  const revealTargets = gsap.utils.toArray<HTMLElement>(
+    '.inner-page section, .inner-page .site-page__hero, .inner-page .site-section__head, .inner-page .blog-card, .inner-page .blog-index__lead-card, .inner-page .blog-topic-panel, .inner-page .cv-card, .inner-page .experience-card, .inner-page .credential-card'
+  );
+  revealTargets.forEach((element) => {
+    if (element.closest('.hero-track')) return;
+    gsap.fromTo(element,
+      { autoAlpha: 0, y: 28 },
+      { autoAlpha: 1, y: 0, duration: 0.72, ease: 'power3.out',
+        clearProps: 'opacity,visibility,transform',
+        scrollTrigger: { trigger: element, start: 'top 91%', once: true }
+      }
+    );
+  });
+
+  gsap.utils.toArray<HTMLElement>('.inner-page [data-motion-stagger]').forEach((group) => {
+    const children = Array.from(group.children) as HTMLElement[];
+    if (!children.length) return;
+    gsap.from(children, {
+      autoAlpha: 0, y: 18, duration: 0.55, stagger: 0.09, ease: 'power2.out',
+      clearProps: 'opacity,visibility,transform',
+      scrollTrigger: { trigger: group, start: 'top 88%', once: true }
+    });
+  });
+
+  gsap.utils.toArray<HTMLElement>('.inner-page [data-parallax]').forEach((element) => {
+    const amount = Number(element.dataset.parallax) || 12;
+    gsap.to(element, {
+      yPercent: amount, ease: 'none',
+      scrollTrigger: { trigger: element, start: 'top bottom', end: 'bottom top', scrub: 0.6 }
+    });
+  });
+
+  // Keyboard, touch and pointer users receive the same press feedback.
+  document.querySelectorAll<HTMLElement>('a.btn, button, .site-button, .care-footer__cta').forEach((control) => {
+    control.addEventListener('pointerdown', () => control.classList.add('is-pressed'));
+    const release = () => control.classList.remove('is-pressed');
+    control.addEventListener('pointerup', release);
+    control.addEventListener('pointercancel', release);
+    control.addEventListener('pointerleave', release);
+    control.addEventListener('blur', release);
+  });
+  ScrollTrigger.refresh();
 }
