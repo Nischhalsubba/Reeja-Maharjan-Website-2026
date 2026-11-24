@@ -90,7 +90,7 @@ const graphSchema = {
           isPartOf: { '@id': 'https://reejamaharjan.com.np/#website' }
         }]
       : []),
-    ...(pathname !== '/' ? [{
+    ...(pathname !== '/' && !isArticlePage ? [{
       '@type': 'BreadcrumbList',
       itemListElement: [
         { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://reejamaharjan.com.np/' },
