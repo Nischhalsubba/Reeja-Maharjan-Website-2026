@@ -58,7 +58,7 @@ export const registeredNurseNepalGuide: BlogPost = {
     { question: 'Should I publish my nursing registration number on my website?', answer: 'A public portfolio can state a verified credential and regulator without exposing the full registration number or identity documents. Share sensitive evidence privately with legitimate employers when appropriate.' }
   ],
   sources: [
-    { label: 'Nepal Nursing Council — official website', href: 'https://nnc.org.np/' },
+    { label: 'Nepal Nursing Council — official website', href: 'https://www.nnc.org.np/' },
     { label: 'Nepal Nursing Council — official application portal', href: 'https://application.nnc.org.np/' },
     { label: 'Nepal Health Research Council — official website', href: 'https://nhrc.gov.np/' },
     { label: 'WHO — Nursing and midwifery', href: 'https://www.who.int/health-topics/nursing' }
