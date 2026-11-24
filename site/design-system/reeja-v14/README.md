@@ -6,6 +6,8 @@
 
 ## Visual direction
 
+- Primary paper canvas: #FAF8E9; deep charcoal ink; restrained ochre accent #D5A82F.
+
 - Primary accent: #D5A82F. The earlier v13 yellow token remains only as a legacy component compatibility alias until all consumers are explicitly migrated.
 
 - Warm clinical editorial palette: pale cream, deep warm charcoal, muted stone and a restrained ochre accent.
