@@ -7023,3 +7023,25 @@ body.care-personal-site {
   }
   [data-reveal] { opacity: 1 !important; transform: none !important; }
 }
+
+
+/* Journal discovery controls */
+.blog-search {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: .65rem 1.25rem;
+  max-width: 48rem;
+  margin: 0 0 2rem;
+}
+.blog-search label { grid-column: 1 / -1; font-size: .82rem; font-weight: 650; letter-spacing: .02em; }
+.blog-search input {
+  width: 100%; min-height: 3.25rem; padding: .85rem 1rem;
+  color: var(--reeja-ink); background: rgba(255,255,255,.58);
+  border: 1px solid var(--reeja-line); border-radius: .35rem;
+  font: inherit; transition: border-color var(--reeja-fast), box-shadow var(--reeja-fast);
+}
+.blog-search input:focus { border-color: var(--reeja-accent-dark); box-shadow: 0 0 0 3px rgba(166,123,18,.13); outline: 0; }
+.blog-search__status { margin: 0; color: var(--reeja-muted); font-size: .8rem; white-space: nowrap; }
+.blog-card[hidden] { display: none !important; }
+@media (max-width: 520px) { .blog-search { grid-template-columns: 1fr; } }
