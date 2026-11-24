@@ -10,7 +10,7 @@ export function initCinematicMotion(): void {
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu) menu.open = false; });
   const sections = Array.from(document.querySelectorAll<HTMLElement>('.hero-track,.profile,.section,.orgs,.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header,.site-section'));
   const updateHeader = () => {
-    const active = sections.findLast(section => section.getBoundingClientRect().top <= 32);
+    const active = sections.findLast(section => section.getBoundingClientRect().top <= 32) ?? sections[0];
     header?.classList.toggle('dark', !!active?.matches('.dark,.site-section--dark,.site-page__hero,.contact-hero,.blog-article__header'));
     header?.classList.toggle('yellow', !!active?.matches('.profile,.contact,.site-section--soft'));
   };
