@@ -15,6 +15,12 @@ const copy = siteCopy.contact;
           <p class="site-eyebrow">Professional enquiries</p>
           <h1 id="contact-page-title">Contact Reeja Maharjan.</h1>
           <p>For nursing roles, maternal-health research or health-programme collaboration, send the organisation, location, expected start date and main responsibilities.</p>
+          <div class="contact-hero__direct">
+            <p class="site-eyebrow">Direct contact</p>
+            <a href={`mailto:${professionalFacts.professionalEmail}`}>{professionalFacts.professionalEmail}</a>
+            <a href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer">Connect on LinkedIn ↗</a>
+            <p>{professionalFacts.currentLocation}</p>
+          </div>
         </div>
         <ProfessionalContactForm />
       </div>
