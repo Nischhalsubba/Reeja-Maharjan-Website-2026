@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1600" preserveAspectRatio="none">
   <defs>
-    <filter id="feather" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="4"/></filter>
+    <filter id="feather" x="-10%" y="-10%" width="120%" height="120%"><feMorphology operator="erode" radius="15"/><feGaussianBlur stdDeviation="3"/></filter>
     <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0.82" stop-color="white"/><stop offset="1" stop-color="white" stop-opacity="0"/></linearGradient>
   </defs>
   <path fill="url(#fade)" filter="url(#feather)" d="M79 1600 L63 1400 Q54 1342 65 1317 L74 1268 Q62 1203 67 1124 L77 1052 L112 933 Q84 923 61 882 L113 748 Q139 665 171 628 Q202 596 279 575 L334 551 L346 524 Q295 502 268 457 L251 411 L248 370 Q228 347 239 316 Q224 240 255 196 Q290 148 349 141 Q430 116 489 158 Q541 188 537 286 Q555 312 538 351 L529 393 Q548 413 527 439 L503 459 L510 505 L548 534 Q643 546 712 582 Q768 609 798 690 L800 894 Q790 926 793 980 Q791 1061 769 1151 L714 1300 Q689 1359 676 1394 L686 1454 L676 1600 Z"/>
