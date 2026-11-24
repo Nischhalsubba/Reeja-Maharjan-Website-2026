@@ -4,7 +4,7 @@ import process from 'node:process';
 const navSource = await readFile(new URL('../src/lib/mobileNavA11y.ts', import.meta.url), 'utf8');
 const headerSource = await readFile(new URL('../src/components/Header.astro', import.meta.url), 'utf8');
 const layoutSource = await readFile(new URL('../src/layouts/BaseLayout.astro', import.meta.url), 'utf8');
-const baseStyleSource = await readFile(new URL('../src/styles/base.css', import.meta.url), 'utf8');
+const baseStyleSource = await readFile(new URL('../src/styles/reeja-cinematic.css', import.meta.url), 'utf8');
 const failures = [];
 
 for (const fragment of ['Escape', "event.key !== 'Tab'", 'restoreFocus', 'focusFirstControl', 'aria-expanded', 'element.inert = value', '{ capture: true }']) {
