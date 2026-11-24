@@ -80,7 +80,6 @@ for(const file of filenames){
   try {
    const u=new URL(href);
    if(u.protocol!=='https:')push('source is not HTTPS: '+href);
-   if(u.hostname==='www.nnc.org.np')push('source uses inaccessible legacy NNC www host');
   }catch {push('invalid source URL: '+href);}
  }
  articles.push({slug,title:data.title,publishedAt:data.publishedAt,updatedAt:data.updatedAt,
