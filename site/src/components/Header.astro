@@ -22,15 +22,10 @@ const links = [
       <ReejaBrandMark />
     </a>
 
-    <nav class="desktop-nav" aria-label="Main navigation">
-      {links.map((link) => (
-        <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>
-          {link.label}
-        </a>
-      ))}
-      <a class="nav-cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-nav">
-        Hire Reeja
-      </a>
+    <nav class="desktop-nav navlinks" aria-label="Main navigation">
+      <details class="menupop"><summary>Experience ＋</summary><div>{links.slice(1).map(link => <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>)}<a href="/maternal-health/" aria-current={current('/maternal-health/') ? 'page' : undefined}>Maternal health</a><a href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined}>For employers</a></div></details>
+      <a href="/#about">About</a>
+      <a class="btn" href="/contact/" aria-current={current('/contact/') ? 'page' : undefined} data-track="contact-nav"><span>Contact</span><i aria-hidden="true">＋</i></a>
     </nav>
 
     <button
@@ -76,6 +71,8 @@ const links = [
           {link.label}
         </a>
       ))}
+      <a href="/maternal-health/" aria-current={current('/maternal-health/') ? 'page' : undefined}>Maternal health</a>
+      <a href="/contact/" aria-current={current('/contact/') ? 'page' : undefined}>Contact</a>
       <a class="mobile-nav__cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">
         Hire Reeja
       </a>

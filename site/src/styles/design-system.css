@@ -1,32 +1,33 @@
 /*
- * Reeja Design System v11 — the shared accessible component contract.
- * Uses the approved warm-neutral and charcoal role tokens; does not import
+ * Reeja Design System v13 — the shared accessible cinematic nursing contract.
+ * Uses the approved cream, yellow and ink role tokens; does not import
  * Webflow, NHS, Radix UI components, or third-party branding.
  */
 :root {
-  --ds-ink: #17191A;
-  --ds-muted: #505957;
+  --ds-ink: #111111;
+  --ds-muted: #55554C;
   --ds-ink-inverse: #FFFFFF;
   --ds-muted-inverse: #E6E8E5;
-  --ds-slate-950: #17191A;
-  --ds-slate-900: #313536;
-  --ds-slate-800: #505957;
-  --ds-teal-700: #39403F;
-  --ds-teal-600: #17191A;
-  --ds-seafoam-300: #D9DBD7;
-  --ds-seafoam-100: #ECEBE7;
-  --ds-paper: #FFFFFF;
-  --ds-canvas: #FAFAF8;
-  --ds-border: #D9DBD7;
-  --ds-focus: #17191A;
-  --ds-focus-inverse: #17191A;
+  --ds-slate-950: #090909;
+  --ds-slate-900: #141414;
+  --ds-slate-800: #55554C;
+  --ds-teal-700: #333333;
+  --ds-teal-600: #111111;
+  --ds-seafoam-300: #D5D2C4;
+  --ds-seafoam-100: #F1EEDF;
+  --ds-paper: #FAF8E9;
+  --ds-canvas: #FAF8E9;
+  --ds-border: #B3AFA0;
+  --ds-accent: #FFDF00;
+  --ds-focus: #4776E6;
+  --ds-focus-inverse: #FFDF00;
   --ds-status-success: #206049;
   --ds-status-warning: #7D5418;
   --ds-status-error: #A03535;
-  --ds-font-body: "Public Sans",system-ui,sans-serif;
-  --ds-font-editorial: Georgia,"Times New Roman",serif;
-  --ds-radius-action: 2px;
-  --ds-radius-surface: 2px;
+  --ds-font-body: Arial,"Public Sans",system-ui,sans-serif;
+  --ds-font-editorial: Arial,"Public Sans",sans-serif;
+  --ds-radius-action: 0px;
+  --ds-radius-surface: 0px;
   --ds-target-min: 44px;
   --ds-motion-fast: 160ms;
   --ds-motion-standard: 260ms;
@@ -50,9 +51,9 @@
 }
 .care-personal-site .ds-action--compact {min-height:44px;padding:8px 14px}
 .care-personal-site .ds-action--primary {
-  background:var(--ds-teal-600);
-  border-color:var(--ds-teal-600);
-  color:#fff;
+  background:var(--ds-accent);
+  border-color:#A58C00;
+  color:var(--ds-ink);
 }
 .care-personal-site .ds-action--primary:hover,
 .care-personal-site .ds-action--primary:focus-visible {
