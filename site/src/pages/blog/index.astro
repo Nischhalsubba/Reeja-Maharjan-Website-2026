@@ -83,7 +83,13 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
           <p>Every article identifies Reeja as the author and keeps sources, update dates, audience, and safety information visible.</p>
         </div>
 
-        <div class="blog-grid" data-ledger-group>
+        <div class="blog-search" role="search">
+          <label for="journal-search">Search nursing and maternal-health articles</label>
+          <input id="journal-search" type="search" placeholder="Try “registered nurse Nepal” or “maternal health”" autocomplete="off" data-journal-search />
+          <p class="blog-search__status" aria-live="polite" data-journal-search-status>{articleList.length} articles</p>
+        </div>
+
+        <div class="blog-grid" data-ledger-group data-journal-results>
           {articleList.map((post) => (
             <article class="blog-card" data-ledger-reveal>
               <BlogPhoto slug={post.slug} variant="card" />
@@ -99,4 +105,20 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
       </div>
     </section>
   </div>
+  <script>
+    const search = document.querySelector<HTMLInputElement>('[data-journal-search]');
+    const status = document.querySelector<HTMLElement>('[data-journal-search-status]');
+    const results = document.querySelector<HTMLElement>('[data-journal-results]');
+    search?.addEventListener('input', () => {
+      const query = (search.value || '').trim().toLocaleLowerCase();
+      const cards = Array.from(results?.querySelectorAll<HTMLElement>('.blog-card') ?? []);
+      let visible = 0;
+      cards.forEach((card) => {
+        const match = !query || (card.textContent || '').toLocaleLowerCase().includes(query);
+        card.hidden = !match;
+        if (match) visible += 1;
+      });
+      if (status) status.textContent = query ? `${visible} matching articles` : `${visible} articles`;
+    });
+  </script>
 </BaseLayout>
