@@ -7,7 +7,7 @@ const load=async p=>readFile(new URL('../'+p,import.meta.url),'utf8');
 const css=await load('src/styles/reeja-cinematic.css');
 const layout=await load('src/layouts/BaseLayout.astro');
 const finalCss=await load('src/styles/reeja-cinematic.css');
-const docs=await load('design-system/reeja-v13/README.md');
+const docs=await load('design-system/reeja-v14/README.md');
 const errors=[];
 function variable(key) {
  return css.match(new RegExp(key+'\\s*:\\s*([^;]+);'))?.[1]?.trim()??'';
@@ -27,7 +27,7 @@ for(const [key,expected] of Object.entries(canonical)){
 }
 if(!variable('--ds-font-body').includes('Public Sans'))errors.push('Body font must prefer Public Sans');
 if(!variable('--ds-font-editorial').includes('Arial'))errors.push('Display font must prefer Arial');
-if(!docs.includes('#FAF8E9')||!docs.includes('#FFDF00')||!docs.includes('Cinematic Nursing'))errors.push('Canonical design documentation missing');
+if(!docs.includes('#FAF8E9')||!docs.includes('#D5A82F')||!docs.includes('Cinematic Nursing v14'))errors.push('Canonical design documentation missing');
 if(layout.split("import '../styles/reeja-cinematic.css';").length!==2)errors.push('Canonical Reeja stylesheet must be imported exactly once');
 if(layout.includes("import '../styles/design-system.css';")||layout.includes("import '../styles/cinematic-refinements.css';"))errors.push('Legacy stylesheet imports remain in BaseLayout');
 if(!finalCss.includes('REEJA CINEMATIC NURSING'))errors.push('Canonical cinematic nursing styles missing');
