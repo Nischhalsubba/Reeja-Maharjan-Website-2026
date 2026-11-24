@@ -41,7 +41,7 @@ export const professionalFacts = {
 
   evidenceOwner: 'Reeja Maharjan',
   evidenceSource: 'Approved professional records and recruiter-facing profile review',
-  lastVerified: '2026-11-24'
+  lastVerified: '2026-07-12'
 } as const;
 
 export type ProfessionalFacts = typeof professionalFacts;
