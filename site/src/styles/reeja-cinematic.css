@@ -7732,3 +7732,23 @@ body.care-personal-site .ds-lab__canvas{border-radius:2px}
 @media(prefers-reduced-motion:reduce){
   .palette-stage__action,.palette-studio__option{transition:none!important}
 }
+
+
+/* Native cross-document transitions; no client-router dependency required. */
+@view-transition { navigation: auto; }
+::view-transition-old(root) { animation: reeja-page-out 150ms ease both; }
+::view-transition-new(root) { animation: reeja-page-in 260ms cubic-bezier(.22,1,.36,1) both; }
+@keyframes reeja-page-out { to { opacity: .82; } }
+@keyframes reeja-page-in { from { opacity: .72; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+:where(input,textarea,select) {
+  transition: border-color var(--reeja-fast) var(--reeja-ease), box-shadow var(--reeja-fast) var(--reeja-ease), background-color var(--reeja-fast) var(--reeja-ease);
+}
+:where(input,textarea,select):focus {
+  border-color: var(--reeja-accent-dark);
+  box-shadow: 0 0 0 3px rgba(166,123,18,.12);
+}
+:where(details > summary) { cursor: pointer; transition: color var(--reeja-fast) var(--reeja-ease); }
+:where(details > summary:hover) { color: var(--reeja-accent-dark); }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation: none !important; }
+}
