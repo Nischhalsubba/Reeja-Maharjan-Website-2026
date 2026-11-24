@@ -59,7 +59,7 @@ export const clinicalResearchNursingNepal: BlogPost = {
     { label: 'Nepal Health Research Council — official website', href: 'https://nhrc.gov.np/ethics/' },
     { label: 'WHO — Research ethics review committee guidance', href: 'https://nhrc.gov.np/publication-category/guidelines/' },
     { label: 'ICH — E6(R3) Good Clinical Practice guideline', href: 'https://www.ema.europa.eu/en/scientific-guidelines/ich-e6-good-clinical-practice' },
-    { label: 'Nepal Nursing Council — official regulator', href: 'https://nnc.org.np/' }
+    { label: 'Nepal Nursing Council — official regulator', href: 'https://www.nnc.org.np/' }
   ],
   relatedSlugs: ['nursing-careers-2026-who-workforce-report-nepal', 'navigating-nurse-licensure-continuing-education-nepal', 'mastering-nursing-documentation-sbar-handover'],
   cta: { title: 'Explore Reeja Maharjan’s research experience', text: 'Review Reeja’s documented maternal-health research responsibilities and professional background.', label: 'View clinical research profile', href: '/clinical-research/' },
