@@ -19,6 +19,8 @@ export const professionalFacts = {
 
   nepalLicense: 'Nepal Nursing Council licensed Registered Nurse',
   nepalLicenseShort: 'NNC Licensed RN',
+  nepalLicenseStatus: 'Active',
+  nepalLicenseStatusVerifiedAt: '2026-11-24',
   texasLicense: 'Texas RN single-state license issued September 8, 2025; recorded expiry October 31, 2026; current renewal status requires verification',
   texasLicenseShort: 'Texas RN (status verification pending)',
   texasLicenseIssued: '2025-09-08',
@@ -39,7 +41,7 @@ export const professionalFacts = {
 
   evidenceOwner: 'Reeja Maharjan',
   evidenceSource: 'Approved professional records and recruiter-facing profile review',
-  lastVerified: '2026-07-12'
+  lastVerified: '2026-11-24'
 } as const;
 
 export type ProfessionalFacts = typeof professionalFacts;
