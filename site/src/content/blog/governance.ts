@@ -13,6 +13,21 @@ const reviewDueAt = '2027-03-11';
 const sourcesAccessedAt = '2026-03-11';
 
 export const blogGovernance: Record<string, BlogGovernance> = {
+
+  'clinical-research-nursing-nepal-guide': {
+    audience: 'Registered nurses, nursing students, research assistants and health-research teams in Nepal',
+    userNeed: 'Understand common clinical research nursing duties, role boundaries, participant communication, ethics and career evaluation.',
+    practiceLens: 'Separates research support from independent clinical decisions and emphasises approved protocols, supervision, privacy and escalation.',
+    sourcesAccessedAt: '2026-11-24',
+    reviewDueAt: '2027-05-24'
+  },
+  'registered-nurse-nepal-registration-career-guide': {
+    audience: 'Nursing students, registered nurses, recruiters and people researching nursing careers in Nepal',
+    userNeed: 'Understand the meaning of registered nurse status, where to verify requirements and how to build a credible career profile.',
+    practiceLens: 'Separates qualification, registration, employer credentialing and international work authorisation.',
+    sourcesAccessedAt: '2026-11-24',
+    reviewDueAt: '2027-05-24'
+  },
   'kangaroo-mother-care-who-2025-guide-parents-nurses': {
     audience: 'Parents, neonatal nurses, maternity staff and nursing students',
     userNeed: 'Understand WHO 2025 kangaroo mother care guidance, family participation, feeding support and safe home follow-up.',

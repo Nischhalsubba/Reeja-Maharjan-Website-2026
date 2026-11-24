@@ -17,6 +17,8 @@ import { mentalHealthMaternalCareSupportingMothersBeyondDelivery } from './menta
 import { futureOfNursingInNepalTelehealthCommunityCarePostCovid } from './future-of-nursing-in-nepal-telehealth-community-care-post-covid';
 import { navigatingNurseLicensureContinuingEducationNepal } from './navigating-nurse-licensure-continuing-education-nepal';
 import { fromNursingStudentToRegisteredNurseMyJourney } from './from-nursing-student-to-registered-nurse-my-journey';
+import { clinicalResearchNursingNepal } from './clinical-research-nursing-nepal-guide';
+import { registeredNurseNepalGuide } from './registered-nurse-nepal-registration-career-guide';
 
 export type { BlogFaq, BlogPost, BlogSection, BlogSource } from './types';
 
@@ -37,7 +39,9 @@ export const blogPosts: BlogPost[] = [
   mentalHealthMaternalCareSupportingMothersBeyondDelivery,
   futureOfNursingInNepalTelehealthCommunityCarePostCovid,
   navigatingNurseLicensureContinuingEducationNepal,
-  fromNursingStudentToRegisteredNurseMyJourney
+  fromNursingStudentToRegisteredNurseMyJourney,
+  clinicalResearchNursingNepal,
+  registeredNurseNepalGuide
 ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
 export const getBlogPost = (slug: string): BlogPost | undefined =>

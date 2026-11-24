@@ -44,7 +44,7 @@ const currentExperience = sourceProfile.experience.map((item, index) => ({
 }));
 
 const credentialNotes = [
-  'Nepal Nursing Council Registered Nurse credential. The public portfolio shows a summary only; supporting verification can be shared privately with a legitimate employer when appropriate.',
+  `Nepal Nursing Council Registered Nurse registration: ${professionalFacts.nepalLicenseStatus}. Confirmed by Reeja on ${professionalFacts.nepalLicenseStatusVerifiedAt}. The registration number and supporting documents are not published publicly; verification can be shared privately with legitimate employers when appropriate.`,
   'Texas RN license originally issued September 2025; recorded expiry October 31, 2026. Renewal and current practice status require official verification; licensure, work authorisation and employer credentialing remain separate.',
   'NCLEX-RN pathway documented through original Texas RN licensure, without publishing exam-result documents or assuming current licensing status.',
   'Structured Comprehensive Newborn Care Level II training relevant to newborn observation, family education, routine nursing support, and appropriate escalation within local clinical scope.',
@@ -136,6 +136,7 @@ export const profile: ProfileContent = {
   },
   personalDetails: [
     { key: 'Professional status', value: professionalFacts.publicRoleLabel },
+    { key: 'Nepal Nursing Council registration', value: `${professionalFacts.nepalLicenseStatus} (confirmed ${professionalFacts.nepalLicenseStatusVerifiedAt})` },
     { key: 'Current role', value: `${professionalFacts.currentRole}, ${professionalFacts.currentProjectShort}` },
     { key: 'Based in', value: professionalFacts.currentLocation },
     { key: 'Open to', value: professionalFacts.availability }
