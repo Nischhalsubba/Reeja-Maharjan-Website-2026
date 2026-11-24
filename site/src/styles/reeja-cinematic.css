@@ -7861,6 +7861,8 @@ body[data-design-system="reeja-cinematic"] .site-header .reference-mega :is(stro
 
 /* Dark surfaces explicitly override the former light-theme declarations. */
 #main-content.inner-page :is(.site-section--dark,.reference-experience-list,.blog-card,.blog-index__lead-card) :is(h2,h3,h4,p,li,dt,dd,small,strong) {color:#faf8e9!important;}
+#main-content.inner-page :is(.blog-card,.blog-index__lead-card) :is(h3 a,.blog-card__meta,.blog-card__content > a:not(.site-button),.blog-index__hero-link) {color:#faf8e9!important;}
+#main-content.inner-page .blog-article__header .site-back {color:#faf8e9!important;border-color:#aaa;}
 #main-content.inner-page :is(.site-section--dark,.reference-experience-list) .site-eyebrow {color:#ffdf00!important;}
 #main-content.inner-page :is(.site-section--dark,.reference-experience-list) .site-button:not(.site-button--primary) {background:#171717!important;color:#faf8e9!important;border-color:#aaa!important;}
 #main-content.inner-page .reference-experience-list {background:#0e0e0e!important;}
@@ -7870,7 +7872,7 @@ body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care
 body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care :is(.care-footer__column a,.care-footer__bottom a,.care-footer__credits a):hover {color:#ffdf00!important;text-decoration:underline;}
 body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care :is(.care-footer__bottom,.care-footer__credits) {border-color:#555!important;}
 body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care .care-footer__main {padding-block:56px;gap:clamp(24px,4vw,64px);}
-body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care .care-footer__wordmark .brand__text {font-family:Arial,sans-serif;}
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care .care-footer__wordmark .brand__text strong {font:400 16px/1.2 Arial,sans-serif;letter-spacing:-.025em;}
 @media(max-width:900px){
   #main-content.inner-page .contact-hero .contact-hero__grid {width:calc(100% - 36px);grid-template-columns:1fr;gap:28px;}
   #main-content.inner-page .contact-hero .contact-hero__copy {padding-top:0;}
