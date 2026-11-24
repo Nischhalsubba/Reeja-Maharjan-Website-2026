@@ -97,6 +97,8 @@ const imageLibrary = {
 } as const;
 
 const articleImageKeys: Record<string, keyof typeof imageLibrary> = {
+  "clinical-research-nursing-nepal-guide": "computer",
+  "registered-nurse-nepal-registration-career-guide": "nurse",
   "kangaroo-mother-care-who-2025-guide-parents-nurses": "newborn",
   "hpv-vaccine-nepal-2026-cervical-cancer-prevention": "vaccination",
   "postpartum-infection-warning-signs-nursing-guide-2026": "newmother",
