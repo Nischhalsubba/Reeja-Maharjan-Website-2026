@@ -7823,3 +7823,65 @@ body:is([data-page-route="/clinical-research/"],[data-page-route="/maternal-heal
 .reference-experience-cards{display:grid;gap:42px;}.reference-experience-cards article[hidden]{display:none!important;}
 .reference-experience-cards a{display:block;color:#fff;text-decoration:none;}.reference-experience-image{position:relative;overflow:hidden;aspect-ratio:16/8;background:#171717;}.reference-experience-image img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.22,1,.36,1);}.reference-experience-image span{position:absolute;top:20px;left:20px;background:#111c;color:#fff;padding:6px 10px;font-size:.7rem;text-transform:uppercase;}.reference-experience-cards a:hover img{transform:scale(1.04);}.reference-experience-caption{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;border-bottom:1px dashed #777;}.reference-experience-caption h2{font-size:clamp(1.6rem,4vw,3rem);color:white;}.reference-experience-caption p{color:#ddd;}.reference-experience-caption .site-button{white-space:nowrap;}
 @media(max-width:820px){.reference-index-heading,.reference-experience-caption{display:block}.reference-experience-image{aspect-ratio:4/3}.reference-filters{gap:6px}.reference-filters button{padding:10px 12px}.reference-experience-caption .site-button{margin-top:12px}}
+
+/* Contrast and layout contract: foregrounds must never depend on a film frame. */
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-header:not(.dark):not(.yellow) {background:#faf8e9!important;color:#111!important;}
+body[data-design-system="reeja-cinematic"] .site-header .brand__text :is(strong,small),
+body[data-design-system="reeja-cinematic"] .site-header .desktop-nav :is(summary,a:not(.btn)) {color:inherit!important;}
+body[data-design-system="reeja-cinematic"] .site-header.dark {background:#090909!important;color:#faf8e9!important;}
+#main-content.cinematic-home .hero-bottom > div {background:#faf8e9!important;color:#111!important;padding:16px;margin:-16px;}
+#main-content.cinematic-home .hero-bottom :is(h1,p,.kicker) {color:#111!important;}
+#main-content.cinematic-home .hero-bottom h1 span:not(.visually-hidden) {color:#4b4b45!important;}
+/* The dropdown is a bounded navigation panel, not a full-page image gallery. */
+body[data-design-system="reeja-cinematic"] .site-header .menupop .reference-mega {background:#faf8e9;color:#111;max-height:calc(100dvh - 64px);overflow-y:auto;padding-block:24px;}
+body[data-design-system="reeja-cinematic"] .site-header .reference-mega .mega-grid img {display:block;width:100%;height:clamp(110px,23vh,220px)!important;max-height:220px;aspect-ratio:auto;object-fit:cover;}
+body[data-design-system="reeja-cinematic"] .site-header .reference-mega .mega-grid > a {min-width:0;}
+body[data-design-system="reeja-cinematic"] .site-header .reference-mega :is(strong,small,p,a:not(.btn)) {color:#111!important;}
+
+/* Contact: readable, top-aligned editorial columns with sufficient form width. */
+#main-content.inner-page .contact-hero .contact-hero__grid {width:min(1270px,calc(100% - 84px));grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start;gap:clamp(32px,6vw,88px);min-height:0;}
+#main-content.inner-page .contact-hero .contact-hero__copy {position:static;align-self:start;min-width:0;padding-top:20px;}
+#main-content.inner-page .contact-hero .contact-hero__direct {display:grid;gap:12px;border-top:1px dashed #777;margin-top:36px;padding-top:24px;}
+#main-content.inner-page .contact-hero .contact-hero__direct .site-eyebrow {margin:0;}
+#main-content.inner-page .contact-hero .contact-hero__direct a {color:#faf8e9!important;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere;}
+#main-content.inner-page .contact-hero .contact-hero__direct p:last-child {margin:0;color:#c9c7bd!important;}
+#main-content.inner-page .contact-hero .professional-contact-form {width:100%;max-width:none;min-width:0;align-self:start;margin:0;padding:clamp(24px,3vw,44px);border:1px solid #555;background:#171717!important;}
+#main-content.inner-page .contact-hero .professional-contact-form__heading h2 {font-size:clamp(27px,3vw,42px);margin-bottom:12px;}
+#main-content.inner-page .contact-hero .professional-contact-form__privacy {background:#242424!important;border-color:#ffdf00;color:#faf8e9;padding:16px;}
+#main-content.inner-page .contact-hero .professional-contact-form__privacy :is(p,strong,a) {color:#faf8e9!important;}
+#main-content.inner-page .contact-hero .professional-contact-form :is(input,textarea)::placeholder {color:#bdbdb8!important;opacity:1;}
+#main-content.inner-page .contact-hero .professional-contact-form .form-field__error {color:#ffb4ab!important;}
+#main-content.inner-page .contact-hero .professional-contact-form [aria-invalid="true"] {border-color:#ffb4ab!important;}
+#main-content.inner-page .contact-hero .professional-contact-form [type="submit"] {background:#ffdf00!important;color:#111!important;border-color:#ffdf00!important;min-height:48px;}
+#main-content.inner-page .contact-hero .professional-contact-form .care-button--secondary {color:#faf8e9!important;background:transparent!important;border-color:#aaa!important;}
+#main-content.inner-page .contact-hero .professional-contact-form .form-status {background:#242424!important;color:#faf8e9!important;}
+#main-content.inner-page .contact-layout {grid-template-columns:1fr;gap:24px;}
+#main-content.inner-page .contact-hero__details {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;}
+#main-content.inner-page .contact-hero__details a {overflow-wrap:anywhere;}
+
+/* Dark surfaces explicitly override the former light-theme declarations. */
+#main-content.inner-page :is(.site-section--dark,.reference-experience-list,.blog-card,.blog-index__lead-card) :is(h2,h3,h4,p,li,dt,dd,small,strong) {color:#faf8e9!important;}
+#main-content.inner-page :is(.blog-card,.blog-index__lead-card) :is(h3 a,.blog-card__meta,.blog-card__content > a:not(.site-button),.blog-index__hero-link) {color:#faf8e9!important;}
+#main-content.inner-page .blog-article__header .site-back {color:#faf8e9!important;border-color:#aaa;}
+#main-content.inner-page .inner-breadcrumb span {color:#c9c7bd!important;}
+#main-content.inner-page .inner-breadcrumb {border-color:#555!important;}
+#main-content.inner-page :is(.site-section--dark,.reference-experience-list) .site-eyebrow {color:#ffdf00!important;}
+#main-content.inner-page :is(.site-section--dark,.reference-experience-list) .site-button:not(.site-button--primary) {background:#171717!important;color:#faf8e9!important;border-color:#aaa!important;}
+#main-content.inner-page .reference-experience-list {background:#0e0e0e!important;}
+#main-content.inner-page .reference-experience-image img {width:100%;height:100%;object-fit:cover;}
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care :is(.care-footer__wordmark,.brand__text,.brand__text strong,.brand__text span,.brand__text small,.care-footer__identity p,.care-footer__location,.care-footer__column h3,.care-footer__column a,.care-footer__bottom,.care-footer__bottom a,.care-footer__bottom small,.care-footer__bottom span,.care-footer__credits,.care-footer__credits summary,.care-footer__credits p,.care-footer__credits a) {color:#e9e7db!important;}
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care .care-footer__column h3 {color:#ffdf00!important;}
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care :is(.care-footer__column a,.care-footer__bottom a,.care-footer__credits a):hover {color:#ffdf00!important;text-decoration:underline;}
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care :is(.care-footer__bottom,.care-footer__credits) {border-color:#555!important;}
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care .care-footer__main {padding-block:56px;gap:clamp(24px,4vw,64px);}
+body.care-personal-site[data-design-system="reeja-cinematic"] .site-footer--care .care-footer__wordmark .brand__text strong {font:400 16px/1.2 Arial,sans-serif;letter-spacing:-.025em;}
+@media(max-width:900px){
+  #main-content.inner-page .inner-breadcrumb {padding-inline:18px;}
+  #main-content.inner-page .contact-hero .contact-hero__grid {width:calc(100% - 36px);grid-template-columns:1fr;gap:28px;}
+  #main-content.inner-page .contact-hero .contact-hero__copy {padding-top:0;}
+  #main-content.inner-page .contact-layout {grid-template-columns:1fr;}
+  #main-content.inner-page .contact-sidebar {grid-template-columns:1fr;}
+  #main-content.cinematic-home .hero-bottom {background:#faf8e9!important;}
+  #main-content.cinematic-home .hero-bottom > div {padding:0;margin:0;background:transparent!important;}
+}
+@media(max-width:540px){#main-content.inner-page .contact-hero__details,#main-content.inner-page .professional-contact-form__grid {grid-template-columns:1fr;}#main-content.inner-page .contact-hero .professional-contact-form {padding:18px;}}
