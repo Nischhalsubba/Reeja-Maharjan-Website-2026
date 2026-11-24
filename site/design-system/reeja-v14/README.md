@@ -6,6 +6,8 @@
 
 ## Visual direction
 
+- Primary accent: #D5A82F. The earlier v13 yellow token remains only as a legacy component compatibility alias until all consumers are explicitly migrated.
+
 - Warm clinical editorial palette: pale cream, deep warm charcoal, muted stone and a restrained ochre accent.
 - Public Sans for readable UI and body copy, with the existing editorial display treatment retained from the approved cinematic direction.
 - Spacious layouts, clear content measure and consistent section rhythm.
