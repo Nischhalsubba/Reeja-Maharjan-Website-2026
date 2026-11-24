@@ -56,7 +56,7 @@ jobs:
         run: npm run verify:contact-handler
       - name: Verify source and style ownership
         run: npm run verify:source
-      - name: Verify Neutral Editorial design system
+      - name: Verify Cinematic Nursing design system
         run: npm run verify:design-system
       - name: Type check
         id: typecheck
