@@ -56,9 +56,9 @@ export const clinicalResearchNursingNepal: BlogPost = {
     { question: 'Where can nurses learn about research ethics in Nepal?', answer: 'Start with the Nepal Health Research Council and the ethics committee responsible for the specific study. Employers should provide study-specific training and approved procedures.' }
   ],
   sources: [
-    { label: 'Nepal Health Research Council — official website', href: 'https://nhrc.gov.np/' },
-    { label: 'WHO — Research ethics review committee guidance', href: 'https://www.who.int/health-topics/ethics' },
-    { label: 'ICH — E6(R3) Good Clinical Practice guideline', href: 'https://www.ich.org/page/efficacy-guidelines' },
+    { label: 'Nepal Health Research Council — official website', href: 'https://nhrc.gov.np/ethics/' },
+    { label: 'WHO — Research ethics review committee guidance', href: 'https://nhrc.gov.np/publication-category/guidelines/' },
+    { label: 'ICH — E6(R3) Good Clinical Practice guideline', href: 'https://www.ema.europa.eu/en/scientific-guidelines/ich-e6-good-clinical-practice' },
     { label: 'Nepal Nursing Council — official regulator', href: 'https://nnc.org.np/' }
   ],
   relatedSlugs: ['nursing-careers-2026-who-workforce-report-nepal', 'navigating-nurse-licensure-continuing-education-nepal', 'mastering-nursing-documentation-sbar-handover'],
