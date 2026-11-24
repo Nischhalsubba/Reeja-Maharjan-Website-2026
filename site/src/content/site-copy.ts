@@ -3,13 +3,13 @@ import { professionalFacts } from './professional-facts';
 const facts = professionalFacts;
 
 export const siteCopy = {
-  updatedAt: '2026-08-07',
+  updatedAt: '2026-11-24',
   siteName: facts.name,
   siteDescriptor: 'Registered Nurse · Maternal Health Research',
   websiteName: 'Reeja Maharjan | Nursing & Maternal Health Research',
   defaultTitle: `${facts.name} | Registered Nurse & Maternal Health Research Assistant`,
   defaultDescription: `Professional portfolio of ${facts.name}, ${facts.credential}, NNC licensed Registered Nurse and ${facts.currentEmployerShort} maternal-health ${facts.currentRole} in ${facts.currentLocation}.`,
-  profileSummary: `${facts.name}, ${facts.credential}, is a ${facts.nepalLicense} with an ${facts.texasLicense}. Her experience includes hospital nursing at Tribhuvan University Teaching Hospital, Manmohan Memorial Medical College & Teaching Hospital, and Sindhuli Hospital, alongside current maternal-health research work with ${facts.currentEmployerShort} on the ${facts.currentProject}. Her work includes patient and participant education, BP/BG monitoring support, tele-follow-up, documentation, data-quality checks, handover, escalation support, and multidisciplinary coordination.`,
+  profileSummary: `${facts.name}, ${facts.credential}, is a ${facts.nepalLicense}; her Nepal Nursing Council registration status was confirmed as active by Reeja on 24 November 2026. Her historical Texas RN licence was issued in 2025 and its renewal status requires official verification. Her experience includes hospital nursing at Tribhuvan University Teaching Hospital, Manmohan Memorial Medical College & Teaching Hospital, and Sindhuli Hospital, alongside current maternal-health research work with ${facts.currentEmployerShort} on the ${facts.currentProject}. Her work includes patient and participant education, BP/BG monitoring support, tele-follow-up, documentation, data-quality checks, handover, escalation support, and multidisciplinary coordination.`,
   seoTopics: [
     'Registered nursing',
     'Maternal health',
@@ -34,7 +34,7 @@ export const siteCopy = {
   ],
   home: {
     title: `${facts.name} | Registered Nurse & Maternal Health Research, Nepal`,
-    description: `${facts.name} is an NNC licensed Registered Nurse and IISH MOM-HD Research Assistant with clinical nursing, maternal-health research, education and telemonitoring experience in Nepal.`,
+    description: `${facts.name} is an NNC registered Registered Nurse and IISH MOM-HD Research Assistant with clinical nursing, maternal-health research, education and telemonitoring experience in Nepal.`,
     hero: {
       kicker: `${facts.name} · ${facts.credential}`,
       titleBefore: `${facts.name} is a`,
