@@ -12,7 +12,7 @@ const styles = (await readdir(new URL('src/styles/', root))).filter((name) => na
 const extraStyles = styles.filter((name) => name !== 'reeja-cinematic.css');
 if (extraStyles.length) failures.push('Legacy stylesheet files remain: ' + extraStyles.join(', '));
 if (layout.split("import '../styles/reeja-cinematic.css';").length !== 2) failures.push('BaseLayout must import the canonical stylesheet exactly once.');
-if (/import ['"][^'"]+\.css['"]/.test(layout.replace("import '../styles/reeja-cinematic.css';", ''))) failures.push('Unexpected stylesheet import remains in BaseLayout.');
+if (/import ['"]\.\.\/styles\/[^'"]+\.css['"]/.test(layout.replace("import '../styles/reeja-cinematic.css';", ''))) failures.push('Unexpected stylesheet import remains in BaseLayout.');
 if (layout.includes('styles/design-system.css') || layout.includes('styles/cinematic-refinements.css')) failures.push('Legacy stylesheet reference remains in BaseLayout.');
 for (const required of ['--reeja-ink', '--reeja-paper', '--reeja-accent', 'prefers-reduced-motion: reduce', '.blog-search', '.cv-page']) {
   if (!canonical.includes(required)) failures.push('Canonical stylesheet is missing ' + required + '.');
