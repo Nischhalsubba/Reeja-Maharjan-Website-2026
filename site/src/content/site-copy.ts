@@ -34,7 +34,7 @@ export const siteCopy = {
   ],
   home: {
     title: `${facts.name} | Registered Nurse & Maternal Health Research, Nepal`,
-    description: `${facts.name} is an NNC registered Registered Nurse and IISH MOM-HD Research Assistant with clinical nursing, maternal-health research, education and telemonitoring experience in Nepal.`,
+    description: `${facts.name} is an Nepal Nursing Council-registered nurse and IISH MOM-HD Research Assistant with clinical nursing, maternal-health research, education and telemonitoring experience in Nepal.`,
     hero: {
       kicker: `${facts.name} · ${facts.credential}`,
       titleBefore: `${facts.name} is a`,
