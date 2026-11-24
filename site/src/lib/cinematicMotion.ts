@@ -6,6 +6,7 @@ export function initCinematicMotion(): void {
   const header = document.querySelector<HTMLElement>('.site-header');
   const menu = header?.querySelector<HTMLDetailsElement>('.menupop');
   menu?.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('a')) menu.open = false; });
+  document.addEventListener('click', (event) => { if (menu?.open && !menu.contains(event.target as Node)) menu.open = false; });
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu) menu.open = false; });
   const sections = Array.from(document.querySelectorAll<HTMLElement>('.hero-track,.profile,.section,.orgs,.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header,.site-section'));
   const updateHeader = () => {

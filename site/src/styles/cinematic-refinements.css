@@ -23,6 +23,9 @@ body[data-design-system="reeja-cinematic"] .site-header .desktop-nav {gap:26px}
 body[data-design-system="reeja-cinematic"] .site-header .menupop summary {min-height:44px;display:flex;align-items:center}
 body[data-design-system="reeja-cinematic"] .site-header .menupop div {top:44px}
 body[data-design-system="reeja-cinematic"] .site-header .menupop a {color:#fff}
+body[data-design-system="reeja-cinematic"] .site-header .menupop a[aria-current="page"] {color:#ffdf00;text-decoration:underline;text-underline-offset:4px}
+body[data-design-system="reeja-cinematic"] .btn {min-height:44px;align-items:center}
+body[data-design-system="reeja-cinematic"] .btn :is(span,i) {min-height:36px;display:inline-flex;align-items:center;justify-content:center}
 body[data-design-system="reeja-cinematic"] .site-header.dark .btn span,body[data-design-system="reeja-cinematic"] .site-header.dark .btn i {background:#ffdf00;color:#111}
 body[data-design-system="reeja-cinematic"] .site-header .menu-toggle {background:#ffdf00;color:#111;border:1px dashed #111;border-radius:0}
 body[data-design-system="reeja-cinematic"] .scroll-progress {background:transparent;z-index:60}
