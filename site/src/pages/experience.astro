@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const areas = [
+  {name:'Clinical research',category:'research',image:'4c6c586bf16b.jpg',alt:'Illustrative clinical blood pressure measurement',description:'IISH · Maternal-health telemonitoring research',href:'/clinical-research/'},
+  {name:'Maternal and newborn care',category:'hospital',image:'4123471de1d5.jpg',alt:'Illustrative maternal and newborn care',description:'Tribhuvan University Teaching Hospital',href:'/maternal-health/'},
+  {name:'General nursing practice',category:'hospital',image:'64358b3119c9.jpg',alt:'Illustrative healthcare setting',description:'Manmohan Memorial Medical College and Teaching Hospital',href:'/nursing-practice/'},
+  {name:'Maternity care',category:'hospital',image:'99f458695911.jpg',alt:'Illustrative clinical documentation',description:'Sindhuli Hospital',href:'/cv/#experience'}
+];
+---
+<BaseLayout title="Nursing experience | Reeja Maharjan" description="Explore Reeja Maharjan’s hospital nursing, maternal and newborn care and maternal-health clinical research experience in Nepal.">
+  <div class="site-page reference-experience">
+    <section class="site-page__hero"><div class="container reference-index-heading"><h1>Experience</h1><p>Hospital nursing, maternal health and clinical research.</p></div></section>
+    <section class="site-section reference-experience-list"><div class="container"><div class="reference-filters" role="group" aria-label="Filter experience"><button type="button" data-experience-filter="all" aria-pressed="true">All experience</button><button type="button" data-experience-filter="hospital" aria-pressed="false">Hospital nursing</button><button type="button" data-experience-filter="research" aria-pressed="false">Clinical research</button></div><p class="visually-hidden" data-experience-count aria-live="polite">4 experiences</p><div class="reference-experience-cards">{areas.map(area=><article data-experience-category={area.category}><a href={area.href}><div class="reference-experience-image"><img src={`/images/cinematic/${area.image}`} alt={area.alt} width={area.image === '4c6c586bf16b.jpg' ? 800 : 1100} height={area.image === '4c6c586bf16b.jpg' ? 1204 : area.image === '4123471de1d5.jpg' ? 734 : area.image === '64358b3119c9.jpg' ? 753 : 619} loading="lazy" /><span>Illustrative photograph</span></div><div class="reference-experience-caption"><div><h2>{area.name}</h2><p>{area.description}</p></div><span class="site-button" aria-hidden="true">Explore ＋</span></div></a></article>)}</div></div></section>
+  </div>
+  <script>
+    const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-experience-filter]')];
+    const cards = [...document.querySelectorAll<HTMLElement>('[data-experience-category]')];
+    filters.forEach(button=>button.addEventListener('click',()=>{const selected=button.dataset.experienceFilter;filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));cards.forEach(card=>{card.hidden=selected!=='all'&&card.dataset.experienceCategory!==selected;});const count=document.querySelector('[data-experience-count]');if(count)count.textContent=`${cards.filter(card=>!card.hidden).length} experiences`; }));
+  </script>
+</BaseLayout>

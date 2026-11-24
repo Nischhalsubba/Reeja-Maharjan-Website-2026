@@ -5,7 +5,6 @@ import { professionalFacts } from '../content/professional-facts';
 import { siteCopy } from '../content/site-copy';
 
 const copy = siteCopy.contact;
-import EditorialPhoto from '../components/EditorialPhoto.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -17,19 +16,18 @@ import EditorialPhoto from '../components/EditorialPhoto.astro';
           <h1 id="contact-page-title">Contact Reeja Maharjan.</h1>
           <p>For nursing roles, maternal-health research or health-programme collaboration, send the organisation, location, expected start date and main responsibilities.</p>
         </div>
-        <div class="contact-hero__details" data-motion-reveal>
+        <ProfessionalContactForm />
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <div class="container contact-layout">
+        <div class="contact-hero__details">
           <div><span>Email</span><a href={`mailto:${professionalFacts.professionalEmail}`}>{professionalFacts.professionalEmail}</a></div>
           <div><span>Based in</span><strong>{professionalFacts.currentLocation}</strong></div>
           <div><span>Current role</span><strong>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</strong></div>
           <div><span>Project</span><strong>{professionalFacts.currentProjectShort}</strong></div>
         </div>
-      </div>
-    </section>
-    <EditorialPhoto kind="writing" label="A thoughtful conversation starts here" />
-
-    <section class="contact-section">
-      <div class="container contact-layout">
-        <ProfessionalContactForm />
 
         <aside class="contact-sidebar" aria-label="Contact guidance" data-motion-reveal>
           <div class="contact-sidebar__block">

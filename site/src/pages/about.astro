@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile } from '../content/profile';
+import { professionalFacts } from '../content/professional-facts';
+---
+<BaseLayout title="About Reeja Maharjan | Registered Nurse in Nepal" description="Meet Reeja Maharjan, her nursing education, hospital experience and maternal-health research journey in Nepal.">
+  <div class="site-page reference-about">
+    <section class="reference-about-hero site-page__hero">
+      <div class="container reference-about-grid">
+        <div><p class="site-eyebrow">About Reeja</p><h1>Care, research and<br />patient education.</h1><p class="site-page__lede">I’m Reeja Maharjan, a registered nurse based in Biratnagar, working across hospital nursing and maternal-health research.</p><p>{professionalFacts.currentLocation} · B.Sc. Nursing</p></div>
+        <figure><img src="/images/reeja-clinical-portrait-2026.jpg" alt="Reeja Maharjan" width="800" height="1000" /></figure>
+      </div>
+    </section>
+    <section class="site-section reference-story" id="journey"><div class="container reference-story-grid"><div class="reference-story-heading"><p class="site-eyebrow">My journey</p><h2>Learning through care.<br />One role at a time.</h2><a class="site-button" href="/cv/">View professional CV</a></div><ol class="reference-timeline">{profile.experience.slice().reverse().map(item=><li><p class="site-eyebrow">{item.period}</p><h3>{item.role}</h3><p>{item.organization}</p><ul>{item.bullets.map(bullet=><li>{bullet}</li>)}</ul></li>)}</ol></div></section>
+    <section class="site-section" id="practice"><div class="container"><div class="site-section__head"><div><p class="site-eyebrow">Areas of practice</p><h2>From the ward to the community.</h2></div></div><div class="site-grid"><a class="site-card" href="/nursing-practice/"><h3>Nursing practice</h3><p>Hospital nursing and patient support.</p></a><a class="site-card" href="/maternal-health/"><h3>Maternal health</h3><p>Care for mothers and newborns.</p></a><a class="site-card" href="/clinical-research/"><h3>Clinical research</h3><p>Participant education and study coordination.</p></a></div></div></section>
+  </div>
+</BaseLayout>

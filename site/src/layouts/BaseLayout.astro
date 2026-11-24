@@ -31,7 +31,7 @@ const {
 
 const pathname = Astro.url.pathname;
 const isArticlePage = pathname.startsWith('/blog/') && pathname !== '/blog/' && !pathname.startsWith('/blog/topics/');
-const isProfilePage = pathname === '/' || pathname === '/hire-reeja/' || pathname === '/cv/';
+const isProfilePage = pathname === '/' || pathname === '/about/' || pathname === '/hire-reeja/' || pathname === '/cv/';
 const canonicalUrl = new URL(pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
 const portraitUrl = new URL('/reeja-headshot.jpg', Astro.site ?? Astro.url.origin).toString();
@@ -152,7 +152,7 @@ const graphSchema = {
       </script>
     )}
   </head>
-  <body id="page-top" class="care-personal-site" data-design-system="reeja-cinematic" data-design-version="14.0.0-cinematic">
+  <body id="page-top" class="care-personal-site" data-design-system="reeja-cinematic" data-design-version="14.0.0-cinematic" data-page-route={pathname}>
     <div class="scroll-progress" aria-hidden="true"><span class="scroll-progress__bar"></span></div>
     <a class="skip-link" href="#main-content">Skip to main content</a>
     <Header name={professionalFacts.name} />

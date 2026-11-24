@@ -8,7 +8,7 @@ const path = Astro.url.pathname;
 const current = (href: string) => href === '/' ? path === '/' : path.startsWith(href);
 const links = [
   { href: '/', label: 'Home' },
-  { href: '/#experience', label: 'Experience' },
+  { href: '/experience/', label: 'Experience' },
   { href: '/clinical-research/', label: 'Research' },
   { href: '/nursing-practice/', label: 'Nursing' },
   { href: '/blog/', label: 'Writing' },
@@ -23,8 +23,8 @@ const links = [
     </a>
 
     <nav class="desktop-nav navlinks" aria-label="Main navigation">
-      <details class="menupop"><summary>Experience ＋</summary><div>{links.slice(1).map(link => <a href={link.href} aria-current={link.href !== '/#experience' && current(link.href) ? 'page' : undefined}>{link.label}</a>)}<a href="/maternal-health/" aria-current={current('/maternal-health/') ? 'page' : undefined}>Maternal health</a><a href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined}>For employers</a></div></details>
-      <a href="/#about">About</a>
+      <details class="menupop"><summary>Experience <span class="menu-sign" aria-hidden="true">+</span></summary><div class="reference-mega"><p class="mega-kicker">Featured experience</p><div class="mega-grid"><a href="/clinical-research/"><img src="/images/cinematic/4c6c586bf16b.jpg" width="800" height="1204" alt="" /><strong>Clinical research</strong><small>Maternal-health telemonitoring</small></a><a href="/maternal-health/"><img src="/images/cinematic/4123471de1d5.jpg" width="1100" height="734" alt="" /><strong>Maternal health</strong><small>Maternal and newborn care</small></a><a href="/nursing-practice/"><img src="/images/cinematic/64358b3119c9.jpg" width="1100" height="753" alt="" /><strong>Nursing practice</strong><small>Hospital and general care</small></a></div><div class="mega-footer"><a href="/blog/">Journal</a><a href="/hire-reeja/">For employers</a><a class="btn" href="/experience/"><span>All experience</span><i aria-hidden="true">＋</i></a></div></div></details>
+      <a href="/about/" aria-current={current('/about/') ? 'page' : undefined}>About</a>
       <a class="btn" href="/contact/" aria-current={current('/contact/') ? 'page' : undefined} data-track="contact-nav"><span>Contact</span><i aria-hidden="true">＋</i></a>
     </nav>
 
@@ -71,6 +71,7 @@ const links = [
           {link.label}
         </a>
       ))}
+      <a href="/about/" aria-current={current('/about/') ? 'page' : undefined}>About</a>
       <a href="/maternal-health/" aria-current={current('/maternal-health/') ? 'page' : undefined}>Maternal health</a>
       <a href="/contact/" aria-current={current('/contact/') ? 'page' : undefined}>Contact</a>
       <a class="mobile-nav__cta" href="/hire-reeja/" aria-current={current('/hire-reeja/') ? 'page' : undefined} data-track="hire-mobile-nav">
