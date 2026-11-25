@@ -8,7 +8,7 @@ export const masteringNursingDocumentationSbarHandover: BlogPost = {
   metaDescription:
     'Learn the SBAR handover format with a nursing example, documentation checklist and clear escalation principles. A source-linked guide by Reeja Maharjan.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-08-07',
+  updatedAt: '2026-11-25',
   readMinutes: 10,
   tags: ['SBAR handover', 'nursing documentation', 'patient safety', 'clinical communication'],
   primaryKeyword: 'nursing documentation and SBAR handover',
