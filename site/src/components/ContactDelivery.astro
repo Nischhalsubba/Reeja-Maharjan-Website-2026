@@ -1,0 +1,13 @@
+---
+import { professionalFacts } from '../content/professional-facts';
+const sitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? '';
+---
+<div class="contact-delivery" data-contact-delivery>
+  {sitekey && <div class="cf-turnstile" data-sitekey={sitekey} data-action="professional_contact" data-appearance="interaction-only" data-theme="dark"></div>}
+  <p class="form-status contact-delivery-status" data-delivery-status role="status" aria-live="polite" hidden></p>
+  <noscript><p>Enable JavaScript to send this form, or <a href={`mailto:${professionalFacts.professionalEmail}`}>email Reeja directly</a>.</p></noscript>
+</div>
+<script>
+  import { initContactDelivery } from '../lib/contactDelivery';
+  initContactDelivery();
+</script>

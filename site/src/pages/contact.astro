@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProfessionalContactForm from '../components/ProfessionalContactForm.astro';
+import ContactDelivery from '../components/ContactDelivery.astro';
 import { professionalFacts } from '../content/professional-facts';
 import { siteCopy } from '../content/site-copy';
 
@@ -9,9 +10,6 @@ const copy = siteCopy.contact;
 
 <BaseLayout title={copy.title} description={copy.description}>
   <div class="contact-page reference-contact">
-    <section id="submission-received" class="container contact-receipt" aria-label="Submission confirmation">
-      <p class="form-status form-status--success" role="status"><strong>Thank you for getting in touch.</strong> If you completed the submission, Reeja can reply by email. A call request is not a confirmed appointment.</p>
-    </section>
     <section class="contact-hero" aria-labelledby="contact-page-title">
       <div class="container contact-hero__grid">
         <div class="contact-hero__copy">
@@ -32,10 +30,8 @@ const copy = siteCopy.contact;
     <section class="contact-section reference-call-section" id="arrange-a-call" aria-labelledby="call-heading">
       <div class="container">
         <div class="reference-call-heading"><h2 id="call-heading">Arrange a call.</h2><p>Online · Nepal time (UTC+05:45)</p></div>
-        <form class="reference-call-grid" id="call-request" method="POST" action={professionalFacts.contactFormEndpoint}>
-          <input type="hidden" name="_subject" value="Professional call request for Reeja Maharjan" />
-          <input type="hidden" name="_next" value="https://reejamaharjan.com.np/contact/#submission-received" />
-          <input type="hidden" name="timezone" value="Nepal time (UTC+05:45)" />
+        <form class="reference-call-grid" id="call-request" method="POST" action={professionalFacts.contactFormEndpoint} data-email-delivery>
+          <input type="hidden" name="kind" value="call" />
           <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="reference-call-availability">
             <p class="site-eyebrow">Preferred time · Nepal time</p>
@@ -51,8 +47,9 @@ const copy = siteCopy.contact;
             <div class="call-contact-fields"><div class="form-field"><label for="call-name">Your name *</label><input id="call-name" name="name" required minlength="2" maxlength="120" autocomplete="name" /></div>
             <div class="form-field"><label for="call-email">Email *</label><input id="call-email" name="email" type="email" required maxlength="254" autocomplete="email" /></div></div>
             <div class="form-field"><label for="call-topic">What would you like to discuss? (optional)</label><textarea id="call-topic" name="topic" maxlength="1000"></textarea></div>
-            <button class="btn yellow" type="submit"><span>Request a time</span><i aria-hidden="true">+</i></button>
-            <p class="reference-call-meta">Your request is sent by email via FormSubmit. You may be asked to complete a spam check. Please avoid sharing patient records or sensitive health information.</p>
+            <button class="btn yellow" type="submit"><span data-submit-label>Request a time</span><i aria-hidden="true">+</i></button>
+            <ContactDelivery />
+            <p class="reference-call-meta">Your request is sent by email. Please avoid sharing patient records or sensitive health information. <a href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja directly</a>.</p>
           </div>
         </form>
       </div>

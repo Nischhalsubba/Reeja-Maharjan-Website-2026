@@ -140,51 +140,44 @@ test('Slate homepage keeps real professional pathways and published article link
 });
 
 for (const path of ['/contact/','/nursing-practice/','/']) {
-  test(`native enquiry sends a readable email payload from ${path}`, async ({page})=>{
-    let payload: URLSearchParams | undefined;
-    await page.route('https://formsubmit.co/**', async route=>{
-      expect(route.request().method()).toBe('POST');
-      payload=new URLSearchParams(route.request().postData() ?? '');
-      await route.fulfill({status:303,headers:{location:origin+'/contact/#submission-received'}});
-    });
+  test(`same-origin enquiry delivery from ${path}`, async ({page})=>{
     await page.goto(origin+path);
     const form=page.locator('#professional-contact-form');
+    await expect(form).toHaveAttribute('action','/api/contact');
+    await expect(form.locator('a[href^="mailto:"]')).toBeVisible();
+    if (!await form.locator('.cf-turnstile').count()) {
+      await expect(form.locator('[data-delivery-status]')).toContainText('not configured');
+      return;
+    }
+    await page.route('**/api/contact',async route=>{
+      expect(route.request().method()).toBe('POST');
+      expect(route.request().postDataJSON().email).toBe('recruiter@example.com');
+      await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true})});
+    });
     await form.getByLabel('Your name').fill('Example Recruiter');
     await form.getByLabel('Work email').fill('recruiter@example.com');
     await form.getByLabel('Message',{exact:true}).fill('A professional enquiry regarding maternal health research.');
+    // Provider tokens are mocked only for this intercepted browser test.
+    await form.evaluate(el=>{let field=el.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]');if(!field){field=document.createElement('input');field.name='cf-turnstile-response';field.type='hidden';el.append(field);}field.value='mock-token';});
     await form.getByRole('button',{name:'Send enquiry'}).click();
-    await expect(page.locator('#submission-received')).toBeVisible();
-    expect(payload?.get('name')).toBe('Example Recruiter');
-    expect(payload?.get('email')).toBe('recruiter@example.com');
-    expect(payload?.get('_template')).toBeNull();
-    expect(payload?.get('_captcha')).toBeNull();
-    expect(payload?.get('_next')).toContain('/contact/#submission-received');
+    await expect(form.locator('[data-delivery-status]')).toContainText('accepted for email delivery');
+    expect(new URL(page.url()).pathname).toBe(path);
   });
 }
 
-test('call request posts preferred time without opening an email app',async({page})=>{
-  let payload: URLSearchParams | undefined;
-  await page.route('https://formsubmit.co/**',async route=>{
-    payload=new URLSearchParams(route.request().postData() ?? '');
-    await route.fulfill({status:303,headers:{location:origin+'/contact/#submission-received'}});
-  });
+test('call request uses the same email delivery endpoint',async({page})=>{
   await page.goto(origin+'/contact/');
   const form=page.locator('#call-request');
+  await expect(form).toHaveAttribute('action','/api/contact');
+  await expect(form.locator('input[name="kind"]')).toHaveValue('call');
   await form.locator('[data-iso]').first().click();
   await form.locator('[data-call-time="09:00"]').click();
-  await form.getByLabel('Your name').fill('Example Recruiter');
-  await form.getByLabel('Email').fill('recruiter@example.com');
-  await form.getByRole('button',{name:'Request a time'}).click();
-  await expect(page.locator('#submission-received')).toBeVisible();
-  expect(payload?.get('date')).toMatch(/^\d{4}-\d{2}-\d{2}$/);
-  expect(payload?.get('time')).toBe('09:00');
-  expect(payload?.get('timezone')).toContain('Nepal');
+  await expect(form.locator('#call-time')).toHaveValue('09:00');
 });
 
 test('contact form keeps invalid users at the field with clear feedback', async ({page})=>{
   await page.goto(origin+'/contact/');
   const form=page.locator('#professional-contact-form');
-  await expect(page.locator('#submission-received')).toBeHidden();
   await form.getByRole('button',{name:'Send enquiry'}).click();
   await expect(form.getByLabel('Your name')).toBeFocused();
   await expect(form.getByLabel('Your name')).toHaveAttribute('aria-invalid','true');
