@@ -16,7 +16,7 @@ const showContact = Astro.url.pathname !== '/contact/';
     <div class="container reference-footer-contact-grid">
       <div>
         <p class="site-eyebrow">Let’s connect</p>
-        <h2>Tell me<br />what’s next</h2>
+        {Astro.url.pathname === '/' ? <h2>Tell me<br />what’s next</h2> : <h2>Let’s talk.</h2>}
         <p>A nursing role, research project or professional collaboration.</p>
         <div class="reference-footer-actions"><a class="btn yellow" href="/contact/#arrange-a-call"><span>Arrange a call</span><i aria-hidden="true">+</i></a><a href={`mailto:${profile.contact.email}`}>Email me</a></div>
       </div>
@@ -33,6 +33,7 @@ const showContact = Astro.url.pathname !== '/contact/';
     <nav class="care-footer__column" aria-label="Explore Reeja's website">
       <h3>Explore</h3>
       <a href="/about/">About Reeja</a>
+      <a href="/education/">Education</a>
       <a href="/experience/">Experience</a>
       <a href="/nursing-practice/">Nursing practice</a>
       <a href="/clinical-research/">Clinical research</a>
@@ -67,6 +68,6 @@ const showContact = Astro.url.pathname !== '/contact/';
     <small title={siteCopy.footer.legal}>© {year} {profile.name}</small>
     <nav aria-label="Footer links"><a href="/blog/">Journal</a><a href="/cv/">Professional CV</a><a href="/contact/">Contact</a><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></nav>
     <span class="reeja-design-credit">Website design by <a href="https://nischhalsubba.com.np/" target="_blank" rel="noopener noreferrer" title="Nischhal Raj Subba — Product Designer">Nischhalsubba.com.np</a></span>
-    <a href="#page-top">Back to top <BrandIcon name="arrow-up" size={18} /></a>
+    {!showContact && <a href="#page-top">Back to top <BrandIcon name="arrow-up" size={18} /></a>}
   </div>
 </footer>

@@ -3,7 +3,7 @@ import { professionalFacts } from './professional-facts';
 const facts = professionalFacts;
 
 export const siteCopy = {
-  updatedAt: '2026-11-24',
+  updatedAt: '2026-11-25',
   siteName: facts.name,
   siteDescriptor: 'Registered Nurse · Maternal Health Research',
   websiteName: 'Reeja Maharjan | Nursing & Maternal Health Research',
@@ -22,7 +22,10 @@ export const siteCopy = {
     'Research participant follow-up',
     'Clinical research coordination',
     'Nursing handover',
-    'Health programme support'
+    'Health programme support',
+    'Rural development studies',
+    'Community health in Nepal',
+    'Health programme coordination in Biratnagar'
   ],
   navigation: [
     { href: '/#experience', label: 'Experience' },
@@ -34,7 +37,7 @@ export const siteCopy = {
   ],
   home: {
     title: `${facts.name} | Registered Nurse & Maternal Health Research, Nepal`,
-    description: `${facts.name} is an Nepal Nursing Council-registered nurse and IISH MOM-HD Research Assistant with clinical nursing, maternal-health research, education and telemonitoring experience in Nepal.`,
+    description: `${facts.name}, B.Sc. Nursing, is a registered nurse in Biratnagar with maternal-health research, hospital nursing and ongoing MA Rural Development studies.`,
     hero: {
       kicker: `${facts.name} · ${facts.credential}`,
       titleBefore: `${facts.name} is a`,
@@ -227,7 +230,7 @@ export const siteCopy = {
   },
   cv: {
     title: `${facts.name} CV | Registered Nurse & Research Assistant`,
-    description: `Review the professional CV of ${facts.name}: B.Sc. Nursing, NNC registration, Texas RN licensure, hospital nursing experience, and IISH MOM-HD research support.`,
+    description: `Review ${facts.name}’s CV: B.Sc. Nursing, NNC registration, hospital and MOM-HD research experience, and ongoing MA Rural Development studies in Biratnagar.`,
     eyebrow: `${facts.name} · Professional CV`,
     lede: `${facts.name}, ${facts.credential}, is a ${facts.nepalLicense} with an ${facts.texasLicense} and current maternal-health research experience with ${facts.currentEmployerShort} in ${facts.currentLocation}.`,
     profileEyebrow: 'Professional profile',
@@ -247,7 +250,7 @@ export const siteCopy = {
     description: `Read nursing and maternal-health articles by ${facts.name} on pregnancy, newborn care, nursing documentation, SBAR handover, clinical communication, and research in Nepal.`,
     eyebrow: 'Writing by Reeja Maharjan',
     heading: 'Nursing and maternal-health articles.',
-    lede: 'Reeja writes practical, source-linked articles for nurses, students, patients, and families. Each clinical article includes its audience, sources, update date, safety note, and review status.',
+    lede: 'Explore source-linked articles for nurses, students and families, informed by Reeja’s interests in maternal health, nursing practice, research and community health. Clinical articles include their sources, update date, safety note and review status.',
     hubEyebrow: 'Featured & topic guides',
     hubHeading: 'Nursing guidance, maternal health and research notes.',
     hubSummary: 'Explore evidence-informed guides organised by maternal health, nursing practice, and digital-health research. Each article links to its sources and explains its clinical scope.',

@@ -167,9 +167,10 @@ export function initCinematicMotion(): void {
       const cover = (name: string) => { const el = document.createElement('span'); el.className = `reference-reveal-cover ${name}`; el.setAttribute('aria-hidden','true'); item.append(el); return el; };
       const gold = cover('reference-reveal-gold'), paper = cover('reference-reveal-paper');
       const timeline=gsap.timeline({paused:true});
-      timeline.set(base,{opacity:0}).set([gold,paper],{scaleX:0,transformOrigin:'left center'});
+      // Keep the actual heading readable even during the sweep and on long wrapped lines.
+      timeline.set(base,{opacity:1}).set([gold,paper],{scaleX:0,transformOrigin:'left center'});
       timeline.to(gold,{scaleX:1,duration:.29,ease:'power3.inOut'},0).to(paper,{scaleX:1,duration:.28,ease:'power3.inOut'},.08);
-      timeline.set(base,{opacity:1},.37).set([gold,paper],{transformOrigin:'right center'},.37);
+      timeline.set([gold,paper],{transformOrigin:'right center'},.37);
       timeline.to(gold,{scaleX:0,duration:.42,ease:'power3.inOut'},.37).to(paper,{scaleX:0,duration:.35,ease:'power3.inOut'},.43);
       ScrollTrigger.create({trigger:heading,start:'top 89%',once:true,onEnter:()=>timeline.delay(index*.085).play()});
     });

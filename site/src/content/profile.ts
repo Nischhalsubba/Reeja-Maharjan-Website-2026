@@ -107,8 +107,9 @@ export const profile: ProfileContent = {
     id: 'education',
     eyebrow: 'Education',
     title: 'Nursing education and academic background',
-    summary: 'Reeja’s education history, including her B.Sc. Nursing degree and prior academic qualifications.'
+    summary: 'Reeja’s completed nursing qualifications and ongoing postgraduate studies in rural development.'
   },
+  education: [{ level: 'MA Rural Development (in progress)', institution: 'Degree Campus, Tribhuvan University, Biratnagar', period: 'Semester 2 · November 2026', result: 'Semester 1 passed; degree not yet completed.' }, ...sourceProfile.education],
   certificationsIntro: {
     id: 'certifications',
     eyebrow: 'Licenses & clinical training',

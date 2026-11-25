@@ -34,12 +34,13 @@ const copy = siteCopy.contact;
             <h3>Choose a time to request.</h3>
             <p>Times are suggestions, not confirmed availability. Reeja will confirm by email.</p>
             <div class="reference-call-date-grid"><div><label for="call-date">Preferred date *</label><input type="date" id="call-date" name="date" required /></div><div><label for="call-time">Preferred time *</label><input type="time" id="call-time" name="time" required /></div></div>
+            <div class="call-request-slots" aria-label="Suggested times in Nepal">{['09:00','09:30','10:00','10:30','11:00','11:30','14:00','14:30','15:00','15:30','16:00','16:30'].map(time => <button type="button" data-call-time={time} aria-pressed="false">{time}</button>)}</div><p class="call-slot-help">Choose a suggested time or enter another preferred time. These are not live calendar slots.</p>
           </div>
           <div class="reference-call-details">
             <h3>Your details.</h3>
             <p>Share your contact details and the topic of your request.</p>
-            <div class="form-field"><label for="call-name">Your name *</label><input id="call-name" name="name" required autocomplete="name" /></div>
-            <div class="form-field"><label for="call-email">Email *</label><input id="call-email" name="email" type="email" required autocomplete="email" /></div>
+            <div class="call-contact-fields"><div class="form-field"><label for="call-name">Your name *</label><input id="call-name" name="name" required autocomplete="name" /></div>
+            <div class="form-field"><label for="call-email">Email *</label><input id="call-email" name="email" type="email" required autocomplete="email" /></div></div>
             <div class="form-field"><label for="call-topic">What would you like to discuss? (optional)</label><textarea id="call-topic" name="topic" maxlength="1000"></textarea></div>
             <button class="btn yellow" type="submit"><span>Request a time</span><i aria-hidden="true">+</i></button>
             <p class="reference-call-meta">This opens your email app. Please avoid sharing patient records or sensitive health information.</p>
@@ -52,6 +53,13 @@ const copy = siteCopy.contact;
 
 <script>
   const form = document.querySelector<HTMLFormElement>('#call-request');
+  const dateInput = document.querySelector<HTMLInputElement>('#call-date');
+  const timeInput = document.querySelector<HTMLInputElement>('#call-time');
+  const slots = [...document.querySelectorAll<HTMLButtonElement>('[data-call-time]')];
+  if (dateInput) dateInput.min = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Kathmandu', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date());
+  const syncSlots = () => slots.forEach(slot => slot.setAttribute('aria-pressed', String(slot.dataset.callTime === timeInput?.value)));
+  slots.forEach(slot => slot.addEventListener('click', () => { if (timeInput) timeInput.value = slot.dataset.callTime ?? ''; syncSlots(); }));
+  timeInput?.addEventListener('input', syncSlots);
   form?.addEventListener('submit', event => {
     event.preventDefault();
     const data = new FormData(form);
