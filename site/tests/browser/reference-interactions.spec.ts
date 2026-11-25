@@ -96,12 +96,53 @@ test('split action labels roll inside a fixed-size tile and keep one accessible 
   const button=page.locator('.hero .btn').first();
   await expect(button).toHaveClass(/ref-action/);
   await expect(button.locator('.ref-action-copy')).toHaveAttribute('aria-hidden','true');
+  await expect(button.locator('.ref-action-icon--leading')).toHaveCount(1);
+  await expect(button.locator('.ref-action-icon--trailing')).toHaveCount(1);
   const before=await button.boundingBox();
   await button.hover();
   await expect.poll(()=>button.locator('.ref-action-original').evaluate(el=>getComputedStyle(el).transform)).not.toBe('none');
   const after=await button.boundingBox();
   expect(Math.abs(before!.width-after!.width)).toBeLessThanOrEqual(1);
   expect(Math.abs(before!.height-after!.height)).toBeLessThanOrEqual(1);
+});
+
+test('desktop custom cursor follows pointer and yields to native form cursor', async ({page}) => {
+  await page.goto(origin+'/contact/');
+  await page.mouse.move(200,200);
+  const cursor=page.locator('.reference-cursor');
+  await expect(cursor).toHaveClass(/is-visible/);
+  await expect(cursor).toHaveCSS('width','11px');
+  await expect(cursor).toHaveCSS('pointer-events','none');
+  await page.locator('input:not([type="hidden"])').first().hover();
+  await expect(cursor).not.toHaveClass(/is-visible/);
+});
+
+test('article metadata presents readable label/value rows', async ({page}) => {
+  await page.setViewportSize({width:1440,height:900});
+  await page.goto(origin+'/blog/');
+  const article=page.locator('main a[href^="/blog/"]:not([href="/blog/"])').first();
+  await article.click();
+  const metadata=page.locator('.blog-article__meta-panel');
+  await expect(metadata).toBeVisible();
+  for(const row of await metadata.locator(':scope > div').all()) {
+    const value=await row.locator('dd').boundingBox();
+    expect(value!.width).toBeGreaterThan(140);
+  }
+});
+
+test('practice and toolkit tabs work with pointer and keyboard', async ({page}) => {
+  await page.goto(origin);
+  const research = page.getByRole('tab',{name:/Research support/});
+  await research.click();
+  await expect(research).toHaveAttribute('aria-selected','true');
+  await expect(page.locator('#panel-research')).toBeVisible();
+  await research.press('ArrowLeft');
+  await expect(page.locator('#panel-clinical')).toBeVisible();
+  await page.goto(origin+'/about/');
+  const tabs=page.locator('.reference-toolkit [role=tab]');
+  await tabs.first().press('End');
+  await expect(tabs.last()).toHaveAttribute('aria-selected','true');
+  await expect(page.locator('.reference-toolkit [role=tabpanel]:visible')).toHaveCount(1);
 });
 
 test('contact enquiry and conversation section retain one form and real contact routes', async ({page})=>{

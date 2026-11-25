@@ -27,12 +27,12 @@ export function initCinematicMotion(): void {
     const updateChapters = () => { const current = chapters.findLast(section=>section.getBoundingClientRect().top <= 150); nav.querySelectorAll('a').forEach(link => { if (link.hash === `#${current?.id}`) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); }); };
     window.addEventListener('scroll',updateChapters,{passive:true}); updateChapters();
   }
-  // Every action is one accessible control with two independent visual tiles.
+  // Every action is one accessible control with three independent visual tiles.
   // Keep the real label node (including the contact form's live submit label).
   const decorateAction = (control: HTMLElement) => {
     if (control.querySelector(':scope > .ref-action-label')) return;
-    const label = control.querySelector<HTMLElement>(':scope > [data-submit-label], :scope > span:not(.form-spinner)');
     const textNode = Array.from(control.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim());
+    const label = control.querySelector<HTMLElement>(':scope > [data-submit-label]') ?? (!textNode ? control.querySelector<HTMLElement>(':scope > span:not(.form-spinner):not([aria-hidden="true"])') : null);
     if (!label && !textNode) return;
     const original = label ?? document.createElement('span');
     if (!label && textNode) { original.textContent = textNode.textContent?.trim().replace(/\s*[＋+−]$/, '') ?? ''; textNode.replaceWith(original); }
@@ -42,11 +42,13 @@ export function initCinematicMotion(): void {
     const duplicate = document.createElement('span'); duplicate.className = 'ref-action-copy'; duplicate.setAttribute('aria-hidden','true');
     duplicate.textContent = original.textContent;
     original.replaceWith(tile); window.append(original, duplicate); tile.append(window);
-    const legacyIcon = control.querySelector(':scope > i, :scope > svg');
-    legacyIcon?.remove();
-    const icon = document.createElement('span'); icon.className = 'ref-action-icon'; icon.setAttribute('aria-hidden','true');
-    const plus = document.createElement('span'); plus.className = 'ref-action-plus'; plus.textContent = control.id === 'more' && control.getAttribute('aria-expanded') === 'true' ? '−' : '+';
-    icon.append(plus); control.append(icon);
+    control.querySelectorAll(':scope > i, :scope > svg, :scope > span[aria-hidden="true"]:not(.form-spinner)').forEach(icon => icon.remove());
+    const createIcon = (position: 'leading' | 'trailing') => {
+      const icon = document.createElement('span'); icon.className = `ref-action-icon ref-action-icon--${position}`; icon.setAttribute('aria-hidden','true');
+      const plus = document.createElement('span'); plus.className = 'ref-action-plus'; plus.textContent = control.id === 'more' && control.getAttribute('aria-expanded') === 'true' ? '−' : '+';
+      icon.append(plus); return icon;
+    };
+    control.prepend(createIcon('leading')); control.append(createIcon('trailing'));
     control.classList.add('ref-action');
     if (original.hasAttribute('data-submit-label')) {
       const observer = new MutationObserver(() => { duplicate.textContent = original.textContent; });
@@ -66,7 +68,55 @@ export function initCinematicMotion(): void {
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) ScrollTrigger.refresh();
     });
   }
+  document.querySelectorAll<HTMLElement>('[data-reference-tabs]').forEach(group => {
+    const tabs = Array.from(group.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const activate = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1;
+        const panel = document.getElementById(tab.getAttribute('aria-controls') ?? ''); if (panel) panel.hidden = i !== index;
+      });
+      if (focus) tabs[index]?.focus();
+    };
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', event => {
+        const next = event.key === 'ArrowRight' ? (index + 1) % tabs.length : event.key === 'ArrowLeft' ? (index + tabs.length - 1) % tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : -1;
+        if (next >= 0) { event.preventDefault(); activate(next, true); }
+      });
+    });
+  });
+  document.querySelectorAll<HTMLElement>('[data-reference-gallery]').forEach(gallery => {
+    const track = gallery.querySelector<HTMLElement>('.reference-gallery-track');
+    if (!track) return;
+    gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-direction]').forEach(button => button.addEventListener('click', () => {
+      const item = track.querySelector('figure');
+      track.scrollBy({left: Number(button.dataset.galleryDirection) * ((item?.getBoundingClientRect().width ?? track.clientWidth) + 16), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+    }));
+  });
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  if (pointer.matches) {
+    const cursor = document.createElement('span'); cursor.className = 'reference-cursor'; cursor.setAttribute('aria-hidden','true'); document.body.append(cursor);
+    const hide = () => { cursor.classList.remove('is-visible', 'is-pressed'); document.documentElement.classList.remove('cursor-active'); };
+    document.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'mouse' || !pointer.matches) { hide(); return; }
+      const target = event.target as HTMLElement;
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) { hide(); return; }
+      let light = true;
+      for (let el: HTMLElement | null = target; el; el = el.parentElement) {
+        const color = getComputedStyle(el).backgroundColor.match(/[\d.]+/g)?.map(Number);
+        if (!color || color.length < 3 || (color[3] ?? 1) < .5) continue;
+        const [r = 0, g = 0, b = 0] = color;
+        light = r * .2126 + g * .7152 + b * .0722 > 140; break;
+      }
+      cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
+      cursor.classList.toggle('on-light', light); cursor.classList.toggle('is-action', !!target.closest('a,button,summary,[role="button"]'));
+      cursor.classList.add('is-visible'); document.documentElement.classList.add('cursor-active');
+    }, { passive: true });
+    document.addEventListener('pointerdown', () => cursor.classList.add('is-pressed'));
+    document.addEventListener('pointerup', () => cursor.classList.remove('is-pressed'));
+    document.addEventListener('pointercancel', hide); document.documentElement.addEventListener('pointerleave', hide); window.addEventListener('blur', hide); pointer.addEventListener('change', hide);
+  }
   gsap.registerPlugin(ScrollTrigger);
   menu?.addEventListener('toggle', () => {
     if (!menu.open) return;
@@ -101,7 +151,7 @@ export function initCinematicMotion(): void {
       if (!active) return;
       const distance = Math.max(1, track.offsetHeight - window.innerHeight);
       progress = gsap.utils.clamp(0, 1, -track.getBoundingClientRect().top / distance);
-      track.style.setProperty('--hero-copy-shade', String(Math.min(.94, Math.sin(progress * Math.PI) * 1.2)));
+      track.style.setProperty('--hero-copy-shade', String(progress > .18 ? .94 : Math.min(.94, progress * 5.3)));
       const target = progress * Math.max(0, video.duration - 1 / 24);
       if (Math.abs(video.currentTime - target) > 0.025) video.currentTime = target;
       if (progress <= 0.005) { video.hidden = true; poster.hidden = false; }
