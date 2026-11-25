@@ -2,13 +2,13 @@ import type { BlogPost } from './types';
 
 export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
   slug: 'from-nursing-student-to-registered-nurse-my-journey',
-  title: 'Reeja Maharjan’s Nursing Journey: From B.Sc. Nursing to Hospital and Research Work',
+  title: 'Reeja Maharjan’s Nursing Journey: Hospital Care, Research and Rural Development',
   excerpt:
-    'Follow Reeja Maharjan’s professional path from B.Sc. Nursing and NNC registration through Sindhuli Hospital, MMTH, TUTH, Texas RN licensure, and maternal-health research with IISH.',
+    'Follow Reeja Maharjan’s career from nursing education and hospital care to maternal-health research in Biratnagar and ongoing MA Rural Development studies.',
   metaDescription:
-    'Read Reeja Maharjan’s nursing journey from B.Sc. Nursing and NNC registration to hospital roles at Sindhuli, MMTH and TUTH and maternal-health research with IISH.',
+    'Meet Reeja Maharjan, a registered nurse in Biratnagar, Nepal. Explore her hospital nursing, IISH maternal-health research and ongoing MA Rural Development studies.',
   publishedAt: '2026-03-11',
-  updatedAt: '2026-11-02',
+  updatedAt: '2026-11-25',
   readMinutes: 8,
   tags: ['Reeja Maharjan', 'nursing career', 'registered nurse Nepal', 'hospital nursing'],
   primaryKeyword: 'Reeja Maharjan nursing journey',
@@ -17,7 +17,7 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
     'B.Sc. Nursing Nepal',
     'TUTH nursing experience',
     'Sindhuli Hospital nursing',
-    'maternal health research nurse Nepal'
+    'maternal health research nurse Nepal', 'nursing and rural development Nepal'
   ],
   quickAnswer: [
     'Reeja Maharjan completed B.Sc. Nursing, became a Nepal Nursing Council registered nurse, and built hospital experience at Sindhuli Hospital, Manmohan Memorial Medical College & Teaching Hospital, and Tribhuvan University Teaching Hospital.',
@@ -85,6 +85,14 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
         'In May 2026, Reeja began working as a Research Assistant with the Institute for Implementation Science and Health on the MOM-HD maternal-health telemonitoring trial in Biratnagar.',
         'The role builds on familiar nursing strengths in a different workflow: participant education, home BP/BG monitoring support, tele-follow-up, documentation, data-quality checks, device coordination, and protocol-based escalation.'
       ]
+    },
+    {
+      id: 'postgraduate-learning',
+      title: 'Continuing education in rural development',
+      paragraphs: [
+        'Reeja is pursuing an MA in Rural Development at Tribhuvan University’s Degree Campus, Biratnagar. As of November 2026, she has passed the first semester and is studying the second. This is an ongoing course of study, not a completed master’s qualification.',
+        'Nursing and rural development offer complementary ways to think about how people access services. Learning about community conditions and local institutions can inform questions about care access, communication and health programme coordination. This is an academic interest, not a claim of completed research or specialist clinical accreditation.'
+      ]
     }
   ],
   faq: [
@@ -107,7 +115,8 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
       question: 'What kind of work connects Reeja’s hospital and research experience?',
       answer:
         'Patient and participant education, documentation, monitoring, follow-up, handover or escalation, and coordination appear repeatedly across her clinical and research roles.'
-    }
+    },
+    {question: 'Where is Reeja studying rural development?', answer: 'She is studying the MA Rural Development programme at Degree Campus, Tribhuvan University, Biratnagar, and has advanced to semester two.'}
   ],
   sources: [
     {
@@ -121,7 +130,9 @@ export const fromNursingStudentToRegisteredNurseMyJourney: BlogPost = {
     {
       label: 'Nepal Nursing Council official website',
       href: 'https://nnc.org.np/'
-    }
+    },
+    {label: 'Degree Campus, Tribhuvan University — MA Rural Development', href: 'https://degreecampus.tu.edu.np/pages/ma-rural-development-2904'},
+    {label: 'Reeja Maharjan — education profile', href: '/education/'}
   ],
   relatedSlugs: [
     'navigating-nurse-licensure-continuing-education-nepal',

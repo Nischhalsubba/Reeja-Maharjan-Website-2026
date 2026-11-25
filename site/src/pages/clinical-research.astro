@@ -22,6 +22,7 @@ import BrandAction from '../components/design-system/BrandAction.astro';
 import BrandCard from '../components/design-system/BrandCard.astro';
 import EvidenceList from '../components/design-system/EvidenceList.astro';
 import Eyebrow from '../components/design-system/Eyebrow.astro';
+import PracticeStory from '../components/PracticeStory.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -39,7 +40,7 @@ import Eyebrow from '../components/design-system/Eyebrow.astro';
     </section>
     <section class="site-section site-section--dark reference-case-overview" id="overview" aria-labelledby="overview-heading">
       <div class="container reference-case-overview-grid">
-        <div><p class="site-eyebrow">Overview</p><h2 id="overview-heading">At a glance.</h2><p>Research in maternal health</p></div>
+        <div><p class="site-eyebrow">Overview</p><h2 id="overview-heading">Research that connects care and follow-up.</h2><p>My contribution is research support, not independent clinical decision-making. The MOM-HD study brings together participant education, monitoring and documentation within established research procedures.</p><p><a href="/education/">Explore my ongoing academic studies →</a></p></div>
         <EvidenceList items={[
           { label: 'Current role', value: `${professionalFacts.currentRole}, ${professionalFacts.currentEmployerShort}` },
           { label: 'Project', value: professionalFacts.currentProjectShort },
@@ -49,6 +50,11 @@ import Eyebrow from '../components/design-system/Eyebrow.astro';
       </div>
     </section>
     <EditorialPhoto kind="research" label="Education, monitoring and follow-up in maternal-health research" />
+    <PracticeStory title="From conversation to coordination." intro="The practical work that connects participant communication, records and research teams in the MOM-HD study." chapters={[
+      {title:'Participant communication',text:'Support screening and consent workflows within the approved research protocol, with clear explanations and organised records.',image:'/images/cinematic/99f458695911.jpg',alt:'Illustrative clinical documentation'},
+      {title:'Monitoring support',text:'Help participants understand their assigned monitoring process and maintain contact with the research team.',image:'/images/cinematic/4c6c586bf16b.jpg',alt:'Illustrative blood pressure monitoring'},
+      {title:'Care-team coordination',text:'Maintain study documentation and communicate concerns to the appropriate team according to the study protocol.',image:'/images/cinematic/64358b3119c9.jpg',alt:'Illustrative hospital team'}
+    ]} />
 
     <section class="site-section">
       <div class="container">

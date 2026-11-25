@@ -1,6 +1,10 @@
 export const professionalFacts = {
   name: 'Reeja Maharjan',
   credential: 'B.Sc. Nursing',
+  currentStudy: 'MA Rural Development, Tribhuvan University',
+  studyCampus: 'Degree Campus, Biratnagar',
+  studyStatus: 'In progress · semester 2; semester 1 passed (reported November 2026)',
+  studyProgramUrl: 'https://degreecampus.tu.edu.np/pages/ma-rural-development-2904',
   primaryRole: 'Registered Nurse and Maternal Health Research Assistant',
   publicRoleLabel: 'NNC Licensed Registered Nurse and Maternal Health Research Assistant',
 

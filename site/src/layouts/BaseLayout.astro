@@ -31,7 +31,7 @@ const {
 
 const pathname = Astro.url.pathname;
 const isArticlePage = pathname.startsWith('/blog/') && pathname !== '/blog/' && !pathname.startsWith('/blog/topics/');
-const isProfilePage = pathname === '/' || pathname === '/about/' || pathname === '/hire-reeja/' || pathname === '/cv/';
+const isProfilePage = pathname === '/' || pathname === '/about/' || pathname === '/hire-reeja/' || pathname === '/cv/' || pathname === '/education/';
 const canonicalUrl = new URL(pathname, Astro.site ?? Astro.url.origin).toString();
 const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
 const portraitUrl = new URL('/reeja-headshot.jpg', Astro.site ?? Astro.url.origin).toString();
@@ -47,6 +47,7 @@ const personSchema = {
   image: portraitUrl,
   jobTitle: professionalFacts.primaryRole,
   description: siteCopy.profileSummary,
+  affiliation: [{ '@type': 'CollegeOrUniversity', name: 'Degree Campus, Tribhuvan University', url: professionalFacts.studyProgramUrl }],
   email: professionalFacts.professionalEmail,
   address: {
     '@type': 'PostalAddress',
@@ -85,7 +86,7 @@ const graphSchema = {
           url: canonicalUrl,
           name: title,
           description,
-          dateModified: siteCopy.updatedAt,
+          dateModified: `${siteCopy.updatedAt}T00:00:00+05:45`,
           mainEntity: { '@id': 'https://reejamaharjan.com.np/#person' },
           isPartOf: { '@id': 'https://reejamaharjan.com.np/#website' }
         }]

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PracticeStory from '../components/PracticeStory.astro';
+import {profile} from '../content/profile';
+const role=profile.experience.find(item=>item.organization.includes('Sindhuli'));
+---
+<BaseLayout title="Maternity Nursing Experience at Sindhuli Hospital | Reeja Maharjan" description="Explore Reeja Maharjan’s nursing officer experience at Sindhuli Hospital in Nepal, including maternity-related nursing support, documentation and team coordination.">
+  <div class="site-page reference-maternity">
+    <section class="site-page__hero reference-case-hero"><div class="container site-page__hero-grid"><div><p class="site-eyebrow">Sindhuli Hospital · Nursing Officer</p><h1>Maternity nursing.<br/>Care and coordination.</h1><p class="reference-case-tags">Hospital nursing · Maternity support · Documentation</p><p class="site-page__lede">My nursing officer experience in Sindhuli included maternity-related responsibilities and organised ward coordination.</p></div></div></section>
+    <section class="site-section site-section--dark reference-case-overview"><div class="container reference-case-overview-grid"><div><h2>Where my clinical journey grew.</h2><p>{role?.period} · {role?.organization}</p><ul>{role?.bullets.map(bullet=><li>{bullet}</li>)}</ul></div><dl class="site-page__summary"><div><dt>Role</dt><dd>{role?.role}</dd></div><div><dt>Location</dt><dd>{role?.location}</dd></div><div><dt>Scope</dt><dd>Assigned nursing duties and clinical-team coordination</dd></div></dl></div></section>
+    <PracticeStory title="A foundation for later maternity work." intro="The clinical setting shaped my professional interest in clear records, family communication and team-based care." chapters={[
+      {title:'Maternity-related nursing',text:'Supported maternity-related care and assigned antenatal and postnatal routines within the hospital team.',image:'/images/cinematic/4123471de1d5.jpg',alt:'Illustrative maternal and newborn care'},
+      {title:'Organised hospital workflow',text:'Supported assigned operation-theatre-related and ward duties, with attention to aseptic practice and organised coordination.',image:'/images/cinematic/64358b3119c9.jpg',alt:'Illustrative hospital care team'},
+      {title:'Documentation and continuity',text:'Maintained nursing documentation and helped coordinate everyday ward responsibilities.',image:'/images/cinematic/99f458695911.jpg',alt:'Illustrative clinical documentation'}
+    ]}/>
+    <section class="site-section"><div class="container site-page__split"><div><h2>Explore my next chapters.</h2><p>See my hospital experience, qualifications and ongoing research work.</p></div><div class="site-actions"><a class="btn yellow" href="/experience/"><span>All experience</span><i aria-hidden="true">+</i></a><a class="btn" href="/maternal-health/"><span>Maternal health</span><i aria-hidden="true">+</i></a><a class="btn" href="/cv/"><span>Professional CV</span><i aria-hidden="true">+</i></a></div></div></section>
+  </div>
+</BaseLayout>
