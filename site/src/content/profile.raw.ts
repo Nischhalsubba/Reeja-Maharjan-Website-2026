@@ -592,6 +592,6 @@ export const profile: ProfileContent = {
     linkedin: 'https://www.linkedin.com/in/reejamaharjan/',
     instagram: 'https://www.instagram.com/maharjan_reeja/',
     resumeUrl: '/resume.pdf',
-    formEndpoint: 'https://formsubmit.co/ajax/maharjanreeja88@gmail.com'
+    formEndpoint: 'https://formsubmit.co/maharjanreeja88@gmail.com'
   }
 };

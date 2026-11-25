@@ -9,6 +9,9 @@ const copy = siteCopy.contact;
 
 <BaseLayout title={copy.title} description={copy.description}>
   <div class="contact-page reference-contact">
+    <section id="submission-received" class="container contact-receipt" aria-label="Submission confirmation">
+      <p class="form-status form-status--success" role="status"><strong>Thank you for getting in touch.</strong> If you completed the submission, Reeja can reply by email. A call request is not a confirmed appointment.</p>
+    </section>
     <section class="contact-hero" aria-labelledby="contact-page-title">
       <div class="container contact-hero__grid">
         <div class="contact-hero__copy">
@@ -29,7 +32,11 @@ const copy = siteCopy.contact;
     <section class="contact-section reference-call-section" id="arrange-a-call" aria-labelledby="call-heading">
       <div class="container">
         <div class="reference-call-heading"><h2 id="call-heading">Arrange a call.</h2><p>Online · Nepal time (UTC+05:45)</p></div>
-        <form class="reference-call-grid" id="call-request" action={`mailto:${professionalFacts.professionalEmail}`} data-call-email={professionalFacts.professionalEmail}>
+        <form class="reference-call-grid" id="call-request" method="POST" action={professionalFacts.contactFormEndpoint}>
+          <input type="hidden" name="_subject" value="Professional call request for Reeja Maharjan" />
+          <input type="hidden" name="_next" value="https://reejamaharjan.com.np/contact/#submission-received" />
+          <input type="hidden" name="timezone" value="Nepal time (UTC+05:45)" />
+          <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="reference-call-availability">
             <p class="site-eyebrow">Preferred time · Nepal time</p>
             <h3>Choose a time to request.</h3>
@@ -41,11 +48,11 @@ const copy = siteCopy.contact;
           <div class="reference-call-details">
             <h3>Your details.</h3>
             <p>Share your contact details and the topic of your request.</p>
-            <div class="call-contact-fields"><div class="form-field"><label for="call-name">Your name *</label><input id="call-name" name="name" required autocomplete="name" /></div>
-            <div class="form-field"><label for="call-email">Email *</label><input id="call-email" name="email" type="email" required autocomplete="email" /></div></div>
+            <div class="call-contact-fields"><div class="form-field"><label for="call-name">Your name *</label><input id="call-name" name="name" required minlength="2" maxlength="120" autocomplete="name" /></div>
+            <div class="form-field"><label for="call-email">Email *</label><input id="call-email" name="email" type="email" required maxlength="254" autocomplete="email" /></div></div>
             <div class="form-field"><label for="call-topic">What would you like to discuss? (optional)</label><textarea id="call-topic" name="topic" maxlength="1000"></textarea></div>
             <button class="btn yellow" type="submit"><span>Request a time</span><i aria-hidden="true">+</i></button>
-            <p class="reference-call-meta">This opens your email app. Please avoid sharing patient records or sensitive health information.</p>
+            <p class="reference-call-meta">Your request is sent by email via FormSubmit. You may be asked to complete a spam check. Please avoid sharing patient records or sensitive health information.</p>
           </div>
         </form>
       </div>
@@ -54,7 +61,6 @@ const copy = siteCopy.contact;
 </BaseLayout>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('#call-request');
   const dateInput = document.querySelector<HTMLInputElement>('#call-date');
   const timeInput = document.querySelector<HTMLInputElement>('#call-time');
   const slots = [...document.querySelectorAll<HTMLButtonElement>('[data-call-time]')];
@@ -76,10 +82,4 @@ const copy = siteCopy.contact;
   const syncSlots = () => slots.forEach(slot => slot.setAttribute('aria-pressed', String(slot.dataset.callTime === timeInput?.value)));
   slots.forEach(slot => slot.addEventListener('click', () => { if (timeInput) timeInput.value = slot.dataset.callTime ?? ''; syncSlots(); }));
   timeInput?.addEventListener('input', syncSlots);
-  form?.addEventListener('submit', event => {
-    event.preventDefault();
-    const data = new FormData(form);
-    const body = `Hello Reeja,\n\nI would like to request a professional call.\nPreferred date: ${data.get('date')}\nPreferred time: ${data.get('time')} (Nepal time)\nName: ${data.get('name')}\nEmail: ${data.get('email')}\nTopic: ${data.get('topic') || 'Not specified'}\n\nPlease confirm whether this works for you.`;
-    window.location.href = `mailto:${form.dataset.callEmail}?subject=${encodeURIComponent('Professional call request')}&body=${encodeURIComponent(body)}`;
-  });
 </script>

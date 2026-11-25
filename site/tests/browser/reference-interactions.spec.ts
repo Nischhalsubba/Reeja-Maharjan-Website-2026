@@ -158,7 +158,7 @@ test('contact enquiry and conversation section retain one form and real contact 
   await expect(page.locator('#contact-role')).toHaveJSProperty('tagName','SELECT');
   await expect(page.locator('#arrange-a-call')).toBeVisible();
   await expect(page.getByRole('button',{name:'Request a time'})).toBeVisible();
-  await expect(page.locator('#call-request')).toHaveAttribute('action',/mailto:/);
+  await expect(page.locator('#call-request')).toHaveAttribute('action',/^https:\/\/formsubmit\.co\//);
   await expect(page.locator('#call-date')).toHaveAttribute('required','');
   await page.goto(origin+'/about/');
   await expect(page.locator('footer #professional-contact-form')).toHaveCount(1);
