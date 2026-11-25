@@ -72,7 +72,7 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
   <input type="hidden" name="_subject" value="Professional inquiry for Reeja Maharjan from reejamaharjan.com.np" />
   <input type="hidden" name="_template" value="table" />
   {!turnstileSitekey && <input type="hidden" name="_captcha" value="false" />}
-  <input type="hidden" name="_url" value="https://reejamaharjan.com.np/contact/" />
+  <input type="hidden" name="_url" value={new URL(Astro.url.pathname, "https://reejamaharjan.com.np").toString()} />
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
   {turnstileSitekey && (
@@ -83,7 +83,7 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
     </div>
   )}
   <details class="professional-contact-form__privacy">
-    <summary>Privacy and message delivery</summary>
+    <summary>Privacy and message delivery · No patient records</summary>
     {turnstileSitekey ? (
       <p>This inquiry is checked by Cloudflare Turnstile and submitted to an email delivery provider. An accepted submission is not a guarantee of inbox receipt. Do not send patient records, identity documents, licence scans or sensitive health information.</p>
     ) : (
