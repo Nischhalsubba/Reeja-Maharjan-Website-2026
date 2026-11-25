@@ -142,3 +142,24 @@ body[data-page-route="/clinical-research/"]{--chapter-photo:url('/images/cinemat
 @media(max-width:600px){.cv-page :is(.cv-profile-grid,.cv-columns,.site-page__hero-grid,.cv-experience__item,.cv-credential){grid-template-columns:minmax(0,1fr)}.cv-page :is(.cv-profile-grid,.cv-columns,.site-page__hero-grid,.cv-experience__item,.cv-credential)>*{min-width:0;max-width:100%;overflow-wrap:anywhere}.cv-page :is(.cv-credential__verification,.cv-credential__note,.cv-profile-copy,.cv-skill-group,.cv-experience__heading){overflow-wrap:anywhere}.cv-page .ref-action{max-width:100%;min-width:0}.cv-page .ref-action-label{flex:0 1 auto;min-width:0;max-width:100%;padding-inline:10px}.cv-page .ref-action-window{min-width:0;max-width:100%;white-space:normal;height:auto;text-align:center}.cv-page .ref-action-original,.cv-page .ref-action-copy{overflow-wrap:anywhere}.cv-page .site-actions{align-items:flex-start}}
 .reference-footer-disclosures{display:flex;flex-wrap:wrap;gap:0 24px;border-top:1px solid #333}.reference-footer-disclosures details{border:0;padding:8px 0;margin:0;width:auto}.reference-footer-disclosures details[open]{flex-basis:100%}.reference-footer-disclosures summary{font-size:12px;padding:7px 0}.reference-footer-disclosures .care-footer__main{padding:16px 0}.reference-footer-contact .professional-contact-form{margin:0}.reference-footer-wave{opacity:.9}
 @media(min-width:901px){.hero-bottom>div,.hero-bottom>div:last-child{position:relative;isolation:isolate;background:none}.hero-bottom>div::before{content:"";position:absolute;inset:-14px;z-index:-1;background:var(--paper);filter:blur(17px);opacity:var(--hero-copy-shade,0);pointer-events:none}}
+
+/* Reversible film chapter: the portrait stays pinned, editorial copy travels
+   with the document, and a yellow exposure wash connects the next section. */
+.hero-track.has-film .hero-bottom{opacity:var(--hero-copy-opacity,1)!important;transform:translate3d(0,var(--hero-copy-y,0px),0);transition:none;will-change:transform,opacity}
+.hero-track.has-film .hero-bottom:focus-within{opacity:1!important;transform:none;background:none}
+.hero-track.hero-copy-out .hero-bottom:not(:focus-within){pointer-events:none}
+.hero::after{content:"";position:absolute;inset:0;background:var(--yellow);opacity:var(--hero-wash,0);pointer-events:none;z-index:5}
+.hero-bottom>div::before{display:none!important}.hero-bottom>div,.hero-bottom>div:last-child{background:none}
+@media(min-width:901px){.hero-bottom>div:first-child{width:44%;max-width:530px}.hero-bottom>div:last-child{width:27%;max-width:390px}.hero h1{font-size:clamp(30px,2.5vw,42px);letter-spacing:-.04em}.hero h1 .reference-reveal-line{width:max-content;max-width:100%}.hero h1 .reference-reveal-ink{white-space:nowrap}.hero-bottom{bottom:4.3%}}
+@media(max-width:900px){.hero-bottom>div,.hero-bottom>div:last-child{background:var(--paper)}.hero h1 .reference-reveal-ink{white-space:normal}}
+.site-header.hero-active.hero-closeup .desktop-nav,.site-header.hero-active.hero-closeup .brand{background:none;padding:0;margin:0}
+.site-footer{position:relative;isolation:isolate}.footer-nepali-rain{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+.reference-story .reference-timeline{position:relative;padding-left:40px;--timeline-progress:1}
+.reference-story .reference-timeline::before,.reference-story .reference-timeline::after{content:"";position:absolute;top:9px;bottom:20px;pointer-events:none}
+.reference-story .reference-timeline::before{left:6px;width:1px;background:#14131430}
+.reference-story .reference-timeline::after{left:5px;width:3px;background:linear-gradient(180deg,transparent,#141314c7 12%,#141314 72%,white 94%,transparent);transform:scaleY(var(--timeline-progress));transform-origin:top}
+.reference-story .reference-timeline>li{position:relative;padding:0 0 36px;border-top:0;border-bottom:1px dashed #14131440;margin-bottom:32px}
+.reference-story .reference-timeline>li::before{content:"";position:absolute;left:-40px;top:3px;width:13px;height:13px;border:1px solid #14131480;background:var(--yellow);z-index:2;transition:background .22s,border-color .22s}
+.reference-story .reference-timeline>li.is-active::before{background:#141314;border-color:#141314}
+.reference-story .reference-timeline>li h3{font-size:clamp(24px,2.35vw,36px);line-height:1.08;letter-spacing:-.035em}
+@media(prefers-reduced-motion:reduce){.hero-track.has-film .hero-bottom{transform:none;opacity:1!important}.hero::after,.footer-nepali-rain{display:none}.reference-story .reference-timeline::after{transform:none}}

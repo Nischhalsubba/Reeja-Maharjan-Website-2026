@@ -16,7 +16,7 @@ export function initCinematicRain(){
   const random = (min, max) => min + Math.random() * (max-min);
   const character = () => characters[Math.floor(Math.random()*characters.length)];
   function refreshSamples() {
-    const source = video.hidden ? image : video;
+    const source = video.classList.contains('film-visible') && video.readyState >= 2 ? video : image;
     const sw = source.videoWidth || source.naturalWidth;
     const sh = source.videoHeight || source.naturalHeight;
     if (!sw || !sh || !width || !height) return;
@@ -65,7 +65,8 @@ export function initCinematicRain(){
         if(y<0||y>height) continue;
         const alpha=Math.max(0,fade)*(1-j/s.length)*s.opacity;
         if(alpha<.015) continue;
-        ctx.fillStyle=darkAt(s.x,y)?`rgba(255,215,0,${alpha*.83})`:`rgba(45,43,35,${alpha*.51})`;
+        const strength=s.pointer?Math.min(1,alpha*2.4):alpha;
+        ctx.fillStyle=darkAt(s.x,y)?`rgba(255,215,0,${strength*.83})`:`rgba(20,19,20,${strength*(s.pointer ? .85 : .51)})`;
         ctx.fillText(s.glyphs[j],s.x,y);
       }
       if(s.y-s.spacing*s.length>height || s.age>s.life)streams[i]=spawn(Math.random()<.77,null,-random(20,height*.25));
@@ -81,15 +82,29 @@ export function initCinematicRain(){
   document.addEventListener('visibilitychange',()=>document.hidden?halt():start());
   let lastPointer=0;
   scene.closest('.hero').addEventListener('pointermove',event=>{
-    if(event.pointerType==='touch'||performance.now()-lastPointer<320)return;
+    if(event.pointerType==='touch'||performance.now()-lastPointer<100)return;
     const r=scene.getBoundingClientRect(),x=event.clientX-r.left,y=event.clientY-r.top;
     if(x<0||x>width||y<0||y>height)return;
     lastPointer=performance.now();
-    streams.push(spawn(false,x+random(-22,22),y-random(10,65)));
-    if(streams.length>32)streams.shift();
+    const stream=spawn(false,x+random(-32,32),y-random(0,24));
+    Object.assign(stream,{pointer:true,opacity:.85,age:.35,life:2.8,speed:42,length:6});streams.push(stream);
+    if(streams.length>55)streams.shift();
   },{passive:true});
   resize();start();
 })();
 
 
+}
+
+// Footer glyphs are a local pointer trail, not a full-screen animated background.
+export function initFooterRain(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches||!matchMedia('(pointer: fine)').matches)return;
+  const footer=document.querySelector('.site-footer');if(!footer)return;
+  const canvas=document.createElement('canvas');canvas.className='footer-nepali-rain';canvas.setAttribute('aria-hidden','true');footer.prepend(canvas);
+  const ctx=canvas.getContext('2d');if(!ctx)return;
+  const glyphs=Array.from('अआइईउएऐकखगघचछजटठडणतथदधनपफबभमयरलवशषसह०१२३४५६७८९');
+  let streams=[],frame=0,last=0,w=0,h=0;
+  const resize=()=>{const r=footer.getBoundingClientRect();w=r.width;h=r.height;const d=Math.min(devicePixelRatio||1,2);canvas.width=Math.ceil(w*d);canvas.height=Math.ceil(h*d);ctx.setTransform(d,0,0,d,0,0);};new ResizeObserver(resize).observe(footer);resize();
+  const draw=t=>{frame=0;ctx.clearRect(0,0,w,h);ctx.font='12px "Nepali Rain", sans-serif';ctx.textAlign='center';streams=streams.filter(s=>t-s.time<2200);for(const s of streams){const age=(t-s.time)/1000;for(let i=0;i<s.chars.length;i++){const alpha=Math.min(1,age*5)*(1-age/2.2)*(1-i/s.chars.length)*.65;ctx.fillStyle=`rgba(255,224,0,${Math.max(0,alpha)})`;ctx.fillText(s.chars[i],s.x,s.y+age*55-i*15);}}if(streams.length&&!document.hidden)frame=requestAnimationFrame(draw);};
+  footer.addEventListener('pointermove',e=>{if(e.pointerType==='touch'||performance.now()-last<105)return;last=performance.now();const r=footer.getBoundingClientRect();streams.push({x:e.clientX-r.left+(Math.random()-.5)*35,y:e.clientY-r.top,time:last,chars:Array.from({length:7},()=>glyphs[Math.floor(Math.random()*glyphs.length)])});if(streams.length>30)streams.shift();if(!frame)frame=requestAnimationFrame(draw);},{passive:true});
 }
