@@ -11,6 +11,7 @@ export function initCinematicMotion(): void {
   const sections = Array.from(document.querySelectorAll<HTMLElement>('.hero-track,.profile,.section,.orgs,.site-page__hero,.cv-page__hero,.contact-hero,.contact-section,.blog-index__hero,.blog-article__header,.site-section'));
   const updateHeader = () => {
     const active = sections.findLast(section => section.getBoundingClientRect().top <= 32) ?? sections[0];
+    header?.classList.toggle('hero-active', !!active?.matches('.hero-track'));
     header?.classList.toggle('dark', !!active?.matches('.dark,.site-section--dark,.site-page__hero,.contact-hero,.blog-article__header'));
     header?.classList.toggle('yellow', !!active?.matches('.profile,.contact,.site-section--soft,.reference-story'));
     if (document.body.dataset.pageRoute === '/contact/') { header?.classList.add('dark'); header?.classList.remove('yellow'); }
@@ -146,30 +147,54 @@ export function initCinematicMotion(): void {
     let frame = 0;
     let active = false;
     let progress = 0;
+    let localVideoUrl: string | undefined;
+    let recovering = false;
+    const isSeekable = () => video.seekable.length > 0 && video.seekable.end(video.seekable.length - 1) > .1;
+    // Some static CDN responses buffer the whole MP4 but expose a zero-length
+    // seekable range. Load the exact same film into an in-memory media URL once.
+    const recoverSeekability = async () => {
+      if (recovering || localVideoUrl) return;
+      recovering = true;
+      try {
+        const response = await fetch(video.currentSrc || video.src);
+        if (!response.ok) throw new Error('Film download failed');
+        localVideoUrl = URL.createObjectURL(await response.blob());
+        video.src = localVideoUrl;
+        video.load();
+      } catch { fallback(); }
+      finally { recovering = false; }
+    };
     const updateFilm = () => {
       frame = 0;
       if (!active) return;
       const distance = Math.max(1, track.offsetHeight - window.innerHeight);
       progress = gsap.utils.clamp(0, 1, -track.getBoundingClientRect().top / distance);
       track.style.setProperty('--hero-copy-shade', String(progress > .18 ? .94 : Math.min(.94, progress * 5.3)));
-      const target = progress * Math.max(0, video.duration - 1 / 24);
-      if (Math.abs(video.currentTime - target) > 0.025) video.currentTime = target;
-      if (progress <= 0.005) { video.hidden = true; poster.hidden = false; }
-      else if (video.readyState >= 2 && !video.seeking) { video.hidden = false; poster.hidden = true; }
+      track.style.setProperty('--hero-copy-opacity', String(Math.max(0, 1 - progress * 3.5)));
+      const target = Math.pow(progress, 1.65) * Math.max(0, video.duration - 1 / 24);
+      if (progress <= 0.005) { video.classList.remove('film-visible'); poster.classList.remove('film-hidden'); }
+      if (!isSeekable()) { if (progress > .005 && video.readyState >= 2) void recoverSeekability(); return; }
+      if (!video.seeking && Math.abs(video.currentTime - target) > 0.025) video.currentTime = target;
     };
     const requestFilm = () => { if (!frame && active) frame = requestAnimationFrame(updateFilm); };
-    const fallback = () => { active = false; video.hidden = true; poster.hidden = false; track.classList.remove('has-film'); ScrollTrigger.refresh(); };
+    const fallback = () => { active = false; video.hidden = true; poster.classList.remove('film-hidden'); track.classList.remove('has-film'); track.style.removeProperty('--hero-copy-opacity'); ScrollTrigger.refresh(); };
     const setup = () => {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      video.hidden = false;
       track.classList.add('has-film');
       active = true;
       window.addEventListener('scroll', requestFilm, { passive: true });
       window.addEventListener('resize', requestFilm, { passive: true });
-      video.addEventListener('seeked', () => { if (active && progress > 0.005 && video.readyState >= 2) { video.hidden = false; poster.hidden = true; } });
+      video.addEventListener('seeked', () => {
+        if (active && progress > 0.005 && video.readyState >= 2 && video.currentTime > .01) { video.classList.add('film-visible'); poster.classList.add('film-hidden'); }
+        requestFilm();
+      });
       requestFilm();
       ScrollTrigger.refresh();
     };
     video.addEventListener('error', fallback, { once: true });
+    video.addEventListener('loadeddata', requestFilm);
+    window.addEventListener('pagehide', () => { if (localVideoUrl) URL.revokeObjectURL(localVideoUrl); }, {once:true});
     if (video.readyState >= 1) setup(); else video.addEventListener('loadedmetadata', setup, { once: true });
     initCinematicRain();
   }

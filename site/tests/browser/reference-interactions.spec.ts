@@ -30,8 +30,10 @@ test('hero copy receives a contrast backing as video approaches front profile', 
 test('visual regression: fixed contrast, bounded experience navigation and usable contact grid', async ({ page }) => {
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto(origin);
-  await expect(page.locator('.hero-bottom > div').first()).toHaveCSS('background-color', 'rgb(250, 248, 233)');
-  await expect(page.locator('.site-header')).toHaveCSS('background-color', 'rgb(250, 248, 233)');
+  // The reference has a transparent header over the film; copy receives a
+  // contrast backing while scrolling and becomes visible on keyboard focus.
+  await expect(page.locator('.site-header')).toHaveCSS('background-color', 'rgba(0, 0, 0, 0)');
+  await expect(page.locator('.hero-bottom > div').first()).toHaveCSS('color', 'rgb(20, 19, 20)');
   await page.locator('.menupop summary').click();
   for (const image of await page.locator('.mega-grid img').all()) {
     expect((await image.boundingBox())!.height).toBeLessThanOrEqual(220);

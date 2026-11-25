@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { readFile } from 'node:fs/promises';
 
 const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 
@@ -39,6 +40,20 @@ test('reduced motion keeps the authentic poster and every action usable', async 
   await context.close();
 });
 
+test('hero recovers seekability on a static origin without byte-range support', async ({page}) => {
+  const filmBytes=await readFile(new URL('../../public/images/reeja-hero.mp4',import.meta.url));
+  await page.route('**/images/reeja-hero.mp4', route=>route.fulfill({status:200,contentType:'video/mp4',headers:{'Content-Length':String(filmBytes.length)},body:filmBytes}));
+  await page.goto(origin);
+  await expect(page.locator('.hero-track')).toHaveClass(/has-film/);
+  await page.evaluate(()=>window.scrollTo({top:600,behavior:'instant'}));
+  const film=page.locator('.hero-portrait video');
+  await expect.poll(()=>film.evaluate((video:HTMLVideoElement)=>video.currentTime),{timeout:15000}).toBeGreaterThan(1);
+  await expect(film).toHaveClass(/film-visible/);
+  await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+  await expect.poll(()=>film.evaluate((video:HTMLVideoElement)=>video.currentTime)).toBeLessThan(.1);
+  await expect(page.locator('.hero-portrait img')).toBeVisible();
+});
+
 test('every indexed route retains one H1, canonical metadata and responsive layout under the same design identity', async ({ browser, request }) => {
   const sitemap = await (await request.get(`${origin}/sitemap-0.xml`)).text();
   const routes = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>new URL(m[1]).pathname);
@@ -50,7 +65,7 @@ test('every indexed route retains one H1, canonical metadata and responsive layo
     for (const route of routes) {
       await page.goto(`${origin}${route}`, {waitUntil:'domcontentloaded'});
       await expect(page.locator('main h1'),route).toHaveCount(1);
-      await expect(page.locator('body')).toHaveAttribute('data-design-version','13.0.0-cinematic');
+      await expect(page.locator('body')).toHaveAttribute('data-design-version','14.0.0-cinematic');
       await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href',`https://reejamaharjan.com.np${route}`);
       const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth);
       expect(overflow,`${route} at ${width}px`).toBeLessThanOrEqual(1);
