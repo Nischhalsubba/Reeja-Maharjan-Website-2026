@@ -118,7 +118,7 @@ export function initCinematicMotion(): void {
     let index=0,playing=false,visible=false;
     const reduced=matchMedia('(prefers-reduced-motion: reduce)');
     const advance=()=>{index=(index+1)%slides.length;slides.forEach((slide,i)=>{slide.hidden=i!==index;if(i===index&&!reduced.matches)slide.animate([{opacity:.4},{opacity:1}],{duration:550,easing:'ease-out'});});};
-    const sync=()=>{toggle.textContent=playing?'Pause':'Play';toggle.setAttribute('aria-pressed',String(playing));toggle.setAttribute('aria-label',`${playing?'Pause':'Play'} experience photographs`);};
+    const sync=()=>{toggle.textContent=playing?'Pause':'Play';toggle.setAttribute('aria-pressed',String(playing));toggle.setAttribute('aria-label',`${playing?'Pause':'Play'} ${card.querySelector('h2')?.textContent?.trim()||'experience'} photographs`);};
     toggle.addEventListener('click',()=>{playing=!playing;sync();});next.addEventListener('click',advance);
     new IntersectionObserver(entries=>{visible=entries.some(e=>e.isIntersecting);}).observe(card);
     window.setInterval(()=>{if(playing&&visible&&!card.hidden&&!document.hidden&&!reduced.matches)advance();},4200);
@@ -152,10 +152,20 @@ export function initCinematicMotion(): void {
       if(wave.width!==w||wave.height!==h){wave.width=w;wave.height=h;}
       waveCtx.clearRect(0,0,w,h);
       const t=time*.0005;
-      for(let row=0;row<34;row++)for(let x=0;x<w;x+=13){
-        const y=h*.42+row*9+Math.sin(x*.012+row*.19+t)*28+Math.sin(x*.004-row*.15+t)*23;
-        waveCtx.fillStyle=`rgba(255,224,0,${Math.max(.025,.23-row*.005)})`;
-        waveCtx.fillRect(x,y,1.2,1.2);
+      for(let row=0;row<42;row++){
+        const depth=row/41;
+        const spread=.38+depth*.97;
+        const yBase=h*.32+Math.pow(depth,1.7)*h*.8;
+        for(let col=-58;col<=58;col++){
+          const x=w/2+col*(w/86)*spread;
+          if(x<0||x>w)continue;
+          const bend=(Math.sin(col*.17+row*.17+t)*26+Math.sin(col*.08-row*.14+t*.7)*19)*spread;
+          const y=yBase+bend;
+          if(y<0||y>h)continue;
+          const alpha=(.07+depth*.3)*(1-Math.abs(col)/85);
+          waveCtx.fillStyle=`rgba(255,224,0,${alpha})`;
+          const size=.65+depth*1.1;waveCtx.fillRect(x,y,size,size);
+        }
       }
       if(visible)waveFrame=requestAnimationFrame(paint);
     };
