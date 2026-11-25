@@ -133,7 +133,7 @@ export function initCinematicMotion(): void {
       const next=document.createElement('button');next.type='button';next.textContent='→';next.setAttribute('aria-label','Next journal articles');
       let index=0;
       const update=()=>{entries.forEach((entry,i)=>{entry.hidden=i<index||i>=index+3;});status.textContent=`${index+1}–${Math.min(index+3,entries.length)} / ${entries.length}`;prev.disabled=index===0;next.disabled=index+3>=entries.length;};
-      prev.addEventListener('click',()=>{index=Math.max(0,index-3);update();});next.addEventListener('click',()=>{index=Math.min(entries.length-1,index+3);update();});controls.append(prev,status,next);journal.after(controls);update();
+      prev.addEventListener('click',()=>{index=Math.max(0,index-3);update();});next.addEventListener('click',()=>{index=Math.min(entries.length-1,index+3);update();});controls.append(prev,status,next);journal.append(controls);update();
     }
   }
   const clock = document.querySelector<HTMLElement>('[data-nepal-clock]');
