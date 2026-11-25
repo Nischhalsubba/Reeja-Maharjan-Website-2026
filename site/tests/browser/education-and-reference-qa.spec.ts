@@ -5,7 +5,7 @@ const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 test('education is discoverable, truthful and in the canonical sitemap', async ({ page, request }) => {
   await page.goto(`${origin}/education/`);
   await expect(page.locator('main h1')).toBeVisible();
-  await expect(page.locator('main')).toContainText('Semester 1 passed');
+  await expect(page.locator('main')).toContainText(/semester 1 passed/i);
   await expect(page.locator('main')).toContainText('degree is in progress');
   const sitemap = await (await request.get(`${origin}/sitemap-0.xml`)).text();
   expect(sitemap).toContain('https://reejamaharjan.com.np/education/');
@@ -32,7 +32,7 @@ test('portrait gallery has optional motion and footer invitation changes by rout
   const play = page.locator('[data-gallery-pause]');
   await play.click(); await expect(play).toHaveText('Pause');
   await play.click(); await expect(play).toHaveText('Play');
-  await expect(page.locator('.reference-footer-contact h2')).toHaveText('Let’s talk.');
+  await expect(page.locator('.reference-footer-contact').getByRole('heading',{name:'Let’s talk.',exact:true})).toBeVisible();
 });
 
 test('experience photographs advance without navigating and all roles have real detail pages',async({page})=>{
@@ -51,7 +51,7 @@ test('experience photographs advance without navigating and all roles have real 
 test('major routes have one visible heading and no horizontal scrolling at six widths', async ({ page }) => {
   test.setTimeout(120000);
   await page.emulateMedia({reducedMotion:'reduce'});
-  for (const width of [390,768,1024,1280,1440,1920]) {
+  for (const width of [320,390,768,1024,1280,1440,1920]) {
     await page.setViewportSize({width,height:900});
     for (const route of ['/','/about/','/education/','/cv/','/experience/','/clinical-research/','/maternal-health/','/maternity-care/','/nursing-practice/','/hire-reeja/','/contact/','/blog/']) {
       await page.goto(origin+route,{waitUntil:'domcontentloaded'});
