@@ -29,3 +29,25 @@ test('tablet preserves two-column professional sections', async ({page})=>{
   await expect(page.locator('.professional-contact-form')).toBeVisible();
   expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
 });
+
+for (const width of [320,390,768,834,1440,1920]) {
+  test(`journal pagination remains readable and functional at ${width}px`, async ({page})=>{
+    await page.setViewportSize({width,height:900});
+    await page.goto(origin);
+    const controls=page.locator('.journal-carousel-controls');
+    const status=controls.locator('[aria-live]');
+    const prev=controls.getByRole('button',{name:'Previous journal articles'});
+    const next=controls.getByRole('button',{name:'Next journal articles'});
+    await expect(status).toHaveText('1–3 / 6');
+    await expect(status).toHaveCSS('color','rgb(20, 19, 20)');
+    await expect(prev).toBeDisabled();
+    await expect(prev).toHaveCSS('opacity','1');
+    await expect(prev).toHaveCSS('color','rgb(85, 73, 0)');
+    await next.click();
+    await expect(status).toHaveText('4–6 / 6');
+    await expect(next).toBeDisabled();
+    await prev.click();
+    await expect(status).toHaveText('1–3 / 6');
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth)).toBeLessThanOrEqual(1);
+  });
+}
