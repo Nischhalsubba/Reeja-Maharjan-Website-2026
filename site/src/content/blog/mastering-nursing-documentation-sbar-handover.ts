@@ -2,18 +2,18 @@ import type { BlogPost } from './types';
 
 export const masteringNursingDocumentationSbarHandover: BlogPost = {
   slug: 'mastering-nursing-documentation-sbar-handover',
-  title: 'Nursing Documentation and SBAR Handover: A Practical Guide',
+  title: 'SBAR Handover in Nursing: Example and Documentation Guide',
   excerpt:
     'Reeja Maharjan explains how timely nursing documentation and structured SBAR handover support safer communication, continuity of care, and clearer escalation.',
   metaDescription:
-    'Registered Nurse Reeja Maharjan explains nursing documentation and SBAR handover, with practical guidance for clear records, escalation, and shift continuity.',
+    'Learn the SBAR handover format with a nursing example, documentation checklist and clear escalation principles. A source-linked guide by Reeja Maharjan.',
   publishedAt: '2026-03-11',
   updatedAt: '2026-08-07',
   readMinutes: 10,
   tags: ['SBAR handover', 'nursing documentation', 'patient safety', 'clinical communication'],
   primaryKeyword: 'nursing documentation and SBAR handover',
   supportingKeywords: [
-    'SBAR nursing handover',
+    'SBAR nursing handover', 'SBAR handover example',
     'accurate nursing documentation',
     'shift handover nursing',
     'patient safety communication',

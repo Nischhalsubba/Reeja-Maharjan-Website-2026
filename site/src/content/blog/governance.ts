@@ -145,8 +145,8 @@ export const blogGovernance: Record<string, BlogGovernance> = {
     audience: 'Recruiters, nursing students, early-career nurses, and readers learning about Reeja Maharjan',
     userNeed: 'Understand how Reeja’s education, registration, hospital roles, clinical training, international licensure, and current research work connect over time.',
     practiceLens: 'Reeja’s career progression shows continuity between bedside care and research through communication, documentation, monitoring, follow-up, and coordination.',
-    sourcesAccessedAt,
-    reviewDueAt
+    sourcesAccessedAt: '2026-11-25',
+    reviewDueAt: '2027-05-25'
   }
 };
 
