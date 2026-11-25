@@ -308,15 +308,17 @@ export function initCinematicMotion(): void {
     const updateFilm = () => {
       frame = 0;
       if (!active) return;
-      const distance = Math.max(1, track.offsetHeight - window.innerHeight);
+      const heroHeight=track.querySelector<HTMLElement>('.hero')?.offsetHeight ?? window.innerHeight;
+      const distance = Math.max(1, track.offsetHeight - heroHeight);
       progress = gsap.utils.clamp(0, 1, -track.getBoundingClientRect().top / distance);
       header?.classList.toggle('hero-closeup', progress > .88);
       // The copy belongs to the scrolling document, not to the pinned film.
       // Both the copy and the closing yellow wash follow the same reversible progress.
-      const copyFade=1-gsap.utils.clamp(0,1,(progress-.24)/.42);
+      const compact=window.matchMedia('(max-width:900px)').matches;
+      const copyFade=1-gsap.utils.clamp(0,1,(progress-(compact ? .15 : .24))/(compact ? .36 : .42));
       const wash=gsap.utils.clamp(0,1,(progress-.77)/.23);
       track.style.setProperty('--hero-copy-opacity',String(copyFade));
-      track.style.setProperty('--hero-copy-y',`${-progress*distance}px`);
+      track.style.setProperty('--hero-copy-y',`${-progress*distance*(compact ? .68 : 1)}px`);
       track.style.setProperty('--hero-wash',String(wash*wash*(3-2*wash)));
       track.style.setProperty('--hero-copy-shade',String(Math.min(.22,progress*.4)));
       track.classList.toggle('hero-copy-out',copyFade<.04);
