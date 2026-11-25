@@ -45,7 +45,7 @@ export function initCinematicMotion(): void {
     const legacyIcon = control.querySelector(':scope > i, :scope > svg');
     legacyIcon?.remove();
     const icon = document.createElement('span'); icon.className = 'ref-action-icon'; icon.setAttribute('aria-hidden','true');
-    const plus = document.createElement('span'); plus.className = 'ref-action-plus'; plus.textContent = '+';
+    const plus = document.createElement('span'); plus.className = 'ref-action-plus'; plus.textContent = control.id === 'more' && control.getAttribute('aria-expanded') === 'true' ? '−' : '+';
     icon.append(plus); control.append(icon);
     control.classList.add('ref-action');
     if (original.hasAttribute('data-submit-label')) {
@@ -63,7 +63,7 @@ export function initCinematicMotion(): void {
       more.textContent = extra.hidden ? 'Load more ＋' : 'Show less −';
       more.setAttribute('aria-expanded', String(!extra.hidden));
       decorateAction(more);
-      ScrollTrigger.refresh();
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) ScrollTrigger.refresh();
     });
   }
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
