@@ -8,7 +8,7 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
 ---
 
 <form
-  class="professional-contact-form"
+  class:list={['professional-contact-form', {'professional-contact-form--compact':compact}]}
   id="professional-contact-form"
   method="POST"
   action={turnstileSitekey ? '/api/contact' : professionalFacts.contactFormEndpoint}
@@ -48,7 +48,7 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
 
     <div class="form-field professional-contact-form__full">
       <label for="contact-location">Location (optional)</label>
-      <input id="contact-location" name="location" type="text" maxlength="160" autocomplete="address-level2" placeholder="City, country, or remote/hybrid" />
+      <input id="contact-location" name="location" type="text" maxlength="160" autocomplete="address-level2" />
     </div>
 
     </>}
@@ -82,6 +82,14 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
       <p class="form-field__help">Please complete verification before sending your message.</p>
     </div>
   )}
+  <div class="professional-contact-form__actions">
+    <button class="care-button care-button--primary" type="submit" data-submit-button>
+      <span data-submit-label>Send enquiry</span>
+      <span class="form-spinner" aria-hidden="true" hidden data-submit-spinner></span>
+    </button>
+    {!compact && <a class="contact-fallback-link" href={directEmailHref} data-track="contact-email-fallback">Email Reeja</a>}
+  </div>
+
   <details class="professional-contact-form__privacy">
     <summary>Privacy and message delivery · No patient records</summary>
     {turnstileSitekey ? (
@@ -90,14 +98,6 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
       <p>This message is processed by <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>, an external delivery service. Messages are sent through its form API without leaving this page. Delivery is subject to spam protections and service limits. Please do not share patient records, identity documents, licence scans or other sensitive information.</p>
     )}
   </details>
-
-  <div class="professional-contact-form__actions">
-    <button class="care-button care-button--primary" type="submit" data-submit-button>
-      <span data-submit-label>Send enquiry</span>
-      <span class="form-spinner" aria-hidden="true" hidden data-submit-spinner></span>
-    </button>
-    <a class="care-button care-button--secondary" href={directEmailHref} data-track="contact-email-fallback">Email Reeja</a>
-  </div>
 
   <div class="professional-contact-form__status" aria-live="polite" aria-atomic="true">
     <p class="form-status form-status--loading" role="status" hidden data-form-loading>Sending…</p>

@@ -94,7 +94,31 @@ export function initCinematicMotion(): void {
       track.scrollBy({left: Number(button.dataset.galleryDirection) * ((item?.getBoundingClientRect().width ?? track.clientWidth) + 16), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
     }));
   });
+  const clock = document.querySelector<HTMLElement>('[data-nepal-clock]');
+  if (clock) {
+    const format = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kathmandu',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
+    const tick = () => { clock.textContent=format.format(new Date()); };
+    tick(); window.setInterval(tick,1000);
+  }
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const wave=document.querySelector<HTMLCanvasElement>('.reference-footer-wave');
+  const waveCtx=wave?.getContext('2d');
+  if(wave&&waveCtx){
+    let waveFrame=0,visible=false;
+    const paint=(time:number)=>{
+      const w=wave.clientWidth,h=wave.clientHeight;
+      if(wave.width!==w||wave.height!==h){wave.width=w;wave.height=h;}
+      waveCtx.clearRect(0,0,w,h);
+      const t=time*.0005;
+      for(let row=0;row<34;row++)for(let x=0;x<w;x+=13){
+        const y=h*.42+row*9+Math.sin(x*.012+row*.19+t)*28+Math.sin(x*.004-row*.15+t)*23;
+        waveCtx.fillStyle=`rgba(255,224,0,${Math.max(.025,.23-row*.005)})`;
+        waveCtx.fillRect(x,y,1.2,1.2);
+      }
+      if(visible)waveFrame=requestAnimationFrame(paint);
+    };
+    new IntersectionObserver(entries=>{visible=entries.some(e=>e.isIntersecting);cancelAnimationFrame(waveFrame);if(visible)waveFrame=requestAnimationFrame(paint);},{threshold:0}).observe(wave);
+  }
   const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   if (pointer.matches) {
     const cursor = document.createElement('span'); cursor.className = 'reference-cursor'; cursor.setAttribute('aria-hidden','true'); document.body.append(cursor);
@@ -124,13 +148,31 @@ export function initCinematicMotion(): void {
     gsap.fromTo(menu.querySelector('.reference-mega'), { clipPath: 'inset(0 0 100% 0)', opacity: .6 }, { clipPath: 'inset(0 0 0% 0)', opacity: 1, duration: .42, ease: 'power3.out' });
     gsap.fromTo(menu.querySelectorAll('.mega-grid > a'), { y: 18, opacity: 0 }, { y: 0, opacity: 1, duration: .38, stagger: .07, delay: .12, clearProps: 'transform,opacity' });
   });
-  // Scan-line reveal for editorial headlines; text remains readable without JS.
-  gsap.utils.toArray<HTMLElement>('main h1, .site-section__head h2, .cinematic-home .sticky h2, .reference-story-heading h2').forEach(heading => {
-    heading.classList.add('reference-scan');
-    const scan = document.createElement('span'); scan.className = 'reference-scan-bar'; scan.setAttribute('aria-hidden','true'); heading.append(scan);
-    const timeline = gsap.timeline({ scrollTrigger: { trigger: heading, start: 'top 89%', once: true }});
-    timeline.fromTo(heading, { y: 8 }, { y: 0, duration: .68, ease: 'power3.out', clearProps: 'transform' }, 0);
-    timeline.fromTo(scan, { left: '0%', opacity: 1 }, { left: '100%', opacity: 0, duration: .68, ease: 'power3.inOut' }, 0);
+  // Measure the natural text layout first, then reveal each authored line with
+  // two full-width covers. No sliding scan line or persistent text hiding.
+  gsap.utils.toArray<HTMLElement>('main h1, main h2, .reference-footer-contact h2').forEach(heading => {
+    if (heading.closest('.visually-hidden')) return;
+    const lines: HTMLElement[] = [];
+    let line = document.createElement('span'); line.className = 'reference-reveal-line';
+    const finish = () => { if (line.childNodes.length) { lines.push(line); heading.append(line); } line = document.createElement('span'); line.className = 'reference-reveal-line'; };
+    const nodes = Array.from(heading.childNodes);
+    nodes.forEach(node => {
+      if (node instanceof HTMLElement && node.classList.contains('visually-hidden')) { heading.append(node); return; }
+      if (node instanceof HTMLBRElement) { node.remove(); finish(); heading.append(document.createElement('br')); }
+      else line.append(node);
+    });
+    finish();
+    lines.forEach((item,index) => {
+      const base = document.createElement('span'); base.className = 'reference-reveal-ink'; base.append(...Array.from(item.childNodes)); item.append(base);
+      const cover = (name: string) => { const el = document.createElement('span'); el.className = `reference-reveal-cover ${name}`; el.setAttribute('aria-hidden','true'); item.append(el); return el; };
+      const gold = cover('reference-reveal-gold'), paper = cover('reference-reveal-paper');
+      const timeline=gsap.timeline({paused:true});
+      timeline.set(base,{opacity:0}).set([gold,paper],{scaleX:0,transformOrigin:'left center'});
+      timeline.to(gold,{scaleX:1,duration:.29,ease:'power3.inOut'},0).to(paper,{scaleX:1,duration:.28,ease:'power3.inOut'},.08);
+      timeline.set(base,{opacity:1},.37).set([gold,paper],{transformOrigin:'right center'},.37);
+      timeline.to(gold,{scaleX:0,duration:.42,ease:'power3.inOut'},.37).to(paper,{scaleX:0,duration:.35,ease:'power3.inOut'},.43);
+      ScrollTrigger.create({trigger:heading,start:'top 89%',once:true,onEnter:()=>timeline.delay(index*.085).play()});
+    });
   });
   // Reveal the introduction word-by-word against the yellow chapter.
   const intro = document.querySelector<HTMLElement>('.cinematic-home .intro');
@@ -171,7 +213,7 @@ export function initCinematicMotion(): void {
       progress = gsap.utils.clamp(0, 1, -track.getBoundingClientRect().top / distance);
       header?.classList.toggle('hero-closeup', progress > .88);
       track.style.setProperty('--hero-copy-shade', String(progress > .18 ? .94 : Math.min(.94, progress * 5.3)));
-      track.style.setProperty('--hero-copy-opacity', String(Math.max(0, 1 - progress * 3.5)));
+      // The headline and calls to action stay visible during the whole pin.
       // Hold the full-front composition through most of the turn, then use the
       // film's final close-up in the last phase of the pinned hero.
       const filmProgress = progress <= .85 ? progress / .85 * .44 : .44 + (progress - .85) / .15 * .56;
@@ -202,7 +244,7 @@ export function initCinematicMotion(): void {
     if (video.readyState >= 1) setup(); else video.addEventListener('loadedmetadata', setup, { once: true });
     initCinematicRain();
   }
-  gsap.utils.toArray<HTMLElement>('.cinematic-home .card,.cinematic-home .section h2,.cinematic-home .profile .intro,.inner-page [data-motion-reveal]').forEach(el => {
+  gsap.utils.toArray<HTMLElement>('.cinematic-home .card,.cinematic-home .profile .intro,.inner-page [data-motion-reveal]').forEach(el => {
     gsap.from(el, { y: 24, opacity: .65, duration: .65, ease: 'power2.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: el, start: 'top 94%', once: true } });
   });
   gsap.utils.toArray<HTMLElement>('.cinematic-home .card-media img').forEach(el => {

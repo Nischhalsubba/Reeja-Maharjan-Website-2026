@@ -2,7 +2,6 @@
 import type { ProfileContent } from '../content/profile';
 import { siteCopy } from '../content/site-copy';
 import BrandIcon from './BrandIcon.astro';
-import ReejaBrandMark from './ReejaBrandMark.astro';
 import ProfessionalContactForm from './ProfessionalContactForm.astro';
 
 type Props = { profile: ProfileContent };
@@ -13,24 +12,22 @@ const showContact = Astro.url.pathname !== '/contact/';
 
 <footer class="site-footer site-footer--care" aria-label="Website footer">
   {showContact && <section class="reference-footer-contact" id="connect">
+    <canvas class="reference-footer-wave" aria-hidden="true"></canvas>
     <div class="container reference-footer-contact-grid">
       <div>
         <p class="site-eyebrow">Let’s connect</p>
-        <h2>Let’s talk.</h2>
-        <p>For nursing opportunities, maternal-health research and professional collaboration.</p>
-        <a class="btn reference-outline" href="/contact/"><span>Arrange a conversation</span><i aria-hidden="true">+</i></a>
-        <div class="reference-footer-email"><p>Prefer email?</p><a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a></div>
+        <h2>Tell me<br />what’s next</h2>
+        <p>A nursing role, research project or professional collaboration.</p>
+        <div class="reference-footer-actions"><a class="btn yellow" href="/contact/#arrange-a-call"><span>Arrange a call</span><i aria-hidden="true">+</i></a><a href={`mailto:${profile.contact.email}`}>Email me</a></div>
       </div>
       <ProfessionalContactForm compact />
+      <div class="reference-footer-ending"><span>🇳🇵 &nbsp; BIRATNAGAR, NEPAL <span aria-hidden="true"> &nbsp; | &nbsp; </span><time data-nepal-clock>Local time</time></span><a href="#page-top">Back to top</a></div>
     </div>
   </section>}
 
-  <div class="container care-footer__main">
-    <div class="care-footer__identity">
-      <a class="care-footer__wordmark" href="/" aria-label="Reeja Maharjan — homepage"><ReejaBrandMark /></a>
-      <p>Registered nurse &amp; maternal-health research</p>
-      <span class="care-footer__location">{profile.contact.location}</span>
-    </div>
+  <details class="container reference-footer-links">
+    <summary>Explore Reeja’s website</summary>
+    <div class="care-footer__main">
 
     <nav class="care-footer__column" aria-label="Explore Reeja's website">
       <h3>Explore</h3>
@@ -54,7 +51,8 @@ const showContact = Astro.url.pathname !== '/contact/';
       <a href={`mailto:${profile.contact.email}`} data-track="email-footer">{profile.contact.email}</a>
       <a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer" data-track="linkedin-footer">Connect on LinkedIn <BrandIcon name="arrow-up-right" size={18} /></a>
     </div>
-  </div>
+    </div>
+  </details>
 
   <details class="container cip-image-credits care-footer__credits">
     <summary>Photography credits and usage</summary>
@@ -64,7 +62,8 @@ const showContact = Astro.url.pathname !== '/contact/';
   </details>
 
   <div class="container care-footer__bottom">
-    <small>© {year} {profile.name}. {siteCopy.footer.legal}</small>
+    <small title={siteCopy.footer.legal}>© {year} {profile.name}</small>
+    <nav aria-label="Footer links"><a href="/blog/">Journal</a><a href="/cv/">Professional CV</a><a href="/contact/">Contact</a><a href={profile.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a></nav>
     <span class="reeja-design-credit">Website design by <a href="https://nischhalsubba.com.np/" target="_blank" rel="noopener noreferrer" title="Nischhal Raj Subba — Product Designer">Nischhalsubba.com.np</a></span>
     <a href="#page-top">Back to top <BrandIcon name="arrow-up" size={18} /></a>
   </div>
