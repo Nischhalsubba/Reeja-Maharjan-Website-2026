@@ -28,23 +28,34 @@ const copy = siteCopy.contact;
     <section class="contact-section reference-call-section" id="arrange-a-call" aria-labelledby="call-heading">
       <div class="container">
         <div class="reference-call-heading"><h2 id="call-heading">Arrange a call.</h2><p>Online · Nepal time (UTC+05:45)</p></div>
-        <div class="reference-call-grid">
+        <form class="reference-call-grid" id="call-request" action={`mailto:${professionalFacts.professionalEmail}`} data-call-email={professionalFacts.professionalEmail}>
           <div class="reference-call-availability">
-            <p class="site-eyebrow">Professional conversations</p>
-            <h3>Find a time that works for both of us.</h3>
-            <p>Send a preferred date, time and time zone, along with the nursing or research opportunity. Reeja can confirm a time by email.</p>
-            <a class="btn" href={`mailto:${professionalFacts.professionalEmail}?subject=Professional%20call%20request`}><span>Request a time</span><i aria-hidden="true">+</i></a>
+            <p class="site-eyebrow">Preferred time · Nepal time</p>
+            <h3>Choose a time to request.</h3>
+            <p>Times are suggestions, not confirmed availability. Reeja will confirm by email.</p>
+            <div class="reference-call-date-grid"><div><label for="call-date">Preferred date *</label><input type="date" id="call-date" name="date" required /></div><div><label for="call-time">Preferred time *</label><input type="time" id="call-time" name="time" required /></div></div>
           </div>
           <div class="reference-call-details">
-            <h3>Your enquiry.</h3>
-            <p>Include your organisation, location, role or project, and expected timeline.</p>
-            <a class="btn reference-outline" href="#professional-contact-form"><span>Send an enquiry</span><i aria-hidden="true">+</i></a>
-            <p class="reference-call-meta">Based in {professionalFacts.currentLocation} · {professionalFacts.currentRole}, {professionalFacts.currentEmployerShort}</p>
-            <a href={professionalFacts.linkedin} target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
-            <a href={professionalFacts.publicCvPath}>Review professional CV</a>
+            <h3>Your details.</h3>
+            <p>Share your contact details and the topic of your request.</p>
+            <div class="form-field"><label for="call-name">Your name *</label><input id="call-name" name="name" required autocomplete="name" /></div>
+            <div class="form-field"><label for="call-email">Email *</label><input id="call-email" name="email" type="email" required autocomplete="email" /></div>
+            <div class="form-field"><label for="call-topic">What would you like to discuss? (optional)</label><textarea id="call-topic" name="topic" maxlength="1000"></textarea></div>
+            <button class="btn yellow" type="submit"><span>Request a time</span><i aria-hidden="true">+</i></button>
+            <p class="reference-call-meta">This opens your email app. Please avoid sharing patient records or sensitive health information.</p>
           </div>
-        </div>
+        </form>
       </div>
     </section>
   </div>
 </BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('#call-request');
+  form?.addEventListener('submit', event => {
+    event.preventDefault();
+    const data = new FormData(form);
+    const body = `Hello Reeja,\n\nI would like to request a professional call.\nPreferred date: ${data.get('date')}\nPreferred time: ${data.get('time')} (Nepal time)\nName: ${data.get('name')}\nEmail: ${data.get('email')}\nTopic: ${data.get('topic') || 'Not specified'}\n\nPlease confirm whether this works for you.`;
+    window.location.href = `mailto:${form.dataset.callEmail}?subject=${encodeURIComponent('Professional call request')}&body=${encodeURIComponent(body)}`;
+  });
+</script>

@@ -25,6 +25,9 @@ test('hero copy receives a contrast backing as video approaches front profile', 
   await expect(page.locator('.hero-track')).toHaveClass(/has-film/);
   await page.evaluate(() => window.scrollTo({top:(document.querySelector('.hero-track')!.getBoundingClientRect().height-innerHeight)/2,behavior:'instant'}));
   await expect.poll(() => page.locator('.hero-track').evaluate(el=>Number((el as HTMLElement).style.getPropertyValue('--hero-copy-shade')))).toBeGreaterThan(.8);
+  await expect(page.locator('.hero-bottom')).toHaveCSS('opacity','1');
+  await expect(page.locator('.hero h1')).toBeVisible();
+  await expect(page.locator('.hero .btn').first()).toBeVisible();
 });
 
 test('visual regression: fixed contrast, bounded experience navigation and usable contact grid', async ({ page }) => {
@@ -43,10 +46,11 @@ test('visual regression: fixed contrast, bounded experience navigation and usabl
   const copy = page.locator('.contact-hero__copy');
   expect((await form.boundingBox())!.width).toBeGreaterThan(500);
   expect(Math.abs((await form.boundingBox())!.y - (await copy.boundingBox())!.y)).toBeLessThan(40);
-  await expect(page.locator('.professional-contact-form__privacy')).toHaveCSS('background-color', 'rgb(36, 36, 36)');
+  await expect(page.locator('.professional-contact-form__privacy summary')).toBeVisible();
+  await expect(page.locator('.professional-contact-form__privacy summary')).toContainText('No patient records');
   await page.goto(`${origin}/nursing-practice/`);
   await expect(page.locator('.site-section--dark h2').first()).toHaveCSS('color', 'rgb(250, 248, 233)');
-  await expect(page.locator('.care-footer__column a').first()).toHaveCSS('color', 'rgb(233, 231, 219)');
+  await expect(page.locator('.care-footer__bottom nav a').first()).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto(`${origin}/contact/`);
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
@@ -82,7 +86,7 @@ test('reference grid is shared by header, content and footer throughout the port
       await page.goto(origin+route,{waitUntil:'domcontentloaded'});
       const edges=await page.evaluate(()=>{
         const header=document.querySelector('.site-header__inner')!.getBoundingClientRect();
-        const footer=document.querySelector('.care-footer__main')!.getBoundingClientRect();
+        const footer=document.querySelector('.care-footer__bottom')!.getBoundingClientRect();
         const first=document.querySelector('main .wrap,main .container:not(.inner-breadcrumb)')?.getBoundingClientRect();
         return {header:header.left,footer:footer.left,content:first?.left,overflow:document.documentElement.scrollWidth-innerWidth};
       });
@@ -153,7 +157,28 @@ test('contact enquiry and conversation section retain one form and real contact 
   await expect(page.locator('#professional-contact-form')).toHaveCount(1);
   await expect(page.locator('#contact-role')).toHaveJSProperty('tagName','SELECT');
   await expect(page.locator('#arrange-a-call')).toBeVisible();
-  await expect(page.getByRole('link',{name:'Request a time'})).toHaveAttribute('href',/mailto:/);
+  await expect(page.getByRole('button',{name:'Request a time'})).toBeVisible();
+  await expect(page.locator('#call-request')).toHaveAttribute('action',/mailto:/);
+  await expect(page.locator('#call-date')).toHaveAttribute('required','');
   await page.goto(origin+'/about/');
   await expect(page.locator('footer #professional-contact-form')).toHaveCount(1);
+});
+
+test('reference footer uses compact enquiry, location clock and responsive links',async({page})=>{
+  await page.goto(origin);
+  await expect(page.locator('.reference-footer-wave')).toBeAttached();
+  await expect(page.locator('[data-nepal-clock]')).toHaveText(/\d\d:\d\d:\d\d/);
+  await expect(page.locator('footer .professional-contact-form--compact input[required]')).toHaveCount(2);
+  await expect(page.locator('.reference-footer-ending a')).toHaveAttribute('href','#page-top');
+  await page.locator('.reference-footer-links summary').click();
+  await expect(page.locator('.care-footer__column a').first()).toBeVisible();
+});
+
+test('heading wipe leaves the original text visible and the cover collapsed',async({page})=>{
+  await page.goto(origin);
+  const title=page.locator('.hero h1');
+  await expect(title.locator('.reference-reveal-cover')).toHaveCount(4);
+  await expect(title.locator('.reference-reveal-ink').first()).toHaveCSS('opacity','1');
+  await expect.poll(()=>title.locator('.reference-reveal-gold').first().evaluate(e=>e.getBoundingClientRect().width)).toBeLessThan(1);
+  await expect(page.locator('.desktop-nav a[href="/about/"]')).toHaveCSS('transition-duration','0.15s');
 });
