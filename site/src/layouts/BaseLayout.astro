@@ -33,7 +33,7 @@ const pathname = Astro.url.pathname;
 const isArticlePage = pathname.startsWith('/blog/') && pathname !== '/blog/' && !pathname.startsWith('/blog/topics/');
 const isProfilePage = pathname === '/' || pathname === '/about/' || pathname === '/hire-reeja/' || pathname === '/cv/' || pathname === '/education/';
 const canonicalUrl = new URL(pathname, Astro.site ?? Astro.url.origin).toString();
-const socialImage = new URL(image, Astro.site ?? Astro.url.origin).toString();
+const socialImage = new URL(image === '/og-default.png' ? '/og-default.png?v=cinematic-20261125' : image, Astro.site ?? Astro.url.origin).toString();
 const portraitUrl = new URL('/reeja-headshot.jpg', Astro.site ?? Astro.url.origin).toString();
 const sameAs = [professionalFacts.linkedin, professionalFacts.instagram].filter(Boolean);
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;

@@ -37,7 +37,7 @@ export const siteCopy = {
   ],
   home: {
     title: `${facts.name} | Registered Nurse & Maternal Health Research, Nepal`,
-    description: `${facts.name}, B.Sc. Nursing, is a registered nurse in Biratnagar with maternal-health research, hospital nursing and ongoing MA Rural Development studies.`,
+    description: `Meet ${facts.name}, a registered nurse and maternal-health research assistant in Biratnagar, Nepal. Explore her nursing practice, research, education and professional CV.`,
     hero: {
       kicker: `${facts.name} · ${facts.credential}`,
       titleBefore: `${facts.name} is a`,
