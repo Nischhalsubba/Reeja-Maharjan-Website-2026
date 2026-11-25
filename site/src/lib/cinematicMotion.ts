@@ -11,6 +11,7 @@ export function initCinematicMotion(): void {
   const sections = Array.from(document.querySelectorAll<HTMLElement>('.hero-track,.profile,.section,.orgs,.site-page__hero,.cv-page__hero,.contact-hero,.contact-section,.blog-index__hero,.blog-article__header,.site-section'));
   const updateHeader = () => {
     const active = sections.findLast(section => section.getBoundingClientRect().top <= 32) ?? sections[0];
+    header?.classList.toggle('hero-active', !!active?.matches('.hero-track'));
     header?.classList.toggle('dark', !!active?.matches('.dark,.site-section--dark,.site-page__hero,.contact-hero,.blog-article__header'));
     header?.classList.toggle('yellow', !!active?.matches('.profile,.contact,.site-section--soft,.reference-story'));
     if (document.body.dataset.pageRoute === '/contact/') { header?.classList.add('dark'); header?.classList.remove('yellow'); }
@@ -27,12 +28,12 @@ export function initCinematicMotion(): void {
     const updateChapters = () => { const current = chapters.findLast(section=>section.getBoundingClientRect().top <= 150); nav.querySelectorAll('a').forEach(link => { if (link.hash === `#${current?.id}`) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); }); };
     window.addEventListener('scroll',updateChapters,{passive:true}); updateChapters();
   }
-  // Every action is one accessible control with two independent visual tiles.
+  // Every action is one accessible control with three independent visual tiles.
   // Keep the real label node (including the contact form's live submit label).
   const decorateAction = (control: HTMLElement) => {
     if (control.querySelector(':scope > .ref-action-label')) return;
-    const label = control.querySelector<HTMLElement>(':scope > [data-submit-label], :scope > span:not(.form-spinner)');
     const textNode = Array.from(control.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim());
+    const label = control.querySelector<HTMLElement>(':scope > [data-submit-label]') ?? (!textNode ? control.querySelector<HTMLElement>(':scope > span:not(.form-spinner):not([aria-hidden="true"])') : null);
     if (!label && !textNode) return;
     const original = label ?? document.createElement('span');
     if (!label && textNode) { original.textContent = textNode.textContent?.trim().replace(/\s*[＋+−]$/, '') ?? ''; textNode.replaceWith(original); }
@@ -42,11 +43,13 @@ export function initCinematicMotion(): void {
     const duplicate = document.createElement('span'); duplicate.className = 'ref-action-copy'; duplicate.setAttribute('aria-hidden','true');
     duplicate.textContent = original.textContent;
     original.replaceWith(tile); window.append(original, duplicate); tile.append(window);
-    const legacyIcon = control.querySelector(':scope > i, :scope > svg');
-    legacyIcon?.remove();
-    const icon = document.createElement('span'); icon.className = 'ref-action-icon'; icon.setAttribute('aria-hidden','true');
-    const plus = document.createElement('span'); plus.className = 'ref-action-plus'; plus.textContent = control.id === 'more' && control.getAttribute('aria-expanded') === 'true' ? '−' : '+';
-    icon.append(plus); control.append(icon);
+    control.querySelectorAll(':scope > i, :scope > svg, :scope > span[aria-hidden="true"]:not(.form-spinner)').forEach(icon => icon.remove());
+    const createIcon = (position: 'leading' | 'trailing') => {
+      const icon = document.createElement('span'); icon.className = `ref-action-icon ref-action-icon--${position}`; icon.setAttribute('aria-hidden','true');
+      const plus = document.createElement('span'); plus.className = 'ref-action-plus'; plus.textContent = control.id === 'more' && control.getAttribute('aria-expanded') === 'true' ? '−' : '+';
+      icon.append(plus); return icon;
+    };
+    control.prepend(createIcon('leading')); control.append(createIcon('trailing'));
     control.classList.add('ref-action');
     if (original.hasAttribute('data-submit-label')) {
       const observer = new MutationObserver(() => { duplicate.textContent = original.textContent; });
@@ -66,7 +69,55 @@ export function initCinematicMotion(): void {
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) ScrollTrigger.refresh();
     });
   }
+  document.querySelectorAll<HTMLElement>('[data-reference-tabs]').forEach(group => {
+    const tabs = Array.from(group.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const activate = (index: number, focus = false) => {
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1;
+        const panel = document.getElementById(tab.getAttribute('aria-controls') ?? ''); if (panel) panel.hidden = i !== index;
+      });
+      if (focus) tabs[index]?.focus();
+    };
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(index));
+      tab.addEventListener('keydown', event => {
+        const next = event.key === 'ArrowRight' ? (index + 1) % tabs.length : event.key === 'ArrowLeft' ? (index + tabs.length - 1) % tabs.length : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : -1;
+        if (next >= 0) { event.preventDefault(); activate(next, true); }
+      });
+    });
+  });
+  document.querySelectorAll<HTMLElement>('[data-reference-gallery]').forEach(gallery => {
+    const track = gallery.querySelector<HTMLElement>('.reference-gallery-track');
+    if (!track) return;
+    gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-direction]').forEach(button => button.addEventListener('click', () => {
+      const item = track.querySelector('figure');
+      track.scrollBy({left: Number(button.dataset.galleryDirection) * ((item?.getBoundingClientRect().width ?? track.clientWidth) + 16), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+    }));
+  });
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  if (pointer.matches) {
+    const cursor = document.createElement('span'); cursor.className = 'reference-cursor'; cursor.setAttribute('aria-hidden','true'); document.body.append(cursor);
+    const hide = () => { cursor.classList.remove('is-visible', 'is-pressed'); document.documentElement.classList.remove('cursor-active'); };
+    document.addEventListener('pointermove', event => {
+      if (event.pointerType !== 'mouse' || !pointer.matches) { hide(); return; }
+      const target = event.target as HTMLElement;
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) { hide(); return; }
+      let light = true;
+      for (let el: HTMLElement | null = target; el; el = el.parentElement) {
+        const color = getComputedStyle(el).backgroundColor.match(/[\d.]+/g)?.map(Number);
+        if (!color || color.length < 3 || (color[3] ?? 1) < .5) continue;
+        const [r = 0, g = 0, b = 0] = color;
+        light = r * .2126 + g * .7152 + b * .0722 > 140; break;
+      }
+      cursor.style.transform = `translate3d(${event.clientX}px,${event.clientY}px,0)`;
+      cursor.classList.toggle('on-light', light); cursor.classList.toggle('is-action', !!target.closest('a,button,summary,[role="button"]'));
+      cursor.classList.add('is-visible'); document.documentElement.classList.add('cursor-active');
+    }, { passive: true });
+    document.addEventListener('pointerdown', () => cursor.classList.add('is-pressed'));
+    document.addEventListener('pointerup', () => cursor.classList.remove('is-pressed'));
+    document.addEventListener('pointercancel', hide); document.documentElement.addEventListener('pointerleave', hide); window.addEventListener('blur', hide); pointer.addEventListener('change', hide);
+  }
   gsap.registerPlugin(ScrollTrigger);
   menu?.addEventListener('toggle', () => {
     if (!menu.open) return;
@@ -96,30 +147,58 @@ export function initCinematicMotion(): void {
     let frame = 0;
     let active = false;
     let progress = 0;
+    let localVideoUrl: string | undefined;
+    let recovering = false;
+    const isSeekable = () => video.seekable.length > 0 && video.seekable.end(video.seekable.length - 1) > .1;
+    // Some static CDN responses buffer the whole MP4 but expose a zero-length
+    // seekable range. Load the exact same film into an in-memory media URL once.
+    const recoverSeekability = async () => {
+      if (recovering || localVideoUrl) return;
+      recovering = true;
+      try {
+        const response = await fetch(video.currentSrc || video.src);
+        if (!response.ok) throw new Error('Film download failed');
+        localVideoUrl = URL.createObjectURL(await response.blob());
+        video.src = localVideoUrl;
+        video.load();
+      } catch { fallback(); }
+      finally { recovering = false; }
+    };
     const updateFilm = () => {
       frame = 0;
       if (!active) return;
       const distance = Math.max(1, track.offsetHeight - window.innerHeight);
       progress = gsap.utils.clamp(0, 1, -track.getBoundingClientRect().top / distance);
-      track.style.setProperty('--hero-copy-shade', String(Math.min(.94, Math.sin(progress * Math.PI) * 1.2)));
-      const target = progress * Math.max(0, video.duration - 1 / 24);
-      if (Math.abs(video.currentTime - target) > 0.025) video.currentTime = target;
-      if (progress <= 0.005) { video.hidden = true; poster.hidden = false; }
-      else if (video.readyState >= 2 && !video.seeking) { video.hidden = false; poster.hidden = true; }
+      header?.classList.toggle('hero-closeup', progress > .88);
+      track.style.setProperty('--hero-copy-shade', String(progress > .18 ? .94 : Math.min(.94, progress * 5.3)));
+      track.style.setProperty('--hero-copy-opacity', String(Math.max(0, 1 - progress * 3.5)));
+      // Hold the full-front composition through most of the turn, then use the
+      // film's final close-up in the last phase of the pinned hero.
+      const filmProgress = progress <= .85 ? progress / .85 * .44 : .44 + (progress - .85) / .15 * .56;
+      const target = filmProgress * Math.max(0, video.duration - 1 / 24);
+      if (progress <= 0.005) { video.classList.remove('film-visible'); poster.classList.remove('film-hidden'); }
+      if (!isSeekable()) { if (progress > .005 && video.readyState >= 2) void recoverSeekability(); return; }
+      if (!video.seeking && Math.abs(video.currentTime - target) > 0.025) video.currentTime = target;
     };
     const requestFilm = () => { if (!frame && active) frame = requestAnimationFrame(updateFilm); };
-    const fallback = () => { active = false; video.hidden = true; poster.hidden = false; track.classList.remove('has-film'); ScrollTrigger.refresh(); };
+    const fallback = () => { active = false; video.hidden = true; poster.classList.remove('film-hidden'); track.classList.remove('has-film'); track.style.removeProperty('--hero-copy-opacity'); header?.classList.remove('hero-closeup'); ScrollTrigger.refresh(); };
     const setup = () => {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
+      video.hidden = false;
       track.classList.add('has-film');
       active = true;
       window.addEventListener('scroll', requestFilm, { passive: true });
       window.addEventListener('resize', requestFilm, { passive: true });
-      video.addEventListener('seeked', () => { if (active && progress > 0.005 && video.readyState >= 2) { video.hidden = false; poster.hidden = true; } });
+      video.addEventListener('seeked', () => {
+        if (active && progress > 0.005 && video.readyState >= 2 && video.currentTime > .01) { video.classList.add('film-visible'); poster.classList.add('film-hidden'); }
+        requestFilm();
+      });
       requestFilm();
       ScrollTrigger.refresh();
     };
     video.addEventListener('error', fallback, { once: true });
+    video.addEventListener('loadeddata', requestFilm);
+    window.addEventListener('pagehide', event => { if (!event.persisted && localVideoUrl) URL.revokeObjectURL(localVideoUrl); });
     if (video.readyState >= 1) setup(); else video.addEventListener('loadedmetadata', setup, { once: true });
     initCinematicRain();
   }
