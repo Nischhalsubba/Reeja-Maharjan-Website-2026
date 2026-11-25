@@ -71,3 +71,46 @@ test('editorial assets and card indices use the cinematic layout without obstruc
   await page.goto(`${origin}/about/`);
   expect(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth)).toBeLessThanOrEqual(1);
 });
+
+
+test('reference grid is shared by header, content and footer throughout the portfolio', async ({page}) => {
+  for (const width of [390, 768, 1440, 1920]) {
+    await page.setViewportSize({width,height:900});
+    for (const route of ['/', '/about/', '/experience/', '/clinical-research/', '/maternal-health/', '/nursing-practice/', '/cv/', '/hire-reeja/', '/contact/', '/blog/']) {
+      await page.goto(origin+route,{waitUntil:'domcontentloaded'});
+      const edges=await page.evaluate(()=>{
+        const header=document.querySelector('.site-header__inner')!.getBoundingClientRect();
+        const footer=document.querySelector('.care-footer__main')!.getBoundingClientRect();
+        const first=document.querySelector('main .wrap,main .container:not(.inner-breadcrumb)')?.getBoundingClientRect();
+        return {header:header.left,footer:footer.left,content:first?.left,overflow:document.documentElement.scrollWidth-innerWidth};
+      });
+      expect(Math.abs(edges.header-edges.footer),route).toBeLessThanOrEqual(1);
+      if(edges.content!==undefined)expect(Math.abs(edges.header-edges.content),route).toBeLessThanOrEqual(1);
+      expect(edges.overflow,route).toBeLessThanOrEqual(1);
+    }
+  }
+});
+
+test('split action labels roll inside a fixed-size tile and keep one accessible name', async ({page}) => {
+  await page.goto(origin);
+  const button=page.locator('.hero .btn').first();
+  await expect(button).toHaveClass(/ref-action/);
+  await expect(button.locator('.ref-action-copy')).toHaveAttribute('aria-hidden','true');
+  const before=await button.boundingBox();
+  await button.hover();
+  await expect.poll(()=>button.locator('.ref-action-original').evaluate(el=>getComputedStyle(el).transform)).not.toBe('none');
+  const after=await button.boundingBox();
+  expect(Math.abs(before!.width-after!.width)).toBeLessThanOrEqual(1);
+  expect(Math.abs(before!.height-after!.height)).toBeLessThanOrEqual(1);
+});
+
+test('contact enquiry and conversation section retain one form and real contact routes', async ({page})=>{
+  await page.goto(origin+'/contact/');
+  await expect(page.locator('main h1')).toHaveText('Let’s talk.');
+  await expect(page.locator('#professional-contact-form')).toHaveCount(1);
+  await expect(page.locator('#contact-role')).toHaveJSProperty('tagName','SELECT');
+  await expect(page.locator('#arrange-a-call')).toBeVisible();
+  await expect(page.getByRole('link',{name:'Request a time'})).toHaveAttribute('href',/mailto:/);
+  await page.goto(origin+'/about/');
+  await expect(page.locator('footer #professional-contact-form')).toHaveCount(1);
+});
