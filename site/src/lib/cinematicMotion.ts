@@ -1,6 +1,6 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { initCinematicRain } from './cinematicRain.js';
+import { initCinematicRain, initFooterRain } from './cinematicRain.js';
 
 export function initCinematicMotion(): void {
   const header = document.querySelector<HTMLElement>('.site-header');
@@ -195,6 +195,15 @@ export function initCinematicMotion(): void {
     document.addEventListener('pointercancel', hide); document.documentElement.addEventListener('pointerleave', hide); window.addEventListener('blur', hide); pointer.addEventListener('change', hide);
   }
   gsap.registerPlugin(ScrollTrigger);
+  initFooterRain();
+  gsap.utils.toArray<HTMLElement>('.reference-story .reference-timeline').forEach(timeline=>{
+    timeline.classList.add('is-scroll-timeline');
+    gsap.fromTo(timeline,{'--timeline-progress':0},{'--timeline-progress':1,ease:'none',scrollTrigger:{trigger:timeline,start:'top 65%',end:'bottom 55%',scrub:true}});
+    timeline.querySelectorAll<HTMLElement>(':scope > li').forEach(entry=>{
+      ScrollTrigger.create({trigger:entry,start:'top 65%',onEnter:()=>entry.classList.add('is-active'),onLeaveBack:()=>entry.classList.remove('is-active')});
+      gsap.fromTo(Array.from(entry.children),{opacity:0,y:14},{opacity:1,y:0,duration:.65,stagger:.075,ease:'power3.out',clearProps:'opacity,transform',scrollTrigger:{trigger:entry,start:'top 84%',once:true}});
+    });
+  });
   menu?.addEventListener('toggle', () => {
     if (!menu.open) return;
     gsap.fromTo(menu.querySelector('.reference-mega'), { clipPath: 'inset(0 0 100% 0)', opacity: .6 }, { clipPath: 'inset(0 0 0% 0)', opacity: 1, duration: .42, ease: 'power3.out' });
@@ -283,18 +292,23 @@ export function initCinematicMotion(): void {
       const distance = Math.max(1, track.offsetHeight - window.innerHeight);
       progress = gsap.utils.clamp(0, 1, -track.getBoundingClientRect().top / distance);
       header?.classList.toggle('hero-closeup', progress > .88);
-      track.style.setProperty('--hero-copy-shade', String(progress > .18 ? .94 : Math.min(.94, progress * 5.3)));
-      // The headline and calls to action stay visible during the whole pin.
-      // Hold the full-front composition through most of the turn, then use the
-      // film's final close-up in the last phase of the pinned hero.
-      const filmProgress = progress <= .85 ? progress / .85 * .44 : .44 + (progress - .85) / .15 * .56;
+      // The copy belongs to the scrolling document, not to the pinned film.
+      // Both the copy and the closing yellow wash follow the same reversible progress.
+      const copyFade=1-gsap.utils.clamp(0,1,(progress-.24)/.42);
+      const wash=gsap.utils.clamp(0,1,(progress-.77)/.23);
+      track.style.setProperty('--hero-copy-opacity',String(copyFade));
+      track.style.setProperty('--hero-copy-y',`${-progress*distance}px`);
+      track.style.setProperty('--hero-wash',String(wash*wash*(3-2*wash)));
+      track.style.setProperty('--hero-copy-shade',String(Math.min(.22,progress*.4)));
+      track.classList.toggle('hero-copy-out',copyFade<.04);
+      const filmProgress = progress <= .65 ? progress / .65 * .44 : .44 + (progress - .65) / .35 * .56;
       const target = filmProgress * Math.max(0, video.duration - 1 / 24);
       if (progress <= 0.005) { video.classList.remove('film-visible'); poster.classList.remove('film-hidden'); }
       if (!isSeekable()) { if (progress > .005 && video.readyState >= 2) void recoverSeekability(); return; }
       if (!video.seeking && Math.abs(video.currentTime - target) > 0.025) video.currentTime = target;
     };
     const requestFilm = () => { if (!frame && active) frame = requestAnimationFrame(updateFilm); };
-    const fallback = () => { active = false; video.hidden = true; poster.classList.remove('film-hidden'); track.classList.remove('has-film'); track.style.removeProperty('--hero-copy-opacity'); header?.classList.remove('hero-closeup'); ScrollTrigger.refresh(); };
+    const fallback = () => { active = false; video.hidden = true; poster.classList.remove('film-hidden'); track.classList.remove('has-film','hero-copy-out'); ['--hero-copy-opacity','--hero-copy-y','--hero-wash','--hero-copy-shade'].forEach(name=>track.style.removeProperty(name)); header?.classList.remove('hero-closeup'); ScrollTrigger.refresh(); };
     const setup = () => {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
       video.hidden = false;
