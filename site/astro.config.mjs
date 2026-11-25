@@ -3,11 +3,13 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import { blogPosts } from './src/content/blog/index.ts';
+import { articleMatchesBlogTopic, blogTopics } from './src/content/blog/topics.ts';
 
 // Only claim a modification date when supported by an editorial revision or
 // the 25 November portfolio release. Do not use the build time as lastmod.
 const revisedRoutes = new Set(['/', '/about/', '/education/', '/experience/', '/clinical-research/', '/maternal-health/', '/maternity-care/', '/nursing-practice/', '/cv/', '/hire-reeja/', '/contact/', '/blog/']);
 const articleUpdates = new Map(blogPosts.map(post => [`/blog/${post.slug}/`, post.updatedAt]));
+const topicUpdates = new Map(blogTopics.map(topic => [`/blog/topics/${topic.slug}/`, blogPosts.filter(post => articleMatchesBlogTopic(post, topic)).map(post => post.updatedAt).sort().at(-1)]));
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,7 +23,7 @@ export default defineConfig({
     // design previews and the custom 404 page are deliberately excluded.
     serialize: (item) => {
       const pathname = new URL(item.url).pathname;
-      const lastmod = articleUpdates.get(pathname) ?? (revisedRoutes.has(pathname) ? '2026-11-25' : undefined);
+      const lastmod = articleUpdates.get(pathname) ?? topicUpdates.get(pathname) ?? (revisedRoutes.has(pathname) ? '2026-11-25' : undefined);
       return lastmod ? { ...item, lastmod } : item;
     },
     filter: (page) => {
