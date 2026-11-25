@@ -161,17 +161,17 @@ export function initCinematicMotion(): void {
       const t=time*.00028;
       // Project a regular 3D grid onto the screen, with broad, intersecting dunes.
       // Each row is a depth plane: rear points are compact and dim, near points spread.
-      const cols=w<700?96:176,rows=w<700?50:84;
+      const cols=w<700?92:148,rows=w<700?45:66;
       for(let row=0;row<rows;row++){
-        const z=row/(rows-1), perspective=.58+z*1.25;
+        const z=row/(rows-1), perspective=.46+z*1.44;
         for(let col=0;col<cols;col++){
           const u=(col/(cols-1)-.5)*2.15;
           const x=w*(.5+u*perspective*.77);
           if(x<-2||x>w+2)continue;
-          const ridge=Math.sin(u*5.2-z*5.8+t)*.085+Math.sin(u*10.4+z*8.3-t*.68)*.037;
-          const dunes=Math.exp(-Math.pow((u+.23)*2.2,2))*(.075+.102*Math.sin(z*7.4+t*.7))+
-            Math.exp(-Math.pow((u-.63)*3.1,2))*(.05+.08*Math.cos(z*8.1-t));
-          const base=h*(.49+z*.40), displacement=h*(ridge+dunes)*perspective;
+          const ridge=Math.sin(u*4.7-z*5.2+t)*.071+Math.sin(u*8.2+z*6.3-t*.68)*.034;
+          const dunes=Math.exp(-Math.pow((u+.23)*2.6,2))*(.09+.12*Math.sin(z*8.4+t*.7))+
+            Math.exp(-Math.pow((u-.63)*3.1,2))*(.10+.12*Math.cos(z*7.2-t));
+          const base=h*(.48+z*.42), displacement=h*(ridge+dunes)*perspective;
           const y0=base-displacement;
           const dx=(x/w-pointerX)*2,dy=y0/h-pointerY;
           const ripple=pointerPower*Math.exp(-(dx*dx+dy*dy)*13)*Math.sin(Math.sqrt(dx*dx+dy*dy)*22-t*6)*h*.025;
@@ -180,9 +180,9 @@ export function initCinematicMotion(): void {
           const edge=Math.max(0,1-Math.pow(Math.abs(x/w-.5)*2,2)*.65);
           const fade=Math.min(1,z*8)*(1-Math.pow(z,3)*.88);
           const crest=.65+.35*Math.sin(u*12-z*8+t);
-          const alpha=edge*fade*(.085+crest*.14);
-          const size=.52+z*.75;
-          waveCtx.fillStyle=`rgba(255,224,0,${alpha})`;waveCtx.fillRect(x,y,size,size);
+          const alpha=edge*fade*(.22+crest*.30);
+          const size=.58+z*.78;
+          waveCtx.fillStyle=`rgba(255,224,0,${alpha})`;waveCtx.beginPath();waveCtx.arc(x,y,size*.58,0,Math.PI*2);waveCtx.fill();
         }
       }
       waveFrame=requestAnimationFrame(paint);
