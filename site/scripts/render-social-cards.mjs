@@ -16,13 +16,11 @@ for (const file of source) {
   const output = file.replace(/\.svg$/, '.png');
   await mkdir(dirname(output), { recursive: true });
   const svg = await readFile(file);
-  const card = sharp(svg, { density: 96 })
-    .resize(1200, 630, { fit: 'fill' })
-    .flatten({ background: '#faf8e9' });
+  const card = sharp(svg, { density: 96 }).resize(1200, 630, { fit: 'fill' });
   if (file.endsWith('og-default.svg')) {
-    const portrait = await sharp(resolve('public/images/reeja-clinical-portrait-2026.jpg')).extract({ left: 0, top: 36, width: 800, height: 1178 }).resize(428, 630, { fit: 'fill' }).png().toBuffer();
-    await card.composite([{input:portrait,left:772,top:0}]).png({ compressionLevel: 9 }).toFile(output);
-  } else await card.png({ compressionLevel: 9, palette: true, effort: 8 }).toFile(output);
+    const overlay = await card.png().toBuffer();
+    await sharp(resolve('public/images/reeja-hero.webp')).resize(1200,630,{fit:'cover',position:'centre'}).composite([{input:overlay,left:0,top:0}]).png({ compressionLevel: 9 }).toFile(output);
+  } else await card.flatten({background:'#faf8e9'}).png({ compressionLevel: 9, palette: true, effort: 8 }).toFile(output);
   const result = await stat(output);
   if (result.size < 1000) throw new Error('Generated social card is missing or suspiciously small: ' + output);
   console.log('Social preview generated:', output.replace(dist, ''), result.size, 'bytes');
