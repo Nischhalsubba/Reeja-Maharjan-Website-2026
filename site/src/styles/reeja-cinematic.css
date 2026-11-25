@@ -187,3 +187,8 @@ body[data-page-route="/clinical-research/"]{--chapter-photo:url('/images/cinemat
 .footer-nepali-rain{z-index:1;mask-image:linear-gradient(180deg,transparent 0%,#000 17%,#000 75%,transparent 99%)}
 @media(max-width:900px){.reference-footer-contact{padding:64px 0 24px}.reference-footer-contact-grid{grid-template-columns:1fr;gap:36px}.reference-footer-contact .professional-contact-form{padding:24px}.reference-footer-ending{padding-top:16px}.reference-footer-wave{opacity:.85}}
 @media(max-width:600px){.reference-footer-contact .professional-contact-form{padding:20px}.reference-footer-contact h2{font-size:36px}.reference-footer-actions{margin-top:24px}.reference-footer-contact-grid{gap:30px}}
+
+/* Fine-tuned against the live closing scene at 1348 CSS pixels. */
+.reference-footer-wave{mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 81%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 18%,#000 81%,transparent 100%)}
+.reference-footer-contact .reference-reveal-ink{color:#f4f4f4!important}
+@media(min-width:901px){.reference-footer-contact-grid{grid-template-columns:minmax(0,1fr) minmax(0,.95fr);column-gap:8%;row-gap:62px}.reference-footer-contact .professional-contact-form__privacy:not([open]){position:absolute;bottom:10px;right:32px;margin:0;font-size:10px}.reference-footer-contact .professional-contact-form__actions{margin-top:16px}.reference-footer-contact .professional-contact-form{padding-bottom:32px}.reference-footer-disclosures{padding-bottom:0}.reference-footer-disclosures details{padding-bottom:0}.reference-footer-contact{padding-bottom:22px}}
