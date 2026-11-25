@@ -22,6 +22,7 @@ import BrandAction from '../components/design-system/BrandAction.astro';
 import BrandCard from '../components/design-system/BrandCard.astro';
 import EvidenceList from '../components/design-system/EvidenceList.astro';
 import Eyebrow from '../components/design-system/Eyebrow.astro';
+import PracticeStory from '../components/PracticeStory.astro';
 ---
 
 <BaseLayout title={copy.title} description={copy.description}>
@@ -49,6 +50,11 @@ import Eyebrow from '../components/design-system/Eyebrow.astro';
       </div>
     </section>
     <EditorialPhoto kind="research" label="Education, monitoring and follow-up in maternal-health research" />
+    <PracticeStory title="From conversation to coordination." intro="The practical work that connects participant communication, records and research teams in the MOM-HD study." chapters={[
+      {title:'Participant communication',text:'Support screening and consent workflows within the approved research protocol, with clear explanations and organised records.',image:'/images/cinematic/99f458695911.jpg',alt:'Illustrative clinical documentation'},
+      {title:'Monitoring support',text:'Help participants understand their assigned monitoring process and maintain contact with the research team.',image:'/images/cinematic/4c6c586bf16b.jpg',alt:'Illustrative blood pressure monitoring'},
+      {title:'Care-team coordination',text:'Maintain study documentation and communicate concerns to the appropriate team according to the study protocol.',image:'/images/cinematic/64358b3119c9.jpg',alt:'Illustrative hospital team'}
+    ]} />
 
     <section class="site-section">
       <div class="container">

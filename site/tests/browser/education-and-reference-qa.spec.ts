@@ -35,12 +35,25 @@ test('portrait gallery has optional motion and footer invitation changes by rout
   await expect(page.locator('.reference-footer-contact h2')).toHaveText('Let’s talk.');
 });
 
+test('experience photographs advance without navigating and all roles have real detail pages',async({page})=>{
+  await page.goto(`${origin}/experience/`);
+  const card=page.locator('[data-media-slideshow]').first();
+  await expect(card.locator('[data-media-slide]:visible')).toHaveCount(1);
+  const before=await card.locator('[data-media-slide]:visible').getAttribute('src');
+  await card.locator('[data-media-next]').click();
+  await expect(card.locator('[data-media-slide]:visible')).not.toHaveAttribute('src',before!);
+  await expect(page.locator('a[href="/maternity-care/"]').first()).toBeAttached();
+  await page.goto(`${origin}/maternity-care/`);
+  await expect(page.locator('main h1')).toBeVisible();
+  await expect(page.locator('.practice-story__chapter')).toHaveCount(3);
+});
+
 test('major routes have one visible heading and no horizontal scrolling at six widths', async ({ page }) => {
   test.setTimeout(120000);
   await page.emulateMedia({reducedMotion:'reduce'});
   for (const width of [390,768,1024,1280,1440,1920]) {
     await page.setViewportSize({width,height:900});
-    for (const route of ['/','/about/','/education/','/cv/','/experience/','/clinical-research/','/maternal-health/','/nursing-practice/','/hire-reeja/','/contact/','/blog/']) {
+    for (const route of ['/','/about/','/education/','/cv/','/experience/','/clinical-research/','/maternal-health/','/maternity-care/','/nursing-practice/','/hire-reeja/','/contact/','/blog/']) {
       await page.goto(origin+route,{waitUntil:'domcontentloaded'});
       await expect(page.locator('main h1')).toHaveCount(1);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth-innerWidth),`${route} @ ${width}`).toBeLessThanOrEqual(1);

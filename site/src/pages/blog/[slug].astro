@@ -41,8 +41,8 @@ const articleSchema = {
     width: 1200,
     height: 630
   },
-  datePublished: post.publishedAt,
-  dateModified: post.updatedAt,
+  datePublished: `${post.publishedAt}T00:00:00+05:45`,
+  dateModified: `${post.updatedAt}T00:00:00+05:45`,
   inLanguage: 'en',
   author: {
     '@type': 'Person',

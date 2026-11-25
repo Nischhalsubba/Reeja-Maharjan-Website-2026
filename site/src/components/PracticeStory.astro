@@ -1,0 +1,13 @@
+---
+type Chapter = {title:string; text:string; image:string; alt:string};
+type Props = {title:string; intro:string; chapters:Chapter[]};
+const {title,intro,chapters}=Astro.props;
+---
+<section class="site-section practice-story" data-practice-story>
+  <div class="container practice-story__grid">
+    <header><h2>{title}</h2><p>{intro}</p><p class="practice-story__note">Illustrative photography · no patient records or study results.</p></header>
+    <div class="practice-story__chapters">
+      {chapters.map((chapter,index)=><article class="practice-story__chapter" data-motion-reveal><figure><img src={chapter.image} alt={chapter.alt} width="1100" height="734" loading="lazy" decoding="async"/><figcaption>Illustrative photograph</figcaption></figure><div><span aria-hidden="true">{String(index+1).padStart(2,'0')}</span><h3>{chapter.title}</h3><p>{chapter.text}</p></div></article>)}
+    </div>
+  </div>
+</section>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PracticeStory from '../components/PracticeStory.astro';
 import { blogPosts } from '../content/blog';
 import { siteCopy } from '../content/site-copy';
 
@@ -35,6 +36,11 @@ import EvidenceList from '../components/design-system/EvidenceList.astro';
       </div>
     </section>
     <EditorialPhoto kind="clinical" label="Care, communication and clinical practice" />
+    <PracticeStory title="Every shift has a story." intro="An overview of my general ward and hospital nursing experience, grounded in teamwork rather than invented patient stories." chapters={[
+      {title:'Working with the care team',text:'My general ward experience at Manmohan Memorial Medical College and Teaching Hospital involved nursing support and coordination across assigned duties.',image:'/images/cinematic/64358b3119c9.jpg',alt:'Illustrative hospital team'},
+      {title:'Observation and communication',text:'I value clear communication about observations and concerns within the scope of my role.',image:'/images/cinematic/4c6c586bf16b.jpg',alt:'Illustrative nursing observation'},
+      {title:'Documentation and handover',text:'Clear records and structured handover connect one shift to the next and support continuity of care.',image:'/images/cinematic/99f458695911.jpg',alt:'Illustrative clinical documentation'}
+    ]} />
 
     <section class="site-section">
       <div class="container">

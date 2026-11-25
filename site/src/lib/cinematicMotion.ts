@@ -110,6 +110,32 @@ export function initCinematicMotion(): void {
       window.setInterval(()=>{if(!paused&&visible&&!hovering&&!gallery.contains(document.activeElement)&&!reduced.matches&&!document.hidden)move(1);},4000);
     }
   });
+  document.querySelectorAll<HTMLElement>('[data-media-slideshow]').forEach(card=>{
+    const slides=[...card.querySelectorAll<HTMLElement>('[data-media-slide]')];
+    const toggle=card.querySelector<HTMLButtonElement>('[data-media-toggle]');
+    const next=card.querySelector<HTMLButtonElement>('[data-media-next]');
+    if(slides.length<2||!toggle||!next)return;
+    let index=0,playing=false,visible=false;
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    const advance=()=>{index=(index+1)%slides.length;slides.forEach((slide,i)=>{slide.hidden=i!==index;if(i===index&&!reduced.matches)slide.animate([{opacity:.4},{opacity:1}],{duration:550,easing:'ease-out'});});};
+    const sync=()=>{toggle.textContent=playing?'Pause':'Play';toggle.setAttribute('aria-pressed',String(playing));toggle.setAttribute('aria-label',`${playing?'Pause':'Play'} experience photographs`);};
+    toggle.addEventListener('click',()=>{playing=!playing;sync();});next.addEventListener('click',advance);
+    new IntersectionObserver(entries=>{visible=entries.some(e=>e.isIntersecting);}).observe(card);
+    window.setInterval(()=>{if(playing&&visible&&!card.hidden&&!document.hidden&&!reduced.matches)advance();},4200);
+  });
+  const journal=document.querySelector<HTMLElement>('.cinematic-home .journal');
+  if(journal){
+    const entries=[...journal.querySelectorAll<HTMLElement>(':scope > a')];
+    if(entries.length>1){
+      const controls=document.createElement('div');controls.className='journal-carousel-controls';
+      const status=document.createElement('span');status.setAttribute('aria-live','polite');
+      const prev=document.createElement('button');prev.type='button';prev.textContent='←';prev.setAttribute('aria-label','Previous journal articles');
+      const next=document.createElement('button');next.type='button';next.textContent='→';next.setAttribute('aria-label','Next journal articles');
+      let index=0;
+      const update=()=>{entries.forEach((entry,i)=>{entry.hidden=i<index||i>=index+3;});status.textContent=`${index+1}–${Math.min(index+3,entries.length)} / ${entries.length}`;prev.disabled=index===0;next.disabled=index+3>=entries.length;};
+      prev.addEventListener('click',()=>{index=Math.max(0,index-3);update();});next.addEventListener('click',()=>{index=Math.min(entries.length-1,index+3);update();});controls.append(prev,status,next);journal.after(controls);update();
+    }
+  }
   const clock = document.querySelector<HTMLElement>('[data-nepal-clock]');
   if (clock) {
     const format = new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kathmandu',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false});
@@ -182,12 +208,14 @@ export function initCinematicMotion(): void {
       const base = document.createElement('span'); base.className = 'reference-reveal-ink'; base.append(...Array.from(item.childNodes)); item.append(base);
       const cover = (name: string) => { const el = document.createElement('span'); el.className = `reference-reveal-cover ${name}`; el.setAttribute('aria-hidden','true'); item.append(el); return el; };
       const gold = cover('reference-reveal-gold'), paper = cover('reference-reveal-paper');
+      const highlight=document.createElement('span');highlight.className='reference-reveal-highlight';highlight.setAttribute('aria-hidden','true');highlight.textContent=base.textContent;item.append(highlight);
       const timeline=gsap.timeline({paused:true});
       // Keep the actual heading readable even during the sweep and on long wrapped lines.
       timeline.set(base,{opacity:1}).set([gold,paper],{scaleX:0,transformOrigin:'left center'});
       timeline.to(gold,{scaleX:1,duration:.29,ease:'power3.inOut'},0).to(paper,{scaleX:1,duration:.28,ease:'power3.inOut'},.08);
       timeline.set([gold,paper],{transformOrigin:'right center'},.37);
       timeline.to(gold,{scaleX:0,duration:.42,ease:'power3.inOut'},.37).to(paper,{scaleX:0,duration:.35,ease:'power3.inOut'},.43);
+      timeline.fromTo(highlight,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:.29,ease:'power3.inOut'},0).to(highlight,{clipPath:'inset(0 0 0 100%)',duration:.48,ease:'power3.inOut'},.29);
       ScrollTrigger.create({trigger:heading,start:'top 89%',once:true,onEnter:()=>timeline.delay(index*.085).play()});
     });
   });

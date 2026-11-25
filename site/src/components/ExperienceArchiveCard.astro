@@ -1,0 +1,16 @@
+---
+type Area={name:string;category:string;image:string;alt:string;description:string;summary:string;tags:string[];href:string};
+const {area}=Astro.props as {area:Area};
+const alternate=area.image==='99f458695911.jpg'?'64358b3119c9.jpg':'99f458695911.jpg';
+---
+<article data-experience-category={area.category} class="experience-archive-card" data-media-slideshow>
+  <div class="reference-experience-image">
+    <a href={area.href} aria-label={`Explore ${area.name}`} class="experience-image-link">
+      <img src={`/images/cinematic/${area.image}`} alt={area.alt} width="1100" height="734" loading="lazy" data-media-slide />
+      <img src={`/images/cinematic/${alternate}`} alt="Additional illustrative healthcare photograph" width="1100" height="734" loading="lazy" data-media-slide hidden />
+    </a>
+    <span>Illustrative photography</span>
+    <div class="media-slide-controls"><button type="button" data-media-toggle aria-label={`Play ${area.name} photographs`} aria-pressed="false">Play</button><button type="button" data-media-next aria-label={`Next ${area.name} photograph`}>Next →</button></div>
+  </div>
+  <a href={area.href} class="reference-experience-caption"><div><p class="site-eyebrow">{area.description}</p><h2>{area.name}</h2><p>{area.summary}</p><ul class="reference-experience-tags" aria-label="Areas of work">{area.tags.map(tag=><li>{tag}</li>)}</ul></div><span class="reference-experience-action" aria-hidden="true"><span>Read about practice</span><span>+</span></span></a>
+</article>

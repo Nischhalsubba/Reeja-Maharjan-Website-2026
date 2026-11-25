@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PracticeStory from '../components/PracticeStory.astro';
 import { blogPosts } from '../content/blog';
 import { siteCopy } from '../content/site-copy';
 
@@ -36,6 +37,11 @@ import EvidenceList from '../components/design-system/EvidenceList.astro';
       </div>
     </section>
     <EditorialPhoto kind="maternal" label="Maternal health and newborn care" />
+    <PracticeStory title="Care around the family." intro="A view of my maternal and newborn nursing background at Tribhuvan University Teaching Hospital and Sindhuli Hospital." chapters={[
+      {title:'Hospital practice',text:'My maternity-related roles involved ward routines, communication and nursing support within the assigned clinical team.',image:'/images/cinematic/64358b3119c9.jpg',alt:'Illustrative hospital team'},
+      {title:'Patient and family education',text:'Clear explanations and respectful communication are recurring parts of my professional approach to maternal and newborn care.',image:'/images/cinematic/4123471de1d5.jpg',alt:'Illustrative mother with newborn'},
+      {title:'Continuity after care',text:'Accurate records, handover and appropriate follow-up help the next team understand the patient’s needs.',image:'/images/cinematic/99f458695911.jpg',alt:'Illustrative clinical documentation'}
+    ]} />
 
     <section class="site-section">
       <div class="container">
