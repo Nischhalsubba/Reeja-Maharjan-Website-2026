@@ -34,6 +34,12 @@ const initHeaderMenu = (): void => {
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeMenu();
   });
+  window.matchMedia('(min-width:901px)').addEventListener('change', event => {
+    if (event.matches) {
+      closeMenu();
+      document.querySelectorAll<HTMLElement>('main,footer').forEach(element => { element.inert = false; });
+    }
+  });
 };
 
 const initScrollProgress = (): void => {
