@@ -164,3 +164,26 @@ body[data-page-route="/clinical-research/"]{--chapter-photo:url('/images/cinemat
 .reference-story .reference-timeline>li h3{font-size:clamp(24px,2.35vw,36px);line-height:1.08;letter-spacing:-.035em}
 @media(prefers-reduced-motion:reduce){.hero-track.has-film .hero-bottom{transform:none;opacity:1!important}.hero::after,.footer-nepali-rain{display:none}.reference-story .reference-timeline::after{transform:none}}
 .nepal-flag{display:inline-block!important;width:12px!important;height:15px!important;object-fit:contain;vertical-align:middle;margin-inline-start:4px;flex:none}.hero .kicker .nepal-flag{vertical-align:-3px}
+
+/* Closing scene: full bleed particle surface, compact inset enquiry and utility strip. */
+.site-footer,.reference-footer-contact{background:#101010;color:#f4f4f4}
+.reference-footer-contact{padding:clamp(88px,9vw,156px) 0 32px;isolation:isolate}
+.reference-footer-wave{z-index:-1;opacity:1;mask-image:linear-gradient(to bottom,transparent 0%,#000 26%,#000 74%,transparent 99%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 26%,#000 74%,transparent 99%)}
+.reference-footer-contact-grid{grid-template-columns:minmax(0,1fr) minmax(0,.89fr);column-gap:10%;row-gap:62px;align-items:start}
+.reference-footer-contact .site-eyebrow{font-size:12px;color:#d7d7d7;margin-bottom:24px;font-weight:500}
+.reference-footer-contact h2{font-size:clamp(36px,2.8vw,48px);line-height:1.03;letter-spacing:-.035em;margin:0 0 26px;font-weight:500}
+.reference-footer-contact p:not(.site-eyebrow){font-size:16px;line-height:1.6;color:#b9b9b9}
+.reference-footer-actions{margin-top:38px;gap:24px}
+.reference-footer-contact .professional-contact-form{padding:32px;background:#181818;border:1px dashed #746528;box-shadow:none}
+.reference-footer-contact .professional-contact-form__grid{gap:14px 12px}
+.reference-footer-contact .form-field label{font-size:12px;line-height:1.4;margin-bottom:8px}
+.reference-footer-contact .form-field input{min-height:44px;padding:9px 12px}
+.reference-footer-contact .form-field textarea{height:84px;min-height:84px;padding:9px 12px}
+.reference-footer-contact .professional-contact-form__actions{margin-top:20px}
+.reference-footer-contact .professional-contact-form__privacy{margin-top:14px;font-size:10px}
+.reference-footer-ending{position:relative;border-top:0;padding:22px 0 0;font-size:11px;color:#bcbcbc}
+.reference-footer-ending::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,#ffe000 0%,#776a18 15%,#3b3b3b 48%,#3b3b3b 100%)}
+.reference-footer-disclosures{border-top:0;padding-top:0}.reference-footer-disclosures details{padding:0 0 8px}.care-footer__bottom{min-height:93px;border-top:1px solid #393939;padding-block:24px}
+.footer-nepali-rain{z-index:1;mask-image:linear-gradient(180deg,transparent 0%,#000 17%,#000 75%,transparent 99%)}
+@media(max-width:900px){.reference-footer-contact{padding:64px 0 24px}.reference-footer-contact-grid{grid-template-columns:1fr;gap:36px}.reference-footer-contact .professional-contact-form{padding:24px}.reference-footer-ending{padding-top:16px}.reference-footer-wave{opacity:.85}}
+@media(max-width:600px){.reference-footer-contact .professional-contact-form{padding:20px}.reference-footer-contact h2{font-size:36px}.reference-footer-actions{margin-top:24px}.reference-footer-contact-grid{gap:30px}}
