@@ -146,30 +146,49 @@ export function initCinematicMotion(): void {
   const wave=document.querySelector<HTMLCanvasElement>('.reference-footer-wave');
   const waveCtx=wave?.getContext('2d');
   if(wave&&waveCtx){
-    let waveFrame=0,visible=false;
+    let waveFrame=0,visible=false, lastFrame=0;
+    let pointerX=.5,pointerY=.5, pointerPower=0, targetPower=0;
+    const scene=wave.closest<HTMLElement>('.reference-footer-contact');
+    scene?.addEventListener('pointermove',event=>{if(event.pointerType==='touch')return;const rect=scene.getBoundingClientRect();pointerX=(event.clientX-rect.left)/rect.width;pointerY=(event.clientY-rect.top)/rect.height;targetPower=1;},{passive:true});
+    scene?.addEventListener('pointerleave',()=>{targetPower=0;});
     const paint=(time:number)=>{
-      const w=wave.clientWidth,h=wave.clientHeight;
-      if(wave.width!==w||wave.height!==h){wave.width=w;wave.height=h;}
-      waveCtx.clearRect(0,0,w,h);
-      const t=time*.0005;
-      for(let row=0;row<42;row++){
-        const depth=row/41;
-        const spread=.38+depth*.97;
-        const yBase=h*.32+Math.pow(depth,1.7)*h*.8;
-        for(let col=-58;col<=58;col++){
-          const x=w/2+col*(w/86)*spread;
-          if(x<0||x>w)continue;
-          const bend=(Math.sin(col*.17+row*.17+t)*26+Math.sin(col*.08-row*.14+t*.7)*19)*spread;
-          const y=yBase+bend;
+      waveFrame=0;if(!visible||document.hidden)return;
+      if(time-lastFrame<30){waveFrame=requestAnimationFrame(paint);return;}lastFrame=time;
+      const w=wave.clientWidth,h=wave.clientHeight,d=Math.min(devicePixelRatio||1,1.75);
+      if(wave.width!==Math.round(w*d)||wave.height!==Math.round(h*d)){wave.width=Math.round(w*d);wave.height=Math.round(h*d);}
+      waveCtx.setTransform(d,0,0,d,0,0);waveCtx.clearRect(0,0,w,h);
+      pointerPower+=(targetPower-pointerPower)*.055;
+      const t=time*.00028;
+      // Project a regular 3D grid onto the screen, with broad, intersecting dunes.
+      // Each row is a depth plane: rear points are compact and dim, near points spread.
+      const cols=w<700?96:176,rows=w<700?50:84;
+      for(let row=0;row<rows;row++){
+        const z=row/(rows-1), perspective=.58+z*1.25;
+        for(let col=0;col<cols;col++){
+          const u=(col/(cols-1)-.5)*2.15;
+          const x=w*(.5+u*perspective*.77);
+          if(x<-2||x>w+2)continue;
+          const ridge=Math.sin(u*5.2-z*5.8+t)*.085+Math.sin(u*10.4+z*8.3-t*.68)*.037;
+          const dunes=Math.exp(-Math.pow((u+.23)*2.2,2))*(.075+.102*Math.sin(z*7.4+t*.7))+
+            Math.exp(-Math.pow((u-.63)*3.1,2))*(.05+.08*Math.cos(z*8.1-t));
+          const base=h*(.49+z*.40), displacement=h*(ridge+dunes)*perspective;
+          const y0=base-displacement;
+          const dx=(x/w-pointerX)*2,dy=y0/h-pointerY;
+          const ripple=pointerPower*Math.exp(-(dx*dx+dy*dy)*13)*Math.sin(Math.sqrt(dx*dx+dy*dy)*22-t*6)*h*.025;
+          const y=y0-ripple;
           if(y<0||y>h)continue;
-          const alpha=(.07+depth*.3)*(1-Math.abs(col)/85);
-          waveCtx.fillStyle=`rgba(255,224,0,${alpha})`;
-          const size=.65+depth*1.1;waveCtx.fillRect(x,y,size,size);
+          const edge=Math.max(0,1-Math.pow(Math.abs(x/w-.5)*2,2)*.65);
+          const fade=Math.min(1,z*8)*(1-Math.pow(z,3)*.88);
+          const crest=.65+.35*Math.sin(u*12-z*8+t);
+          const alpha=edge*fade*(.085+crest*.14);
+          const size=.52+z*.75;
+          waveCtx.fillStyle=`rgba(255,224,0,${alpha})`;waveCtx.fillRect(x,y,size,size);
         }
       }
-      if(visible)waveFrame=requestAnimationFrame(paint);
+      waveFrame=requestAnimationFrame(paint);
     };
     new IntersectionObserver(entries=>{visible=entries.some(e=>e.isIntersecting);cancelAnimationFrame(waveFrame);if(visible)waveFrame=requestAnimationFrame(paint);},{threshold:0}).observe(wave);
+    document.addEventListener('visibilitychange',()=>{cancelAnimationFrame(waveFrame);if(visible&&!document.hidden)waveFrame=requestAnimationFrame(paint);});
   }
   const pointer = window.matchMedia('(hover: hover) and (pointer: fine)');
   if (pointer.matches) {
