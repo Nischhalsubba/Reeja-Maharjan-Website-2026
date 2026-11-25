@@ -8,11 +8,12 @@ export function initCinematicMotion(): void {
   menu?.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('a')) menu.open = false; });
   document.addEventListener('click', (event) => { if (menu?.open && !menu.contains(event.target as Node)) menu.open = false; });
   document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu) menu.open = false; });
-  const sections = Array.from(document.querySelectorAll<HTMLElement>('.hero-track,.profile,.section,.orgs,.site-page__hero,.cv-page__hero,.contact-hero,.blog-index__hero,.blog-article__header,.site-section'));
+  const sections = Array.from(document.querySelectorAll<HTMLElement>('.hero-track,.profile,.section,.orgs,.site-page__hero,.cv-page__hero,.contact-hero,.contact-section,.blog-index__hero,.blog-article__header,.site-section'));
   const updateHeader = () => {
     const active = sections.findLast(section => section.getBoundingClientRect().top <= 32) ?? sections[0];
     header?.classList.toggle('dark', !!active?.matches('.dark,.site-section--dark,.site-page__hero,.contact-hero,.blog-article__header'));
-    header?.classList.toggle('yellow', !!active?.matches('.profile,.contact,.site-section--soft'));
+    header?.classList.toggle('yellow', !!active?.matches('.profile,.contact,.site-section--soft,.reference-story'));
+    if (document.body.dataset.pageRoute === '/contact/') { header?.classList.add('dark'); header?.classList.remove('yellow'); }
   };
   window.addEventListener('scroll', updateHeader, { passive: true });
   updateHeader();
@@ -26,6 +27,33 @@ export function initCinematicMotion(): void {
     const updateChapters = () => { const current = chapters.findLast(section=>section.getBoundingClientRect().top <= 150); nav.querySelectorAll('a').forEach(link => { if (link.hash === `#${current?.id}`) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); }); };
     window.addEventListener('scroll',updateChapters,{passive:true}); updateChapters();
   }
+  // Every action is one accessible control with two independent visual tiles.
+  // Keep the real label node (including the contact form's live submit label).
+  const decorateAction = (control: HTMLElement) => {
+    if (control.querySelector(':scope > .ref-action-label')) return;
+    const label = control.querySelector<HTMLElement>(':scope > [data-submit-label], :scope > span:not(.form-spinner)');
+    const textNode = Array.from(control.childNodes).find(node => node.nodeType === Node.TEXT_NODE && node.textContent?.trim());
+    if (!label && !textNode) return;
+    const original = label ?? document.createElement('span');
+    if (!label && textNode) { original.textContent = textNode.textContent?.trim().replace(/\s*[＋+−]$/, '') ?? ''; textNode.replaceWith(original); }
+    original.classList.add('ref-action-original');
+    const tile = document.createElement('span'); tile.className = 'ref-action-label';
+    const window = document.createElement('span'); window.className = 'ref-action-window';
+    const duplicate = document.createElement('span'); duplicate.className = 'ref-action-copy'; duplicate.setAttribute('aria-hidden','true');
+    duplicate.textContent = original.textContent;
+    original.replaceWith(tile); window.append(original, duplicate); tile.append(window);
+    const legacyIcon = control.querySelector(':scope > i, :scope > svg');
+    legacyIcon?.remove();
+    const icon = document.createElement('span'); icon.className = 'ref-action-icon'; icon.setAttribute('aria-hidden','true');
+    const plus = document.createElement('span'); plus.className = 'ref-action-plus'; plus.textContent = control.id === 'more' && control.getAttribute('aria-expanded') === 'true' ? '−' : '+';
+    icon.append(plus); control.append(icon);
+    control.classList.add('ref-action');
+    if (original.hasAttribute('data-submit-label')) {
+      const observer = new MutationObserver(() => { duplicate.textContent = original.textContent; });
+      observer.observe(original, { childList: true, characterData: true, subtree: true });
+    }
+  };
+  document.querySelectorAll<HTMLElement>('a.btn,button.btn,a.site-button,button.site-button,a.care-footer__cta,a.care-button,button[data-submit-button],a.care-link,a.blog-index__read-link,#more').forEach(decorateAction);
   const more = document.querySelector<HTMLButtonElement>('#more');
   const extra = document.querySelector<HTMLElement>('#extra');
   if (more && extra) {
@@ -34,22 +62,12 @@ export function initCinematicMotion(): void {
       extra.hidden = !extra.hidden;
       more.textContent = extra.hidden ? 'Load more ＋' : 'Show less −';
       more.setAttribute('aria-expanded', String(!extra.hidden));
-      ScrollTrigger.refresh();
+      decorateAction(more);
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) ScrollTrigger.refresh();
     });
   }
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
   gsap.registerPlugin(ScrollTrigger);
-  // Two-layer label roll, with duplicate text kept out of the accessibility tree.
-  document.querySelectorAll<HTMLElement>('.btn > span,.site-button,.care-footer__cta,.reference-filters button,.more').forEach(label => {
-    if (label.querySelector('.motion-label') || label.id === 'more') return;
-    const node = Array.from(label.childNodes).find(child=>child.nodeType === Node.TEXT_NODE && child.textContent?.trim());
-    if (!node || !node.textContent) return;
-    const text = node.textContent.trim();
-    const window = document.createElement('span'); window.className = 'motion-label';
-    const original = document.createElement('span'); original.textContent = text;
-    const copy = document.createElement('span'); copy.textContent = text; copy.setAttribute('aria-hidden','true');
-    window.append(original, copy); node.replaceWith(window);
-  });
   menu?.addEventListener('toggle', () => {
     if (!menu.open) return;
     gsap.fromTo(menu.querySelector('.reference-mega'), { clipPath: 'inset(0 0 100% 0)', opacity: .6 }, { clipPath: 'inset(0 0 0% 0)', opacity: 1, duration: .42, ease: 'power3.out' });
