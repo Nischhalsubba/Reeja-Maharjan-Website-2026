@@ -1,15 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
-<title id="title">Reeja Maharjan · Registered nurse</title>
-<desc id="desc">Professional portfolio of Reeja Maharjan, registered nurse and maternal-health research assistant.</desc>
-<rect width="1200" height="630" fill="#FAF8E9"/>
-<rect x="865" width="335" height="630" fill="#FFDF00"/>
-<g transform="translate(927 195) scale(5.2)" fill="none" stroke="#111" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10v14a11 11 0 0 0 22 0v-7M13 10h5m-5 0H9m26 7h-5m5 0h4M24 35v3a5 5 0 0 0 10 0v-2"/><circle cx="34" cy="33" r="3.5" fill="#111"/><path d="M25 10v8m-4-4h8" stroke-width="2"/></g>
-<rect x="70" y="76" width="10" height="10" fill="#FFDF00"/>
-<text x="96" y="91" font-family="Arial,sans-serif" font-size="23" fill="#111">REEJA MAHARJAN · REGISTERED NURSE</text>
-<text x="70" y="255" font-family="Arial,sans-serif" font-size="80" letter-spacing="-4" fill="#111">Care, research,</text>
-<text x="70" y="345" font-family="Arial,sans-serif" font-size="80" letter-spacing="-4" fill="#111">educate.</text>
-<text x="70" y="409" font-family="Arial,sans-serif" font-size="34" letter-spacing="-1" fill="#555">From ward to community.</text>
-<text x="70" y="478" font-family="Arial,sans-serif" font-size="24" fill="#111">Maternal health · Clinical nursing · Research</text>
-<line x1="70" y1="530" x2="800" y2="530" stroke="#B4B19F" stroke-dasharray="5 5"/>
-<text x="70" y="574" font-family="Arial,sans-serif" font-size="21" fill="#111">reejamaharjan.com.np</text>
+  <title id="title">Reeja Maharjan — Registered nurse, Nepal</title>
+  <desc id="desc">Nursing, maternal health research and patient education portfolio with professional portrait.</desc>
+  <rect width="1200" height="630" fill="#faf8e9"/>
+  <rect x="772" width="428" height="630" fill="#ffe000"/>
+  <rect x="56" y="56" width="48" height="48" fill="#ffe000"/>
+  <g fill="none" stroke="#141314" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" transform="translate(55 55)"><path d="M13 10v14a11 11 0 0 0 22 0v-7M13 10h5m-5 0H9m26 7h-5m5 0h4M24 35v3a5 5 0 0 0 10 0v-2"/><circle cx="34" cy="33" r="3.5" fill="#141314"/><path d="M25 10v8m-4-4h8" stroke-width="2"/></g>
+  <text x="120" y="77" font-family="Arial,sans-serif" font-size="19" fill="#141314">PROFESSIONAL PORTFOLIO</text>
+  <text x="120" y="99" font-family="Arial,sans-serif" font-size="15" fill="#57564f">BIRATNAGAR, NEPAL</text>
+  <text x="56" y="209" font-family="Arial,sans-serif" font-size="82" letter-spacing="-3" fill="#141314">Reeja</text>
+  <text x="56" y="295" font-family="Arial,sans-serif" font-size="82" letter-spacing="-3" fill="#141314">Maharjan.</text>
+  <text x="58" y="361" font-family="Arial,sans-serif" font-size="30" fill="#141314">Registered Nurse · B.Sc. Nursing</text>
+  <text x="58" y="402" font-family="Arial,sans-serif" font-size="23" fill="#57564f">Maternal health research · Patient education</text>
+  <line x1="56" y1="467" x2="718" y2="467" stroke="#99978d" stroke-dasharray="6 5"/>
+  <text x="56" y="509" font-family="Arial,sans-serif" font-size="23" fill="#141314">Care, research, educate.</text>
+  <rect x="56" y="551" width="294" height="40" fill="#141314"/>
+  <text x="70" y="577" font-family="Arial,sans-serif" font-size="20" fill="#faf8e9">reejamaharjan.com.np</text>
 </svg>
