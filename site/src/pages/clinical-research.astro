@@ -17,7 +17,7 @@ const responsibilities = [
   ['Device coordination', 'Distribution, use, tracking, and return workflows.'],
   ['Team communication', 'Coordination with nurses, obstetricians, researchers, and technical teams.']
 ];
-import ResearchJourneyVisual from '../components/ResearchJourneyVisual.astro';
+import EditorialPhoto from '../components/EditorialPhoto.astro';
 import BrandAction from '../components/design-system/BrandAction.astro';
 import BrandCard from '../components/design-system/BrandCard.astro';
 import EvidenceList from '../components/design-system/EvidenceList.astro';
@@ -26,13 +26,20 @@ import Eyebrow from '../components/design-system/Eyebrow.astro';
 
 <BaseLayout title={copy.title} description={copy.description}>
   <div class="site-page">
-    <section class="site-page__hero">
+    <section class="site-page__hero reference-case-hero">
       <div class="container site-page__hero-grid">
         <div>
           <Eyebrow inverse>Maternal-health research</Eyebrow>
           <h1>Maternal-health research and <em>telemonitoring.</em></h1>
+          <p class="reference-case-tags">Participant education · Home monitoring · Follow-up</p>
           <p class="site-page__lede">At IISH, I support the MOM-HD maternal-health telemonitoring study in Nepal through participant education, home BP/BG monitoring guidance, tele-follow-up and accurate study documentation.</p>
         </div>
+
+      </div>
+    </section>
+    <section class="site-section site-section--dark reference-case-overview" id="overview" aria-labelledby="overview-heading">
+      <div class="container reference-case-overview-grid">
+        <div><p class="site-eyebrow">Overview</p><h2 id="overview-heading">At a glance.</h2><p>Research in maternal health</p></div>
         <EvidenceList items={[
           { label: 'Current role', value: `${professionalFacts.currentRole}, ${professionalFacts.currentEmployerShort}` },
           { label: 'Project', value: professionalFacts.currentProjectShort },
@@ -41,7 +48,7 @@ import Eyebrow from '../components/design-system/Eyebrow.astro';
         ]} />
       </div>
     </section>
-    <ResearchJourneyVisual label="Education, monitoring and follow-up in maternal-health research" />
+    <EditorialPhoto kind="research" label="Education, monitoring and follow-up in maternal-health research" />
 
     <section class="site-section">
       <div class="container">

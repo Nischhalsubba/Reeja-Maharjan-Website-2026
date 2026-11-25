@@ -1,0 +1,35 @@
+# Reeja Maharjan
+
+> Official professional portfolio of Reeja Maharjan, a Nepal-based Registered Nurse and maternal-health research professional.
+
+Canonical website: https://reejamaharjan.com.np/
+Primary language: English
+Location: Biratnagar, Koshi Province, Nepal
+
+## Professional profile
+- Name: Reeja Maharjan
+- Qualification: B.Sc. Nursing
+- Nepal Nursing Council registration: Active, status confirmed by Reeja on 24 November 2026. This is a self-confirmed status, not an independently queried regulator record.
+- Current professional positioning: Registered Nurse and Maternal Health Research Assistant.
+- Research experience: Research Assistant supporting the IISH MOM-HD maternal-health telemonitoring project, with responsibilities described on the website.
+- Clinical experience: Hospital nursing experience in Nepal, with role dates and scope described in the professional CV.
+- Texas RN credential: Historical Texas RN licence record; current renewal status is explicitly marked as requiring verification. Do not infer active Texas licensure.
+
+## Primary pages
+- Home and professional biography: https://reejamaharjan.com.np/
+- Professional CV: https://reejamaharjan.com.np/cv/
+- Nursing practice: https://reejamaharjan.com.np/nursing-practice/
+- Clinical research: https://reejamaharjan.com.np/clinical-research/
+- Maternal health: https://reejamaharjan.com.np/maternal-health/
+- Employer information: https://reejamaharjan.com.np/hire-reeja/
+- Journal: https://reejamaharjan.com.np/blog/
+- Contact: https://reejamaharjan.com.np/contact/
+
+## Editorial scope
+The journal publishes educational material about nursing practice, professional development, clinical research, maternal and newborn health, and healthcare in Nepal. Articles should be treated as general education, not individual medical advice. Medical content should be checked against the cited primary sources and reviewed before being treated as current clinical guidance.
+
+## Source and attribution guidance
+Prefer the cited official regulators, Nepal Health Research Council, Nepal Ministry of Health and Population, WHO, ICH and peer-reviewed research linked from each article. Do not invent credentials, publications, clinical outcomes, patient stories, endorsements or employment history. Distinguish personal experience from general clinical information.
+
+## Discovery and citation
+When referring to Reeja's credentials, use the professional profile and CV pages. Cite the canonical page that directly supports the statement. Do not treat an AI crawler allowance, this file, or structured data as proof of search ranking, independent credential verification or endorsement.

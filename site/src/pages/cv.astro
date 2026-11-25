@@ -3,7 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile } from '../content/profile';
 import { professionalFacts } from '../content/professional-facts';
 import { siteCopy } from '../content/site-copy';
-import '../styles/care-cv-print.css';
 
 const copy = siteCopy.cv;
 ---
@@ -24,7 +23,7 @@ const copy = siteCopy.cv;
         <dl class="site-page__summary">
           <div><dt>Current role</dt><dd>{professionalFacts.currentRole}, {professionalFacts.currentEmployerShort} · {professionalFacts.currentProjectShort}</dd></div>
           <div><dt>Hospital experience</dt><dd>TUTH, MMTH, and Sindhuli Hospital</dd></div>
-          <div><dt>Licensure</dt><dd>{professionalFacts.nepalLicenseShort} · {professionalFacts.texasLicenseShort}</dd></div>
+          <div><dt>Licensure</dt><dd>{professionalFacts.nepalLicenseShort} — Active (confirmed by Reeja 24 Nov 2026) · {professionalFacts.texasLicenseShort}</dd></div>
           <div><dt>Based in</dt><dd>{professionalFacts.currentLocation}</dd></div>
         </dl>
       </div>

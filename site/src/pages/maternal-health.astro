@@ -18,17 +18,24 @@ import EvidenceList from '../components/design-system/EvidenceList.astro';
 
 <BaseLayout title={copy.title} description={copy.description}>
   <div class="site-page">
-    <section class="site-page__hero">
+    <section class="site-page__hero reference-case-hero">
       <div class="container site-page__hero-grid">
         <div>
           <p class="site-eyebrow">Maternal health</p>
           <h1>Maternal and newborn <em>nursing in Nepal.</em></h1>
+          <p class="reference-case-tags">Hospital nursing · Family education · Follow-up</p>
           <p class="site-page__lede">My work spans maternal-newborn hospital care and pregnancy telemonitoring research. I support clear education for families, home-monitoring guidance and structured follow-up within my assigned roles.</p>
         </div>
+
+      </div>
+    </section>
+    <section class="site-section site-section--dark reference-case-overview" id="overview" aria-labelledby="overview-heading">
+      <div class="container reference-case-overview-grid">
+        <div><p class="site-eyebrow">Overview</p><h2 id="overview-heading">At a glance.</h2><p>Maternal and newborn care</p></div>
         <EvidenceList items={copy.summary.map(([label, value]) => ({ label, value }))} />
       </div>
     </section>
-    <EditorialPhoto kind="nepal" label="Maternal health and community care in Nepal" />
+    <EditorialPhoto kind="maternal" label="Maternal health and newborn care" />
 
     <section class="site-section">
       <div class="container">

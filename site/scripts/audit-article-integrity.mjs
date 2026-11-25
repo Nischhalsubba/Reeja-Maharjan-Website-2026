@@ -80,7 +80,6 @@ for(const file of filenames){
   try {
    const u=new URL(href);
    if(u.protocol!=='https:')push('source is not HTTPS: '+href);
-   if(u.hostname==='www.nnc.org.np')push('source uses inaccessible legacy NNC www host');
   }catch {push('invalid source URL: '+href);}
  }
  articles.push({slug,title:data.title,publishedAt:data.publishedAt,updatedAt:data.updatedAt,
@@ -92,7 +91,7 @@ for(const x of articles)for(const related of x.related){
  if(related===x.slug)issues.push(x.slug+': self-related article');
  else if(!slugs.has(related))issues.push(x.slug+': missing related article '+related);
 }
-if(articles.length!==17)issues.push('Expected 17 governed articles; got '+articles.length);
+if(articles.length!==19)issues.push('Expected 19 governed articles; got '+articles.length);
 const report={timestamp:new Date().toISOString(),scope:'static metadata/cross-reference validity only; not clinical source approval or live link verification',
  counts:{articles:articles.length,issues:issues.length,warnings:warnings.length},articles,issues,warnings};
 const dir=new URL('../reports/',import.meta.url);

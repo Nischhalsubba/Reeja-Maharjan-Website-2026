@@ -26,6 +26,9 @@ const acceptedTransitions = new Set(['2.1.0-site=>3.0.0-care-personal', '3.0.0-c
 // Only this reviewed transition is exempt from comparing an obsolete layout;
 // subsequent v13 changes still receive strict screenshot comparison.
 acceptedTransitions.add('12.0.0-care-personal=>13.0.0-cinematic');
+// v14 consolidates all page styles into one canonical nursing design system.
+// This explicit transition records the approved site-wide visual migration.
+acceptedTransitions.add('13.0.0-cinematic=>14.0.0-cinematic');
 const browser = await chromium.launch();
 await mkdir(outputDir, { recursive: true });
 

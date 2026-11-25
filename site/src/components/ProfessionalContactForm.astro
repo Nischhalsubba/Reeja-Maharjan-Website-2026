@@ -1,6 +1,8 @@
 ---
 import { professionalFacts } from '../content/professional-facts';
 
+type Props = { compact?: boolean };
+const { compact = false } = Astro.props;
 const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=${encodeURIComponent(`Professional opportunity for ${professionalFacts.name}`)}`;
 const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? '';
 ---
@@ -14,7 +16,7 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
   data-contact-form
   aria-labelledby="contact-form-title"
 >
-  <div class="professional-contact-form__heading">
+  <div class="professional-contact-form__heading visually-hidden">
     <p class="site-eyebrow">Professional inquiry</p>
     <h2 id="contact-form-title">Send a message to Reeja.</h2>
     <p>Share the opportunity and your contact details. Required fields are marked with an asterisk.</p>
@@ -28,39 +30,41 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
     </div>
 
     <div class="form-field">
-      <label for="contact-email">Your email <span aria-hidden="true">*</span></label>
+      <label for="contact-email">Work email <span aria-hidden="true">*</span></label>
       <input id="contact-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254" aria-describedby="contact-email-error" />
       <p class="form-field__error" id="contact-email-error" data-error-for="contact-email" role="alert" hidden></p>
     </div>
 
+    {!compact && <>
     <div class="form-field">
-      <label for="contact-organisation">Organisation / hospital</label>
-      <input id="contact-organisation" name="organization" type="text" maxlength="160" autocomplete="organization" placeholder="Organisation, hospital, university, NGO, or INGO" />
+      <label for="contact-organisation">Organisation (optional)</label>
+      <input id="contact-organisation" name="organization" type="text" maxlength="160" autocomplete="organization"  />
     </div>
 
     <div class="form-field">
-      <label for="contact-role">Role / opportunity</label>
-      <input id="contact-role" name="role_type" type="text" maxlength="160" placeholder="Staff nurse role, research project, health programme…" />
+      <label for="contact-role">Role or project (optional)</label>
+      <select id="contact-role" name="role_type"><option value="">Select a role or project</option><option value="Staff nurse">Staff nurse</option><option value="Maternal and newborn health">Maternal and newborn health</option><option value="Clinical research">Clinical research</option><option value="Health programme">Health programme</option><option value="Other">Other</option></select>
     </div>
 
     <div class="form-field professional-contact-form__full">
-      <label for="contact-location">Location</label>
+      <label for="contact-location">Location (optional)</label>
       <input id="contact-location" name="location" type="text" maxlength="160" autocomplete="address-level2" placeholder="City, country, or remote/hybrid" />
     </div>
 
+    </>}
     <div class="form-field professional-contact-form__full">
       <label for="contact-message">Message <span aria-hidden="true">*</span></label>
       <textarea
         id="contact-message"
         name="message"
-        rows="7"
+        rows="4"
         required
         minlength="20"
         maxlength="5000"
         aria-describedby="contact-message-help contact-message-error"
-        placeholder="Role or project, responsibilities, timing, and preferred next step."
+        
       ></textarea>
-      <p class="form-field__help" id="contact-message-help">A short opportunity summary is enough.</p>
+      <p class="form-field__help visually-hidden" id="contact-message-help">A short opportunity summary is enough.</p>
       <p class="form-field__error" id="contact-message-error" data-error-for="contact-message" role="alert" hidden></p>
     </div>
   </div>
@@ -68,7 +72,7 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
   <input type="hidden" name="_subject" value="Professional inquiry for Reeja Maharjan from reejamaharjan.com.np" />
   <input type="hidden" name="_template" value="table" />
   {!turnstileSitekey && <input type="hidden" name="_captcha" value="false" />}
-  <input type="hidden" name="_url" value="https://reejamaharjan.com.np/contact/" />
+  <input type="hidden" name="_url" value={new URL(Astro.url.pathname, "https://reejamaharjan.com.np").toString()} />
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
   {turnstileSitekey && (
@@ -78,18 +82,18 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
       <p class="form-field__help">Please complete verification before sending your message.</p>
     </div>
   )}
-  <div class="professional-contact-form__privacy">
-    <strong>Privacy</strong>
+  <details class="professional-contact-form__privacy">
+    <summary>Privacy and message delivery · No patient records</summary>
     {turnstileSitekey ? (
       <p>This inquiry is checked by Cloudflare Turnstile and submitted to an email delivery provider. An accepted submission is not a guarantee of inbox receipt. Do not send patient records, identity documents, licence scans or sensitive health information.</p>
     ) : (
       <p>This message is processed by <a href="https://formsubmit.co/" target="_blank" rel="noopener noreferrer">FormSubmit</a>, an external delivery service. Messages are sent through its form API without leaving this page. Delivery is subject to spam protections and service limits. Please do not share patient records, identity documents, licence scans or other sensitive information.</p>
     )}
-  </div>
+  </details>
 
   <div class="professional-contact-form__actions">
     <button class="care-button care-button--primary" type="submit" data-submit-button>
-      <span data-submit-label>Send to Reeja</span>
+      <span data-submit-label>Send enquiry</span>
       <span class="form-spinner" aria-hidden="true" hidden data-submit-spinner></span>
     </button>
     <a class="care-button care-button--secondary" href={directEmailHref} data-track="contact-email-fallback">Email Reeja</a>
@@ -180,7 +184,7 @@ const turnstileSitekey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY?.trim() ?? ''
       if (!submitButton) return;
       submitButton.disabled = active;
       submitButton.toggleAttribute('aria-busy', active);
-      if (submitLabel) submitLabel.textContent = active ? 'Sending…' : 'Send to Reeja';
+      if (submitLabel) submitLabel.textContent = active ? 'Sending…' : 'Send enquiry';
       if (submitSpinner) submitSpinner.hidden = !active;
     };
 

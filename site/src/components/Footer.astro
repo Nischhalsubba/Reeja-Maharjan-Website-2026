@@ -3,25 +3,27 @@ import type { ProfileContent } from '../content/profile';
 import { siteCopy } from '../content/site-copy';
 import BrandIcon from './BrandIcon.astro';
 import ReejaBrandMark from './ReejaBrandMark.astro';
+import ProfessionalContactForm from './ProfessionalContactForm.astro';
 
 type Props = { profile: ProfileContent };
 const { profile } = Astro.props;
 const year = new Date().getFullYear();
+const showContact = Astro.url.pathname !== '/contact/';
 ---
 
 <footer class="site-footer site-footer--care" aria-label="Website footer">
-  <div class="container care-footer__invitation">
-    <div class="care-footer__intro">
-      <p class="care-footer__eyebrow"><span aria-hidden="true" class="care-footer__spark"></span> CONTACT / REEJA MAHARJAN</p>
-      <h2>Write to <span>Reeja.</span></h2>
+  {showContact && <section class="reference-footer-contact" id="connect">
+    <div class="container reference-footer-contact-grid">
+      <div>
+        <p class="site-eyebrow">Let’s connect</p>
+        <h2>Let’s talk.</h2>
+        <p>For nursing opportunities, maternal-health research and professional collaboration.</p>
+        <a class="btn reference-outline" href="/contact/"><span>Arrange a conversation</span><i aria-hidden="true">+</i></a>
+        <div class="reference-footer-email"><p>Prefer email?</p><a href={`mailto:${profile.contact.email}`}>{profile.contact.email}</a></div>
+      </div>
+      <ProfessionalContactForm compact />
     </div>
-    <div class="care-footer__invite-actions">
-      <p>For nursing opportunities, maternal-health research, professional collaboration, or a question about my work.</p>
-      <a class="care-footer__cta" href="/contact/" data-track="contact-footer">
-        Get in touch <BrandIcon name="arrow-up-right" size={18} />
-      </a>
-    </div>
-  </div>
+  </section>}
 
   <div class="container care-footer__main">
     <div class="care-footer__identity">
@@ -32,8 +34,8 @@ const year = new Date().getFullYear();
 
     <nav class="care-footer__column" aria-label="Explore Reeja's website">
       <h3>Explore</h3>
-      <a href="/">About Reeja</a>
-      <a href="/#experience">Experience</a>
+      <a href="/about/">About Reeja</a>
+      <a href="/experience/">Experience</a>
       <a href="/nursing-practice/">Nursing practice</a>
       <a href="/clinical-research/">Clinical research</a>
       <a href="/maternal-health/">Maternal health</a>
