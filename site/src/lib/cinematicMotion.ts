@@ -218,7 +218,9 @@ export function initCinematicMotion(): void {
       const base = document.createElement('span'); base.className = 'reference-reveal-ink'; base.append(...Array.from(item.childNodes)); item.append(base);
       const cover = (name: string) => { const el = document.createElement('span'); el.className = `reference-reveal-cover ${name}`; el.setAttribute('aria-hidden','true'); item.append(el); return el; };
       const gold = cover('reference-reveal-gold'), paper = cover('reference-reveal-paper');
-      const highlight=document.createElement('span');highlight.className='reference-reveal-highlight';highlight.setAttribute('aria-hidden','true');highlight.textContent=base.textContent;item.append(highlight);
+      // Paint the decorative duplicate with CSS so the heading remains a single
+      // text node sequence for selection, search and assistive technology.
+      const highlight=document.createElement('span');highlight.className='reference-reveal-highlight';highlight.setAttribute('aria-hidden','true');highlight.dataset.revealText=base.textContent ?? '';item.append(highlight);
       const timeline=gsap.timeline({paused:true});
       // Keep the actual heading readable even during the sweep and on long wrapped lines.
       timeline.set(base,{opacity:1}).set([gold,paper],{scaleX:0,transformOrigin:'left center'});

@@ -2,6 +2,15 @@ import { test, expect } from '@playwright/test';
 
 const origin = process.env.BROWSER_TEST_ORIGIN ?? 'http://127.0.0.1:4321';
 
+test('decorative heading reveals never duplicate the heading text', async ({ page }) => {
+  await page.goto(`${origin}/education/`);
+  const title = page.locator('main h1');
+  await expect(title.locator('.reference-reveal-highlight').first()).toBeAttached();
+  await expect(title).toHaveText(/^From nursing\s*to rural development\.$/i);
+  await expect(title.locator('.reference-reveal-highlight').first()).toBeEmpty();
+  await expect(page.getByRole('heading', { level: 1, name: /From nursing\s*to rural development\./i })).toBeVisible();
+});
+
 test('education is discoverable, truthful and in the canonical sitemap', async ({ page, request }) => {
   await page.goto(`${origin}/education/`);
   await expect(page.locator('main h1')).toBeVisible();
