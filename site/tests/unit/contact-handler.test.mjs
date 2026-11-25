@@ -133,6 +133,18 @@ test('reject oversized message without truncating or contacting providers', asyn
   });
 });
 
+test('call request sends readable Nepal time and optional topic', async () => {
+  const { mock, calls } = setupFetch();
+  await withFetch(mock, async () => {
+    const res = await onRequestPost({request:req({name:payload.name,email:payload.email,kind:'call',date:'2026-12-01',time:'09:30',topic:'Nursing opportunities','cf-turnstile-response':'valid-test-token'}),env});
+    assert.equal(res.status,200);
+    const sent = JSON.parse(calls[1].options.body);
+    assert.match(sent.subject,/call request/);
+    assert.match(sent.text,/09:30 \(Nepal time/);
+    assert.match(sent.text,/Nursing opportunities/);
+  });
+});
+
 test('reject oversized optional fields and invalid types before verification', async () => {
   const cases = [
     { ...payload, organization: 'A'.repeat(161) },

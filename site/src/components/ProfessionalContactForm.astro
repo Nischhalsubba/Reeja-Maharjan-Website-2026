@@ -1,10 +1,10 @@
 ---
 import { professionalFacts } from '../content/professional-facts';
+import ContactDelivery from './ContactDelivery.astro';
 
 type Props = { compact?: boolean };
 const { compact = false } = Astro.props;
 const directEmailHref = `mailto:${professionalFacts.professionalEmail}?subject=${encodeURIComponent(`Professional opportunity for ${professionalFacts.name}`)}`;
-const returnUrl = 'https://reejamaharjan.com.np/contact/#submission-received';
 ---
 
 <form
@@ -13,6 +13,7 @@ const returnUrl = 'https://reejamaharjan.com.np/contact/#submission-received';
   method="POST"
   action={professionalFacts.contactFormEndpoint}
   data-contact-form
+  data-email-delivery
   aria-labelledby="contact-form-title"
 >
   <div class="professional-contact-form__heading visually-hidden">
@@ -68,9 +69,6 @@ const returnUrl = 'https://reejamaharjan.com.np/contact/#submission-received';
     </div>
   </div>
 
-  <input type="hidden" name="_subject" value="Professional inquiry for Reeja Maharjan from reejamaharjan.com.np" />
-  <input type="hidden" name="_next" value={returnUrl} />
-  <input type="hidden" name="_url" value={new URL(Astro.url.pathname, "https://reejamaharjan.com.np").toString()} />
   <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
   <div class="professional-contact-form__actions">
@@ -78,12 +76,13 @@ const returnUrl = 'https://reejamaharjan.com.np/contact/#submission-received';
       <span data-submit-label>Send enquiry</span>
 
     </button>
-    {!compact && <a class="contact-fallback-link" href={directEmailHref} data-track="contact-email-fallback">Email Reeja</a>}
+    <a class="contact-fallback-link" href={directEmailHref} data-track="contact-email-fallback">Email Reeja</a>
   </div>
+  <ContactDelivery />
 
   <details class="professional-contact-form__privacy">
     <summary>Privacy and message delivery · No patient records</summary>
-    <p>Your message is sent through FormSubmit, which may ask you to complete a spam check before returning to this website. Please do not share patient records, identity documents or sensitive health information.</p>
+    <p>Your message is checked for spam and sent through a secure email delivery provider. Please do not share patient records, identity documents or sensitive health information.</p>
   </details>
 
 </form>

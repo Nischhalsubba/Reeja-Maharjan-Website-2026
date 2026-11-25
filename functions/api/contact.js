@@ -1,5 +1,5 @@
 /*
- * Optional Cloudflare Pages contact endpoint.
+ * Cloudflare Pages contact endpoint.
  * Not active until a public Turnstile sitekey is configured at build time and
  * the encrypted runtime TURNSTILE_SECRET_KEY and RESEND_API_KEY bindings exist.
  * Never log personal inquiry data, tokens, or provider credentials.
@@ -49,9 +49,15 @@ export async function onRequestPost({ request, env }) {
   if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return fail(400, 'Invalid message.');
   if (cleanLine(payload._honey)) return fail(400, 'Unable to send this message.');
   // Reject excessive input: never silently truncate a recruiter's inquiry or sender details.
+  const isCall = payload.kind === 'call';
+  const requestId = cleanLine(payload.request_id);
+  if (requestId && !/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(requestId)) return fail(422, 'Invalid submission identifier.');
   if (tooLong(payload, 'name', 120, true) ||
       tooLong(payload, 'email', 254, true) ||
-      tooLong(payload, 'message', messageLimit, true) ||
+      tooLong(payload, 'message', messageLimit, !isCall) ||
+      tooLong(payload, 'topic', 1000) ||
+      tooLong(payload, 'date', 10, isCall) ||
+      tooLong(payload, 'time', 5, isCall) ||
       tooLong(payload, 'organization', 160) ||
       tooLong(payload, 'role_type', 160) ||
       tooLong(payload, 'location', 160)) {
@@ -63,7 +69,10 @@ export async function onRequestPost({ request, env }) {
   const organization = cleanLine(payload.organization);
   const role = cleanLine(payload.role_type);
   const location = cleanLine(payload.location);
-  if (name.length < 2 || !validEmail(email) || message.length < 20 || message.length > messageLimit) {
+  const date = cleanLine(payload.date);
+  const time = cleanLine(payload.time);
+  if (name.length < 2 || !validEmail(email) || (!isCall && message.length < 20) || message.length > messageLimit ||
+      (isCall && (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time) || Number.isNaN(Date.parse(date)) || new Date(date).toISOString().slice(0,10) !== date))) {
     return fail(422, 'Please check your name, email and message length.');
   }
   const token = typeof payload['cf-turnstile-response'] === 'string'
@@ -86,27 +95,26 @@ export async function onRequestPost({ request, env }) {
     return fail(403, 'Verification failed or expired. Please retry.');
   }
   const text = [
-    'New professional inquiry from reejamaharjan.com.np',
+    isCall ? 'New professional call request from reejamaharjan.com.np' : 'New professional inquiry from reejamaharjan.com.np',
     'Name: ' + name,
     'Email: ' + email,
-    'Organization: ' + organization,
-    'Role: ' + role,
-    'Location: ' + location,
+    ...(isCall ? ['Preferred date: ' + date, 'Preferred time: ' + time + ' (Nepal time, UTC+05:45)'] : [organization && 'Organization: ' + organization, role && 'Role: ' + role, location && 'Location: ' + location].filter(Boolean)),
     '',
-    message
+    isCall ? (cleanMessage(payload.topic) || 'No topic specified.') : message
   ].join('\n');
   try {
     const outgoing = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + env.RESEND_API_KEY,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...(requestId ? {'Idempotency-Key': 'reeja-contact-' + requestId} : {})
       },
       body: JSON.stringify({
         from: env.CONTACT_FROM_EMAIL,
         to: [env.CONTACT_TO_EMAIL],
         reply_to: email,
-        subject: 'Professional inquiry for Reeja Maharjan',
+        subject: isCall ? 'Website call request for Reeja Maharjan' : 'Website enquiry for Reeja Maharjan',
         text
       }),
       signal: AbortSignal.timeout(10000)
