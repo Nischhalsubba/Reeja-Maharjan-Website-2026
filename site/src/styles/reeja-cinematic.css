@@ -8116,3 +8116,31 @@ body[data-design-system="reeja-cinematic"] .professional-contact-form [hidden] {
 body[data-design-system="reeja-cinematic"] .reference-footer-contact .professional-contact-form__full {grid-column:1/-1;}
 body[data-design-system="reeja-cinematic"] .reference-footer-contact .professional-contact-form .form-field {min-width:0;}
 body[data-design-system="reeja-cinematic"] .reference-footer-contact .professional-contact-form :is(input,textarea) {width:100%;}
+
+/* Case-study openings, facts rail and experience archive share the same grid. */
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-hero .site-page__hero-grid {display:block;max-width:var(--reference-container-max)!important;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-hero .site-page__hero-grid>div {max-width:780px;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-hero h1 {font-size:clamp(44px,5.5vw,82px);max-width:20ch;margin-bottom:20px;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-tags {font-size:12px;text-transform:uppercase;letter-spacing:.04em;border-top:1px dashed #aaa;padding-top:12px;color:#ffde22!important;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-hero .site-page__lede {max-width:62ch;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview {padding:64px 0!important;border-top:1px dashed #555;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview-grid {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(24px,5vw,72px);align-items:start;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview .site-page__summary {background:transparent!important;border:0!important;padding:0;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview .site-page__summary>div {grid-template-columns:minmax(110px,.4fr) minmax(0,1fr);gap:16px;border-bottom:1px dashed #555;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview .site-page__summary dt {color:#ffde22!important;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-experience-list {padding-top:0!important;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-experience-cards {gap:48px;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-experience-cards article {border:1px dashed #555;background:#171717;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-experience-caption {padding:28px;align-items:end;border:0;gap:28px;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-experience-caption .site-eyebrow {font-size:11px;color:#ffde22!important;margin-bottom:12px;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-experience-tags {padding:0;margin:18px 0 0;list-style:none;display:flex;gap:8px;flex-wrap:wrap;}
+body[data-design-system="reeja-cinematic"] #main-content .reference-experience-tags li {padding:4px 8px;border:1px dashed #777;font-size:11px;color:#e9e7db!important;}
+body[data-design-system="reeja-cinematic"] .reference-experience-action {display:inline-flex;gap:6px;white-space:nowrap;font:400 12px/1 Arial,sans-serif;text-transform:uppercase;}
+body[data-design-system="reeja-cinematic"] .reference-experience-action>span {display:grid;place-items:center;min-height:34px;border:1px dashed #777;background:#111;color:#fff;padding:0 14px;transition:background-color 360ms,color 360ms;}
+body[data-design-system="reeja-cinematic"] .reference-experience-action>span:last-child {width:34px;padding:0;font-size:16px;}
+body[data-design-system="reeja-cinematic"] .reference-experience-cards a:is(:hover,:focus-visible) .reference-experience-action>span {background:#ffde22;color:#111;}
+body[data-design-system="reeja-cinematic"] #main-content.inner-page :is(.site-page__hero,.contact-hero,.blog-article__header,.site-section--dark,.reference-experience-list) .ref-action,
+body[data-design-system="reeja-cinematic"] #main-content.inner-page .site-button.ref-action {background:transparent!important;border:0!important;padding:0!important;}
+@media(max-width:820px){body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview-grid {grid-template-columns:1fr;gap:16px;}body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview {padding:40px 0!important;}body[data-design-system="reeja-cinematic"] #main-content .reference-experience-caption {padding:20px;}body[data-design-system="reeja-cinematic"] .reference-experience-action {margin-top:20px;}}
+@media(max-width:480px){body[data-design-system="reeja-cinematic"] #main-content .reference-case-overview .site-page__summary>div {grid-template-columns:1fr;gap:6px;}}
+@media(prefers-reduced-motion:reduce){body[data-design-system="reeja-cinematic"] .reference-experience-action>span {transition:none;}}
