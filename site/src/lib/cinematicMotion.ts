@@ -169,15 +169,19 @@ export function initCinematicMotion(): void {
       if (!active) return;
       const distance = Math.max(1, track.offsetHeight - window.innerHeight);
       progress = gsap.utils.clamp(0, 1, -track.getBoundingClientRect().top / distance);
+      header?.classList.toggle('hero-closeup', progress > .88);
       track.style.setProperty('--hero-copy-shade', String(progress > .18 ? .94 : Math.min(.94, progress * 5.3)));
       track.style.setProperty('--hero-copy-opacity', String(Math.max(0, 1 - progress * 3.5)));
-      const target = Math.pow(progress, 1.65) * Math.max(0, video.duration - 1 / 24);
+      // Hold the full-front composition through most of the turn, then use the
+      // film's final close-up in the last phase of the pinned hero.
+      const filmProgress = progress <= .85 ? progress / .85 * .44 : .44 + (progress - .85) / .15 * .56;
+      const target = filmProgress * Math.max(0, video.duration - 1 / 24);
       if (progress <= 0.005) { video.classList.remove('film-visible'); poster.classList.remove('film-hidden'); }
       if (!isSeekable()) { if (progress > .005 && video.readyState >= 2) void recoverSeekability(); return; }
       if (!video.seeking && Math.abs(video.currentTime - target) > 0.025) video.currentTime = target;
     };
     const requestFilm = () => { if (!frame && active) frame = requestAnimationFrame(updateFilm); };
-    const fallback = () => { active = false; video.hidden = true; poster.classList.remove('film-hidden'); track.classList.remove('has-film'); track.style.removeProperty('--hero-copy-opacity'); ScrollTrigger.refresh(); };
+    const fallback = () => { active = false; video.hidden = true; poster.classList.remove('film-hidden'); track.classList.remove('has-film'); track.style.removeProperty('--hero-copy-opacity'); header?.classList.remove('hero-closeup'); ScrollTrigger.refresh(); };
     const setup = () => {
       if (!Number.isFinite(video.duration) || video.duration <= 0) return;
       video.hidden = false;
@@ -194,7 +198,7 @@ export function initCinematicMotion(): void {
     };
     video.addEventListener('error', fallback, { once: true });
     video.addEventListener('loadeddata', requestFilm);
-    window.addEventListener('pagehide', () => { if (localVideoUrl) URL.revokeObjectURL(localVideoUrl); }, {once:true});
+    window.addEventListener('pagehide', event => { if (!event.persisted && localVideoUrl) URL.revokeObjectURL(localVideoUrl); });
     if (video.readyState >= 1) setup(); else video.addEventListener('loadedmetadata', setup, { once: true });
     initCinematicRain();
   }
