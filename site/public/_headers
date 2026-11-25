@@ -9,3 +9,10 @@
 
 /build.json
   Cache-Control: no-store, max-age=0
+
+/sitemap-index.xml
+  Cache-Control: public, max-age=0, must-revalidate
+/sitemap-0.xml
+  Cache-Control: public, max-age=0, must-revalidate
+/robots.txt
+  Cache-Control: public, max-age=0, must-revalidate

@@ -221,15 +221,29 @@ export function initCinematicMotion(): void {
       // Paint the decorative duplicate with CSS so the heading remains a single
       // text node sequence for selection, search and assistive technology.
       const highlight=document.createElement('span');highlight.className='reference-reveal-highlight';highlight.setAttribute('aria-hidden','true');highlight.dataset.revealText=base.textContent ?? '';item.append(highlight);
+      const layer = (name:string) => { const el=document.createElement('span');el.className=`reference-reveal-highlight ${name}`;el.setAttribute('aria-hidden','true');el.dataset.revealText=base.textContent??'';item.append(el);return el; };
+      const paperInk=layer('reference-reveal-paper-ink'), shine=layer('reference-reveal-shine');
       const timeline=gsap.timeline({paused:true});
-      // Keep the actual heading readable even during the sweep and on long wrapped lines.
-      timeline.set(base,{opacity:1}).set([gold,paper],{scaleX:0,transformOrigin:'left center'});
-      timeline.to(gold,{scaleX:1,duration:.29,ease:'power3.inOut'},0).to(paper,{scaleX:1,duration:.28,ease:'power3.inOut'},.08);
-      timeline.set([gold,paper],{transformOrigin:'right center'},.37);
-      timeline.to(gold,{scaleX:0,duration:.42,ease:'power3.inOut'},.37).to(paper,{scaleX:0,duration:.35,ease:'power3.inOut'},.43);
-      timeline.fromTo(highlight,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:.29,ease:'power3.inOut'},0).to(highlight,{clipPath:'inset(0 0 0 100%)',duration:.48,ease:'power3.inOut'},.29);
-      ScrollTrigger.create({trigger:heading,start:'top 89%',once:true,onEnter:()=>timeline.delay(index*.085).play()});
+      const initialVisible=!!heading.closest('.hero-track');
+      gsap.set(base,{opacity:initialVisible?1:0});
+      gsap.set([highlight,paperInk,shine],{opacity:0});
+      timeline.set([gold,paper],{scaleX:0,transformOrigin:'left center'},0);
+      timeline.to(gold,{scaleX:1,duration:.34,ease:'power3.inOut'},0).to(paper,{scaleX:1,duration:.32,ease:'power3.inOut'},.09);
+      timeline.set(base,{opacity:1},.41).set([gold,paper],{transformOrigin:'right center'},.41);
+      timeline.to(gold,{scaleX:0,duration:.44,ease:'power3.inOut'},.41).to(paper,{scaleX:0,duration:.42,ease:'power3.inOut'},.48);
+      timeline.set([highlight,paperInk],{opacity:1},.43);
+      timeline.fromTo(highlight,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)',duration:.32,ease:'power3.inOut'},.43).to(highlight,{clipPath:'inset(0 0 0 100%)',duration:.40,ease:'power3.inOut'},.75);
+      timeline.fromTo(paperInk,{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)',duration:.4,ease:'power3.inOut'},.57).to(paperInk,{opacity:0,duration:.25},.95);
+      timeline.set(shine,{opacity:1,clipPath:'none',backgroundPosition:'-100% 0'},.63).to(shine,{backgroundPosition:'150% 0',duration:.7,ease:'power2.out'},.63).set([shine,highlight],{opacity:0},1.33);
+      ScrollTrigger.create({trigger:heading,start:'top 90%',once:true,onEnter:()=>timeline.delay(index*.10).play()});
     });
+  });
+  // Supporting copy arrives behind the headline, with a smaller vertical travel
+  // than the editorial cards. Keep the pinned homepage copy outside this group.
+  gsap.utils.toArray<HTMLElement>('.inner-page .site-page__hero, .inner-page .site-section__head, .contact-hero, .blog-article__header, .reference-footer-contact').forEach(section => {
+    const copy = Array.from(section.querySelectorAll<HTMLElement>('.site-eyebrow,.site-page__lede,.site-actions,.reference-footer-actions,.site-section__head > p'));
+    if (!copy.length) return;
+    gsap.fromTo(copy,{opacity:0,y:12},{opacity:1,y:0,duration:.58,delay:.28,stagger:.07,ease:'power2.out',clearProps:'opacity,transform',scrollTrigger:{trigger:section,start:'top 91%',once:true}});
   });
   // Reveal the introduction word-by-word against the yellow chapter.
   const intro = document.querySelector<HTMLElement>('.cinematic-home .intro');
