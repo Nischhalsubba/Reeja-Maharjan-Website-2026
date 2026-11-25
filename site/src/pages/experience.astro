@@ -15,6 +15,6 @@ const areas = [
   <script>
     const filters = [...document.querySelectorAll<HTMLButtonElement>('[data-experience-filter]')];
     const cards = [...document.querySelectorAll<HTMLElement>('[data-experience-category]')];
-    filters.forEach(button=>button.addEventListener('click',()=>{const selected=button.dataset.experienceFilter;filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));cards.forEach(card=>{card.hidden=selected!=='all'&&card.dataset.experienceCategory!==selected;});const count=document.querySelector('[data-experience-count]');if(count)count.textContent=`${cards.filter(card=>!card.hidden).length} experiences`; }));
+    filters.forEach(button=>button.addEventListener('click',()=>{const selected=button.dataset.experienceFilter;filters.forEach(item=>item.setAttribute('aria-pressed',String(item===button)));cards.forEach((card,index)=>{card.hidden=selected!=='all'&&card.dataset.experienceCategory!==selected;if(!card.hidden&&!matchMedia('(prefers-reduced-motion: reduce)').matches)card.animate([{opacity:.6,transform:'translateY(8px)'},{opacity:1,transform:'translateY(0)'}],{duration:300,delay:index*35,easing:'cubic-bezier(.22,1,.36,1)'});});const count=document.querySelector('[data-experience-count]');if(count)count.textContent=`${cards.filter(card=>!card.hidden).length} experiences`; }));
   </script>
 </BaseLayout>

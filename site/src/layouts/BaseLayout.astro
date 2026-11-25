@@ -86,7 +86,7 @@ const graphSchema = {
           url: canonicalUrl,
           name: title,
           description,
-          dateModified: siteCopy.updatedAt,
+          dateModified: `${siteCopy.updatedAt}T00:00:00+05:45`,
           mainEntity: { '@id': 'https://reejamaharjan.com.np/#person' },
           isPartOf: { '@id': 'https://reejamaharjan.com.np/#website' }
         }]

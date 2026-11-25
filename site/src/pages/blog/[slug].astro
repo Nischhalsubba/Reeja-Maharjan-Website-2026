@@ -146,8 +146,8 @@ import BlogPhoto from '../../components/BlogPhoto.astro';
           <section class="blog-author-card">
             <p class="site-eyebrow">About the author</p>
             <h2>Reeja Maharjan, B.Sc. Nursing</h2>
-            <p>Reeja is a Nepal Nursing Council registered nurse; her registration status was confirmed as active by Reeja on 24 November 2026. She has prior Texas RN licensure (renewal status pending verification) and IISH maternal-health Research Assistant with hospital nursing experience in Nepal. Her professional work includes patient and participant education, documentation, telemonitoring support, follow-up, and care coordination.</p>
-            <p><a href="/">About Reeja</a> · <a href="/cv/">View Reeja’s CV</a> · <a href={topicHub.href}>{topicHub.label}</a>{topicArchive && <> · <a href={`/blog/topics/${topicArchive.slug}/`}>More {topicArchive.label.toLowerCase()} articles</a></>}</p>
+            <p>Reeja Maharjan is a registered nurse in Biratnagar, Nepal, with hospital nursing and maternal-health research experience. She supports participant education, follow-up, study records and care coordination. She is also pursuing MA Rural Development at Tribhuvan University’s Degree Campus. Her Nepal Nursing Council registration was self-confirmed active on 24 November 2026; the status of her historical Texas RN licence requires verification.</p>
+            <p><a href="/about/">About Reeja</a> · <a href="/cv/">Professional CV</a> · <a href="/education/">Education</a> · <a href={topicHub.href}>{topicHub.label}</a>{topicArchive && <> · <a href={`/blog/topics/${topicArchive.slug}/`}>More {topicArchive.label.toLowerCase()} articles</a></>}</p>
           </section>
 
           {relatedPosts.length > 0 && (

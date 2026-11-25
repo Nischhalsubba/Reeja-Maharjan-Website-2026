@@ -7,7 +7,7 @@ export function initCinematicMotion(): void {
   const menu = header?.querySelector<HTMLDetailsElement>('.menupop');
   menu?.addEventListener('click', (event) => { if ((event.target as HTMLElement).closest('a')) menu.open = false; });
   document.addEventListener('click', (event) => { if (menu?.open && !menu.contains(event.target as Node)) menu.open = false; });
-  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu) menu.open = false; });
+  document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && menu?.open) { menu.open = false; menu.querySelector('summary')?.focus(); } });
   const sections = Array.from(document.querySelectorAll<HTMLElement>('.hero-track,.profile,.section,.orgs,.site-page__hero,.cv-page__hero,.contact-hero,.contact-section,.blog-index__hero,.blog-article__header,.site-section'));
   const updateHeader = () => {
     const active = sections.findLast(section => section.getBoundingClientRect().top <= 32) ?? sections[0];
@@ -74,7 +74,7 @@ export function initCinematicMotion(): void {
     const activate = (index: number, focus = false) => {
       tabs.forEach((tab, i) => {
         tab.setAttribute('aria-selected', String(i === index)); tab.tabIndex = i === index ? 0 : -1;
-        const panel = document.getElementById(tab.getAttribute('aria-controls') ?? ''); if (panel) panel.hidden = i !== index;
+        const panel = document.getElementById(tab.getAttribute('aria-controls') ?? ''); if (panel) { panel.hidden = i !== index; if (i === index && !matchMedia('(prefers-reduced-motion: reduce)').matches) panel.animate([{opacity:.65,transform:'translateY(6px)'},{opacity:1,transform:'translateY(0)'}],{duration:260,easing:'cubic-bezier(.22,1,.36,1)'}); }
       });
       if (focus) tabs[index]?.focus();
     };
@@ -89,10 +89,26 @@ export function initCinematicMotion(): void {
   document.querySelectorAll<HTMLElement>('[data-reference-gallery]').forEach(gallery => {
     const track = gallery.querySelector<HTMLElement>('.reference-gallery-track');
     if (!track) return;
-    gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-direction]').forEach(button => button.addEventListener('click', () => {
-      const item = track.querySelector('figure');
-      track.scrollBy({left: Number(button.dataset.galleryDirection) * ((item?.getBoundingClientRect().width ?? track.clientWidth) + 16), behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
-    }));
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const move = (direction: number) => {
+      const item = track.querySelector<HTMLElement>('figure, article');
+      const step = (item?.getBoundingClientRect().width ?? track.clientWidth) + 16;
+      const limit = Math.max(0, track.scrollWidth - track.clientWidth);
+      const next = direction > 0 && track.scrollLeft >= limit - 3 ? 0 : direction < 0 && track.scrollLeft <= 3 ? limit : track.scrollLeft + direction * step;
+      track.scrollTo({left:next,behavior:reduced.matches?'instant':'smooth'});
+    };
+    gallery.querySelectorAll<HTMLButtonElement>('[data-gallery-direction]').forEach(button => button.addEventListener('click', () => move(Number(button.dataset.galleryDirection))));
+    const pause = gallery.querySelector<HTMLButtonElement>('[data-gallery-pause]');
+    let paused = true;
+    let visible = false;
+    let hovering = false;
+    if (pause) {
+      const sync = () => {pause.textContent=paused?'Play':'Pause';pause.setAttribute('aria-pressed',String(!paused));};
+      sync(); pause.addEventListener('click',()=>{paused=!paused;sync();});
+      new IntersectionObserver(entries=>{visible=entries.some(e=>e.isIntersecting);}).observe(gallery);
+      gallery.addEventListener('pointerenter',()=>{hovering=true;});gallery.addEventListener('pointerleave',()=>{hovering=false;});
+      window.setInterval(()=>{if(!paused&&visible&&!hovering&&!gallery.contains(document.activeElement)&&!reduced.matches&&!document.hidden)move(1);},4000);
+    }
   });
   const clock = document.querySelector<HTMLElement>('[data-nepal-clock]');
   if (clock) {

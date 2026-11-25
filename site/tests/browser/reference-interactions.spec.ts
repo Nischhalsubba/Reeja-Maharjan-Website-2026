@@ -11,7 +11,7 @@ test('reference-inspired navigation opens visual experience menu and real inner 
   await page.keyboard.press('Escape');
   await expect(page.locator('.menupop')).not.toHaveAttribute('open', '');
   await page.locator('.desktop-nav a[href="/about/"]').click();
-  await expect(page.locator('main h1')).toHaveText(/Care, research and/);
+  await expect(page.locator('main h1')).toHaveText(/Care that extends/);
   await expect(page.locator('.reference-timeline > li').first()).toBeAttached();
   await page.goto(`${origin}/experience/`);
   await page.getByRole('button', { name: 'Clinical research' }).click();
@@ -59,7 +59,7 @@ test('visual regression: fixed contrast, bounded experience navigation and usabl
 test('editorial assets and card indices use the cinematic layout without obstructing text', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto(`${origin}/about/`);
-  await expect(page.locator('.reference-about-portrait img')).toHaveCSS('mask-image', /reeja-portrait-mask\.svg/);
+  await expect(page.locator('.reference-about-portrait img')).toHaveCSS('mask-image', /linear-gradient/);
   await expect(page.locator('.reference-practice-card img')).toHaveCount(3);
   for (const route of ['/clinical-research/', '/maternal-health/', '/nursing-practice/', '/hire-reeja/']) {
     await page.goto(origin + route);

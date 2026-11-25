@@ -33,6 +33,7 @@ const copy = siteCopy.contact;
             <p class="site-eyebrow">Preferred time · Nepal time</p>
             <h3>Choose a time to request.</h3>
             <p>Times are suggestions, not confirmed availability. Reeja will confirm by email.</p>
+            <div class="reference-call-date-nav"><button type="button" data-date-step="-1" disabled>Earlier</button><span aria-live="polite" data-date-range></span><button type="button" data-date-step="1">Later</button></div><div class="call-date-choices" data-date-choices aria-label="Suggested dates"></div>
             <div class="reference-call-date-grid"><div><label for="call-date">Preferred date *</label><input type="date" id="call-date" name="date" required /></div><div><label for="call-time">Preferred time *</label><input type="time" id="call-time" name="time" required /></div></div>
             <div class="call-request-slots" aria-label="Suggested times in Nepal">{['09:00','09:30','10:00','10:30','11:00','11:30','14:00','14:30','15:00','15:30','16:00','16:30'].map(time => <button type="button" data-call-time={time} aria-pressed="false">{time}</button>)}</div><p class="call-slot-help">Choose a suggested time or enter another preferred time. These are not live calendar slots.</p>
           </div>
@@ -57,6 +58,20 @@ const copy = siteCopy.contact;
   const timeInput = document.querySelector<HTMLInputElement>('#call-time');
   const slots = [...document.querySelectorAll<HTMLButtonElement>('[data-call-time]')];
   if (dateInput) dateInput.min = new Intl.DateTimeFormat('en-CA', {timeZone:'Asia/Kathmandu', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date());
+  const days = document.querySelector<HTMLElement>('[data-date-choices]');
+  const range = document.querySelector<HTMLElement>('[data-date-range]');
+  const earlier = document.querySelector<HTMLButtonElement>('[data-date-step="-1"]');
+  let offset = 0;
+  const drawDates = () => {
+    if (!dateInput || !days || !range) return;
+    const today = new Date(`${dateInput.min}T12:00:00Z`);
+    const fmt = new Intl.DateTimeFormat('en-GB',{weekday:'short',day:'numeric',month:'short',timeZone:'UTC'});
+    days.replaceChildren();
+    for(let i=0;i<6;i++){const date=new Date(today);date.setUTCDate(date.getUTCDate()+offset+i);const iso=date.toISOString().slice(0,10);const button=document.createElement('button');button.type='button';button.className='call-date-choice';button.textContent=fmt.format(date);button.setAttribute('aria-pressed',String(dateInput.value===iso));button.addEventListener('click',()=>{dateInput.value=iso;drawDates();days.querySelector<HTMLButtonElement>(`[data-iso="${iso}"]`)?.focus();});button.dataset.iso=iso;days.append(button);}
+    const start=new Date(today);start.setUTCDate(start.getUTCDate()+offset);const end=new Date(start);end.setUTCDate(end.getUTCDate()+5);range.textContent=`${fmt.format(start)} – ${fmt.format(end)}`;if(earlier)earlier.disabled=offset===0;
+  };
+  document.querySelectorAll<HTMLButtonElement>('[data-date-step]').forEach(button=>button.addEventListener('click',()=>{offset=Math.max(0,offset+6*Number(button.dataset.dateStep));drawDates();}));
+  dateInput?.addEventListener('change',drawDates);drawDates();
   const syncSlots = () => slots.forEach(slot => slot.setAttribute('aria-pressed', String(slot.dataset.callTime === timeInput?.value)));
   slots.forEach(slot => slot.addEventListener('click', () => { if (timeInput) timeInput.value = slot.dataset.callTime ?? ''; syncSlots(); }));
   timeInput?.addEventListener('input', syncSlots);
