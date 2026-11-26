@@ -19,7 +19,7 @@ test('approved browser requests remain clean', async ({ page }) => {
   const contactForm = page.locator('form[data-email-delivery]');
   if (await contactForm.count()) {
     await expect(contactForm).toHaveAttribute('method', /post/i);
-    await expect(contactForm).toHaveAttribute('action', '/api/contact');
+    await expect(contactForm).toHaveAttribute('action', /^https:\/\/formsubmit\.co\//);
   }
 
   expect(consoleErrors).toEqual([]);
@@ -44,6 +44,6 @@ test('remote deployment serves restrictive security headers', async ({ request }
   expect(csp).toContain("default-src 'self'");
   expect(csp).toContain("frame-ancestors 'none'");
   expect(csp).toContain("base-uri 'self'");
-  expect(csp).toContain('https://challenges.cloudflare.com');
+  expect(csp).toContain('https://formsubmit.co');
   expect(csp).toContain('https://www.googletagmanager.com');
 });

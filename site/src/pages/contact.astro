@@ -32,6 +32,8 @@ const copy = siteCopy.contact;
         <div class="reference-call-heading"><h2 id="call-heading">Arrange a call.</h2><p>Online · Nepal time (UTC+05:45)</p></div>
         <form class="reference-call-grid" id="call-request" method="POST" action={professionalFacts.contactFormEndpoint} data-email-delivery>
           <input type="hidden" name="kind" value="call" />
+          <input type="hidden" name="_subject" value="Professional call request for Reeja Maharjan" />
+          <input type="hidden" name="_template" value="basic" />
           <input class="form-honeypot" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div class="reference-call-availability">
             <p class="site-eyebrow">Preferred time · Nepal time</p>
@@ -49,7 +51,7 @@ const copy = siteCopy.contact;
             <div class="form-field"><label for="call-topic">What would you like to discuss? (optional)</label><textarea id="call-topic" name="topic" maxlength="1000"></textarea></div>
             <button class="btn yellow" type="submit"><span data-submit-label>Request a time</span><i aria-hidden="true">+</i></button>
             <ContactDelivery />
-            <p class="reference-call-meta">Your request is sent by email. Please avoid sharing patient records or sensitive health information. <a href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja directly</a>.</p>
+            <p class="reference-call-meta">Your request is sent by email through FormSubmit. Please avoid sharing patient records or sensitive health information. <a href={`mailto:${professionalFacts.professionalEmail}`}>Email Reeja directly</a>.</p>
           </div>
         </form>
       </div>
