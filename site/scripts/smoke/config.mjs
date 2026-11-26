@@ -98,7 +98,7 @@ export const requiredSecurityHeaders = {
     "frame-ancestors 'none'",
     "base-uri 'self'",
     'upgrade-insecure-requests',
-    'https://challenges.cloudflare.com',
+    'https://formsubmit.co',
     'https://www.googletagmanager.com'
   ],
   'x-content-type-options': ['nosniff'],

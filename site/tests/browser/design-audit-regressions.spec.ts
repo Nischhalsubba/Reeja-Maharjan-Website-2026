@@ -140,39 +140,68 @@ test('Slate homepage keeps real professional pathways and published article link
 });
 
 for (const path of ['/contact/','/nursing-practice/','/']) {
-  test(`same-origin enquiry delivery from ${path}`, async ({page})=>{
+  test(`FormSubmit enquiry delivery from ${path}`, async ({page})=>{
+    await page.route('https://formsubmit.co/ajax/**',async route=>{
+      expect(route.request().method()).toBe('POST');
+      const payload=new URLSearchParams(route.request().postData() ?? '');
+      expect(payload.get('email')).toBe('recruiter@example.com');
+      expect(payload.get('_template')).toBe('basic');
+      expect(payload.get('message')).toContain('maternal health research');
+      await route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:JSON.stringify({success:'true'})});
+    });
     await page.goto(origin+path);
     const form=page.locator('#professional-contact-form');
-    await expect(form).toHaveAttribute('action','/api/contact');
-    await expect(form.locator('a[href^="mailto:"]')).toBeVisible();
-    if (!await form.locator('.cf-turnstile').count()) {
-      await expect(form.locator('[data-delivery-status]')).toContainText('not configured');
-      return;
-    }
-    await page.route('**/api/contact',async route=>{
-      expect(route.request().method()).toBe('POST');
-      expect(route.request().postDataJSON().email).toBe('recruiter@example.com');
-      await route.fulfill({status:200,contentType:'application/json',body:JSON.stringify({success:true})});
-    });
+    await expect(form).toHaveAttribute('action',/^https:\/\/formsubmit\.co\//);
     await form.getByLabel('Your name').fill('Example Recruiter');
     await form.getByLabel('Work email').fill('recruiter@example.com');
     await form.getByLabel('Message',{exact:true}).fill('A professional enquiry regarding maternal health research.');
-    // Provider tokens are mocked only for this intercepted browser test.
-    await form.evaluate(el=>{let field=el.querySelector<HTMLInputElement>('input[name="cf-turnstile-response"]');if(!field){field=document.createElement('input');field.name='cf-turnstile-response';field.type='hidden';el.append(field);}field.value='mock-token';});
     await form.getByRole('button',{name:'Send enquiry'}).click();
     await expect(form.locator('[data-delivery-status]')).toContainText('accepted for email delivery');
     expect(new URL(page.url()).pathname).toBe(path);
   });
 }
 
+test('provider outage preserves message and offers populated direct email',async({page})=>{
+  let release!:()=>void;
+  const pending=new Promise<void>(resolve=>{release=resolve;});
+  await page.route('https://formsubmit.co/ajax/**',async route=>{
+    await pending;
+    await route.fulfill({status:500,contentType:'text/html',headers:{'access-control-allow-origin':'*'},body:'Provider unavailable'});
+  });
+  await page.goto(origin+'/contact/');
+  const form=page.locator('#professional-contact-form');
+  await form.getByLabel('Your name').fill('Example Recruiter');
+  await form.getByLabel('Work email').fill('recruiter@example.com');
+  await form.getByLabel('Message',{exact:true}).fill('Please contact me about a professional nursing role.');
+  await form.getByRole('button',{name:'Send enquiry'}).click();
+  try {
+    await expect(form.getByRole('button',{name:'Sending…'})).toBeDisabled();
+    await expect(form.locator('[data-delivery-status]')).toHaveAttribute('data-state','pending');
+  } finally {release();}
+  await expect(form.locator('[data-delivery-status]')).toHaveAttribute('data-state','error');
+  await expect(form.getByLabel('Message',{exact:true})).toHaveValue('Please contact me about a professional nursing role.');
+  const fallback=form.locator('[data-delivery-fallback]');
+  await expect(fallback).toBeVisible();
+  expect(decodeURIComponent(await fallback.getAttribute('href') ?? '')).toContain('Please contact me about a professional nursing role.');
+  await expect(form.getByRole('button',{name:'Send enquiry'})).toBeEnabled();
+});
+
 test('call request uses the same email delivery endpoint',async({page})=>{
+  await page.route('https://formsubmit.co/ajax/**',async route=>{
+    const payload=new URLSearchParams(route.request().postData() ?? '');
+    expect(payload.get('message')).toContain('09:00 (Nepal time');
+    expect(payload.get('_subject')).toContain('call request');
+    await route.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:JSON.stringify({success:true})});
+  });
   await page.goto(origin+'/contact/');
   const form=page.locator('#call-request');
-  await expect(form).toHaveAttribute('action','/api/contact');
-  await expect(form.locator('input[name="kind"]')).toHaveValue('call');
+  await expect(form).toHaveAttribute('action',/^https:\/\/formsubmit\.co\//);
   await form.locator('[data-iso]').first().click();
   await form.locator('[data-call-time="09:00"]').click();
-  await expect(form.locator('#call-time')).toHaveValue('09:00');
+  await form.getByLabel('Your name').fill('Example Recruiter');
+  await form.getByLabel('Email').fill('recruiter@example.com');
+  await form.getByRole('button',{name:'Request a time'}).click();
+  await expect(form.locator('[data-delivery-status]')).toContainText('accepted for email delivery');
 });
 
 test('contact form keeps invalid users at the field with clear feedback', async ({page})=>{

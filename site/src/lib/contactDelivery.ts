@@ -1,69 +1,54 @@
+import { professionalFacts } from '../content/professional-facts';
+
 export function initContactDelivery(): void {
-  if (document.querySelector('.cf-turnstile') && !document.querySelector('script[data-contact-challenge]')) {
-    const script = document.createElement('script');
-    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
-    script.async = true;
-    script.dataset.contactChallenge = 'true';
-    document.head.append(script);
-  }
   document.querySelectorAll<HTMLFormElement>('form[data-email-delivery]').forEach(form => {
     if (form.dataset.deliveryBound) return;
     form.dataset.deliveryBound = 'true';
     const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
     const label = button?.querySelector<HTMLElement>('[data-submit-label]');
     const status = form.querySelector<HTMLElement>('[data-delivery-status]');
-    const challenge = form.querySelector<HTMLElement>('.cf-turnstile');
-    if (!button || !label || !status) return;
+    const fallback = form.querySelector<HTMLAnchorElement>('[data-delivery-fallback]');
+    if (!button || !label || !status || !fallback) return;
     const initialLabel = label.textContent ?? 'Send enquiry';
     let busy = false;
-    let previousPayload = '';
-    let requestId = '';
     const show = (message: string, state: string) => {
       status.hidden = false;
       status.dataset.state = state;
       status.textContent = message;
+      fallback.hidden = state !== 'error';
     };
-    if (!challenge) show('Online delivery is not configured yet. Please use the direct email link.', 'error');
     form.addEventListener('submit', async event => {
       event.preventDefault();
       if (busy || !form.reportValidity()) return;
-      if (!challenge) return;
-      const payload = Object.fromEntries(new FormData(form));
-      if (!payload['cf-turnstile-response']) {
-        show('Please wait for the spam verification to finish, then try again.', 'error');
-        return;
-      }
-      const fingerprint = JSON.stringify(Object.entries(payload).filter(([key]) => key !== 'cf-turnstile-response'));
-      if (fingerprint !== previousPayload || !requestId) {
-        previousPayload = fingerprint;
-        requestId = crypto.randomUUID();
-      }
-      payload.request_id = requestId;
+      const values = Object.fromEntries(new FormData(form));
+      if (values._honey) {show('Unable to send. Please use the direct email link.', 'error'); return;}
+      const call = form.id === 'call-request';
+      const subject = call ? 'Professional call request for Reeja Maharjan' : 'New website enquiry for Reeja Maharjan';
+      const body = [
+        'Name: ' + values.name, 'Email: ' + values.email,
+        ...(call ? ['Preferred date: ' + values.date, 'Preferred time: ' + values.time + ' (Nepal time, UTC+05:45)', '', String(values.topic || 'No topic specified.')] : [...[values.organization && 'Organisation: ' + values.organization, values.role_type && 'Role: ' + values.role_type, values.location && 'Location: ' + values.location].filter(Boolean), '', String(values.message)]),
+      ].join('\n');
+      fallback.href = 'mailto:' + professionalFacts.professionalEmail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      const payload = new URLSearchParams({name:String(values.name), email:String(values.email), message:body, _subject:subject, _template:'basic', _honey:''});
       busy = true;
       button.disabled = true;
       form.setAttribute('aria-busy', 'true');
       label.textContent = 'Sending…';
       show('Sending your message…', 'pending');
       try {
-        const response = await fetch(form.action, {method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload),signal:AbortSignal.timeout(25000)});
+        const response = await fetch(professionalFacts.contactAjaxEndpoint, {method:'POST', headers:{Accept:'application/json'},body:payload,signal:AbortSignal.timeout(30000)});
         const result = await response.json();
-        if (!response.ok || result.success !== true) {
-          show(typeof result.message === 'string' ? result.message : 'Could not confirm delivery. Your message is still here; please email Reeja directly if needed.', 'error');
-          return;
-        }
+        if (!response.ok || (result.success !== true && result.success !== 'true')) throw new Error('Delivery not confirmed');
         form.reset();
-        requestId = '';
-        previousPayload = '';
         form.querySelectorAll('input[type="date"],input[type="time"]').forEach(input => {input.dispatchEvent(new Event('change'));input.dispatchEvent(new Event('input'));});
-        show(form.id === 'call-request' ? 'Your call request was accepted for email delivery. Reeja will confirm the appointment separately.' : 'Your message was accepted for email delivery. Thank you!', 'success');
+        show(call ? 'Your call request was accepted for email delivery. Reeja will confirm the appointment separately.' : 'Your message was accepted for email delivery. Thank you!', 'success');
       } catch {
-        show('Could not confirm delivery. Your message is still here. Please email Reeja directly before retrying.', 'error');
+        show('We could not confirm delivery. Your details are still here. If you do not receive a reply, use the email option below to send your completed message directly.', 'error');
       } finally {
         busy = false;
         button.disabled = false;
         form.removeAttribute('aria-busy');
         label.textContent = initialLabel;
-        (window as Window & {turnstile?: {reset: (widget: string)=>void}}).turnstile?.reset(`#${form.id} .cf-turnstile`);
       }
     });
   });
